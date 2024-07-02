@@ -18,4 +18,4 @@ Run the project
 npm run dev
 ```
 
-Open your browser and go to http://localhost:4173 (if this port is busy it will be changed to the next available port)
+Open your browser and go to http://localhost:5173 (if this port is busy it will be changed to the next available port)
