@@ -1,7 +1,9 @@
+import { MainScene } from "./scenes/main.scene";
+
 function App() {
   return (
     <>
-      <h1>Hello Quickmock !!!</h1>
+      <MainScene />
     </>
   );
 }
