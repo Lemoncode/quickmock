@@ -1,9 +1,17 @@
-import React from "react";
+import {
+  CanvasPod,
+  ToolbarPod,
+  ContainerGalleryPod,
+  ComponentGalleryPod,
+} from "@/pods";
 
 export const MainScene = () => {
   return (
     <>
-      <h1>Hello Quickmock from Main Scene !!!</h1>
+      <ToolbarPod />
+      <ContainerGalleryPod />
+      <ComponentGalleryPod />
+      <CanvasPod />
     </>
   );
 };
