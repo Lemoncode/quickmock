@@ -1,13 +1,9 @@
 import { ComboBoxShape } from "@/common/components/shapes";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Stage, Layer, Transformer } from "react-konva";
 import { createShape, ShapeModel } from "./canvas.model";
 import React from "react";
-import Konva from "konva";
-
-type ShapeRefs = {
-  [key: string]: React.RefObject<any>;
-};
+import { useSelection } from "./useselection.hook";
 
 export const CanvasPod = () => {
   const [shapes, _] = useState<ShapeModel[]>([
@@ -15,22 +11,7 @@ export const CanvasPod = () => {
     createShape(90, 170, 250, 50),
   ]);
 
-  const transformerRef = React.useRef<Konva.Transformer>(null);
-  const shapeRefs = useRef<ShapeRefs>({});
-
-  // Remove unused shapes
-  useEffect(() => {
-    const currentIds = shapes.map((shape) => shape.id);
-    Object.keys(shapeRefs.current).forEach((id) => {
-      if (!currentIds.includes(id)) {
-        delete shapeRefs.current[id];
-      }
-    });
-  }, [shapes]);
-
-  const handleSelect = (id: string) => {
-    transformerRef?.current?.nodes([shapeRefs.current[id].current]);
-  };
+  const { transformerRef, shapeRefs, handleSelect } = useSelection(shapes);
 
   return (
     <>
