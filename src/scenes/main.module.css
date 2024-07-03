@@ -1,0 +1,34 @@
+.layout {
+    display: grid;
+    grid-template-columns: 2fr 8fr 2fr;
+    grid-template-rows: 120px 1fr;
+    grid-template-areas:
+        "toolbar toolbar toolbar"
+        "container-gallery canvas component-gallery";
+    height: 100vh;
+    border: 1px solid black;
+}
+
+.toolbar {
+    grid-area: toolbar;
+    background-color: #D5F5E3;
+    border: 1px solid black;
+}
+
+.containerGallery {
+    grid-area: container-gallery;
+    background-color: #FEF9E7;
+    border: 1px solid black;
+}
+
+.componentGallery {
+    grid-area: component-gallery;
+    background-color: #FDEDEC;
+    border: 1px solid black;
+}
+
+.canvas {
+    grid-area: canvas;
+    background-color: white;
+    border: 1px solid black;
+}
