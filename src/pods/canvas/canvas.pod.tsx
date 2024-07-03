@@ -34,6 +34,7 @@ export const CanvasPod = () => {
                   height={shape.height}
                   onSelected={handleSelect}
                   ref={shapeRefs.current[shape.id]}
+                  draggable
                 />
               );
             })}
