@@ -6,14 +6,24 @@ import { Path, Group, Text } from "react-konva";
 // TODO: we will need to add more props like for instance text content
 // but we have to check how to pass it to the shape (there will be different types of shapes)
 interface ComboBoxShapeProps extends ShapeConfig {
+  id: string;
   x: number;
   y: number;
   width: number;
   height: number;
+  onSelected: (id: string) => void;
 }
 
 export const ComboBoxShape = forwardRef<any, ComboBoxShapeProps>(
-  ({ x, y, width, height, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+    console.log(
+      `ComboBox ${id}`,
+      `x: ${x}`,
+      `y: ${y}`,
+      `width: ${width}`,
+      `height: ${height}`
+    );
+
     return (
       <Group
         x={x}
@@ -22,6 +32,7 @@ export const ComboBoxShape = forwardRef<any, ComboBoxShapeProps>(
         width={width}
         height={height}
         {...shapeProps}
+        onClick={() => onSelected(id)}
       >
         {/* Rectangle */}
         <Path
