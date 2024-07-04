@@ -1,0 +1,10 @@
+.layout {
+    display: grid;
+    grid-template-columns: 2fr 8fr 2fr;
+    grid-template-rows: 2fr 8fr;
+    grid-template-areas:
+        "toolbar toolbar toolbar"
+        "container-gallery canvas component-gallery";
+    height: 100vh;
+    border: 1px solid black;
+}
