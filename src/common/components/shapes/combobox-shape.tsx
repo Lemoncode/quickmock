@@ -15,7 +15,15 @@ interface ComboBoxShapeProps extends ShapeConfig {
 }
 
 export const ComboBoxShape = forwardRef<any, ComboBoxShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps}, ref) => {
+  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+    console.log(
+      `ComboBox ${id}`,
+      `x: ${x}`,
+      `y: ${y}`,
+      `width: ${width}`,
+      `height: ${height}`
+    );
+
     return (
       <Group
         x={x}
@@ -60,4 +68,3 @@ export const ComboBoxShape = forwardRef<any, ComboBoxShapeProps>(
     );
   }
 );
-
