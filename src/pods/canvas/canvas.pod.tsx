@@ -6,6 +6,11 @@ import React from "react";
 import { useSelection } from "./useselection.hook";
 import Konva from "konva";
 
+interface Size {
+  width: number;
+  height: number;
+}
+
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([
     createShape(10, 10, 200, 50),
@@ -19,6 +24,21 @@ export const CanvasPod = () => {
     selectedShapeRef,
     selectedShapeId,
   } = useSelection(shapes);
+
+  const originalSizeSelectedShape = useRef<Size>({ width: 0, height: 0 });
+  const currentScaleSelectedShape = useRef<number>(1);
+
+  const handleInnerSelect = (id: string) => {
+    const shape = findShape(id);
+    if (shape) {
+      originalSizeSelectedShape.current = {
+        width: shape.width,
+        height: shape.height,
+      };
+      currentScaleSelectedShape.current = 1;
+    }
+    handleSelect(id);
+  };
 
   const baseLayerRef = useRef<Konva.Layer>(null);
 
@@ -39,74 +59,75 @@ export const CanvasPod = () => {
     );
   };
 
-  /*
   const handleTransform = () => {
     const node = selectedShapeRef.current;
     if (!node) {
       return;
     }
-    // adjust size to scale
-    const formerNodeWidth = node.width();
-    const formerNodeHeight = node.height();
-
-    const newWidth = node.width() * node.scaleX();
-    const newHeight = node.height() * node.scaleY();
-    node.width(newWidth);
-    node.height(newHeight);
-
-    // reset scale to 1
-    if (Math.floor(formerNodeWidth) !== Math.floor(node.width())) {
-      console.log("Scale before: ", node.scaleX());
-      node.scaleX(1);
-      console.log("Scale 1: ", node.scaleX());
-      updateShapeSize(selectedShapeId, newWidth, newHeight);
-    } else {
-      console.log("width not changed");
-      console.log("** Scale: ", node.scaleX());
-    }
-
-    if (formerNodeHeight !== node.height()) {
-      node.scaleY(1);
-      updateShapeSize(selectedShapeId, newWidth, newHeight);
-    }
-
-    baseLayerRef?.current?.batchDraw();
-  };
-  */
-
-  const handleTransformEnd = () => {
-    const node = selectedShapeRef.current;
-    if (!node) {
-      return;
-    }
-    const scaleX = node.scaleX();
-    const scaleY = node.scaleY();
-
-    // we will reset it back
-    node.scaleX(1);
-    node.scaleY(1);
-  };
-
-  /*
-  const handleTransformEnd = () => {
-    const node = selectedShapeRef.current;
-    if (!node) {
-      return;
-    }
 
     const scaleX = node.scaleX();
-    const scaleY = node.scaleY();
 
-    const newWidth = node?.width() ?? 0 * scaleX;
-    const newHeight = node?.height() ?? 0 * scaleY;
+    //const scaleY = node.scaleY();
+    // Let's start only with scaleX
+    currentScaleSelectedShape.current = scaleX;
+
+    const calculatedWidth = transformerRef.current?.width() ?? 0;
+
+    /*const calculatedWidth =
+      originalSizeSelectedShape.current.width *
+      currentScaleSelectedShape.current;
+      */
+    console.log("** calculatedWidth", calculatedWidth);
+
+    //selectedShapeRef.current?.width(calculatedWidth);
 
     // Update the width and height and reset the scale
-    updateShapeSize(selectedShapeId, newWidth, newHeight);
+    // Right now only only on X
+    updateShapeSize(
+      selectedShapeId,
+      calculatedWidth,
+      originalSizeSelectedShape.current.height
+    );
 
     node.scaleX(1);
     node.scaleY(1);
   };
+
+  const handleTransformEnd = () => {
+    const node = selectedShapeRef.current;
+    if (!node) {
+      return;
+    }
+
+    const scaleX = node.scaleX();
+
+    //const scaleY = node.scaleY();
+    // Let's start only with scaleX
+    currentScaleSelectedShape.current = scaleX;
+
+    /*
+    const calculatedWidth =
+      originalSizeSelectedShape.current.width *
+      currentScaleSelectedShape.current;
+    console.log("** calculatedWidth", calculatedWidth);
 */
+    const calculatedWidth = transformerRef.current?.width() ?? 0;
+
+    //selectedShapeRef.current?.width(calculatedWidth);
+
+    node.scaleX(1);
+    node.scaleY(1);
+
+    // Update the width and height and reset the scale
+    // Right now only only on X
+    updateShapeSize(
+      selectedShapeId,
+      calculatedWidth,
+      originalSizeSelectedShape.current.height
+    );
+
+    currentScaleSelectedShape.current = 1;
+  };
 
   return (
     <>
@@ -127,12 +148,13 @@ export const CanvasPod = () => {
                   y={shape.y}
                   width={shape.width}
                   height={shape.height}
-                  onSelected={handleSelect}
+                  onSelected={handleInnerSelect}
                   ref={shapeRefs.current[shape.id]}
                   draggable
                   onDragEnd={(e: Konva.KonvaEventObject<DragEvent>) =>
                     handleDragEnd(e, shape.id)
                   }
+                  onTransform={handleTransform}
                   onTransformEnd={handleTransformEnd}
                 />
               );
