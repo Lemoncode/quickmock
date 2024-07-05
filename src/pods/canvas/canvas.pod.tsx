@@ -60,6 +60,6 @@ export const CanvasPod = () => {
           </Layer>
         </Stage>
       </div>
-    <div/>
+    </div>
   );
 };
