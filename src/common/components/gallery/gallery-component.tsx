@@ -11,8 +11,8 @@ export const GalleryComponent: React.FC<Props> = props => {
 
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-      {itemCollection.map((item, index) => (
-        <ItemComponent key={index} item={item} />
+      {itemCollection.map(item => (
+        <ItemComponent key={item.type} item={item} />
       ))}
     </div>
   );

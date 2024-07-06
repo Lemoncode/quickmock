@@ -1,7 +1,7 @@
-import { ItemInfo } from '../../../common/components/gallery/components/model';
+import { ItemInfo } from '@/common/components/gallery/components/model';
 
 export const mockWidgetCollection: ItemInfo[] = [
-  { thumbnailSrc: '../../../../public/widgets/button.svg', type: 'input' },
-  { thumbnailSrc: '../../../../public/widgets/input.svg', type: 'input' },
-  { thumbnailSrc: '../../../../public/widgets/combobox.svg', type: 'input' },
+  { thumbnailSrc: '/widgets/button.svg', type: 'input' },
+  { thumbnailSrc: '/widgets/input.svg', type: 'input' },
+  { thumbnailSrc: '/widgets/combobox.svg', type: 'input' },
 ];
