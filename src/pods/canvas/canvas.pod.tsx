@@ -12,6 +12,11 @@ interface Size {
   height: number;
 }
 
+interface Coord {
+  x: number;
+  y: number;
+}
+
 // TODO: this should be moved to business or utils and added unit tests
 function getDecimalPart(num: number): number {
   // Get intenger part
@@ -48,10 +53,14 @@ export const CanvasPod = () => {
 
   const findShape = (id: string) => shapes.find((shape) => shape.id === id);
 
-  const updateShapeSize = (id: string, width: number, height: number) => {
+  const updateShapeSizeAndPosition = (
+    id: string,
+    position: Coord,
+    size: Size
+  ) => {
     setShapes((prevShapes) =>
       prevShapes.map((shape) =>
-        shape.id === id ? { ...shape, width, height } : shape
+        shape.id === id ? { ...shape, ...position, ...size } : shape
       )
     );
   };
@@ -64,6 +73,7 @@ export const CanvasPod = () => {
 
     const scaleX = node?.scaleX() ?? 1;
     const scaleY = node?.scaleY() ?? 1;
+    const position = { x: node.x(), y: node.y() };
 
     let newWidth =
       TransformSizeDecimalsRef.current.width + node.width() * scaleX;
@@ -78,7 +88,10 @@ export const CanvasPod = () => {
     newHeight = Math.trunc(newHeight);
 
     // Update the width and height and reset the scale
-    updateShapeSize(selectedShapeId, newWidth, newHeight);
+    updateShapeSizeAndPosition(selectedShapeId, position, {
+      width: newWidth,
+      height: newHeight,
+    });
 
     // Reset the scale to avoid further scaling
     node.scaleX(1);
