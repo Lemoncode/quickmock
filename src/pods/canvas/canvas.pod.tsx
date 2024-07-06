@@ -6,9 +6,19 @@ import React from "react";
 import { useSelection } from "./useselection.hook";
 import Konva from "konva";
 
+// TODO: this should move to model
 interface Size {
   width: number;
   height: number;
+}
+
+// TODO: this should be moved to business or utils and added unit tests
+function getDecimalPart(num: number): number {
+  // Get intenger part
+  const integerPart = Math.trunc(num);
+  // Substract integer to num obtain decimal part
+  const decimalPart = num - integerPart;
+  return decimalPart;
 }
 
 export const CanvasPod = () => {
@@ -25,20 +35,7 @@ export const CanvasPod = () => {
     selectedShapeId,
   } = useSelection(shapes);
 
-  const originalSizeSelectedShape = useRef<Size>({ width: 0, height: 0 });
-  const currentScaleSelectedShape = useRef<number>(1);
-
-  const handleInnerSelect = (id: string) => {
-    const shape = findShape(id);
-    if (shape) {
-      originalSizeSelectedShape.current = {
-        width: shape.width,
-        height: shape.height,
-      };
-      currentScaleSelectedShape.current = 1;
-    }
-    handleSelect(id);
-  };
+  const TransformSizeDecimalsRef = useRef<Size>({ width: 0, height: 0 });
 
   const baseLayerRef = useRef<Konva.Layer>(null);
 
@@ -65,68 +62,27 @@ export const CanvasPod = () => {
       return;
     }
 
-    const scaleX = node.scaleX();
+    const scaleX = node?.scaleX() ?? 1;
+    const scaleY = node?.scaleY() ?? 1;
 
-    //const scaleY = node.scaleY();
-    // Let's start only with scaleX
-    currentScaleSelectedShape.current = scaleX;
+    let newWidth =
+      TransformSizeDecimalsRef.current.width + node.width() * scaleX;
+    let newHeight =
+      TransformSizeDecimalsRef.current.height + node.height() * scaleY;
 
-    const calculatedWidth = transformerRef.current?.width() ?? 0;
-
-    /*const calculatedWidth =
-      originalSizeSelectedShape.current.width *
-      currentScaleSelectedShape.current;
-      */
-    console.log("** calculatedWidth", calculatedWidth);
-
-    //selectedShapeRef.current?.width(calculatedWidth);
-
-    // Update the width and height and reset the scale
-    // Right now only only on X
-    updateShapeSize(
-      selectedShapeId,
-      calculatedWidth,
-      originalSizeSelectedShape.current.height
-    );
-
-    node.scaleX(1);
-    node.scaleY(1);
-  };
-
-  const handleTransformEnd = () => {
-    const node = selectedShapeRef.current;
-    if (!node) {
-      return;
-    }
-
-    const scaleX = node.scaleX();
-
-    //const scaleY = node.scaleY();
-    // Let's start only with scaleX
-    currentScaleSelectedShape.current = scaleX;
-
-    /*
-    const calculatedWidth =
-      originalSizeSelectedShape.current.width *
-      currentScaleSelectedShape.current;
-    console.log("** calculatedWidth", calculatedWidth);
-*/
-    const calculatedWidth = transformerRef.current?.width() ?? 0;
-
-    //selectedShapeRef.current?.width(calculatedWidth);
-
-    node.scaleX(1);
-    node.scaleY(1);
+    TransformSizeDecimalsRef.current = {
+      width: getDecimalPart(newWidth),
+      height: getDecimalPart(newHeight),
+    };
+    newWidth = Math.trunc(newWidth);
+    newHeight = Math.trunc(newHeight);
 
     // Update the width and height and reset the scale
-    // Right now only only on X
-    updateShapeSize(
-      selectedShapeId,
-      calculatedWidth,
-      originalSizeSelectedShape.current.height
-    );
+    updateShapeSize(selectedShapeId, newWidth, newHeight);
 
-    currentScaleSelectedShape.current = 1;
+    // Reset the scale to avoid further scaling
+    node.scaleX(1);
+    node.scaleY(1);
   };
 
   return (
@@ -148,18 +104,30 @@ export const CanvasPod = () => {
                   y={shape.y}
                   width={shape.width}
                   height={shape.height}
-                  onSelected={handleInnerSelect}
+                  onSelected={handleSelect}
                   ref={shapeRefs.current[shape.id]}
                   draggable
                   onDragEnd={(e: Konva.KonvaEventObject<DragEvent>) =>
                     handleDragEnd(e, shape.id)
                   }
                   onTransform={handleTransform}
-                  onTransformEnd={handleTransformEnd}
+                  onTransformEnd={handleTransform}
                 />
               );
             })}
-            <Transformer flipEnabled={false} ref={transformerRef} />
+            {/* TODO: boundBoxFunc should be generic and get adapted by item type */}
+            <Transformer
+              flipEnabled={false}
+              ref={transformerRef}
+              boundBoxFunc={(oldBox, newBox) => {
+                const { width, height } = newBox;
+                const limitedBox = { ...newBox };
+                limitedBox.width = width < 110 ? oldBox.width : width;
+                limitedBox.height = height < 50 ? oldBox.height : height;
+
+                return limitedBox;
+              }}
+            />
           </Layer>
         </Stage>
       </div>

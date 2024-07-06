@@ -59,6 +59,8 @@ export const ComboBoxShape = forwardRef<any, ComboBoxShapeProps>(
         <Text
           x={10}
           y={(height - 25) / 2 + 5}
+          width={width - 50}
+          height={height - 10}
           text="Select an option"
           fontSize={20}
           fontFamily="Arial"
