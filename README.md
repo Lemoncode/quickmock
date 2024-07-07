@@ -34,7 +34,7 @@ Contributors to this project
     <kbd><img src="https://github.com/LourdesRsdp.png" alt="Lourdes Rodriguez" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
   <a href="https://github.com/devrodrigolec">
-    <kbd><img src="https://github.com/devrodrigolec" alt="Rodrigo Leciñana" width="50" height="50" style="border-radius: 50%;"></kbd>
+    <kbd><img src="https://github.com/devrodrigolec.png" alt="Rodrigo Leciñana" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
   <a href="https://github.com/deletidev">
     <kbd><img src="https://github.com/deletidev.png" alt="Leticia De La Osa" width="50" height="50" style="border-radius: 50%;"></kbd>
