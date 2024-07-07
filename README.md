@@ -1,6 +1,8 @@
 # Quick mock
 
-Work in progres...
+**Work in progres...**
+
+The goal of this project is to create an open source low fidelity UI mock tool 
 
 # Installation
 
@@ -19,3 +21,12 @@ npm run dev
 ```
 
 Open your browser and go to http://localhost:5173 (if this port is busy it will be changed to the next available port)
+
+## Team
+
+Team members participating in this project
+
+- [Jesús Sanz](https://github.com/jsanzdev)
+- [Lourdes Rodriguez](https://github.com/LourdesRsdp)
+- [Leticia De La Osa](https://github.com/deletidev)
+- [Braulio Díez](https://github.com/brauliodiez)
