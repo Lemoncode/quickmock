@@ -27,9 +27,16 @@ Open your browser and go to http://localhost:5173 (if this port is busy it will 
 Contributors to this project
 
 <p align="left">
-  <a href="https://github.com/jsanzdev"><img src="https://github.com/jsanzdev.png?size=50" alt="Jesús Sanz" style="border-radius: 50%;" /></a>
-  <a href="https://github.com/LourdesRsdp"><img src="https://github.com/LourdesRsdp.png?size=50" alt="Lourdes Rodriguez" style="border-radius: 50%;" /></a>
-  <a href="https://github.com/deletidev"><img src="https://github.com/deletidev.png?size=50" alt="Leticia De La Osa" style="border-radius: 50%;" /></a>
-  <a href="https://github.com/brauliodiez"><img src="https://github.com/brauliodiez.png?size=50" alt="Braulio Díez" style="border-radius: 50%;" /></a>
+  <a href="https://github.com/jsanzdev">
+    <img src="https://github.com/jsanzdev.png" alt="Jesús Sanz" width="50" height="50" style="border-radius: 50%;">
+  </a>
+  <a href="https://github.com/LourdesRsdp">
+    <img src="https://github.com/LourdesRsdp.png" alt="Lourdes Rodriguez" width="50" height="50" style="border-radius: 50%;">
+  </a>
+  <a href="https://github.com/deletidev">
+    <img src="https://github.com/deletidev.png" alt="Leticia De La Osa" width="50" height="50" style="border-radius: 50%;">
+  </a>
+  <a href="https://github.com/brauliodiez">
+    <img src="https://github.com/brauliodiez.png" alt="Braulio Díez" width="50" height="50" style="border-radius: 50%;">
+  </a>
 </p>
-
