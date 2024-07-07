@@ -1,5 +1,5 @@
 import { ItemInfo } from './model';
-import './item-component.module.css';
+import classes from './item-component.module.css';
 
 interface Props {
   item: ItemInfo;
@@ -8,7 +8,7 @@ interface Props {
 export const ItemComponent: React.FC<Props> = props => {
   return (
     // TODO: Move Style to Sass
-    <div className="container">
+    <div className={classes.container}>
       <img src={props.item.thumbnailSrc} />
     </div>
   );
