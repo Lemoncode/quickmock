@@ -28,15 +28,15 @@ Contributors to this project
 
 <p align="left">
   <a href="https://github.com/jsanzdev">
-    <img src="https://github.com/jsanzdev.png" alt="Jesús Sanz" width="50" height="50" style="border-radius: 50%;">
+    <kbd><img src="https://github.com/jsanzdev.png" alt="Jesús Sanz" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
   <a href="https://github.com/LourdesRsdp">
-    <img src="https://github.com/LourdesRsdp.png" alt="Lourdes Rodriguez" width="50" height="50" style="border-radius: 50%;">
+    <kbd><img src="https://github.com/LourdesRsdp.png" alt="Lourdes Rodriguez" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
   <a href="https://github.com/deletidev">
-    <img src="https://github.com/deletidev.png" alt="Leticia De La Osa" width="50" height="50" style="border-radius: 50%;">
+    <kbd><img src="https://github.com/deletidev.png" alt="Leticia De La Osa" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
   <a href="https://github.com/brauliodiez">
-    <img src="https://github.com/brauliodiez.png" alt="Braulio Díez" width="50" height="50" style="border-radius: 50%;">
+    <kbd><img src="https://github.com/brauliodiez.png" alt="Braulio Díez" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
 </p>
