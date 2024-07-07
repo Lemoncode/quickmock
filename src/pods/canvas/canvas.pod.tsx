@@ -1,4 +1,7 @@
-import { ComboBoxShape } from "@/common/components/shapes";
+import {
+  ComboBoxShape,
+  getComboBoxShapeSizeRestrictions,
+} from "@/common/components/shapes";
 import { useRef, useState } from "react";
 import { Stage, Layer, Transformer } from "react-konva";
 import { createShape, ShapeModel } from "./canvas.model";
@@ -6,6 +9,10 @@ import React from "react";
 import { useSelection } from "./useselection.hook";
 import Konva from "konva";
 import { useTransform } from "./usetransform.hook";
+import {
+  fitBoxToShapeSizeRestrictions as fitSizeToShapeSizeRestrictions,
+  getShapeSizeRestrictions,
+} from "./canvas.utils";
 
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([
@@ -19,6 +26,7 @@ export const CanvasPod = () => {
     handleSelect,
     selectedShapeRef,
     selectedShapeId,
+    selectedShapeType,
   } = useSelection(shapes);
 
   const baseLayerRef = useRef<Konva.Layer>(null);
@@ -70,13 +78,20 @@ export const CanvasPod = () => {
             <Transformer
               flipEnabled={false}
               ref={transformerRef}
-              boundBoxFunc={(oldBox, newBox) => {
+              boundBoxFunc={(_, newBox) => {
                 const { width, height } = newBox;
-                const limitedBox = { ...newBox };
-                limitedBox.width = width < 110 ? oldBox.width : width;
-                limitedBox.height = height < 50 ? oldBox.height : height;
 
-                return limitedBox;
+                const limitedRect = fitSizeToShapeSizeRestrictions(
+                  getShapeSizeRestrictions(selectedShapeType),
+                  width,
+                  height
+                );
+
+                return {
+                  ...newBox,
+                  width: limitedRect.width,
+                  height: limitedRect.height,
+                };
               }}
             />
           </Layer>
