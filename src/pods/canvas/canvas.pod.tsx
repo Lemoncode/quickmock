@@ -11,7 +11,7 @@ export const CanvasPod = () => {
     createShape(90, 170, 250, 50),
   ]);
 
-  const { shapeRefs, transformerRef, handleSelected } = useSelection(shapes);
+  const { shapeRefs, transformerRef, handleSelected, handleClearSelection } = useSelection(shapes);
 
   const handleDragEnd =
     (id: string) => (e: Konva.KonvaEventObject<DragEvent>) => {
@@ -23,12 +23,16 @@ export const CanvasPod = () => {
       );
     };
 
+  
   return (
     <>
       {/*TODO: harcoded border, once final layout is ready, remove this*/}
       <div style={{ border: "1px solid black" }}>
         {/*TODO: right now harcoded values, remove this once we have final layout*/}
-        <Stage width={1024} height={800}>
+        <Stage width={1024} height={800} 
+        onMouseDown={handleClearSelection}
+        onTouchStart={handleClearSelection}
+        >
           <Layer>
             {
               /* TODO compentize and simplify this */
