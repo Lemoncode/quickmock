@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ShapeModel } from './canvas.model';
 import Konva from 'konva';
+import { ShapeType } from '@/core/model';
 
 type ShapeRefs = {
   [key: string]: React.RefObject<any>;
@@ -11,6 +12,9 @@ export const useSelection = (shapes: ShapeModel[]) => {
   const shapeRefs = useRef<ShapeRefs>({});
   const selectedShapeRef = useRef<Konva.Node | null>(null);
   const [selectedShapeId, setSelectedShapeId] = useState<string>('');
+  const [selectedShapeType, setSelectedShapeType] = useState<ShapeType | null>(
+    null
+  );
 
   // Remove unused shapes
   useEffect(() => {
@@ -22,10 +26,11 @@ export const useSelection = (shapes: ShapeModel[]) => {
     });
   }, [shapes]);
 
-  const handleSelected = (id: string) => {
+  const handleSelected = (id: string, type: ShapeType) => {
     selectedShapeRef.current = shapeRefs.current[id].current;
     transformerRef?.current?.nodes([shapeRefs.current[id].current]);
     setSelectedShapeId(id);
+    setSelectedShapeType(type);
   };
 
   const handleClearSelection = (
@@ -47,5 +52,6 @@ export const useSelection = (shapes: ShapeModel[]) => {
     handleClearSelection,
     selectedShapeRef,
     selectedShapeId,
+    selectedShapeType,
   };
 };

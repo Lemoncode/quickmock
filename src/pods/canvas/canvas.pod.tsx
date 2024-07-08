@@ -1,11 +1,19 @@
 import classes from './canvas.pod.module.css';
-import { ComboBoxShape } from '@/common/components/front-components';
+import {
+  ComboBoxShape,
+  getComboBoxShapeSizeRestrictions,
+} from '@/common/components/front-components';
 import { createRef, useState } from 'react';
 import { Layer, Stage, Transformer } from 'react-konva';
-import { Coord, ShapeModel, Size, createShape } from './canvas.model';
+import { ShapeModel, createShape } from './canvas.model';
 import { useSelection } from './use-selection.hook';
 import Konva from 'konva';
 import { useTransform } from './use-transform.hook';
+import {
+  fitSizeToShapeSizeRestrictions,
+  getShapeSizeRestrictions,
+} from './canvas.util';
+import { Box } from 'konva/lib/shapes/Transformer';
 
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([
@@ -20,12 +28,14 @@ export const CanvasPod = () => {
     handleClearSelection,
     selectedShapeRef,
     selectedShapeId,
+    selectedShapeType,
   } = useSelection(shapes);
 
   const { handleTransform } = useTransform(
     setShapes,
     selectedShapeRef,
-    selectedShapeId
+    selectedShapeId,
+    selectedShapeType
   );
 
   const handleDragEnd =
@@ -35,6 +45,19 @@ export const CanvasPod = () => {
         prevShapes.map(shape => (shape.id === id ? { ...shape, x, y } : shape))
       );
     };
+
+  const handleTransformerBoundBoxFunc = (_: Box, newBox: Box) => {
+    const limitedSize = fitSizeToShapeSizeRestrictions(
+      getShapeSizeRestrictions(selectedShapeType),
+      newBox.width,
+      newBox.height
+    );
+    return {
+      ...newBox,
+      width: limitedSize.width,
+      height: limitedSize.height,
+    };
+  };
 
   return (
     <div className={classes.canvas}>
@@ -74,16 +97,7 @@ export const CanvasPod = () => {
           <Transformer
             ref={transformerRef}
             flipEnabled={false}
-            boundBoxFunc={(oldBox, newBox) => {
-              // TODO Just implemented for the combobox case (harcoded)
-              // once it works we can generalize it
-              const { width, height } = newBox;
-              const limitedBox = { ...newBox };
-              limitedBox.width = width < 110 ? oldBox.width : width;
-              limitedBox.height = height < 51 ? oldBox.height : height;
-
-              return limitedBox;
-            }}
+            boundBoxFunc={handleTransformerBoundBoxFunc}
           />
         </Layer>
       </Stage>
