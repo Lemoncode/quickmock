@@ -7,12 +7,19 @@ import {
 } from './canvas.util';
 import { ShapeType } from '@/core/model';
 
+interface TransFormSelectedInfo {
+  selectedShapeRef: React.MutableRefObject<Node<NodeConfig> | null>;
+  selectedShapeId: string;
+  selectedShapeType: ShapeType | null;
+}
+
 export const useTransform = (
   setShapes: (value: React.SetStateAction<ShapeModel[]>) => void,
-  selectedShapeRef: React.MutableRefObject<Node<NodeConfig> | null>,
-  selectedShapeId: string,
-  selectedShapeType: ShapeType | null
+  transformSelectedInfo: TransFormSelectedInfo
 ) => {
+  const { selectedShapeId, selectedShapeRef, selectedShapeType } =
+    transformSelectedInfo;
+
   const updateShapeSizeAndPosition = (
     id: string,
     position: Coord,

@@ -31,12 +31,11 @@ export const CanvasPod = () => {
     selectedShapeType,
   } = useSelection(shapes);
 
-  const { handleTransform } = useTransform(
-    setShapes,
+  const { handleTransform } = useTransform(setShapes, {
     selectedShapeRef,
     selectedShapeId,
-    selectedShapeType
-  );
+    selectedShapeType,
+  });
 
   const handleDragEnd =
     (id: string) => (e: Konva.KonvaEventObject<DragEvent>) => {
