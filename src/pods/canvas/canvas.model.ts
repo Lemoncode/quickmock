@@ -1,4 +1,14 @@
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from 'uuid';
+
+export interface Size {
+  width: number;
+  height: number;
+}
+
+export interface Coord {
+  x: number;
+  y: number;
+}
 
 export interface ShapeModel {
   id: string;

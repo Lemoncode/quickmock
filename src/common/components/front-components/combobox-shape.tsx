@@ -1,6 +1,6 @@
-import { ShapeConfig } from "konva/lib/Shape";
-import { forwardRef } from "react";
-import { Path, Group, Text } from "react-konva";
+import { ShapeConfig } from 'konva/lib/Shape';
+import { forwardRef } from 'react';
+import { Path, Group, Text } from 'react-konva';
 
 // Important: we extend from Shapeconfig so we can get additional shape params
 // TODO: we will need to add more props like for instance text content
@@ -63,6 +63,8 @@ export const ComboBoxShape = forwardRef<any, ComboBoxShapeProps>(
           fontSize={20}
           fontFamily="Arial"
           fill="black"
+          width={width - 50}
+          height={height - 10}
         />
       </Group>
     );
