@@ -1,0 +1,49 @@
+:root {
+  /* spacing */
+  --space-unit: 4px;
+  --space-xs: calc(var(--space-unit));
+  --space-s: calc(var(--space-unit) * 2);
+  --space-md: calc(var(--space-unit) * 4);
+  --space-lg: calc(var(--space-unit) * 6);
+  --space-xl: calc(var(--space-unit) * 8);
+  --space-xxl: calc(var(--space-unit) * 12);
+
+  /* colors */
+  --primary-50: #f0f0f0;
+  --primary-100: #e3e3e3;
+  --primary-200: #c7c7c7;
+  --primary-300: #ababab;
+  --primary-400: #8f8f8f;
+  --primary-500: #707070;
+  --primary-600: #545454;
+  --primary-700: #383838;
+  --primary-800: #1c1c1c;
+  --primary-900: #000000;
+  --pure-white: #ffffff;
+
+  /*font-sizes*/
+  --fs-xs: 14px;
+  --fs-s: 16px;
+  --fs-md: 18px;
+  --fs-lg: 20px;
+  --fs-xl: 24px;
+  --fs-xxl: 32px;
+
+  /*font-weight*/
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 600;
+  --fw-extrabold: 700;
+
+  /*Main styles*/
+  font-family: Inter, system-ui, Helvetica, Arial, sans-serif;
+  font-size: var(--fs-m);
+  line-height: 1.5;
+  font-weight: var(--fw-regular);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
