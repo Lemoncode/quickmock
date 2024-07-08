@@ -21,8 +21,15 @@ export const useSelection = (shapes: ShapeModel[]) => {
   }, [shapes]);
 
   const handleSelected = (id: string) => {
-    transformerRef?.current?.nodes([shapeRefs.current[id].current]);
+    transformerRef?.current?.nodes([shapeRefs.current[id].current]);    
   };
 
-  return { transformerRef, shapeRefs, handleSelected };
+
+  const handleClearSelection = (mouseEvent : Konva.KonvaEventObject<MouseEvent> |  Konva.KonvaEventObject<TouchEvent>) => {
+    if (mouseEvent.target === mouseEvent.target.getStage()) {
+      transformerRef.current?.nodes([]);      
+    }
+  }
+
+  return { transformerRef, shapeRefs, handleSelected, handleClearSelection };
 };
