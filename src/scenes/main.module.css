@@ -1,0 +1,10 @@
+.containerGallery {
+    grid-area: container-gallery;
+    border-right: 1px solid black;
+}
+
+.componentGallery {
+    grid-area: component-gallery;
+    border-left: 1px solid black;
+}
+

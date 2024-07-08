@@ -1,9 +1,12 @@
+
+import classes from "./canvas.pod.module.css";
 import { ComboBoxShape } from "@/common/components/front-components";
 import { createRef, useState } from "react";
 import { Layer, Stage, Transformer } from "react-konva";
 import { ShapeModel, createShape } from "./canvas.model";
 import { useSelection } from "./use-selection.hook";
 import Konva from "konva";
+
 
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([
@@ -25,9 +28,7 @@ export const CanvasPod = () => {
 
   
   return (
-    <>
-      {/*TODO: harcoded border, once final layout is ready, remove this*/}
-      <div style={{ border: "1px solid black" }}>
+  <div className={classes.canvas}>
         {/*TODO: right now harcoded values, remove this once we have final layout*/}
         <Stage width={1024} height={800} 
         onMouseDown={handleClearSelection}
@@ -41,26 +42,25 @@ export const CanvasPod = () => {
                   shapeRefs.current[shape.id] = createRef();
                 }
 
-                return (
-                  <ComboBoxShape
-                    id={shape.id}
-                    key={shape.id}
-                    x={shape.x}
-                    y={shape.y}
-                    width={shape.width}
-                    height={shape.height}
-                    draggable
-                    onSelected={handleSelected}
-                    ref={shapeRefs.current[shape.id]}
-                    onDragEnd={handleDragEnd(shape.id)}
-                  />
-                );
-              })
-            }
-            <Transformer ref={transformerRef} />
-          </Layer>
-        </Stage>
-      </div>
-    </>
+              return (
+                <ComboBoxShape
+                  id={shape.id}
+                  key={shape.id}
+                  x={shape.x}
+                  y={shape.y}
+                  width={shape.width}
+                  height={shape.height}
+                  draggable
+                  onSelected={handleSelected}
+                  ref={shapeRefs.current[shape.id]}
+                  onDragEnd={handleDragEnd(shape.id)}
+                />
+              );
+            })
+          }
+          <Transformer ref={transformerRef} />
+        </Layer>
+      </Stage>
+    </div>
   );
 };

@@ -1,3 +1,6 @@
+import { MainLayout } from "@/layout/main.layout";
+import classes from "./main.module.css";
+
 import {
   CanvasPod,
   ToolbarPod,
@@ -7,11 +10,11 @@ import {
 
 export const MainScene = () => {
   return (
-    <>
+    <MainLayout >
       <ToolbarPod />
-      <ContainerGalleryPod />
-      <ComponentGalleryPod />
+      <div className={classes.containerGallery}><ContainerGalleryPod /><ComponentGalleryPod /></div>
+      <div className={classes.componentGallery}></div>
       <CanvasPod />
-    </>
+    </MainLayout>
   );
 };

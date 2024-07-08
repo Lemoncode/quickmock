@@ -1,0 +1,6 @@
+.canvas {
+    grid-area: canvas;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
