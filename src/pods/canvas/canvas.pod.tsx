@@ -11,11 +11,13 @@ import {
   getShapeSizeRestrictions,
 } from './canvas.util';
 import { Box } from 'konva/lib/shapes/Transformer';
+import { InputShape } from '@/common/components/front-components/input-shape';
+import { renderShapeComponent } from './shape-renderer';
 
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([
-    createShape(10, 10, 200, 50),
-    createShape(90, 170, 250, 50),
+    createShape({ x: 10, y: 10 }, { width: 200, height: 50 }, 'combobox'),
+    createShape({ x: 90, y: 170 }, { width: 250, height: 50 }, 'input'),
   ]);
 
   const {
@@ -62,22 +64,12 @@ export const CanvasPod = () => {
                 shapeRefs.current[shape.id] = createRef();
               }
 
-              return (
-                <ComboBoxShape
-                  id={shape.id}
-                  key={shape.id}
-                  x={shape.x}
-                  y={shape.y}
-                  width={shape.width}
-                  height={shape.height}
-                  draggable
-                  onSelected={handleSelected}
-                  ref={shapeRefs.current[shape.id]}
-                  onDragEnd={handleDragEnd(shape.id)}
-                  onTransform={handleTransform}
-                  onTransformEnd={handleTransform}
-                />
-              );
+              return renderShapeComponent(shape, {
+                handleSelected,
+                shapeRefs,
+                handleDragEnd,
+                handleTransform,
+              });
             })
           }
           <Transformer
