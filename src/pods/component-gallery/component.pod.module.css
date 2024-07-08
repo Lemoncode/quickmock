@@ -1,0 +1,11 @@
+.container {
+  height: 60%;
+  overflow-y: auto;
+}
+
+.title {
+  background-color: var(--primary-200);
+  padding: var(--space-xs) var(--space-md);
+  border-top: 1px solid var(--primary-900);
+  border-bottom: 1px solid var(--primary-900);
+}

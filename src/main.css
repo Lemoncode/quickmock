@@ -36,6 +36,13 @@
   --fw-bold: 600;
   --fw-extrabold: 700;
 
+  /*Layout*/
+  --column-min-size: 250px;
+  --canvas-min-size: 500px;
+
+  /*gallery*/
+  --gallery-item-size: 120px;
+
   /*Main styles*/
   font-family: Inter, system-ui, Helvetica, Arial, sans-serif;
   font-size: var(--fs-m);
