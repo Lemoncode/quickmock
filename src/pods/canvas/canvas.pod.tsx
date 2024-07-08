@@ -5,6 +5,12 @@ import { Layer, Stage, Transformer } from 'react-konva';
 import { ShapeModel, createShape } from './canvas.model';
 import { useSelection } from './use-selection.hook';
 import Konva from 'konva';
+import { useTransform } from './use-transform.hook';
+import {
+  fitSizeToShapeSizeRestrictions,
+  getShapeSizeRestrictions,
+} from './canvas.util';
+import { Box } from 'konva/lib/shapes/Transformer';
 
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([
@@ -12,8 +18,24 @@ export const CanvasPod = () => {
     createShape(90, 170, 250, 50),
   ]);
 
-  const { shapeRefs, transformerRef, handleSelected, handleClearSelection } =
-    useSelection(shapes);
+  const {
+    shapeRefs,
+    transformerRef,
+    handleSelected,
+    handleClearSelection,
+    selectedShapeRef,
+    selectedShapeId,
+    selectedShapeType,
+  } = useSelection(shapes);
+
+  const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
+    setShapes,
+    {
+      selectedShapeRef,
+      selectedShapeId,
+      selectedShapeType,
+    }
+  );
 
   const handleDragEnd =
     (id: string) => (e: Konva.KonvaEventObject<DragEvent>) => {
@@ -52,11 +74,17 @@ export const CanvasPod = () => {
                   onSelected={handleSelected}
                   ref={shapeRefs.current[shape.id]}
                   onDragEnd={handleDragEnd(shape.id)}
+                  onTransform={handleTransform}
+                  onTransformEnd={handleTransform}
                 />
               );
             })
           }
-          <Transformer ref={transformerRef} />
+          <Transformer
+            ref={transformerRef}
+            flipEnabled={false}
+            boundBoxFunc={handleTransformerBoundBoxFunc}
+          />
         </Layer>
       </Stage>
     </div>

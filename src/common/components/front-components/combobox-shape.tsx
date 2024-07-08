@@ -1,6 +1,14 @@
-import { ShapeConfig } from "konva/lib/Shape";
-import { forwardRef } from "react";
-import { Path, Group, Text } from "react-konva";
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
+import { ShapeConfig } from 'konva/lib/Shape';
+import { forwardRef } from 'react';
+import { Path, Group, Text } from 'react-konva';
+
+export const getComboBoxShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
+  minWidth: 80,
+  minHeight: 50,
+  maxWidth: -1,
+  maxHeight: 50,
+});
 
 // Important: we extend from Shapeconfig so we can get additional shape params
 // TODO: we will need to add more props like for instance text content
@@ -11,7 +19,7 @@ interface ComboBoxShapeProps extends ShapeConfig {
   y: number;
   width: number;
   height: number;
-  onSelected: (id: string) => void;
+  onSelected: (id: string, type: ShapeType) => void;
 }
 
 export const ComboBoxShape = forwardRef<any, ComboBoxShapeProps>(
@@ -32,7 +40,7 @@ export const ComboBoxShape = forwardRef<any, ComboBoxShapeProps>(
         width={width}
         height={height}
         {...shapeProps}
-        onClick={() => onSelected(id)}
+        onClick={() => onSelected(id, "combobox")}
       >
         {/* Rectangle */}
         <Path
@@ -63,6 +71,8 @@ export const ComboBoxShape = forwardRef<any, ComboBoxShapeProps>(
           fontSize={20}
           fontFamily="Arial"
           fill="black"
+          width={width - 50}
+          height={height - 10}
         />
       </Group>
     );
