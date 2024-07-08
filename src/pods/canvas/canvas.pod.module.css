@@ -1,6 +1,5 @@
 .canvas {
-    grid-area: canvas;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  grid-area: canvas;
+  width: 100%;
+  overflow: auto;
 }
