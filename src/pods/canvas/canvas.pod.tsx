@@ -12,6 +12,7 @@ import {
 } from './canvas.util';
 import { Box } from 'konva/lib/shapes/Transformer';
 import { InputShape } from '@/common/components/front-components/input-shape';
+import { renderShapeComponent } from './shape-renderer';
 
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([
@@ -46,6 +47,7 @@ export const CanvasPod = () => {
       );
     };
 
+  /*
   const renderShapeComponent = (shape: ShapeModel) => {
     switch (shape.type) {
       case 'combobox':
@@ -85,7 +87,7 @@ export const CanvasPod = () => {
       default:
         return <p>** Shape not defined **</p>;
     }
-  };
+  };*/
 
   return (
     <div className={classes.canvas}>
@@ -104,7 +106,12 @@ export const CanvasPod = () => {
                 shapeRefs.current[shape.id] = createRef();
               }
 
-              return renderShapeComponent(shape);
+              return renderShapeComponent(shape, {
+                handleSelected,
+                shapeRefs,
+                handleDragEnd,
+                handleTransform,
+              });
             })
           }
           <Transformer

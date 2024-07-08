@@ -40,3 +40,7 @@ export const createShape = (
     type: shapeType,
   };
 };
+
+export type ShapeRefs = {
+  [key: string]: React.RefObject<any>;
+};
