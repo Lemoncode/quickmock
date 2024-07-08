@@ -34,8 +34,6 @@ export const useTransform = (
 
   const handleTransform = () => {
     const node = selectedShapeRef.current;
-    // TODO: right now the hook initalizes the transformer with empty object {}
-    // rather initialize it with null
     if (!node) {
       return;
     }

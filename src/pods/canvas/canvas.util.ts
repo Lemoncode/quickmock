@@ -2,7 +2,7 @@ import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { Size } from './canvas.model';
 import { getComboBoxShapeSizeRestrictions } from '@/common/components/front-components';
 
-// TODO Add Unit tests
+// TODO Add Unit tests, issue: #45
 export const fitSizeToShapeSizeRestrictions = (
   shapeSizeRestrictions: ShapeSizeRestrictions,
   width: number,
@@ -31,6 +31,7 @@ const defaultShapeSizeRestrictions: ShapeSizeRestrictions = {
   maxHeight: -1,
 };
 
+// TODO: Add unit test support: #46
 export const getShapeSizeRestrictions = (type: ShapeType | null) => {
   if (!type) {
     return defaultShapeSizeRestrictions;
