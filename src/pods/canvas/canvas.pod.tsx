@@ -1,8 +1,5 @@
 import classes from './canvas.pod.module.css';
-import {
-  ComboBoxShape,
-  getComboBoxShapeSizeRestrictions,
-} from '@/common/components/front-components';
+import { ComboBoxShape } from '@/common/components/front-components';
 import { createRef, useState } from 'react';
 import { Layer, Stage, Transformer } from 'react-konva';
 import { ShapeModel, createShape } from './canvas.model';
@@ -31,11 +28,14 @@ export const CanvasPod = () => {
     selectedShapeType,
   } = useSelection(shapes);
 
-  const { handleTransform } = useTransform(setShapes, {
-    selectedShapeRef,
-    selectedShapeId,
-    selectedShapeType,
-  });
+  const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
+    setShapes,
+    {
+      selectedShapeRef,
+      selectedShapeId,
+      selectedShapeType,
+    }
+  );
 
   const handleDragEnd =
     (id: string) => (e: Konva.KonvaEventObject<DragEvent>) => {
@@ -44,19 +44,6 @@ export const CanvasPod = () => {
         prevShapes.map(shape => (shape.id === id ? { ...shape, x, y } : shape))
       );
     };
-
-  const handleTransformerBoundBoxFunc = (_: Box, newBox: Box) => {
-    const limitedSize = fitSizeToShapeSizeRestrictions(
-      getShapeSizeRestrictions(selectedShapeType),
-      newBox.width,
-      newBox.height
-    );
-    return {
-      ...newBox,
-      width: limitedSize.width,
-      height: limitedSize.height,
-    };
-  };
 
   return (
     <div className={classes.canvas}>
