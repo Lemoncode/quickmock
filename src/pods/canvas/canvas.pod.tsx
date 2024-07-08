@@ -47,48 +47,6 @@ export const CanvasPod = () => {
       );
     };
 
-  /*
-  const renderShapeComponent = (shape: ShapeModel) => {
-    switch (shape.type) {
-      case 'combobox':
-        return (
-          <ComboBoxShape
-            id={shape.id}
-            key={shape.id}
-            x={shape.x}
-            y={shape.y}
-            width={shape.width}
-            height={shape.height}
-            draggable
-            onSelected={handleSelected}
-            ref={shapeRefs.current[shape.id]}
-            onDragEnd={handleDragEnd(shape.id)}
-            onTransform={handleTransform}
-            onTransformEnd={handleTransform}
-          />
-        );
-      case 'input':
-        return (
-          <InputShape
-            id={shape.id}
-            key={shape.id}
-            x={shape.x}
-            y={shape.y}
-            width={shape.width}
-            height={shape.height}
-            draggable
-            onSelected={handleSelected}
-            ref={shapeRefs.current[shape.id]}
-            onDragEnd={handleDragEnd(shape.id)}
-            onTransform={handleTransform}
-            onTransformEnd={handleTransform}
-          />
-        );
-      default:
-        return <p>** Shape not defined **</p>;
-    }
-  };*/
-
   return (
     <div className={classes.canvas}>
       {/*TODO: move size to canvas provider?*/}
