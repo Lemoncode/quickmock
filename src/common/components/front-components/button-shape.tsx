@@ -13,7 +13,7 @@ interface ButtonShapeProps extends ShapeConfig {
 }
 
 export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
-  minWidth: 200,
+  minWidth: 150,
   minHeight: 50,
   maxWidth: -1,
   maxHeight: 50,
@@ -42,9 +42,9 @@ export const ButtonShape = forwardRef<any, ButtonShapeProps>(
           fill="white"
         />
         <Text
-          x={60}
+          x={50}
           y={40}
-          width={width - 5}
+          width={width - 50}
           text="Click Me!"
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
