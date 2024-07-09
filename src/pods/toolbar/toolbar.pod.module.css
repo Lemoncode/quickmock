@@ -1,7 +1,51 @@
-.toolbar {
-    grid-area: toolbar;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid black;
+.container {
+  grid-area: toolbar;
+  display: flex;
+  justify-content: space-evenly;
+  padding: var(--padding-pixel-s);
+  background-color: var(--primary-10);
+}
+
+.button {
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  margin: var(--padding-pixel-xs);
+  padding: var(--padding-pixel-m);
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  font-size: var(--fs-md);
+  border: var(--transition-pixel-s) solid #eee;
+  border-radius: var(--transition-pixel-m);
+  box-shadow:
+    var(--toolbarBorder-xs) var(--toolbarBorder-xs) var(--toolbarBorder-s)
+      var(--primary-50),
+    calc(-1 * var(--toolbarBorder-xs)) calc(-1 * var(--toolbarBorder-xs))
+      var(--toolbarBorder-s) var(--pure-white);
+  transition: all var(--transition-seconds-s) ease;
+}
+
+.button:click {
+  transform: translateY(var(--transition-pixel-s));
+}
+
+.button:hover {
+  box-shadow:
+    var(--toolbarBorder-xs) var(--toolbarBorder-xs) var(--toolbarBorder-s)
+      var(--pure-white),
+    calc(-1 * var(--toolbarBorder-xs)) calc(-1 * var(--toolbarBorder-xs))
+      var(--toolbarBorder-s) var(--primary-50);
+}
+
+.button:active {
+  transform: translateY(var(--transition-seconds-s));
+  box-shadow:
+    inset var(--toolbarBorder-xxs) var(--toolbarBorder-xxs)
+      var(--toolbarBorder-xs) var(--pure-white),
+    inset calc(-1 * var(--toolbarBorder-xxs))
+      calc(-1 * var(--toolbarBorder-xxs)) var(--toolbarBorder-xs)
+      var(--primary-50);
 }
