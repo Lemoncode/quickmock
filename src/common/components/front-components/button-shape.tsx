@@ -13,7 +13,7 @@ interface ButtonShapeProps extends ShapeConfig {
 }
 
 export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
-  minWidth: 60,
+  minWidth: 200,
   minHeight: 50,
   maxWidth: -1,
   maxHeight: 50,
