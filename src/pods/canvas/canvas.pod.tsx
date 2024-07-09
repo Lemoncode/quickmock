@@ -18,6 +18,7 @@ export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([
     createShape({ x: 10, y: 10 }, { width: 200, height: 50 }, 'combobox'),
     createShape({ x: 90, y: 170 }, { width: 250, height: 50 }, 'input'),
+    createShape({ x: 50, y: 50 }, { width: 200, height: 50 }, 'button'),
   ]);
 
   const {
