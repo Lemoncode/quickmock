@@ -13,6 +13,12 @@ import {
 import { Box } from 'konva/lib/shapes/Transformer';
 import { InputShape } from '@/common/components/front-components/input-shape';
 import { renderShapeComponent } from './shape-renderer';
+import {
+  moveZIndexDownOneLevel,
+  moveZIndexToBottom,
+  moveZIndexTopOneLevel,
+  moveZIndexToTop,
+} from './zindex.util';
 
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([
@@ -49,8 +55,41 @@ export const CanvasPod = () => {
       );
     };
 
+  const handleZIndexChange = (shapeCollection: ShapeModel[]) => {
+    setShapes(shapeCollection);
+  };
+
   return (
     <div className={classes.canvas}>
+      {/*TODO: move buttons to app props panel*/}
+      <button
+        onClick={() =>
+          handleZIndexChange(moveZIndexToBottom(selectedShapeId, shapes))
+        }
+      >
+        Move to Bottom
+      </button>
+      <button
+        onClick={() =>
+          handleZIndexChange(moveZIndexToTop(selectedShapeId, shapes))
+        }
+      >
+        Move to Top
+      </button>
+      <button
+        onClick={() =>
+          handleZIndexChange(moveZIndexDownOneLevel(selectedShapeId, shapes))
+        }
+      >
+        Move to Bottom One Level
+      </button>
+      <button
+        onClick={() =>
+          handleZIndexChange(moveZIndexTopOneLevel(selectedShapeId, shapes))
+        }
+      >
+        Move to Top One Level
+      </button>
       {/*TODO: move size to canvas provider?*/}
       <Stage
         width={3000}
