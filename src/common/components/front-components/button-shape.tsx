@@ -1,16 +1,7 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
-import { ShapeConfig } from 'konva/lib/Shape';
-import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-
-interface ButtonShapeProps extends ShapeConfig {
-  id: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  onSelected: (id: string, type: ShapeType) => void;
-}
+import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeProps } from './shape.model';
 
 export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
   minWidth: 150,
@@ -19,7 +10,7 @@ export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
   maxHeight: 50,
 });
 
-export const ButtonShape = forwardRef<any, ButtonShapeProps>(
+export const ButtonShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
     return (
       <Group
