@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   getComboBoxShapeSizeRestrictions,
   getInputShapeSizeRestrictions,
+  getTextAreaSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
 } from '@/common/components/front-components';
 
@@ -41,6 +42,11 @@ const getDefaultWidthFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getToggleSwitchShapeSizeRestrictions().defaultWidth,
         height: getToggleSwitchShapeSizeRestrictions().defaultHeight,
+      };
+    case 'textarea':
+      return {
+        width: getTextAreaSizeRestrictions().defaultWidth,
+        height: getTextAreaSizeRestrictions().defaultHeight,
       };
     default:
       return { width: 200, height: 50 };

@@ -1,12 +1,15 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
+import { ShapeSizeRestrictions } from '@/core/model';
 
-export const getTextAreaSizeRestrictions = () => ({
+export const getTextAreaSizeRestrictions = (): ShapeSizeRestrictions => ({
   minWidth: 80,
   minHeight: 90,
   maxWidth: -1,
   maxHeight: 500,
+  defaultWidth: 190,
+  defaultHeight: 290,
 });
 
 export const TextAreaShape = forwardRef<any, ShapeProps>(
@@ -19,7 +22,7 @@ export const TextAreaShape = forwardRef<any, ShapeProps>(
         height={height}
         ref={ref}
         {...shapeProps}
-        onClick={() => onSelected(id, 'textArea')}
+        onClick={() => onSelected(id, 'textarea')}
       >
         <Rect
           x={10}
