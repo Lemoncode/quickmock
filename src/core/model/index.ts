@@ -7,7 +7,5 @@ export interface ShapeSizeRestrictions {
   defaultHeight: number;
 }
 
-export type ShapeType =
-  | 'combobox'
-  | 'input'
-  | 'toggleswitch' /* | "text"| "button" |  "checkbox" | "radio" | "image"*/;
+export type ShapeType = 'combobox' | 'input' | 'textarea' | 'toggleswitch';
+/* | "text"| "button" |  "checkbox" | "radio" | "image"*/

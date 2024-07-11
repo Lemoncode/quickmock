@@ -1,4 +1,5 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
+import { getTextAreaSizeRestrictions } from '@/common/components/front-components/textarea-shape';
 import { Coord, Size } from './canvas.model';
 import {
   getComboBoxShapeSizeRestrictions,
@@ -35,6 +36,8 @@ const defaultShapeSizeRestrictions: ShapeSizeRestrictions = {
   minHeight: 0,
   maxWidth: -1,
   maxHeight: -1,
+  defaultWidth: 100,
+  defaultHeight: 100,
 };
 
 // TODO: Add unit test support: #46
@@ -48,6 +51,8 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getComboBoxShapeSizeRestrictions();
     case 'input':
       return getInputShapeSizeRestrictions();
+    case 'textArea':
+      return getTextAreaSizeRestrictions();
     case 'toggleswitch':
       return getToggleSwitchShapeSizeRestrictions();
     default:
