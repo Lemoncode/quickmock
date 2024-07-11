@@ -8,6 +8,8 @@ export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
   minHeight: 50,
   maxWidth: -1,
   maxHeight: 50,
+  defaultWidth: 190,
+  defaultHeight: 50,
 });
 
 export const InputShape = forwardRef<any, ShapeProps>(
