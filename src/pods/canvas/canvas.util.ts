@@ -2,6 +2,7 @@ import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { Size } from './canvas.model';
 import { getComboBoxShapeSizeRestrictions } from '@/common/components/front-components';
 import { getInputShapeSizeRestrictions } from '@/common/components/front-components/input-shape';
+import { getTextAreaSizeRestrictions } from '@/common/components/front-components/textarea-shape';
 
 // TODO Add Unit tests, issue: #45
 export const fitSizeToShapeSizeRestrictions = (
@@ -43,6 +44,8 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getComboBoxShapeSizeRestrictions();
     case 'input':
       return getInputShapeSizeRestrictions();
+    case 'textArea':
+      return getTextAreaSizeRestrictions();
     default:
       return defaultShapeSizeRestrictions;
   }

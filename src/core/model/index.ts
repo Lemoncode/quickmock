@@ -5,6 +5,5 @@ export interface ShapeSizeRestrictions {
   maxHeight: number;
 }
 
-export type ShapeType =
-  | 'combobox'
-  | 'input' /* | "text"| "button" |  "checkbox" | "radio" | "image"*/;
+export type ShapeType = 'combobox' | 'input' | 'textArea';
+/* | "text"| "button" |  "checkbox" | "radio" | "image"*/
