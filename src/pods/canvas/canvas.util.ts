@@ -1,8 +1,11 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { Size } from './canvas.model';
-import { getComboBoxShapeSizeRestrictions } from '@/common/components/front-components';
-import { getInputShapeSizeRestrictions } from '@/common/components/front-components/input-shape';
-import { getCheckboxShapeSizeRestrictions } from '@/common/components/front-components/checkbox-shape';
+import {
+  getComboBoxShapeSizeRestrictions,
+  getInputShapeSizeRestrictions,
+  getToggleSwitchShapeSizeRestrictions,
+  getCheckboxShapeSizeRestrictions,
+} from '@/common/components/front-components';
 
 // TODO Add Unit tests, issue: #45
 export const fitSizeToShapeSizeRestrictions = (
@@ -46,6 +49,8 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getInputShapeSizeRestrictions();
     case 'checkbox':
       return getCheckboxShapeSizeRestrictions();
+    case 'toggleswitch':
+      return getToggleSwitchShapeSizeRestrictions();
     default:
       return defaultShapeSizeRestrictions;
   }

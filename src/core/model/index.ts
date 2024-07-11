@@ -8,4 +8,5 @@ export interface ShapeSizeRestrictions {
 export type ShapeType =
   | 'combobox'
   | 'input'
-  | 'checkbox' /* | "text"| "button" | "radio" | "image"*/;
+  | 'checkbox'
+  | 'toggleswitch' /* | "text"| "button" |  "radio" | "image"*/;

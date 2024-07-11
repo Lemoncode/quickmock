@@ -1,9 +1,10 @@
 import { ShapeModel } from '../canvas.model';
 import { ShapeRendererProps } from './model';
 import {
-  renderCheckbox,
   renderComboBox,
   renderInput,
+  renderToggleSwitch,
+  renderCheckbox,
 } from './simple-component';
 
 export const renderShapeComponent = (
@@ -17,6 +18,8 @@ export const renderShapeComponent = (
       return renderInput(shape, shapeRenderedProps);
     case 'checkbox':
       return renderCheckbox(shape, shapeRenderedProps);
+    case 'toggleswitch':
+      return renderToggleSwitch(shape, shapeRenderedProps);
     default:
       return <p>** Shape not defined **</p>;
   }

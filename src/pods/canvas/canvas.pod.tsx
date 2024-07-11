@@ -1,17 +1,10 @@
 import classes from './canvas.pod.module.css';
-import { ComboBoxShape } from '@/common/components/front-components';
 import { createRef, useState } from 'react';
 import { Layer, Stage, Transformer } from 'react-konva';
 import { ShapeModel, createShape } from './canvas.model';
 import { useSelection } from './use-selection.hook';
 import Konva from 'konva';
 import { useTransform } from './use-transform.hook';
-import {
-  fitSizeToShapeSizeRestrictions,
-  getShapeSizeRestrictions,
-} from './canvas.util';
-import { Box } from 'konva/lib/shapes/Transformer';
-import { InputShape } from '@/common/components/front-components/input-shape';
 import { renderShapeComponent } from './shape-renderer';
 
 export const CanvasPod = () => {
@@ -19,6 +12,8 @@ export const CanvasPod = () => {
     createShape({ x: 10, y: 10 }, { width: 200, height: 50 }, 'combobox'),
     createShape({ x: 90, y: 170 }, { width: 250, height: 50 }, 'input'),
     createShape({ x: 90, y: 270 }, { width: 30, height: 30 }, 'checkbox'),
+    createShape({ x: 90, y: 270 }, { width: 60, height: 35 }, 'toggleswitch'),
+    createShape({ x: 220, y: 280 }, { width: 60, height: 25 }, 'toggleswitch'),
   ]);
 
   const {
