@@ -2,3 +2,9 @@
   height: 40%;
   overflow-y: auto;
 }
+
+.title {
+  background-color: var(--primary-200);
+  padding: var(--space-xs) var(--space-md);
+  border-bottom: 1px solid var(--primary-900);
+}
