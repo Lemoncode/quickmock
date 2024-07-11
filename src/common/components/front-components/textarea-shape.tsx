@@ -4,7 +4,7 @@ import { ShapeProps } from './shape.model';
 
 export const getTextAreaSizeRestrictions = () => ({
   minWidth: 80,
-  minHeight: 60,
+  minHeight: 90,
   maxWidth: -1,
   maxHeight: 500,
 });

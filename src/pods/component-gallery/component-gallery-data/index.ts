@@ -4,4 +4,5 @@ export const mockWidgetCollection: ItemInfo[] = [
   { thumbnailSrc: '/widgets/button.svg', type: 'input' },
   { thumbnailSrc: '/widgets/input.svg', type: 'input' },
   { thumbnailSrc: '/widgets/combobox.svg', type: 'input' },
+  { thumbnailSrc: '/widgets/textarea.svg', type: 'input' },
 ];
