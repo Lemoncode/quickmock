@@ -10,12 +10,7 @@ import { useDropShape } from './use-drop-shape.hook';
 import { useMonitorShape } from './use-monitor-shape.hook';
 
 export const CanvasPod = () => {
-  const [shapes, setShapes] = useState<ShapeModel[]>([
-    createShape({ x: 10, y: 10 }, { width: 200, height: 50 }, 'combobox'),
-    createShape({ x: 90, y: 170 }, { width: 250, height: 50 }, 'input'),
-    createShape({ x: 90, y: 270 }, { width: 60, height: 35 }, 'toggleswitch'),
-    createShape({ x: 220, y: 280 }, { width: 60, height: 25 }, 'toggleswitch'),
-  ]);
+  const [shapes, setShapes] = useState<ShapeModel[]>([]);
 
   const {
     shapeRefs,

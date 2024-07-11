@@ -52,15 +52,11 @@ export const useMonitorShape = (
 
         setShapes(shapes => [
           ...shapes,
-          createShape(
-            { x: positionX, y: positionY },
-            { width: 200, height: 50 }, // TODO: each shape should provide it's own size
-            type as any
-          ),
+          createShape({ x: positionX, y: positionY }, type as any),
         ]);
       },
     });
   }, []);
 
-  return { stageRef}
+  return { stageRef };
 };
