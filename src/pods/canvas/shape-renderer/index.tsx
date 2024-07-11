@@ -3,6 +3,7 @@ import { ShapeRendererProps } from './model';
 import {
   renderComboBox,
   renderInput,
+  renderNotFound,
   renderToggleSwitch,
 } from './simple-component';
 
@@ -18,6 +19,6 @@ export const renderShapeComponent = (
     case 'toggleswitch':
       return renderToggleSwitch(shape, shapeRenderedProps);
     default:
-      return <p>** Shape not defined **</p>;
+      return renderNotFound(shape, shapeRenderedProps);
   }
 };
