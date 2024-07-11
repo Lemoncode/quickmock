@@ -15,6 +15,8 @@ export const TextAreaShape = forwardRef<any, ShapeProps>(
       <Group
         x={x}
         y={y}
+        width={width}
+        height={height}
         ref={ref}
         {...shapeProps}
         onClick={() => onSelected(id, 'textArea')}
