@@ -16,6 +16,7 @@ import {
   extractScreenCoordinatesFromPragmaticLocation,
   portScreenPositionToDivCoordinates,
 } from './canvas.util';
+import { useDropShape } from './use-drop-shape.hook';
 
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([
@@ -35,23 +36,9 @@ export const CanvasPod = () => {
     selectedShapeType,
   } = useSelection(shapes);
 
-  const [isDraggedOver, setIsDraggedOver] = useState(false);
-  const dropRef = useRef(null);
   const stageRef = useRef<Konva.Stage>(null);
 
-  useEffect(() => {
-    const el = dropRef.current;
-
-    invariant(el);
-
-    return dropTargetForElements({
-      element: el,
-      getData: () => ({ destination: 'canvas' }),
-      onDragEnter: () => setIsDraggedOver(true),
-      onDragLeave: () => setIsDraggedOver(false),
-      onDrop: () => setIsDraggedOver(false),
-    });
-  });
+  const { isDraggedOver, dropRef } = useDropShape();
 
   useEffect(() => {
     return monitorForElements({
