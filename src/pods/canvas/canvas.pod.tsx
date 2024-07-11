@@ -1,22 +1,13 @@
 import classes from './canvas.pod.module.css';
-import { createRef, useEffect, useRef, useState } from 'react';
+import { createRef, useState } from 'react';
 import { Layer, Stage, Transformer } from 'react-konva';
 import { ShapeModel, createShape } from './canvas.model';
 import { useSelection } from './use-selection.hook';
 import Konva from 'konva';
 import { useTransform } from './use-transform.hook';
 import { renderShapeComponent } from './shape-renderer';
-import {
-  dropTargetForElements,
-  monitorForElements,
-} from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
-import invariant from 'tiny-invariant';
-import {
-  convertFromDivElementCoordsToKonvaCoords,
-  extractScreenCoordinatesFromPragmaticLocation,
-  portScreenPositionToDivCoordinates,
-} from './canvas.util';
 import { useDropShape } from './use-drop-shape.hook';
+import { useMonitorShape } from './use-monitor-shape.hook';
 
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([
@@ -36,56 +27,8 @@ export const CanvasPod = () => {
     selectedShapeType,
   } = useSelection(shapes);
 
-  const stageRef = useRef<Konva.Stage>(null);
-
   const { isDraggedOver, dropRef } = useDropShape();
-
-  useEffect(() => {
-    return monitorForElements({
-      onDrop({ source, location }) {
-        const destination = location.current.dropTargets[0];
-        invariant(destination);
-
-        const type = source.data.type;
-        const screenPosition =
-          extractScreenCoordinatesFromPragmaticLocation(location);
-
-        let positionX = 0;
-        let positionY = 0;
-        if (screenPosition) {
-          invariant(dropRef.current);
-          const { x: divRelativeX, y: divRelativeY } =
-            portScreenPositionToDivCoordinates(
-              dropRef.current as HTMLDivElement,
-              screenPosition
-            );
-
-          invariant(stageRef.current);
-          const stage = stageRef.current;
-          const konvaCoord = convertFromDivElementCoordsToKonvaCoords(
-            stage,
-            screenPosition,
-            {
-              x: divRelativeX,
-              y: divRelativeY,
-            }
-          );
-
-          positionX = konvaCoord.x;
-          positionY = konvaCoord.y;
-        }
-
-        setShapes(shapes => [
-          ...shapes,
-          createShape(
-            { x: positionX, y: positionY },
-            { width: 200, height: 50 }, // TODO: each shape should provide it's own size
-            type as any
-          ),
-        ]);
-      },
-    });
-  }, []);
+  const { stageRef } = useMonitorShape(dropRef, setShapes);
 
   const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
     setShapes,
