@@ -1,0 +1,16 @@
+<svg width="200" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Marco del móvil -->
+  <rect x="20" y="20" width="160" height="360" rx="30" ry="30"
+        style="fill:none;stroke:black;stroke-width:2"/>
+
+  <!-- Pantalla del móvil -->
+  <rect x="30" y="50" width="140" height="300" rx="10" ry="10"
+        style="fill:none;stroke:black;stroke-width:1"/>
+  
+  <!-- Altavoz -->
+  <rect x="90" y="30" width="20" height="5" rx="2" ry="2"
+        style="fill:none;stroke:black;stroke-width:1"/>
+  
+  <!-- Botón de inicio -->
+  <circle cx="100" cy="366" r="9" style="fill:none;stroke:black;stroke-width:2"/>
+</svg>
