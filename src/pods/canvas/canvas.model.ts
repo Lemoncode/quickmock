@@ -26,7 +26,7 @@ export interface ShapeModel {
   type: ShapeType;
 }
 
-const getDefaultWidthFromShape = (shapeType: ShapeType): Size => {
+const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
     case 'combobox':
       return {
@@ -58,7 +58,7 @@ const getDefaultWidthFromShape = (shapeType: ShapeType): Size => {
 // size: { width: number, height: number }
 export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
   const { x, y } = coord;
-  const { width, height } = getDefaultWidthFromShape(shapeType);
+  const { width, height } = getDefaultSizeFromShape(shapeType);
 
   return {
     id: uuidv4(),

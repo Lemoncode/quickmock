@@ -9,7 +9,7 @@ export const getTextAreaSizeRestrictions = (): ShapeSizeRestrictions => ({
   maxWidth: -1,
   maxHeight: 500,
   defaultWidth: 190,
-  defaultHeight: 290,
+  defaultHeight: 100,
 });
 
 export const TextAreaShape = forwardRef<any, ShapeProps>(
