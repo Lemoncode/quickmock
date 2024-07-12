@@ -8,7 +8,13 @@ export const getCheckboxShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
   minHeight: 30,
   maxWidth: -1,
   maxHeight: 50,
+  defaultWidth: 220,
+  defaultHeight: 50,
 });
+
+const marginTick = 5;
+const boxTickWidth = 50;
+const tickWidth = boxTickWidth - marginTick;
 
 export const CheckBoxShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
@@ -30,7 +36,7 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
         <Rect
           x={0}
           y={0}
-          width={width}
+          width={boxTickWidth}
           height={height}
           cornerRadius={5}
           stroke="black"
@@ -39,14 +45,23 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
         />
 
         {/* Marca de verificación (checked) */}
+
+        {/*
+        ----------
+       |     *
+       | *  *
+       |  *
+       -----------
+      */}
+
         <Line
           points={[
-            width * 0.2,
-            height * 0.5,
-            width * 0.4,
-            height * 0.7,
-            width * 0.8,
-            height * 0.3,
+            marginTick,
+            height / 2,
+            marginTick + boxTickWidth / 4,
+            height - marginTick,
+            tickWidth - marginTick,
+            marginTick,
           ]}
           stroke="black"
           strokeWidth={2}
@@ -56,12 +71,12 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
 
         {/* Texto */}
         <Text
-          x={width + 10}
+          x={boxTickWidth + marginTick}
           y={height / 2}
           height={height / 3}
           text="Check me!"
           fontFamily="Comic Sans MS, cursive"
-          fontSize={width * 0.8}
+          fontSize={20}
           fill="black"
           verticalAlign="middle"
         />

@@ -1,7 +1,7 @@
 import classes from './canvas.pod.module.css';
 import { createRef, useState } from 'react';
 import { Layer, Stage, Transformer } from 'react-konva';
-import { ShapeModel, createShape } from './canvas.model';
+import { ShapeModel } from './canvas.model';
 import { useSelection } from './use-selection.hook';
 import Konva from 'konva';
 import { useTransform } from './use-transform.hook';
