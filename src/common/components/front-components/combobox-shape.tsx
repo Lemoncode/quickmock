@@ -8,11 +8,12 @@ export const getComboBoxShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
   minHeight: 50,
   maxWidth: -1,
   maxHeight: 50,
+  defaultWidth: 220,
+  defaultHeight: 50,
 });
 
 export const ComboBoxShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
-
     return (
       <Group
         x={x}

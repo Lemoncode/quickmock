@@ -3,6 +3,8 @@ import { ShapeRendererProps } from './model';
 import {
   renderComboBox,
   renderInput,
+  renderTextArea,
+  renderNotFound,
   renderToggleSwitch,
   renderCheckbox,
 } from './simple-component';
@@ -18,9 +20,11 @@ export const renderShapeComponent = (
       return renderInput(shape, shapeRenderedProps);
     case 'checkbox':
       return renderCheckbox(shape, shapeRenderedProps);
+    case 'textarea':
+      return renderTextArea(shape, shapeRenderedProps);
     case 'toggleswitch':
       return renderToggleSwitch(shape, shapeRenderedProps);
     default:
-      return <p>** Shape not defined **</p>;
+      return renderNotFound(shape, shapeRenderedProps);
   }
 };

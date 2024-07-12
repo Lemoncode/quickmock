@@ -12,10 +12,12 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@atlaskit/pragmatic-drag-and-drop": "^1.2.1",
     "konva": "^9.3.12",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-konva": "^18.2.10",
+    "tiny-invariant": "^1.3.3",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
