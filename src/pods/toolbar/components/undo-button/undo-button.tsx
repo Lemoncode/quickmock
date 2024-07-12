@@ -4,7 +4,7 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 
 export const UndoButton = () => {
   const handleClick = () => {
-    console.log('Hola desde Undo');
+    console.log('Undo');
   };
 
   return (

@@ -4,7 +4,7 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 
 export const OpenButton = () => {
   const handleClick = () => {
-    console.log('Hola desde Open');
+    console.log('Open');
   };
 
   return (

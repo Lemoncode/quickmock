@@ -4,7 +4,7 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 
 export const ZoomOutButton = () => {
   const handleClick = () => {
-    console.log('Hola desde ZoomOut');
+    console.log('ZoomOut');
   };
 
   return (

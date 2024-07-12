@@ -4,7 +4,7 @@ import { ZoomInIcon } from '@/common/components/icons/zoom-in.component';
 
 export const ZoomInButton = () => {
   const handleClick = () => {
-    console.log('Hola desde ZoomIn');
+    console.log('ZoomIn');
   };
 
   return (

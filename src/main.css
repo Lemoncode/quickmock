@@ -60,9 +60,10 @@
   --padding-pixel-s: 10px;
   --padding-pixel-m: 16px;
 
-  /*Toolbar*/
-  --toolbarBorder-xxs: 1rem;
-  --toolbarBorder-xs: 2rem;
-  --toolbarBorder-s: 4rem;
-  --transition-seconds-s: 1s;
+  /*Border radius*/
+  --border-radius-unit: 4px;
+  --border-radius-s: var(--border-radius-unit);
+  --border-radius-m: calc(var(--border-radius-unit) * 2);
+  --border-radius-l: calc(var(--border-radius-unit) * 4);
+  --border-radius-xl: calc(var(--border-radius-unit) * 6);
 }

@@ -4,7 +4,7 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 
 export const RedoButton = () => {
   const handleClick = () => {
-    console.log('Hola desde Redo');
+    console.log('Redo');
   };
 
   return (
