@@ -17,12 +17,12 @@ export const renderShapeComponent = (
       return renderComboBox(shape, shapeRenderedProps);
     case 'input':
       return renderInput(shape, shapeRenderedProps);
-    case 'textArea':
+    case 'textarea':
       return renderTextArea(shape, shapeRenderedProps);
     case 'toggleswitch':
       return renderToggleSwitch(shape, shapeRenderedProps);
-    case 'textarea': 
-      return renderTextArea(shape, shapeRenderedProps);  
+    case 'textarea':
+      return renderTextArea(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
