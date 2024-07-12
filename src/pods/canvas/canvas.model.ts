@@ -6,6 +6,7 @@ import {
   getTextAreaSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
 } from '@/common/components/front-components';
+import { getButtonShapeSizeRestrictions } from '@/common/components/front-components/button-shape';
 
 export interface Size {
   width: number;
@@ -48,6 +49,13 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getTextAreaSizeRestrictions().defaultWidth,
         height: getTextAreaSizeRestrictions().defaultHeight,
       };
+    case 'button': {
+      return {
+        width: getButtonShapeSizeRestrictions().defaultWidth,
+        height: getButtonShapeSizeRestrictions().defaultHeight,
+      };
+    }
+
     default:
       return { width: 200, height: 50 };
   }

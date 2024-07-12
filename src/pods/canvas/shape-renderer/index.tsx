@@ -5,6 +5,7 @@ import {
   renderInput,
   renderTextArea,
   renderNotFound,
+  renderButton,
   renderToggleSwitch,
   renderCheckbox,
 } from './simple-component';
@@ -18,6 +19,8 @@ export const renderShapeComponent = (
       return renderComboBox(shape, shapeRenderedProps);
     case 'input':
       return renderInput(shape, shapeRenderedProps);
+    case 'button':
+      return renderButton(shape, shapeRenderedProps);
     case 'checkbox':
       return renderCheckbox(shape, shapeRenderedProps);
     case 'textarea':

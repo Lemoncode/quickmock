@@ -1,4 +1,5 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
+import { getButtonShapeSizeRestrictions } from '@/common/components/front-components/button-shape';
 import { Coord, Size } from './canvas.model';
 import {
   getComboBoxShapeSizeRestrictions,
@@ -52,6 +53,8 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getComboBoxShapeSizeRestrictions();
     case 'input':
       return getInputShapeSizeRestrictions();
+    case 'button':
+      return getButtonShapeSizeRestrictions();
     case 'checkbox':
       return getCheckboxShapeSizeRestrictions();
     case 'textarea':
