@@ -8,6 +8,8 @@ export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
   minHeight: 50,
   maxWidth: -1,
   maxHeight: 50,
+  defaultWidth: 150,
+  defaultHeight: 50,
 });
 
 export const ButtonShape = forwardRef<any, ShapeProps>(
