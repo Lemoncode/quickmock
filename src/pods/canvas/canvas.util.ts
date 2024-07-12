@@ -1,10 +1,11 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { getTextAreaSizeRestrictions } from '@/common/components/front-components/textarea-shape';
 import { Coord, Size } from './canvas.model';
 import {
   getComboBoxShapeSizeRestrictions,
   getInputShapeSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
+  getCheckboxShapeSizeRestrictions,
+  getTextAreaSizeRestrictions,
 } from '@/common/components/front-components';
 import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
 import { Stage } from 'konva/lib/Stage';
@@ -51,7 +52,9 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getComboBoxShapeSizeRestrictions();
     case 'input':
       return getInputShapeSizeRestrictions();
-    case 'textArea':
+    case 'checkbox':
+      return getCheckboxShapeSizeRestrictions();
+    case 'textarea':
       return getTextAreaSizeRestrictions();
     case 'toggleswitch':
       return getToggleSwitchShapeSizeRestrictions();
