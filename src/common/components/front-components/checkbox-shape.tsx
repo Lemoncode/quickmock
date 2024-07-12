@@ -4,7 +4,7 @@ import { ShapeProps } from './shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
 
 export const getCheckboxShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
-  minWidth: 30,
+  minWidth: 150,
   minHeight: 30,
   maxWidth: -1,
   maxHeight: 50,
@@ -73,6 +73,7 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
         <Text
           x={boxTickWidth + marginTick}
           y={height / 2}
+          width={width - boxTickWidth - marginTick}
           height={height / 3}
           text="Check me!"
           fontFamily="Comic Sans MS, cursive"
