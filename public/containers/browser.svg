@@ -1,0 +1,25 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Marco de la ventana -->
+  <rect x="10" y="10" width="380" height="280" rx="15" ry="15"
+        style="fill:none;stroke:black;stroke-width:2"/>
+
+  <!-- Barra de título -->
+  <rect x="10" y="10" width="380" height="40" rx="10" ry="10"
+        style="fill:none;stroke:black;stroke-width:2"/>
+  
+  <!-- Botones de la barra de título -->
+  <circle cx="30" cy="30" r="6" style="fill:red;stroke:black;stroke-width:1"/>
+  <circle cx="50" cy="30" r="6" style="fill:yellow;stroke:black;stroke-width:1"/>
+  <circle cx="70" cy="30" r="6" style="fill:green;stroke:black;stroke-width:1"/>
+  
+  <!-- Área de contenido -->
+  <rect x="20" y="60" width="360" height="220"
+        style="fill:none;stroke:black;stroke-width:1"/>
+
+  <!-- Barra de URL -->
+  <rect x="30" y="70" width="340" height="20" rx="5" ry="5"
+        style="fill:none;stroke:black;stroke-width:1"/>
+  <text x="40" y="85" font-family="Comic Sans MS, cursive" font-size="12" fill="black">
+    https://example.com
+  </text>
+</svg>

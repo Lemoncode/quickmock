@@ -1,8 +1,15 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { Size } from './canvas.model';
-import { getComboBoxShapeSizeRestrictions } from '@/common/components/front-components';
-import { getInputShapeSizeRestrictions } from '@/common/components/front-components/input-shape';
 import { getButtonShapeSizeRestrictions } from '@/common/components/front-components/button-shape';
+import { Coord, Size } from './canvas.model';
+import {
+  getComboBoxShapeSizeRestrictions,
+  getInputShapeSizeRestrictions,
+  getToggleSwitchShapeSizeRestrictions,
+  getCheckboxShapeSizeRestrictions,
+  getTextAreaSizeRestrictions,
+} from '@/common/components/front-components';
+import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
+import { Stage } from 'konva/lib/Stage';
 
 // TODO Add Unit tests, issue: #45
 export const fitSizeToShapeSizeRestrictions = (
@@ -31,6 +38,8 @@ const defaultShapeSizeRestrictions: ShapeSizeRestrictions = {
   minHeight: 0,
   maxWidth: -1,
   maxHeight: -1,
+  defaultWidth: 100,
+  defaultHeight: 100,
 };
 
 // TODO: Add unit test support: #46
@@ -46,7 +55,55 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getInputShapeSizeRestrictions();
     case 'button':
       return getButtonShapeSizeRestrictions();
+    case 'checkbox':
+      return getCheckboxShapeSizeRestrictions();
+    case 'textarea':
+      return getTextAreaSizeRestrictions();
+    case 'toggleswitch':
+      return getToggleSwitchShapeSizeRestrictions();
     default:
       return defaultShapeSizeRestrictions;
   }
+};
+
+// TODO Add unit tests to this functions
+export const extractScreenCoordinatesFromPragmaticLocation = (
+  location: DragLocationHistory
+) => {
+  const pragmaticDropInfo = location.current.input;
+  return {
+    x: pragmaticDropInfo.clientX,
+    y: pragmaticDropInfo.clientY,
+  };
+};
+
+export const portScreenPositionToDivCoordinates = (
+  divElement: HTMLDivElement,
+  screenPosition: Coord
+): Coord => {
+  const canvasRect = divElement.getBoundingClientRect();
+  const x = screenPosition.x - canvasRect.left;
+  const y = screenPosition.y - canvasRect.top;
+
+  return { x, y };
+};
+
+export const convertFromDivElementCoordsToKonvaCoords = (
+  stage: Stage,
+  screenPosition: Coord,
+  relativeDivPosition: Coord
+): Coord => {
+  stage.setPointersPositions([screenPosition.x, screenPosition.y]);
+  const result: Coord = { x: 0, y: 0 };
+
+  const pointerPosition = stage.getPointerPosition();
+  if (pointerPosition) {
+    const scaleX = stage.scaleX();
+    const scaleY = stage.scaleY();
+
+    result.x = (relativeDivPosition.x - stage.x()) / scaleX;
+    result.y = (relativeDivPosition.y - stage.y()) / scaleY;
+  }
+
+  return result;
 };

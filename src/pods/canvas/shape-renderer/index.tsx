@@ -1,7 +1,14 @@
 import { ShapeModel } from '../canvas.model';
 import { ShapeRendererProps } from './model';
-import { renderComboBox, renderInput } from './simple-component';
-import { renderButton } from './simple-component/button.renderer';
+import {
+  renderComboBox,
+  renderInput,
+  renderTextArea,
+  renderNotFound,
+  renderButton,
+  renderToggleSwitch,
+  renderCheckbox,
+} from './simple-component';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -14,7 +21,13 @@ export const renderShapeComponent = (
       return renderInput(shape, shapeRenderedProps);
     case 'button':
       return renderButton(shape, shapeRenderedProps);
+    case 'checkbox':
+      return renderCheckbox(shape, shapeRenderedProps);
+    case 'textarea':
+      return renderTextArea(shape, shapeRenderedProps);
+    case 'toggleswitch':
+      return renderToggleSwitch(shape, shapeRenderedProps);
     default:
-      return <p>** Shape not defined **</p>;
+      return renderNotFound(shape, shapeRenderedProps);
   }
 };

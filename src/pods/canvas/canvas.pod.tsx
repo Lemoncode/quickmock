@@ -1,25 +1,16 @@
 import classes from './canvas.pod.module.css';
-import { ComboBoxShape } from '@/common/components/front-components';
 import { createRef, useState } from 'react';
 import { Layer, Stage, Transformer } from 'react-konva';
-import { ShapeModel, createShape } from './canvas.model';
+import { ShapeModel } from './canvas.model';
 import { useSelection } from './use-selection.hook';
 import Konva from 'konva';
 import { useTransform } from './use-transform.hook';
-import {
-  fitSizeToShapeSizeRestrictions,
-  getShapeSizeRestrictions,
-} from './canvas.util';
-import { Box } from 'konva/lib/shapes/Transformer';
-import { InputShape } from '@/common/components/front-components/input-shape';
 import { renderShapeComponent } from './shape-renderer';
+import { useDropShape } from './use-drop-shape.hook';
+import { useMonitorShape } from './use-monitor-shape.hook';
 
 export const CanvasPod = () => {
-  const [shapes, setShapes] = useState<ShapeModel[]>([
-    createShape({ x: 10, y: 10 }, { width: 200, height: 50 }, 'combobox'),
-    createShape({ x: 90, y: 170 }, { width: 250, height: 50 }, 'input'),
-    createShape({ x: 50, y: 50 }, { width: 250, height: 50 }, 'button'),
-  ]);
+  const [shapes, setShapes] = useState<ShapeModel[]>([]);
 
   const {
     shapeRefs,
@@ -30,6 +21,9 @@ export const CanvasPod = () => {
     selectedShapeId,
     selectedShapeType,
   } = useSelection(shapes);
+
+  const { isDraggedOver, dropRef } = useDropShape();
+  const { stageRef } = useMonitorShape(dropRef, setShapes);
 
   const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
     setShapes,
@@ -48,14 +42,22 @@ export const CanvasPod = () => {
       );
     };
 
+  {
+    /* TODO: add other animation for isDraggerOver */
+  }
   return (
-    <div className={classes.canvas}>
+    <div
+      className={classes.canvas}
+      ref={dropRef}
+      style={{ opacity: isDraggedOver ? 0.5 : 1 }}
+    >
       {/*TODO: move size to canvas provider?*/}
       <Stage
         width={3000}
         height={3000}
         onMouseDown={handleClearSelection}
         onTouchStart={handleClearSelection}
+        ref={stageRef}
       >
         <Layer>
           {
