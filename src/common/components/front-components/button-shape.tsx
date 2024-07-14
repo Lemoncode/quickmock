@@ -1,18 +1,18 @@
-import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef } from 'react';
-import { ShapeProps } from './shape.model';
 import { Group, Rect, Text } from 'react-konva';
+import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeProps } from './shape.model';
 
-export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
-  minWidth: 60,
+export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
+  minWidth: 150,
   minHeight: 50,
   maxWidth: -1,
   maxHeight: 50,
-  defaultWidth: 190,
+  defaultWidth: 150,
   defaultHeight: 50,
 });
 
-export const InputShape = forwardRef<any, ShapeProps>(
+export const ButtonShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
     return (
       <Group
@@ -22,26 +22,26 @@ export const InputShape = forwardRef<any, ShapeProps>(
         width={width}
         height={height}
         {...shapeProps}
-        onClick={() => onSelected(id, 'input')}
+        onClick={() => onSelected(id, 'button')}
       >
         <Rect
           x={10}
-          y={10}
+          y={20}
           width={width}
           height={height}
-          cornerRadius={5}
+          cornerRadius={14}
           stroke="black"
           strokeWidth={2}
           fill="white"
         />
         <Text
-          x={20}
-          y={30}
-          width={width - 5}
-          text="Input"
+          x={50}
+          y={40}
+          width={width - 50}
+          text="Click Me!"
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
-          fill="gray"
+          fill="black"
         />
       </Group>
     );
