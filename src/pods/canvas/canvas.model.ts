@@ -5,6 +5,7 @@ import {
   getInputShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
+  getDatepickerInputShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import { getButtonShapeSizeRestrictions } from '@/common/components/front-components/button-shape';
 
@@ -48,6 +49,11 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getTextAreaSizeRestrictions().defaultWidth,
         height: getTextAreaSizeRestrictions().defaultHeight,
+      };
+    case 'datepickerinput':
+      return {
+        width: getDatepickerInputShapeSizeRestrictions().defaultWidth,
+        height: getDatepickerInputShapeSizeRestrictions().defaultHeight,
       };
     case 'button': {
       return {
