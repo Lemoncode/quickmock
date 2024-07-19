@@ -16,7 +16,6 @@ export const getDatepickerInputShapeSizeRestrictions =
 export const DatepickerInputShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
     const margin = 10;
-    const inputHeight = 40;
     const separatorPadding = 15; // Extra padding for spacers
     const separator1X = width / 3 + margin;
     const separator2X = (2 * width) / 3 - margin;
@@ -36,7 +35,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           x={margin}
           y={margin * 3}
           width={width - 2 * margin}
-          height={inputHeight}
+          height={height}
           cornerRadius={10}
           stroke="black"
           strokeWidth={2}
@@ -49,7 +48,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
             separator1X + separatorPadding,
             margin * 2 + separatorPadding,
             separator1X - separatorPadding,
-            margin * 4 + inputHeight - separatorPadding,
+            margin * 4 + height - separatorPadding,
           ]}
           stroke="black"
           strokeWidth={2}
@@ -59,7 +58,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
             separator2X + separatorPadding,
             margin * 2 + separatorPadding,
             separator2X - separatorPadding,
-            margin * 4 + inputHeight - separatorPadding,
+            margin * 4 + height - separatorPadding,
           ]}
           stroke="black"
           strokeWidth={2}
