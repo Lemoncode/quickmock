@@ -1,0 +1,25 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rectángulo del listbox -->
+  <rect x="10" y="10" width="180" height="180" rx="10" ry="10" 
+        style="fill:none;stroke:black;stroke-width:2"/>
+  
+  <!-- Elementos de la lista -->
+  <!-- Elemento seleccionado -->
+  <rect x="20" y="40" width="160" height="30" rx="5" ry="5" style="fill:lightblue;stroke:none"/>
+  <text x="30" y="60" font-family="Comic Sans MS, cursive" font-size="20" fill="black">
+    Item 1
+  </text>
+  
+  <text x="30" y="90" font-family="Comic Sans MS, cursive" font-size="20" fill="black">
+    Item 2
+  </text>
+  <text x="30" y="120" font-family="Comic Sans MS, cursive" font-size="20" fill="black">
+    Item 3
+  </text>
+  <text x="30" y="150" font-family="Comic Sans MS, cursive" font-size="20" fill="black">
+    Item 4
+  </text>
+  <text x="30" y="180" font-family="Comic Sans MS, cursive" font-size="20" fill="black">
+    Item 5
+  </text>
+</svg>

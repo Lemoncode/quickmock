@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   getComboBoxShapeSizeRestrictions,
   getInputShapeSizeRestrictions,
+  getListBoxShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
 } from '@/common/components/front-components';
@@ -49,12 +50,16 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getTextAreaSizeRestrictions().defaultWidth,
         height: getTextAreaSizeRestrictions().defaultHeight,
       };
-    case 'button': {
+    case 'button':
       return {
         width: getButtonShapeSizeRestrictions().defaultWidth,
         height: getButtonShapeSizeRestrictions().defaultHeight,
       };
-    }
+    case 'listbox':
+      return {
+        width: getListBoxShapeSizeRestrictions().defaultWidth,
+        height: getListBoxShapeSizeRestrictions().defaultHeight,
+      };
 
     default:
       return { width: 200, height: 50 };

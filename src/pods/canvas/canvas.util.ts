@@ -7,6 +7,7 @@ import {
   getToggleSwitchShapeSizeRestrictions,
   getCheckboxShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
+  getListBoxShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
 import { Stage } from 'konva/lib/Stage';
@@ -61,6 +62,8 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getTextAreaSizeRestrictions();
     case 'toggleswitch':
       return getToggleSwitchShapeSizeRestrictions();
+    case 'listbox':
+      return getListBoxShapeSizeRestrictions();
     default:
       return defaultShapeSizeRestrictions;
   }
