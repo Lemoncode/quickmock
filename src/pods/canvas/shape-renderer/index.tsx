@@ -8,6 +8,7 @@ import {
   renderButton,
   renderToggleSwitch,
   renderCheckbox,
+  renderDatepickerinput,
 } from './simple-component';
 
 export const renderShapeComponent = (
@@ -27,6 +28,8 @@ export const renderShapeComponent = (
       return renderTextArea(shape, shapeRenderedProps);
     case 'toggleswitch':
       return renderToggleSwitch(shape, shapeRenderedProps);
+    case 'datepickerinput':
+      return renderDatepickerinput(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
