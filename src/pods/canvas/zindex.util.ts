@@ -1,5 +1,6 @@
 import { ShapeModel } from './canvas.model';
 
+// TOO Add Unit tests to all these methods: #65
 export const moveZIndexToTop = (
   selectedShapeId: string,
   shapeCollection: ShapeModel[]
