@@ -1,15 +1,15 @@
-import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
+import { ShapeSizeRestrictions } from '@/core/model';
 import { ShapeConfig } from 'konva/lib/Shape';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 
 export const getListBoxShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
-  minWidth: 80,
-  minHeight: 50,
+  minWidth: 150,
+  minHeight: 100,
   maxWidth: 500,
   maxHeight: 500,
   defaultWidth: 150,
-  defaultHeight: 100,
+  defaultHeight: 80,
 });
 
 interface ListBoxShapeProps extends ShapeConfig {
@@ -19,7 +19,7 @@ interface ListBoxShapeProps extends ShapeConfig {
   width: number;
   height: number;
   items: string[];
-  onSelected: (id: string, type: ShapeType) => void;
+  onSelected: (id: string, itemIndex: number) => void;
 }
 
 export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
@@ -50,7 +50,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
 
     const handleClick = (itemIndex: number) => {
       setSelectedItem(itemIndex);
-      onSelected(id, 'listbox');
+      onSelected(id, itemIndex);
     };
 
     return (
@@ -73,7 +73,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
           height={height}
           cornerRadius={10}
           stroke="black"
-          strokeWidth={2}
+          strokeWidth={4}
           fill="white"
         />
 
@@ -82,9 +82,9 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
           {items.map((item, index) => (
             <Group key={index} onClick={() => handleClick(index)}>
               <Rect
-                x={0}
-                y={30 * index}
-                width={width}
+                x={2}
+                y={index === 0 ? 2 : index * 30}
+                width={width - 4}
                 height={30}
                 fill={selectedItem === index ? 'lightblue' : 'white'}
               />
