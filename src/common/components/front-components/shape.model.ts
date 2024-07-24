@@ -12,4 +12,6 @@ export interface ShapeProps extends ShapeConfig {
   width: number;
   height: number;
   onSelected: (id: string, type: ShapeType) => void;
+  text: string;
+  onTextChange: (id: string, text: string) => void;
 }

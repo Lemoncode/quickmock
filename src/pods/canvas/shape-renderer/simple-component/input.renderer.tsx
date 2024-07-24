@@ -17,6 +17,7 @@ export const renderInput = (
       y={shape.y}
       width={shape.width}
       height={shape.height}
+      text={shape.text}
       draggable
       onSelected={handleSelected}
       ref={shapeRefs.current[shape.id]}

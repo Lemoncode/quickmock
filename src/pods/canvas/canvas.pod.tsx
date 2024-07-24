@@ -14,6 +14,7 @@ import {
   moveZIndexTopOneLevel,
   moveZIndexToTop,
 } from './zindex.util';
+import { EditableComponent } from '@/common/components/inline-edit';
 
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([]);
@@ -107,12 +108,31 @@ export const CanvasPod = () => {
                 shapeRefs.current[shape.id] = createRef();
               }
 
-              return renderShapeComponent(shape, {
-                handleSelected,
-                shapeRefs,
-                handleDragEnd,
-                handleTransform,
-              });
+              return (
+                <EditableComponent
+                  key={shape.id}
+                  x={shape.x}
+                  y={shape.y}
+                  width={shape.width}
+                  height={shape.height}
+                  editEnabled={true}
+                  text={shape.text}
+                  onUpdateText={(text: string) => {
+                    setShapes(prevShapes =>
+                      prevShapes.map(s =>
+                        s.id === shape.id ? { ...s, text } : s
+                      )
+                    );
+                  }}
+                >
+                  {renderShapeComponent(shape, {
+                    handleSelected,
+                    shapeRefs,
+                    handleDragEnd,
+                    handleTransform,
+                  })}
+                </EditableComponent>
+              );
             })
           }
           <Transformer

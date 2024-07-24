@@ -26,6 +26,7 @@ export interface ShapeModel {
   width: number;
   height: number;
   type: ShapeType;
+  text: string;
 }
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {

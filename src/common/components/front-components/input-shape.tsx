@@ -13,7 +13,10 @@ export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
 });
 
 export const InputShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, onTextChange, ...shapeProps },
+    ref
+  ) => {
     return (
       <Group
         x={x}
@@ -38,7 +41,7 @@ export const InputShape = forwardRef<any, ShapeProps>(
           x={20}
           y={30}
           width={width - 5}
-          text="Input"
+          text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
           fill="gray"
