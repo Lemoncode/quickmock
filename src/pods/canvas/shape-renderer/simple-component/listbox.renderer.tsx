@@ -23,7 +23,7 @@ export const renderListbox = (
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
-      items={['Item1', 'Item2', 'Item3', 'Item4', 'Item5']}
+      items={['', 'Item1', 'Item2', 'Item3', 'Item4', 'Item5']}
     />
   );
 };

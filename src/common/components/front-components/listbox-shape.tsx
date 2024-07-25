@@ -1,15 +1,15 @@
-import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { ShapeConfig } from 'konva/lib/Shape';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 
 export const getListBoxShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
-  minWidth: 150,
-  minHeight: 100,
-  maxWidth: 500,
-  maxHeight: 500,
+  minWidth: 50,
+  minHeight: 50,
+  maxWidth: 400,
+  maxHeight: 400,
   defaultWidth: 150,
-  defaultHeight: 80,
+  defaultHeight: 150,
 });
 
 interface ListBoxShapeProps extends ShapeConfig {
@@ -19,7 +19,7 @@ interface ListBoxShapeProps extends ShapeConfig {
   width: number;
   height: number;
   items: string[];
-  onSelected: (id: string, itemIndex: number) => void;
+  onSelected: (id: string, ShapeType: ShapeType) => void;
 }
 
 export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
@@ -27,6 +27,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
     const [scrollOffset, setScrollOffset] = useState(0);
     const [selectedItem, setSelectedItem] = useState<number | null>(null);
     const listRef = useRef<any>(null);
+    console.log({ width, height });
 
     useEffect(() => {
       const handleScroll = (e: WheelEvent) => {
@@ -35,7 +36,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
           const newOffset = prev - e.deltaY;
           return Math.max(
             Math.min(newOffset, 0),
-            -(items.length * 30 - height + 10)
+            -(items.length * 30 - height + 5)
           );
         });
       };
@@ -50,15 +51,24 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
 
     const handleClick = (itemIndex: number) => {
       setSelectedItem(itemIndex);
-      onSelected(id, itemIndex);
+      onSelected(id, 'listbox');
+    };
+
+    const handleMinSizeListBox = (
+      size: number,
+      sizeRestrictionsName: keyof ShapeSizeRestrictions
+    ) => {
+      return size < getListBoxShapeSizeRestrictions()[sizeRestrictionsName]
+        ? getListBoxShapeSizeRestrictions()[sizeRestrictionsName]
+        : size;
     };
 
     return (
       <Group
         x={x}
         y={y}
-        width={width}
-        height={height}
+        width={handleMinSizeListBox(width, 'minWidth')}
+        height={handleMinSizeListBox(height, 'minHeight')}
         ref={ref}
         {...shapeProps}
         clipFunc={ctx => {
@@ -69,8 +79,8 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
         <Rect
           x={0}
           y={0}
-          width={width}
-          height={height}
+          width={handleMinSizeListBox(width, 'minWidth')}
+          height={handleMinSizeListBox(height, 'minHeight')}
           cornerRadius={10}
           stroke="black"
           strokeWidth={4}
@@ -83,7 +93,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
             <Group key={index} onClick={() => handleClick(index)}>
               <Rect
                 x={2}
-                y={index === 0 ? 2 : index * 30}
+                y={index === 0 ? 4 : index * 30}
                 width={width - 4}
                 height={30}
                 fill={selectedItem === index ? 'lightblue' : 'white'}
