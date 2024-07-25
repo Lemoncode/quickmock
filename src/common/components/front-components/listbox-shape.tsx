@@ -4,8 +4,8 @@ import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 
 export const getListBoxShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
-  minWidth: 50,
-  minHeight: 50,
+  minWidth: 75,
+  minHeight: 75,
   maxWidth: 400,
   maxHeight: 400,
   defaultWidth: 150,
@@ -26,9 +26,12 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
   ({ x, y, width, height, id, items, onSelected, ...shapeProps }, ref) => {
     const [scrollOffset, setScrollOffset] = useState(0);
     const [selectedItem, setSelectedItem] = useState<number | null>(null);
+    const rectRef = useRef<any>(null);
     const listRef = useRef<any>(null);
 
     useEffect(() => {
+      rectRef?.current.moveToTop();
+      setScrollOffset(0);
       const handleScroll = (e: WheelEvent) => {
         e.preventDefault();
         setScrollOffset(prev => {
@@ -80,10 +83,12 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
           y={0}
           width={handleMinSizeListBox(width, 'minWidth')}
           height={handleMinSizeListBox(height, 'minHeight')}
+          ref={rectRef}
           cornerRadius={10}
           stroke="black"
           strokeWidth={4}
-          fill="white"
+          fill="transparent"
+          listening={false}
         />
 
         {/* Elementos de la lista con desplazamiento */}
