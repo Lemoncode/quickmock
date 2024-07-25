@@ -8,4 +8,5 @@ export const mockWidgetCollection: ItemInfo[] = [
   { thumbnailSrc: '/widgets/checkbox.svg', type: 'checkbox' },
   { thumbnailSrc: '/widgets/toggleswitch.svg', type: 'toggleswitch' },
   { thumbnailSrc: '/widgets/datepicker.svg', type: 'datepickerinput' },
+  { thumbnailSrc: '/widgets/timepicker.svg', type: 'timepickerinput' },
 ];
