@@ -27,7 +27,6 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
     const [scrollOffset, setScrollOffset] = useState(0);
     const [selectedItem, setSelectedItem] = useState<number | null>(null);
     const listRef = useRef<any>(null);
-    console.log({ width, height });
 
     useEffect(() => {
       const handleScroll = (e: WheelEvent) => {
