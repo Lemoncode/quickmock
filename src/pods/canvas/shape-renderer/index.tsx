@@ -9,7 +9,10 @@ import {
   renderToggleSwitch,
   renderCheckbox,
   renderListbox,
+  renderDatepickerinput,
+  renderTimepickerinput,
 } from './simple-component';
+import { renderBrowserWindow } from './simple-container';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -30,6 +33,12 @@ export const renderShapeComponent = (
       return renderToggleSwitch(shape, shapeRenderedProps);
     case 'listbox':
       return renderListbox(shape, shapeRenderedProps);
+    case 'datepickerinput':
+      return renderDatepickerinput(shape, shapeRenderedProps);
+    case 'browser':
+      return renderBrowserWindow(shape, shapeRenderedProps);
+    case 'timepickerinput':
+      return renderTimepickerinput(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

@@ -6,8 +6,11 @@ import {
   getListBoxShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
+  getDatepickerInputShapeSizeRestrictions,
+  getButtonShapeSizeRestrictions,
+  getTimepickerInputShapeSizeRestrictions,
 } from '@/common/components/front-components';
-import { getButtonShapeSizeRestrictions } from '@/common/components/front-components/button-shape';
+import { getBrowserWindowShapeSizeRestrictions } from '@/common/components/front-containers';
 
 export interface Size {
   width: number;
@@ -50,6 +53,11 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getTextAreaSizeRestrictions().defaultWidth,
         height: getTextAreaSizeRestrictions().defaultHeight,
       };
+    case 'datepickerinput':
+      return {
+        width: getDatepickerInputShapeSizeRestrictions().defaultWidth,
+        height: getDatepickerInputShapeSizeRestrictions().defaultHeight,
+      };
     case 'button':
       return {
         width: getButtonShapeSizeRestrictions().defaultWidth,
@@ -59,6 +67,16 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getListBoxShapeSizeRestrictions().defaultWidth,
         height: getListBoxShapeSizeRestrictions().defaultHeight,
+      };
+    case 'browser':
+      return {
+        width: getBrowserWindowShapeSizeRestrictions().defaultWidth,
+        height: getBrowserWindowShapeSizeRestrictions().defaultHeight,
+      };
+    case 'timepickerinput':
+      return {
+        width: getTimepickerInputShapeSizeRestrictions().defaultWidth,
+        height: getTimepickerInputShapeSizeRestrictions().defaultHeight,
       };
 
     default:
