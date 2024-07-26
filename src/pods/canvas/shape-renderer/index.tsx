@@ -10,6 +10,7 @@ import {
   renderCheckbox,
   renderDatepickerinput,
 } from './simple-component';
+import { renderBrowserWindow } from './simple-container';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -30,6 +31,8 @@ export const renderShapeComponent = (
       return renderToggleSwitch(shape, shapeRenderedProps);
     case 'datepickerinput':
       return renderDatepickerinput(shape, shapeRenderedProps);
+    case 'browser':
+      return renderBrowserWindow(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

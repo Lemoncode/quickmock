@@ -14,5 +14,6 @@ export type ShapeType =
   | 'checkbox'
   | 'textarea'
   | 'toggleswitch'
-  | 'datepickerinput';
+  | 'datepickerinput'
+  | 'browser';
 /* | "text"| "button" |  "radio" | "image"*/
