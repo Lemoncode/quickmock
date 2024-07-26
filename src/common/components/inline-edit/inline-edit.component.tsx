@@ -1,3 +1,4 @@
+import { Coord } from '@/pods/canvas/canvas.model';
 import React, { useState, useRef, useEffect } from 'react';
 import { Group } from 'react-konva';
 import { Html } from 'react-konva-utils';
@@ -5,6 +6,7 @@ import { Html } from 'react-konva-utils';
 type EditableComponentProps = {
   x: number;
   y: number;
+  scale: number;
   width: number;
   height: number;
   text?: string;
@@ -19,6 +21,7 @@ export const EditableComponent: React.FC<EditableComponentProps> = props => {
     editEnabled,
     x,
     y,
+    scale,
     width,
     height,
     text = 'value',
@@ -56,6 +59,16 @@ export const EditableComponent: React.FC<EditableComponentProps> = props => {
     }
   };
 
+  const calculateTextAreaXPosition = () => {
+    const value = x * scale;
+    return value + 'px';
+  };
+
+  const calculateTextAreaYPosition = () => {
+    const value = y * scale;
+    return value + 'px';
+  };
+
   return (
     <>
       <Group onDblClick={handleDoubleClick}>{children}</Group>
@@ -66,8 +79,8 @@ export const EditableComponent: React.FC<EditableComponentProps> = props => {
           divProps={{
             style: {
               position: 'absolute',
-              top: y + 'px',
-              left: x + 'px',
+              top: calculateTextAreaYPosition(),
+              left: calculateTextAreaXPosition(),
               width: width + 'px',
               height: height + 'px',
               background: 'blue',

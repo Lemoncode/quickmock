@@ -28,8 +28,8 @@ export const InputShape = forwardRef<any, ShapeProps>(
         onClick={() => onSelected(id, 'input')}
       >
         <Rect
-          x={10}
-          y={10}
+          x={0}
+          y={0}
           width={width}
           height={height}
           cornerRadius={5}
