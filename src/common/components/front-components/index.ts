@@ -4,3 +4,4 @@ export * from './input-shape';
 export * from './toggleswitch-shape';
 export * from './checkbox-shape';
 export * from './datepickerinput-shape';
+export * from './timepickerinput-shape';

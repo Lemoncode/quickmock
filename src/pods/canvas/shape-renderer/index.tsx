@@ -9,6 +9,7 @@ import {
   renderToggleSwitch,
   renderCheckbox,
   renderDatepickerinput,
+  renderTimepickerinput,
 } from './simple-component';
 
 export const renderShapeComponent = (
@@ -30,6 +31,8 @@ export const renderShapeComponent = (
       return renderToggleSwitch(shape, shapeRenderedProps);
     case 'datepickerinput':
       return renderDatepickerinput(shape, shapeRenderedProps);
+    case 'timepickerinput':
+      return renderTimepickerinput(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
