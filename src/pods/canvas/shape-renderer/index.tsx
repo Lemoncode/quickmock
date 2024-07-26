@@ -9,6 +9,7 @@ import {
   renderToggleSwitch,
   renderCheckbox,
   renderDatepickerinput,
+  renderTimepickerinput,
 } from './simple-component';
 import { renderBrowserWindow } from './simple-container';
 
@@ -33,6 +34,8 @@ export const renderShapeComponent = (
       return renderDatepickerinput(shape, shapeRenderedProps);
     case 'browser':
       return renderBrowserWindow(shape, shapeRenderedProps);
+    case 'timepickerinput':
+      return renderTimepickerinput(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

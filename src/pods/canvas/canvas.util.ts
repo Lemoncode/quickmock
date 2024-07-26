@@ -8,6 +8,7 @@ import {
   getCheckboxShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
   getDatepickerInputShapeSizeRestrictions,
+  getTimepickerInputShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import { getBrowserWindowShapeSizeRestrictions } from '@/common/components/front-containers';
 import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
@@ -67,6 +68,8 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getDatepickerInputShapeSizeRestrictions();
     case 'browser':
       return getBrowserWindowShapeSizeRestrictions();
+    case 'timepickerinput':
+      return getTimepickerInputShapeSizeRestrictions();
     default:
       return defaultShapeSizeRestrictions;
   }
