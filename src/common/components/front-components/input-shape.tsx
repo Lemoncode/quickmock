@@ -17,6 +17,7 @@ export const InputShape = forwardRef<any, ShapeProps>(
     { x, y, width, height, id, onSelected, text, onTextChange, ...shapeProps },
     ref
   ) => {
+    // Scale not working?
     return (
       <Group
         x={x}
