@@ -30,10 +30,12 @@ export const fitSizeToShapeSizeRestrictions = (
       ? Math.min(shapeSizeRestrictions.maxHeight, height)
       : height;
 
-  return {
+  const result = {
     width: Math.max(newWidth, shapeSizeRestrictions.minWidth),
     height: Math.max(newHeight, shapeSizeRestrictions.minHeight),
   };
+
+  return result;
 };
 
 const defaultShapeSizeRestrictions: ShapeSizeRestrictions = {

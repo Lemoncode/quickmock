@@ -7,4 +7,5 @@ export interface ShapeRendererProps {
   shapeRefs: React.MutableRefObject<ShapeRefs>;
   handleDragEnd: (id: string) => (e: Konva.KonvaEventObject<DragEvent>) => void;
   handleTransform: () => void;
+  handleTransformEnd: () => void;
 }

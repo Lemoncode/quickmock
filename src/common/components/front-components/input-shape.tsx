@@ -14,6 +14,21 @@ export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
 
 export const InputShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+    console.log('** InputShape X, Y, Width, Height', x, y, width, height);
+    // workaround
+    /*
+    const heightAdjusted =
+      height < getInputShapeSizeRestrictions().minHeight
+        ? getInputShapeSizeRestrictions().minHeight
+        : height;
+    */
+    /*
+    const yAdjusted =
+      height < getInputShapeSizeRestrictions().minHeight
+        ? y + (getInputShapeSizeRestrictions().minHeight - height)
+        : y;
+    */
+
     return (
       <Group
         x={x}
@@ -25,8 +40,8 @@ export const InputShape = forwardRef<any, ShapeProps>(
         onClick={() => onSelected(id, 'input')}
       >
         <Rect
-          x={10}
-          y={10}
+          x={0}
+          y={0}
           width={width}
           height={height}
           cornerRadius={5}
@@ -34,15 +49,20 @@ export const InputShape = forwardRef<any, ShapeProps>(
           strokeWidth={2}
           fill="white"
         />
-        <Text
-          x={20}
-          y={30}
-          width={width - 5}
-          text="Input"
-          fontFamily="Comic Sans MS, cursive"
-          fontSize={15}
-          fill="gray"
-        />
+        {
+          <Text
+            x={20}
+            y={30}
+            width={width - 20}
+            height={height - 35}
+            ellipsis={true}
+            wrap="none"
+            text="Input"
+            fontFamily="Comic Sans MS, cursive"
+            fontSize={15}
+            fill="gray"
+          />
+        }
       </Group>
     );
   }

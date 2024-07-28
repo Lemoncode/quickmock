@@ -6,8 +6,13 @@ export const renderInput = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
-  const { handleSelected, shapeRefs, handleDragEnd, handleTransform } =
-    shapeRenderedProps;
+  const {
+    handleSelected,
+    shapeRefs,
+    handleDragEnd,
+    handleTransform,
+    handleTransformEnd,
+  } = shapeRenderedProps;
 
   return (
     <InputShape
@@ -22,7 +27,9 @@ export const renderInput = (
       ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
-      onTransformEnd={handleTransform}
+      onTransformEnd={handleTransformEnd}
     />
   );
 };
+
+//       onTransform={handleTransform}

@@ -1,6 +1,7 @@
 import classes from './canvas.pod.module.css';
-import { createRef, useState } from 'react';
-import { Layer, Stage, Transformer } from 'react-konva';
+import invariant from 'tiny-invariant';
+import { createRef, useEffect, useState } from 'react';
+import { Group, Layer, Stage, Transformer } from 'react-konva';
 import { ShapeModel } from './canvas.model';
 import { useSelection } from './use-selection.hook';
 import Konva from 'konva';
@@ -17,7 +18,7 @@ import {
 
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([]);
-  const [scale, setScale] = useState(1);
+  const [scale, setScale] = useState(1.5);
 
   const {
     shapeRefs,
@@ -32,14 +33,22 @@ export const CanvasPod = () => {
   const { isDraggedOver, dropRef } = useDropShape();
   const { stageRef } = useMonitorShape(dropRef, setShapes);
 
-  const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
-    setShapes,
-    {
+  const { handleTransform, handleTransformEnd, handleTransformerBoundBoxFunc } =
+    useTransform(setShapes, {
       selectedShapeRef,
       selectedShapeId,
       selectedShapeType,
+      stageScale: scale,
+    });
+
+  useEffect(() => {
+    if (transformerRef.current) {
+      if (selectedShapeRef.current) {
+        transformerRef.current.nodes([selectedShapeRef.current]);
+      }
+      transformerRef.current?.getLayer()?.batchDraw();
     }
-  );
+  }, [shapes]);
 
   const handleDragEnd =
     (id: string) => (e: Konva.KonvaEventObject<DragEvent>) => {
@@ -54,7 +63,16 @@ export const CanvasPod = () => {
   };
 
   const handleZoom = (zoomIn: boolean) => {
-    setScale(prevScale => (zoomIn ? prevScale * 1.1 : prevScale * 0.9));
+    const stage = stageRef.current;
+    invariant(stage);
+    const oldScale = scale;
+    const newScale = zoomIn ? oldScale * 1.1 : oldScale * 0.9;
+    setScale(newScale);
+    const pointer = stage.getPointerPosition();
+    invariant(pointer);
+
+    stage.scale({ x: newScale, y: newScale });
+    stage.batchDraw();
   };
 
   {
@@ -106,24 +124,28 @@ export const CanvasPod = () => {
         onMouseDown={handleClearSelection}
         onTouchStart={handleClearSelection}
         ref={stageRef}
-        scale={{ x: scale, y: scale }}
+        scaleX={scale}
+        scaleY={scale}
       >
         <Layer>
-          {
-            /* TODO compentize and simplify this */
-            shapes.map(shape => {
-              if (!shapeRefs.current[shape.id]) {
-                shapeRefs.current[shape.id] = createRef();
-              }
+          <Group>
+            {
+              /* TODO compentize and simplify this */
+              shapes.map(shape => {
+                if (!shapeRefs.current[shape.id]) {
+                  shapeRefs.current[shape.id] = createRef();
+                }
 
-              return renderShapeComponent(shape, {
-                handleSelected,
-                shapeRefs,
-                handleDragEnd,
-                handleTransform,
-              });
-            })
-          }
+                return renderShapeComponent(shape, {
+                  handleSelected,
+                  shapeRefs,
+                  handleDragEnd,
+                  handleTransform,
+                  handleTransformEnd,
+                });
+              })
+            }
+          </Group>
           <Transformer
             ref={transformerRef}
             flipEnabled={false}
