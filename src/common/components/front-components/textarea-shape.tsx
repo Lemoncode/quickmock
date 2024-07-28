@@ -25,25 +25,27 @@ export const TextAreaShape = forwardRef<any, ShapeProps>(
         onClick={() => onSelected(id, 'textarea')}
       >
         <Rect
-          x={10}
-          y={20}
-          width={width}
+          x={0}
+          y={0}
+          width={width + 10}
           height={height}
-          cornerRadius={10}
+          cornerRadius={5}
           stroke="black"
           strokeWidth={2}
           fill="white"
         />
 
         <Text
-          x={20}
-          y={40}
+          x={10}
+          y={10}
+          width={width}
           text="Your text here..."
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
-          fill="black"
-          width={width}
-          height={height}
+          fill="gray"
+          align="left"
+          ellipsis={true}
+          height={height - 10}
         />
       </Group>
     );

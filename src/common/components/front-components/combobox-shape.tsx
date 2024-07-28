@@ -4,7 +4,7 @@ import { Path, Group, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
 
 export const getComboBoxShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
-  minWidth: 80,
+  minWidth: 100,
   minHeight: 50,
   maxWidth: -1,
   maxHeight: 50,
@@ -54,7 +54,8 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>(
           fontFamily="Arial"
           fill="black"
           width={width - 50}
-          height={height - 10}
+          ellipsis={true}
+          wrap="none"
         />
       </Group>
     );
