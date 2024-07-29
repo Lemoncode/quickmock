@@ -4,9 +4,12 @@ import App from './App.tsx';
 import './normalize.css';
 import './reset.css';
 import './main.css';
+import { CanvasProvider } from './core/providers';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <CanvasProvider>
+      <App />
+    </CanvasProvider>
   </React.StrictMode>
 );

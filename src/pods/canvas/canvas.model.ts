@@ -1,4 +1,4 @@
-import { Coord, ShapeType, Size } from '@/core/model';
+import { Coord, ShapeType, Size, ShapeModel } from '@/core/model';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -11,15 +11,6 @@ import {
   getTimepickerInputShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import { getBrowserWindowShapeSizeRestrictions } from '@/common/components/front-containers';
-
-export interface ShapeModel {
-  id: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  type: ShapeType;
-}
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {

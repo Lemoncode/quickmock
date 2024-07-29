@@ -28,3 +28,12 @@ export interface Coord {
   x: number;
   y: number;
 }
+
+export interface ShapeModel {
+  id: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  type: ShapeType;
+}
