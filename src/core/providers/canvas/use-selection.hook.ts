@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { ShapeRefs } from './canvas.model';
 import Konva from 'konva';
-import { ShapeModel, ShapeType } from '@/core/model';
+import { ShapeModel, ShapeRefs, ShapeType } from '@/core/model';
 
 export const useSelection = (shapes: ShapeModel[]) => {
   const transformerRef = useRef<Konva.Transformer>(null);

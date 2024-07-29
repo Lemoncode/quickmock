@@ -2,7 +2,7 @@ import { createRef } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
 import { Layer, Stage, Transformer } from 'react-konva';
-import { useSelection } from './use-selection.hook';
+import { useSelection } from '../../core/providers/canvas/use-selection.hook';
 import { useTransform } from './use-transform.hook';
 import { renderShapeComponent } from './shape-renderer';
 import { useDropShape } from './use-drop-shape.hook';
@@ -17,9 +17,10 @@ import {
 import { ShapeModel } from '@/core/model';
 
 export const CanvasPod = () => {
-  const { shapes, setShapes, scale } = useCanvasContext();
-
   const {
+    shapes,
+    setShapes,
+    scale,
     shapeRefs,
     transformerRef,
     handleSelected,
@@ -27,7 +28,7 @@ export const CanvasPod = () => {
     selectedShapeRef,
     selectedShapeId,
     selectedShapeType,
-  } = useSelection(shapes);
+  } = useCanvasContext();
 
   const { isDraggedOver, dropRef } = useDropShape();
   const { stageRef } = useMonitorShape(dropRef, setShapes);

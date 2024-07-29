@@ -76,7 +76,3 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     type: shapeType,
   };
 };
-
-export type ShapeRefs = {
-  [key: string]: React.RefObject<any>;
-};
