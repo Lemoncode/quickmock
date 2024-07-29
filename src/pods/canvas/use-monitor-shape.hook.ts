@@ -7,7 +7,8 @@ import {
   convertFromDivElementCoordsToKonvaCoords,
 } from './canvas.util';
 import Konva from 'konva';
-import { createShape, ShapeModel } from './canvas.model';
+import { createShape } from './canvas.model';
+import { ShapeModel } from '@/core/model';
 
 export const useMonitorShape = (
   dropRef: React.MutableRefObject<null>,

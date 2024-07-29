@@ -1,6 +1,6 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { getButtonShapeSizeRestrictions } from '@/common/components/front-components/button-shape';
-import { Coord, Size } from './canvas.model';
+import { Coord } from '@/core/model';
 import {
   getComboBoxShapeSizeRestrictions,
   getInputShapeSizeRestrictions,
@@ -14,28 +14,6 @@ import {
 import { getBrowserWindowShapeSizeRestrictions } from '@/common/components/front-containers';
 import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
 import { Stage } from 'konva/lib/Stage';
-
-// TODO Add Unit tests, issue: #45
-export const fitSizeToShapeSizeRestrictions = (
-  shapeSizeRestrictions: ShapeSizeRestrictions,
-  width: number,
-  height: number
-): Size => {
-  const newWidth =
-    shapeSizeRestrictions.maxWidth !== -1
-      ? Math.min(shapeSizeRestrictions.maxWidth, width)
-      : width;
-
-  const newHeight =
-    shapeSizeRestrictions.maxHeight !== -1
-      ? Math.min(shapeSizeRestrictions.maxHeight, height)
-      : height;
-
-  return {
-    width: Math.max(newWidth, shapeSizeRestrictions.minWidth),
-    height: Math.max(newHeight, shapeSizeRestrictions.minHeight),
-  };
-};
 
 const defaultShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 0,

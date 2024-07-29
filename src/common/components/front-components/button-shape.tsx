@@ -25,8 +25,8 @@ export const ButtonShape = forwardRef<any, ShapeProps>(
         onClick={() => onSelected(id, 'button')}
       >
         <Rect
-          x={10}
-          y={20}
+          x={0}
+          y={0}
           width={width}
           height={height}
           cornerRadius={14}
@@ -35,13 +35,16 @@ export const ButtonShape = forwardRef<any, ShapeProps>(
           fill="white"
         />
         <Text
-          x={50}
-          y={40}
-          width={width - 50}
+          x={0}
+          y={20}
+          width={width}
           text="Click Me!"
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
           fill="black"
+          align="center"
+          ellipsis={true}
+          wrap="none"
         />
       </Group>
     );
