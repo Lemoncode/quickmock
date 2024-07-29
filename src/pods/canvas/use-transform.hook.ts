@@ -54,7 +54,12 @@ export const useTransform = (
     node.scaleY(1);
   };
 
-  const handleTransformerBoundBoxFunc = (_: Box, newBox: Box) => {
+  const handleTransformerBoundBoxFunc = (oldBox: Box, newBox: Box) => {
+    if (newBox.width < 5 || newBox.height < 5) {
+      return oldBox;
+    }
+    return newBox;
+    /*
     const limitedSize = fitSizeToShapeSizeRestrictions(
       getShapeSizeRestrictions(selectedShapeType),
       newBox.width,
@@ -64,7 +69,7 @@ export const useTransform = (
       ...newBox,
       width: limitedSize.width,
       height: limitedSize.height,
-    };
+    };*/
   };
 
   return { handleTransform, handleTransformerBoundBoxFunc };

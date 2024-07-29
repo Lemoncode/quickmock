@@ -3,14 +3,17 @@ import { forwardRef } from 'react';
 import { ShapeProps } from './shape.model';
 import { Group, Rect, Text } from 'react-konva';
 
-export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
+const inputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 60,
   minHeight: 50,
   maxWidth: -1,
   maxHeight: 50,
   defaultWidth: 190,
   defaultHeight: 50,
-});
+};
+
+export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions =>
+  inputShapeRestrictions;
 
 export const InputShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
@@ -27,7 +30,7 @@ export const InputShape = forwardRef<any, ShapeProps>(
         <Rect
           x={0}
           y={0}
-          width={width + 10}
+          width={width}
           height={height}
           cornerRadius={5}
           stroke="black"
@@ -37,7 +40,8 @@ export const InputShape = forwardRef<any, ShapeProps>(
         <Text
           x={10}
           y={20}
-          width={width}
+          width={width - 10}
+          height={height - 20}
           text="Input text..."
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}

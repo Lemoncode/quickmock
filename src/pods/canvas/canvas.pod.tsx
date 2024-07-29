@@ -17,6 +17,7 @@ import {
 
 export const CanvasPod = () => {
   const [shapes, setShapes] = useState<ShapeModel[]>([]);
+  const [scale, setScale] = useState(1);
 
   const {
     shapeRefs,
@@ -50,6 +51,10 @@ export const CanvasPod = () => {
 
   const handleZIndexChange = (shapeCollection: ShapeModel[]) => {
     setShapes(shapeCollection);
+  };
+
+  const handleZoom = (zoomIn: boolean) => {
+    setScale(prevScale => (zoomIn ? prevScale * 1.1 : prevScale / 1.1));
   };
 
   {
@@ -90,6 +95,8 @@ export const CanvasPod = () => {
       >
         Move to Top One Level
       </button>
+      <button onClick={() => handleZoom(true)}>Zoom In</button>
+      <button onClick={() => handleZoom(false)}>Zoom Out</button>
 
       {/*TODO: move size to canvas provider?*/}
       <Stage
@@ -98,6 +105,7 @@ export const CanvasPod = () => {
         onMouseDown={handleClearSelection}
         onTouchStart={handleClearSelection}
         ref={stageRef}
+        scale={{ x: scale, y: scale }}
       >
         <Layer>
           {
