@@ -19,6 +19,10 @@ export type ShapeType =
   | 'timepickerinput';
 /* | "text"| "button" |  "radio" | "image"*/
 
+export type ShapeRefs = {
+  [key: string]: React.RefObject<any>;
+};
+
 export interface Size {
   width: number;
   height: number;
