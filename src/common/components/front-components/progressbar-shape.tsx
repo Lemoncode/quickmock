@@ -1,7 +1,7 @@
 import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef } from 'react';
 import { Group, Rect } from 'react-konva';
-import { ShapeConfig } from 'konva/lib/Shape';
+import { ShapeProps } from './shape.model';
 
 export const getProgressBarShapeSizeRestrictions =
   (): ShapeSizeRestrictions => ({
@@ -9,25 +9,15 @@ export const getProgressBarShapeSizeRestrictions =
     minHeight: 50,
     maxWidth: -1,
     maxHeight: 50,
-    defaultWidth: 220,
+    defaultWidth: 280,
     defaultHeight: 20,
   });
 
-interface ProgressBarShapeProps extends ShapeConfig {
-  id: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  progress: number;
-  onSelected: (id: string, name: string) => void;
-}
-
-export const ProgressBarShape = forwardRef<any, ProgressBarShapeProps>(
-  ({ x, y, width, height, id, onSelected, progress, ...shapeProps }, ref) => {
+export const ProgressBarShape = forwardRef<any, ShapeProps>(
+  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
     const margin = 10;
     const barHeight = 20;
-    const progressBarWidth = (width - 2 * margin) * progress;
+    const progressBarWidth = width / 2;
 
     return (
       <Group
@@ -39,7 +29,7 @@ export const ProgressBarShape = forwardRef<any, ProgressBarShapeProps>(
         {...shapeProps}
         onClick={() => onSelected(id, 'progressbar')}
       >
-        {/* ProgressBar background */}
+        {/* Progressbar background */}
         <Rect
           x={margin}
           y={height / 2 - barHeight / 2}
@@ -48,16 +38,19 @@ export const ProgressBarShape = forwardRef<any, ProgressBarShapeProps>(
           cornerRadius={10}
           stroke="black"
           strokeWidth={2}
-          fill="none"
+          fill="white"
         />
-        {/* Progressbar */}
+
+        {/* Progressbar progress */}
         <Rect
           x={margin}
           y={height / 2 - barHeight / 2}
           width={progressBarWidth}
-          height={height}
+          height={barHeight}
           cornerRadius={10}
-          fill="blue"
+          stroke="black"
+          strokeWidth={2}
+          fill="lightgrey"
         />
       </Group>
     );
