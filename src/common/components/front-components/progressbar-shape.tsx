@@ -5,20 +5,16 @@ import { ShapeProps } from './shape.model';
 
 export const getProgressBarShapeSizeRestrictions =
   (): ShapeSizeRestrictions => ({
-    minWidth: 80,
-    minHeight: 50,
+    minWidth: 100,
+    minHeight: 20,
     maxWidth: -1,
-    maxHeight: 50,
-    defaultWidth: 280,
+    maxHeight: 30,
+    defaultWidth: 300,
     defaultHeight: 20,
   });
 
 export const ProgressBarShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
-    const margin = 10;
-    const barHeight = 20;
-    const progressBarWidth = width / 2;
-
     return (
       <Group
         x={x}
@@ -31,10 +27,10 @@ export const ProgressBarShape = forwardRef<any, ShapeProps>(
       >
         {/* Progressbar background */}
         <Rect
-          x={margin}
-          y={height / 2 - barHeight / 2}
-          width={width - 2 * margin}
-          height={barHeight}
+          x={0}
+          y={0}
+          width={width}
+          height={height}
           cornerRadius={10}
           stroke="black"
           strokeWidth={2}
@@ -43,10 +39,10 @@ export const ProgressBarShape = forwardRef<any, ShapeProps>(
 
         {/* Progressbar progress */}
         <Rect
-          x={margin}
-          y={height / 2 - barHeight / 2}
-          width={progressBarWidth}
-          height={barHeight}
+          x={0}
+          y={0}
+          width={width / 2}
+          height={height}
           cornerRadius={10}
           stroke="black"
           strokeWidth={2}
