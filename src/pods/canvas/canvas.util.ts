@@ -9,6 +9,7 @@ import {
   getTextAreaSizeRestrictions,
   getDatepickerInputShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
+  getListboxShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import { getBrowserWindowShapeSizeRestrictions } from '@/common/components/front-containers';
 import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
@@ -42,6 +43,8 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getTextAreaSizeRestrictions();
     case 'toggleswitch':
       return getToggleSwitchShapeSizeRestrictions();
+    case 'listbox':
+      return getListboxShapeSizeRestrictions();
     case 'datepickerinput':
       return getDatepickerInputShapeSizeRestrictions();
     case 'browser':
