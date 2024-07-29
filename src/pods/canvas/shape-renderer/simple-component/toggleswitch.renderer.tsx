@@ -1,5 +1,5 @@
+import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
-import { ShapeModel } from '../../canvas.model';
 import { ToggleSwitch } from '@/common/components/front-components/toggleswitch-shape';
 
 export const renderToggleSwitch = (

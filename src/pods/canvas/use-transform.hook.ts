@@ -1,11 +1,6 @@
 import { Node, NodeConfig } from 'konva/lib/Node';
-import { Coord, ShapeModel, Size } from './canvas.model';
 import { Box } from 'konva/lib/shapes/Transformer';
-import {
-  fitSizeToShapeSizeRestrictions,
-  getShapeSizeRestrictions,
-} from './canvas.util';
-import { ShapeType } from '@/core/model';
+import { Coord, ShapeModel, ShapeType, Size } from '@/core/model';
 
 interface TransFormSelectedInfo {
   selectedShapeRef: React.MutableRefObject<Node<NodeConfig> | null>;
@@ -17,8 +12,7 @@ export const useTransform = (
   setShapes: (value: React.SetStateAction<ShapeModel[]>) => void,
   transformSelectedInfo: TransFormSelectedInfo
 ) => {
-  const { selectedShapeId, selectedShapeRef, selectedShapeType } =
-    transformSelectedInfo;
+  const { selectedShapeId, selectedShapeRef } = transformSelectedInfo;
 
   const updateShapeSizeAndPosition = (
     id: string,
@@ -54,17 +48,11 @@ export const useTransform = (
     node.scaleY(1);
   };
 
-  const handleTransformerBoundBoxFunc = (_: Box, newBox: Box) => {
-    const limitedSize = fitSizeToShapeSizeRestrictions(
-      getShapeSizeRestrictions(selectedShapeType),
-      newBox.width,
-      newBox.height
-    );
-    return {
-      ...newBox,
-      width: limitedSize.width,
-      height: limitedSize.height,
-    };
+  const handleTransformerBoundBoxFunc = (oldBox: Box, newBox: Box) => {
+    if (newBox.width < 5 || newBox.height < 5) {
+      return oldBox;
+    }
+    return newBox;
   };
 
   return { handleTransform, handleTransformerBoundBoxFunc };

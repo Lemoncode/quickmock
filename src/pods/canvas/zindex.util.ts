@@ -1,4 +1,4 @@
-import { ShapeModel } from './canvas.model';
+import { ShapeModel } from '@/core/model';
 
 // TOO Add Unit tests to all these methods: #65
 export const moveZIndexToTop = (

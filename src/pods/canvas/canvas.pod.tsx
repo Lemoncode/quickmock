@@ -14,9 +14,10 @@ import {
   moveZIndexTopOneLevel,
   moveZIndexToTop,
 } from './zindex.util';
+import { ShapeModel } from '@/core/model';
 
 export const CanvasPod = () => {
-  const { shapes, setShapes } = useCanvasContext();
+  const { shapes, setShapes, scale } = useCanvasContext();
 
   const {
     shapeRefs,
@@ -98,6 +99,7 @@ export const CanvasPod = () => {
         onMouseDown={handleClearSelection}
         onTouchStart={handleClearSelection}
         ref={stageRef}
+        scale={{ x: scale, y: scale }}
       >
         <Layer>
           {

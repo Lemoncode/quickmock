@@ -9,9 +9,10 @@ interface Props {
 export const CanvasProvider: React.FC<Props> = props => {
   const { children } = props;
   const [shapes, setShapes] = React.useState<ShapeModel[]>([]);
+  const [scale, setScale] = React.useState(1);
 
   return (
-    <CanvasContext.Provider value={{ shapes, setShapes }}>
+    <CanvasContext.Provider value={{ shapes, setShapes, scale, setScale }}>
       {children}
     </CanvasContext.Provider>
   );

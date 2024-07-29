@@ -1,5 +1,5 @@
+import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
-import { ShapeModel } from '../../canvas.model';
 import { ButtonShape } from '@/common/components/front-components/button-shape';
 
 export const renderButton = (
