@@ -2,15 +2,19 @@ import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
-export const getListBoxShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
+const listboxShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 75,
-  minHeight: 75,
-  maxWidth: 400,
-  maxHeight: 400,
-  defaultWidth: 150,
-  defaultHeight: 150,
-});
+  minHeight: 180,
+  maxWidth: 300,
+  maxHeight: 300,
+  defaultWidth: 120,
+  defaultHeight: 220,
+};
+
+export const getListboxShapeSizeRestrictions = (): ShapeSizeRestrictions =>
+  listboxShapeSizeRestrictions;
 
 interface ListBoxShapeProps extends ShapeProps {
   items: string[];
@@ -18,65 +22,44 @@ interface ListBoxShapeProps extends ShapeProps {
 
 export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
   ({ x, y, width, height, id, items, onSelected, ...shapeProps }, ref) => {
-    const [scrollOffset, setScrollOffset] = useState(0);
     const [selectedItem, setSelectedItem] = useState<number | null>(null);
     const rectRef = useRef<any>(null);
     const listRef = useRef<any>(null);
 
+    const { width: restrictedWidth, height: restrictedHeight } =
+      fitSizeToShapeSizeRestrictions(
+        listboxShapeSizeRestrictions,
+        width,
+        height
+      );
+
     useEffect(() => {
       rectRef?.current.moveToTop();
-      setScrollOffset(0);
-      const handleScroll = (e: WheelEvent) => {
-        e.preventDefault();
-        setScrollOffset(prev => {
-          const newOffset = prev - e.deltaY;
-          return Math.max(
-            Math.min(newOffset, 0),
-            -(items.length * 30 - height + 5)
-          );
-        });
-      };
-
-      const container = listRef.current;
-      container?.addEventListener('wheel', handleScroll);
-
-      return () => {
-        container?.removeEventListener('wheel', handleScroll);
-      };
-    }, [items.length, height]);
+    }, []);
 
     const handleClick = (itemIndex: number) => {
       setSelectedItem(itemIndex);
       onSelected(id, 'listbox');
     };
 
-    const handleMinSizeListBox = (
-      size: number,
-      sizeRestrictionsName: keyof ShapeSizeRestrictions
-    ) => {
-      return size < getListBoxShapeSizeRestrictions()[sizeRestrictionsName]
-        ? getListBoxShapeSizeRestrictions()[sizeRestrictionsName]
-        : size;
-    };
-
     return (
       <Group
         x={x}
         y={y}
-        width={handleMinSizeListBox(width, 'minWidth')}
-        height={handleMinSizeListBox(height, 'minHeight')}
+        width={restrictedWidth}
+        height={restrictedHeight}
         ref={ref}
         {...shapeProps}
         clipFunc={ctx => {
-          ctx.rect(0, 0, width, height);
+          ctx.rect(0, 0, restrictedWidth, restrictedHeight);
         }}
       >
         {/* Rectángulo del listbox */}
         <Rect
           x={0}
           y={0}
-          width={handleMinSizeListBox(width, 'minWidth')}
-          height={handleMinSizeListBox(height, 'minHeight')}
+          width={restrictedWidth}
+          height={restrictedHeight}
           ref={rectRef}
           cornerRadius={10}
           stroke="black"
@@ -86,7 +69,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
         />
 
         {/* Elementos de la lista con desplazamiento */}
-        <Group ref={listRef} y={scrollOffset}>
+        <Group ref={listRef}>
           {items.map((item, index) => (
             <Group key={index} onClick={() => handleClick(index)}>
               <Rect

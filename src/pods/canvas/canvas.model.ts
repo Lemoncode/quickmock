@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   getComboBoxShapeSizeRestrictions,
   getInputShapeSizeRestrictions,
-  getListBoxShapeSizeRestrictions,
+  getListboxShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
   getDatepickerInputShapeSizeRestrictions,
@@ -47,8 +47,8 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       };
     case 'listbox':
       return {
-        width: getListBoxShapeSizeRestrictions().defaultWidth,
-        height: getListBoxShapeSizeRestrictions().defaultHeight,
+        width: getListboxShapeSizeRestrictions().defaultWidth,
+        height: getListboxShapeSizeRestrictions().defaultHeight,
       };
     case 'browser':
       return {
