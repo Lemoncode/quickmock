@@ -9,7 +9,8 @@
     "test": "vitest",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "tsc-check": "tsc --noEmit"
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^1.2.1",
