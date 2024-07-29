@@ -2,7 +2,6 @@ import { createRef } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
 import { Layer, Stage, Transformer } from 'react-konva';
-import { useSelection } from '../../core/providers/canvas/use-selection.hook';
 import { useTransform } from './use-transform.hook';
 import { renderShapeComponent } from './shape-renderer';
 import { useDropShape } from './use-drop-shape.hook';
