@@ -10,7 +10,10 @@ import {
   getButtonShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
 } from '@/common/components/front-components';
-import { getBrowserWindowShapeSizeRestrictions } from '@/common/components/front-containers';
+import {
+  getBrowserWindowShapeSizeRestrictions,
+  getTabletShapeSizeRestrictions,
+} from '@/common/components/front-containers';
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
@@ -48,6 +51,11 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getBrowserWindowShapeSizeRestrictions().defaultWidth,
         height: getBrowserWindowShapeSizeRestrictions().defaultHeight,
+      };
+    case 'tablet':
+      return {
+        width: getTabletShapeSizeRestrictions().defaultWidth,
+        height: getTabletShapeSizeRestrictions().defaultHeight,
       };
     case 'timepickerinput':
       return {

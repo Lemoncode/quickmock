@@ -16,6 +16,7 @@ export type ShapeType =
   | 'toggleswitch'
   | 'datepickerinput'
   | 'browser'
+  | 'tablet'
   | 'timepickerinput';
 /* | "text"| "button" |  "radio" | "image"*/
 

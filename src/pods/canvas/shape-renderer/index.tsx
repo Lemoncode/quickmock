@@ -11,7 +11,7 @@ import {
   renderDatepickerinput,
   renderTimepickerinput,
 } from './simple-component';
-import { renderBrowserWindow } from './simple-container';
+import { renderBrowserWindow, renderTablet } from './simple-container';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -34,6 +34,8 @@ export const renderShapeComponent = (
       return renderDatepickerinput(shape, shapeRenderedProps);
     case 'browser':
       return renderBrowserWindow(shape, shapeRenderedProps);
+    case 'tablet':
+      return renderTablet(shape, shapeRenderedProps);
     case 'timepickerinput':
       return renderTimepickerinput(shape, shapeRenderedProps);
     default:

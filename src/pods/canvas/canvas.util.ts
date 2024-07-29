@@ -10,7 +10,10 @@ import {
   getDatepickerInputShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
 } from '@/common/components/front-components';
-import { getBrowserWindowShapeSizeRestrictions } from '@/common/components/front-containers';
+import {
+  getBrowserWindowShapeSizeRestrictions,
+  getTabletShapeSizeRestrictions,
+} from '@/common/components/front-containers';
 import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
 import { Stage } from 'konva/lib/Stage';
 
@@ -46,6 +49,8 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getDatepickerInputShapeSizeRestrictions();
     case 'browser':
       return getBrowserWindowShapeSizeRestrictions();
+    case 'tablet':
+      return getTabletShapeSizeRestrictions();
     case 'timepickerinput':
       return getTimepickerInputShapeSizeRestrictions();
     default:
