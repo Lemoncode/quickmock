@@ -15,3 +15,12 @@ export type ShapeType =
   | 'textarea'
   | 'toggleswitch';
 /* | "text"| "button" |  "radio" | "image"*/
+
+export interface ShapeModel {
+  id: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  type: ShapeType;
+}

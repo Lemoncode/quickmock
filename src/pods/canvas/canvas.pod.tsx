@@ -1,16 +1,16 @@
 import classes from './canvas.pod.module.css';
-import { createRef, useState } from 'react';
+import { createRef } from 'react';
 import { Layer, Stage, Transformer } from 'react-konva';
-import { ShapeModel } from './canvas.model';
 import { useSelection } from './use-selection.hook';
 import Konva from 'konva';
 import { useTransform } from './use-transform.hook';
 import { renderShapeComponent } from './shape-renderer';
 import { useDropShape } from './use-drop-shape.hook';
 import { useMonitorShape } from './use-monitor-shape.hook';
+import { useCanvasContext } from '@/core/providers';
 
 export const CanvasPod = () => {
-  const [shapes, setShapes] = useState<ShapeModel[]>([]);
+  const { shapes, setShapes } = useCanvasContext();
 
   const {
     shapeRefs,
