@@ -1,4 +1,4 @@
-import { ShapeType } from '@/core/model';
+import { ShapeModel, ShapeType } from '@/core/model';
 import { v4 as uuidv4 } from 'uuid';
 import {
   getComboBoxShapeSizeRestrictions,
@@ -19,15 +19,6 @@ export interface Size {
 export interface Coord {
   x: number;
   y: number;
-}
-
-export interface ShapeModel {
-  id: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  type: ShapeType;
 }
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {

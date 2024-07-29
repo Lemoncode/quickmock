@@ -18,3 +18,12 @@ export type ShapeType =
   | 'browser'
   | 'timepickerinput';
 /* | "text"| "button" |  "radio" | "image"*/
+
+export interface ShapeModel {
+  id: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  type: ShapeType;
+}
