@@ -13,5 +13,7 @@ export type ShapeType =
   | 'button'
   | 'checkbox'
   | 'textarea'
-  | 'toggleswitch';
+  | 'toggleswitch'
+  | 'progressbar';
+
 /* | "text"| "button" |  "radio" | "image"*/

@@ -5,6 +5,7 @@ import {
   getInputShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
+  getProgressBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import { getButtonShapeSizeRestrictions } from '@/common/components/front-components/button-shape';
 
@@ -53,6 +54,12 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getButtonShapeSizeRestrictions().defaultWidth,
         height: getButtonShapeSizeRestrictions().defaultHeight,
+      };
+    }
+    case 'progressbar': {
+      return {
+        width: getProgressBarShapeSizeRestrictions().defaultWidth,
+        height: getProgressBarShapeSizeRestrictions().defaultHeight,
       };
     }
 
