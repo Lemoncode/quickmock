@@ -25,9 +25,9 @@ export const InputShape = forwardRef<any, ShapeProps>(
         onClick={() => onSelected(id, 'input')}
       >
         <Rect
-          x={10}
-          y={10}
-          width={width}
+          x={0}
+          y={0}
+          width={width + 10}
           height={height}
           cornerRadius={5}
           stroke="black"
@@ -35,13 +35,16 @@ export const InputShape = forwardRef<any, ShapeProps>(
           fill="white"
         />
         <Text
-          x={20}
-          y={30}
-          width={width - 5}
-          text="Input"
+          x={10}
+          y={20}
+          width={width}
+          text="Input text..."
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
           fill="gray"
+          align="left"
+          ellipsis={true}
+          wrap="none"
         />
       </Group>
     );
