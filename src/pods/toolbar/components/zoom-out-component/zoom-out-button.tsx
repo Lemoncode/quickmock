@@ -1,10 +1,13 @@
 import { ZoomOutIcon } from '@/common/components/icons/zoom-out.component';
 import ToolbarButton from '../toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
+import { useCanvasContext } from '@/core/providers';
 
 export const ZoomOutButton = () => {
+  const { setScale } = useCanvasContext();
+
   const handleClick = () => {
-    console.log('ZoomOut');
+    setScale(prevScale => prevScale * 0.9);
   };
 
   return (

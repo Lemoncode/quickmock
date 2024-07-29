@@ -1,7 +1,6 @@
 import { Node, NodeConfig } from 'konva/lib/Node';
-import { Coord, ShapeModel, Size } from './canvas.model';
 import { Box } from 'konva/lib/shapes/Transformer';
-import { ShapeType } from '@/core/model';
+import { Coord, ShapeModel, ShapeType, Size } from '@/core/model';
 
 interface TransFormSelectedInfo {
   selectedShapeRef: React.MutableRefObject<Node<NodeConfig> | null>;

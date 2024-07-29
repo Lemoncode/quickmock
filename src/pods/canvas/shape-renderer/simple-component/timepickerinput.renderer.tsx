@@ -1,6 +1,6 @@
 import { TimepickerInputShape } from '@/common/components/front-components';
-import { ShapeModel } from '../../canvas.model';
 import { ShapeRendererProps } from '../model';
+import { ShapeModel } from '@/core/model';
 
 export const renderTimepickerinput = (
   shape: ShapeModel,

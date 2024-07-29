@@ -1,4 +1,4 @@
-import { ShapeModel } from '../../canvas.model';
+import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
 import { Group, Text } from 'react-konva';
 

@@ -1,6 +1,6 @@
 import { InputShape } from '@/common/components/front-components/input-shape';
 import { ShapeRendererProps } from '../model';
-import { ShapeModel } from '../../canvas.model';
+import { ShapeModel } from '@/core/model';
 
 export const renderInput = (
   shape: ShapeModel,

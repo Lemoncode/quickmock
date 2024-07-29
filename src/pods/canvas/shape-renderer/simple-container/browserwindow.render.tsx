@@ -1,6 +1,6 @@
 import { BrowserWindowShape } from '@/common/components/front-containers';
-import { ShapeModel } from '../../canvas.model';
 import { ShapeRendererProps } from '../model';
+import { ShapeModel } from '@/core/model';
 
 export const renderBrowserWindow = (
   shape: ShapeModel,

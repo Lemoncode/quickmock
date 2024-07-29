@@ -1,4 +1,4 @@
-import { createRef, useState } from 'react';
+import { createRef } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
 import { Layer, Stage, Transformer } from 'react-konva';
@@ -17,8 +17,7 @@ import {
 import { ShapeModel } from '@/core/model';
 
 export const CanvasPod = () => {
-  const { shapes, setShapes } = useCanvasContext();
-  const [scale, setScale] = useState(1);
+  const { shapes, setShapes, scale } = useCanvasContext();
 
   const {
     shapeRefs,
@@ -52,10 +51,6 @@ export const CanvasPod = () => {
 
   const handleZIndexChange = (shapeCollection: ShapeModel[]) => {
     setShapes(shapeCollection);
-  };
-
-  const handleZoom = (zoomIn: boolean) => {
-    setScale(prevScale => (zoomIn ? prevScale * 1.1 : prevScale / 1.1));
   };
 
   {
@@ -96,8 +91,6 @@ export const CanvasPod = () => {
       >
         Move to Top One Level
       </button>
-      <button onClick={() => handleZoom(true)}>Zoom In</button>
-      <button onClick={() => handleZoom(false)}>Zoom Out</button>
 
       {/*TODO: move size to canvas provider?*/}
       <Stage
