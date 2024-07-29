@@ -13,7 +13,10 @@ export type ShapeType =
   | 'button'
   | 'checkbox'
   | 'textarea'
-  | 'toggleswitch';
+  | 'toggleswitch'
+  | 'datepickerinput'
+  | 'browser'
+  | 'timepickerinput';
 /* | "text"| "button" |  "radio" | "image"*/
 
 export interface ShapeModel {

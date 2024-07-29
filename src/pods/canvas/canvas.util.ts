@@ -7,7 +7,10 @@ import {
   getToggleSwitchShapeSizeRestrictions,
   getCheckboxShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
+  getDatepickerInputShapeSizeRestrictions,
+  getTimepickerInputShapeSizeRestrictions,
 } from '@/common/components/front-components';
+import { getBrowserWindowShapeSizeRestrictions } from '@/common/components/front-containers';
 import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
 import { Stage } from 'konva/lib/Stage';
 
@@ -61,6 +64,12 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getTextAreaSizeRestrictions();
     case 'toggleswitch':
       return getToggleSwitchShapeSizeRestrictions();
+    case 'datepickerinput':
+      return getDatepickerInputShapeSizeRestrictions();
+    case 'browser':
+      return getBrowserWindowShapeSizeRestrictions();
+    case 'timepickerinput':
+      return getTimepickerInputShapeSizeRestrictions();
     default:
       return defaultShapeSizeRestrictions;
   }

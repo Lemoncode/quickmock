@@ -1,0 +1,13 @@
+<svg width="300" height="100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Marco del input -->
+  <rect x="10" y="30" width="280" height="40" rx="10" ry="10"
+        style="fill:none;stroke:black;stroke-width:2"/>
+
+  <!-- Separadores -->
+  <text x="120" y="60" font-family="Comic Sans MS, cursive" font-size="20" fill="black">
+    :
+  </text>
+  <text x="220" y="60" font-family="Comic Sans MS, cursive" font-size="20" fill="black">
+    :
+  </text>
+</svg>

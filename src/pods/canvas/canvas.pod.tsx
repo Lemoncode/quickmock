@@ -1,13 +1,19 @@
-import classes from './canvas.pod.module.css';
 import { createRef } from 'react';
+import Konva from 'konva';
+import { useCanvasContext } from '@/core/providers';
 import { Layer, Stage, Transformer } from 'react-konva';
 import { useSelection } from './use-selection.hook';
-import Konva from 'konva';
 import { useTransform } from './use-transform.hook';
 import { renderShapeComponent } from './shape-renderer';
 import { useDropShape } from './use-drop-shape.hook';
 import { useMonitorShape } from './use-monitor-shape.hook';
-import { useCanvasContext } from '@/core/providers';
+import classes from './canvas.pod.module.css';
+import {
+  moveZIndexDownOneLevel,
+  moveZIndexToBottom,
+  moveZIndexTopOneLevel,
+  moveZIndexToTop,
+} from './zindex.util';
 
 export const CanvasPod = () => {
   const { shapes, setShapes } = useCanvasContext();
@@ -42,6 +48,10 @@ export const CanvasPod = () => {
       );
     };
 
+  const handleZIndexChange = (shapeCollection: ShapeModel[]) => {
+    setShapes(shapeCollection);
+  };
+
   {
     /* TODO: add other animation for isDraggerOver */
   }
@@ -51,6 +61,36 @@ export const CanvasPod = () => {
       ref={dropRef}
       style={{ opacity: isDraggedOver ? 0.5 : 1 }}
     >
+      {/*TODO: move buttons to app props panel*/}
+      <button
+        onClick={() =>
+          handleZIndexChange(moveZIndexToBottom(selectedShapeId, shapes))
+        }
+      >
+        Move to Bottom
+      </button>
+      <button
+        onClick={() =>
+          handleZIndexChange(moveZIndexToTop(selectedShapeId, shapes))
+        }
+      >
+        Move to Top
+      </button>
+      <button
+        onClick={() =>
+          handleZIndexChange(moveZIndexDownOneLevel(selectedShapeId, shapes))
+        }
+      >
+        Move to Bottom One Level
+      </button>
+      <button
+        onClick={() =>
+          handleZIndexChange(moveZIndexTopOneLevel(selectedShapeId, shapes))
+        }
+      >
+        Move to Top One Level
+      </button>
+
       {/*TODO: move size to canvas provider?*/}
       <Stage
         width={3000}
