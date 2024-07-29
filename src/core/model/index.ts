@@ -16,7 +16,8 @@ export type ShapeType =
   | 'toggleswitch'
   | 'datepickerinput'
   | 'browser'
-  | 'timepickerinput';
+  | 'timepickerinput'
+  | 'mobilePhone';
 /* | "text"| "button" |  "radio" | "image"*/
 
 export interface Size {

@@ -11,7 +11,10 @@ import {
   renderDatepickerinput,
   renderTimepickerinput,
 } from './simple-component';
-import { renderBrowserWindow } from './simple-container';
+import {
+  renderBrowserWindow,
+  renderMobilePhoneContainer,
+} from './simple-container';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -36,6 +39,8 @@ export const renderShapeComponent = (
       return renderBrowserWindow(shape, shapeRenderedProps);
     case 'timepickerinput':
       return renderTimepickerinput(shape, shapeRenderedProps);
+    case 'mobilePhone':
+      return renderMobilePhoneContainer(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
