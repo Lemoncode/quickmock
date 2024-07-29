@@ -2,6 +2,7 @@ import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from './shape.model';
 import { Group, Rect, Text } from 'react-konva';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
 const inputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 60,
@@ -17,21 +18,24 @@ export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions =>
 
 export const InputShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+    const { width: restrictedWidth, height: restrictedHeight } =
+      fitSizeToShapeSizeRestrictions(inputShapeRestrictions, width, height);
+
     return (
       <Group
         x={x}
         y={y}
         ref={ref}
-        width={width}
-        height={height}
+        width={restrictedWidth}
+        height={restrictedHeight}
         {...shapeProps}
         onClick={() => onSelected(id, 'input')}
       >
         <Rect
           x={0}
           y={0}
-          width={width}
-          height={height}
+          width={restrictedWidth}
+          height={restrictedHeight}
           cornerRadius={5}
           stroke="black"
           strokeWidth={2}

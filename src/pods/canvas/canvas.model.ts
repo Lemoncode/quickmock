@@ -1,5 +1,6 @@
-import { ShapeType } from '@/core/model';
+import { Coord, ShapeType, Size } from '@/core/model';
 import { v4 as uuidv4 } from 'uuid';
+
 import {
   getComboBoxShapeSizeRestrictions,
   getInputShapeSizeRestrictions,
@@ -10,16 +11,6 @@ import {
   getTimepickerInputShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import { getBrowserWindowShapeSizeRestrictions } from '@/common/components/front-containers';
-
-export interface Size {
-  width: number;
-  height: number;
-}
-
-export interface Coord {
-  x: number;
-  y: number;
-}
 
 export interface ShapeModel {
   id: string;
