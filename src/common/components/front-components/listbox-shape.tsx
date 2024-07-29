@@ -1,7 +1,7 @@
-import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { ShapeConfig } from 'konva/lib/Shape';
+import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
+import { ShapeProps } from './shape.model';
 
 export const getListBoxShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
   minWidth: 75,
@@ -12,14 +12,8 @@ export const getListBoxShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
   defaultHeight: 150,
 });
 
-interface ListBoxShapeProps extends ShapeConfig {
-  id: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+interface ListBoxShapeProps extends ShapeProps {
   items: string[];
-  onSelected: (id: string, ShapeType: ShapeType) => void;
 }
 
 export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
