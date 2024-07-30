@@ -8,6 +8,7 @@ import {
   renderButton,
   renderToggleSwitch,
   renderCheckbox,
+  renderProgressbar,
   renderListbox,
   renderDatepickerinput,
   renderTimepickerinput,
@@ -31,6 +32,8 @@ export const renderShapeComponent = (
       return renderTextArea(shape, shapeRenderedProps);
     case 'toggleswitch':
       return renderToggleSwitch(shape, shapeRenderedProps);
+    case 'progressbar':
+      return renderProgressbar(shape, shapeRenderedProps);
     case 'listbox':
       return renderListbox(shape, shapeRenderedProps);
     case 'datepickerinput':

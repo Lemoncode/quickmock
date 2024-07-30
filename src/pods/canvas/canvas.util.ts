@@ -7,6 +7,7 @@ import {
   getToggleSwitchShapeSizeRestrictions,
   getCheckboxShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
+  getProgressBarShapeSizeRestrictions,
   getDatepickerInputShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
   getListboxShapeSizeRestrictions,
@@ -43,6 +44,8 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getTextAreaSizeRestrictions();
     case 'toggleswitch':
       return getToggleSwitchShapeSizeRestrictions();
+    case 'progressbar':
+      return getProgressBarShapeSizeRestrictions();
     case 'listbox':
       return getListboxShapeSizeRestrictions();
     case 'datepickerinput':

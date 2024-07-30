@@ -7,6 +7,7 @@ import {
   getListboxShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
+  getProgressBarShapeSizeRestrictions,
   getDatepickerInputShapeSizeRestrictions,
   getButtonShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
@@ -45,6 +46,12 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getButtonShapeSizeRestrictions().defaultWidth,
         height: getButtonShapeSizeRestrictions().defaultHeight,
       };
+    case 'progressbar': {
+      return {
+        width: getProgressBarShapeSizeRestrictions().defaultWidth,
+        height: getProgressBarShapeSizeRestrictions().defaultHeight,
+      };
+    }
     case 'listbox':
       return {
         width: getListboxShapeSizeRestrictions().defaultWidth,
