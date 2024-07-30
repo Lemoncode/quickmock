@@ -12,6 +12,7 @@ import {
   renderListbox,
   renderDatepickerinput,
   renderTimepickerinput,
+  renderLabel,
 } from './simple-component';
 import { renderBrowserWindow, renderTablet } from './simple-container';
 
@@ -44,6 +45,8 @@ export const renderShapeComponent = (
       return renderTablet(shape, shapeRenderedProps);
     case 'timepickerinput':
       return renderTimepickerinput(shape, shapeRenderedProps);
+    case 'label':
+      return renderLabel(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

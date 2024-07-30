@@ -18,6 +18,7 @@ import {
 } from '@/common/components/front-containers';
 import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
 import { Stage } from 'konva/lib/Stage';
+import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 
 const defaultShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 0,
@@ -59,6 +60,8 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getTabletShapeSizeRestrictions();
     case 'timepickerinput':
       return getTimepickerInputShapeSizeRestrictions();
+    case 'label':
+      return getLabelSizeRestrictions();
     default:
       return defaultShapeSizeRestrictions;
   }

@@ -9,3 +9,4 @@ export * from './progressbar.renderer';
 export * from './listbox.renderer';
 export * from './datepickerinput.renderer';
 export * from './timepickerinput.renderer';
+export * from './label.renderer';
