@@ -2,47 +2,45 @@ import { forwardRef } from 'react';
 import { Group, Text, Rect } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
-export const getLabelSizeRestrictions = (): ShapeSizeRestrictions => ({
-  minWidth: 150,
-  minHeight: 50,
+const labelSizeRestrictions: ShapeSizeRestrictions = {
+  minWidth: 50,
+  minHeight: 20,
   maxWidth: -1,
-  maxHeight: 50,
-  defaultWidth: 150,
-  defaultHeight: 50,
-});
+  maxHeight: -1,
+  defaultWidth: 110,
+  defaultHeight: 40,
+};
+
+export const getLabelSizeRestrictions = (): ShapeSizeRestrictions =>
+  labelSizeRestrictions;
 
 export const LabelShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+    const { width: restrictedWidth, height: restrictedHeight } =
+      fitSizeToShapeSizeRestrictions(labelSizeRestrictions, width, height);
+
     return (
       <Group
         x={x}
         y={y}
-        width={width}
-        height={height}
+        width={restrictedWidth}
+        height={restrictedHeight}
         ref={ref}
         {...shapeProps}
         onClick={() => onSelected(id, 'label')}
       >
-        <Rect
-          x={0}
-          y={0}
-          width={width}
-          height={height}
-          cornerRadius={14}
-          stroke="black"
-          strokeWidth={1}
-          fill="lightgrey"
-        />
         <Text
           x={0}
-          y={20}
-          width={width}
+          y={0}
+          width={restrictedWidth}
+          height={restrictedHeight}
           text="Label"
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
           fill="black"
-          align="center"
+          align="left"
           ellipsis={true}
           wrap="none"
         />
