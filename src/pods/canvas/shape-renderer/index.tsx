@@ -13,6 +13,7 @@ import {
   renderTimepickerinput,
 } from './simple-component';
 import { renderBrowserWindow } from './simple-container';
+import { renderLabel } from './simple-component/label.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -39,6 +40,8 @@ export const renderShapeComponent = (
       return renderBrowserWindow(shape, shapeRenderedProps);
     case 'timepickerinput':
       return renderTimepickerinput(shape, shapeRenderedProps);
+    case 'label':
+      return renderLabel(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
