@@ -14,11 +14,19 @@ export type ShapeType =
   | 'checkbox'
   | 'textarea'
   | 'toggleswitch'
+  | 'progressbar'
+  | 'listbox'
   | 'datepickerinput'
   | 'browser'
   | 'timepickerinput'
-  | 'mobilePhone';
+  | 'mobilePhone'
+  | 'tablet'
+  | 'timepickerinput';
 /* | "text"| "button" |  "radio" | "image"*/
+
+export type ShapeRefs = {
+  [key: string]: React.RefObject<any>;
+};
 
 export interface Size {
   width: number;

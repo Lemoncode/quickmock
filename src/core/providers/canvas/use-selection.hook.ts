@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { ShapeRefs } from './canvas.model';
 import Konva from 'konva';
-import { ShapeModel, ShapeType } from '@/core/model';
+import { ShapeModel, ShapeRefs, ShapeType } from '@/core/model';
+import { SelectionInfo } from './canvas.model';
 
-export const useSelection = (shapes: ShapeModel[]) => {
+export const useSelection = (shapes: ShapeModel[]): SelectionInfo => {
   const transformerRef = useRef<Konva.Transformer>(null);
   const shapeRefs = useRef<ShapeRefs>({});
   const selectedShapeRef = useRef<Konva.Node | null>(null);

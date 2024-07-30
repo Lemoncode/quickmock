@@ -4,8 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   getComboBoxShapeSizeRestrictions,
   getInputShapeSizeRestrictions,
+  getListboxShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
+  getProgressBarShapeSizeRestrictions,
   getDatepickerInputShapeSizeRestrictions,
   getButtonShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
@@ -13,6 +15,7 @@ import {
 import {
   getBrowserWindowShapeSizeRestrictions,
   getMobilePhoneShapeSizeRestrictions,
+  getTabletShapeSizeRestrictions,
 } from '@/common/components/front-containers';
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
@@ -47,6 +50,17 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getButtonShapeSizeRestrictions().defaultWidth,
         height: getButtonShapeSizeRestrictions().defaultHeight,
       };
+    case 'progressbar': {
+      return {
+        width: getProgressBarShapeSizeRestrictions().defaultWidth,
+        height: getProgressBarShapeSizeRestrictions().defaultHeight,
+      };
+    }
+    case 'listbox':
+      return {
+        width: getListboxShapeSizeRestrictions().defaultWidth,
+        height: getListboxShapeSizeRestrictions().defaultHeight,
+      };
     case 'browser':
       return {
         width: getBrowserWindowShapeSizeRestrictions().defaultWidth,
@@ -56,6 +70,11 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getMobilePhoneShapeSizeRestrictions().defaultWidth,
         height: getMobilePhoneShapeSizeRestrictions().defaultHeight,
+      };
+    case 'tablet':
+      return {
+        width: getTabletShapeSizeRestrictions().defaultWidth,
+        height: getTabletShapeSizeRestrictions().defaultHeight,
       };
     case 'timepickerinput':
       return {
@@ -83,8 +102,4 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     height,
     type: shapeType,
   };
-};
-
-export type ShapeRefs = {
-  [key: string]: React.RefObject<any>;
 };
