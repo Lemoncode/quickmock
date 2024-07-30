@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { Group, Text, Rect } from 'react-konva';
+import { Group, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
