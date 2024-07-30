@@ -9,7 +9,6 @@ export const renderMobilePhoneContainer = (
   const { handleSelected, shapeRefs, handleDragEnd, handleTransform } =
     shapeRenderedProps;
 
-  console.log('ejecutandome');
   return (
     <MobilePhoneShape
       id={shape.id}
