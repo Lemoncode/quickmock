@@ -12,15 +12,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   const [shapes, setShapes] = React.useState<ShapeModel[]>([]);
   const [scale, setScale] = React.useState(1);
 
-  const {
-    shapeRefs,
-    transformerRef,
-    handleSelected,
-    handleClearSelection,
-    selectedShapeRef,
-    selectedShapeId,
-    selectedShapeType,
-  } = useSelection(shapes);
+  const selectionInfo = useSelection(shapes);
 
   return (
     <CanvasContext.Provider
@@ -29,13 +21,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         setShapes,
         scale,
         setScale,
-        shapeRefs,
-        transformerRef,
-        handleSelected,
-        handleClearSelection,
-        selectedShapeRef,
-        selectedShapeId,
-        selectedShapeType,
+        selectionInfo,
       }}
     >
       {children}
