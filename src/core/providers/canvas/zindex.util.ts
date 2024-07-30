@@ -1,7 +1,8 @@
 import { ShapeModel } from '@/core/model';
+import { ZIndexAction } from './canvas.model';
 
 // TOO Add Unit tests to all these methods: #65
-export const moveZIndexToTop = (
+const moveZIndexToTop = (
   selectedShapeId: string,
   shapeCollection: ShapeModel[]
 ): ShapeModel[] => {
@@ -16,7 +17,7 @@ export const moveZIndexToTop = (
     : shapeCollection;
 };
 
-export const moveZIndexToBottom = (
+const moveZIndexToBottom = (
   selectedShapeId: string,
   shapeCollection: ShapeModel[]
 ): ShapeModel[] => {
@@ -31,7 +32,7 @@ export const moveZIndexToBottom = (
     : shapeCollection;
 };
 
-export const moveZIndexDownOneLevel = (
+const moveZIndexDownOneLevel = (
   selectedShapeId: string,
   shapeCollection: ShapeModel[]
 ): ShapeModel[] => {
@@ -54,7 +55,7 @@ export const moveZIndexDownOneLevel = (
     : shapeCollection;
 };
 
-export const moveZIndexTopOneLevel = (
+const moveZIndexTopOneLevel = (
   selectedShapeId: string,
   shapeCollection: ShapeModel[]
 ): ShapeModel[] => {
@@ -75,4 +76,24 @@ export const moveZIndexTopOneLevel = (
         ...shapeCollection.slice(selectedShapeIndex + 2),
       ]
     : shapeCollection;
+};
+
+export const performZIndexAction = (
+  selectedShapeId: string,
+  action: ZIndexAction,
+  shapes: ShapeModel[]
+): ShapeModel[] => {
+  switch (action) {
+    case 'top':
+      return moveZIndexToTop(selectedShapeId, shapes);
+      break;
+    case 'bottom':
+      return moveZIndexToBottom(selectedShapeId, shapes);
+      break;
+    case 'up':
+      return moveZIndexTopOneLevel(selectedShapeId, shapes);
+      break;
+    case 'down':
+      return moveZIndexDownOneLevel(selectedShapeId, shapes);
+  }
 };

@@ -2,6 +2,8 @@ import { ShapeModel, ShapeRefs, ShapeType } from '@/core/model';
 import Konva from 'konva';
 import { Node, NodeConfig } from 'konva/lib/Node';
 
+export type ZIndexAction = 'top' | 'bottom' | 'up' | 'down';
+
 export interface SelectionInfo {
   transformerRef: React.RefObject<Konva.Transformer>;
   shapeRefs: React.MutableRefObject<ShapeRefs>;
@@ -14,6 +16,7 @@ export interface SelectionInfo {
   selectedShapeRef: React.MutableRefObject<Node<NodeConfig> | null>;
   selectedShapeId: string;
   selectedShapeType: ShapeType | null;
+  setZIndexOnSelected: (action: ZIndexAction) => void;
 }
 
 export interface CanvasContextModel {
