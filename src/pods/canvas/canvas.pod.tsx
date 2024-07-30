@@ -16,10 +16,9 @@ import {
 import { ShapeModel } from '@/core/model';
 
 export const CanvasPod = () => {
+  const { shapes, setShapes, scale, selectionInfo } = useCanvasContext();
+
   const {
-    shapes,
-    setShapes,
-    scale,
     shapeRefs,
     transformerRef,
     handleSelected,
@@ -27,7 +26,7 @@ export const CanvasPod = () => {
     selectedShapeRef,
     selectedShapeId,
     selectedShapeType,
-  } = useCanvasContext();
+  } = selectionInfo;
 
   const { isDraggedOver, dropRef } = useDropShape();
   const { stageRef } = useMonitorShape(dropRef, setShapes);

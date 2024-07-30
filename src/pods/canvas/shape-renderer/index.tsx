@@ -8,12 +8,13 @@ import {
   renderButton,
   renderToggleSwitch,
   renderCheckbox,
+  renderProgressbar,
   renderListbox,
   renderDatepickerinput,
   renderTimepickerinput,
+  renderLabel,
 } from './simple-component';
-import { renderBrowserWindow } from './simple-container';
-import { renderLabel } from './simple-component/label.renderer';
+import { renderBrowserWindow, renderTablet } from './simple-container';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -32,12 +33,16 @@ export const renderShapeComponent = (
       return renderTextArea(shape, shapeRenderedProps);
     case 'toggleswitch':
       return renderToggleSwitch(shape, shapeRenderedProps);
+    case 'progressbar':
+      return renderProgressbar(shape, shapeRenderedProps);
     case 'listbox':
       return renderListbox(shape, shapeRenderedProps);
     case 'datepickerinput':
       return renderDatepickerinput(shape, shapeRenderedProps);
     case 'browser':
       return renderBrowserWindow(shape, shapeRenderedProps);
+    case 'tablet':
+      return renderTablet(shape, shapeRenderedProps);
     case 'timepickerinput':
       return renderTimepickerinput(shape, shapeRenderedProps);
     case 'label':

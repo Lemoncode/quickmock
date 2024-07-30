@@ -7,11 +7,15 @@ import {
   getListboxShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
+  getProgressBarShapeSizeRestrictions,
   getDatepickerInputShapeSizeRestrictions,
   getButtonShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
 } from '@/common/components/front-components';
-import { getBrowserWindowShapeSizeRestrictions } from '@/common/components/front-containers';
+import {
+  getBrowserWindowShapeSizeRestrictions,
+  getTabletShapeSizeRestrictions,
+} from '@/common/components/front-containers';
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
@@ -45,6 +49,12 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getButtonShapeSizeRestrictions().defaultWidth,
         height: getButtonShapeSizeRestrictions().defaultHeight,
       };
+    case 'progressbar': {
+      return {
+        width: getProgressBarShapeSizeRestrictions().defaultWidth,
+        height: getProgressBarShapeSizeRestrictions().defaultHeight,
+      };
+    }
     case 'listbox':
       return {
         width: getListboxShapeSizeRestrictions().defaultWidth,
@@ -54,6 +64,11 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getBrowserWindowShapeSizeRestrictions().defaultWidth,
         height: getBrowserWindowShapeSizeRestrictions().defaultHeight,
+      };
+    case 'tablet':
+      return {
+        width: getTabletShapeSizeRestrictions().defaultWidth,
+        height: getTabletShapeSizeRestrictions().defaultHeight,
       };
     case 'timepickerinput':
       return {

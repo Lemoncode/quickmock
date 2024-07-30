@@ -14,11 +14,13 @@ export type ShapeType =
   | 'checkbox'
   | 'textarea'
   | 'toggleswitch'
+  | 'progressbar'
   | 'listbox'
   | 'datepickerinput'
   | 'browser'
   | 'timepickerinput'
-  | 'label';
+  | 'label'
+  | 'tablet';
 /* | "text"| "button" |  "radio" | "image"*/
 
 export type ShapeRefs = {
