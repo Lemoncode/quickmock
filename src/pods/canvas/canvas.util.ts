@@ -31,7 +31,7 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
   if (!type) {
     return defaultShapeSizeRestrictions;
   }
-
+  console.log('Hola');
   switch (type) {
     case 'combobox':
       return getComboBoxShapeSizeRestrictions();
