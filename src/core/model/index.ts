@@ -21,7 +21,8 @@ export type ShapeType =
   | 'timepickerinput'
   | 'mobilePhone'
   | 'tablet'
-  | 'timepickerinput';
+  | 'timepickerinput'
+  | 'label';
 /* | "text"| "button" |  "radio" | "image"*/
 
 export type ShapeRefs = {
