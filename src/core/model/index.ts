@@ -18,6 +18,7 @@ export type ShapeType =
   | 'listbox'
   | 'datepickerinput'
   | 'browser'
+  | 'tablet'
   | 'timepickerinput';
 /* | "text"| "button" |  "radio" | "image"*/
 
