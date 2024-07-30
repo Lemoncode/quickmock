@@ -14,6 +14,7 @@ import {
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
+  getMobilePhoneShapeSizeRestrictions,
   getTabletShapeSizeRestrictions,
 } from '@/common/components/front-containers';
 import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
@@ -34,7 +35,6 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
   if (!type) {
     return defaultShapeSizeRestrictions;
   }
-
   switch (type) {
     case 'combobox':
       return getComboBoxShapeSizeRestrictions();
@@ -60,6 +60,8 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getTabletShapeSizeRestrictions();
     case 'timepickerinput':
       return getTimepickerInputShapeSizeRestrictions();
+    case 'mobilePhone':
+      return getMobilePhoneShapeSizeRestrictions();
     case 'label':
       return getLabelSizeRestrictions();
     default:

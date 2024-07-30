@@ -14,6 +14,7 @@ import {
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
+  getMobilePhoneShapeSizeRestrictions,
   getTabletShapeSizeRestrictions,
 } from '@/common/components/front-containers';
 
@@ -64,6 +65,11 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getBrowserWindowShapeSizeRestrictions().defaultWidth,
         height: getBrowserWindowShapeSizeRestrictions().defaultHeight,
+      };
+    case 'mobilePhone':
+      return {
+        width: getMobilePhoneShapeSizeRestrictions().defaultWidth,
+        height: getMobilePhoneShapeSizeRestrictions().defaultHeight,
       };
     case 'tablet':
       return {
