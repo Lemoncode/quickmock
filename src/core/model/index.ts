@@ -14,6 +14,32 @@ export type ShapeType =
   | 'checkbox'
   | 'textarea'
   | 'toggleswitch'
-  | 'progressbar';
-
+  | 'progressbar'
+  | 'listbox'
+  | 'datepickerinput'
+  | 'browser'
+  | 'timepickerinput';
 /* | "text"| "button" |  "radio" | "image"*/
+
+export type ShapeRefs = {
+  [key: string]: React.RefObject<any>;
+};
+
+export interface Size {
+  width: number;
+  height: number;
+}
+
+export interface Coord {
+  x: number;
+  y: number;
+}
+
+export interface ShapeModel {
+  id: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  type: ShapeType;
+}

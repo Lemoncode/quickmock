@@ -1,32 +1,18 @@
-import { ShapeType } from '@/core/model';
+import { Coord, ShapeType, Size, ShapeModel } from '@/core/model';
 import { v4 as uuidv4 } from 'uuid';
+
 import {
   getComboBoxShapeSizeRestrictions,
   getInputShapeSizeRestrictions,
+  getListboxShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
   getProgressBarShapeSizeRestrictions,
+  getDatepickerInputShapeSizeRestrictions,
+  getButtonShapeSizeRestrictions,
+  getTimepickerInputShapeSizeRestrictions,
 } from '@/common/components/front-components';
-import { getButtonShapeSizeRestrictions } from '@/common/components/front-components/button-shape';
-
-export interface Size {
-  width: number;
-  height: number;
-}
-
-export interface Coord {
-  x: number;
-  y: number;
-}
-
-export interface ShapeModel {
-  id: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  type: ShapeType;
-}
+import { getBrowserWindowShapeSizeRestrictions } from '@/common/components/front-containers';
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
@@ -50,18 +36,37 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getTextAreaSizeRestrictions().defaultWidth,
         height: getTextAreaSizeRestrictions().defaultHeight,
       };
-    case 'button': {
+    case 'datepickerinput':
+      return {
+        width: getDatepickerInputShapeSizeRestrictions().defaultWidth,
+        height: getDatepickerInputShapeSizeRestrictions().defaultHeight,
+      };
+    case 'button':
       return {
         width: getButtonShapeSizeRestrictions().defaultWidth,
         height: getButtonShapeSizeRestrictions().defaultHeight,
       };
-    }
     case 'progressbar': {
       return {
         width: getProgressBarShapeSizeRestrictions().defaultWidth,
         height: getProgressBarShapeSizeRestrictions().defaultHeight,
       };
     }
+    case 'listbox':
+      return {
+        width: getListboxShapeSizeRestrictions().defaultWidth,
+        height: getListboxShapeSizeRestrictions().defaultHeight,
+      };
+    case 'browser':
+      return {
+        width: getBrowserWindowShapeSizeRestrictions().defaultWidth,
+        height: getBrowserWindowShapeSizeRestrictions().defaultHeight,
+      };
+    case 'timepickerinput':
+      return {
+        width: getTimepickerInputShapeSizeRestrictions().defaultWidth,
+        height: getTimepickerInputShapeSizeRestrictions().defaultHeight,
+      };
 
     default:
       return { width: 200, height: 50 };
@@ -83,8 +88,4 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     height,
     type: shapeType,
   };
-};
-
-export type ShapeRefs = {
-  [key: string]: React.RefObject<any>;
 };

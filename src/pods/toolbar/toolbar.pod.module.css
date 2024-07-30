@@ -1,7 +1,35 @@
-.toolbar {
-    grid-area: toolbar;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid black;
+.container {
+  grid-area: toolbar;
+  display: flex;
+  justify-content: space-evenly;
+  padding: var(--space-s);
+  background-color: var(--primary-100);
+  border-bottom: 1px solid var(--primary-900);
+}
+
+.button {
+  border: none;
+  color: var(--text-color);
+  background-color: inherit;
+  padding: 0.6em 1.2em;
+  border-radius: var(--border-radius-m);
+  font-size: var(--fs-xs);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.button svg {
+  font-size: var(--fs-s);
+}
+.button:focus-visible {
+  outline: 1px auto var(--primary-500);
+}
+
+.button:hover {
+  background-color: var(--primary-900);
+  color: var(--pure-white);
 }

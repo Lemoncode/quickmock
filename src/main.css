@@ -9,6 +9,7 @@
   --space-xxl: calc(var(--space-unit) * 12);
 
   /* colors */
+  --primary-10: #fafafa;
   --primary-50: #f0f0f0;
   --primary-100: #e3e3e3;
   --primary-200: #c7c7c7;
@@ -53,4 +54,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --transition-pixel-s: 1px;
+  --transition-pixel-m: 2px;
+  --padding-pixel-xs: 8px;
+  --padding-pixel-s: 10px;
+  --padding-pixel-m: 16px;
+
+  /*Border radius*/
+  --border-radius-unit: 4px;
+  --border-radius-s: var(--border-radius-unit);
+  --border-radius-m: calc(var(--border-radius-unit) * 2);
+  --border-radius-l: calc(var(--border-radius-unit) * 4);
+  --border-radius-xl: calc(var(--border-radius-unit) * 6);
 }

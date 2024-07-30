@@ -1,6 +1,6 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { getButtonShapeSizeRestrictions } from '@/common/components/front-components/button-shape';
-import { Coord, Size } from './canvas.model';
+import { Coord } from '@/core/model';
 import {
   getComboBoxShapeSizeRestrictions,
   getInputShapeSizeRestrictions,
@@ -8,31 +8,13 @@ import {
   getCheckboxShapeSizeRestrictions,
   getTextAreaSizeRestrictions,
   getProgressBarShapeSizeRestrictions,
+  getDatepickerInputShapeSizeRestrictions,
+  getTimepickerInputShapeSizeRestrictions,
+  getListboxShapeSizeRestrictions,
 } from '@/common/components/front-components';
+import { getBrowserWindowShapeSizeRestrictions } from '@/common/components/front-containers';
 import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
 import { Stage } from 'konva/lib/Stage';
-
-// TODO Add Unit tests, issue: #45
-export const fitSizeToShapeSizeRestrictions = (
-  shapeSizeRestrictions: ShapeSizeRestrictions,
-  width: number,
-  height: number
-): Size => {
-  const newWidth =
-    shapeSizeRestrictions.maxWidth !== -1
-      ? Math.min(shapeSizeRestrictions.maxWidth, width)
-      : width;
-
-  const newHeight =
-    shapeSizeRestrictions.maxHeight !== -1
-      ? Math.min(shapeSizeRestrictions.maxHeight, height)
-      : height;
-
-  return {
-    width: Math.max(newWidth, shapeSizeRestrictions.minWidth),
-    height: Math.max(newHeight, shapeSizeRestrictions.minHeight),
-  };
-};
 
 const defaultShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 0,
@@ -64,6 +46,14 @@ export const getShapeSizeRestrictions = (type: ShapeType | null) => {
       return getToggleSwitchShapeSizeRestrictions();
     case 'progressbar':
       return getProgressBarShapeSizeRestrictions();
+    case 'listbox':
+      return getListboxShapeSizeRestrictions();
+    case 'datepickerinput':
+      return getDatepickerInputShapeSizeRestrictions();
+    case 'browser':
+      return getBrowserWindowShapeSizeRestrictions();
+    case 'timepickerinput':
+      return getTimepickerInputShapeSizeRestrictions();
     default:
       return defaultShapeSizeRestrictions;
   }
