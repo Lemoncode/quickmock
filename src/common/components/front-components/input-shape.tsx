@@ -17,7 +17,7 @@ export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   inputShapeRestrictions;
 
 export const InputShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, text, onSelected, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(inputShapeRestrictions, width, height);
 
@@ -46,7 +46,7 @@ export const InputShape = forwardRef<any, ShapeProps>(
           y={20}
           width={width - 10}
           height={height - 20}
-          text="Input text..."
+          text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
           fill="gray"

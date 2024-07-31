@@ -46,4 +46,6 @@ export interface ShapeModel {
   width: number;
   height: number;
   type: ShapeType;
+  allowsInlineEdition: boolean;
+  text?: string;
 }

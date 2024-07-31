@@ -2,7 +2,6 @@ import React from 'react';
 import { ShapeModel } from '@/core/model';
 import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
-import { ZIndexAction } from './canvas.model';
 
 interface Props {
   children: React.ReactNode;

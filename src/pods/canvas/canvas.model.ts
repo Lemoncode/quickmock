@@ -17,6 +17,7 @@ import {
   getMobilePhoneShapeSizeRestrictions,
   getTabletShapeSizeRestrictions,
 } from '@/common/components/front-containers';
+import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
@@ -81,9 +82,36 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getTimepickerInputShapeSizeRestrictions().defaultWidth,
         height: getTimepickerInputShapeSizeRestrictions().defaultHeight,
       };
+    case 'label':
+      return {
+        width: getLabelSizeRestrictions().defaultWidth,
+        height: getLabelSizeRestrictions().defaultHeight,
+      };
 
     default:
       return { width: 200, height: 50 };
+  }
+};
+
+const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
+  // Right now only input and label, later on we can add more shapes
+  switch (shapeType) {
+    case 'input':
+    case 'label':
+      return true;
+    default:
+      return false;
+  }
+};
+
+const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
+  switch (shapeType) {
+    case 'input':
+      return '';
+    case 'label':
+      return 'Label';
+    default:
+      return undefined;
   }
 };
 
@@ -94,6 +122,11 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
   const { x, y } = coord;
   const { width, height } = getDefaultSizeFromShape(shapeType);
 
+  const allowsInlineEdition = doesShapeAllowInlineEdition(shapeType);
+  const defaultTextValue = allowsInlineEdition
+    ? generateDefaultTextValue(shapeType)
+    : undefined;
+
   return {
     id: uuidv4(),
     x,
@@ -101,5 +134,7 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     width,
     height,
     type: shapeType,
+    allowsInlineEdition,
+    text: defaultTextValue,
   };
 };
