@@ -73,6 +73,8 @@ export const EditableComponent: React.FC<Props> = props => {
     return `${size.height}px`;
   };
 
+  // TODO: Componentize this #91
+  // https://github.com/Lemoncode/quickmock/issues/91
   return (
     <>
       <Group onDblClick={handleDoubleClick}>{children}</Group>
