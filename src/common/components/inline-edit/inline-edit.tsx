@@ -55,7 +55,8 @@ export const EditableComponent: React.FC<Props> = props => {
     }
   };
 
-  // TODO: this can be optimized using React.useCallback
+  // TODO: this can be optimized using React.useCallback, issue #90
+  // https://github.com/Lemoncode/quickmock/issues/90
   const calculateTextAreaXPosition = () => {
     return `${coords.x * scale}px`;
   };
