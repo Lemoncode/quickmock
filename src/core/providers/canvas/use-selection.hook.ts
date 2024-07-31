@@ -51,6 +51,14 @@ export const useSelection = (
     );
   };
 
+  const updateTextOnSelected = (text: string) => {
+    setShapes(prevShapes =>
+      prevShapes.map(shape =>
+        shape.id === selectedShapeId ? { ...shape, text } : shape
+      )
+    );
+  };
+
   return {
     transformerRef,
     shapeRefs,
@@ -60,5 +68,6 @@ export const useSelection = (
     selectedShapeId,
     selectedShapeType,
     setZIndexOnSelected,
+    updateTextOnSelected,
   };
 };

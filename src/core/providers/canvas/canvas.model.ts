@@ -17,6 +17,7 @@ export interface SelectionInfo {
   selectedShapeId: string;
   selectedShapeType: ShapeType | null;
   setZIndexOnSelected: (action: ZIndexAction) => void;
+  updateTextOnSelected: (text: string) => void;
 }
 
 export interface CanvasContextModel {
