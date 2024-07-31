@@ -2,7 +2,7 @@ import { ShapeModel } from '@/core/model';
 import { ZIndexAction } from './canvas.model';
 
 // TOO Add Unit tests to all these methods: #65
-const moveZIndexToTop = (
+export const moveZIndexToTop = (
   selectedShapeId: string,
   shapeCollection: ShapeModel[]
 ): ShapeModel[] => {
@@ -17,7 +17,7 @@ const moveZIndexToTop = (
     : shapeCollection;
 };
 
-const moveZIndexToBottom = (
+export const moveZIndexToBottom = (
   selectedShapeId: string,
   shapeCollection: ShapeModel[]
 ): ShapeModel[] => {
@@ -32,7 +32,7 @@ const moveZIndexToBottom = (
     : shapeCollection;
 };
 
-const moveZIndexDownOneLevel = (
+export const moveZIndexDownOneLevel = (
   selectedShapeId: string,
   shapeCollection: ShapeModel[]
 ): ShapeModel[] => {
@@ -55,7 +55,7 @@ const moveZIndexDownOneLevel = (
     : shapeCollection;
 };
 
-const moveZIndexTopOneLevel = (
+export const moveZIndexTopOneLevel = (
   selectedShapeId: string,
   shapeCollection: ShapeModel[]
 ): ShapeModel[] => {
