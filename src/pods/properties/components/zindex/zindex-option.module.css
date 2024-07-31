@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  padding: var(--space-xs) var(--space-md);
+  border-bottom: 1px solid var(--primary-300);
+}
+
+.container :first-child {
+  flex: 1;
+}
+
+.button {
+  border: none;
+  color: var(--text-color);
+  background-color: inherit;
+  padding: var(--space-xs);
+  border-radius: var(--border-radius-s);
+  font-size: var(--fs-xs);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--primary-100);
+}

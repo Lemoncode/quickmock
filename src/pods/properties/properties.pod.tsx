@@ -1,13 +1,11 @@
 import { useCanvasContext } from '@/core/providers';
+import classes from './properties.pod.module.css';
+import { ZIndexOptions } from './components/zindex/zindex-option.component';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
 
   const selectedShapeID = selectionInfo?.selectedShapeRef.current ?? null;
-
-  const handleZIndexTop = () => {
-    selectionInfo?.setZIndexOnSelected('top');
-  };
 
   if (!selectedShapeID) {
     return null;
@@ -15,7 +13,10 @@ export const PropertiesPod = () => {
 
   return (
     <div>
-      <button onClick={handleZIndexTop}>Pal Top</button>
+      <div className={classes.title}>
+        <p>Properties</p>
+      </div>
+      <ZIndexOptions selectionInfo={selectionInfo} />
     </div>
   );
 };
