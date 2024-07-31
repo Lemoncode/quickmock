@@ -1,20 +1,30 @@
-import { Group, Rect, Line } from 'react-konva';
+import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from './shape.model';
-import { ShapeSizeRestrictions } from '@/core/model';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import { Group, Rect, Line } from 'react-konva';
+
+const datepickerInputShapeRestrictions: ShapeSizeRestrictions = {
+  minWidth: 80,
+  minHeight: 50,
+  maxWidth: -1,
+  maxHeight: 50,
+  defaultWidth: 220,
+  defaultHeight: 50,
+};
 
 export const getDatepickerInputShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => ({
-    minWidth: 80,
-    minHeight: 50,
-    maxWidth: -1,
-    maxHeight: 50,
-    defaultWidth: 220,
-    defaultHeight: 50,
-  });
+  (): ShapeSizeRestrictions => datepickerInputShapeRestrictions;
 
 export const DatepickerInputShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+    const { width: restrictedWidth, height: restrictedHeight } =
+      fitSizeToShapeSizeRestrictions(
+        datepickerInputShapeRestrictions,
+        width,
+        height
+      );
+
     const margin = 10;
     const separatorPadding = 15; // Extra padding for spacers
     const separator1X = width / 3 + margin;
@@ -25,8 +35,8 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
         x={x}
         y={y}
         ref={ref}
-        width={width}
-        height={height}
+        width={restrictedWidth}
+        height={restrictedHeight}
         {...shapeProps}
         onClick={() => onSelected(id, 'datepickerinput')}
       >

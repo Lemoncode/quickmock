@@ -105,6 +105,8 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
           fontFamily="Comic Sans MS, cursive"
           fontSize={12}
           fill="black"
+          ellipsis={true}
+          wrap="none"
         />
       </Group>
     );

@@ -1,20 +1,30 @@
 import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef, useState } from 'react';
 import { ShapeProps } from './shape.model';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Circle, Group, Rect } from 'react-konva';
 
-export const getToggleSwitchShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => ({
-    minWidth: 50,
-    minHeight: 25,
-    maxWidth: 100,
-    maxHeight: 35,
-    defaultWidth: 60,
-    defaultHeight: 25,
-  });
+const toggleSwitchShapeRestrictions: ShapeSizeRestrictions = {
+  minWidth: 50,
+  minHeight: 25,
+  maxWidth: 100,
+  maxHeight: 35,
+  defaultWidth: 60,
+  defaultHeight: 25,
+};
+
+export const getToggleSwitchShapeSizeRestrictions = (): ShapeSizeRestrictions =>
+  toggleSwitchShapeRestrictions;
 
 export const ToggleSwitch = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+    const { width: restrictedWidth, height: restrictedHeight } =
+      fitSizeToShapeSizeRestrictions(
+        toggleSwitchShapeRestrictions,
+        width,
+        height
+      );
+
     const [isOn, setIsOn] = useState(false);
 
     const handleSwitch = () => {
@@ -29,16 +39,16 @@ export const ToggleSwitch = forwardRef<any, ShapeProps>(
         x={x}
         y={y}
         ref={ref}
-        width={width}
-        height={height}
+        width={restrictedWidth}
+        height={restrictedHeight}
         {...shapeProps}
         onClick={() => onSelected(id, 'toggleswitch')}
       >
         <Rect
           x={0}
           y={0}
-          width={width}
-          height={height}
+          width={restrictedWidth}
+          height={restrictedHeight}
           cornerRadius={50}
           stroke="black"
           strokeWidth={2}
@@ -47,8 +57,8 @@ export const ToggleSwitch = forwardRef<any, ShapeProps>(
         <Circle
           onClick={handleSwitch}
           x={circleX}
-          y={height / 2}
-          radius={height / 2}
+          y={restrictedHeight / 2}
+          radius={restrictedHeight / 2}
           stroke="black"
           strokeWidth={2}
           fill="white"

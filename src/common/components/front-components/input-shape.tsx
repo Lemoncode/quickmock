@@ -1,8 +1,8 @@
 import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from './shape.model';
-import { Group, Rect, Text } from 'react-konva';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import { Group, Rect, Text } from 'react-konva';
 
 const inputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 60,
