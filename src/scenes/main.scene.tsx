@@ -1,19 +1,25 @@
-import { MainLayout } from "@/layout/main.layout";
-import classes from "./main.module.css";
+import { MainLayout } from '@/layout/main.layout';
+import classes from './main.module.css';
 
 import {
   CanvasPod,
   ToolbarPod,
   ContainerGalleryPod,
   ComponentGalleryPod,
-} from "@/pods";
+} from '@/pods';
+import { PropertiesPod } from '@/pods/properties';
 
 export const MainScene = () => {
   return (
-    <MainLayout >
+    <MainLayout>
       <ToolbarPod />
-      <div className={classes.containerGallery}><ContainerGalleryPod /><ComponentGalleryPod /></div>
-      <div className={classes.componentGallery}></div>
+      <div className={classes.containerGallery}>
+        <ContainerGalleryPod />
+        <ComponentGalleryPod />
+      </div>
+      <div className={classes.componentGallery}>
+        <PropertiesPod />
+      </div>
       <CanvasPod />
     </MainLayout>
   );

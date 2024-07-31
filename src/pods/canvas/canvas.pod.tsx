@@ -7,12 +7,6 @@ import { renderShapeComponent } from './shape-renderer';
 import { useDropShape } from './use-drop-shape.hook';
 import { useMonitorShape } from './use-monitor-shape.hook';
 import classes from './canvas.pod.module.css';
-import {
-  moveZIndexDownOneLevel,
-  moveZIndexToBottom,
-  moveZIndexTopOneLevel,
-  moveZIndexToTop,
-} from './zindex.util';
 import { ShapeModel } from '@/core/model';
 
 export const CanvasPod = () => {
@@ -48,10 +42,6 @@ export const CanvasPod = () => {
       );
     };
 
-  const handleZIndexChange = (shapeCollection: ShapeModel[]) => {
-    setShapes(shapeCollection);
-  };
-
   {
     /* TODO: add other animation for isDraggerOver */
   }
@@ -61,36 +51,6 @@ export const CanvasPod = () => {
       ref={dropRef}
       style={{ opacity: isDraggedOver ? 0.5 : 1 }}
     >
-      {/*TODO: move buttons to app props panel*/}
-      <button
-        onClick={() =>
-          handleZIndexChange(moveZIndexToBottom(selectedShapeId, shapes))
-        }
-      >
-        Move to Bottom
-      </button>
-      <button
-        onClick={() =>
-          handleZIndexChange(moveZIndexToTop(selectedShapeId, shapes))
-        }
-      >
-        Move to Top
-      </button>
-      <button
-        onClick={() =>
-          handleZIndexChange(moveZIndexDownOneLevel(selectedShapeId, shapes))
-        }
-      >
-        Move to Bottom One Level
-      </button>
-      <button
-        onClick={() =>
-          handleZIndexChange(moveZIndexTopOneLevel(selectedShapeId, shapes))
-        }
-      >
-        Move to Top One Level
-      </button>
-
       {/*TODO: move size to canvas provider?*/}
       <Stage
         width={3000}

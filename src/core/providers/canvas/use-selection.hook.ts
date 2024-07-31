@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import Konva from 'konva';
 import { ShapeModel, ShapeRefs, ShapeType } from '@/core/model';
-import { SelectionInfo } from './canvas.model';
+import { SelectionInfo, ZIndexAction } from './canvas.model';
+import { performZIndexAction } from './zindex.util';
 
-export const useSelection = (shapes: ShapeModel[]): SelectionInfo => {
+export const useSelection = (
+  shapes: ShapeModel[],
+  setShapes: React.Dispatch<React.SetStateAction<ShapeModel[]>>
+): SelectionInfo => {
   const transformerRef = useRef<Konva.Transformer>(null);
   const shapeRefs = useRef<ShapeRefs>({});
   const selectedShapeRef = useRef<Konva.Node | null>(null);
@@ -41,6 +45,12 @@ export const useSelection = (shapes: ShapeModel[]): SelectionInfo => {
     }
   };
 
+  const setZIndexOnSelected = (action: ZIndexAction) => {
+    setShapes(prevShapes =>
+      performZIndexAction(selectedShapeId, action, prevShapes)
+    );
+  };
+
   return {
     transformerRef,
     shapeRefs,
@@ -49,5 +59,6 @@ export const useSelection = (shapes: ShapeModel[]): SelectionInfo => {
     selectedShapeRef,
     selectedShapeId,
     selectedShapeType,
+    setZIndexOnSelected,
   };
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { ShapeModel } from '@/core/model';
 import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
+import { ZIndexAction } from './canvas.model';
 
 interface Props {
   children: React.ReactNode;
@@ -12,7 +13,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   const [shapes, setShapes] = React.useState<ShapeModel[]>([]);
   const [scale, setScale] = React.useState(1);
 
-  const selectionInfo = useSelection(shapes);
+  const selectionInfo = useSelection(shapes, setShapes);
 
   return (
     <CanvasContext.Provider
