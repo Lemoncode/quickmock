@@ -25,10 +25,9 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
         height
       );
 
-    const margin = 10;
-    const separatorPadding = 15; // Extra padding for spacers
-    const separator1X = width / 3 + margin;
-    const separator2X = (2 * width) / 3 - margin;
+    const separatorPadding = 3; // Extra padding for spacers
+    const separator1X = restrictedWidth / 3;
+    const separator2X = (2 * restrictedWidth) / 3;
 
     return (
       <Group
@@ -42,9 +41,9 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
       >
         {/* input frame */}
         <Rect
-          x={margin}
-          y={margin * 3}
-          width={restrictedWidth - 2 * margin}
+          x={0}
+          y={0}
+          width={restrictedWidth}
           height={restrictedHeight}
           cornerRadius={10}
           stroke="black"
@@ -55,7 +54,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
         {/* Separators : */}
         <Text
           x={separator1X - 10}
-          y={margin * 3 + restrictedHeight / 2 + 5 - separatorPadding}
+          y={restrictedHeight / separatorPadding}
           text=":"
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
@@ -63,7 +62,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
         />
         <Text
           x={separator2X - 10}
-          y={margin * 3 + restrictedHeight / 2 + 5 - separatorPadding}
+          y={restrictedHeight / separatorPadding}
           text=":"
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
