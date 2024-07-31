@@ -87,6 +87,27 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   }
 };
 
+const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
+  switch (shapeType) {
+    case 'input':
+    case 'label':
+      return true;
+    default:
+      return false;
+  }
+};
+
+const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
+  switch (shapeType) {
+    case 'input':
+      return '';
+    case 'label':
+      return 'Label';
+    default:
+      return undefined;
+  }
+};
+
 // TODO: create interfaces to hold Coordination and Size
 // coordinate: { x: number, y: number }
 // size: { width: number, height: number }
@@ -101,5 +122,7 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     width,
     height,
     type: shapeType,
+    allowsInlineEdition: doesShapeAllowInlineEdition(shapeType),
+    text: generateDefaultTextValue(shapeType),
   };
 };

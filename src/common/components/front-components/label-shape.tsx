@@ -17,7 +17,7 @@ export const getLabelSizeRestrictions = (): ShapeSizeRestrictions =>
   labelSizeRestrictions;
 
 export const LabelShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(labelSizeRestrictions, width, height);
 
@@ -36,7 +36,7 @@ export const LabelShape = forwardRef<any, ShapeProps>(
           y={0}
           width={restrictedWidth}
           height={restrictedHeight}
-          text="Label"
+          text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
           fill="black"
