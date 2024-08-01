@@ -6,7 +6,7 @@ export const ContainerGalleryPod = () => {
   return (
     <div className={classes.container}>
       <div className={classes.title}>
-        <p>Containers</p>
+        <p>Devices</p>
       </div>
       <GalleryComponent itemCollection={mockContainerCollection} />
     </div>
