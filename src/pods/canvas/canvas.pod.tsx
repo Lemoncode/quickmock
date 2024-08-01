@@ -7,7 +7,7 @@ import { renderShapeComponent } from './shape-renderer';
 import { useDropShape } from './use-drop-shape.hook';
 import { useMonitorShape } from './use-monitor-shape.hook';
 import classes from './canvas.pod.module.css';
-import { ShapeModel } from '@/core/model';
+import { EditableComponent } from '@/common/components/inline-edit';
 
 export const CanvasPod = () => {
   const { shapes, setShapes, scale, selectionInfo } = useCanvasContext();
@@ -20,6 +20,7 @@ export const CanvasPod = () => {
     selectedShapeRef,
     selectedShapeId,
     selectedShapeType,
+    updateTextOnSelected,
   } = selectionInfo;
 
   const { isDraggedOver, dropRef } = useDropShape();
@@ -68,12 +69,25 @@ export const CanvasPod = () => {
                 shapeRefs.current[shape.id] = createRef();
               }
 
-              return renderShapeComponent(shape, {
-                handleSelected,
-                shapeRefs,
-                handleDragEnd,
-                handleTransform,
-              });
+              return (
+                <EditableComponent
+                  key={shape.id}
+                  coords={{ x: shape.x, y: shape.y }}
+                  size={{ width: shape.width, height: shape.height }}
+                  isEditable={shape.allowsInlineEdition}
+                  text={shape.text ?? ''}
+                  onTextSubmit={updateTextOnSelected}
+                  scale={scale}
+                  editType="input"
+                >
+                  {renderShapeComponent(shape, {
+                    handleSelected,
+                    shapeRefs,
+                    handleDragEnd,
+                    handleTransform,
+                  })}
+                </EditableComponent>
+              );
             })
           }
           <Transformer
