@@ -10,7 +10,14 @@ import classes from './canvas.pod.module.css';
 import { EditableComponent } from '@/common/components/inline-edit';
 
 export const CanvasPod = () => {
-  const { shapes, setShapes, scale, selectionInfo } = useCanvasContext();
+  const {
+    shapes,
+    scale,
+    selectionInfo,
+    addNewShape,
+    updateShapeSizeAndPosition,
+    updateShapePosition,
+  } = useCanvasContext();
 
   const {
     shapeRefs,
@@ -24,10 +31,10 @@ export const CanvasPod = () => {
   } = selectionInfo;
 
   const { isDraggedOver, dropRef } = useDropShape();
-  const { stageRef } = useMonitorShape(dropRef, setShapes);
+  const { stageRef } = useMonitorShape(dropRef, addNewShape);
 
   const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
-    setShapes,
+    updateShapeSizeAndPosition,
     {
       selectedShapeRef,
       selectedShapeId,
@@ -38,9 +45,7 @@ export const CanvasPod = () => {
   const handleDragEnd =
     (id: string) => (e: Konva.KonvaEventObject<DragEvent>) => {
       const { x, y } = e.target.position();
-      setShapes(prevShapes =>
-        prevShapes.map(shape => (shape.id === id ? { ...shape, x, y } : shape))
-      );
+      updateShapePosition(id, { x, y });
     };
 
   {
