@@ -38,14 +38,24 @@ export const EditableComponent: React.FC<Props> = props => {
       }
     };
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (isEditing && event.key === 'Enter') {
+        setIsEditing(false);
+        onTextSubmit(editText);
+      }
+    };
+
     if (isEditing) {
       document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
     } else {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
     };
   }, [isEditing, editText]);
 
