@@ -17,8 +17,8 @@ export const ToolbarPod: React.FC = () => {
       <NewButton />
       <OpenButton />
       <SaveButton />
-      <ZoomInButton />
       <ZoomOutButton />
+      <ZoomInButton />
       <UndoButton />
       <RedoButton />
       <ExportButton />

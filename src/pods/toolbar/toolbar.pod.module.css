@@ -22,9 +22,11 @@
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
+
 .button svg {
   font-size: var(--fs-s);
 }
+
 .button:focus-visible {
   outline: 1px auto var(--primary-500);
 }
@@ -32,4 +34,13 @@
 .button:hover {
   background-color: var(--primary-900);
   color: var(--pure-white);
+}
+
+.button:disabled {
+  color: var(--primary-300);
+  cursor: not-allowed;
+}
+
+.button:disabled:hover {
+  background-color: inherit;
 }
