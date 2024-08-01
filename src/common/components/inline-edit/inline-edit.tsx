@@ -39,6 +39,7 @@ export const EditableComponent: React.FC<Props> = props => {
     };
 
     if (isEditing) {
+      inputRef.current?.focus();
       document.addEventListener('mousedown', handleClickOutside);
     } else {
       document.removeEventListener('mousedown', handleClickOutside);
