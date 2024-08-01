@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-50);
+  border-top: 1px solid var(--primary-100);
+  padding: var(--space-xs) var(--space-md);
+}
+
+.title {
+  flex-grow: 1;
+}
+
+.zoomContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+}
+
+.zoomValue {
+  min-width: 50px;
+  text-align: center;
+}
+
+.button {
+  border: none;
+  color: var(--text-color);
+  background-color: inherit;
+  padding: var(--space-s);
+  border-radius: var(--border-radius-m);
+  font-size: var(--fs-xs);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--primary-100);
+}
+
+.button:disabled {
+  color: var(--primary-300);
+  cursor: not-allowed;
+}
+
+.button:disabled:hover {
+  background-color: inherit;
+}
