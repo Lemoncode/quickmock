@@ -30,7 +30,7 @@ const defaultShapeSizeRestrictions: ShapeSizeRestrictions = {
   defaultHeight: 100,
 };
 
-// TODO: Add unit test support: #46
+// TODO: check if have to remove this
 export const getShapeSizeRestrictions = (type: ShapeType | null) => {
   if (!type) {
     return defaultShapeSizeRestrictions;
