@@ -2,23 +2,32 @@ import { forwardRef } from 'react';
 import { Group, Rect, Circle } from 'react-konva';
 import { ShapeProps } from '../front-components/shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
-export const getTabletShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
+const tabletShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
   minHeight: 150,
   maxWidth: 1000,
   maxHeight: 1000,
   defaultWidth: 400,
   defaultHeight: 300,
-});
+};
+
+export const getTabletShapeSizeRestrictions = (): ShapeSizeRestrictions =>
+  tabletShapeSizeRestrictions;
 
 export const TabletShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+    const { width: restrictedWidth, height: restrictedHeight } =
+      fitSizeToShapeSizeRestrictions(
+        tabletShapeSizeRestrictions,
+        width,
+        height
+      );
     const margin = 20;
     const screenMargin = 15;
     const cameraPadding = 3;
     const buttonPadding = 3;
-
     const cameraRadius = 3;
     const buttonRadius = 5;
 
@@ -27,8 +36,8 @@ export const TabletShape = forwardRef<any, ShapeProps>(
         x={x}
         y={y}
         ref={ref}
-        width={width}
-        height={height}
+        width={restrictedWidth}
+        height={restrictedHeight}
         {...shapeProps}
         onClick={() => onSelected(id, 'tablet')}
       >
@@ -36,8 +45,8 @@ export const TabletShape = forwardRef<any, ShapeProps>(
         <Rect
           x={margin}
           y={margin}
-          width={width - 2 * margin}
-          height={height - 2 * margin}
+          width={restrictedWidth - 2 * margin}
+          height={restrictedHeight - 2 * margin}
           cornerRadius={20}
           stroke="black"
           strokeWidth={2}
@@ -48,8 +57,8 @@ export const TabletShape = forwardRef<any, ShapeProps>(
         <Rect
           x={margin + screenMargin}
           y={margin + screenMargin}
-          width={width - 2 * margin - 2 * screenMargin}
-          height={height - 2 * margin - 2 * screenMargin}
+          width={restrictedWidth - 2 * margin - 2 * screenMargin}
+          height={restrictedHeight - 2 * margin - 2 * screenMargin}
           cornerRadius={10}
           stroke="black"
           strokeWidth={1}
@@ -59,7 +68,7 @@ export const TabletShape = forwardRef<any, ShapeProps>(
         {/* Cámara frontal */}
         <Circle
           x={margin + cameraPadding + cameraRadius}
-          y={height / 2}
+          y={restrictedHeight / 2}
           radius={cameraRadius}
           stroke="black"
           strokeWidth={1}
@@ -68,8 +77,8 @@ export const TabletShape = forwardRef<any, ShapeProps>(
 
         {/* Botón de inicio */}
         <Circle
-          x={width - margin - buttonPadding - buttonRadius}
-          y={height / 2}
+          x={restrictedWidth - margin - buttonPadding - buttonRadius}
+          y={restrictedHeight / 2}
           radius={buttonRadius}
           stroke="black"
           strokeWidth={1.5}
