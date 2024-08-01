@@ -1,20 +1,29 @@
 import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef } from 'react';
-import { Group, Rect, Circle, Text } from 'react-konva';
 import { ShapeProps } from '../front-components/shape.model';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import { Group, Rect, Circle, Text } from 'react-konva';
+
+const browserWindowShapeSizeRestrictions: ShapeSizeRestrictions = {
+  minWidth: 200,
+  minHeight: 150,
+  maxWidth: 1000,
+  maxHeight: 1000,
+  defaultWidth: 400,
+  defaultHeight: 300,
+};
 
 export const getBrowserWindowShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => ({
-    minWidth: 200,
-    minHeight: 150,
-    maxWidth: 1000,
-    maxHeight: 1000,
-    defaultWidth: 400,
-    defaultHeight: 300,
-  });
+  (): ShapeSizeRestrictions => browserWindowShapeSizeRestrictions;
 
 export const BrowserWindowShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+    const { width: restrictedWidth, height: restrictedHeight } =
+      fitSizeToShapeSizeRestrictions(
+        browserWindowShapeSizeRestrictions,
+        width,
+        height
+      );
     const margin = 10;
     const titleBarHeight = 30;
     const buttonRadius = 6;
@@ -25,8 +34,8 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
         x={x}
         y={y}
         ref={ref}
-        width={width}
-        height={height}
+        width={restrictedWidth}
+        height={restrictedHeight}
         {...shapeProps}
         onClick={() => onSelected(id, 'browser')}
       >
@@ -34,8 +43,8 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
         <Rect
           x={margin}
           y={margin}
-          width={width - 2 * margin}
-          height={height - 2 * margin}
+          width={restrictedWidth}
+          height={restrictedHeight}
           cornerRadius={15}
           stroke="black"
           strokeWidth={2}
@@ -45,7 +54,7 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
         <Rect
           x={margin}
           y={margin}
-          width={width - 2 * margin}
+          width={restrictedWidth}
           height={titleBarHeight}
           cornerRadius={10}
           stroke="black"
@@ -80,9 +89,9 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
         {/* Content area */}
         <Rect
           x={margin * 2}
-          y={margin + titleBarHeight + 7}
-          width={width - 4 * margin}
-          height={height - titleBarHeight - 3 * margin - 10}
+          y={margin + 40}
+          width={restrictedWidth - 20}
+          height={restrictedHeight - 50}
           stroke="black"
           strokeWidth={1}
           fill="white"
@@ -91,7 +100,7 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
         <Rect
           x={margin * 3}
           y={margin + titleBarHeight + 15}
-          width={width - 6 * margin}
+          width={restrictedWidth - 40}
           height={urlBarHeight}
           cornerRadius={5}
           stroke="black"
@@ -101,10 +110,14 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
         <Text
           x={margin * 3 + 5}
           y={margin + titleBarHeight + 20}
+          width={restrictedWidth - 50}
+          height={restrictedHeight - 50}
           text="https://example.com"
           fontFamily="Comic Sans MS, cursive"
           fontSize={12}
           fill="black"
+          ellipsis={true}
+          wrap="none"
         />
       </Group>
     );
