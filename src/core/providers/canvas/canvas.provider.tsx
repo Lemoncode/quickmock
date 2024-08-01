@@ -2,6 +2,7 @@ import React from 'react';
 import { ShapeModel } from '@/core/model';
 import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
+import { useHistoryManager } from '@/common/undo-redo';
 
 interface Props {
   children: React.ReactNode;
@@ -13,6 +14,15 @@ export const CanvasProvider: React.FC<Props> = props => {
   const [scale, setScale] = React.useState(1);
 
   const selectionInfo = useSelection(shapes, setShapes);
+
+  const {
+    addSnapshot,
+    canRedo: canRedoLogic,
+    canUndo: canUndoLogic,
+    redo,
+    undo,
+    getCurrentState: getCurrentUndoHistoryState,
+  } = useHistoryManager(null);
 
   return (
     <CanvasContext.Provider
