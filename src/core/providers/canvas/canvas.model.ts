@@ -27,4 +27,8 @@ export interface CanvasContextModel {
   setScale: React.Dispatch<React.SetStateAction<number>>;
 
   selectionInfo: SelectionInfo;
+  canUndo: () => boolean;
+  canRedo: () => boolean;
+  doUndo: () => void;
+  doRedo: () => void;
 }

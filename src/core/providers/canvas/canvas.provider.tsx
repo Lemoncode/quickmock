@@ -22,7 +22,29 @@ export const CanvasProvider: React.FC<Props> = props => {
     redo,
     undo,
     getCurrentState: getCurrentUndoHistoryState,
-  } = useHistoryManager(null);
+  } = useHistoryManager(shapes); //TODO: Clarify if we need the scale here as well
+
+  const doUndo = () => {
+    if (canUndo()) {
+      undo();
+      // setSchemaSkipHistory(getCurrentUndoHistoryState());
+    }
+  };
+
+  const doRedo = () => {
+    if (canRedo()) {
+      redo();
+      // setSchemaSkipHistory(getCurrentUndoHistoryState());
+    }
+  };
+
+  const canRedo = () => {
+    return canRedoLogic();
+  };
+
+  const canUndo = () => {
+    return canUndoLogic();
+  };
 
   return (
     <CanvasContext.Provider
@@ -32,6 +54,10 @@ export const CanvasProvider: React.FC<Props> = props => {
         scale,
         setScale,
         selectionInfo,
+        canUndo,
+        canRedo,
+        doUndo,
+        doRedo,
       }}
     >
       {children}
