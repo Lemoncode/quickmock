@@ -4,14 +4,20 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { useCanvasContext } from '@/core/providers';
 
 export const ZoomOutButton = () => {
-  const { setScale } = useCanvasContext();
+  const { scale, setScale } = useCanvasContext();
 
   const handleClick = () => {
-    setScale(prevScale => prevScale * 0.9);
+    setScale(prevScale => Number(Math.max(0.5, prevScale - 0.1).toFixed(1)));
   };
 
+  const isDisabled = scale <= 0.5;
+
   return (
-    <ToolbarButton onClick={handleClick} className={classes.button}>
+    <ToolbarButton
+      onClick={handleClick}
+      className={classes.button}
+      disabled={isDisabled}
+    >
       <ZoomOutIcon />
       <span>Zoom Out</span>
     </ToolbarButton>
