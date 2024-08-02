@@ -23,6 +23,7 @@ export const EditableComponent: React.FC<Props> = props => {
   const [editText, setEditText] = useState(text);
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const hasTextSelected = useRef(false);
 
   // handle click outside of the input when editing
   useEffect(() => {
@@ -35,6 +36,7 @@ export const EditableComponent: React.FC<Props> = props => {
       ) {
         setIsEditing(false);
         onTextSubmit(editText);
+        hasTextSelected.current = false;
       }
     };
 
@@ -42,11 +44,16 @@ export const EditableComponent: React.FC<Props> = props => {
       if (isEditing && event.key === 'Enter') {
         setIsEditing(false);
         onTextSubmit(editText);
+        hasTextSelected.current = false;
       }
     };
 
     if (isEditing) {
-      inputRef.current?.focus();
+      if (!hasTextSelected.current) {
+        inputRef.current?.focus();
+        inputRef.current?.select();
+        hasTextSelected.current = true;
+      }
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleKeyDown);
     } else {
