@@ -1,6 +1,6 @@
 import { Node, NodeConfig } from 'konva/lib/Node';
 import { Box } from 'konva/lib/shapes/Transformer';
-import { Coord, ShapeModel, ShapeType, Size } from '@/core/model';
+import { Coord, ShapeType, Size } from '@/core/model';
 
 interface TransFormSelectedInfo {
   selectedShapeRef: React.MutableRefObject<Node<NodeConfig> | null>;
@@ -9,22 +9,10 @@ interface TransFormSelectedInfo {
 }
 
 export const useTransform = (
-  setShapes: (value: React.SetStateAction<ShapeModel[]>) => void,
+  updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void,
   transformSelectedInfo: TransFormSelectedInfo
 ) => {
   const { selectedShapeId, selectedShapeRef } = transformSelectedInfo;
-
-  const updateShapeSizeAndPosition = (
-    id: string,
-    position: Coord,
-    size: Size
-  ) => {
-    setShapes(prevShapes =>
-      prevShapes.map(shape =>
-        shape.id === id ? { ...shape, ...position, ...size } : shape
-      )
-    );
-  };
 
   const handleTransform = () => {
     const node = selectedShapeRef.current;

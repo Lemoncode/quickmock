@@ -1,16 +1,20 @@
-import { forwardRef } from 'react';
-import { Group, Rect, Line, Text } from 'react-konva';
-import { ShapeProps } from './shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
+import { forwardRef } from 'react';
+import { ShapeProps } from './shape.model';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import { Group, Rect, Line, Text } from 'react-konva';
 
-export const getCheckboxShapeSizeRestrictions = (): ShapeSizeRestrictions => ({
-  minWidth: 150,
+const checkBoxShapeRestrictions: ShapeSizeRestrictions = {
+  minWidth: 100,
   minHeight: 30,
   maxWidth: -1,
   maxHeight: 50,
-  defaultWidth: 220,
+  defaultWidth: 200,
   defaultHeight: 50,
-});
+};
+
+export const getCheckboxShapeSizeRestrictions = (): ShapeSizeRestrictions =>
+  checkBoxShapeRestrictions;
 
 const marginTick = 5;
 const boxTickWidth = 50;
@@ -18,42 +22,29 @@ const tickWidth = boxTickWidth - marginTick;
 
 export const CheckBoxShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
-    const handleClick = () => {
-      onSelected(id, 'checkbox');
-    };
+    const { width: restrictedWidth, height: restrictedHeight } =
+      fitSizeToShapeSizeRestrictions(checkBoxShapeRestrictions, width, height);
 
     return (
       <Group
         x={x}
         y={y}
         ref={ref}
-        width={width}
-        height={height}
+        width={restrictedWidth}
+        height={restrictedHeight}
         {...shapeProps}
-        onClick={handleClick}
+        onClick={() => onSelected(id, 'checkbox')}
       >
-        {/* Caja del checkbox */}
         <Rect
           x={0}
           y={0}
           width={boxTickWidth}
-          height={height}
+          height={restrictedHeight}
           cornerRadius={5}
           stroke="black"
           strokeWidth={2}
           fill="white"
         />
-
-        {/* Marca de verificación (checked) */}
-
-        {/*
-        ----------
-       |     *
-       | *  *
-       |  *
-       -----------
-      */}
-
         <Line
           points={[
             marginTick,
@@ -68,8 +59,6 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
           lineCap="round"
           lineJoin="round"
         />
-
-        {/* Texto */}
         <Text
           x={boxTickWidth + marginTick}
           y={height / 2}
@@ -79,7 +68,10 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
           fill="black"
+          align="left"
           verticalAlign="middle"
+          ellipsis={true}
+          wrap="none"
         />
       </Group>
     );
