@@ -34,19 +34,20 @@ export const EditableComponent: React.FC<Props> = props => {
         !inputRef.current.contains(event.target as Node)
       ) {
         setIsEditing(false);
-        onTextSubmit(editText);
+        onTextSubmit(inputRef.current?.value || '');
       }
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (isEditing && event.key === 'Enter') {
         setIsEditing(false);
-        onTextSubmit(editText);
+        onTextSubmit(inputRef.current?.value || '');
       }
     };
 
     if (isEditing) {
       inputRef.current?.focus();
+      inputRef.current?.select();
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleKeyDown);
     } else {
@@ -58,7 +59,7 @@ export const EditableComponent: React.FC<Props> = props => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleKeyDown);
     };
-  }, [isEditing, editText]);
+  }, [isEditing]);
 
   const handleDoubleClick = () => {
     if (isEditable) {
