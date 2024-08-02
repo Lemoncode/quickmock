@@ -9,8 +9,8 @@ const mobilePhoneShapeSizeRestrictions: ShapeSizeRestrictions = {
   minHeight: 150,
   maxWidth: 1000,
   maxHeight: 1000,
-  defaultWidth: 200,
-  defaultHeight: 400,
+  defaultWidth: 250,
+  defaultHeight: 450,
 };
 
 export const getMobilePhoneShapeSizeRestrictions = (): ShapeSizeRestrictions =>

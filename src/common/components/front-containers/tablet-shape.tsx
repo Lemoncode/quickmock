@@ -7,10 +7,10 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 const tabletShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
   minHeight: 150,
-  maxWidth: 1000,
-  maxHeight: 1000,
-  defaultWidth: 400,
-  defaultHeight: 300,
+  maxWidth: -1,
+  maxHeight: -1,
+  defaultWidth: 500,
+  defaultHeight: 400,
 };
 
 export const getTabletShapeSizeRestrictions = (): ShapeSizeRestrictions =>
