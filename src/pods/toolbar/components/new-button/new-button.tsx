@@ -1,10 +1,13 @@
 import { NewIcon } from '@/common/components/icons/new-button.components';
 import ToolbarButton from '../toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
+import { useCanvasContext } from '@/core/providers';
 
 export const NewButton = () => {
+  const { clearCanvas } = useCanvasContext();
+
   const handleClick = () => {
-    console.log('New');
+    clearCanvas();
   };
 
   return (
