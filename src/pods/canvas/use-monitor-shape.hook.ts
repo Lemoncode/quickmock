@@ -19,6 +19,7 @@ export const useMonitorShape = (
     return monitorForElements({
       onDrop({ source, location }) {
         const destination = location.current.dropTargets[0];
+        if (!destination) return;
         invariant(destination);
 
         const type = source.data.type as ShapeType;

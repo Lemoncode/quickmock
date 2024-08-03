@@ -23,6 +23,7 @@ export interface SelectionInfo {
 export interface CanvasContextModel {
   shapes: ShapeModel[];
   scale: number;
+  clearCanvas: () => void;
   setScale: React.Dispatch<React.SetStateAction<number>>;
   addNewShape: (type: ShapeType, x: number, y: number) => void;
   updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void;

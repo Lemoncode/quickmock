@@ -15,6 +15,11 @@ export const CanvasProvider: React.FC<Props> = props => {
   const [scale, setScale] = React.useState(1);
 
   const selectionInfo = useSelection(shapes, setShapes);
+
+  const clearCanvas = () => {
+    setShapes([]);
+  };
+
   const addNewShape = (type: ShapeType, x: number, y: number) => {
     setShapes(shapes => [...shapes, createShape({ x, y }, type)]);
   };
@@ -74,6 +79,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         shapes,
         scale,
         setScale,
+        clearCanvas,
         selectionInfo,
         addNewShape,
         updateShapeSizeAndPosition,
