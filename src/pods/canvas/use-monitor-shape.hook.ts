@@ -7,12 +7,11 @@ import {
   convertFromDivElementCoordsToKonvaCoords,
 } from './canvas.util';
 import Konva from 'konva';
-import { createShape } from './canvas.model';
-import { ShapeModel } from '@/core/model';
+import { ShapeType } from '@/core/model';
 
 export const useMonitorShape = (
   dropRef: React.MutableRefObject<null>,
-  setShapes: React.Dispatch<React.SetStateAction<ShapeModel[]>>
+  addNewShape: (type: ShapeType, x: number, y: number) => void
 ) => {
   const stageRef = useRef<Konva.Stage>(null);
 
@@ -20,9 +19,10 @@ export const useMonitorShape = (
     return monitorForElements({
       onDrop({ source, location }) {
         const destination = location.current.dropTargets[0];
+        if (!destination) return;
         invariant(destination);
 
-        const type = source.data.type;
+        const type = source.data.type as ShapeType;
         const screenPosition =
           extractScreenCoordinatesFromPragmaticLocation(location);
 
@@ -50,11 +50,7 @@ export const useMonitorShape = (
           positionX = konvaCoord.x;
           positionY = konvaCoord.y;
         }
-
-        setShapes(shapes => [
-          ...shapes,
-          createShape({ x: positionX, y: positionY }, type as any),
-        ]);
+        addNewShape(type, positionX, positionY);
       },
     });
   }, []);

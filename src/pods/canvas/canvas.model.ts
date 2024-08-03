@@ -17,9 +17,15 @@ import {
   getMobilePhoneShapeSizeRestrictions,
   getTabletShapeSizeRestrictions,
 } from '@/common/components/front-containers';
+import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
+    case 'label':
+      return {
+        width: getLabelSizeRestrictions().defaultWidth,
+        height: getLabelSizeRestrictions().defaultHeight,
+      };
     case 'combobox':
       return {
         width: getComboBoxShapeSizeRestrictions().defaultWidth,

@@ -1,4 +1,4 @@
-import { ShapeModel, ShapeRefs, ShapeType } from '@/core/model';
+import { Coord, ShapeModel, ShapeRefs, ShapeType, Size } from '@/core/model';
 import Konva from 'konva';
 import { Node, NodeConfig } from 'konva/lib/Node';
 
@@ -22,9 +22,11 @@ export interface SelectionInfo {
 
 export interface CanvasContextModel {
   shapes: ShapeModel[];
-  setShapes: React.Dispatch<React.SetStateAction<ShapeModel[]>>;
   scale: number;
+  clearCanvas: () => void;
   setScale: React.Dispatch<React.SetStateAction<number>>;
-
+  addNewShape: (type: ShapeType, x: number, y: number) => void;
+  updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void;
+  updateShapePosition: (id: string, position: Coord) => void;
   selectionInfo: SelectionInfo;
 }

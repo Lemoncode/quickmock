@@ -1,7 +1,8 @@
 import React from 'react';
-import { ShapeModel } from '@/core/model';
+import { Coord, ShapeModel, ShapeType, Size } from '@/core/model';
 import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
+import { createShape } from '@/pods/canvas/canvas.model';
 
 interface Props {
   children: React.ReactNode;
@@ -14,14 +15,43 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const selectionInfo = useSelection(shapes, setShapes);
 
+  const clearCanvas = () => {
+    setShapes([]);
+  };
+
+  const addNewShape = (type: ShapeType, x: number, y: number) => {
+    setShapes(shapes => [...shapes, createShape({ x, y }, type)]);
+  };
+
+  const updateShapeSizeAndPosition = (
+    id: string,
+    position: Coord,
+    size: Size
+  ) => {
+    setShapes(prevShapes =>
+      prevShapes.map(shape =>
+        shape.id === id ? { ...shape, ...position, ...size } : shape
+      )
+    );
+  };
+
+  const updateShapePosition = (id: string, { x, y }: Coord) => {
+    setShapes(prevShapes =>
+      prevShapes.map(shape => (shape.id === id ? { ...shape, x, y } : shape))
+    );
+  };
+
   return (
     <CanvasContext.Provider
       value={{
         shapes,
-        setShapes,
         scale,
         setScale,
+        clearCanvas,
         selectionInfo,
+        addNewShape,
+        updateShapeSizeAndPosition,
+        updateShapePosition,
       }}
     >
       {children}

@@ -4,7 +4,7 @@ import { mockWidgetCollection } from './component-gallery-data';
 
 export const ComponentGalleryPod = () => {
   return (
-    <div className={classes.component}>
+    <div className={classes.container}>
       <div className={classes.title}>
         <p>Components</p>
       </div>
