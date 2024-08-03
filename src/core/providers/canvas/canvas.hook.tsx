@@ -11,13 +11,23 @@ import React, { Dispatch, SetStateAction } from 'react';
   so you can undo it later, instead of having to remember to call storeInUndoQueue
   you can just call _setState_ and it will do it for you.
 */
-export function useStateWithInterceptor<S>(
-  initialState: S | (() => S),
-  schemaInterceptorFn: (schema: S) => void
-): [S, Dispatch<SetStateAction<S>>, Dispatch<SetStateAction<S>>] {
-  const [shapes, setInternalShapes] = React.useState<S>(initialState);
 
-  const setShapes = (newShapes: React.SetStateAction<S>): void => {
+export function useStateWithInterceptor<S>(
+  initialState: S[] | (() => S[]),
+  schemaInterceptorFn: (shapes: S[]) => void
+): [S[], Dispatch<SetStateAction<S[]>>, Dispatch<SetStateAction<S[]>>] {
+  const [shapes, setInternalShapes] = React.useState<S[]>(initialState);
+
+  /*
+TODO: REVISAR sugerencia de ChaptGPT, porque ha sugerido corregir así:
+const setShapes: Dispatch<SetStateAction<S[]>> = (newShapes) => {
+    const updatedShapes = newShapes instanceof Function ? newShapes(shapes) : newShapes;
+  
+    schemaInterceptorFn(updatedShapes);
+    setInternalShapes(updatedShapes);
+  };
+*/
+  const setShapes = (newShapes: React.SetStateAction<S[]>): void => {
     // If newShapes is a function, use it to calculate the new state based on the current state
     // Otherwise, use newShapes directly
     const updatedShapes =
@@ -29,7 +39,7 @@ export function useStateWithInterceptor<S>(
   };
 
   const setShapesSkipInterceptor = (
-    newShapes: React.SetStateAction<S>
+    newShapes: React.SetStateAction<S[]>
   ): void => {
     return setInternalShapes(newShapes);
   };
