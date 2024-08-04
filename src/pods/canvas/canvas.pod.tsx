@@ -1,13 +1,14 @@
-import { createRef } from 'react';
+import { createRef, useMemo } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
-import { Layer, Stage, Transformer } from 'react-konva';
+import { Layer, Line, Stage, Transformer } from 'react-konva';
 import { useTransform } from './use-transform.hook';
 import { renderShapeComponent } from './shape-renderer';
 import { useDropShape } from './use-drop-shape.hook';
 import { useMonitorShape } from './use-monitor-shape.hook';
 import classes from './canvas.pod.module.css';
 import { EditableComponent } from '@/common/components/inline-edit';
+import { useSnapin } from './use-snap-in.hook';
 
 export const CanvasPod = () => {
   const {
@@ -32,6 +33,28 @@ export const CanvasPod = () => {
 
   const { isDraggedOver, dropRef } = useDropShape();
   const { stageRef } = useMonitorShape(dropRef, addNewShape);
+
+  // TODO, wrap in useCallback for better performance
+  const getSelectedShapeKonvaId = (): string => {
+    let result: string = '';
+
+    if (selectedShapeRef.current) {
+      result = String(selectedShapeRef.current._id);
+    }
+
+    return result;
+  };
+
+  // TODO. wrap in useMemo
+  const selectedShapeKonvaId = getSelectedShapeKonvaId();
+
+  const {
+    handleDragMove,
+    showSnapInHorizontalLine,
+    showSnapInVerticalLine,
+    yCoordHorizontalLine,
+    xCoordVerticalLine,
+  } = useSnapin(stageRef, transformerRef, selectedShapeKonvaId);
 
   const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
     updateShapeSizeAndPosition,
@@ -99,7 +122,32 @@ export const CanvasPod = () => {
             ref={transformerRef}
             flipEnabled={false}
             boundBoxFunc={handleTransformerBoundBoxFunc}
+            onDragMove={handleDragMove}
           />
+          {showSnapInHorizontalLine && (
+            <Line
+              points={[
+                0,
+                yCoordHorizontalLine,
+                stageRef.current?.width() ?? 0,
+                yCoordHorizontalLine,
+              ]}
+              stroke="red"
+              strokeWidth={1}
+            />
+          )}
+          {showSnapInVerticalLine && (
+            <Line
+              points={[
+                xCoordVerticalLine,
+                0,
+                xCoordVerticalLine,
+                stageRef.current?.height() ?? 0,
+              ]}
+              stroke="red"
+              strokeWidth={1}
+            />
+          )}
         </Layer>
       </Stage>
     </div>

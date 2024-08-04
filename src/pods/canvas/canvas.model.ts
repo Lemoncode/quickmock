@@ -19,6 +19,26 @@ import {
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 
+export const SNAP_THRESHOLD = 5;
+
+export type SnapLines = {
+  vertical: number[];
+  horizontal: number[];
+};
+
+export type SnapType = 'center' | 'start' | 'end';
+
+export interface SnapEdge {
+  guide: number;
+  offset: number;
+  snap: SnapType;
+}
+
+export type SnapEdges = {
+  vertical: SnapEdge[];
+  horizontal: SnapEdge[];
+};
+
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
     case 'label':
