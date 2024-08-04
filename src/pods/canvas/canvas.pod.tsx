@@ -1,4 +1,4 @@
-import { createRef, useEffect, useRef } from 'react';
+import { createRef, useEffect } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
 import { Layer, Stage, Transformer } from 'react-konva';
@@ -52,7 +52,6 @@ export const CanvasPod = () => {
   const { copyShape, pasteShapeFromClipboard } = useClipboard();
 
   useEffect(() => {
-    console.log('CanvasPod mounted');
     const handleKeyDown = (e: KeyboardEvent) => {
       const isCtrlOrCmdPressed = e.ctrlKey || e.metaKey;
 
