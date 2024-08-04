@@ -19,6 +19,7 @@ export const renderRadioButton = (
       height={shape.height}
       draggable
       onSelected={handleSelected}
+      name="shape"
       ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}

@@ -3,7 +3,7 @@ import { KonvaEventObject } from 'konva/lib/Node';
 import { Stage } from 'konva/lib/Stage';
 import invariant from 'tiny-invariant';
 import { SnapEdges, SnapLines } from './canvas.model';
-import { getClosestSnapLines } from './snap-utils';
+import { ClosestSnapLines, getClosestSnapLines } from './snap-utils';
 import { useState } from 'react';
 
 export const useSnapin = (
@@ -30,12 +30,6 @@ export const useSnapin = (
 
     // Do nothing if no snapping lines
     // Not sure what to do here...
-    if (
-      closestSnapLines.vertical !== null ||
-      closestSnapLines.horizontal !== null
-    ) {
-      console.log(closestSnapLines);
-    }
 
     setShowSnapInHorizontalLine(closestSnapLines.horizontal !== null);
     setShowSnapInVerticalLine(closestSnapLines.vertical !== null);
@@ -45,6 +39,50 @@ export const useSnapin = (
     if (closestSnapLines.horizontal !== null) {
       setYCoordHorizontalLine(closestSnapLines.horizontal.snapLine);
     }
+
+    tryMagneto(closestSnapLines);
+  };
+
+  // We need to add export on type ClosestSnapLines
+  const tryMagneto = (closestSnapLines: ClosestSnapLines) => {
+    // Right now we have single selection (maybe with multiple just disable snapping)
+    const [selectedNode] = transformerRef.current?.nodes() ?? [];
+    if (!selectedNode) return;
+
+    const target = transformerRef.current;
+    if (!target) return;
+
+    const orginalAbsolutePosition = target.absolutePosition();
+    const newAbsolutePosition = target.absolutePosition();
+
+    // Let's horizontal
+    if (closestSnapLines.horizontal) {
+      const position =
+        closestSnapLines.horizontal.snapLine +
+        closestSnapLines.horizontal.offset;
+      newAbsolutePosition.y = position;
+    }
+    // Let's go Vertical
+    if (closestSnapLines.vertical) {
+      const position =
+        closestSnapLines.vertical.snapLine + closestSnapLines.vertical.offset;
+      newAbsolutePosition.x = position;
+    }
+
+    // calculate the difference between original and new position
+    const vecDiff = {
+      x: orginalAbsolutePosition.x - newAbsolutePosition.x,
+      y: orginalAbsolutePosition.y - newAbsolutePosition.y,
+    };
+
+    // apply the difference to the selected shape.
+    const nodeAbsPos = selectedNode.getAbsolutePosition();
+    const newPos = {
+      x: nodeAbsPos.x - vecDiff.x,
+      y: nodeAbsPos.y - vecDiff.y,
+    };
+
+    selectedNode.setAbsolutePosition(newPos);
   };
 
   const getSnapLines = (excludedShapeId: string): SnapLines => {

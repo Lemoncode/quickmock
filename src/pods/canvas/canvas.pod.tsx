@@ -1,4 +1,4 @@
-import { createRef, useMemo } from 'react';
+import { createRef, useMemo, useState } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
 import { Layer, Line, Stage, Transformer } from 'react-konva';
@@ -9,8 +9,12 @@ import { useMonitorShape } from './use-monitor-shape.hook';
 import classes from './canvas.pod.module.css';
 import { EditableComponent } from '@/common/components/inline-edit';
 import { useSnapin } from './use-snap-in.hook';
+import { ShapeType } from '@/core/model';
 
 export const CanvasPod = () => {
+  const [isTransformerBeingDragged, setIsTransformerBeingDragged] =
+    useState(false);
+
   const {
     shapes,
     scale,
@@ -31,8 +35,15 @@ export const CanvasPod = () => {
     updateTextOnSelected,
   } = selectionInfo;
 
+  const addNewshapeAnSetSelected = (type: ShapeType, x: number, y: number) => {
+    const shapeId = addNewShape(type, x, y);
+    setTimeout(() => {
+      handleSelected(shapeId, type);
+    });
+  };
+
   const { isDraggedOver, dropRef } = useDropShape();
-  const { stageRef } = useMonitorShape(dropRef, addNewShape);
+  const { stageRef } = useMonitorShape(dropRef, addNewshapeAnSetSelected);
 
   // TODO, wrap in useCallback for better performance
   const getSelectedShapeKonvaId = (): string => {
@@ -122,9 +133,11 @@ export const CanvasPod = () => {
             ref={transformerRef}
             flipEnabled={false}
             boundBoxFunc={handleTransformerBoundBoxFunc}
+            onDragStart={() => setIsTransformerBeingDragged(true)}
             onDragMove={handleDragMove}
+            onDragEnd={() => setIsTransformerBeingDragged(false)}
           />
-          {showSnapInHorizontalLine && (
+          {isTransformerBeingDragged && showSnapInHorizontalLine && (
             <Line
               points={[
                 0,
@@ -132,11 +145,12 @@ export const CanvasPod = () => {
                 stageRef.current?.width() ?? 0,
                 yCoordHorizontalLine,
               ]}
-              stroke="red"
+              stroke="rgb(0, 161, 255)"
+              dash={[4, 6]}
               strokeWidth={1}
             />
           )}
-          {showSnapInVerticalLine && (
+          {isTransformerBeingDragged && showSnapInVerticalLine && (
             <Line
               points={[
                 xCoordVerticalLine,
@@ -144,7 +158,8 @@ export const CanvasPod = () => {
                 xCoordVerticalLine,
                 stageRef.current?.height() ?? 0,
               ]}
-              stroke="red"
+              stroke="rgb(0, 161, 255)"
+              dash={[4, 6]}
               strokeWidth={1}
             />
           )}

@@ -34,7 +34,7 @@ const getAllSnapLinesSingleDirection = (
   return result;
 };
 
-type ClosestSnapLines = {
+export type ClosestSnapLines = {
   vertical: SnapLineSubset | null;
   horizontal: SnapLineSubset | null;
 };
