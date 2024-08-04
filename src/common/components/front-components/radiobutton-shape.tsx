@@ -61,7 +61,7 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>(
         {/* Texto */}
         <Text
           x={radius * 2 + 10}
-          y={radius * 0.5}
+          y={radius * 0.5 + 5}
           text="Select me!"
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
