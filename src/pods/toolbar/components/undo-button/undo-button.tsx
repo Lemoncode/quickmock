@@ -1,10 +1,14 @@
 import { UndoIcon } from '@/common/components/icons/undo-icon.component';
 import ToolbarButton from '../toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
+import { useCanvasContext } from '@/core/providers';
 
 export const UndoButton = () => {
+  const { doUndo } = useCanvasContext();
+
   const handleClick = () => {
     console.log('Undo');
+    doUndo();
   };
 
   return (
