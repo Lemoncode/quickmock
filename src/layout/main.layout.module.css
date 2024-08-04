@@ -1,9 +1,8 @@
 .layout {
   display: grid;
-  grid-template-columns: minmax(var(--column-min-size), 2fr) minmax(
-      var(--canvas-min-size),
-      8fr
-    ) minmax(var(--column-min-size), 2fr);
+  grid-template-columns:
+    minmax(var(--column-min-size), 2fr) minmax(var(--canvas-min-size), 8fr)
+    minmax(var(--column-min-size), 2fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
   grid-template-areas:
     'toolbar toolbar toolbar'
