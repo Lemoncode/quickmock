@@ -4,6 +4,7 @@ import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
 import { createShape } from '@/pods/canvas/canvas.model';
 import { useHistoryManager } from '@/common/undo-redo';
+import { useStateWithInterceptor } from './canvas.hook';
 
 interface Props {
   children: React.ReactNode;
@@ -11,8 +12,28 @@ interface Props {
 
 export const CanvasProvider: React.FC<Props> = props => {
   const { children } = props;
-  const [shapes, setShapes] = React.useState<ShapeModel[]>([]);
+
+  //TODO: borrar este comentario
+  //const [shapes, setShapes] = React.useState<ShapeModel[]>([]);
+
   const [scale, setScale] = React.useState(1);
+
+  const {
+    addSnapshot,
+    canRedo: canRedoLogic,
+    canUndo: canUndoLogic,
+    redo,
+    undo,
+    getCurrentState: getCurrentUndoHistoryState,
+  } = useHistoryManager([]); //TODO: Clarify if we need the scale here as well
+
+  //TODO: Revisar si puedo solucionar este problema de tipos de otra forma
+  const addSnapshotWrapper = <T extends ShapeModel[]>(newState: T) => {
+    addSnapshot(newState as any);
+  };
+
+  const [shapes, setShapes, setShapesSkipHistory] =
+    useStateWithInterceptor<ShapeModel>([], addSnapshotWrapper);
 
   const selectionInfo = useSelection(shapes, setShapes);
 
@@ -42,18 +63,10 @@ export const CanvasProvider: React.FC<Props> = props => {
     );
   };
 
-  const {
-    addSnapshot,
-    canRedo: canRedoLogic,
-    canUndo: canUndoLogic,
-    redo,
-    undo,
-    getCurrentState: getCurrentUndoHistoryState,
-  } = useHistoryManager(shapes); //TODO: Clarify if we need the scale here as well
-
   const doUndo = () => {
     if (canUndo()) {
       undo();
+      setShapes(getCurrentUndoHistoryState());
       // setSchemaSkipHistory(getCurrentUndoHistoryState());
     }
   };
