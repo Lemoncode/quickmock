@@ -14,35 +14,42 @@ import React, { Dispatch, SetStateAction } from 'react';
 
 export function useStateWithInterceptor<S>(
   initialState: S[] | (() => S[]),
-  schemaInterceptorFn: (shapes: S[]) => void
+  shapesInterceptorFn: (shapes: S[]) => void
 ): [S[], Dispatch<SetStateAction<S[]>>, Dispatch<SetStateAction<S[]>>] {
   const [shapes, setInternalShapes] = React.useState<S[]>(initialState);
 
-  /*
-TODO: REVISAR sugerencia de ChaptGPT, porque ha sugerido corregir así:
-const setShapes: Dispatch<SetStateAction<S[]>> = (newShapes) => {
-    const updatedShapes = newShapes instanceof Function ? newShapes(shapes) : newShapes;
-  
-    schemaInterceptorFn(updatedShapes);
-    setInternalShapes(updatedShapes);
-  };
-*/
   const setShapes = (newShapes: React.SetStateAction<S[]>): void => {
-    // If newShapes is a function, use it to calculate the new state based on the current state
-    // Otherwise, use newShapes directly
-    const updatedShapes =
-      newShapes instanceof Function ? newShapes(shapes) : newShapes;
-
-    schemaInterceptorFn(updatedShapes);
-
     return setInternalShapes(newShapes);
   };
 
-  const setShapesSkipInterceptor = (
+  /*
+  const [shapes, setInternalShapes] = React.useState<S[]>(initialState);
+
+  const setShapes = (newShapes: React.SetStateAction<S[]>): void => {
+    // If newShapes is a function, use it to calculate the new state based on the current state
+    // Otherwise, use newShapes directly      
+    
+    const updatedShapes =  newShapes instanceof Function ? newShapes(shapes): newShapes; 
+    console.log("updatedShapes.length: ", updatedShapes.length,"shapes.length: ", shapes.length);
+
+
+    shapesInterceptorFn(updatedShapes);
+    console.log("2 - updatedShapes.length: ", updatedShapes.length,"shapes.length: ", shapes.length);
+
+   // return setInternalShapes(newShapes);
+    return setInternalShapes(updatedShapes); 
+  };
+
+  const setShapesSkipInterceptor = (    
     newShapes: React.SetStateAction<S[]>
   ): void => {
+   
     return setInternalShapes(newShapes);
   };
 
   return [shapes, setShapes, setShapesSkipInterceptor];
+
+  */
+
+  return [shapes, setShapes, setInternalShapes];
 }

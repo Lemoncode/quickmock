@@ -28,12 +28,14 @@ export const CanvasProvider: React.FC<Props> = props => {
   } = useHistoryManager([]); //TODO: Clarify if we need the scale here as well
 
   //TODO: Revisar si puedo solucionar este problema de tipos de otra forma
-  const addSnapshotWrapper = <T extends ShapeModel[]>(newState: T) => {
-    addSnapshot(newState as any);
-  };
+  /*const addSnapshotWrapper = <T extends ShapeModel[]>(newState: T) => {
+    addSnapshot(newState);
+  };*/
 
   const [shapes, setShapes, setShapesSkipHistory] =
-    useStateWithInterceptor<ShapeModel>([], addSnapshotWrapper);
+    useStateWithInterceptor<ShapeModel>([], addSnapshot);
+
+  // const [shapes, setShapes] =React.useState<ShapeModel[]>([]);
 
   const selectionInfo = useSelection(shapes, setShapes);
 
@@ -65,9 +67,10 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const doUndo = () => {
     if (canUndo()) {
+      console.log('undoing');
       undo();
       setShapes(getCurrentUndoHistoryState());
-      // setSchemaSkipHistory(getCurrentUndoHistoryState());
+      // setShapesSkipHistory(getCurrentUndoHistoryState());
     }
   };
 
