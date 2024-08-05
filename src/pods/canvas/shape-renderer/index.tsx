@@ -13,6 +13,7 @@ import {
   renderDatepickerinput,
   renderTimepickerinput,
   renderLabel,
+  renderRadioButton,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -53,6 +54,8 @@ export const renderShapeComponent = (
       return renderMobilePhoneContainer(shape, shapeRenderedProps);
     case 'label':
       return renderLabel(shape, shapeRenderedProps);
+    case 'radiobutton':
+      return renderRadioButton(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
