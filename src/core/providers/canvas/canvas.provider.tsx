@@ -3,6 +3,7 @@ import { Coord, ShapeModel, ShapeType, Size } from '@/core/model';
 import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
 import { createShape } from '@/pods/canvas/canvas.model';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
   children: React.ReactNode;
@@ -24,6 +25,11 @@ export const CanvasProvider: React.FC<Props> = props => {
     setShapes(shapes => [...shapes, newShape]);
 
     return newShape.id;
+  };
+
+  const pasteShape = (shape: ShapeModel) => {
+    shape.id = uuidv4();
+    setShapes(shapes => [...shapes, shape]);
   };
 
   const updateShapeSizeAndPosition = (
@@ -53,6 +59,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         clearCanvas,
         selectionInfo,
         addNewShape,
+        pasteShape,
         updateShapeSizeAndPosition,
         updateShapePosition,
       }}

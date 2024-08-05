@@ -1,4 +1,4 @@
-import { createRef, useMemo, useState } from 'react';
+import { createRef, useMemo, useEffect, useState } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
 import { Layer, Line, Stage, Transformer } from 'react-konva';
@@ -8,6 +8,7 @@ import { useDropShape } from './use-drop-shape.hook';
 import { useMonitorShape } from './use-monitor-shape.hook';
 import classes from './canvas.pod.module.css';
 import { EditableComponent } from '@/common/components/inline-edit';
+import { useClipboard } from './use-clipboard.hook';
 import { useSnapIn } from './use-snapin.hook';
 import { ShapeType } from '@/core/model';
 
@@ -83,6 +84,27 @@ export const CanvasPod = () => {
       const { x, y } = e.target.position();
       updateShapePosition(id, { x, y });
     };
+
+  const { copyShape, pasteShapeFromClipboard } = useClipboard();
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const isCtrlOrCmdPressed = e.ctrlKey || e.metaKey;
+
+      if (isCtrlOrCmdPressed && e.key === 'c') {
+        copyShape();
+      }
+      if (isCtrlOrCmdPressed && e.key === 'v') {
+        pasteShapeFromClipboard();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedShapeId]);
 
   {
     /* TODO: add other animation for isDraggerOver */
