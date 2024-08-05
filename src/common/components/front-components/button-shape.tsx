@@ -6,11 +6,11 @@ import { Group, Rect, Text } from 'react-konva';
 
 const buttonShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 60,
-  minHeight: 50,
+  minHeight: 45,
   maxWidth: -1,
   maxHeight: 50,
-  defaultWidth: 150,
-  defaultHeight: 50,
+  defaultWidth: 140,
+  defaultHeight: 45,
 };
 
 export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
