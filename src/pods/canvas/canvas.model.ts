@@ -132,3 +132,36 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     text: generateDefaultTextValue(shapeType),
   };
 };
+
+// Snap model
+export const SNAP_THRESHOLD = 5;
+
+export type SnapLines = {
+  vertical: number[];
+  horizontal: number[];
+};
+
+export type SnapType = 'center' | 'start' | 'end';
+
+export interface SnapEdge {
+  guide: number;
+  offset: number;
+  snapType: SnapType;
+}
+
+export type SnapEdges = {
+  vertical: SnapEdge[];
+  horizontal: SnapEdge[];
+};
+
+export type SnapLineSubset = {
+  snapLine: number;
+  diff: number;
+  snap: SnapType;
+  offset: number;
+};
+
+export type ClosestSnapLines = {
+  vertical: SnapLineSubset | null;
+  horizontal: SnapLineSubset | null;
+};
