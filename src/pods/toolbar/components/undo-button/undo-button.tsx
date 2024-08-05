@@ -4,10 +4,14 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { useCanvasContext } from '@/core/providers';
 
 export const UndoButton = () => {
-  const { doUndo } = useCanvasContext();
+  const { doUndo, shapes } = useCanvasContext();
 
   const handleClick = () => {
     console.log('Undo');
+
+    //TODO: REMOVE THIS
+    console.log('shapes: ', shapes);
+
     doUndo();
   };
 
