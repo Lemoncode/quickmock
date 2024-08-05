@@ -66,7 +66,6 @@ export const CanvasProvider: React.FC<Props> = props => {
   const doUndo = () => {
     if (canUndo()) {
       undo();
-      setShapes(getCurrentUndoHistoryState());
       setShapesSkipHistory(getCurrentUndoHistoryState());
     }
   };
