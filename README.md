@@ -4,6 +4,8 @@
 
 The goal of this project is to create an open source low fidelity UI mock tool 
 
+![quickmock](https://github.com/user-attachments/assets/a26e7302-0847-4377-80f0-39098791b371)
+
 # 🚀 Installation
 
 Clone this repository and run the following commands:
