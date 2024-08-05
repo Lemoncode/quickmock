@@ -25,7 +25,7 @@ export interface CanvasContextModel {
   scale: number;
   clearCanvas: () => void;
   setScale: React.Dispatch<React.SetStateAction<number>>;
-  addNewShape: (type: ShapeType, x: number, y: number) => void;
+  addNewShape: (type: ShapeType, x: number, y: number) => string;
   updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void;
   updateShapePosition: (id: string, position: Coord) => void;
   selectionInfo: SelectionInfo;

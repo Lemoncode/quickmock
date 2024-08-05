@@ -9,6 +9,7 @@ import { useMonitorShape } from './use-monitor-shape.hook';
 import classes from './canvas.pod.module.css';
 import { EditableComponent } from '@/common/components/inline-edit';
 import { useSnapIn } from './use-snapin.hook';
+import { ShapeType } from '@/core/model';
 
 export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
@@ -34,8 +35,16 @@ export const CanvasPod = () => {
     updateTextOnSelected,
   } = selectionInfo;
 
+  const addNewShapeAndSetSelected = (type: ShapeType, x: number, y: number) => {
+    const shapeId = addNewShape(type, x, y);
+    // TODO add issue enhance this
+    setTimeout(() => {
+      handleSelected(shapeId, type);
+    });
+  };
+
   const { isDraggedOver, dropRef } = useDropShape();
-  const { stageRef } = useMonitorShape(dropRef, addNewShape);
+  const { stageRef } = useMonitorShape(dropRef, addNewShapeAndSetSelected);
 
   const getSelectedShapeKonvaId = (): string => {
     let result = '';
