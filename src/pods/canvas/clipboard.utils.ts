@@ -13,9 +13,9 @@ export const cloneShape = (shape: ShapeModel): ShapeModel => {
   return cloneDeep(shape);
 };
 
-export const adjustShapePosition = (shape: ShapeModel) => {
-  shape.x += 20;
-  shape.y += 20;
+export const adjustShapePosition = (shape: ShapeModel, copyCount: number) => {
+  shape.x += 20 * copyCount;
+  shape.y += 20 * copyCount;
 };
 
 export const validateShape = (shape: ShapeModel | null) => {

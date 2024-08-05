@@ -11,11 +11,13 @@ import {
 export const useClipboard = () => {
   const { pasteShape, shapes, selectionInfo } = useCanvasContext();
   const clipboardShapeRef = useRef<ShapeModel | null>(null);
+  const copyCount = useRef(1);
 
   const copyShape = () => {
     const selectedShape = findShapeById(selectionInfo.selectedShapeId, shapes);
     if (selectedShape) {
       clipboardShapeRef.current = cloneShape(selectedShape);
+      copyCount.current = 1;
     }
   };
 
@@ -23,8 +25,9 @@ export const useClipboard = () => {
     if (clipboardShapeRef.current) {
       const newShape: ShapeModel = cloneShape(clipboardShapeRef.current);
       validateShape(newShape);
-      adjustShapePosition(newShape);
+      adjustShapePosition(newShape, copyCount.current);
       pasteShape(newShape);
+      copyCount.current++;
     }
   };
 
