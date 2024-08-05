@@ -19,37 +19,17 @@ export function useStateWithInterceptor<S>(
   const [shapes, setInternalShapes] = React.useState<S[]>(initialState);
 
   const setShapes = (newShapes: React.SetStateAction<S[]>): void => {
-    return setInternalShapes(newShapes);
-  };
-
-  /*
-  const [shapes, setInternalShapes] = React.useState<S[]>(initialState);
-
-  const setShapes = (newShapes: React.SetStateAction<S[]>): void => {
-    // If newShapes is a function, use it to calculate the new state based on the current state
-    // Otherwise, use newShapes directly      
-    
-    const updatedShapes =  newShapes instanceof Function ? newShapes(shapes): newShapes; 
-    console.log("updatedShapes.length: ", updatedShapes.length,"shapes.length: ", shapes.length);
-
-
+    const updatedShapes =
+      newShapes instanceof Function ? newShapes(shapes) : newShapes;
     shapesInterceptorFn(updatedShapes);
-    console.log("2 - updatedShapes.length: ", updatedShapes.length,"shapes.length: ", shapes.length);
-
-   // return setInternalShapes(newShapes);
-    return setInternalShapes(updatedShapes); 
+    setInternalShapes(newShapes);
   };
 
-  const setShapesSkipInterceptor = (    
+  const setShapesSkipInterceptor = (
     newShapes: React.SetStateAction<S[]>
   ): void => {
-   
     return setInternalShapes(newShapes);
   };
 
   return [shapes, setShapes, setShapesSkipInterceptor];
-
-  */
-
-  return [shapes, setShapes, setInternalShapes];
 }
