@@ -31,10 +31,10 @@ Contributors to this project
     <kbd><img src="https://github.com/LourdesRsdp.png" alt="Lourdes Rodriguez" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
   <a href="https://github.com/Franlop7">
-    <kbd><img src="https://github.com/Franlop7" alt="Fran López" width="50" height="50" style="border-radius: 50%;"></kbd>
+    <kbd><img src="https://github.com/Franlop7.png" alt="Fran López" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
   <a href="https://github.com/oleojake">
-    <kbd><img src="https://github.com/oleojake" alt="Pablo Marzal" width="50" height="50" style="border-radius: 50%;"></kbd>
+    <kbd><img src="https://github.com/oleojake.png" alt="Pablo Marzal" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
   <a href="https://github.com/jsanzdev">
     <kbd><img src="https://github.com/jsanzdev.png" alt="Jesús Sanz" width="50" height="50" style="border-radius: 50%;"></kbd>
