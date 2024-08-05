@@ -1,8 +1,8 @@
-import { ListBoxShape } from '@/common/components/front-components';
 import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
+import { RadioButtonShape } from '@/common/components/front-components/radiobutton-shape';
 
-export const renderListbox = (
+export const renderRadioButton = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
@@ -10,10 +10,9 @@ export const renderListbox = (
     shapeRenderedProps;
 
   return (
-    <ListBoxShape
+    <RadioButtonShape
       id={shape.id}
       key={shape.id}
-      ref={shapeRefs.current[shape.id]}
       x={shape.x}
       y={shape.y}
       width={shape.width}
@@ -21,10 +20,10 @@ export const renderListbox = (
       name="shape"
       draggable
       onSelected={handleSelected}
+      ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
-      items={['', 'Item1', 'Item2', 'Item3', 'Item4', 'Item5']}
     />
   );
 };

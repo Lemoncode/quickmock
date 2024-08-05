@@ -12,4 +12,5 @@ export const mockWidgetCollection: ItemInfo[] = [
   { thumbnailSrc: '/widgets/listbox.svg', type: 'listbox' },
   { thumbnailSrc: '/widgets/datepicker.svg', type: 'datepickerinput' },
   { thumbnailSrc: '/widgets/timepicker.svg', type: 'timepickerinput' },
+  { thumbnailSrc: '/widgets/radiobutton.svg', type: 'radiobutton' },
 ];

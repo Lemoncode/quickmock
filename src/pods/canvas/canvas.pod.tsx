@@ -1,7 +1,7 @@
-import { createRef, useEffect } from 'react';
+import { createRef, useMemo, useEffect, useState } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
-import { Layer, Stage, Transformer } from 'react-konva';
+import { Layer, Line, Stage, Transformer } from 'react-konva';
 import { useTransform } from './use-transform.hook';
 import { renderShapeComponent } from './shape-renderer';
 import { useDropShape } from './use-drop-shape.hook';
@@ -9,8 +9,13 @@ import { useMonitorShape } from './use-monitor-shape.hook';
 import classes from './canvas.pod.module.css';
 import { EditableComponent } from '@/common/components/inline-edit';
 import { useClipboard } from './use-clipboard.hook';
+import { useSnapIn } from './use-snapin.hook';
+import { ShapeType } from '@/core/model';
 
 export const CanvasPod = () => {
+  const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
+    useState(false);
+
   const {
     shapes,
     scale,
@@ -31,8 +36,39 @@ export const CanvasPod = () => {
     updateTextOnSelected,
   } = selectionInfo;
 
+  const addNewShapeAndSetSelected = (type: ShapeType, x: number, y: number) => {
+    const shapeId = addNewShape(type, x, y);
+    // TODO add issue enhance this
+    setTimeout(() => {
+      handleSelected(shapeId, type);
+    });
+  };
+
   const { isDraggedOver, dropRef } = useDropShape();
-  const { stageRef } = useMonitorShape(dropRef, addNewShape);
+  const { stageRef } = useMonitorShape(dropRef, addNewShapeAndSetSelected);
+
+  const getSelectedShapeKonvaId = (): string => {
+    let result = '';
+
+    if (selectedShapeRef.current) {
+      result = String(selectedShapeRef.current._id);
+    }
+
+    return result;
+  };
+
+  const selectedShapeKonvaId = useMemo(
+    () => getSelectedShapeKonvaId(),
+    [selectedShapeRef.current]
+  );
+
+  const {
+    handleTransformerDragMove,
+    showSnapInHorizontalLine,
+    showSnapInVerticalLine,
+    yCoordHorizontalLine,
+    xCoordVerticalLine,
+  } = useSnapIn(stageRef, transformerRef, selectedShapeKonvaId);
 
   const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
     updateShapeSizeAndPosition,
@@ -121,7 +157,36 @@ export const CanvasPod = () => {
             ref={transformerRef}
             flipEnabled={false}
             boundBoxFunc={handleTransformerBoundBoxFunc}
+            onDragStart={() => setIsTransfomerBeingDragged(true)}
+            onDragMove={handleTransformerDragMove}
+            onDragEnd={() => setIsTransfomerBeingDragged(false)}
           />
+          {isTransfomerBeingDragged && showSnapInHorizontalLine && (
+            <Line
+              points={[
+                0,
+                yCoordHorizontalLine,
+                stageRef.current?.width() ?? 0,
+                yCoordHorizontalLine,
+              ]}
+              stroke="rgb(0,161,255"
+              dash={[4, 6]}
+              strokeWidth={1}
+            />
+          )}
+          {isTransfomerBeingDragged && showSnapInVerticalLine && (
+            <Line
+              points={[
+                xCoordVerticalLine,
+                0,
+                xCoordVerticalLine,
+                stageRef.current?.height() ?? 0,
+              ]}
+              stroke="rgb(0,161,255"
+              dash={[4, 6]}
+              strokeWidth={1}
+            />
+          )}
         </Layer>
       </Stage>
     </div>

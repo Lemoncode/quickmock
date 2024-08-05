@@ -8,3 +8,4 @@ export * from './listbox-shape';
 export * from './datepickerinput-shape';
 export * from './button-shape';
 export * from './timepickerinput-shape';
+export * from './radiobutton-shape';

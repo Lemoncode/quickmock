@@ -20,8 +20,11 @@ export const CanvasProvider: React.FC<Props> = props => {
     setShapes([]);
   };
 
-  const addNewShape = (type: ShapeType, x: number, y: number) => {
-    setShapes(shapes => [...shapes, createShape({ x, y }, type)]);
+  const addNewShape = (type: ShapeType, x: number, y: number): string => {
+    const newShape = createShape({ x, y }, type);
+    setShapes(shapes => [...shapes, newShape]);
+
+    return newShape.id;
   };
 
   const pasteShape = (shape: ShapeModel) => {
