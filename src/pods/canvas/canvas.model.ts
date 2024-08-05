@@ -97,6 +97,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
   switch (shapeType) {
     case 'input':
     case 'label':
+    case 'button':
       return true;
     default:
       return false;
@@ -109,6 +110,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return '';
     case 'label':
       return 'Label';
+    case 'button':
+      return 'Click Me!';
     default:
       return undefined;
   }

@@ -17,7 +17,7 @@ export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   buttonShapeRestrictions;
 
 export const ButtonShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(buttonShapeRestrictions, width, height);
 
@@ -46,7 +46,7 @@ export const ButtonShape = forwardRef<any, ShapeProps>(
           y={20}
           width={width}
           height={height - 20}
-          text="Click Me!"
+          text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
           fill="black"
