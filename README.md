@@ -27,11 +27,17 @@ Open your browser and go to http://localhost:5173 (if this port is busy it will 
 Contributors to this project
 
 <p align="left">
-  <a href="https://github.com/jsanzdev">
-    <kbd><img src="https://github.com/jsanzdev.png" alt="Jesús Sanz" width="50" height="50" style="border-radius: 50%;"></kbd>
-  </a>
   <a href="https://github.com/LourdesRsdp">
     <kbd><img src="https://github.com/LourdesRsdp.png" alt="Lourdes Rodriguez" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>
+  <a href="https://github.com/Franlop7">
+    <kbd><img src="https://github.com/Franlop7" alt="Fran López" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>
+  <a href="https://github.com/oleojake">
+    <kbd><img src="https://github.com/oleojake" alt="Pablo Marzal" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>
+  <a href="https://github.com/jsanzdev">
+    <kbd><img src="https://github.com/jsanzdev.png" alt="Jesús Sanz" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
   <a href="https://github.com/devrodrigolec">
     <kbd><img src="https://github.com/devrodrigolec.png" alt="Rodrigo Leciñana" width="50" height="50" style="border-radius: 50%;"></kbd>
