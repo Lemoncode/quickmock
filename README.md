@@ -52,7 +52,7 @@ Contributors to this project
   </a>
   </a>
     <a href="https://github.com/Ivanruii">
-    <kbd><img src="https://github.com/Ivanruii" alt="Ivan Ruíz" width="50" height="50" style="border-radius: 50%;"></kbd>
+    <kbd><img src="https://github.com/Ivanruii.png" alt="Ivan Ruíz" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
   </a>
     <a href="https://github.com/raquetelio">
