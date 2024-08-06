@@ -106,11 +106,6 @@ export const CanvasPod = () => {
     };
   }, [selectedShapeId]);
 
-  useEffect(() => {
-    transformerRef.current?.nodes([]);
-    selectedShapeRef.current = null;
-  }, [shapes]);
-
   {
     /* TODO: add other animation for isDraggerOver */
   }
