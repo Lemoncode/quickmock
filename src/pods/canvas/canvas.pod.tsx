@@ -23,6 +23,7 @@ export const CanvasPod = () => {
     addNewShape,
     updateShapeSizeAndPosition,
     updateShapePosition,
+    stageRef,
   } = useCanvasContext();
 
   const {
@@ -45,7 +46,7 @@ export const CanvasPod = () => {
   };
 
   const { isDraggedOver, dropRef } = useDropShape();
-  const { stageRef } = useMonitorShape(dropRef, addNewShapeAndSetSelected);
+  useMonitorShape(dropRef, addNewShapeAndSetSelected);
 
   const getSelectedShapeKonvaId = (): string => {
     let result = '';
@@ -68,7 +69,7 @@ export const CanvasPod = () => {
     showSnapInVerticalLine,
     yCoordHorizontalLine,
     xCoordVerticalLine,
-  } = useSnapIn(stageRef, transformerRef, selectedShapeKonvaId);
+  } = useSnapIn(transformerRef, selectedShapeKonvaId);
 
   const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
     updateShapeSizeAndPosition,
