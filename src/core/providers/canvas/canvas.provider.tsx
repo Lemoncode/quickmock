@@ -4,6 +4,7 @@ import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
 import { createShape } from '@/pods/canvas/canvas.model';
 import { v4 as uuidv4 } from 'uuid';
+import { removeShapeFromList } from './canvas.business';
 
 interface Props {
   children: React.ReactNode;
@@ -15,6 +16,12 @@ export const CanvasProvider: React.FC<Props> = props => {
   const [scale, setScale] = React.useState(1);
 
   const selectionInfo = useSelection(shapes, setShapes);
+
+  const deleteSelectedShape = () => {
+    setShapes(prevShapes =>
+      removeShapeFromList(selectionInfo.selectedShapeId, prevShapes)
+    );
+  };
 
   const clearCanvas = () => {
     setShapes([]);
@@ -62,6 +69,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         pasteShape,
         updateShapeSizeAndPosition,
         updateShapePosition,
+        deleteSelectedShape,
       }}
     >
       {children}
