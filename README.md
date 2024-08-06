@@ -65,4 +65,7 @@ Contributors to this project
   <a href="https://github.com/Bomasen">
     <kbd><img src="https://github.com/Bomasen.png" alt="Borja Martínez Sendra" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
+  <a href="https://github.com/brauliodiez">
+    <kbd><img src="https://github.com/brauliodiez.png" alt="Braulio Díez" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>
 </p>
