@@ -1,13 +1,12 @@
 import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';
-import { Stage } from 'konva/lib/Stage';
 import invariant from 'tiny-invariant';
 import { ClosestSnapLines, SnapEdges, SnapLines } from './canvas.model';
 import { getClosestSnapLines } from './snap.utils';
 import { useState } from 'react';
+import { useCanvasContext } from '@/core/providers';
 
 export const useSnapIn = (
-  stageRef: React.RefObject<Stage>,
   transformRef: React.RefObject<Konva.Transformer>,
   excludedShapeId: string
 ) => {
@@ -16,6 +15,7 @@ export const useSnapIn = (
   const [showSnapInVerticalLine, setShowSnapInVerticalLine] = useState(false);
   const [yCoordHorizontalLine, setYCoordHorizontalLine] = useState(0);
   const [xCoordVerticalLine, setXCoordVerticalLine] = useState(0);
+  const { stageRef } = useCanvasContext();
 
   const handleTransformerDragMove = (e: KonvaEventObject<DragEvent>) => {
     if (!excludedShapeId) return;

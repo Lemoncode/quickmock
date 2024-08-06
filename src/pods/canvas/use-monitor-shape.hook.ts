@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import invariant from 'tiny-invariant';
 import {
@@ -6,14 +6,14 @@ import {
   portScreenPositionToDivCoordinates,
   convertFromDivElementCoordsToKonvaCoords,
 } from './canvas.util';
-import Konva from 'konva';
 import { ShapeType } from '@/core/model';
+import { useCanvasContext } from '@/core/providers';
 
 export const useMonitorShape = (
   dropRef: React.MutableRefObject<null>,
   addNewShape: (type: ShapeType, x: number, y: number) => void
 ) => {
-  const stageRef = useRef<Konva.Stage>(null);
+  const { stageRef } = useCanvasContext();
 
   useEffect(() => {
     return monitorForElements({
@@ -54,6 +54,4 @@ export const useMonitorShape = (
       },
     });
   }, []);
-
-  return { stageRef };
 };

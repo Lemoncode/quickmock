@@ -4,6 +4,7 @@ import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
 import { createShape } from '@/pods/canvas/canvas.model';
 import { v4 as uuidv4 } from 'uuid';
+import Konva from 'konva';
 
 interface Props {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   const { children } = props;
   const [shapes, setShapes] = React.useState<ShapeModel[]>([]);
   const [scale, setScale] = React.useState(1);
+  const stageRef = React.useRef<Konva.Stage>(null);
 
   const selectionInfo = useSelection(shapes, setShapes);
 
@@ -62,6 +64,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         pasteShape,
         updateShapeSizeAndPosition,
         updateShapePosition,
+        stageRef,
       }}
     >
       {children}
