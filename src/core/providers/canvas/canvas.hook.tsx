@@ -11,25 +11,28 @@ import React, { Dispatch, SetStateAction } from 'react';
   so you can undo it later, instead of having to remember to call storeInUndoQueue
   you can just call _setState_ and it will do it for you.
 */
-
 export function useStateWithInterceptor<S>(
-  initialState: S[] | (() => S[]),
-  shapesInterceptorFn: (shapes: S[]) => void
-): [S[], Dispatch<SetStateAction<S[]>>, Dispatch<SetStateAction<S[]>>] {
-  const [shapes, setInternalShapes] = React.useState<S[]>(initialState);
+  initialState: S | (() => S),
+  documentInterceptorFn: (schema: S) => void
+): [S, Dispatch<SetStateAction<S>>, Dispatch<SetStateAction<S>>] {
+  const [document, setInternalDocument] = React.useState<S>(initialState);
 
-  const setShapes = (newShapes: React.SetStateAction<S[]>): void => {
-    const updatedShapes =
-      newShapes instanceof Function ? newShapes(shapes) : newShapes;
-    shapesInterceptorFn(updatedShapes);
-    setInternalShapes(newShapes);
+  const setDocument = (newDocument: React.SetStateAction<S>): void => {
+    setInternalDocument(prevDocument => {
+      const updatedDocument =
+        newDocument instanceof Function
+          ? newDocument(prevDocument)
+          : newDocument;
+      documentInterceptorFn(updatedDocument);
+      return updatedDocument;
+    });
   };
 
-  const setShapesSkipInterceptor = (
-    newShapes: React.SetStateAction<S[]>
+  const setDocumentSkipInterceptor = (
+    newDocument: React.SetStateAction<S>
   ): void => {
-    return setInternalShapes(newShapes);
+    return setInternalDocument(newDocument);
   };
 
-  return [shapes, setShapes, setShapesSkipInterceptor];
+  return [document, setDocument, setDocumentSkipInterceptor];
 }

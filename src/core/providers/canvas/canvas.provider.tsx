@@ -1,10 +1,11 @@
 import React from 'react';
-import { Coord, ShapeModel, ShapeType, Size } from '@/core/model';
+import { Coord, ShapeType, Size } from '@/core/model';
 import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
 import { createShape } from '@/pods/canvas/canvas.model';
 import { useHistoryManager } from '@/common/undo-redo';
 import { useStateWithInterceptor } from './canvas.hook';
+import { createDefaultDocumentModel, DocumentModel } from './canvas.model';
 
 interface Props {
   children: React.ReactNode;
@@ -25,24 +26,27 @@ export const CanvasProvider: React.FC<Props> = props => {
     redo,
     undo,
     getCurrentState: getCurrentUndoHistoryState,
-  } = useHistoryManager([]); //TODO: Checkthis
+  } = useHistoryManager<DocumentModel>(createDefaultDocumentModel()); //TODO: Checkthis
 
-  //TODO: Revisar si puedo solucionar este problema de tipos de otra forma
-  const addSnapshotWrapper = <T extends ShapeModel[]>(newState: T) => {
-    addSnapshot(newState as any);
-  };
+  const [document, setDocument, setShapesSkipHistory] =
+    useStateWithInterceptor<DocumentModel>(
+      createDefaultDocumentModel(),
+      addSnapshot
+    );
 
-  const [shapes, setShapes, setShapesSkipHistory] =
-    useStateWithInterceptor<ShapeModel>([], addSnapshotWrapper);
-
-  const selectionInfo = useSelection(shapes, setShapes);
+  const selectionInfo = useSelection(document, setDocument);
 
   const clearCanvas = () => {
-    setShapes([]);
+    setDocument({ shapes: [] });
   };
 
   const addNewShape = (type: ShapeType, x: number, y: number) => {
-    setShapes(shapes => [...shapes, createShape({ x, y }, type)]);
+    setDocument(({ shapes }) => {
+      const newShapes = [...shapes, createShape({ x, y }, type)];
+      return {
+        shapes: newShapes,
+      };
+    });
   };
 
   const updateShapeSizeAndPosition = (
@@ -50,17 +54,19 @@ export const CanvasProvider: React.FC<Props> = props => {
     position: Coord,
     size: Size
   ) => {
-    setShapes(prevShapes =>
-      prevShapes.map(shape =>
+    setDocument(({ shapes }) => ({
+      shapes: shapes.map(shape =>
         shape.id === id ? { ...shape, ...position, ...size } : shape
-      )
-    );
+      ),
+    }));
   };
 
   const updateShapePosition = (id: string, { x, y }: Coord) => {
-    setShapes(prevShapes =>
-      prevShapes.map(shape => (shape.id === id ? { ...shape, x, y } : shape))
-    );
+    setDocument(({ shapes }) => ({
+      shapes: shapes.map(shape =>
+        shape.id === id ? { ...shape, x, y } : shape
+      ),
+    }));
   };
 
   const doUndo = () => {
@@ -88,7 +94,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   return (
     <CanvasContext.Provider
       value={{
-        shapes,
+        shapes: document.shapes,
         scale,
         setScale,
         clearCanvas,

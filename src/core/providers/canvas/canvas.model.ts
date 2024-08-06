@@ -34,3 +34,11 @@ export interface CanvasContextModel {
   doUndo: () => void;
   doRedo: () => void;
 }
+
+export interface DocumentModel {
+  shapes: ShapeModel[];
+}
+
+export const createDefaultDocumentModel = (): DocumentModel => ({
+  shapes: [],
+});
