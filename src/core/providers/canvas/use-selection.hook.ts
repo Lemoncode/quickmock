@@ -16,15 +16,23 @@ export const useSelection = (
     null
   );
 
-  // Remove unused shapes
+  // Remove unused shapes and reset selectedShapeId if it no longer exists
   useEffect(() => {
     const currentIds = shapes.map(shape => shape.id);
+
     Object.keys(shapeRefs.current).forEach(id => {
       if (!currentIds.includes(id)) {
         delete shapeRefs.current[id];
       }
     });
-  }, [shapes]);
+
+    if (!currentIds.includes(selectedShapeId)) {
+      transformerRef.current?.nodes([]);
+      selectedShapeRef.current = null;
+      setSelectedShapeId('');
+      setSelectedShapeType(null);
+    }
+  }, [shapes, selectedShapeId]);
 
   const handleSelected = (id: string, type: ShapeType) => {
     selectedShapeRef.current = shapeRefs.current[id].current;
@@ -42,6 +50,7 @@ export const useSelection = (
       transformerRef.current?.nodes([]);
       selectedShapeRef.current = null;
       setSelectedShapeId('');
+      setSelectedShapeType(null);
     }
   };
 
