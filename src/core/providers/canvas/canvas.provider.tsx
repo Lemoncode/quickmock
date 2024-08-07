@@ -18,9 +18,14 @@ export const CanvasProvider: React.FC<Props> = props => {
   const selectionInfo = useSelection(shapes, setShapes);
 
   const deleteSelectedShape = () => {
-    setShapes(prevShapes =>
-      removeShapeFromList(selectionInfo.selectedShapeId, prevShapes)
-    );
+    setShapes(prevShapes => {
+      const newShapes = removeShapeFromList(
+        selectionInfo.selectedShapeId,
+        prevShapes
+      );
+      selectionInfo.clearSelection();
+      return newShapes;
+    });
   };
 
   const clearCanvas = () => {

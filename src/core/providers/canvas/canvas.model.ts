@@ -13,6 +13,7 @@ export interface SelectionInfo {
       | Konva.KonvaEventObject<MouseEvent>
       | Konva.KonvaEventObject<TouchEvent>
   ) => void;
+  clearSelection: () => void;
   selectedShapeRef: React.MutableRefObject<Node<NodeConfig> | null>;
   selectedShapeId: string;
   selectedShapeType: ShapeType | null;

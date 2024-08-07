@@ -45,6 +45,13 @@ export const useSelection = (
     }
   };
 
+  const clearSelection = () => {
+    transformerRef.current?.nodes([]);
+    selectedShapeRef.current = null;
+    setSelectedShapeId('');
+    setSelectedShapeType(null);
+  };
+
   const setZIndexOnSelected = (action: ZIndexAction) => {
     setShapes(prevShapes =>
       performZIndexAction(selectedShapeId, action, prevShapes)
@@ -64,6 +71,7 @@ export const useSelection = (
     shapeRefs,
     handleSelected,
     handleClearSelection,
+    clearSelection,
     selectedShapeRef,
     selectedShapeId,
     selectedShapeType,

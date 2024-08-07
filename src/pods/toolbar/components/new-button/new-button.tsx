@@ -4,10 +4,11 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { useCanvasContext } from '@/core/providers';
 
 export const NewButton = () => {
-  const { clearCanvas } = useCanvasContext();
+  const { clearCanvas, deleteSelectedShape } = useCanvasContext();
 
   const handleClick = () => {
     clearCanvas();
+    deleteSelectedShape();
   };
 
   return (
