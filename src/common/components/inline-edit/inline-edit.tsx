@@ -46,7 +46,7 @@ export const EditableComponent: React.FC<Props> = props => {
         !getActiveInputRef()?.contains(event.target as Node)
       ) {
         setIsEditing(false);
-        onTextSubmit(inputRef.current?.value || '');
+        onTextSubmit(getActiveInputRef()?.value || '');
       }
     };
 
@@ -58,13 +58,13 @@ export const EditableComponent: React.FC<Props> = props => {
 
       if (editType === 'input' && isEditing && event.key === 'Enter') {
         setIsEditing(false);
-        onTextSubmit(inputRef.current?.value || '');
+        onTextSubmit(getActiveInputRef()?.value || '');
       }
     };
 
     if (isEditing) {
-      inputRef.current?.focus();
-      inputRef.current?.select();
+      getActiveInputRef()?.focus();
+      getActiveInputRef()?.select();
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleKeyDown);
     } else {
