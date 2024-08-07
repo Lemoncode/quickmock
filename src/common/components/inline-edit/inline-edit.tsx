@@ -1,7 +1,7 @@
 import { Coord, Size } from '@/core/model';
 import React, { useEffect, useRef, useState } from 'react';
 import { Group } from 'react-konva';
-import { Html } from 'react-konva-utils';
+import { HtmlEditWidget } from './html-edit.widget';
 
 type EditType = 'input' | 'textarea';
 
@@ -17,8 +17,16 @@ interface Props {
 }
 
 export const EditableComponent: React.FC<Props> = props => {
-  const { coords, size, isEditable, text, onTextSubmit, scale, children } =
-    props;
+  const {
+    coords,
+    size,
+    isEditable,
+    text,
+    onTextSubmit,
+    scale,
+    children,
+    editType,
+  } = props;
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(text);
 
@@ -94,24 +102,19 @@ export const EditableComponent: React.FC<Props> = props => {
     <>
       <Group onDblClick={handleDoubleClick}>{children}</Group>
       {isEditing ? (
-        <Html
+        <HtmlEditWidget
           divProps={{
-            style: {
-              position: 'absolute',
-              top: calculateTextAreaYPosition(),
-              left: calculateTextAreaXPosition(),
-              width: calculateWidth(),
-              height: calculateHeight(),
-            },
+            position: 'absolute',
+            top: calculateTextAreaYPosition(),
+            left: calculateTextAreaXPosition(),
+            width: calculateWidth(),
+            height: calculateHeight(),
           }}
-        >
-          <input
-            ref={inputRef}
-            style={{ width: '100%', height: '100%' }}
-            value={editText}
-            onChange={e => setEditText(e.target.value)}
-          />
-        </Html>
+          ref={inputRef}
+          value={editText}
+          onSetEditText={setEditText}
+          editType={editType}
+        />
       ) : null}
     </>
   );
