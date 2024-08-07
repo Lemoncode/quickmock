@@ -1,15 +1,13 @@
-import { Coord, Size } from '@/core/model';
+import { Coord, EditType, Size } from '@/core/model';
 import React, { useEffect, useRef, useState } from 'react';
 import { Group } from 'react-konva';
 import { Html } from 'react-konva-utils';
-
-type EditType = 'input' | 'textarea';
 
 interface Props {
   coords: Coord;
   size: Size;
   isEditable: boolean;
-  editType: EditType;
+  editType?: EditType;
   text: string;
   scale: number;
   onTextSubmit: (text: string) => void;
@@ -17,12 +15,26 @@ interface Props {
 }
 
 export const EditableComponent: React.FC<Props> = props => {
-  const { coords, size, isEditable, text, onTextSubmit, scale, children } =
-    props;
+  const {
+    coords,
+    size,
+    isEditable,
+    text,
+    onTextSubmit,
+    scale,
+    children,
+    editType,
+  } = props;
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(text);
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  const getActiveInputRef = ():
+    | HTMLInputElement
+    | HTMLTextAreaElement
+    | null => (editType === 'input' ? inputRef.current : textAreaRef.current);
 
   // handle click outside of the input when editing
   useEffect(() => {
@@ -30,8 +42,8 @@ export const EditableComponent: React.FC<Props> = props => {
 
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        inputRef.current &&
-        !inputRef.current.contains(event.target as Node)
+        getActiveInputRef() &&
+        !getActiveInputRef()?.contains(event.target as Node)
       ) {
         setIsEditing(false);
         onTextSubmit(inputRef.current?.value || '');
@@ -42,7 +54,9 @@ export const EditableComponent: React.FC<Props> = props => {
       if (isEditing && event.key === 'Escape') {
         setIsEditing(false);
         setEditText(text);
-      } else if (isEditing && event.key === 'Enter') {
+      }
+
+      if (editType === 'input' && isEditing && event.key === 'Enter') {
         setIsEditing(false);
         onTextSubmit(inputRef.current?.value || '');
       }
@@ -105,12 +119,21 @@ export const EditableComponent: React.FC<Props> = props => {
             },
           }}
         >
-          <input
-            ref={inputRef}
-            style={{ width: '100%', height: '100%' }}
-            value={editText}
-            onChange={e => setEditText(e.target.value)}
-          />
+          {editType === 'input' ? (
+            <input
+              ref={inputRef}
+              style={{ width: '100%', height: '100%' }}
+              value={editText}
+              onChange={e => setEditText(e.target.value)}
+            />
+          ) : (
+            <textarea
+              ref={textAreaRef}
+              style={{ width: '100%', height: '100%' }}
+              value={editText}
+              onChange={e => setEditText(e.target.value)}
+            ></textarea>
+          )}
         </Html>
       ) : null}
     </>

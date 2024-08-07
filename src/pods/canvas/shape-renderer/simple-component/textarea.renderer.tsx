@@ -24,6 +24,9 @@ export const renderTextArea = (
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      isEditable={shape.allowsInlineEdition}
+      editType={shape.editType}
+      text={shape.text}
     />
   );
 };
