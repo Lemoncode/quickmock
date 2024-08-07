@@ -1,13 +1,30 @@
-.componentsGallery {
-  grid-area: components-gallery;
+.leftTools {
+  grid-area: leftTools;
   border-right: 1px solid black;
+  display: inline-flex;
+  flex-direction: column;
 }
 
-.propertiesOptions {
-  grid-area: properties-options;
+.rightTools {
+  grid-area: rightTools;
   border-left: 1px solid black;
 }
 
 .footer {
   grid-area: footer;
+}
+
+.container {
+  overflow-y: auto;
+}
+.container[open] {
+  flex: 1;
+  border-bottom: 1px solid var(--primary-900);
+}
+.title {
+  position: sticky;
+  top: 0;
+  background-color: var(--primary-200);
+  padding: var(--space-xs) var(--space-md);
+  border-bottom: 1px solid var(--primary-900);
 }

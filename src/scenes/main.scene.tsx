@@ -14,12 +14,18 @@ export const MainScene = () => {
   return (
     <MainLayout>
       <ToolbarPod />
-      <div className={classes.componentsGallery}>
-        <ContainerGalleryPod />
-        <ComponentGalleryPod />
+      <div className={classes.leftTools}>
+        <details className={classes.container} name="toolsLeft">
+          <summary className={classes.title}>Devices</summary>
+          <ContainerGalleryPod />
+        </details>
+        <details className={classes.container} name="toolsLeft" open>
+          <summary className={classes.title}>Components</summary>
+          <ComponentGalleryPod />
+        </details>
       </div>
       <CanvasPod />
-      <div className={classes.propertiesOptions}>
+      <div className={classes.rightTools}>
         <PropertiesPod />
       </div>
       <div className={classes.footer}>
