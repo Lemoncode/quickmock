@@ -38,8 +38,8 @@ export const RectangleShape = forwardRef<any, ShapeProps>(
           height={restrictedHeight}
           strokeWidth={2}
           stroke="black"
+          fille={null}
           cornerRadius={5}
-          fill="lightgrey"
         />
       </Group>
     );
