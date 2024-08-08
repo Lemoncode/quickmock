@@ -6,7 +6,8 @@ export const renderTablet = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
-  const { handleSelected, shapeRefs } = shapeRenderedProps;
+  const { handleSelected, shapeRefs, handleDragEnd, handleTransform } =
+    shapeRenderedProps;
 
   return (
     <TabletShape
@@ -19,6 +20,9 @@ export const renderTablet = (
       height={shape.height}
       onSelected={handleSelected}
       ref={shapeRefs.current[shape.id]}
+      onDragEnd={handleDragEnd(shape.id)}
+      onTransform={handleTransform}
+      onTransformEnd={handleTransform}
     />
   );
 };
