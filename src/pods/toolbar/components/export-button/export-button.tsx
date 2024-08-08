@@ -45,9 +45,7 @@ export const ExportButton = () => {
   }
 
   const calculateCanvasBounds = (): CanvasBounds => {
-    const MARGIN = 50; // Margin to add to the canvas bounds
-    const MIN_WIDTH = 960;
-    const MIN_HEIGHT = 540;
+    const MARGIN = 10;
     const canvasBounds: CanvasBounds = {
       x: Infinity,
       y: Infinity,
@@ -55,22 +53,12 @@ export const ExportButton = () => {
       height: 0,
     };
 
-    // If there are no shapes, return default bounds, it's just a guard, the button will be disabled before
-    if (shapes.length === 0) {
-      return {
-        x: 0,
-        y: 0,
-        width: stageRef.current?.width() ?? MIN_WIDTH,
-        height: stageRef.current?.height() ?? MIN_HEIGHT,
-      };
-    }
-
     shapes.forEach(shape => {
       // Calculate min x and y
       if (shape.x < canvasBounds.x) canvasBounds.x = shape.x;
       if (shape.y < canvasBounds.y) canvasBounds.y = shape.y;
 
-      // Calculate max width and height
+      // Calculate max x and y
       if (shape.x + shape.width > canvasBounds.width) {
         canvasBounds.width = shape.x + shape.width;
       }
@@ -79,27 +67,11 @@ export const ExportButton = () => {
       }
     });
 
-    // Calculate the actual width and height of the shapes
-    const actualWidth = canvasBounds.width - canvasBounds.x;
-    const actualHeight = canvasBounds.height - canvasBounds.y;
-
-    // Add margins
-    const adjustedWidth = Math.max(actualWidth + 2 * MARGIN, MIN_WIDTH);
-    const adjustedHeight = Math.max(actualHeight + 2 * MARGIN, MIN_HEIGHT);
-
-    // Center content if adjusted dimensions are larger than actual dimensions
-    if (adjustedWidth > actualWidth) {
-      const extraWidth = adjustedWidth - actualWidth;
-      canvasBounds.x -= extraWidth / 2;
-    }
-    if (adjustedHeight > actualHeight) {
-      const extraHeight = adjustedHeight - actualHeight;
-      canvasBounds.y -= extraHeight / 2;
-    }
-
-    // Set the new canvas bounds with the adjusted dimensions
-    canvasBounds.width = adjustedWidth;
-    canvasBounds.height = adjustedHeight;
+    // Calculate the actual width and height and apply margin
+    canvasBounds.x -= MARGIN;
+    canvasBounds.y -= MARGIN;
+    canvasBounds.width = canvasBounds.width - canvasBounds.x + MARGIN;
+    canvasBounds.height = canvasBounds.height - canvasBounds.y + MARGIN;
 
     return canvasBounds;
   };
@@ -111,10 +83,11 @@ export const ExportButton = () => {
     const bounds = calculateCanvasBounds();
     const dataURL = stageRef.current.toDataURL({
       mimeType: 'image/png', // Change to jpeg to download as jpeg
-      width: bounds.width,
-      height: bounds.height,
       x: bounds.x,
       y: bounds.y,
+      width: bounds.width,
+      height: bounds.height,
+      pixelRatio: 2,
     });
     createDownloadLink(dataURL);
     showTransformer();
