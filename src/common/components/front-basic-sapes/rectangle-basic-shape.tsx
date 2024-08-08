@@ -5,12 +5,12 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 import { Group, Rect } from 'react-konva';
 
 const rectangleShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 60,
-  minHeight: 45,
+  minWidth: 10,
+  minHeight: 10,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 170,
-  defaultHeight: 45,
+  defaultWidth: 160,
+  defaultHeight: 160,
 };
 
 export const getRectangleShapeSizeRestrictions = (): ShapeSizeRestrictions =>
