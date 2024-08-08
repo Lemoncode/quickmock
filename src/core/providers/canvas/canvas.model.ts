@@ -30,5 +30,5 @@ export interface CanvasContextModel {
   updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void;
   updateShapePosition: (id: string, position: Coord) => void;
   selectionInfo: SelectionInfo;
-  deleteSelectedShape: (id: any) => void;
+  deleteSelectedShape: (id: string) => void;
 }
