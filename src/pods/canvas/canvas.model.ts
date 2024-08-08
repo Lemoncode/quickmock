@@ -18,6 +18,7 @@ import {
   getTabletShapeSizeRestrictions,
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
+import { getRectangleShapeSizeRestrictions } from '@/common/components/front-basic-sapes';
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
@@ -87,7 +88,11 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getTimepickerInputShapeSizeRestrictions().defaultWidth,
         height: getTimepickerInputShapeSizeRestrictions().defaultHeight,
       };
-
+    case 'rectangle':
+      return {
+        width: getRectangleShapeSizeRestrictions().defaultWidth,
+        height: getRectangleShapeSizeRestrictions().defaultHeight,
+      };
     default:
       return { width: 200, height: 50 };
   }
