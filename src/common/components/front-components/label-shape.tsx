@@ -5,12 +5,12 @@ import { ShapeSizeRestrictions } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
 const labelSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 50,
+  minWidth: 40,
   minHeight: 20,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 110,
-  defaultHeight: 40,
+  defaultWidth: 60,
+  defaultHeight: 25,
 };
 
 export const getLabelSizeRestrictions = (): ShapeSizeRestrictions =>

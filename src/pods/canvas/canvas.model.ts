@@ -17,9 +17,15 @@ import {
   getMobilePhoneShapeSizeRestrictions,
   getTabletShapeSizeRestrictions,
 } from '@/common/components/front-containers';
+import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
+    case 'label':
+      return {
+        width: getLabelSizeRestrictions().defaultWidth,
+        height: getLabelSizeRestrictions().defaultHeight,
+      };
     case 'combobox':
       return {
         width: getComboBoxShapeSizeRestrictions().defaultWidth,
@@ -92,6 +98,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'input':
     case 'label':
     case 'combobox':
+    case 'button':
       return true;
     default:
       return false;
@@ -106,6 +113,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Label';
     case 'combobox':
       return 'Select an option';
+    case 'button':
+      return 'Click Me!';
     default:
       return undefined;
   }
@@ -128,4 +137,37 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     allowsInlineEdition: doesShapeAllowInlineEdition(shapeType),
     text: generateDefaultTextValue(shapeType),
   };
+};
+
+// Snap model
+export const SNAP_THRESHOLD = 5;
+
+export type SnapLines = {
+  vertical: number[];
+  horizontal: number[];
+};
+
+export type SnapType = 'center' | 'start' | 'end';
+
+export interface SnapEdge {
+  guide: number;
+  offset: number;
+  snapType: SnapType;
+}
+
+export type SnapEdges = {
+  vertical: SnapEdge[];
+  horizontal: SnapEdge[];
+};
+
+export type SnapLineSubset = {
+  snapLine: number;
+  diff: number;
+  snap: SnapType;
+  offset: number;
+};
+
+export type ClosestSnapLines = {
+  vertical: SnapLineSubset | null;
+  horizontal: SnapLineSubset | null;
 };

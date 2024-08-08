@@ -6,11 +6,11 @@ import { Group, Rect, Text } from 'react-konva';
 
 const inputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 60,
-  minHeight: 50,
+  minHeight: 45,
   maxWidth: -1,
   maxHeight: 50,
-  defaultWidth: 190,
-  defaultHeight: 50,
+  defaultWidth: 170,
+  defaultHeight: 45,
 };
 
 export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions =>

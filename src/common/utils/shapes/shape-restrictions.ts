@@ -21,3 +21,5 @@ export const fitSizeToShapeSizeRestrictions = (
     height: Math.max(newHeight, shapeSizeRestrictions.minHeight),
   };
 };
+
+export type { ShapeSizeRestrictions };

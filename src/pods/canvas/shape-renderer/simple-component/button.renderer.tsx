@@ -17,12 +17,15 @@ export const renderButton = (
       y={shape.y}
       width={shape.width}
       height={shape.height}
+      name="shape"
       draggable
       onSelected={handleSelected}
       ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      isEditable={shape.allowsInlineEdition}
+      text={shape.text}
     />
   );
 };

@@ -3,6 +3,8 @@ import { Coord, ShapeModel, ShapeType, Size } from '@/core/model';
 import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
 import { createShape } from '@/pods/canvas/canvas.model';
+import { v4 as uuidv4 } from 'uuid';
+import { removeShapeFromList } from './canvas.business';
 
 interface Props {
   children: React.ReactNode;
@@ -15,12 +17,26 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const selectionInfo = useSelection(shapes, setShapes);
 
+  const deleteSelectedShape = () => {
+    setShapes(prevShapes =>
+      removeShapeFromList(selectionInfo.selectedShapeId, prevShapes)
+    );
+  };
+
   const clearCanvas = () => {
     setShapes([]);
   };
 
-  const addNewShape = (type: ShapeType, x: number, y: number) => {
-    setShapes(shapes => [...shapes, createShape({ x, y }, type)]);
+  const addNewShape = (type: ShapeType, x: number, y: number): string => {
+    const newShape = createShape({ x, y }, type);
+    setShapes(shapes => [...shapes, newShape]);
+
+    return newShape.id;
+  };
+
+  const pasteShape = (shape: ShapeModel) => {
+    shape.id = uuidv4();
+    setShapes(shapes => [...shapes, shape]);
   };
 
   const updateShapeSizeAndPosition = (
@@ -50,8 +66,10 @@ export const CanvasProvider: React.FC<Props> = props => {
         clearCanvas,
         selectionInfo,
         addNewShape,
+        pasteShape,
         updateShapeSizeAndPosition,
         updateShapePosition,
+        deleteSelectedShape,
       }}
     >
       {children}
