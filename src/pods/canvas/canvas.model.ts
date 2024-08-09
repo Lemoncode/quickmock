@@ -19,6 +19,7 @@ import {
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 import { getRectangleShapeSizeRestrictions } from '@/common/components/front-basic-sapes';
+import { getVideoPlayerShapeSizeRestrictions } from '@/common/components/front-rich-components';
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
@@ -92,6 +93,11 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getRectangleShapeSizeRestrictions().defaultWidth,
         height: getRectangleShapeSizeRestrictions().defaultHeight,
+      };
+    case 'videoPlayer':
+      return {
+        width: getVideoPlayerShapeSizeRestrictions().defaultWidth,
+        height: getVideoPlayerShapeSizeRestrictions().defaultHeight,
       };
     default:
       return { width: 200, height: 50 };
