@@ -21,7 +21,7 @@ import { getLabelSizeRestrictions } from '@/common/components/front-components/l
 import { getRectangleShapeSizeRestrictions } from '@/common/components/front-basic-sapes';
 import { getVideoPlayerShapeSizeRestrictions } from '@/common/components/front-rich-components';
 
-const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
+export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
     case 'label':
       return {
