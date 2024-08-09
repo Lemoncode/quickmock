@@ -1,4 +1,4 @@
-import { Coord, ShapeType, Size, ShapeModel } from '@/core/model';
+import { Coord, ShapeType, Size, ShapeModel, EditType } from '@/core/model';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -110,6 +110,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'label':
     case 'combobox':
     case 'button':
+    case 'textarea':
       return true;
     default:
       return false;
@@ -126,9 +127,22 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Select an option';
     case 'button':
       return 'Click Me!';
+    case 'textarea':
+      return 'Your text here...';
     default:
       return undefined;
   }
+};
+
+const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
+  const result = undefined;
+
+  switch (shapeType) {
+    case 'textarea':
+      return 'textarea';
+      break;
+  }
+  return result;
 };
 
 // TODO: create interfaces to hold Coordination and Size
@@ -147,6 +161,7 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     type: shapeType,
     allowsInlineEdition: doesShapeAllowInlineEdition(shapeType),
     text: generateDefaultTextValue(shapeType),
+    editType: getShapeEditInlineType(shapeType),
   };
 };
 

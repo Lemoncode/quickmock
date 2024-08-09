@@ -141,7 +141,7 @@ export const CanvasPod = () => {
                   text={shape.text ?? ''}
                   onTextSubmit={updateTextOnSelected}
                   scale={scale}
-                  editType="input"
+                  editType={shape.editType ?? 'input'}
                 >
                   {renderShapeComponent(shape, {
                     handleSelected,
