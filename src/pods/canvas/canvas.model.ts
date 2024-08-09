@@ -18,7 +18,10 @@ import {
   getTabletShapeSizeRestrictions,
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
-import { getRectangleShapeSizeRestrictions } from '@/common/components/front-basic-sapes';
+import {
+  getDiamondShapeSizeRestrictions,
+  getRectangleShapeSizeRestrictions,
+} from '@/common/components/front-basic-sapes';
 import { getVideoPlayerShapeSizeRestrictions } from '@/common/components/front-rich-components';
 
 const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
@@ -98,6 +101,11 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getVideoPlayerShapeSizeRestrictions().defaultWidth,
         height: getVideoPlayerShapeSizeRestrictions().defaultHeight,
+      };
+    case 'diamond':
+      return {
+        width: getDiamondShapeSizeRestrictions().defaultWidth,
+        height: getDiamondShapeSizeRestrictions().defaultHeight,
       };
     default:
       return { width: 200, height: 50 };

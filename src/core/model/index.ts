@@ -25,7 +25,8 @@ export type ShapeType =
   | 'label'
   | 'radiobutton'
   | 'rectangle'
-  | 'videoPlayer';
+  | 'videoPlayer'
+  | 'diamond';
 /* | "text"| "button" |  "radio" | "image"*/
 
 export type ShapeRefs = {
