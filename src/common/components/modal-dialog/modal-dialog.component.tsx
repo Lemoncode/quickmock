@@ -18,6 +18,8 @@ export const ModalDialogComponent: React.FC<Props> = (props: Props) => {
     setIsOpen(!isOpen);
   };
 
+  console.log('Prueba');
+
   return (
     isOpen && (
       <div className={classes.dialogModal}>
