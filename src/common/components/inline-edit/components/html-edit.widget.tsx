@@ -1,6 +1,6 @@
 import { Html } from 'react-konva-utils';
 import { forwardRef } from 'react';
-import { EditType, StyleDivProps } from './inline-edit.model';
+import { EditType, StyleDivProps } from '../inline-edit.model';
 
 interface Props {
   divProps: StyleDivProps;
@@ -11,8 +11,6 @@ interface Props {
 
 export const HtmlEditWidget = forwardRef<any, Props>(
   ({ divProps, onSetEditText, value, editType }, ref) => {
-    const Element = editType === 'textarea' ? 'textarea' : 'input';
-
     return (
       <Html
         divProps={{
@@ -25,12 +23,22 @@ export const HtmlEditWidget = forwardRef<any, Props>(
           },
         }}
       >
-        <Element
-          ref={ref}
-          style={{ width: '100%', height: '100%' }}
-          value={value}
-          onChange={e => onSetEditText(e.target.value)}
-        />
+        {editType === 'input' && (
+          <input
+            ref={ref}
+            style={{ width: '100%', height: '100%' }}
+            value={value}
+            onChange={e => onSetEditText(e.target.value)}
+          />
+        )}
+        {editType === 'textarea' && (
+          <textarea
+            ref={ref}
+            style={{ width: '100%', height: '100%' }}
+            value={value}
+            onChange={e => onSetEditText(e.target.value)}
+          />
+        )}
       </Html>
     );
   }

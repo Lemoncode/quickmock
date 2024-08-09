@@ -1,9 +1,8 @@
-import { Coord, Size } from '@/core/model';
 import React, { useEffect, useRef, useState } from 'react';
 import { Group } from 'react-konva';
-import { HtmlEditWidget } from './html-edit.widget';
-
-type EditType = 'input' | 'textarea';
+import { Coord, Size } from '@/core/model';
+import { HtmlEditWidget } from './components';
+import { EditType } from './inline-edit.model';
 
 interface Props {
   coords: Coord;
@@ -96,8 +95,6 @@ export const EditableComponent: React.FC<Props> = props => {
     return `${size.height}px`;
   };
 
-  // TODO: Componentize this #91
-  // https://github.com/Lemoncode/quickmock/issues/91
   return (
     <>
       <Group onDblClick={handleDoubleClick}>{children}</Group>
