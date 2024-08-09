@@ -27,6 +27,8 @@ export type ShapeType =
   | 'rectangle';
 /* | "text"| "button" |  "radio" | "image"*/
 
+export type EditType = 'input' | 'textarea';
+
 export type ShapeRefs = {
   [key: string]: React.RefObject<any>;
 };
@@ -49,5 +51,6 @@ export interface ShapeModel {
   height: number;
   type: ShapeType;
   allowsInlineEdition: boolean;
+  editType?: EditType;
   text?: string;
 }
