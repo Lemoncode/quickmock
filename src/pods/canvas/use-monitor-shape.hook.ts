@@ -8,6 +8,7 @@ import {
 } from './canvas.util';
 import Konva from 'konva';
 import { ShapeType } from '@/core/model';
+import { calculateShapeOffsetToXDropCoordinate } from './use-monitor.business';
 
 export const useMonitorShape = (
   dropRef: React.MutableRefObject<null>,
@@ -23,6 +24,7 @@ export const useMonitorShape = (
         invariant(destination);
 
         const type = source.data.type as ShapeType;
+
         const screenPosition =
           extractScreenCoordinatesFromPragmaticLocation(location);
 
@@ -47,7 +49,9 @@ export const useMonitorShape = (
             }
           );
 
-          positionX = konvaCoord.x;
+          positionX =
+            konvaCoord.x -
+            calculateShapeOffsetToXDropCoordinate(konvaCoord.x, type);
           positionY = konvaCoord.y;
         }
         addNewShape(type, positionX, positionY);

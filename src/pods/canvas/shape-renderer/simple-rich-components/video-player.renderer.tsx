@@ -1,8 +1,8 @@
-import { RectangleShape } from '@/common/components/front-basic-sapes';
+import { VideoPlayerShape } from '@/common/components/front-rich-components/video-player';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 
-export const renderRectangle = (
+export const renderVideoPlayer = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
@@ -10,7 +10,7 @@ export const renderRectangle = (
     shapeRenderedProps;
 
   return (
-    <RectangleShape
+    <VideoPlayerShape
       id={shape.id}
       key={shape.id}
       ref={shapeRefs.current[shape.id]}
