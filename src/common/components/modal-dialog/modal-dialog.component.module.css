@@ -1,0 +1,58 @@
+body {
+  position: relative;
+}
+
+.dialogModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mainDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+  height: 70%;
+  background-color: aqua;
+  border: 3px solid black;
+}
+
+.xCloseModalDiv {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.xCloseModal {
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  display: grid;
+  place-content: center;
+  font-weight: bold;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.xCloseModal:hover {
+  background-color: darkgray;
+  color: white;
+  cursor: pointer;
+}
+
+.xCloseModal::after {
+  content: 'X';
+}
