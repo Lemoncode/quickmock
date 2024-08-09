@@ -2,6 +2,7 @@ import { Coord, EditType, Size } from '@/core/model';
 import React, { useEffect, useRef, useState } from 'react';
 import { Group } from 'react-konva';
 import { Html } from 'react-konva-utils';
+import { addPxSuffix, calculateCoordinateValue } from './inline-edit.utils';
 
 interface Props {
   coords: Coord;
@@ -86,22 +87,22 @@ export const EditableComponent: React.FC<Props> = props => {
 
   // TODO: this can be optimized using React.useCallback, issue #90
   // https://github.com/Lemoncode/quickmock/issues/90
-  const calculateTextAreaXPosition = () => {
-    return `${coords.x * scale}px`;
-  };
-
-  const calculateTextAreaYPosition = () => {
-    return `${coords.y * scale}px`;
-  };
-
-  const calculateWidth = () => {
-    return `${size.width}px`;
-  };
-
-  const calculateHeight = () => {
-    return `${size.height}px`;
-  };
-
+  const calculateTextAreaXPosition = React.useCallback(
+    () => calculateCoordinateValue(coords.x, scale),
+    [coords.x, scale]
+  );
+  const calculateTextAreaYPosition = React.useCallback(
+    () => calculateCoordinateValue(coords.y, scale),
+    [coords.y, scale]
+  );
+  const calculateWidth = React.useCallback(
+    () => addPxSuffix(size.width),
+    [size.width]
+  );
+  const calculateHeight = React.useCallback(
+    () => addPxSuffix(size.height),
+    [size.height]
+  );
   // TODO: Componentize this #91
   // https://github.com/Lemoncode/quickmock/issues/91
   return (
