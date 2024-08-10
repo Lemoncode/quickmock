@@ -3,14 +3,15 @@ import { forwardRef } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
+import { BASIC_SHAPE } from './shape.const';
 
 const inputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 60,
-  minHeight: 45,
+  minHeight: 38,
   maxWidth: -1,
-  maxHeight: 50,
-  defaultWidth: 170,
-  defaultHeight: 45,
+  maxHeight: 38,
+  defaultWidth: 155,
+  defaultHeight: 38,
 };
 
 export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -36,20 +37,20 @@ export const InputShape = forwardRef<any, ShapeProps>(
           y={0}
           width={restrictedWidth}
           height={restrictedHeight}
-          cornerRadius={5}
-          stroke="black"
-          strokeWidth={2}
-          fill="white"
+          cornerRadius={BASIC_SHAPE.CORNER_RADIUS}
+          stroke={BASIC_SHAPE.STROKE_COLOR}
+          strokeWidth={BASIC_SHAPE.STROKE_WIDTH}
+          fill={BASIC_SHAPE.FILL_BACKGROUND}
         />
         <Text
-          x={10}
-          y={20}
-          width={width - 10}
-          height={height - 20}
+          x={BASIC_SHAPE.PADDING}
+          y={BASIC_SHAPE.PADDING}
+          width={width - BASIC_SHAPE.PADDING * 2}
           text={text}
-          fontFamily="Comic Sans MS, cursive"
-          fontSize={15}
-          fill="gray"
+          fontFamily={BASIC_SHAPE.FONT_FAMILY}
+          fontSize={BASIC_SHAPE.FONT_SIZE_INPUT}
+          lineHeight={BASIC_SHAPE.LINE_HEIGHT}
+          fill={BASIC_SHAPE.FILL_TEXT_INPUT}
           align="left"
           ellipsis={true}
           wrap="none"
