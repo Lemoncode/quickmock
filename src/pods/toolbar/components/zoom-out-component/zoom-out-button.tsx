@@ -1,7 +1,7 @@
 import { ZoomOutIcon } from '@/common/components/icons/zoom-out.component';
-import ToolbarButton from '../toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { useCanvasContext } from '@/core/providers';
+import { ToolbarButton } from '../toolbar-button';
 
 export const ZoomOutButton = () => {
   const { scale, setScale } = useCanvasContext();
@@ -17,11 +17,8 @@ export const ZoomOutButton = () => {
       onClick={handleClick}
       className={classes.button}
       disabled={isDisabled}
-    >
-      <ZoomOutIcon />
-      <span>Zoom Out</span>
-    </ToolbarButton>
+      icon={<ZoomOutIcon />}
+      label="Zoom Out"
+    />
   );
 };
-
-export default ZoomOutButton;

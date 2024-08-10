@@ -1,9 +1,9 @@
 import { ExportIcon } from '@/common/components/icons/export-icon.component';
 import { useCanvasContext } from '@/core/providers';
-import ToolbarButton from '@/pods/toolbar/components/toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { Stage } from 'konva/lib/Stage';
 import { calculateCanvasBounds } from './export-button.utils';
+import { ToolbarButton } from '../toolbar-button';
 
 export const ExportButton = () => {
   const { stageRef, shapes } = useCanvasContext();
@@ -44,11 +44,8 @@ export const ExportButton = () => {
       onClick={handleExport}
       className={classes.button}
       disabled={shapes.length === 0}
-    >
-      <ExportIcon />
-      <span>Export</span>
-    </ToolbarButton>
+      icon={<ExportIcon />}
+      label="Export"
+    />
   );
 };
-
-export default ExportButton;

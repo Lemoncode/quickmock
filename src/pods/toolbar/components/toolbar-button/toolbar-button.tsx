@@ -1,9 +1,8 @@
-import useShortcut from '../../shortcut/shortcut.hook';
+import { useShortcut } from '../../shortcut/shortcut.hook';
 /* import { isMacOS } from '@/common/helpers/platform.helpers'; */
 import { ShortcutOptions } from '../../shortcut/shortcut.model';
 
 interface Props {
-  children: React.ReactNode;
   onClick?: () => void;
   className?: string;
   disabled?: boolean;
@@ -13,7 +12,6 @@ interface Props {
 }
 export const ToolbarButton: React.FC<Props> = props => {
   const {
-    children,
     onClick = () => {},
     className,
     disabled,
@@ -46,9 +44,6 @@ export const ToolbarButton: React.FC<Props> = props => {
           {tooltipText}
         </span>
       )} */}
-      {children}
     </button>
   );
 };
-
-export default ToolbarButton;

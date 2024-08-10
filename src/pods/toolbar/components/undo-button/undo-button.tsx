@@ -1,6 +1,6 @@
 import { UndoIcon } from '@/common/components/icons/undo-icon.component';
-import ToolbarButton from '../toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
+import { ToolbarButton } from '../toolbar-button/toolbar-button';
 
 export const UndoButton = () => {
   const handleClick = () => {
@@ -8,11 +8,11 @@ export const UndoButton = () => {
   };
 
   return (
-    <ToolbarButton onClick={handleClick} className={classes.button}>
-      <UndoIcon />
-      <span>Undo</span>
-    </ToolbarButton>
+    <ToolbarButton
+      onClick={handleClick}
+      className={classes.button}
+      icon={<UndoIcon />}
+      label="Undo"
+    />
   );
 };
-
-export default UndoButton;
