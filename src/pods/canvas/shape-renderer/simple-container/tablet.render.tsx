@@ -6,7 +6,8 @@ export const renderTablet = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
-  const { handleSelected, shapeRefs } = shapeRenderedProps;
+  const { handleSelected, shapeRefs, handleDragEnd, handleTransform } =
+    shapeRenderedProps;
 
   return (
     <TabletShape
@@ -14,11 +15,14 @@ export const renderTablet = (
       key={shape.id}
       x={shape.x}
       y={shape.y}
-      draggable
       width={shape.width}
       height={shape.height}
+      draggable
       onSelected={handleSelected}
       ref={shapeRefs.current[shape.id]}
+      onDragEnd={handleDragEnd(shape.id)}
+      onTransform={handleTransform}
+      onTransformEnd={handleTransform}
     />
   );
 };
