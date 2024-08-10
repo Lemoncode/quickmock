@@ -44,8 +44,8 @@ export const TextAreaShape = forwardRef<any, ShapeProps>(
         <Text
           x={10}
           y={10}
-          width={width - 10}
-          height={height - 10}
+          width={restrictedWidth - 10}
+          height={restrictedHeight - 10}
           text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
