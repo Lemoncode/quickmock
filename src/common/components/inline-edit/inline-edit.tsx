@@ -1,8 +1,9 @@
-import { Coord, EditType, Size } from '@/core/model';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Group } from 'react-konva';
-import { Html } from 'react-konva-utils';
-import { addPxSuffix, calculateCoordinateValue } from './inline-edit.utils';
+import { Coord, Size } from '@/core/model';
+import { HtmlEditWidget } from './components';
+import { EditType } from './inline-edit.model';
+import { useSubmitCancelHook, usePositionHook } from './hooks';
 
 interface Props {
   coords: Coord;
@@ -26,58 +27,18 @@ export const EditableComponent: React.FC<Props> = props => {
     children,
     editType,
   } = props;
-  const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(text);
 
-  const inputRef = useRef<HTMLInputElement>(null);
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
-
-  const getActiveInputRef = ():
-    | HTMLInputElement
-    | HTMLTextAreaElement
-    | null => (editType === 'input' ? inputRef.current : textAreaRef.current);
-
-  // handle click outside of the input when editing
-  useEffect(() => {
-    if (!isEditable) return;
-
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        getActiveInputRef() &&
-        !getActiveInputRef()?.contains(event.target as Node)
-      ) {
-        setIsEditing(false);
-        onTextSubmit(getActiveInputRef()?.value || '');
-      }
-    };
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (isEditing && event.key === 'Escape') {
-        setIsEditing(false);
-        setEditText(text);
-      }
-
-      if (editType === 'input' && isEditable && event.key === 'Enter') {
-        setIsEditing(false);
-        onTextSubmit(getActiveInputRef()?.value || '');
-      }
-    };
-
-    if (isEditing) {
-      getActiveInputRef()?.focus();
-      getActiveInputRef()?.select();
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('keydown', handleKeyDown);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isEditing]);
+  const { inputRef, textAreaRef, isEditing, setIsEditing } =
+    useSubmitCancelHook(
+      {
+        editType,
+        isEditable,
+        text,
+        onTextSubmit,
+      },
+      setEditText
+    );
 
   const handleDoubleClick = () => {
     if (isEditable) {
@@ -85,57 +46,30 @@ export const EditableComponent: React.FC<Props> = props => {
     }
   };
 
-  // TODO: this can be optimized using React.useCallback, issue #90
-  // https://github.com/Lemoncode/quickmock/issues/90
-  const calculateTextAreaXPosition = React.useCallback(
-    () => calculateCoordinateValue(coords.x, scale),
-    [coords.x, scale]
-  );
-  const calculateTextAreaYPosition = React.useCallback(
-    () => calculateCoordinateValue(coords.y, scale),
-    [coords.y, scale]
-  );
-  const calculateWidth = React.useCallback(
-    () => addPxSuffix(size.width),
-    [size.width]
-  );
-  const calculateHeight = React.useCallback(
-    () => addPxSuffix(size.height),
-    [size.height]
-  );
-  // TODO: Componentize this #91
-  // https://github.com/Lemoncode/quickmock/issues/91
+  const {
+    calculateTextAreaXPosition,
+    calculateTextAreaYPosition,
+    calculateWidth,
+    calculateHeight,
+  } = usePositionHook(coords, size, scale);
+
   return (
     <>
       <Group onDblClick={handleDoubleClick}>{children}</Group>
       {isEditing ? (
-        <Html
+        <HtmlEditWidget
           divProps={{
-            style: {
-              position: 'absolute',
-              top: calculateTextAreaYPosition(),
-              left: calculateTextAreaXPosition(),
-              width: calculateWidth(),
-              height: calculateHeight(),
-            },
+            position: 'absolute',
+            top: calculateTextAreaYPosition(),
+            left: calculateTextAreaXPosition(),
+            width: calculateWidth(),
+            height: calculateHeight(),
           }}
-        >
-          {editType === 'input' ? (
-            <input
-              ref={inputRef}
-              style={{ width: '100%', height: '100%' }}
-              value={editText}
-              onChange={e => setEditText(e.target.value)}
-            />
-          ) : (
-            <textarea
-              ref={textAreaRef}
-              style={{ width: '100%', height: '100%' }}
-              value={editText}
-              onChange={e => setEditText(e.target.value)}
-            ></textarea>
-          )}
-        </Html>
+          ref={editType === 'input' ? inputRef : textAreaRef}
+          value={editText}
+          onSetEditText={setEditText}
+          editType={editType ?? 'input'}
+        />
       ) : null}
     </>
   );
