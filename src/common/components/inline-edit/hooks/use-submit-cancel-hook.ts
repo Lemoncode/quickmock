@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { EditType } from './inline-edit.model';
+import { EditType } from '../inline-edit.model';
 
 interface Configuration {
   editType: EditType | undefined;

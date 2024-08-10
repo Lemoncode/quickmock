@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { addPxSuffix, calculateCoordinateValue } from './inline-edit.utils';
+import { addPxSuffix, calculateCoordinateValue } from '../inline-edit.utils';
 import { Coord, Size } from '@/core/model';
 
 export const usePositionHook = (coords: Coord, size: Size, scale: number) => {

@@ -3,8 +3,7 @@ import { Group } from 'react-konva';
 import { Coord, Size } from '@/core/model';
 import { HtmlEditWidget } from './components';
 import { EditType } from './inline-edit.model';
-import { useSubmitCancelHook } from './use-submit-cancel-hook';
-import { usePositionHook } from './use-position-hook';
+import { useSubmitCancelHook, usePositionHook } from './hooks';
 
 interface Props {
   coords: Coord;
