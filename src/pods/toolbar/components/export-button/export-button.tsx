@@ -2,24 +2,10 @@ import { ExportIcon } from '@/common/components/icons/export-icon.component';
 import { useCanvasContext } from '@/core/providers';
 import ToolbarButton from '@/pods/toolbar/components/toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
+import { Stage } from 'konva/lib/Stage';
 
 export const ExportButton = () => {
-  const { stageRef, selectionInfo, shapes, setScale } = useCanvasContext();
-  const { transformerRef } = selectionInfo;
-
-  const hideTransformer = () => {
-    const transformer = transformerRef.current;
-    if (transformer) {
-      transformer.hide();
-    }
-  };
-
-  const showTransformer = () => {
-    const transformer = transformerRef.current;
-    if (transformer) {
-      transformer.show();
-    }
-  };
+  const { stageRef, shapes } = useCanvasContext();
 
   const createDownloadLink = (dataURL: string) => {
     const link = document.createElement('a');
@@ -30,11 +16,8 @@ export const ExportButton = () => {
     document.body.removeChild(link);
   };
 
-  const resetScale = () => {
-    if (stageRef.current) {
-      stageRef.current.scale({ x: 1, y: 1 }); // Reset scale to 1 before exporting
-      setScale(1);
-    }
+  const resetScale = (stage: Stage) => {
+    stage.scale({ x: 1, y: 1 });
   };
 
   interface CanvasBounds {
@@ -53,10 +36,23 @@ export const ExportButton = () => {
       height: 0,
     };
 
+    if (shapes.length === 0) {
+      return {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+      };
+    }
+
     shapes.forEach(shape => {
       // Calculate min x and y
-      if (shape.x < canvasBounds.x) canvasBounds.x = shape.x;
-      if (shape.y < canvasBounds.y) canvasBounds.y = shape.y;
+      if (shape.x < canvasBounds.x) {
+        canvasBounds.x = shape.x;
+      }
+      if (shape.y < canvasBounds.y) {
+        canvasBounds.y = shape.y;
+      }
 
       // Calculate max x and y
       if (shape.x + shape.width > canvasBounds.width) {
@@ -77,27 +73,28 @@ export const ExportButton = () => {
   };
 
   const handleExport = () => {
-    if (!stageRef.current) return;
-    hideTransformer();
-    resetScale();
-    const bounds = calculateCanvasBounds();
-    const dataURL = stageRef.current.toDataURL({
-      mimeType: 'image/png', // Change to jpeg to download as jpeg
-      x: bounds.x,
-      y: bounds.y,
-      width: bounds.width,
-      height: bounds.height,
-      pixelRatio: 2,
-    });
-    createDownloadLink(dataURL);
-    showTransformer();
+    if (stageRef.current) {
+      const originalStage = stageRef.current;
+      const clonedStage = originalStage.clone();
+      resetScale(clonedStage);
+      const bounds = calculateCanvasBounds();
+      const dataURL = clonedStage.toDataURL({
+        mimeType: 'image/png', // Change to jpeg to download as jpeg
+        x: bounds.x,
+        y: bounds.y,
+        width: bounds.width,
+        height: bounds.height,
+        pixelRatio: 2,
+      });
+      createDownloadLink(dataURL);
+    }
   };
 
   return (
     <ToolbarButton
       onClick={handleExport}
       className={classes.button}
-      disabled={shapes.length > 0 ? false : true}
+      disabled={shapes.length === 0}
     >
       <ExportIcon />
       <span>Export</span>
