@@ -1,4 +1,4 @@
-import { Coord, ShapeType, Size, ShapeModel } from '@/core/model';
+import { Coord, ShapeType, Size, ShapeModel, EditType } from '@/core/model';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -18,8 +18,13 @@ import {
   getTabletShapeSizeRestrictions,
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
+import {
+  getDiamondShapeSizeRestrictions,
+  getRectangleShapeSizeRestrictions,
+} from '@/common/components/front-basic-sapes';
+import { getVideoPlayerShapeSizeRestrictions } from '@/common/components/front-rich-components';
 
-const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
+export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
     case 'label':
       return {
@@ -87,7 +92,21 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getTimepickerInputShapeSizeRestrictions().defaultWidth,
         height: getTimepickerInputShapeSizeRestrictions().defaultHeight,
       };
-
+    case 'rectangle':
+      return {
+        width: getRectangleShapeSizeRestrictions().defaultWidth,
+        height: getRectangleShapeSizeRestrictions().defaultHeight,
+      };
+    case 'videoPlayer':
+      return {
+        width: getVideoPlayerShapeSizeRestrictions().defaultWidth,
+        height: getVideoPlayerShapeSizeRestrictions().defaultHeight,
+      };
+    case 'diamond':
+      return {
+        width: getDiamondShapeSizeRestrictions().defaultWidth,
+        height: getDiamondShapeSizeRestrictions().defaultHeight,
+      };
     default:
       return { width: 200, height: 50 };
   }
@@ -97,7 +116,9 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
   switch (shapeType) {
     case 'input':
     case 'label':
+    case 'combobox':
     case 'button':
+    case 'textarea':
       return true;
     default:
       return false;
@@ -110,11 +131,26 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return '';
     case 'label':
       return 'Label';
+    case 'combobox':
+      return 'Select an option';
     case 'button':
       return 'Click Me!';
+    case 'textarea':
+      return 'Your text here...';
     default:
       return undefined;
   }
+};
+
+const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
+  const result = undefined;
+
+  switch (shapeType) {
+    case 'textarea':
+      return 'textarea';
+      break;
+  }
+  return result;
 };
 
 // TODO: create interfaces to hold Coordination and Size
@@ -133,6 +169,7 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     type: shapeType,
     allowsInlineEdition: doesShapeAllowInlineEdition(shapeType),
     text: generateDefaultTextValue(shapeType),
+    editType: getShapeEditInlineType(shapeType),
   };
 };
 

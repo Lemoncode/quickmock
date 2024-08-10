@@ -17,7 +17,7 @@ export const getComboBoxShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   comboBoxShapeRestrictions;
 
 export const ComboBoxShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(comboBoxShapeRestrictions, width, height);
 
@@ -36,6 +36,7 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>(
           data={`M1,1 H${width - 2} V${height - 2} H1 Z`}
           stroke="black"
           strokeWidth={2}
+          fill="white"
         />
         {/* Polygon (Arrow), combo triangle dropdown */}
         <Path
@@ -53,7 +54,7 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>(
         <Text
           x={10}
           y={(height - 25) / 2 + 5}
-          text="Select an option"
+          text={text}
           fontSize={20}
           fontFamily="Arial"
           fill="black"

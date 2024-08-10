@@ -29,6 +29,7 @@ export interface CanvasContextModel {
   addNewShape: (type: ShapeType, x: number, y: number) => string;
   updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void;
   updateShapePosition: (id: string, position: Coord) => void;
+  stageRef: React.RefObject<Konva.Stage>;
   selectionInfo: SelectionInfo;
-  deleteSelectedShape: () => void;
+  deleteSelectedShape: (id: string) => void;
 }
