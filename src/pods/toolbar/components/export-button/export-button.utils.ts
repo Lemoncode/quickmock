@@ -1,6 +1,6 @@
 import { ShapeModel } from '@/core/model';
 
-interface CanvasBounds {
+export interface CanvasBounds {
   x: number;
   y: number;
   width: number;
