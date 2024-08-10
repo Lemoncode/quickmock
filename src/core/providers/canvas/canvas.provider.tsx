@@ -5,6 +5,7 @@ import { useSelection } from './use-selection.hook';
 import { createShape } from '@/pods/canvas/canvas.model';
 import { v4 as uuidv4 } from 'uuid';
 import Konva from 'konva';
+import { removeShapeFromList } from './canvas.business';
 
 interface Props {
   children: React.ReactNode;
@@ -17,6 +18,12 @@ export const CanvasProvider: React.FC<Props> = props => {
   const stageRef = React.useRef<Konva.Stage>(null);
 
   const selectionInfo = useSelection(shapes, setShapes);
+
+  const deleteSelectedShape = () => {
+    setShapes(prevShapes =>
+      removeShapeFromList(selectionInfo.selectedShapeId, prevShapes)
+    );
+  };
 
   const clearCanvas = () => {
     setShapes([]);
@@ -65,6 +72,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         updateShapeSizeAndPosition,
         updateShapePosition,
         stageRef,
+        deleteSelectedShape,
       }}
     >
       {children}

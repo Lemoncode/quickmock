@@ -47,6 +47,24 @@ Contributors to this project
   <a href="https://github.com/deletidev">
     <kbd><img src="https://github.com/deletidev.png" alt="Leticia De La Osa" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
+    <a href="https://github.com/monikMononoke">
+    <kbd><img src="https://github.com/monikMononoke.png" alt="Mónika" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>
+  </a>
+    <a href="https://github.com/Ivanruii">
+    <kbd><img src="https://github.com/Ivanruii.png" alt="Ivan Ruíz" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>
+  </a>
+    <a href="https://github.com/raquetelio">
+    <kbd><img src="https://github.com/raquetelio.png" alt="Raquel Toscano" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>
+  </a>
+    <a href="https://github.com/manugallegob">
+    <kbd><img src="https://github.com/manugallegob.png" alt="Manuel Gallego" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>
+  <a href="https://github.com/Bomasen">
+    <kbd><img src="https://github.com/Bomasen.png" alt="Borja Martínez Sendra" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>
   <a href="https://github.com/brauliodiez">
     <kbd><img src="https://github.com/brauliodiez.png" alt="Braulio Díez" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>

@@ -17,7 +17,7 @@ export const getTextAreaSizeRestrictions = (): ShapeSizeRestrictions =>
   textAreaShapeRestrictions;
 
 export const TextAreaShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(textAreaShapeRestrictions, width, height);
 
@@ -41,13 +41,12 @@ export const TextAreaShape = forwardRef<any, ShapeProps>(
           strokeWidth={2}
           fill="white"
         />
-
         <Text
           x={10}
           y={10}
           width={restrictedWidth - 10}
           height={restrictedHeight - 10}
-          text="Your text here..."
+          text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
           fill="gray"
