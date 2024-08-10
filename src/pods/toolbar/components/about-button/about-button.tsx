@@ -8,11 +8,11 @@ export const AboutButton = () => {
   };
 
   return (
-    <ToolbarButton onClick={handleClick} className={classes.button}>
-      <AboutIcon />
-      <span>About Us</span>
-    </ToolbarButton>
+    <ToolbarButton
+      onClick={handleClick}
+      className={classes.button}
+      icon={<AboutIcon />}
+      label="About"
+    />
   );
 };
-
-export default AboutButton;

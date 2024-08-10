@@ -1,6 +1,6 @@
 import { RedoIcon } from '@/common/components/icons/redo-icon.component';
-import ToolbarButton from '../toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
+import { ToolbarButton } from '../toolbar-button';
 
 export const RedoButton = () => {
   const handleClick = () => {
@@ -8,11 +8,11 @@ export const RedoButton = () => {
   };
 
   return (
-    <ToolbarButton onClick={handleClick} className={classes.button}>
-      <RedoIcon />
-      <span>Redo</span>
-    </ToolbarButton>
+    <ToolbarButton
+      onClick={handleClick}
+      className={classes.button}
+      icon={<RedoIcon />}
+      label="Redo"
+    />
   );
 };
-
-export default RedoButton;
