@@ -22,7 +22,10 @@ import {
   getDiamondShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
 } from '@/common/components/front-basic-sapes';
-import { getVideoPlayerShapeSizeRestrictions } from '@/common/components/front-rich-components';
+import {
+  getAccordionShapeSizeRestrictions,
+  getVideoPlayerShapeSizeRestrictions,
+} from '@/common/components/front-rich-components';
 
 export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
@@ -107,7 +110,15 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getDiamondShapeSizeRestrictions().defaultWidth,
         height: getDiamondShapeSizeRestrictions().defaultHeight,
       };
+    case 'accordion':
+      return {
+        width: getAccordionShapeSizeRestrictions().defaultWidth,
+        height: getAccordionShapeSizeRestrictions().defaultHeight,
+      };
     default:
+      console.warn(
+        `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
+      );
       return { width: 200, height: 50 };
   }
 };
