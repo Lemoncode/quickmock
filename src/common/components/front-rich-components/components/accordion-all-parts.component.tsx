@@ -20,12 +20,12 @@ export const AccordionAllParts: React.FC<Props> = props => {
 
   let accordionBodyAppliedOffset = 0;
 
-  const renderAccordionBody = () => {
+  const renderAccordionBody = (headerIndex: number) => {
     accordionBodyAppliedOffset = accordionSelectedBodyHeight;
     return (
       <AccordionBody
         x={10}
-        y={singleHeaderHeight}
+        y={(headerIndex + 1) * singleHeaderHeight}
         width={width}
         height={accordionSelectedBodyHeight}
       />
@@ -41,7 +41,7 @@ export const AccordionAllParts: React.FC<Props> = props => {
           height={singleHeaderHeight}
           text={section}
         />
-        {selectedSectionIndex === index ? renderAccordionBody() : null}
+        {selectedSectionIndex === index ? renderAccordionBody(index) : null}
       </>
     ));
   };

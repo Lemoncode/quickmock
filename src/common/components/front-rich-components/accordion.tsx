@@ -3,7 +3,10 @@ import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { AccordionAllParts } from './components';
-import { calculateDynamicContentSizeRestriction } from './accordion.business';
+import {
+  calculateDynamicContentSizeRestriction,
+  mapTextToSections,
+} from './accordion.business';
 
 const accordionShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 315,
@@ -30,10 +33,10 @@ export const AccordionShape = forwardRef<any, ShapeProps>(
 
     useEffect(() => {
       if (text) {
-        const sections = text.split('\n');
+        const { sections, selectedSectionIndex } = mapTextToSections(text);
         setSections(sections);
         // right now let's set a default value, TODO enhance this
-        setSelectedSectionIndex(0);
+        setSelectedSectionIndex(selectedSectionIndex);
       } else {
         setSections([]);
       }
