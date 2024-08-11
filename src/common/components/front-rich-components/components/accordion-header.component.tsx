@@ -1,9 +1,14 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../../front-components/shape.model';
+import { TriangleSelector } from './triangle-selector.component';
 
-export const AccordionHeader = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, text, ...shapeProps }, ref) => {
+interface Props extends ShapeProps {
+  isSelected: boolean;
+}
+
+export const AccordionHeader = forwardRef<any, Props>(
+  ({ x, y, width, height, text, isSelected, ...shapeProps }, ref) => {
     return (
       <Group
         x={x}
@@ -22,8 +27,9 @@ export const AccordionHeader = forwardRef<any, ShapeProps>(
           stroke="black"
           strokeWidth={2}
         />
+        <TriangleSelector x={5} y={9} isSelected={isSelected} />
         <Text
-          x={20}
+          x={40}
           y={20}
           text={text}
           fontFamily="Arial"

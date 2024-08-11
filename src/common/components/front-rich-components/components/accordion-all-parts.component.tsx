@@ -40,6 +40,7 @@ export const AccordionAllParts: React.FC<Props> = props => {
           width={width}
           height={singleHeaderHeight}
           text={section}
+          isSelected={selectedSectionIndex === index}
         />
         {selectedSectionIndex === index ? renderAccordionBody(index) : null}
       </>
