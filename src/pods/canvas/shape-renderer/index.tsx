@@ -20,9 +20,12 @@ import {
   renderMobilePhoneContainer,
   renderTablet,
 } from './simple-container';
-import { renderRectangle } from './simple-basic-shapes/rectangle.rerender';
 import { renderVideoPlayer } from './simple-rich-components';
-import { renderDiamond } from './simple-basic-shapes';
+import {
+  renderDiamond,
+  renderRectangle,
+  renderLine,
+} from './simple-basic-shapes';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -65,6 +68,8 @@ export const renderShapeComponent = (
       return renderVideoPlayer(shape, shapeRenderedProps);
     case 'diamond':
       return renderDiamond(shape, shapeRenderedProps);
+    case 'line':
+      return renderLine(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

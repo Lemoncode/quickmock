@@ -21,6 +21,7 @@ import { getLabelSizeRestrictions } from '@/common/components/front-components/l
 import {
   getDiamondShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
+  getlineShapeRestrictions,
 } from '@/common/components/front-basic-sapes';
 import { getVideoPlayerShapeSizeRestrictions } from '@/common/components/front-rich-components';
 
@@ -106,6 +107,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getDiamondShapeSizeRestrictions().defaultWidth,
         height: getDiamondShapeSizeRestrictions().defaultHeight,
+      };
+    case 'line':
+      return {
+        width: getlineShapeRestrictions().defaultWidth,
+        height: getlineShapeRestrictions().defaultHeight,
       };
     default:
       return { width: 200, height: 50 };

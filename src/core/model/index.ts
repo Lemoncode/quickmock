@@ -26,7 +26,8 @@ export type ShapeType =
   | 'radiobutton'
   | 'rectangle'
   | 'videoPlayer'
-  | 'diamond';
+  | 'diamond'
+  | 'line';
 /* | "text"| "button" |  "radio" | "image"*/
 
 export type EditType = 'input' | 'textarea';
