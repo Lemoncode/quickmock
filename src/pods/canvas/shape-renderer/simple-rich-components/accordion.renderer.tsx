@@ -24,6 +24,9 @@ export const renderAccordion = (
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      editType={shape.editType}
+      isEditable={true}
+      text={shape.text}
     />
   );
 };
