@@ -7,8 +7,7 @@
 
   <!-- Contenido de la sección 1 -->
   <rect x="10" y="60" width="280" height="100" style="fill:#ffffff;stroke:black;stroke-width:1"/>
-  <text x="20" y="90" font-family="Arial" font-size="16" fill="black">Content of section 1</text>
-
+  
   <!-- Sección 2: Colapsada -->
   <rect x="10" y="160" width="280" height="50" style="fill:#f0f0f0;stroke:black;stroke-width:2"/>
   <!-- Flecha hacia la derecha -->

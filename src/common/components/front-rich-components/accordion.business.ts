@@ -1,6 +1,8 @@
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeSizeRestrictions } from '@/core/model';
 
+// TODO: Add unit tests #169
+
 interface SizeInfo {
   width: number;
   height: number;
