@@ -5,6 +5,7 @@ import { ShapeProps } from '../front-components/shape.model';
 import { AccordionAllParts } from './components';
 import {
   calculateDynamicContentSizeRestriction,
+  calculateSelectedAccordionHeight,
   mapTextToSections,
 } from './accordion.business';
 
@@ -26,8 +27,8 @@ const minimumAccordionBodyHeight = 60;
 export const AccordionShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
     const [sections, setSections] = useState<string[]>([
-      'Sección A',
-      'Sección B',
+      '[*] Sectión A',
+      'Sectión B',
     ]);
     const [selectedSectionIndex, setSelectedSectionIndex] = useState(0);
 
@@ -35,7 +36,6 @@ export const AccordionShape = forwardRef<any, ShapeProps>(
       if (text) {
         const { sections, selectedSectionIndex } = mapTextToSections(text);
         setSections(sections);
-        // right now let's set a default value, TODO enhance this
         setSelectedSectionIndex(selectedSectionIndex);
       } else {
         setSections([]);
@@ -43,14 +43,11 @@ export const AccordionShape = forwardRef<any, ShapeProps>(
     }, [text]);
 
     const accordionSelectedBodyHeight = useMemo(() => {
-      const accordionsHeadersHeight = singleHeaderHeight * sections.length;
-      let accordionSelectedBodyHeight = height - accordionsHeadersHeight;
-
-      if (accordionSelectedBodyHeight < 0) {
-        accordionSelectedBodyHeight = minimumAccordionBodyHeight;
-      }
-
-      return accordionSelectedBodyHeight;
+      return calculateSelectedAccordionHeight(sections, {
+        height,
+        minimumAccordionBodyHeight,
+        singleHeaderHeight,
+      });
     }, [sections, height]);
 
     const { width: restrictedWidth, height: restrictedHeight } =

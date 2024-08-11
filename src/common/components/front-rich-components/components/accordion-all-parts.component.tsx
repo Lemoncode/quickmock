@@ -22,11 +22,12 @@ export const AccordionAllParts: React.FC<Props> = props => {
 
   const renderAccordionBody = (headerIndex: number) => {
     accordionBodyAppliedOffset = accordionSelectedBodyHeight;
+    const marginLeft = 10;
     return (
       <AccordionBody
-        x={10}
+        x={marginLeft}
         y={(headerIndex + 1) * singleHeaderHeight}
-        width={width - 10}
+        width={width - marginLeft}
         height={accordionSelectedBodyHeight}
       />
     );

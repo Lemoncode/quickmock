@@ -69,3 +69,26 @@ export const mapTextToSections = (text: string): SectionsInfo => {
       selectedSectionIndex === -1 ? 0 : selectedSectionIndex,
   };
 };
+
+// TODO: Add unit tests
+interface SelectedAccordionSizeInfo {
+  height: number;
+  minimumAccordionBodyHeight: number;
+  singleHeaderHeight: number;
+}
+
+export const calculateSelectedAccordionHeight = (
+  sections: string[],
+  sizeInfo: SelectedAccordionSizeInfo
+) => {
+  const { height, minimumAccordionBodyHeight, singleHeaderHeight } = sizeInfo;
+
+  const accordionsHeadersHeight = singleHeaderHeight * sections.length;
+  let accordionSelectedBodyHeight = height - accordionsHeadersHeight;
+
+  if (accordionSelectedBodyHeight < 0) {
+    accordionSelectedBodyHeight = minimumAccordionBodyHeight;
+  }
+
+  return accordionSelectedBodyHeight;
+};
