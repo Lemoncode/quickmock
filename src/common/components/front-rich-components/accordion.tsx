@@ -1,9 +1,9 @@
-import { Group, Line, Rect, Text } from 'react-konva';
+import { Group } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
-import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { AccordionBody } from './components/accordion-body.component';
+import { AccordionAllParts } from './components';
+import { calculateDynamicContentSizeRestriction } from './accordion.business';
 
 const accordionShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 315,
@@ -11,14 +11,14 @@ const accordionShapeSizeRestrictions: ShapeSizeRestrictions = {
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 315,
-  defaultHeight: 225,
+  defaultHeight: 250,
 };
 
 export const getAccordionShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   accordionShapeSizeRestrictions;
 
 const singleHeaderHeight = 50;
-const minimumAccordionBodyHeight = 50;
+const minimumAccordionBodyHeight = 60;
 
 export const AccordionShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
@@ -50,24 +50,14 @@ export const AccordionShape = forwardRef<any, ShapeProps>(
       return accordionSelectedBodyHeight;
     }, [sections, height]);
 
-    const calculateDynamicContentSizeRestriction = () => {
-      // Accordion section height:
-      const accordionsHeadersHeight = singleHeaderHeight * sections.length;
-
-      const restrictedSize = fitSizeToShapeSizeRestrictions(
-        accordionShapeSizeRestrictions,
-        width,
-        height
-      );
-
-      restrictedSize.height =
-        accordionsHeadersHeight + accordionSelectedBodyHeight;
-
-      return restrictedSize;
-    };
-
     const { width: restrictedWidth, height: restrictedHeight } =
-      calculateDynamicContentSizeRestriction();
+      calculateDynamicContentSizeRestriction(sections, {
+        width,
+        height,
+        singleHeaderHeight,
+        accordionShapeSizeRestrictions,
+        accordionSelectedBodyHeight,
+      });
 
     return (
       <Group
@@ -80,95 +70,14 @@ export const AccordionShape = forwardRef<any, ShapeProps>(
         onClick={() => onSelected(id, 'accordion')}
         fill="black"
       >
-        {sections.map((section, index) => (
-          <>
-            <Rect
-              key={index}
-              x={10}
-              y={singleHeaderHeight * index}
-              width={restrictedWidth}
-              height={singleHeaderHeight}
-              fill="#f0f0f0"
-              stroke="black"
-              strokeWidth={2}
-            />
-            <Text
-              x={20}
-              y={20 + 50 * index}
-              text={section}
-              fontFamily="Arial"
-              fontSize={20}
-              fill="black"
-            />
-          </>
-        ))}
-        <AccordionBody
-          x={10}
-          y={singleHeaderHeight * sections.length}
+        <AccordionAllParts
           width={restrictedWidth}
-          height={accordionSelectedBodyHeight}
+          singleHeaderHeight={singleHeaderHeight}
+          accordionSelectedBodyHeight={accordionSelectedBodyHeight}
+          sections={sections}
+          selectedSectionIndex={selectedSectionIndex}
         />
       </Group>
     );
   }
 );
-
-// <Rect
-//   x={10}
-//   y={10}
-//   width={restrictedWidth}
-//   height={50}
-//   fill="#f0f0f0"
-//   stroke="black"
-//   strokeWidth={2}
-// />
-// {/* down arrow triangle */}
-// <Line points={[30, 45, 40, 25, 20, 25]} closed fill="black" />
-// <Text
-//   x={60}
-//   y={40}
-//   text="Section 1"
-//   fontFamily="Arial"
-//   fontSize={20}
-//   fill="black"
-// />
-
-// {/* Contenido de la sección 1 */}
-// <Rect
-//   x={10}
-//   y={60}
-//   width={restrictedWidth}
-//   height={100}
-//   fill="#ffffff"
-//   stroke="black"
-//   strokeWidth={1}
-// />
-// <Text
-//   x={20}
-//   y={90}
-//   text="Content of section 1"
-//   fontFamily="Arial"
-//   fontSize={16}
-//   fill="black"
-// />
-
-// {/* Sección 2: Colapsada */}
-// <Rect
-//   x={10}
-//   y={160}
-//   width={restrictedWidth}
-//   height={50}
-//   fill="#f0f0f0"
-//   stroke="black"
-//   strokeWidth={2}
-// />
-// {/* Right arrow triangle */}
-// <Line points={[30, 175, 50, 185, 30, 195]} closed fill="black" />
-// <Text
-//   x={60}
-//   y={180}
-//   text="Section 2"
-//   fontFamily="Arial"
-//   fontSize={20}
-//   fill="black"
-// />
