@@ -22,7 +22,10 @@ import {
   getDiamondShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
 } from '@/common/components/front-basic-sapes';
-import { getVideoPlayerShapeSizeRestrictions } from '@/common/components/front-rich-components';
+import {
+  getAccordionShapeSizeRestrictions,
+  getVideoPlayerShapeSizeRestrictions,
+} from '@/common/components/front-rich-components';
 
 export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
@@ -107,7 +110,15 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getDiamondShapeSizeRestrictions().defaultWidth,
         height: getDiamondShapeSizeRestrictions().defaultHeight,
       };
+    case 'accordion':
+      return {
+        width: getAccordionShapeSizeRestrictions().defaultWidth,
+        height: getAccordionShapeSizeRestrictions().defaultHeight,
+      };
     default:
+      console.warn(
+        `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
+      );
       return { width: 200, height: 50 };
   }
 };
@@ -119,6 +130,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'combobox':
     case 'button':
     case 'textarea':
+    case 'accordion':
       return true;
     default:
       return false;
@@ -137,6 +149,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Click Me!';
     case 'textarea':
       return 'Your text here...';
+    case 'accordion':
+      return '[*]Section A\nSection B';
     default:
       return undefined;
   }
@@ -147,6 +161,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
 
   switch (shapeType) {
     case 'textarea':
+    case 'accordion':
       return 'textarea';
       break;
   }

@@ -23,6 +23,7 @@ import {
 import { renderRectangle } from './simple-basic-shapes/rectangle.rerender';
 import { renderVideoPlayer } from './simple-rich-components';
 import { renderDiamond } from './simple-basic-shapes';
+import { renderAccordion } from './simple-rich-components/accordion.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -65,6 +66,8 @@ export const renderShapeComponent = (
       return renderVideoPlayer(shape, shapeRenderedProps);
     case 'diamond':
       return renderDiamond(shape, shapeRenderedProps);
+    case 'accordion':
+      return renderAccordion(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
