@@ -150,7 +150,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'textarea':
       return 'Your text here...';
     case 'accordion':
-      return 'Section A\nSection B';
+      return '[*]Section A\nSection B';
     default:
       return undefined;
   }

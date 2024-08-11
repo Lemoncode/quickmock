@@ -26,18 +26,19 @@ export const AccordionAllParts: React.FC<Props> = props => {
       <AccordionBody
         x={10}
         y={(headerIndex + 1) * singleHeaderHeight}
-        width={width}
+        width={width - 10}
         height={accordionSelectedBodyHeight}
       />
     );
   };
   const renderAccordion = () => {
+    const textMarginLeft = 10;
     return sections.map((section, index) => (
       <>
         <AccordionHeader
-          x={10}
+          x={textMarginLeft}
           y={singleHeaderHeight * index + accordionBodyAppliedOffset}
-          width={width}
+          width={width - textMarginLeft}
           height={singleHeaderHeight}
           text={section}
           isSelected={selectedSectionIndex === index}
