@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef, useRef, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
@@ -21,10 +21,15 @@ interface ListBoxShapeProps extends ShapeProps {
 }
 
 export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
-  ({ x, y, width, height, id, items, onSelected, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, items, onSelected, text, ...shapeProps },
+    ref
+  ) => {
     const [selectedItem, setSelectedItem] = useState<number | null>(null);
+    const [listboxItems, setListboxItem] = useState<string[]>(items);
     const rectRef = useRef<any>(null);
     const listRef = useRef<any>(null);
+    console.log(items);
 
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
@@ -37,6 +42,15 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
       setSelectedItem(itemIndex);
       onSelected(id, 'listbox');
     };
+
+    useEffect(() => {
+      if (text) {
+        setListboxItem(listboxItems);
+        setSelectedItem(selectedItem);
+      } else {
+        setListboxItem([]);
+      }
+    }, [text]);
 
     return (
       <Group

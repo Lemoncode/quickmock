@@ -133,6 +133,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'accordion':
     case 'checkbox':
     case 'radiobutton':
+    case 'listbox':
       return true;
     default:
       return false;
@@ -157,6 +158,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return '[*]Section A\nSection B';
     case 'checkbox':
       return 'Check me!';
+    case 'listbox':
+      return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6\n';
     default:
       return undefined;
   }
@@ -168,6 +171,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
   switch (shapeType) {
     case 'textarea':
     case 'accordion':
+    case 'listbox':
       return 'textarea';
       break;
   }
