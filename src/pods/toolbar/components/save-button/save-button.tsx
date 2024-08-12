@@ -10,10 +10,7 @@ const DEFAULT_FILE_EXTENSION = 'png'; //sobreentiendo que es png
 export const SaveButton = () => {
 
   const myObject = { name: 'hello' };
-  const content = JSON.stringify(myObject); 
-
-
-
+  const content = JSON.stringify(myObject);
   const saveFile = async (openedFilename: string) => {
     const filename = openedFilename !== '' ? openedFilename : DEFAULT_FILE_NAME;
 
