@@ -16,6 +16,7 @@ export const renderRectangle = (
       ref={shapeRefs.current[shape.id]}
       x={shape.x}
       y={shape.y}
+      name="shape"
       width={shape.width}
       height={shape.height}
       draggable

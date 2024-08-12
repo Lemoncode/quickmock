@@ -22,6 +22,9 @@ import {
 } from './simple-container';
 import { renderRectangle } from './simple-basic-shapes/rectangle.rerender';
 import { renderPostit } from './simple-basic-shapes/postit.rerender';
+import { renderVideoPlayer } from './simple-rich-components';
+import { renderDiamond } from './simple-basic-shapes/diamond.renderer';
+import { renderAccordion } from './simple-rich-components/accordion.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -62,6 +65,12 @@ export const renderShapeComponent = (
       return renderRectangle(shape, shapeRenderedProps);
     case 'postit':
       return renderPostit(shape, shapeRenderedProps);
+    case 'videoPlayer':
+      return renderVideoPlayer(shape, shapeRenderedProps);
+    case 'diamond':
+      return renderDiamond(shape, shapeRenderedProps);
+    case 'accordion':
+      return renderAccordion(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

@@ -1,5 +1,5 @@
 import { DeleteIcon } from '@/common/components/icons/delete-icon.component';
-import { ToolbarButton } from '@/pods/toolbar/components/toolbar-button/toolbar-button';
+import { ToolbarButton } from '../toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { useCanvasContext } from '@/core/providers';
 import { SHORTCUTS } from '../../shortcut/shortcut.const';
@@ -21,7 +21,6 @@ export const DeleteButton = () => {
       className={classes.button}
       disabled={!selectionInfo.selectedShapeId}
       shortcutOptions={SHORTCUTS.delete}
-      children={<></>}
     />
   );
 };
