@@ -28,6 +28,7 @@ export type ShapeType =
   | 'videoPlayer'
   | 'diamond'
   | 'line';
+  | 'accordion';
 /* | "text"| "button" |  "radio" | "image"*/
 
 export type EditType = 'input' | 'textarea';

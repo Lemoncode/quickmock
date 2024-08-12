@@ -1,7 +1,7 @@
 import { NewIcon } from '@/common/components/icons/new-button.components';
-import ToolbarButton from '../toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { useCanvasContext } from '@/core/providers';
+import { ToolbarButton } from '../toolbar-button';
 
 export const NewButton = () => {
   const { clearCanvas } = useCanvasContext();
@@ -11,11 +11,11 @@ export const NewButton = () => {
   };
 
   return (
-    <ToolbarButton onClick={handleClick} className={classes.button}>
-      <NewIcon />
-      <span>New</span>
-    </ToolbarButton>
+    <ToolbarButton
+      onClick={handleClick}
+      className={classes.button}
+      icon={<NewIcon />}
+      label="New"
+    />
   );
 };
-
-export default NewButton;
