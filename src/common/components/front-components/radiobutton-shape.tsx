@@ -14,7 +14,7 @@ const radioButtonShapeRestrictions: ShapeSizeRestrictions = {
 };
 
 export const RadioButtonShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         radioButtonShapeRestrictions,
@@ -62,7 +62,7 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>(
         <Text
           x={radius * 2 + 10}
           y={radius * 0.5 + 5}
-          text="Select me!"
+          text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
           fill="none"
