@@ -32,4 +32,16 @@ export interface CanvasContextModel {
   stageRef: React.RefObject<Konva.Stage>;
   selectionInfo: SelectionInfo;
   deleteSelectedShape: (id: string) => void;
+  canUndo: () => boolean;
+  canRedo: () => boolean;
+  doUndo: () => void;
+  doRedo: () => void;
 }
+
+export interface DocumentModel {
+  shapes: ShapeModel[];
+}
+
+export const createDefaultDocumentModel = (): DocumentModel => ({
+  shapes: [],
+});
