@@ -1,41 +1,37 @@
+import { useModalDialogContext } from '@/core/providers/model-dialog-providers/model-dialog.provider';
 import classes from './modal-dialog.component.module.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 interface Props {
-  title: string;
-  isOpen: boolean;
+  children: React.ReactNode;
 }
 
-export const ModalDialogComponent: React.FC<Props> = (props: Props) => {
-  const { title } = props;
-  const [isOpen, setIsOpen] = React.useState(true);
+export const ModalDialogComponent: React.FC<Props> = props => {
+  const { children } = props;
+  const { modalDialog, closeModal } = useModalDialogContext();
+  const { isOpen, title } = modalDialog;
 
-  React.useEffect(() => {
-    console.log(isOpen);
-  }, [isOpen]);
+  useEffect(() => {}, [modalDialog]);
 
   const handleClick = () => {
-    setIsOpen(!isOpen);
+    closeModal();
   };
-
-  console.log('Prueba');
 
   return (
     isOpen && (
       <div className={classes.dialogModal}>
         <div className={classes.mainDiv}>
           <div className={classes.xCloseModalDiv}>
-            <h2>About us</h2>
+            <h2>{title}</h2>
             <button
               className={classes.xCloseModal}
               onClick={handleClick}
             ></button>
           </div>
-          <div>
+          <div className={classes.main}>
             <h1>{title ?? 'Dialog Modal Title'}</h1>
-            <h2>Prueba</h2>
+            <h2>{children}</h2>
           </div>
-          <div></div>
         </div>
       </div>
     )
