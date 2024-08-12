@@ -33,7 +33,15 @@ export const PostItShape = forwardRef<any, ShapeProps>(
     const rotation = -10;
 
     return (
-      <Group x={x} y={y} ref={ref} {...shapeProps} onClick={handleClick}>
+      <Group
+        x={x}
+        y={y}
+        ref={ref}
+        width={restrictedWidth}
+        height={restrictedHeight}
+        {...shapeProps}
+        onClick={handleClick}
+      >
         {/* Marco del Post-it */}
         <Rect
           x={0}
