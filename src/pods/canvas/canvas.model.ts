@@ -131,6 +131,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'button':
     case 'textarea':
     case 'accordion':
+    case 'checkbox':
       return true;
     default:
       return false;
@@ -151,6 +152,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Your text here...';
     case 'accordion':
       return '[*]Section A\nSection B';
+    case 'checkbox':
+      return 'Check me!';
     default:
       return undefined;
   }
