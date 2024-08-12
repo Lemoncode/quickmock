@@ -19,6 +19,7 @@ import {
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 import {
+  getTriangleShapeSizeRestrictions,
   getDiamondShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
 } from '@/common/components/front-basic-sapes';
@@ -114,6 +115,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getAccordionShapeSizeRestrictions().defaultWidth,
         height: getAccordionShapeSizeRestrictions().defaultHeight,
+      };
+    case 'triangle':
+      return {
+        width: getTriangleShapeSizeRestrictions().defaultWidth,
+        height: getTriangleShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(

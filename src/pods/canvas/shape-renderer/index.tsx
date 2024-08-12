@@ -22,7 +22,7 @@ import {
 } from './simple-container';
 import { renderRectangle } from './simple-basic-shapes/rectangle.rerender';
 import { renderVideoPlayer } from './simple-rich-components';
-import { renderDiamond } from './simple-basic-shapes';
+import { renderDiamond, renderTriangle } from './simple-basic-shapes';
 import { renderAccordion } from './simple-rich-components/accordion.renderer';
 
 export const renderShapeComponent = (
@@ -68,6 +68,8 @@ export const renderShapeComponent = (
       return renderDiamond(shape, shapeRenderedProps);
     case 'accordion':
       return renderAccordion(shape, shapeRenderedProps);
+    case 'triangle':
+      return renderTriangle(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
