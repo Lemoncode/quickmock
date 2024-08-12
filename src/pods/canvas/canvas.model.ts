@@ -20,6 +20,7 @@ import {
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 import {
   getDiamondShapeSizeRestrictions,
+  getPostItShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
 } from '@/common/components/front-basic-sapes';
 import {
@@ -115,6 +116,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getAccordionShapeSizeRestrictions().defaultWidth,
         height: getAccordionShapeSizeRestrictions().defaultHeight,
       };
+    case 'postit':
+      return {
+        width: getPostItShapeSizeRestrictions().defaultWidth,
+        height: getPostItShapeSizeRestrictions().defaultHeight,
+      };
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -133,6 +139,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'accordion':
     case 'checkbox':
     case 'radiobutton':
+    case 'postit':
       return true;
     default:
       return false;
@@ -157,6 +164,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return '[*]Section A\nSection B';
     case 'checkbox':
       return 'Check me!';
+    case 'postit':
+      return '';
     default:
       return undefined;
   }
@@ -168,6 +177,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
   switch (shapeType) {
     case 'textarea':
     case 'accordion':
+    case 'postit':
       return 'textarea';
       break;
   }

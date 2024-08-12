@@ -16,6 +16,7 @@ export const renderPostit = (
       ref={shapeRefs.current[shape.id]}
       x={shape.x}
       y={shape.y}
+      text={shape.text}
       width={shape.width}
       height={shape.height}
       draggable
@@ -23,6 +24,8 @@ export const renderPostit = (
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      editType={shape.editType}
+      isEditable={true}
     />
   );
 };

@@ -2,22 +2,22 @@ import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { Group, Rect } from 'react-konva';
+import { Group, Rect, Text } from 'react-konva';
 
 const postItShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 150,
-  maxWidth: 200,
-  maxHeight: 200,
-  defaultWidth: 100,
-  defaultHeight: 150,
+  minWidth: 50,
+  minHeight: 50,
+  maxWidth: -1,
+  maxHeight: -1,
+  defaultWidth: 160,
+  defaultHeight: 160,
 };
 
 export const getPostItShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   postItShapeRestrictions;
 
 export const PostItShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, text, onSelected, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(postItShapeRestrictions, width, height);
     const handleClick = () => {
@@ -64,6 +64,17 @@ export const PostItShape = forwardRef<any, ShapeProps>(
           stroke="black"
           strokeWidth={2}
           fill="gray"
+        />
+
+        <Text
+          x={5}
+          y={fixedHeight + 35}
+          width={postItWidth - 5}
+          height={postItHeight - 15}
+          text={text}
+          wrap="word"
+          ellipsis={true}
+          fontSize={15}
         />
       </Group>
     );
