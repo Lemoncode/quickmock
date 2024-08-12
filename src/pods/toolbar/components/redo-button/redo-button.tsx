@@ -4,12 +4,8 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { useCanvasContext } from '@/core/providers';
 
 export const RedoButton = () => {
-  const { doRedo, shapes } = useCanvasContext();
+  const { doRedo } = useCanvasContext();
   const handleClick = () => {
-    console.log('Redo');
-
-    //TODO: REMOVE THIS
-    console.log('shapes: ', shapes);
     doRedo();
   };
 
