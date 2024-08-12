@@ -21,6 +21,7 @@ import {
   renderTablet,
 } from './simple-container';
 import { renderRectangle } from './simple-basic-shapes/rectangle.rerender';
+import { renderPostit } from './simple-basic-shapes/postit.rerender';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -59,6 +60,8 @@ export const renderShapeComponent = (
       return renderRadioButton(shape, shapeRenderedProps);
     case 'rectangle':
       return renderRectangle(shape, shapeRenderedProps);
+    case 'postit':
+      return renderPostit(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

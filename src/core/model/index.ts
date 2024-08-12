@@ -24,7 +24,8 @@ export type ShapeType =
   | 'timepickerinput'
   | 'label'
   | 'radiobutton'
-  | 'rectangle';
+  | 'rectangle'
+  | 'postit';
 /* | "text"| "button" |  "radio" | "image"*/
 
 export type ShapeRefs = {
