@@ -7,8 +7,8 @@ import { Group, Rect } from 'react-konva';
 const postItShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
   minHeight: 150,
-  maxWidth: -1,
-  maxHeight: -1,
+  maxWidth: 200,
+  maxHeight: 200,
   defaultWidth: 100,
   defaultHeight: 150,
 };
