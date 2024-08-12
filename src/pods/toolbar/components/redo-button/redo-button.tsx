@@ -4,13 +4,17 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { useCanvasContext } from '@/core/providers';
 
 export const RedoButton = () => {
-  const { doRedo } = useCanvasContext();
+  const { doRedo, canRedo } = useCanvasContext();
   const handleClick = () => {
     doRedo();
   };
 
   return (
-    <ToolbarButton onClick={handleClick} className={classes.button}>
+    <ToolbarButton
+      onClick={handleClick}
+      className={classes.button}
+      disabled={!canRedo()}
+    >
       <RedoIcon />
       <span>Redo</span>
     </ToolbarButton>

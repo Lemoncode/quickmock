@@ -4,14 +4,18 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { useCanvasContext } from '@/core/providers';
 
 export const UndoButton = () => {
-  const { doUndo } = useCanvasContext();
+  const { doUndo, canUndo } = useCanvasContext();
 
   const handleClick = () => {
     doUndo();
   };
 
   return (
-    <ToolbarButton onClick={handleClick} className={classes.button}>
+    <ToolbarButton
+      onClick={handleClick}
+      className={classes.button}
+      disabled={!canUndo()}
+    >
       <UndoIcon />
       <span>Undo</span>
     </ToolbarButton>
