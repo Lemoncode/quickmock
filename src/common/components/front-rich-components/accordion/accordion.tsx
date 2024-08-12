@@ -1,7 +1,7 @@
 import { Group } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef, useEffect, useMemo, useState } from 'react';
-import { ShapeProps } from '../front-components/shape.model';
+import { ShapeProps } from '../../front-components/shape.model';
 import { AccordionAllParts } from './components';
 import {
   calculateDynamicContentSizeRestriction,
