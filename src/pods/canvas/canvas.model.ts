@@ -21,6 +21,7 @@ import { getLabelSizeRestrictions } from '@/common/components/front-components/l
 import {
   getDiamondShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
+  getlineShapeRestrictions,
 } from '@/common/components/front-basic-sapes';
 import {
   getAccordionShapeSizeRestrictions,
@@ -110,6 +111,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getDiamondShapeSizeRestrictions().defaultWidth,
         height: getDiamondShapeSizeRestrictions().defaultHeight,
       };
+    case 'line':
+      return {
+        width: getlineShapeRestrictions().defaultWidth,
+        height: getlineShapeRestrictions().defaultHeight,
+      };
     case 'accordion':
       return {
         width: getAccordionShapeSizeRestrictions().defaultWidth,
@@ -133,6 +139,15 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'accordion':
     case 'checkbox':
     case 'radiobutton':
+      return true;
+    default:
+      return false;
+  }
+};
+
+const doesShapeHaveLateralTransformer = (shapeType: ShapeType): boolean => {
+  switch (shapeType) {
+    case 'line':
       return true;
     default:
       return false;
@@ -189,6 +204,7 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     height,
     type: shapeType,
     allowsInlineEdition: doesShapeAllowInlineEdition(shapeType),
+    hasLateralTransformer: doesShapeHaveLateralTransformer(shapeType),
     text: generateDefaultTextValue(shapeType),
     editType: getShapeEditInlineType(shapeType),
   };
