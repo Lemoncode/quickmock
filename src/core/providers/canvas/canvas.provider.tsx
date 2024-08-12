@@ -17,9 +17,6 @@ interface Props {
 export const CanvasProvider: React.FC<Props> = props => {
   const { children } = props;
 
-  //TODO: borrar este comentario
-  //const [shapes, setShapes] = React.useState<ShapeModel[]>([]);
-
   const [scale, setScale] = React.useState(1);
   const stageRef = React.useRef<Konva.Stage>(null);
 
@@ -30,7 +27,7 @@ export const CanvasProvider: React.FC<Props> = props => {
     redo,
     undo,
     getCurrentState: getCurrentUndoHistoryState,
-  } = useHistoryManager<DocumentModel>(createDefaultDocumentModel()); //TODO: Checkthis
+  } = useHistoryManager<DocumentModel>(createDefaultDocumentModel());
 
   const [document, setDocument, setShapesSkipHistory] =
     useStateWithInterceptor<DocumentModel>(
@@ -44,26 +41,24 @@ export const CanvasProvider: React.FC<Props> = props => {
     setDocument({ shapes: [] });
   };
 
-  //TODO: solve this
-  /*const deleteSelectedShape = () => {
-   
-    setShapes(prevShapes =>
-      removeShapeFromList(selectionInfo.selectedShapeId, prevShapes)
-    );
-  };*/
+  const deleteSelectedShape = () => {
+    setDocument(prevDocument => ({
+      ...prevDocument,
+      shapes: removeShapeFromList(
+        selectionInfo.selectedShapeId,
+        prevDocument.shapes
+      ),
+    }));
+  };
 
-  //TOD: fix this
-  /*
   const pasteShape = (shape: ShapeModel) => {
     shape.id = uuidv4();
-    setShapes(shapes => [...shapes, shape]);
+
+    setDocument(prevDocument => ({
+      ...prevDocument,
+      shapes: [...prevDocument.shapes, shape],
+    }));
   };
-  
-  */
-
-  const pasteShape = (shape: ShapeModel) => {};
-
-  const deleteSelectedShape = () => {};
 
   const addNewShape = (type: ShapeType, x: number, y: number) => {
     const newShape = createShape({ x, y }, type);
