@@ -26,6 +26,8 @@ import {
   renderRectangle,
   renderLine,
 } from './simple-basic-shapes';
+import { renderAccordion } from './simple-rich-components/accordion.renderer';
+
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -70,6 +72,8 @@ export const renderShapeComponent = (
       return renderDiamond(shape, shapeRenderedProps);
     case 'line':
       return renderLine(shape, shapeRenderedProps);
+    case 'accordion':
+      return renderAccordion(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
