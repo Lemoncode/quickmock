@@ -1,8 +1,9 @@
 import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
-import { ShapeProps } from './shape.model';
+import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import { mapListboxTextToItems } from './listbox-shape.business';
 
 const listboxShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 75,
@@ -17,6 +18,7 @@ export const getListboxShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   listboxShapeSizeRestrictions;
 
 interface ListBoxShapeProps extends ShapeProps {
+  // TODO: Eliminar esto y de donde se use (seguramente el rendrer)
   items: string[];
 }
 
@@ -45,13 +47,15 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
 
     useEffect(() => {
       if (text) {
-        setListboxItem(listboxItems);
-        setSelectedItem(selectedItem);
+        const { items, selectedSectionIndex } = mapListboxTextToItems(text);
+        setListboxItem(items);
+        setSelectedItem(selectedSectionIndex);
       } else {
         setListboxItem([]);
       }
     }, [text]);
 
+    // TODO: martillo fino de ancohes porque el transformer no va bien
     return (
       <Group
         x={x}
@@ -79,7 +83,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
 
         {/* Elementos de la lista con desplazamiento */}
         <Group ref={listRef}>
-          {items.map((item, index) => (
+          {listboxItems.map((item, index) => (
             <Group key={index} onClick={() => handleClick(index)}>
               <Rect
                 x={2}
@@ -88,6 +92,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
                 height={30}
                 fill={selectedItem === index ? 'lightblue' : 'white'}
               />
+              {/* Creo que le falta el width de esa caja*/}
               <Text
                 x={10}
                 y={30 * index + 5}
@@ -95,6 +100,8 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
                 fontFamily="Comic Sans MS, cursive"
                 fontSize={20}
                 fill="black"
+                wrap="none"
+                ellipsis={true}
               />
             </Group>
           ))}
