@@ -131,6 +131,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'button':
     case 'textarea':
     case 'accordion':
+    case 'radiobutton':
       return true;
     default:
       return false;
@@ -147,6 +148,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Select an option';
     case 'button':
       return 'Click Me!';
+    case 'radiobutton':
+      return 'Select me!';
     case 'textarea':
       return 'Your text here...';
     case 'accordion':
