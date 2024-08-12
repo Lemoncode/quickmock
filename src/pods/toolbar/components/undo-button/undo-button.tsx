@@ -1,6 +1,6 @@
 import { UndoIcon } from '@/common/components/icons/undo-icon.component';
-import ToolbarButton from '../toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
+import { ToolbarButton } from '../toolbar-button/toolbar-button';
 import { useCanvasContext } from '@/core/providers';
 
 export const UndoButton = () => {
@@ -15,11 +15,8 @@ export const UndoButton = () => {
       onClick={handleClick}
       className={classes.button}
       disabled={!canUndo()}
-    >
-      <UndoIcon />
-      <span>Undo</span>
-    </ToolbarButton>
+      icon={<UndoIcon />}
+      label="Undo"
+    />
   );
 };
-
-export default UndoButton;

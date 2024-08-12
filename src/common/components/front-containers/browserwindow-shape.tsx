@@ -41,8 +41,8 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
       >
         {/* Window frame */}
         <Rect
-          x={margin}
-          y={margin}
+          x={0}
+          y={0}
           width={restrictedWidth}
           height={restrictedHeight}
           cornerRadius={15}
@@ -52,8 +52,8 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
         />
         {/* Title bar */}
         <Rect
-          x={margin}
-          y={margin}
+          x={0}
+          y={0}
           width={restrictedWidth}
           height={titleBarHeight}
           cornerRadius={10}
@@ -64,7 +64,7 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
         {/* Title bar buttons */}
         <Circle
           x={margin + 20}
-          y={margin + titleBarHeight / 2}
+          y={titleBarHeight / 2}
           radius={buttonRadius}
           fill="red"
           stroke="black"
@@ -72,7 +72,7 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
         />
         <Circle
           x={margin + 40}
-          y={margin + titleBarHeight / 2}
+          y={titleBarHeight / 2}
           radius={buttonRadius}
           fill="yellow"
           stroke="black"
@@ -80,7 +80,7 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
         />
         <Circle
           x={margin + 60}
-          y={margin + titleBarHeight / 2}
+          y={titleBarHeight / 2}
           radius={buttonRadius}
           fill="green"
           stroke="black"
@@ -89,9 +89,9 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
         {/* Content area */}
         <Rect
           x={margin * 2}
-          y={margin + 40}
-          width={restrictedWidth - 20}
-          height={restrictedHeight - 50}
+          y={margin * 5}
+          width={restrictedWidth - margin * 4}
+          height={restrictedHeight - margin * 7}
           stroke="black"
           strokeWidth={1}
           fill="white"
@@ -99,8 +99,8 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
         {/* URL bar */}
         <Rect
           x={margin * 3}
-          y={margin + titleBarHeight + 15}
-          width={restrictedWidth - 40}
+          y={margin * 3 + titleBarHeight}
+          width={restrictedWidth - margin * 6}
           height={urlBarHeight}
           cornerRadius={5}
           stroke="black"
@@ -108,8 +108,8 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>(
           fill="white"
         />
         <Text
-          x={margin * 3 + 5}
-          y={margin + titleBarHeight + 20}
+          x={margin * 4}
+          y={margin * 3.5 + titleBarHeight}
           width={restrictedWidth - 50}
           height={restrictedHeight - 50}
           text="https://example.com"

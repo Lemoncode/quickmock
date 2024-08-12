@@ -1,6 +1,6 @@
 import { RedoIcon } from '@/common/components/icons/redo-icon.component';
-import ToolbarButton from '../toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
+import { ToolbarButton } from '../toolbar-button';
 import { useCanvasContext } from '@/core/providers';
 
 export const RedoButton = () => {
@@ -14,11 +14,8 @@ export const RedoButton = () => {
       onClick={handleClick}
       className={classes.button}
       disabled={!canRedo()}
-    >
-      <RedoIcon />
-      <span>Redo</span>
-    </ToolbarButton>
+      icon={<RedoIcon />}
+      label="Redo"
+    />
   );
 };
-
-export default RedoButton;

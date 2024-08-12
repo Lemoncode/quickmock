@@ -17,6 +17,7 @@ export const renderDatepickerinput = (
       y={shape.y}
       width={shape.width}
       height={shape.height}
+      name="shape"
       draggable
       onSelected={handleSelected}
       ref={shapeRefs.current[shape.id]}

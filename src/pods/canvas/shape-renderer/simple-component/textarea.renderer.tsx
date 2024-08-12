@@ -17,12 +17,16 @@ export const renderTextArea = (
       y={shape.y}
       width={shape.width}
       height={shape.height}
+      name="shape"
       draggable
       onSelected={handleSelected}
       ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      editType={shape.editType}
+      isEditable={true}
+      text={shape.text}
     />
   );
 };

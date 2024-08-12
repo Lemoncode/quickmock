@@ -1,4 +1,4 @@
-import { Coord, ShapeType, Size, ShapeModel } from '@/core/model';
+import { Coord, ShapeType, Size, ShapeModel, EditType } from '@/core/model';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -18,8 +18,16 @@ import {
   getTabletShapeSizeRestrictions,
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
+import {
+  getDiamondShapeSizeRestrictions,
+  getRectangleShapeSizeRestrictions,
+} from '@/common/components/front-basic-sapes';
+import {
+  getAccordionShapeSizeRestrictions,
+  getVideoPlayerShapeSizeRestrictions,
+} from '@/common/components/front-rich-components';
 
-const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
+export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
     case 'label':
       return {
@@ -87,8 +95,30 @@ const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getTimepickerInputShapeSizeRestrictions().defaultWidth,
         height: getTimepickerInputShapeSizeRestrictions().defaultHeight,
       };
-
+    case 'rectangle':
+      return {
+        width: getRectangleShapeSizeRestrictions().defaultWidth,
+        height: getRectangleShapeSizeRestrictions().defaultHeight,
+      };
+    case 'videoPlayer':
+      return {
+        width: getVideoPlayerShapeSizeRestrictions().defaultWidth,
+        height: getVideoPlayerShapeSizeRestrictions().defaultHeight,
+      };
+    case 'diamond':
+      return {
+        width: getDiamondShapeSizeRestrictions().defaultWidth,
+        height: getDiamondShapeSizeRestrictions().defaultHeight,
+      };
+    case 'accordion':
+      return {
+        width: getAccordionShapeSizeRestrictions().defaultWidth,
+        height: getAccordionShapeSizeRestrictions().defaultHeight,
+      };
     default:
+      console.warn(
+        `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
+      );
       return { width: 200, height: 50 };
   }
 };
@@ -97,6 +127,10 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
   switch (shapeType) {
     case 'input':
     case 'label':
+    case 'combobox':
+    case 'button':
+    case 'textarea':
+    case 'accordion':
       return true;
     default:
       return false;
@@ -109,9 +143,29 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return '';
     case 'label':
       return 'Label';
+    case 'combobox':
+      return 'Select an option';
+    case 'button':
+      return 'Click Me!';
+    case 'textarea':
+      return 'Your text here...';
+    case 'accordion':
+      return '[*]Section A\nSection B';
     default:
       return undefined;
   }
+};
+
+const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
+  const result = undefined;
+
+  switch (shapeType) {
+    case 'textarea':
+    case 'accordion':
+      return 'textarea';
+      break;
+  }
+  return result;
 };
 
 // TODO: create interfaces to hold Coordination and Size
@@ -130,5 +184,39 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     type: shapeType,
     allowsInlineEdition: doesShapeAllowInlineEdition(shapeType),
     text: generateDefaultTextValue(shapeType),
+    editType: getShapeEditInlineType(shapeType),
   };
+};
+
+// Snap model
+export const SNAP_THRESHOLD = 5;
+
+export type SnapLines = {
+  vertical: number[];
+  horizontal: number[];
+};
+
+export type SnapType = 'center' | 'start' | 'end';
+
+export interface SnapEdge {
+  guide: number;
+  offset: number;
+  snapType: SnapType;
+}
+
+export type SnapEdges = {
+  vertical: SnapEdge[];
+  horizontal: SnapEdge[];
+};
+
+export type SnapLineSubset = {
+  snapLine: number;
+  diff: number;
+  snap: SnapType;
+  offset: number;
+};
+
+export type ClosestSnapLines = {
+  vertical: SnapLineSubset | null;
+  horizontal: SnapLineSubset | null;
 };
