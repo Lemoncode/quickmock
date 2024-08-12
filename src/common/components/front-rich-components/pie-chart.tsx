@@ -1,4 +1,4 @@
-import { Group, Rect, Circle, Line, Path } from 'react-konva';
+import { Group, Circle, Path } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
@@ -13,6 +13,9 @@ const PieChartShapeSizeRestrictions: ShapeSizeRestrictions = {
   defaultHeight: 500,
 };
 
+const PIE_FIX_WIDTH = 200;
+const PIE_FIX_HEIGHT = 200;
+
 export const getPieChartShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   PieChartShapeSizeRestrictions;
 
@@ -26,11 +29,11 @@ export const PieChartShape = forwardRef<any, ShapeProps>(
       );
 
     const calculateScaleX = () => {
-      return restrictedWidth / 200;
+      return restrictedWidth / PIE_FIX_WIDTH;
     };
 
     const calculateScaleY = () => {
-      return restrictedHeight / 200;
+      return restrictedHeight / PIE_FIX_HEIGHT;
     };
 
     return (
@@ -44,8 +47,8 @@ export const PieChartShape = forwardRef<any, ShapeProps>(
         onClick={() => onSelected(id, 'pie')}
       >
         <Group
-          width={200}
-          height={200}
+          width={PIE_FIX_WIDTH}
+          height={PIE_FIX_HEIGHT}
           scaleX={calculateScaleX()}
           scaleY={calculateScaleY()}
         >
