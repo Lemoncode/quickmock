@@ -27,8 +27,9 @@ export type ShapeType =
   | 'rectangle'
   | 'videoPlayer'
   | 'diamond'
-  | 'line';
-  | 'accordion';
+  | 'line'
+  | 'accordion'
+  | 'pie';
 /* | "text"| "button" |  "radio" | "image"*/
 
 export type EditType = 'input' | 'textarea';
