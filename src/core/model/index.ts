@@ -28,6 +28,7 @@ export type ShapeType =
   | 'videoPlayer'
   | 'diamond'
   | 'triangle'
+  | 'line'
   | 'accordion';
 /* | "text"| "button" |  "radio" | "image"*/
 
@@ -55,6 +56,7 @@ export interface ShapeModel {
   height: number;
   type: ShapeType;
   allowsInlineEdition: boolean;
+  hasLateralTransformer: boolean;
   editType?: EditType;
   text?: string;
 }

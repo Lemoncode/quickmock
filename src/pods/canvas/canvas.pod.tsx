@@ -72,12 +72,7 @@ export const CanvasPod = () => {
   } = useSnapIn(transformerRef, selectedShapeKonvaId);
 
   const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
-    updateShapeSizeAndPosition,
-    {
-      selectedShapeRef,
-      selectedShapeId,
-      selectedShapeType,
-    }
+    updateShapeSizeAndPosition
   );
 
   const handleDragEnd =
