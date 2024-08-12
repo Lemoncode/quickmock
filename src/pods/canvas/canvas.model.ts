@@ -131,6 +131,15 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
   }
 };
 
+const doesShapeHaveLateralTransformer = (shapeType: ShapeType): boolean => {
+  switch (shapeType) {
+    case 'line':
+      return true;
+    default:
+      return false;
+  }
+};
+
 const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
   switch (shapeType) {
     case 'input':
@@ -174,6 +183,7 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     height,
     type: shapeType,
     allowsInlineEdition: doesShapeAllowInlineEdition(shapeType),
+    hasLateralTransformer: doesShapeHaveLateralTransformer(shapeType),
     text: generateDefaultTextValue(shapeType),
     editType: getShapeEditInlineType(shapeType),
   };

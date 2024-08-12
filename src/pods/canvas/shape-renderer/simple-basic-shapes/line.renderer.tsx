@@ -20,6 +20,7 @@ export const renderLine = (
       width={shape.width}
       height={shape.height}
       draggable
+      hasLateralTransformer={shape.hasLateralTransformer}
       onSelected={handleSelected}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
