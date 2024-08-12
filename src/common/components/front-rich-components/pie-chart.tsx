@@ -25,8 +25,6 @@ export const PieChartShape = forwardRef<any, ShapeProps>(
         height
       );
 
-    console.log('PieChartShape', { restrictedWidth, restrictedHeight });
-
     const calculateScaleX = () => {
       return restrictedWidth / 200;
     };
@@ -43,7 +41,7 @@ export const PieChartShape = forwardRef<any, ShapeProps>(
         width={restrictedWidth}
         height={restrictedHeight}
         {...shapeProps}
-        onClick={() => onSelected(id, 'videoPlayer')}
+        onClick={() => onSelected(id, 'pie')}
       >
         <Group
           width={200}
