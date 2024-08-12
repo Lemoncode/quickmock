@@ -27,7 +27,7 @@ export type ShapeType =
   | 'rectangle'
   | 'videoPlayer'
   | 'diamond'
-  | 'line';
+  | 'line'
   | 'accordion';
 /* | "text"| "button" |  "radio" | "image"*/
 
