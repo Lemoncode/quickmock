@@ -28,6 +28,7 @@ import {
 } from './simple-basic-shapes';
 import { renderAccordion } from './simple-rich-components/accordion.renderer';
 import { renderPieChart } from './simple-rich-components/pie-chart.renderer';
+import { renderMapChart } from './simple-rich-components/map-chart.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -70,6 +71,8 @@ export const renderShapeComponent = (
       return renderVideoPlayer(shape, shapeRenderedProps);
     case 'pie':
       return renderPieChart(shape, shapeRenderedProps);
+    case 'map':
+      return renderMapChart(shape, shapeRenderedProps);
     case 'diamond':
       return renderDiamond(shape, shapeRenderedProps);
     case 'line':

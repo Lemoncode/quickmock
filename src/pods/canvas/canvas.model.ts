@@ -27,6 +27,7 @@ import {
   getAccordionShapeSizeRestrictions,
   getPieChartShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
+  getMapChartShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 
 export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
@@ -126,6 +127,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getPieChartShapeSizeRestrictions().defaultWidth,
         height: getPieChartShapeSizeRestrictions().defaultHeight,
+      };
+    case 'map':
+      return {
+        width: getMapChartShapeSizeRestrictions().defaultWidth,
+        height: getMapChartShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(

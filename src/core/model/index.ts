@@ -29,7 +29,8 @@ export type ShapeType =
   | 'diamond'
   | 'line'
   | 'accordion'
-  | 'pie';
+  | 'pie'
+  | 'map';
 
 export type EditType = 'input' | 'textarea';
 
