@@ -1,0 +1,5 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Estrella -->
+  <polygon points="50,10 61,35 88,35 66,52 75,80 50,65 25,80 34,52 12,35 39,35" 
+           style="fill:none;stroke:black;stroke-width:2"/>
+</svg>
