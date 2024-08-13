@@ -30,7 +30,6 @@ export type ShapeType =
   | 'line'
   | 'accordion'
   | 'pie';
-/* | "text"| "button" |  "radio" | "image"*/
 
 export type EditType = 'input' | 'textarea';
 
