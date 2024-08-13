@@ -5,12 +5,12 @@ import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
 const MapChartShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 100,
+  minWidth: 50,
+  minHeight: 50,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 150,
-  defaultHeight: 150,
+  defaultWidth: 200,
+  defaultHeight: 200,
 };
 
 const MAP_FIX_WIDTH = 200;
@@ -44,7 +44,7 @@ export const MapChartShape = forwardRef<any, ShapeProps>(
         width={restrictedWidth}
         height={restrictedHeight}
         {...shapeProps}
-        onClick={() => onSelected(id, 'pie')}
+        onClick={() => onSelected(id, 'map')}
       >
         <Group
           width={MAP_FIX_WIDTH}
