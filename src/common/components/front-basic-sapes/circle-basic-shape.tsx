@@ -21,6 +21,8 @@ export const CircleShape = forwardRef<any, ShapeProps>(
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(circleShapeRestrictions, width, height);
 
+    const radius = Math.min(restrictedWidth, restrictedHeight) / 2;
+
     return (
       <Group
         x={x}
@@ -32,11 +34,9 @@ export const CircleShape = forwardRef<any, ShapeProps>(
         onClick={() => onSelected(id, 'circle')}
       >
         <Circle
-          x={0}
-          y={0}
-          width={restrictedWidth}
-          height={restrictedHeight}
-          radius={40}
+          x={restrictedWidth / 2}
+          y={restrictedHeight / 2}
+          radius={radius}
           stroke="black"
           strokeWidth={2}
           fill="white"
