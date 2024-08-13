@@ -28,8 +28,8 @@ export type ShapeType =
   | 'videoPlayer'
   | 'diamond'
   | 'line'
-  | 'accordion';
-/* | "text"| "button" |  "radio" | "image"*/
+  | 'accordion'
+  | 'pie';
 
 export type EditType = 'input' | 'textarea';
 

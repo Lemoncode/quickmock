@@ -27,7 +27,7 @@ import {
   renderLine,
 } from './simple-basic-shapes';
 import { renderAccordion } from './simple-rich-components/accordion.renderer';
-
+import { renderPieChart } from './simple-rich-components/pie-chart.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -68,6 +68,8 @@ export const renderShapeComponent = (
       return renderRectangle(shape, shapeRenderedProps);
     case 'videoPlayer':
       return renderVideoPlayer(shape, shapeRenderedProps);
+    case 'pie':
+      return renderPieChart(shape, shapeRenderedProps);
     case 'diamond':
       return renderDiamond(shape, shapeRenderedProps);
     case 'line':

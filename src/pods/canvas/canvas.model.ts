@@ -25,6 +25,7 @@ import {
 } from '@/common/components/front-basic-sapes';
 import {
   getAccordionShapeSizeRestrictions,
+  getPieChartShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 
@@ -120,6 +121,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getAccordionShapeSizeRestrictions().defaultWidth,
         height: getAccordionShapeSizeRestrictions().defaultHeight,
+      };
+    case 'pie':
+      return {
+        width: getPieChartShapeSizeRestrictions().defaultWidth,
+        height: getPieChartShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(
