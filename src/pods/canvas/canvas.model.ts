@@ -19,6 +19,7 @@ import {
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 import {
+  getCircleShapeSizeRestrictions,
   getDiamondShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
   getlineShapeRestrictions,
@@ -126,6 +127,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getPieChartShapeSizeRestrictions().defaultWidth,
         height: getPieChartShapeSizeRestrictions().defaultHeight,
+      };
+    case 'circle':
+      return {
+        width: getCircleShapeSizeRestrictions().defaultWidth,
+        height: getCircleShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(
