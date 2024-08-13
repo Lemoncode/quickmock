@@ -1,6 +1,6 @@
 import { Group, Circle, Path } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
@@ -28,13 +28,13 @@ export const PieChartShape = forwardRef<any, ShapeProps>(
         height
       );
 
-    const calculateScaleX = () => {
+    const scaleX = useMemo(() => {
       return restrictedWidth / PIE_FIX_WIDTH;
-    };
+    }, [restrictedWidth]);
 
-    const calculateScaleY = () => {
+    const scaleY = useMemo(() => {
       return restrictedHeight / PIE_FIX_HEIGHT;
-    };
+    }, [restrictedWidth]);
 
     return (
       <Group
@@ -49,8 +49,8 @@ export const PieChartShape = forwardRef<any, ShapeProps>(
         <Group
           width={PIE_FIX_WIDTH}
           height={PIE_FIX_HEIGHT}
-          scaleX={calculateScaleX()}
-          scaleY={calculateScaleY()}
+          scaleX={scaleX}
+          scaleY={scaleY}
         >
           {/* Círculo exterior */}
           <Circle
