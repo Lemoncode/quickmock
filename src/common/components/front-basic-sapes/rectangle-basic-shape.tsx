@@ -38,7 +38,7 @@ export const RectangleShape = forwardRef<any, ShapeProps>(
           height={restrictedHeight}
           strokeWidth={2}
           stroke="black"
-          fille={null}
+          fill={'white'}
           cornerRadius={5}
         />
       </Group>
