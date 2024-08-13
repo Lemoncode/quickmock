@@ -22,6 +22,7 @@ import {
   getDiamondShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
   getlineShapeRestrictions,
+  getStarShapeSizeRestrictions,
 } from '@/common/components/front-basic-sapes';
 import {
   getAccordionShapeSizeRestrictions,
@@ -126,6 +127,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getPieChartShapeSizeRestrictions().defaultWidth,
         height: getPieChartShapeSizeRestrictions().defaultHeight,
+      };
+    case 'star':
+      return {
+        width: getStarShapeSizeRestrictions().defaultWidth,
+        height: getStarShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(
