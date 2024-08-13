@@ -34,7 +34,7 @@ export const MapChartShape = forwardRef<any, ShapeProps>(
 
     const scaleY = useMemo(() => {
       return restrictedHeight / MAP_FIX_HEIGHT;
-    }, [restrictedWidth]);
+    }, [restrictedHeight]);
 
     return (
       <Group
@@ -52,6 +52,7 @@ export const MapChartShape = forwardRef<any, ShapeProps>(
           scaleX={scaleX}
           scaleY={scaleY}
         >
+          {/* Fondo del mapa */}
           <Rect width={400} height={400} fill="#e6e6e6" />
 
           {/* Carreteras principales */}
