@@ -31,6 +31,7 @@ export type ShapeType =
   | 'accordion'
   | 'pie'
   | 'horizontal-menu'
+  | 'breadcrumb'
   | 'map'
   | 'circle'
   | 'star';

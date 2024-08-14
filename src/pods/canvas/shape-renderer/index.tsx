@@ -26,6 +26,7 @@ import {
   renderHorizontalMenu,
   renderPieChart,
   renderMapChart,
+  renderBreadcrumb,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -86,6 +87,8 @@ export const renderShapeComponent = (
       return renderAccordion(shape, shapeRenderedProps);
     case 'horizontal-menu':
       return renderHorizontalMenu(shape, shapeRenderedProps);
+    case 'breadcrumb':
+      return renderBreadcrumb(shape, shapeRenderedProps);
     case 'circle':
       return renderCircle(shape, shapeRenderedProps);
     case 'star':

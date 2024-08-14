@@ -8,5 +8,6 @@ export const mockRichComponentsCollection: ItemInfo[] = [
     thumbnailSrc: '/rich-components/horizontal-menu.svg',
     type: 'horizontal-menu',
   },
+  { thumbnailSrc: '/rich-components/breadcrumb.svg', type: 'breadcrumb' },
   { thumbnailSrc: '/rich-components/map.svg', type: 'map' },
 ];
