@@ -26,11 +26,13 @@ export const PostItShape = forwardRef<any, ShapeProps>(
 
     const postItWidth = restrictedWidth;
     const postItHeight = restrictedHeight;
-    const fixedWidth = postItWidth * 0.5;
-    const fixedHeight = postItHeight * 0.2;
-    const fixedX = (width - fixedWidth) / 2;
-    const fixedY = postItHeight / 4;
-    const rotation = -10;
+    const tapeWidth = postItWidth * 0.5;
+    const tapeHeight = postItHeight * 0.2;
+
+    const tapeX = (width - tapeWidth) / 2;
+    const tapeY = 0;
+
+    const tapeRotation = -10;
 
     return (
       <Group
@@ -42,39 +44,28 @@ export const PostItShape = forwardRef<any, ShapeProps>(
         {...shapeProps}
         onClick={handleClick}
       >
-        {/* Marco del Post-it */}
+        {/* Post-it frame */}
         <Rect
           x={0}
-          y={fixedHeight + 10}
+          y={10}
           width={postItWidth}
-          height={postItHeight}
+          height={restrictedHeight - 10}
           cornerRadius={10}
           stroke="black"
           strokeWidth={2}
           fill="#FFFF99"
         />
 
-        {/* Fixo rotado */}
+        {/* Tape */}
         <Rect
-          x={fixedX}
-          y={fixedY}
-          width={fixedWidth}
-          height={fixedHeight}
-          rotation={rotation}
+          x={tapeX}
+          y={tapeY}
+          width={tapeWidth}
+          height={tapeHeight}
+          rotation={tapeRotation}
           stroke="black"
           strokeWidth={2}
           fill="gray"
-        />
-
-        <Text
-          x={5}
-          y={fixedHeight + 35}
-          width={postItWidth - 5}
-          height={postItHeight - 15}
-          text={text}
-          wrap="word"
-          ellipsis={true}
-          fontSize={15}
         />
       </Group>
     );
