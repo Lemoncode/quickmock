@@ -19,13 +19,20 @@ import {
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 import {
+  getCircleShapeSizeRestrictions,
   getDiamondShapeSizeRestrictions,
   getPostItShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
+  getlineShapeRestrictions,
+  getStarShapeSizeRestrictions,
 } from '@/common/components/front-basic-sapes';
 import {
   getAccordionShapeSizeRestrictions,
+  getBreadcrumbShapeSizeRestrictions,
+  getPieChartShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
+  getHorizontalMenuShapeSizeRestrictions,
+  getMapChartShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 
 export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
@@ -111,6 +118,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getDiamondShapeSizeRestrictions().defaultWidth,
         height: getDiamondShapeSizeRestrictions().defaultHeight,
       };
+    case 'line':
+      return {
+        width: getlineShapeRestrictions().defaultWidth,
+        height: getlineShapeRestrictions().defaultHeight,
+      };
     case 'accordion':
       return {
         width: getAccordionShapeSizeRestrictions().defaultWidth,
@@ -120,6 +132,36 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getPostItShapeSizeRestrictions().defaultWidth,
         height: getPostItShapeSizeRestrictions().defaultHeight,
+      }
+    case 'pie':
+      return {
+        width: getPieChartShapeSizeRestrictions().defaultWidth,
+        height: getPieChartShapeSizeRestrictions().defaultHeight,
+      };
+    case 'horizontal-menu':
+      return {
+        width: getHorizontalMenuShapeSizeRestrictions().defaultWidth,
+        height: getHorizontalMenuShapeSizeRestrictions().defaultHeight,
+      };
+    case 'breadcrumb':
+      return {
+        width: getBreadcrumbShapeSizeRestrictions().defaultWidth,
+        height: getBreadcrumbShapeSizeRestrictions().defaultHeight,
+      };
+    case 'map':
+      return {
+        width: getMapChartShapeSizeRestrictions().defaultWidth,
+        height: getMapChartShapeSizeRestrictions().defaultHeight,
+      };
+    case 'circle':
+      return {
+        width: getCircleShapeSizeRestrictions().defaultWidth,
+        height: getCircleShapeSizeRestrictions().defaultHeight,
+      };
+    case 'star':
+      return {
+        width: getStarShapeSizeRestrictions().defaultWidth,
+        height: getStarShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(
@@ -140,6 +182,17 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'checkbox':
     case 'radiobutton':
     case 'postit':
+    case 'horizontal-menu':
+    case 'breadcrumb':
+      return true;
+    default:
+      return false;
+  }
+};
+
+const doesShapeHaveLateralTransformer = (shapeType: ShapeType): boolean => {
+  switch (shapeType) {
+    case 'line':
       return true;
     default:
       return false;
@@ -162,10 +215,14 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Your text here...';
     case 'accordion':
       return '[*]Section A\nSection B';
+    case 'breadcrumb':
+      return 'Home\nCategory\nProducts';
     case 'checkbox':
       return 'Check me!';
     case 'postit':
       return '';
+    case 'horizontal-menu':
+      return 'Home\nAbout\nServices\nContact';
     default:
       return undefined;
   }
@@ -178,6 +235,8 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'textarea':
     case 'accordion':
     case 'postit':
+    case 'horizontal-menu':
+    case 'breadcrumb':
       return 'textarea';
       break;
   }
@@ -199,6 +258,7 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     height,
     type: shapeType,
     allowsInlineEdition: doesShapeAllowInlineEdition(shapeType),
+    hasLateralTransformer: doesShapeHaveLateralTransformer(shapeType),
     text: generateDefaultTextValue(shapeType),
     editType: getShapeEditInlineType(shapeType),
   };

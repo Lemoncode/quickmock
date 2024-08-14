@@ -20,11 +20,22 @@ import {
   renderMobilePhoneContainer,
   renderTablet,
 } from './simple-container';
-import { renderRectangle } from './simple-basic-shapes/rectangle.rerender';
-import { renderPostit } from './simple-basic-shapes/postit.rerender';
-import { renderVideoPlayer } from './simple-rich-components';
-import { renderDiamond } from './simple-basic-shapes/diamond.renderer';
-import { renderAccordion } from './simple-rich-components/accordion.renderer';
+import {
+  renderVideoPlayer,
+  renderAccordion,
+  renderHorizontalMenu,
+  renderPieChart,
+  renderMapChart,
+  renderBreadcrumb,
+} from './simple-rich-components';
+import {
+  renderDiamond,
+  renderRectangle,
+  renderLine,
+  renderCircle,
+  renderStar,
+  renderPostit
+} from './simple-basic-shapes';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -67,10 +78,24 @@ export const renderShapeComponent = (
       return renderPostit(shape, shapeRenderedProps);
     case 'videoPlayer':
       return renderVideoPlayer(shape, shapeRenderedProps);
+    case 'pie':
+      return renderPieChart(shape, shapeRenderedProps);
+    case 'map':
+      return renderMapChart(shape, shapeRenderedProps);
     case 'diamond':
       return renderDiamond(shape, shapeRenderedProps);
+    case 'line':
+      return renderLine(shape, shapeRenderedProps);
     case 'accordion':
       return renderAccordion(shape, shapeRenderedProps);
+    case 'horizontal-menu':
+      return renderHorizontalMenu(shape, shapeRenderedProps);
+    case 'breadcrumb':
+      return renderBreadcrumb(shape, shapeRenderedProps);
+    case 'circle':
+      return renderCircle(shape, shapeRenderedProps);
+    case 'star':
+      return renderStar(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

@@ -28,8 +28,14 @@ export type ShapeType =
   | 'postit'
   | 'videoPlayer'
   | 'diamond'
-  | 'accordion';
-/* | "text"| "button" |  "radio" | "image"*/
+  | 'line'
+  | 'accordion'
+  | 'pie'
+  | 'horizontal-menu'
+  | 'breadcrumb'
+  | 'map'
+  | 'circle'
+  | 'star';
 
 export type EditType = 'input' | 'textarea';
 
@@ -55,6 +61,7 @@ export interface ShapeModel {
   height: number;
   type: ShapeType;
   allowsInlineEdition: boolean;
+  hasLateralTransformer: boolean;
   editType?: EditType;
   text?: string;
 }
