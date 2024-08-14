@@ -1,10 +1,11 @@
 import { useModalDialogContext } from '@/core/providers/model-dialog-providers/model-dialog.provider';
 import classes from './modal-dialog.component.module.css';
 import React, { useEffect } from 'react';
+import { XIconComponent } from '../icons';
 
-export const ModalDialogComponent: React.FC<Props> = () => {
+export const ModalDialogComponent: React.FC = () => {
   const { modalDialog, closeModal } = useModalDialogContext();
-  const { isOpen, title } = modalDialog;
+  const { isOpen, title, selectedComponent } = modalDialog;
 
   useEffect(() => {}, [modalDialog]);
 
@@ -14,20 +15,18 @@ export const ModalDialogComponent: React.FC<Props> = () => {
 
   return (
     isOpen && (
-      <div className={classes.dialogModal}>
-        <div className={classes.mainDiv}>
-          <div className={classes.xCloseModalDiv}>
-            <h2>{title}</h2>
-            <button
-              className={classes.xCloseModal}
-              onClick={handleClick}
-            ></button>
-          </div>
-          <div className={classes.main}>
-            <h1>{title ?? 'Dialog Modal Title'}</h1>
-            <h2>{modalDialog.selectedComponent}</h2>
-          </div>
+      <div className={classes.container}>
+        <div className={classes.dialogHeader}>
+          <h2 className={classes.dialogTitle}>{title}</h2>
+          <button
+            className={classes.dialogButton}
+            onClick={handleClick}
+            aria-label="close modal dialog"
+          >
+            <XIconComponent />
+          </button>
         </div>
+        <div>{selectedComponent}</div>
       </div>
     )
   );

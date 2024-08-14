@@ -1,66 +1,43 @@
-body {
-  position: relative;
-}
-
-.dialogModal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  flex: 1;
-  width: 100%;
-  height: 100%;
+.container {
+  z-index: 2;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--primary-900-50-opacity);
 }
 
-.mainDiv {
+.dialogHeader {
+  background-color: var(--primary-500);
+  width: 70vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-direction: column;
-  width: 70%;
-  height: 70%;
-  background-color: aqua;
-  border: 3px solid black;
+  padding: var(--space-s) var(--space-md);
+  border-top-left-radius: var(--border-radius-m);
+  border-top-right-radius: var(--border-radius-m);
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  flex: 1;
-  padding: 32px;
+.dialogTitle {
+  font-size: var(--fs-md);
+  color: var(--pure-white);
 }
 
-.xCloseModalDiv {
-  width: 100%;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
+.dialogButton {
+  width: fit-content;
+  margin-left: auto;
+  background-color: transparent;
+  color: var(--pure-white);
+  padding: var(--space-xs);
+  line-height: 0;
+  border: none;
 }
 
-.xCloseModal {
-  width: 32px;
-  height: 32px;
-  background-color: white;
-  display: grid;
-  place-content: center;
-  font-weight: bold;
-  border: 1px solid black;
-  border-radius: 8px;
-}
-
-.xCloseModal:hover {
-  background-color: darkgray;
-  color: white;
+.dialogButton:hover {
   cursor: pointer;
-}
-
-.xCloseModal::after {
-  content: 'X';
 }
