@@ -1,4 +1,11 @@
-import { Coord, ShapeType, Size, ShapeModel, EditType } from '@/core/model';
+import {
+  Coord,
+  ShapeType,
+  Size,
+  ShapeModel,
+  EditType,
+  OtherProps,
+} from '@/core/model';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -233,6 +240,18 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
   return result;
 };
 
+export const generateDefaultOtherProps = (
+  shapeType: ShapeType
+): OtherProps | undefined => {
+  switch (shapeType) {
+    case 'input':
+    case 'button':
+      return { color: '#000000', backgroundColor: '#FFFFFF' };
+    default:
+      return undefined;
+  }
+};
+
 // TODO: create interfaces to hold Coordination and Size
 // coordinate: { x: number, y: number }
 // size: { width: number, height: number }
@@ -251,6 +270,7 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     hasLateralTransformer: doesShapeHaveLateralTransformer(shapeType),
     text: generateDefaultTextValue(shapeType),
     editType: getShapeEditInlineType(shapeType),
+    otherProps: generateDefaultOtherProps(shapeType),
   };
 };
 
