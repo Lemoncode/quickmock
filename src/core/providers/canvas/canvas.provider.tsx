@@ -1,5 +1,5 @@
 import React from 'react';
-import { Coord, ShapeModel, ShapeType, Size } from '@/core/model';
+import { Coord, ShapeModel, ShapeType, Size, OtherProps } from '@/core/model';
 import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
 import { createShape } from '@/pods/canvas/canvas.model';
@@ -73,6 +73,12 @@ export const CanvasProvider: React.FC<Props> = props => {
     return newShape.id;
   };
 
+  const getSelectedShapeData = (): ShapeModel | undefined => {
+    return document.shapes.find(
+      shape => shape.id === selectionInfo.selectedShapeId
+    );
+  };
+
   const updateShapeSizeAndPosition = (
     id: string,
     position: Coord,
@@ -115,6 +121,24 @@ export const CanvasProvider: React.FC<Props> = props => {
     return canUndoLogic();
   };
 
+  // TODO: Rather implement this with immer
+  const updateOtherPropOnSelected = (propName: string, value: unknown) => {
+    setDocument(prevDocument => ({
+      ...prevDocument,
+      shapes: prevDocument.shapes.map(shape =>
+        shape.id === selectionInfo.selectedShapeId
+          ? {
+              ...shape,
+              otherProps: {
+                ...shape.otherProps,
+                [propName]: value,
+              },
+            }
+          : shape
+      ),
+    }));
+  };
+
   return (
     <CanvasContext.Provider
       value={{
@@ -123,6 +147,8 @@ export const CanvasProvider: React.FC<Props> = props => {
         setScale,
         clearCanvas,
         selectionInfo,
+        updateOtherPropOnSelected,
+        getSelectedShapeData,
         addNewShape,
         pasteShape,
         updateShapeSizeAndPosition,

@@ -18,6 +18,8 @@ export interface SelectionInfo {
   selectedShapeType: ShapeType | null;
   setZIndexOnSelected: (action: ZIndexAction) => void;
   updateTextOnSelected: (text: string) => void;
+  // This can be improved, Type Of etc..
+  updateOtherPropOnSelected: (propName: string, value: unknown) => void;
 }
 
 export interface CanvasContextModel {
@@ -27,10 +29,12 @@ export interface CanvasContextModel {
   setScale: React.Dispatch<React.SetStateAction<number>>;
   pasteShape: (shape: ShapeModel) => void;
   addNewShape: (type: ShapeType, x: number, y: number) => string;
+  getSelectedShapeData: () => ShapeModel | undefined;
   updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void;
   updateShapePosition: (id: string, position: Coord) => void;
   stageRef: React.RefObject<Konva.Stage>;
   selectionInfo: SelectionInfo;
+  updateOtherPropOnSelected: (propName: string, value: unknown) => void;
   deleteSelectedShape: (id: string) => void;
   canUndo: () => boolean;
   canRedo: () => boolean;

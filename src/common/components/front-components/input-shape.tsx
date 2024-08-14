@@ -17,7 +17,10 @@ export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   inputShapeRestrictions;
 
 export const InputShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(inputShapeRestrictions, width, height);
 
@@ -37,9 +40,9 @@ export const InputShape = forwardRef<any, ShapeProps>(
           width={restrictedWidth}
           height={restrictedHeight}
           cornerRadius={5}
-          stroke="black"
+          stroke={otherProps?.color ?? 'black'}
           strokeWidth={2}
-          fill="white"
+          fill={otherProps?.backgroundColor ?? 'white'}
         />
         <Text
           x={10}
