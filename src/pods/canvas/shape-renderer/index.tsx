@@ -30,6 +30,7 @@ import {
 } from './simple-basic-shapes';
 import { renderAccordion } from './simple-rich-components/accordion.renderer';
 import { renderPieChart } from './simple-rich-components/pie-chart.renderer';
+import { renderBreadcrumb } from './simple-rich-components/breadcrumb.renderer';
 import { renderMapChart } from './simple-rich-components/map-chart.renderer';
 
 export const renderShapeComponent = (
@@ -81,6 +82,8 @@ export const renderShapeComponent = (
       return renderLine(shape, shapeRenderedProps);
     case 'accordion':
       return renderAccordion(shape, shapeRenderedProps);
+    case 'breadcrumb':
+      return renderBreadcrumb(shape, shapeRenderedProps);
     case 'circle':
       return renderCircle(shape, shapeRenderedProps);
     case 'star':

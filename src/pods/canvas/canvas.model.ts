@@ -27,6 +27,7 @@ import {
 } from '@/common/components/front-basic-sapes';
 import {
   getAccordionShapeSizeRestrictions,
+  getBreadcrumbShapeSizeRestrictions,
   getPieChartShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
   getMapChartShapeSizeRestrictions,
@@ -130,6 +131,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getPieChartShapeSizeRestrictions().defaultWidth,
         height: getPieChartShapeSizeRestrictions().defaultHeight,
       };
+    case 'breadcrumb':
+      return {
+        width: getBreadcrumbShapeSizeRestrictions().defaultWidth,
+        height: getBreadcrumbShapeSizeRestrictions().defaultHeight,
+      };
     case 'map':
       return {
         width: getMapChartShapeSizeRestrictions().defaultWidth,
@@ -163,6 +169,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'accordion':
     case 'checkbox':
     case 'radiobutton':
+    case 'breadcrumb':
       return true;
     default:
       return false;
@@ -194,6 +201,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Your text here...';
     case 'accordion':
       return '[*]Section A\nSection B';
+    case 'breadcrumb':
+      return 'Home\nCategory\nProducts';
     case 'checkbox':
       return 'Check me!';
     default:
@@ -207,6 +216,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
   switch (shapeType) {
     case 'textarea':
     case 'accordion':
+    case 'breadcrumb':
       return 'textarea';
       break;
   }
