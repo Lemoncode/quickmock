@@ -20,14 +20,22 @@ import {
   renderMobilePhoneContainer,
   renderTablet,
 } from './simple-container';
-import { renderVideoPlayer } from './simple-rich-components';
+import {
+  renderVideoPlayer,
+  renderAccordion,
+  renderHorizontalMenu,
+  renderPieChart,
+  renderMapChart,
+  renderBreadcrumb,
+} from './simple-rich-components';
 import {
   renderDiamond,
   renderTriangle,
   renderRectangle,
   renderLine,
+  renderCircle,
+  renderStar,
 } from './simple-basic-shapes';
-import { renderAccordion } from './simple-rich-components/accordion.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -68,6 +76,10 @@ export const renderShapeComponent = (
       return renderRectangle(shape, shapeRenderedProps);
     case 'videoPlayer':
       return renderVideoPlayer(shape, shapeRenderedProps);
+    case 'pie':
+      return renderPieChart(shape, shapeRenderedProps);
+    case 'map':
+      return renderMapChart(shape, shapeRenderedProps);
     case 'diamond':
       return renderDiamond(shape, shapeRenderedProps);
     case 'line':
@@ -76,6 +88,14 @@ export const renderShapeComponent = (
       return renderAccordion(shape, shapeRenderedProps);
     case 'triangle':
       return renderTriangle(shape, shapeRenderedProps);
+    case 'horizontal-menu':
+      return renderHorizontalMenu(shape, shapeRenderedProps);
+    case 'breadcrumb':
+      return renderBreadcrumb(shape, shapeRenderedProps);
+    case 'circle':
+      return renderCircle(shape, shapeRenderedProps);
+    case 'star':
+      return renderStar(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

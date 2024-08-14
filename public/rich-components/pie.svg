@@ -1,0 +1,9 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gráfico de tarta -->
+  <circle cx="100" cy="100" r="80" style="fill:none;stroke:black;stroke-width:2"/>
+
+  <!-- Secciones del gráfico -->
+  <path d="M 20 100 L 100 20 A 80 80 0 0 1 100 180 Z" style="fill:darkgray;stroke:black;stroke-width:1"/>
+  <path d="M 100 100 L 100 180 A 80 80 0 0 1 20 100 Z" style="fill:lightgray;stroke:black;stroke-width:1"/>
+  <path d="M 100 100 L 20 100 A 80 80 0 0 1 100 20 Z" style="fill:gray;stroke:black;stroke-width:1"/>
+</svg>

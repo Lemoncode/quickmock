@@ -27,10 +27,17 @@ export type ShapeType =
   | 'rectangle'
   | 'videoPlayer'
   | 'diamond'
-  | 'triangle'
+
+  /* | "text"| "button" |  "radio" | "image"*/
   | 'line'
-  | 'accordion';
-/* | "text"| "button" |  "radio" | "image"*/
+  | 'accordion'
+  | 'pie'
+  | 'horizontal-menu'
+  | 'breadcrumb'
+  | 'map'
+  | 'circle'
+  | 'triangle'
+  | 'star';
 
 export type EditType = 'input' | 'textarea';
 

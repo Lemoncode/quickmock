@@ -20,13 +20,19 @@ import {
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 import {
   getTriangleShapeSizeRestrictions,
+  getCircleShapeSizeRestrictions,
   getDiamondShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
   getlineShapeRestrictions,
+  getStarShapeSizeRestrictions,
 } from '@/common/components/front-basic-sapes';
 import {
   getAccordionShapeSizeRestrictions,
+  getBreadcrumbShapeSizeRestrictions,
+  getPieChartShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
+  getHorizontalMenuShapeSizeRestrictions,
+  getMapChartShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 
 export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
@@ -127,6 +133,36 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getTriangleShapeSizeRestrictions().defaultWidth,
         height: getTriangleShapeSizeRestrictions().defaultHeight,
       };
+    case 'pie':
+      return {
+        width: getPieChartShapeSizeRestrictions().defaultWidth,
+        height: getPieChartShapeSizeRestrictions().defaultHeight,
+      };
+    case 'horizontal-menu':
+      return {
+        width: getHorizontalMenuShapeSizeRestrictions().defaultWidth,
+        height: getHorizontalMenuShapeSizeRestrictions().defaultHeight,
+      };
+    case 'breadcrumb':
+      return {
+        width: getBreadcrumbShapeSizeRestrictions().defaultWidth,
+        height: getBreadcrumbShapeSizeRestrictions().defaultHeight,
+      };
+    case 'map':
+      return {
+        width: getMapChartShapeSizeRestrictions().defaultWidth,
+        height: getMapChartShapeSizeRestrictions().defaultHeight,
+      };
+    case 'circle':
+      return {
+        width: getCircleShapeSizeRestrictions().defaultWidth,
+        height: getCircleShapeSizeRestrictions().defaultHeight,
+      };
+    case 'star':
+      return {
+        width: getStarShapeSizeRestrictions().defaultWidth,
+        height: getStarShapeSizeRestrictions().defaultHeight,
+      };
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -145,6 +181,8 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'accordion':
     case 'checkbox':
     case 'radiobutton':
+    case 'horizontal-menu':
+    case 'breadcrumb':
       return true;
     default:
       return false;
@@ -176,8 +214,12 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Your text here...';
     case 'accordion':
       return '[*]Section A\nSection B';
+    case 'breadcrumb':
+      return 'Home\nCategory\nProducts';
     case 'checkbox':
       return 'Check me!';
+    case 'horizontal-menu':
+      return 'Home\nAbout\nServices\nContact';
     default:
       return undefined;
   }
@@ -189,6 +231,8 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
   switch (shapeType) {
     case 'textarea':
     case 'accordion':
+    case 'horizontal-menu':
+    case 'breadcrumb':
       return 'textarea';
       break;
   }
