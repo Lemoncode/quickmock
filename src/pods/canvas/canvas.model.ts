@@ -30,6 +30,7 @@ import {
   getBreadcrumbShapeSizeRestrictions,
   getPieChartShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
+  getHorizontalMenuShapeSizeRestrictions,
   getMapChartShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 
@@ -131,6 +132,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getPieChartShapeSizeRestrictions().defaultWidth,
         height: getPieChartShapeSizeRestrictions().defaultHeight,
       };
+    case 'horizontal-menu':
+      return {
+        width: getHorizontalMenuShapeSizeRestrictions().defaultWidth,
+        height: getHorizontalMenuShapeSizeRestrictions().defaultHeight,
+      };
     case 'breadcrumb':
       return {
         width: getBreadcrumbShapeSizeRestrictions().defaultWidth,
@@ -169,6 +175,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'accordion':
     case 'checkbox':
     case 'radiobutton':
+    case 'horizontal-menu':
     case 'breadcrumb':
       return true;
     default:
@@ -205,6 +212,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Home\nCategory\nProducts';
     case 'checkbox':
       return 'Check me!';
+    case 'horizontal-menu':
+      return 'Home\nAbout\nServices\nContact';
     default:
       return undefined;
   }
@@ -216,6 +225,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
   switch (shapeType) {
     case 'textarea':
     case 'accordion':
+    case 'horizontal-menu':
     case 'breadcrumb':
       return 'textarea';
       break;
