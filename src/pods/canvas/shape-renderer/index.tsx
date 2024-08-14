@@ -28,6 +28,7 @@ import {
 } from './simple-basic-shapes';
 import { renderAccordion } from './simple-rich-components/accordion.renderer';
 import { renderPieChart } from './simple-rich-components/pie-chart.renderer';
+import { renderBreadcrumb } from './simple-rich-components/breadcrumb.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -76,6 +77,8 @@ export const renderShapeComponent = (
       return renderLine(shape, shapeRenderedProps);
     case 'accordion':
       return renderAccordion(shape, shapeRenderedProps);
+    case 'breadcrumb':
+      return renderBreadcrumb(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
