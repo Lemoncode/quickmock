@@ -5,8 +5,8 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 import { Group, Rect, Text } from 'react-konva';
 
 const postItShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 50,
-  minHeight: 50,
+  minWidth: 80,
+  minHeight: 80,
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 160,
@@ -27,8 +27,8 @@ export const PostItShape = forwardRef<any, ShapeProps>(
 
     const postItWidth = restrictedWidth;
     const postItHeight = restrictedHeight;
-    const tapeWidth = postItWidth * 0.5;
-    const tapeHeight = postItHeight * 0.2;
+    const tapeWidth = postItWidth * 0.4;
+    const tapeHeight = postItHeight * 0.18;
 
     const tapeX = (width - tapeWidth) / 2;
     const tapeY = 0;
@@ -70,7 +70,9 @@ export const PostItShape = forwardRef<any, ShapeProps>(
         />
         <Text
           x={5}
-          y={40}
+          y={tapeHeight + 5}
+          width={postItWidth - 5}
+          height={restrictedHeight - tapeHeight - 10}
           text={text}
           fontSize={18}
           fill="black"
