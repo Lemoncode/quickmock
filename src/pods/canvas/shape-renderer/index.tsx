@@ -25,6 +25,8 @@ import {
   renderDiamond,
   renderRectangle,
   renderLine,
+  renderCircle,
+  renderStar,
 } from './simple-basic-shapes';
 import { renderAccordion } from './simple-rich-components/accordion.renderer';
 import { renderPieChart } from './simple-rich-components/pie-chart.renderer';
@@ -79,6 +81,10 @@ export const renderShapeComponent = (
       return renderLine(shape, shapeRenderedProps);
     case 'accordion':
       return renderAccordion(shape, shapeRenderedProps);
+    case 'circle':
+      return renderCircle(shape, shapeRenderedProps);
+    case 'star':
+      return renderStar(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
