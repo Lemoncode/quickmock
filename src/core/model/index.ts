@@ -25,6 +25,7 @@ export type ShapeType =
   | 'label'
   | 'radiobutton'
   | 'rectangle'
+  | 'postit'
   | 'videoPlayer'
   | 'diamond'
 
@@ -55,6 +56,11 @@ export interface Coord {
   y: number;
 }
 
+export interface OtherProps {
+  stroke?: string;
+  backgroundColor?: string;
+}
+
 export interface ShapeModel {
   id: string;
   x: number;
@@ -66,4 +72,5 @@ export interface ShapeModel {
   hasLateralTransformer: boolean;
   editType?: EditType;
   text?: string;
+  otherProps?: OtherProps;
 }

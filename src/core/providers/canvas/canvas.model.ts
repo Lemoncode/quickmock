@@ -1,4 +1,11 @@
-import { Coord, ShapeModel, ShapeRefs, ShapeType, Size } from '@/core/model';
+import {
+  Coord,
+  OtherProps,
+  ShapeModel,
+  ShapeRefs,
+  ShapeType,
+  Size,
+} from '@/core/model';
 import Konva from 'konva';
 import { Node, NodeConfig } from 'konva/lib/Node';
 
@@ -16,8 +23,14 @@ export interface SelectionInfo {
   selectedShapeRef: React.MutableRefObject<Node<NodeConfig> | null>;
   selectedShapeId: string;
   selectedShapeType: ShapeType | null;
+  getSelectedShapeData: () => ShapeModel | undefined;
   setZIndexOnSelected: (action: ZIndexAction) => void;
   updateTextOnSelected: (text: string) => void;
+  // TODO: Update, A. KeyOf B. Move To useSelectionInfo
+  updateOtherPropsOnSelected: <K extends keyof OtherProps>(
+    key: K,
+    value: OtherProps[K]
+  ) => void;
 }
 
 export interface CanvasContextModel {

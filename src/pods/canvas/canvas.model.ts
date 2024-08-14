@@ -1,4 +1,11 @@
-import { Coord, ShapeType, Size, ShapeModel, EditType } from '@/core/model';
+import {
+  Coord,
+  ShapeType,
+  Size,
+  ShapeModel,
+  EditType,
+  OtherProps,
+} from '@/core/model';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -22,6 +29,7 @@ import {
   getTriangleShapeSizeRestrictions,
   getCircleShapeSizeRestrictions,
   getDiamondShapeSizeRestrictions,
+  getPostItShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
   getlineShapeRestrictions,
   getStarShapeSizeRestrictions,
@@ -133,6 +141,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getTriangleShapeSizeRestrictions().defaultWidth,
         height: getTriangleShapeSizeRestrictions().defaultHeight,
       };
+    case 'postit':
+      return {
+        width: getPostItShapeSizeRestrictions().defaultWidth,
+        height: getPostItShapeSizeRestrictions().defaultHeight,
+      };
     case 'pie':
       return {
         width: getPieChartShapeSizeRestrictions().defaultWidth,
@@ -181,6 +194,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'accordion':
     case 'checkbox':
     case 'radiobutton':
+    case 'postit':
     case 'horizontal-menu':
     case 'breadcrumb':
       return true;
@@ -218,6 +232,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Home\nCategory\nProducts';
     case 'checkbox':
       return 'Check me!';
+    case 'postit':
+      return '';
     case 'horizontal-menu':
       return 'Home\nAbout\nServices\nContact';
     default:
@@ -231,12 +247,25 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
   switch (shapeType) {
     case 'textarea':
     case 'accordion':
+    case 'postit':
     case 'horizontal-menu':
     case 'breadcrumb':
       return 'textarea';
       break;
   }
   return result;
+};
+
+export const generateDefaultOtherProps = (
+  shapeType: ShapeType
+): OtherProps | undefined => {
+  switch (shapeType) {
+    case 'input':
+    case 'button':
+      return { stroke: '#000000', backgroundColor: '#FFFFFF' };
+    default:
+      return undefined;
+  }
 };
 
 // TODO: create interfaces to hold Coordination and Size
@@ -257,6 +286,7 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     hasLateralTransformer: doesShapeHaveLateralTransformer(shapeType),
     text: generateDefaultTextValue(shapeType),
     editType: getShapeEditInlineType(shapeType),
+    otherProps: generateDefaultOtherProps(shapeType),
   };
 };
 
