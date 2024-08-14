@@ -25,10 +25,13 @@ import {
   renderDiamond,
   renderRectangle,
   renderLine,
+  renderCircle,
+  renderStar,
 } from './simple-basic-shapes';
 import { renderAccordion } from './simple-rich-components/accordion.renderer';
 import { renderPieChart } from './simple-rich-components/pie-chart.renderer';
 import { renderBreadcrumb } from './simple-rich-components/breadcrumb.renderer';
+import { renderMapChart } from './simple-rich-components/map-chart.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -71,6 +74,8 @@ export const renderShapeComponent = (
       return renderVideoPlayer(shape, shapeRenderedProps);
     case 'pie':
       return renderPieChart(shape, shapeRenderedProps);
+    case 'map':
+      return renderMapChart(shape, shapeRenderedProps);
     case 'diamond':
       return renderDiamond(shape, shapeRenderedProps);
     case 'line':
@@ -79,6 +84,10 @@ export const renderShapeComponent = (
       return renderAccordion(shape, shapeRenderedProps);
     case 'breadcrumb':
       return renderBreadcrumb(shape, shapeRenderedProps);
+    case 'circle':
+      return renderCircle(shape, shapeRenderedProps);
+    case 'star':
+      return renderStar(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

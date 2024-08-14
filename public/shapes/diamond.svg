@@ -1,4 +1,4 @@
 <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
   <!-- Romb -->
-  <polygon points="100,10 190,100 100,190 10,100" style="fill:none;stroke:black;stroke-width:1"/>
+  <polygon points="100,10 190,100 100,190 10,100" style="fill:none;stroke:black;stroke-width:3"/>
 </svg>
