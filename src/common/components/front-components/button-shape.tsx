@@ -17,7 +17,10 @@ export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   buttonShapeRestrictions;
 
 export const ButtonShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(buttonShapeRestrictions, width, height);
 
@@ -37,9 +40,9 @@ export const ButtonShape = forwardRef<any, ShapeProps>(
           width={restrictedWidth}
           height={restrictedHeight}
           cornerRadius={14}
-          stroke="black"
+          stroke={otherProps?.stroke ?? 'black'}
           strokeWidth={2}
-          fill="white"
+          fill={otherProps?.backgroundColor ?? 'white'}
         />
         <Text
           x={0}

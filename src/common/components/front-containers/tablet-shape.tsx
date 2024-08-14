@@ -26,8 +26,6 @@ export const TabletShape = forwardRef<any, ShapeProps>(
       );
     const margin = 20;
     const screenMargin = 15;
-    const cameraPadding = 3;
-    const buttonPadding = 3;
     const cameraRadius = 3;
     const buttonRadius = 5;
 
@@ -43,10 +41,10 @@ export const TabletShape = forwardRef<any, ShapeProps>(
       >
         {/* Marco de la tablet */}
         <Rect
-          x={margin}
-          y={margin}
-          width={restrictedWidth - 2 * margin}
-          height={restrictedHeight - 2 * margin}
+          x={0}
+          y={0}
+          width={restrictedWidth}
+          height={restrictedHeight}
           cornerRadius={20}
           stroke="black"
           strokeWidth={2}
@@ -67,7 +65,7 @@ export const TabletShape = forwardRef<any, ShapeProps>(
 
         {/* Cámara frontal */}
         <Circle
-          x={margin + cameraPadding + cameraRadius}
+          x={margin}
           y={restrictedHeight / 2}
           radius={cameraRadius}
           stroke="black"
@@ -77,7 +75,7 @@ export const TabletShape = forwardRef<any, ShapeProps>(
 
         {/* Botón de inicio */}
         <Circle
-          x={restrictedWidth - margin - buttonPadding - buttonRadius}
+          x={restrictedWidth - margin}
           y={restrictedHeight / 2}
           radius={buttonRadius}
           stroke="black"

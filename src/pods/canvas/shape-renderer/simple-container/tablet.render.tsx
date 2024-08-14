@@ -15,9 +15,9 @@ export const renderTablet = (
       key={shape.id}
       x={shape.x}
       y={shape.y}
-      draggable
       width={shape.width}
       height={shape.height}
+      draggable
       onSelected={handleSelected}
       ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}

@@ -25,9 +25,17 @@ export type ShapeType =
   | 'label'
   | 'radiobutton'
   | 'rectangle'
+  | 'postit'
   | 'videoPlayer'
-  | 'diamond';
-/* | "text"| "button" |  "radio" | "image"*/
+  | 'diamond'
+  | 'line'
+  | 'accordion'
+  | 'pie'
+  | 'horizontal-menu'
+  | 'breadcrumb'
+  | 'map'
+  | 'circle'
+  | 'star';
 
 export type EditType = 'input' | 'textarea';
 
@@ -45,6 +53,11 @@ export interface Coord {
   y: number;
 }
 
+export interface OtherProps {
+  stroke?: string;
+  backgroundColor?: string;
+}
+
 export interface ShapeModel {
   id: string;
   x: number;
@@ -53,6 +66,8 @@ export interface ShapeModel {
   height: number;
   type: ShapeType;
   allowsInlineEdition: boolean;
+  hasLateralTransformer: boolean;
   editType?: EditType;
   text?: string;
+  otherProps?: OtherProps;
 }

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import Konva from 'konva';
-import { ShapeModel, ShapeRefs, ShapeType } from '@/core/model';
-import { SelectionInfo, ZIndexAction } from './canvas.model';
+import { OtherProps, ShapeModel, ShapeRefs, ShapeType } from '@/core/model';
+import { DocumentModel, SelectionInfo, ZIndexAction } from './canvas.model';
 import { performZIndexAction } from './zindex.util';
 
 export const useSelection = (
-  shapes: ShapeModel[],
-  setShapes: React.Dispatch<React.SetStateAction<ShapeModel[]>>
+  document: DocumentModel,
+  setDocument: React.Dispatch<React.SetStateAction<DocumentModel>>
 ): SelectionInfo => {
   const transformerRef = useRef<Konva.Transformer>(null);
   const shapeRefs = useRef<ShapeRefs>({});
@@ -18,6 +18,7 @@ export const useSelection = (
 
   // Remove unused shapes and reset selectedShapeId if it no longer exists
   useEffect(() => {
+    const shapes = document.shapes;
     const currentIds = shapes.map(shape => shape.id);
 
     Object.keys(shapeRefs.current).forEach(id => {
@@ -32,7 +33,7 @@ export const useSelection = (
       setSelectedShapeId('');
       setSelectedShapeType(null);
     }
-  }, [shapes, selectedShapeId]);
+  }, [document.shapes, selectedShapeId]);
 
   const handleSelected = (id: string, type: ShapeType) => {
     selectedShapeRef.current = shapeRefs.current[id].current;
@@ -55,18 +56,36 @@ export const useSelection = (
   };
 
   const setZIndexOnSelected = (action: ZIndexAction) => {
-    setShapes(prevShapes =>
-      performZIndexAction(selectedShapeId, action, prevShapes)
-    );
+    setDocument(prevDocument => ({
+      shapes: performZIndexAction(selectedShapeId, action, prevDocument.shapes),
+    }));
   };
 
   const updateTextOnSelected = (text: string) => {
-    setShapes(prevShapes =>
-      prevShapes.map(shape =>
+    setDocument(prevDocument => ({
+      shapes: prevDocument.shapes.map(shape =>
         shape.id === selectedShapeId ? { ...shape, text } : shape
-      )
-    );
+      ),
+    }));
   };
+
+  // TODO: Rather implement this using immmer
+
+  const updateOtherPropsOnSelected = <K extends keyof OtherProps>(
+    key: K,
+    value: OtherProps[K]
+  ) => {
+    setDocument(prevDocument => ({
+      shapes: prevDocument.shapes.map(shape =>
+        shape.id === selectedShapeId
+          ? { ...shape, otherProps: { ...shape.otherProps, [key]: value } }
+          : shape
+      ),
+    }));
+  };
+
+  const getSelectedShapeData = (): ShapeModel | undefined =>
+    document.shapes.find(shape => shape.id === selectedShapeId);
 
   return {
     transformerRef,
@@ -76,7 +95,9 @@ export const useSelection = (
     selectedShapeRef,
     selectedShapeId,
     selectedShapeType,
+    getSelectedShapeData,
     setZIndexOnSelected,
     updateTextOnSelected,
+    updateOtherPropsOnSelected,
   };
 };

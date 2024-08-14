@@ -40,7 +40,8 @@ export const LabelShape = forwardRef<any, ShapeProps>(
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
           fill="black"
-          align="left"
+          align="center"
+          verticalAlign="middle"
           ellipsis={true}
           wrap="none"
         />

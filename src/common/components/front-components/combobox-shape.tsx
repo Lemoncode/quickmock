@@ -36,6 +36,7 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>(
           data={`M1,1 H${width - 2} V${height - 2} H1 Z`}
           stroke="black"
           strokeWidth={2}
+          fill="white"
         />
         {/* Polygon (Arrow), combo triangle dropdown */}
         <Path

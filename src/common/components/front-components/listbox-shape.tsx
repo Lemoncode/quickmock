@@ -1,12 +1,12 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
 const listboxShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 75,
-  minHeight: 180,
+  minHeight: 200,
   maxWidth: 300,
   maxHeight: 300,
   defaultWidth: 120,
@@ -32,10 +32,6 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
         width,
         height
       );
-
-    useEffect(() => {
-      rectRef?.current.moveToTop();
-    }, []);
 
     const handleClick = (itemIndex: number) => {
       setSelectedItem(itemIndex);
@@ -64,8 +60,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
           cornerRadius={10}
           stroke="black"
           strokeWidth={4}
-          fill="transparent"
-          listening={false}
+          fill="white"
         />
 
         {/* Elementos de la lista con desplazamiento */}

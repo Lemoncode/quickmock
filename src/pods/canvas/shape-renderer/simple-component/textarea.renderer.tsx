@@ -25,7 +25,7 @@ export const renderTextArea = (
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
       editType={shape.editType}
-      isEditable={shape.editType}
+      isEditable={true}
       text={shape.text}
     />
   );
