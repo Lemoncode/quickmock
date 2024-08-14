@@ -20,14 +20,17 @@ import {
   renderMobilePhoneContainer,
   renderTablet,
 } from './simple-container';
-import { renderVideoPlayer } from './simple-rich-components';
+import {
+  renderVideoPlayer,
+  renderAccordion,
+  renderHorizontalMenu,
+  renderPieChart,
+} from './simple-rich-components';
 import {
   renderDiamond,
   renderRectangle,
   renderLine,
 } from './simple-basic-shapes';
-import { renderAccordion } from './simple-rich-components/accordion.renderer';
-import { renderPieChart } from './simple-rich-components/pie-chart.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -76,6 +79,8 @@ export const renderShapeComponent = (
       return renderLine(shape, shapeRenderedProps);
     case 'accordion':
       return renderAccordion(shape, shapeRenderedProps);
+    case 'horizontal-menu':
+      return renderHorizontalMenu(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

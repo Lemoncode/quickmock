@@ -27,6 +27,7 @@ import {
   getAccordionShapeSizeRestrictions,
   getPieChartShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
+  getHorizontalMenuShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 
 export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
@@ -127,6 +128,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getPieChartShapeSizeRestrictions().defaultWidth,
         height: getPieChartShapeSizeRestrictions().defaultHeight,
       };
+    case 'horizontal-menu':
+      return {
+        width: getHorizontalMenuShapeSizeRestrictions().defaultWidth,
+        height: getHorizontalMenuShapeSizeRestrictions().defaultHeight,
+      };
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -145,6 +151,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'accordion':
     case 'checkbox':
     case 'radiobutton':
+    case 'horizontal-menu':
       return true;
     default:
       return false;
@@ -178,6 +185,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return '[*]Section A\nSection B';
     case 'checkbox':
       return 'Check me!';
+    case 'horizontal-menu':
+      return 'Home\nAbout\nServices\nContact';
     default:
       return undefined;
   }
@@ -189,6 +198,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
   switch (shapeType) {
     case 'textarea':
     case 'accordion':
+    case 'horizontal-menu':
       return 'textarea';
       break;
   }

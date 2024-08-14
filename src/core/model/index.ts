@@ -29,7 +29,8 @@ export type ShapeType =
   | 'diamond'
   | 'line'
   | 'accordion'
-  | 'pie';
+  | 'pie'
+  | 'horizontal-menu';
 
 export type EditType = 'input' | 'textarea';
 
