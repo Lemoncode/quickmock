@@ -2,9 +2,9 @@ import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { Group, Rect } from 'react-konva';
+import { Group, Star } from 'react-konva';
 
-const rectangleShapeRestrictions: ShapeSizeRestrictions = {
+const starShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
   minHeight: 10,
   maxWidth: -1,
@@ -13,33 +13,35 @@ const rectangleShapeRestrictions: ShapeSizeRestrictions = {
   defaultHeight: 160,
 };
 
-export const getRectangleShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  rectangleShapeRestrictions;
+export const getStarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
+  starShapeRestrictions;
 
-export const RectangleShape = forwardRef<any, ShapeProps>(
+export const StarShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
-      fitSizeToShapeSizeRestrictions(rectangleShapeRestrictions, width, height);
+      fitSizeToShapeSizeRestrictions(starShapeRestrictions, width, height);
 
     return (
       <Group
         x={x}
         y={y}
-        ref={ref}
         width={restrictedWidth}
         height={restrictedHeight}
+        ref={ref}
         {...shapeProps}
-        onClick={() => onSelected(id, 'rectangle')}
+        onClick={() => onSelected(id, 'star')}
       >
-        <Rect
-          x={0}
-          y={0}
+        <Star
+          x={restrictedWidth / 2}
+          y={restrictedHeight / 2}
           width={restrictedWidth}
           height={restrictedHeight}
+          numPoints={5}
+          innerRadius={restrictedWidth / 4}
+          outerRadius={restrictedWidth / 2}
+          stroke={'black'}
           strokeWidth={2}
-          stroke="black"
           fill={'white'}
-          cornerRadius={5}
         />
       </Group>
     );

@@ -19,15 +19,18 @@ import {
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 import {
+  getCircleShapeSizeRestrictions,
   getDiamondShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
   getlineShapeRestrictions,
+  getStarShapeSizeRestrictions,
 } from '@/common/components/front-basic-sapes';
 import {
   getAccordionShapeSizeRestrictions,
   getPieChartShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
   getHorizontalMenuShapeSizeRestrictions,
+  getMapChartShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 
 export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
@@ -132,6 +135,21 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getHorizontalMenuShapeSizeRestrictions().defaultWidth,
         height: getHorizontalMenuShapeSizeRestrictions().defaultHeight,
+      };
+    case 'map':
+      return {
+        width: getMapChartShapeSizeRestrictions().defaultWidth,
+        height: getMapChartShapeSizeRestrictions().defaultHeight,
+      };
+    case 'circle':
+      return {
+        width: getCircleShapeSizeRestrictions().defaultWidth,
+        height: getCircleShapeSizeRestrictions().defaultHeight,
+      };
+    case 'star':
+      return {
+        width: getStarShapeSizeRestrictions().defaultWidth,
+        height: getStarShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(

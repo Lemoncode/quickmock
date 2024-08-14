@@ -30,7 +30,10 @@ export type ShapeType =
   | 'line'
   | 'accordion'
   | 'pie'
-  | 'horizontal-menu';
+  | 'horizontal-menu'
+  | 'map'
+  | 'circle'
+  | 'star';
 
 export type EditType = 'input' | 'textarea';
 
