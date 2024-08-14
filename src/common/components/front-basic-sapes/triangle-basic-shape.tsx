@@ -4,13 +4,16 @@ import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Line } from 'react-konva';
 
+const WIDTH = 160;
+const HEIGHT = (WIDTH * 1.732) / 2;
+
 const triangleShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
   minHeight: 10,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 160,
-  defaultHeight: 160,
+  defaultWidth: WIDTH,
+  defaultHeight: HEIGHT,
 };
 
 export const getTriangleShapeSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -21,16 +24,14 @@ export const TriangleShape = forwardRef<any, ShapeProps>(
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(triangleShapeRestrictions, width, height);
 
-    const sideLength = restrictedWidth;
-    const triangleHeight = (Math.sqrt(3) / 2) * sideLength;
-
+    const halfWidth = restrictedWidth / 2;
     const points = [
-      restrictedWidth / 2,
-      restrictedHeight - triangleHeight,
+      halfWidth,
+      0, // Top point
       restrictedWidth,
-      restrictedHeight,
+      restrictedHeight, // Right point
       0,
-      restrictedHeight,
+      restrictedHeight, // Left point
     ];
 
     return (
