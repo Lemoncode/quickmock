@@ -20,6 +20,7 @@ export const PostItShape = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, id, text, onSelected, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(postItShapeRestrictions, width, height);
+
     const handleClick = () => {
       onSelected(id, 'postit');
     };
@@ -66,6 +67,15 @@ export const PostItShape = forwardRef<any, ShapeProps>(
           stroke="black"
           strokeWidth={2}
           fill="gray"
+        />
+        <Text
+          x={5}
+          y={40}
+          text={text}
+          fontSize={18}
+          fill="black"
+          wrap="wrap"
+          ellipsis={true}
         />
       </Group>
     );
