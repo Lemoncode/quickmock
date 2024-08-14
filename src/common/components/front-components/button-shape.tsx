@@ -40,7 +40,7 @@ export const ButtonShape = forwardRef<any, ShapeProps>(
           width={restrictedWidth}
           height={restrictedHeight}
           cornerRadius={14}
-          stroke={otherProps?.color ?? 'black'}
+          stroke={otherProps?.stroke ?? 'black'}
           strokeWidth={2}
           fill={otherProps?.backgroundColor ?? 'white'}
         />

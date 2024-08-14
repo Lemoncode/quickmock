@@ -246,7 +246,7 @@ export const generateDefaultOtherProps = (
   switch (shapeType) {
     case 'input':
     case 'button':
-      return { color: '#000000', backgroundColor: '#FFFFFF' };
+      return { stroke: '#000000', backgroundColor: '#FFFFFF' };
     default:
       return undefined;
   }

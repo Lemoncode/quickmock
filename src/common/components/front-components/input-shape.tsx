@@ -25,8 +25,8 @@ export const InputShape = forwardRef<any, ShapeProps>(
       fitSizeToShapeSizeRestrictions(inputShapeRestrictions, width, height);
 
     const stroke = useMemo(
-      () => otherProps?.color ?? 'black',
-      [otherProps?.color]
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
     );
 
     const fill = useMemo(

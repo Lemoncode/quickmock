@@ -53,7 +53,7 @@ export interface Coord {
 }
 
 export interface OtherProps {
-  color?: string;
+  stroke?: string;
   backgroundColor?: string;
 }
 

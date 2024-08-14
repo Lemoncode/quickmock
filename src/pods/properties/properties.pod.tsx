@@ -21,11 +21,11 @@ export const PropertiesPod = () => {
         <p>Properties</p>
       </div>
       <ZIndexOptions selectionInfo={selectionInfo} />
-      {selectedShapeData?.otherProps?.color && (
+      {selectedShapeData?.otherProps?.stroke && (
         <ColorPicker
           label="Color"
-          color={selectedShapeData.otherProps.color}
-          onChange={color => updateOtherPropsOnSelected('color', color)}
+          color={selectedShapeData.otherProps.stroke}
+          onChange={color => updateOtherPropsOnSelected('stroke', color)}
         />
       )}
       {selectedShapeData?.otherProps?.backgroundColor && (
