@@ -34,6 +34,7 @@ import {
   renderLine,
   renderCircle,
   renderStar,
+  renderPostit
 } from './simple-basic-shapes';
 
 export const renderShapeComponent = (
@@ -73,6 +74,8 @@ export const renderShapeComponent = (
       return renderRadioButton(shape, shapeRenderedProps);
     case 'rectangle':
       return renderRectangle(shape, shapeRenderedProps);
+    case 'postit':
+      return renderPostit(shape, shapeRenderedProps);
     case 'videoPlayer':
       return renderVideoPlayer(shape, shapeRenderedProps);
     case 'pie':

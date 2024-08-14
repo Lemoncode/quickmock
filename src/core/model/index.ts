@@ -25,6 +25,7 @@ export type ShapeType =
   | 'label'
   | 'radiobutton'
   | 'rectangle'
+  | 'postit'
   | 'videoPlayer'
   | 'diamond'
   | 'line'

@@ -28,6 +28,7 @@ import { getLabelSizeRestrictions } from '@/common/components/front-components/l
 import {
   getCircleShapeSizeRestrictions,
   getDiamondShapeSizeRestrictions,
+  getPostItShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
   getlineShapeRestrictions,
   getStarShapeSizeRestrictions,
@@ -134,6 +135,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getAccordionShapeSizeRestrictions().defaultWidth,
         height: getAccordionShapeSizeRestrictions().defaultHeight,
       };
+    case 'postit':
+      return {
+        width: getPostItShapeSizeRestrictions().defaultWidth,
+        height: getPostItShapeSizeRestrictions().defaultHeight,
+      }
     case 'pie':
       return {
         width: getPieChartShapeSizeRestrictions().defaultWidth,
@@ -182,6 +188,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'accordion':
     case 'checkbox':
     case 'radiobutton':
+    case 'postit':
     case 'horizontal-menu':
     case 'breadcrumb':
       return true;
@@ -219,6 +226,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Home\nCategory\nProducts';
     case 'checkbox':
       return 'Check me!';
+    case 'postit':
+      return '';
     case 'horizontal-menu':
       return 'Home\nAbout\nServices\nContact';
     default:
@@ -232,6 +241,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
   switch (shapeType) {
     case 'textarea':
     case 'accordion':
+    case 'postit':
     case 'horizontal-menu':
     case 'breadcrumb':
       return 'textarea';
