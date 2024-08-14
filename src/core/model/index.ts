@@ -30,6 +30,7 @@ export type ShapeType =
   | 'line'
   | 'accordion'
   | 'pie'
+  | 'map'
   | 'circle'
   | 'star';
 
