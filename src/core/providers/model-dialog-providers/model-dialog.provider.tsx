@@ -15,12 +15,10 @@ export const ModalDialogProvider: React.FC<Props> = props => {
     createInitialModalDialog()
   );
 
-  const openModal = (
-    /* component: React.ReactNode | null, */ title: string
-  ) => {
+  const openModal = (component: React.ReactNode | null, title: string) => {
     setModalDialog({
       isOpen: true,
-      /*      selectedComponent: component, */
+      selectedComponent: component,
       title,
     });
   };
@@ -28,6 +26,7 @@ export const ModalDialogProvider: React.FC<Props> = props => {
   const closeModal = () => {
     setModalDialog({
       isOpen: false,
+      selectedComponent: null,
       title: '',
     });
   };

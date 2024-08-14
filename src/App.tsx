@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <MainScene />
-      <ModalDialogComponent children={'Hola, soy el children desde App.tsx'} />
+      <ModalDialogComponent />
     </>
   );
 }

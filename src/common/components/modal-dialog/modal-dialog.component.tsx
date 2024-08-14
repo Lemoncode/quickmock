@@ -2,12 +2,7 @@ import { useModalDialogContext } from '@/core/providers/model-dialog-providers/m
 import classes from './modal-dialog.component.module.css';
 import React, { useEffect } from 'react';
 
-interface Props {
-  children: React.ReactNode;
-}
-
-export const ModalDialogComponent: React.FC<Props> = props => {
-  const { children } = props;
+export const ModalDialogComponent: React.FC<Props> = () => {
   const { modalDialog, closeModal } = useModalDialogContext();
   const { isOpen, title } = modalDialog;
 
@@ -30,7 +25,7 @@ export const ModalDialogComponent: React.FC<Props> = props => {
           </div>
           <div className={classes.main}>
             <h1>{title ?? 'Dialog Modal Title'}</h1>
-            <h2>{children}</h2>
+            <h2>{modalDialog.selectedComponent}</h2>
           </div>
         </div>
       </div>
