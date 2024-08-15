@@ -37,6 +37,36 @@ export type ShapeType =
   | 'circle'
   | 'star';
 
+export const ShapeDisplayName: Record<ShapeType, string> = {
+  combobox: 'Combobox',
+  input: 'Input',
+  button: 'Button',
+  checkbox: 'Checkbox',
+  textarea: 'Textarea',
+  toggleswitch: 'Toggle Switch',
+  progressbar: 'Progress Bar',
+  listbox: 'List Box',
+  datepickerinput: 'Date Picker Input',
+  browser: 'Browser',
+  timepickerinput: 'Time Picker Input',
+  mobilePhone: 'Mobile Phone',
+  tablet: 'Tablet',
+  label: 'Label',
+  radiobutton: 'Radio Button',
+  rectangle: 'Rectangle',
+  videoPlayer: 'Video Player',
+  diamond: 'Diamond',
+  line: 'Line',
+  accordion: 'Accordion',
+  pie: 'Pie',
+  breadcrumb: 'Breadcrumb',
+  map: 'Map',
+  circle: 'Circle',
+  star: 'Star',
+  postit: 'Post-it',
+  'horizontal-menu': 'Horizontal Menu',
+};
+
 export type EditType = 'input' | 'textarea';
 
 export type ShapeRefs = {
