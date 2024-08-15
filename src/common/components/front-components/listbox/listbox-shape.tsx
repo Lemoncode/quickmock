@@ -58,7 +58,6 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
         listboxShapeSizeRestrictions,
       });
 
-    // TODO: martillo fino de ancohes porque el transformer no va bien
     return (
       <Group
         x={x}
