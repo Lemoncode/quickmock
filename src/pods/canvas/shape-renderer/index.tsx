@@ -34,7 +34,7 @@ import {
   renderLine,
   renderCircle,
   renderStar,
-  renderPostit
+  renderPostit,
 } from './simple-basic-shapes';
 
 export const renderShapeComponent = (
