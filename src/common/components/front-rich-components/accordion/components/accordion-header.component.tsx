@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
-import { ShapeProps } from '../../front-components/shape.model';
 import { TriangleSelector } from './triangle-selector.component';
+import { ShapeProps } from '@/common/components/front-components/shape.model';
 
 interface Props extends ShapeProps {
   isSelected: boolean;

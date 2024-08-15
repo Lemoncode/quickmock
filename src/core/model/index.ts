@@ -25,10 +25,47 @@ export type ShapeType =
   | 'label'
   | 'radiobutton'
   | 'rectangle'
+  | 'postit'
   | 'videoPlayer'
   | 'diamond'
-  | 'accordion';
-/* | "text"| "button" |  "radio" | "image"*/
+  | 'line'
+  | 'accordion'
+  | 'pie'
+  | 'horizontal-menu'
+  | 'breadcrumb'
+  | 'map'
+  | 'circle'
+  | 'star';
+
+export const ShapeDisplayName: Record<ShapeType, string> = {
+  combobox: 'Combobox',
+  input: 'Input',
+  button: 'Button',
+  checkbox: 'Checkbox',
+  textarea: 'Textarea',
+  toggleswitch: 'Toggle Switch',
+  progressbar: 'Progress Bar',
+  listbox: 'List Box',
+  datepickerinput: 'Date Picker Input',
+  browser: 'Browser',
+  timepickerinput: 'Time Picker Input',
+  mobilePhone: 'Mobile Phone',
+  tablet: 'Tablet',
+  label: 'Label',
+  radiobutton: 'Radio Button',
+  rectangle: 'Rectangle',
+  videoPlayer: 'Video Player',
+  diamond: 'Diamond',
+  line: 'Line',
+  accordion: 'Accordion',
+  pie: 'Pie',
+  breadcrumb: 'Breadcrumb',
+  map: 'Map',
+  circle: 'Circle',
+  star: 'Star',
+  postit: 'Post-it',
+  'horizontal-menu': 'Horizontal Menu',
+};
 
 export type EditType = 'input' | 'textarea';
 
@@ -46,6 +83,11 @@ export interface Coord {
   y: number;
 }
 
+export interface OtherProps {
+  stroke?: string;
+  backgroundColor?: string;
+}
+
 export interface ShapeModel {
   id: string;
   x: number;
@@ -54,6 +96,8 @@ export interface ShapeModel {
   height: number;
   type: ShapeType;
   allowsInlineEdition: boolean;
+  hasLateralTransformer: boolean;
   editType?: EditType;
   text?: string;
+  otherProps?: OtherProps;
 }

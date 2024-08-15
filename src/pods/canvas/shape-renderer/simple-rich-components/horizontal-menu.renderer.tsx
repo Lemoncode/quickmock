@@ -1,8 +1,8 @@
-import { InputShape } from '@/common/components/front-components/input-shape';
+import { HorizontalMenu } from '@/common/components/front-rich-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 
-export const renderInput = (
+export const renderHorizontalMenu = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
@@ -10,23 +10,23 @@ export const renderInput = (
     shapeRenderedProps;
 
   return (
-    <InputShape
+    <HorizontalMenu
       id={shape.id}
       key={shape.id}
+      ref={shapeRefs.current[shape.id]}
       x={shape.x}
       y={shape.y}
+      name="shape"
       width={shape.width}
       height={shape.height}
-      name="shape"
       draggable
       onSelected={handleSelected}
-      ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
-      isEditable={shape.allowsInlineEdition}
+      editType={shape.editType}
+      isEditable={true}
       text={shape.text}
-      otherProps={shape.otherProps}
     />
   );
 };

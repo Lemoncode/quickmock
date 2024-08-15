@@ -1,4 +1,11 @@
-import { Coord, ShapeType, Size, ShapeModel, EditType } from '@/core/model';
+import {
+  Coord,
+  ShapeType,
+  Size,
+  ShapeModel,
+  EditType,
+  OtherProps,
+} from '@/core/model';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -19,12 +26,20 @@ import {
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 import {
+  getCircleShapeSizeRestrictions,
   getDiamondShapeSizeRestrictions,
+  getPostItShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
+  getlineShapeRestrictions,
+  getStarShapeSizeRestrictions,
 } from '@/common/components/front-basic-sapes';
 import {
   getAccordionShapeSizeRestrictions,
+  getBreadcrumbShapeSizeRestrictions,
+  getPieChartShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
+  getHorizontalMenuShapeSizeRestrictions,
+  getMapChartShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 
 export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
@@ -110,10 +125,50 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getDiamondShapeSizeRestrictions().defaultWidth,
         height: getDiamondShapeSizeRestrictions().defaultHeight,
       };
+    case 'line':
+      return {
+        width: getlineShapeRestrictions().defaultWidth,
+        height: getlineShapeRestrictions().defaultHeight,
+      };
     case 'accordion':
       return {
         width: getAccordionShapeSizeRestrictions().defaultWidth,
         height: getAccordionShapeSizeRestrictions().defaultHeight,
+      };
+    case 'postit':
+      return {
+        width: getPostItShapeSizeRestrictions().defaultWidth,
+        height: getPostItShapeSizeRestrictions().defaultHeight,
+      };
+    case 'pie':
+      return {
+        width: getPieChartShapeSizeRestrictions().defaultWidth,
+        height: getPieChartShapeSizeRestrictions().defaultHeight,
+      };
+    case 'horizontal-menu':
+      return {
+        width: getHorizontalMenuShapeSizeRestrictions().defaultWidth,
+        height: getHorizontalMenuShapeSizeRestrictions().defaultHeight,
+      };
+    case 'breadcrumb':
+      return {
+        width: getBreadcrumbShapeSizeRestrictions().defaultWidth,
+        height: getBreadcrumbShapeSizeRestrictions().defaultHeight,
+      };
+    case 'map':
+      return {
+        width: getMapChartShapeSizeRestrictions().defaultWidth,
+        height: getMapChartShapeSizeRestrictions().defaultHeight,
+      };
+    case 'circle':
+      return {
+        width: getCircleShapeSizeRestrictions().defaultWidth,
+        height: getCircleShapeSizeRestrictions().defaultHeight,
+      };
+    case 'star':
+      return {
+        width: getStarShapeSizeRestrictions().defaultWidth,
+        height: getStarShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(
@@ -133,7 +188,18 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'accordion':
     case 'checkbox':
     case 'radiobutton':
-    case 'listbox':
+    case 'postit':
+    case 'horizontal-menu':
+    case 'breadcrumb':
+      return true;
+    default:
+      return false;
+  }
+};
+
+const doesShapeHaveLateralTransformer = (shapeType: ShapeType): boolean => {
+  switch (shapeType) {
+    case 'line':
       return true;
     default:
       return false;
@@ -156,10 +222,14 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Your text here...';
     case 'accordion':
       return '[*]Section A\nSection B';
+    case 'breadcrumb':
+      return 'Home\nCategory\nProducts';
     case 'checkbox':
       return 'Check me!';
-    case 'listbox':
-      return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
+    case 'postit':
+      return '';
+    case 'horizontal-menu':
+      return 'Home\nAbout\nServices\nContact';
     default:
       return undefined;
   }
@@ -171,11 +241,25 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
   switch (shapeType) {
     case 'textarea':
     case 'accordion':
-    case 'listbox':
+    case 'postit':
+    case 'horizontal-menu':
+    case 'breadcrumb':
       return 'textarea';
       break;
   }
   return result;
+};
+
+export const generateDefaultOtherProps = (
+  shapeType: ShapeType
+): OtherProps | undefined => {
+  switch (shapeType) {
+    case 'input':
+    case 'button':
+      return { stroke: '#000000', backgroundColor: '#FFFFFF' };
+    default:
+      return undefined;
+  }
 };
 
 // TODO: create interfaces to hold Coordination and Size
@@ -193,8 +277,10 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     height,
     type: shapeType,
     allowsInlineEdition: doesShapeAllowInlineEdition(shapeType),
+    hasLateralTransformer: doesShapeHaveLateralTransformer(shapeType),
     text: generateDefaultTextValue(shapeType),
     editType: getShapeEditInlineType(shapeType),
+    otherProps: generateDefaultOtherProps(shapeType),
   };
 };
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Konva from 'konva';
-import { ShapeRefs, ShapeType } from '@/core/model';
+import { OtherProps, ShapeModel, ShapeRefs, ShapeType } from '@/core/model';
 import { DocumentModel, SelectionInfo, ZIndexAction } from './canvas.model';
 import { performZIndexAction } from './zindex.util';
 
@@ -69,6 +69,24 @@ export const useSelection = (
     }));
   };
 
+  // TODO: Rather implement this using immmer
+
+  const updateOtherPropsOnSelected = <K extends keyof OtherProps>(
+    key: K,
+    value: OtherProps[K]
+  ) => {
+    setDocument(prevDocument => ({
+      shapes: prevDocument.shapes.map(shape =>
+        shape.id === selectedShapeId
+          ? { ...shape, otherProps: { ...shape.otherProps, [key]: value } }
+          : shape
+      ),
+    }));
+  };
+
+  const getSelectedShapeData = (): ShapeModel | undefined =>
+    document.shapes.find(shape => shape.id === selectedShapeId);
+
   return {
     transformerRef,
     shapeRefs,
@@ -77,7 +95,9 @@ export const useSelection = (
     selectedShapeRef,
     selectedShapeId,
     selectedShapeType,
+    getSelectedShapeData,
     setZIndexOnSelected,
     updateTextOnSelected,
+    updateOtherPropsOnSelected,
   };
 };
