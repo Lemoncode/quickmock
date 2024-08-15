@@ -191,6 +191,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'postit':
     case 'horizontal-menu':
     case 'breadcrumb':
+    case 'listbox':
       return true;
     default:
       return false;
@@ -228,6 +229,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Check me!';
     case 'postit':
       return '';
+    case 'listbox':
+      return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
     case 'horizontal-menu':
       return 'Home\nAbout\nServices\nContact';
     default:
@@ -244,6 +247,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'postit':
     case 'horizontal-menu':
     case 'breadcrumb':
+    case 'listbox':
       return 'textarea';
       break;
   }
