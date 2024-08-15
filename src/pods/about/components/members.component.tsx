@@ -20,7 +20,7 @@ export const MemberListComponent: React.FC<Props> = props => {
           <LinkedinIcon />
         </div>
       </a>
-      <p className="member-name">
+      <p className={classes.memberName}>
         {member.name} <br />
         {member.surname}
       </p>

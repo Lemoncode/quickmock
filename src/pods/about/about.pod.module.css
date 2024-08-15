@@ -11,9 +11,9 @@
   gap: var(--space-s);
 }
 
-.project-logo {
+.projectLogo {
   display: block;
-  width: 45px;
+  width: 60px;
   height: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -38,15 +38,4 @@
   margin: 0;
   margin-bottom: var(--space-lg);
   color: var(--primary-200);
-}
-
-.team {
-  font-size: var(--fs-lg);
-  font-weight: var(--fw-medium);
-  color: var(--pure-white);
-  text-align: left;
-  margin: 0;
-  margin-bottom: var(--space-lg);
-  align-self: flex-start;
-  color: var(--primary-300);
 }

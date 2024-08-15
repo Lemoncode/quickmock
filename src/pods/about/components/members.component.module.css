@@ -2,14 +2,20 @@
   width: 100px;
 }
 
-.member-link {
+.memberName {
+  color: var(--pure-white);
+  text-align: center;
+  padding-top: var(--space-s);
+}
+
+.memberLink {
   display: block;
   position: relative;
   border-radius: 100%;
   color: white;
 }
 
-.member-link img {
+.memberLink img {
   width: 100px;
   height: 100px;
   object-fit: cover;
@@ -17,7 +23,7 @@
   display: block;
 }
 
-.member-icon {
+.memberIcon {
   width: 26px;
   height: 26px;
   border-radius: 100%;
@@ -40,14 +46,14 @@
     width: 80px;
   }
 
-  .member-link img {
+  .memberLink img {
     width: 60px;
     height: 60px;
     margin-right: 10px;
     margin-left: 10px;
   }
 
-  .member-icon {
+  .memberIcon {
     width: 22px;
     height: 22px;
     font-size: var(--fs-xs);
