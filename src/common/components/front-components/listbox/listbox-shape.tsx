@@ -2,14 +2,16 @@ import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../shape.model';
-import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { mapListboxTextToItems } from './listbox-shape.business';
+import {
+  calculateDynamicContentSizeRestriction,
+  mapListboxTextToItems,
+} from './listbox-shape.business';
 
 const listboxShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 75,
   minHeight: 200,
-  maxWidth: 300,
-  maxHeight: 300,
+  maxWidth: -1,
+  maxHeight: -1,
   defaultWidth: 120,
   defaultHeight: 220,
 };
@@ -18,27 +20,20 @@ export const getListboxShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   listboxShapeSizeRestrictions;
 
 interface ListBoxShapeProps extends ShapeProps {
-  // TODO: Eliminar esto y de donde se use (seguramente el rendrer)
-  items: string[];
+  text: string;
+  onSelected: (id: string, type: string) => void;
 }
 
+const singleHeaderHeight = 35;
+
 export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
-  (
-    { x, y, width, height, id, items, onSelected, text, ...shapeProps },
-    ref
-  ) => {
+  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
     const [selectedItem, setSelectedItem] = useState<number | null>(null);
-    const [listboxItems, setListboxItem] = useState<string[]>(items);
+    const [listboxItems, setListboxItem] = useState<string[]>([
+      '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6',
+    ]);
     const rectRef = useRef<any>(null);
     const listRef = useRef<any>(null);
-    console.log(items);
-
-    const { width: restrictedWidth, height: restrictedHeight } =
-      fitSizeToShapeSizeRestrictions(
-        listboxShapeSizeRestrictions,
-        width,
-        height
-      );
 
     const handleClick = (itemIndex: number) => {
       setSelectedItem(itemIndex);
@@ -47,13 +42,21 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
 
     useEffect(() => {
       if (text) {
-        const { items, selectedSectionIndex } = mapListboxTextToItems(text);
+        const { items, selectedItemIndex } = mapListboxTextToItems(text);
         setListboxItem(items);
-        setSelectedItem(selectedSectionIndex);
+        setSelectedItem(selectedItemIndex);
       } else {
         setListboxItem([]);
       }
     }, [text]);
+
+    const { width: restrictedWidth, height: restrictedHeight } =
+      calculateDynamicContentSizeRestriction(listboxItems, {
+        width,
+        height,
+        singleHeaderHeight,
+        listboxShapeSizeRestrictions,
+      });
 
     // TODO: martillo fino de ancohes porque el transformer no va bien
     return (
@@ -64,20 +67,17 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
         height={restrictedHeight}
         ref={ref}
         {...shapeProps}
-        clipFunc={ctx => {
-          ctx.rect(0, 0, restrictedWidth, restrictedHeight);
-        }}
       >
         {/* Rectángulo del listbox */}
         <Rect
-          x={0}
-          y={0}
-          width={restrictedWidth}
-          height={restrictedHeight}
+          x={-10}
+          y={-10}
+          width={restrictedWidth + 20}
+          height={restrictedHeight + 20}
           ref={rectRef}
           cornerRadius={10}
           stroke="black"
-          strokeWidth={4}
+          strokeWidth={2}
           fill="white"
         />
 
@@ -86,19 +86,22 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
           {listboxItems.map((item, index) => (
             <Group key={index} onClick={() => handleClick(index)}>
               <Rect
-                x={2}
-                y={index === 0 ? 4 : index * 30}
-                width={width - 4}
-                height={30}
+                x={0}
+                y={0 + index * singleHeaderHeight}
+                width={restrictedWidth}
+                height={singleHeaderHeight}
                 fill={selectedItem === index ? 'lightblue' : 'white'}
+                stroke={selectedItem === index ? 'skyblue' : 'transparent'}
+                strokeWidth={selectedItem === index ? 1 : 0}
               />
-              {/* Creo que le falta el width de esa caja*/}
               <Text
                 x={10}
-                y={30 * index + 5}
+                y={0 + index * singleHeaderHeight + 12}
                 text={item}
+                width={restrictedWidth - 10}
+                height={singleHeaderHeight - 12}
                 fontFamily="Comic Sans MS, cursive"
-                fontSize={20}
+                fontSize={15}
                 fill="black"
                 wrap="none"
                 ellipsis={true}

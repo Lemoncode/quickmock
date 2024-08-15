@@ -159,7 +159,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'checkbox':
       return 'Check me!';
     case 'listbox':
-      return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6\n';
+      return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
     default:
       return undefined;
   }
