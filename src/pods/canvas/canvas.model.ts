@@ -26,6 +26,7 @@ import {
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 import {
+  getTriangleShapeSizeRestrictions,
   getCircleShapeSizeRestrictions,
   getDiamondShapeSizeRestrictions,
   getPostItShapeSizeRestrictions,
@@ -135,6 +136,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getAccordionShapeSizeRestrictions().defaultWidth,
         height: getAccordionShapeSizeRestrictions().defaultHeight,
+      };
+    case 'triangle':
+      return {
+        width: getTriangleShapeSizeRestrictions().defaultWidth,
+        height: getTriangleShapeSizeRestrictions().defaultHeight,
       };
     case 'postit':
       return {
