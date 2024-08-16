@@ -40,6 +40,7 @@ import {
   getVideoPlayerShapeSizeRestrictions,
   getHorizontalMenuShapeSizeRestrictions,
   getMapChartShapeSizeRestrictions,
+  getLineChartShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 
 export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
@@ -169,6 +170,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getStarShapeSizeRestrictions().defaultWidth,
         height: getStarShapeSizeRestrictions().defaultHeight,
+      };
+    case 'linechart':
+      return {
+        width: getLineChartShapeSizeRestrictions().defaultWidth,
+        height: getLineChartShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(

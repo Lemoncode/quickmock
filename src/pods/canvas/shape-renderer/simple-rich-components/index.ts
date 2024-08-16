@@ -4,3 +4,4 @@ export * from './pie-chart.renderer';
 export * from './horizontal-menu.renderer';
 export * from './map-chart.renderer';
 export * from './breadcrumb.renderer';
+export * from './line-chart.renderer';

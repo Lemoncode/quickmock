@@ -35,7 +35,8 @@ export type ShapeType =
   | 'breadcrumb'
   | 'map'
   | 'circle'
-  | 'star';
+  | 'star'
+  | 'linechart';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -64,6 +65,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   circle: 'Circle',
   star: 'Star',
   postit: 'Post-it',
+  linechart: 'Line',
   'horizontal-menu': 'Horizontal Menu',
 };
 
