@@ -63,7 +63,7 @@ export const LargeArrowShape = forwardRef<any, ShapeProps>(
           scaleX={scaleX}
           scaleY={scaleY}
         >
-          <Path data={pathData} fill="fill" stroke="black" strokeWidth={2} />
+          <Path data={pathData} fill={fill} stroke={stroke} strokeWidth={2} />
         </Group>
       </Group>
     );
