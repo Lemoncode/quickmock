@@ -1,6 +1,6 @@
 import { Group, Path } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
@@ -13,6 +13,11 @@ const LargeArrowShapeSizeRestrictions: ShapeSizeRestrictions = {
   defaultHeight: 50,
 };
 
+const LARGE_ARROW_FIX_WIDTH = 100;
+const LARGE_ARROW_FIX_HEIGHT = 100;
+
+const pathData = `M10,35 L200,35 L200,15 L300,50 L200,85 L200,65 L10,65 Z`;
+
 export const getLargeArrowShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   LargeArrowShapeSizeRestrictions;
 export const LargeArrowShape = forwardRef<any, ShapeProps>(
@@ -23,6 +28,14 @@ export const LargeArrowShape = forwardRef<any, ShapeProps>(
         width,
         height
       );
+
+    const scaleX = useMemo(() => {
+      return restrictedWidth / LARGE_ARROW_FIX_WIDTH;
+    }, [restrictedWidth]);
+
+    const scaleY = useMemo(() => {
+      return restrictedHeight / LARGE_ARROW_FIX_HEIGHT;
+    }, [restrictedHeight]);
 
     return (
       <Group
@@ -35,17 +48,12 @@ export const LargeArrowShape = forwardRef<any, ShapeProps>(
         onClick={() => onSelected(id, 'largeArrow')}
       >
         <Group
-          width={100}
-          height={100}
-          scaleX={restrictedWidth / 100}
-          scaleY={restrictedHeight / 100}
+          width={LARGE_ARROW_FIX_WIDTH}
+          height={LARGE_ARROW_FIX_HEIGHT}
+          scaleX={scaleX}
+          scaleY={scaleY}
         >
-          <Path
-            data="M10,35 L200,35 L200,15 L300,50 L200,85 L200,65 L10,65 Z"
-            fill={'#4CAF50'}
-            stroke={'black'}
-            strokeWidth={2}
-          />
+          <Path data={pathData} fill="#4CAF50" stroke="black" strokeWidth={2} />
         </Group>
       </Group>
     );
