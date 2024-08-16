@@ -5,12 +5,12 @@ import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
 const LargeArrowShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 100,
+  minWidth: 50,
+  minHeight: 50,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 50,
-  defaultHeight: 50,
+  defaultWidth: 100,
+  defaultHeight: 100,
 };
 
 const LARGE_ARROW_FIX_WIDTH = 100;
