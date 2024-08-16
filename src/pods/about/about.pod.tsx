@@ -11,7 +11,6 @@ export const AboutPod = () => {
       <h2 className={classes.projectName}>QuickMock</h2>
       <p className={classes.projectVersion}>Version 0.0</p>
       <p className={classes.projectCommunity}>Community preview</p>
-
       <DevelopmentTeamComponent />
     </div>
   );
