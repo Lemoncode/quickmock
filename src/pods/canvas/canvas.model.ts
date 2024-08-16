@@ -272,7 +272,21 @@ export const generateDefaultOtherProps = (
   switch (shapeType) {
     case 'input':
     case 'button':
+    case 'textarea':
+    case 'combobox':
+    case 'listbox':
+    case 'datepickerinput':
+    case 'timepickerinput':
+    case 'rectangle':
+    case 'circle':
+    case 'star':
+    case 'diamond':
+    case 'triangle':
       return { stroke: '#000000', backgroundColor: '#FFFFFF' };
+    case 'line':
+      return { stroke: '#000000' };
+    case 'postit':
+      return { stroke: '#000000', backgroundColor: '#FFFF99' };
     default:
       return undefined;
   }

@@ -24,6 +24,7 @@ export const renderStar = (
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      otherProps={shape.otherProps}
     />
   );
 };
