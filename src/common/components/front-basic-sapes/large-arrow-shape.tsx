@@ -21,7 +21,7 @@ const pathData = `M10,35 L200,35 L200,15 L300,50 L200,85 L200,65 L10,65 Z`;
 export const getLargeArrowShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   LargeArrowShapeSizeRestrictions;
 export const LargeArrowShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, otherProps, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         LargeArrowShapeSizeRestrictions,
@@ -36,6 +36,16 @@ export const LargeArrowShape = forwardRef<any, ShapeProps>(
     const scaleY = useMemo(() => {
       return restrictedHeight / LARGE_ARROW_FIX_HEIGHT;
     }, [restrictedHeight]);
+
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
 
     return (
       <Group
@@ -53,7 +63,7 @@ export const LargeArrowShape = forwardRef<any, ShapeProps>(
           scaleX={scaleX}
           scaleY={scaleY}
         >
-          <Path data={pathData} fill="#4CAF50" stroke="black" strokeWidth={2} />
+          <Path data={pathData} fill="fill" stroke="black" strokeWidth={2} />
         </Group>
       </Group>
     );
