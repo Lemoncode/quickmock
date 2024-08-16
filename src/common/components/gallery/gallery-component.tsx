@@ -14,10 +14,10 @@ export const GalleryComponent: React.FC<Props> = props => {
   return (
     <div className={classes.container}>
       {itemCollection.map(item => (
-        <>
-          <ItemComponent key={item.type} item={item} />
+        <React.Fragment key={item.type}>
+          <ItemComponent item={item} />
           <p>{ShapeDisplayName[item.type as ShapeType]}</p>
-        </>
+        </React.Fragment>
       ))}
     </div>
   );

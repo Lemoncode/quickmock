@@ -34,7 +34,7 @@ export const PieChartShape = forwardRef<any, ShapeProps>(
 
     const scaleY = useMemo(() => {
       return restrictedHeight / PIE_FIX_HEIGHT;
-    }, [restrictedWidth]);
+    }, [restrictedHeight]);
 
     return (
       <Group

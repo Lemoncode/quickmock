@@ -1,8 +1,8 @@
-import { TimepickerInputShape } from '@/common/components/front-components';
+import { TriangleShape } from '@/common/components/front-basic-sapes';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 
-export const renderTimepickerinput = (
+export const renderTriangle = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
@@ -10,17 +10,16 @@ export const renderTimepickerinput = (
     shapeRenderedProps;
 
   return (
-    <TimepickerInputShape
+    <TriangleShape
       id={shape.id}
       key={shape.id}
+      ref={shapeRefs.current[shape.id]}
       x={shape.x}
       y={shape.y}
       width={shape.width}
       height={shape.height}
-      name="shape"
       draggable
       onSelected={handleSelected}
-      ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
