@@ -28,6 +28,8 @@ export type ShapeType =
   | 'postit'
   | 'videoPlayer'
   | 'diamond'
+
+  /* | "text"| "button" |  "radio" | "image"*/
   | 'line'
   | 'accordion'
   | 'pie'
@@ -35,6 +37,7 @@ export type ShapeType =
   | 'breadcrumb'
   | 'map'
   | 'circle'
+  | 'triangle'
   | 'star';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {

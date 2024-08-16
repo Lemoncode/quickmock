@@ -30,6 +30,7 @@ import {
 } from './simple-rich-components';
 import {
   renderDiamond,
+  renderTriangle,
   renderRectangle,
   renderLine,
   renderCircle,
@@ -88,6 +89,8 @@ export const renderShapeComponent = (
       return renderLine(shape, shapeRenderedProps);
     case 'accordion':
       return renderAccordion(shape, shapeRenderedProps);
+    case 'triangle':
+      return renderTriangle(shape, shapeRenderedProps);
     case 'horizontal-menu':
       return renderHorizontalMenu(shape, shapeRenderedProps);
     case 'breadcrumb':
