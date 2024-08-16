@@ -35,6 +35,7 @@ import {
   renderCircle,
   renderStar,
   renderPostit,
+  renderLargeArrowShape,
 } from './simple-basic-shapes';
 
 export const renderShapeComponent = (
@@ -96,6 +97,8 @@ export const renderShapeComponent = (
       return renderCircle(shape, shapeRenderedProps);
     case 'star':
       return renderStar(shape, shapeRenderedProps);
+    case 'largeArrow':
+      return renderLargeArrowShape(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

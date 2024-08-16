@@ -35,7 +35,8 @@ export type ShapeType =
   | 'breadcrumb'
   | 'map'
   | 'circle'
-  | 'star';
+  | 'star'
+  | 'largeArrow';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -65,6 +66,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   star: 'Star',
   postit: 'Post-it',
   'horizontal-menu': 'Horizontal Menu',
+  largeArrow: 'Large Arrow',
 };
 
 export type EditType = 'input' | 'textarea';

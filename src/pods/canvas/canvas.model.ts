@@ -32,6 +32,7 @@ import {
   getRectangleShapeSizeRestrictions,
   getlineShapeRestrictions,
   getStarShapeSizeRestrictions,
+  getLargeArrowShapeSizeRestrictions,
 } from '@/common/components/front-basic-sapes';
 import {
   getAccordionShapeSizeRestrictions,
@@ -169,6 +170,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getStarShapeSizeRestrictions().defaultWidth,
         height: getStarShapeSizeRestrictions().defaultHeight,
+      };
+    case 'largeArrow':
+      return {
+        width: getLargeArrowShapeSizeRestrictions().defaultWidth,
+        height: getLargeArrowShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(
