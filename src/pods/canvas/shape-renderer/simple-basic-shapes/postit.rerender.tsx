@@ -26,6 +26,7 @@ export const renderPostit = (
       onTransformEnd={handleTransform}
       editType={shape.editType}
       isEditable={true}
+      otherProps={shape.otherProps}
     />
   );
 };

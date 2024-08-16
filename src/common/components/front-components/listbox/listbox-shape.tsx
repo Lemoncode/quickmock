@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../shape.model';
 import {
@@ -27,7 +27,10 @@ interface ListBoxShapeProps extends ShapeProps {
 const singleHeaderHeight = 35;
 
 export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const [selectedItem, setSelectedItem] = useState<number | null>(null);
     const [listboxItems, setListboxItem] = useState<string[]>([
       '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6',
@@ -58,6 +61,16 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
         listboxShapeSizeRestrictions,
       });
 
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
+
     return (
       <Group
         x={x}
@@ -75,9 +88,9 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
           height={restrictedHeight + 20}
           ref={rectRef}
           cornerRadius={10}
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
-          fill="white"
+          fill={fill}
         />
 
         {/* Elementos de la lista con desplazamiento */}
@@ -89,7 +102,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
                 y={0 + index * singleHeaderHeight}
                 width={restrictedWidth}
                 height={singleHeaderHeight}
-                fill={selectedItem === index ? 'lightblue' : 'white'}
+                fill={selectedItem === index ? 'lightblue' : fill}
                 stroke={selectedItem === index ? 'skyblue' : 'transparent'}
                 strokeWidth={selectedItem === index ? 1 : 0}
               />

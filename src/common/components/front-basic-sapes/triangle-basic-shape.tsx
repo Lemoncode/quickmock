@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Line } from 'react-konva';
@@ -20,7 +20,10 @@ export const getTriangleShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   triangleShapeRestrictions;
 
 export const TriangleShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(triangleShapeRestrictions, width, height);
 
@@ -33,6 +36,16 @@ export const TriangleShape = forwardRef<any, ShapeProps>(
       0,
       restrictedHeight, // Left point
     ];
+
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
 
     return (
       <Group
@@ -47,9 +60,9 @@ export const TriangleShape = forwardRef<any, ShapeProps>(
         <Line
           points={points}
           closed
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
-          fill="white"
+          fill={fill}
         />
       </Group>
     );

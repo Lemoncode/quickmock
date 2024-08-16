@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { Group, Line, Rect } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
@@ -17,9 +17,17 @@ export const getlineShapeRestrictions = (): ShapeSizeRestrictions =>
   lineShapeRestrictions;
 
 export const LineShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(lineShapeRestrictions, width, height);
+
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
 
     return (
       <Group
@@ -42,7 +50,7 @@ export const LineShape = forwardRef<any, ShapeProps>(
           x={0}
           y={restrictedHeight / 2}
           points={[0, 0, restrictedWidth, 0]}
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
         />
       </Group>
