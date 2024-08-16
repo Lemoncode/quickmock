@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Circle, Group } from 'react-konva';
@@ -17,11 +17,21 @@ export const getCircleShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   circleShapeRestrictions;
 
 export const CircleShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, otherProps, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(circleShapeRestrictions, width, height);
 
     const radius = Math.min(restrictedWidth, restrictedHeight) / 2;
+
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
 
     return (
       <Group
@@ -37,9 +47,9 @@ export const CircleShape = forwardRef<any, ShapeProps>(
           x={restrictedWidth / 2}
           y={restrictedHeight / 2}
           radius={radius}
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
-          fill="white"
+          fill={fill}
         />
       </Group>
     );

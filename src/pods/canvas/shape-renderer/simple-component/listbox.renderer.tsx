@@ -27,6 +27,7 @@ export const renderListbox = (
       editType={shape.editType}
       isEditable={true}
       text={shape.text}
+      otherProps={shape.otherProps}
     />
   );
 };

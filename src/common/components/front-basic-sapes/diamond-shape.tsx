@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Line } from 'react-konva';
@@ -17,7 +17,10 @@ export const getDiamondShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   diamondShapeRestrictions;
 
 export const DiamondShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(diamondShapeRestrictions, width, height);
 
@@ -35,6 +38,16 @@ export const DiamondShape = forwardRef<any, ShapeProps>(
       halfHeight, // Left point
     ];
 
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
+
     return (
       <Group
         x={x}
@@ -48,9 +61,9 @@ export const DiamondShape = forwardRef<any, ShapeProps>(
         <Line
           points={points}
           closed
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
-          fill="white"
+          fill={fill}
         />
       </Group>
     );

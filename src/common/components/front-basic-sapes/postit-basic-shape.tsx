@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
@@ -17,7 +17,10 @@ export const getPostItShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   postItShapeRestrictions;
 
 export const PostItShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, text, onSelected, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, text, onSelected, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(postItShapeRestrictions, width, height);
 
@@ -34,6 +37,16 @@ export const PostItShape = forwardRef<any, ShapeProps>(
     const tapeY = 0;
 
     const tapeRotation = -10;
+
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
 
     return (
       <Group
@@ -52,9 +65,9 @@ export const PostItShape = forwardRef<any, ShapeProps>(
           width={postItWidth}
           height={restrictedHeight - 10}
           cornerRadius={10}
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
-          fill="#FFFF99"
+          fill={fill}
         />
 
         {/* Tape */}

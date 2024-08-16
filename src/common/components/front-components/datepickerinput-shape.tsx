@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Line } from 'react-konva';
@@ -17,7 +17,7 @@ export const getDatepickerInputShapeSizeRestrictions =
   (): ShapeSizeRestrictions => datepickerInputShapeRestrictions;
 
 export const DatepickerInputShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, otherProps, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         datepickerInputShapeRestrictions,
@@ -28,6 +28,16 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
     const separatorPadding = 12;
     const separator1X = restrictedWidth / 3;
     const separator2X = (2 * restrictedWidth) / 3;
+
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
 
     return (
       <Group
@@ -46,9 +56,9 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           width={restrictedWidth}
           height={restrictedHeight + 4}
           cornerRadius={10}
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
-          fill="white"
+          fill={fill}
         />
         {/* Inverted diagonal spacers */}
         <Line
@@ -58,7 +68,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
             separator1X - separatorPadding,
             10 + restrictedHeight - separatorPadding,
           ]}
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
         />
         <Line
@@ -68,7 +78,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
             separator2X - separatorPadding,
             10 + restrictedHeight - separatorPadding,
           ]}
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
         />
       </Group>

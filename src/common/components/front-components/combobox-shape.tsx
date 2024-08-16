@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Path, Group, Text } from 'react-konva';
@@ -17,9 +17,22 @@ export const getComboBoxShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   comboBoxShapeRestrictions;
 
 export const ComboBoxShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(comboBoxShapeRestrictions, width, height);
+
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
 
     return (
       <Group
@@ -34,21 +47,21 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>(
         {/* Rectangle */}
         <Path
           data={`M1,1 H${width - 2} V${height - 2} H1 Z`}
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
-          fill="white"
+          fill={fill}
         />
         {/* Polygon (Arrow), combo triangle dropdown */}
         <Path
           data={`M${width - 30},${(height + 10) / 2 - 15} L${width - 10},${
             (height + 10) / 2 - 15
           } L${width - 20},${(height + 10) / 2}`}
-          fill="black"
+          fill={stroke}
         />
         {/* Combo arrow vertical line separator */}
         <Path
           data={`M${width - 40},1 L${width - 40},${height - 1}`}
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
         />
         <Text
