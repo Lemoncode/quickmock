@@ -71,7 +71,6 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   triangle: 'Triangle',
   'horizontal-menu': 'Horizontal Menu',
   largeArrow: 'Large Arrow',
-  triangle: 'Triangle',
 };
 
 export type EditType = 'input' | 'textarea';
