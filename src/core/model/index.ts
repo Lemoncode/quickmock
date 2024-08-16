@@ -67,6 +67,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   circle: 'Circle',
   star: 'Star',
   postit: 'Post-it',
+  triangle: 'Triangle',
   'horizontal-menu': 'Horizontal Menu',
 };
 
