@@ -18,6 +18,7 @@ import {
   getDatepickerInputShapeSizeRestrictions,
   getButtonShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
+  getIconShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -182,6 +183,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getLargeArrowShapeSizeRestrictions().defaultWidth,
         height: getLargeArrowShapeSizeRestrictions().defaultHeight,
       };
+    case 'icon':
+      return {
+        width: getIconShapeSizeRestrictions().defaultWidth,
+        height: getIconShapeSizeRestrictions().defaultHeight,
+      };
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -289,6 +295,16 @@ export const generateDefaultOtherProps = (
       return { stroke: '#000000', backgroundColor: '#FFFF99' };
     case 'largeArrow':
       return { stroke: '#000000', backgroundColor: '#d3d3d3' };
+    case 'icon':
+      return {
+        icon: {
+          name: 'save',
+          filename: 'save.svg',
+          searchTerms: ['save', 'disk', 'store'],
+          categories: ['IT'],
+        },
+        iconSize: 'M',
+      };
     default:
       return undefined;
   }
