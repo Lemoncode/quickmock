@@ -43,6 +43,7 @@ import {
   getHorizontalMenuShapeSizeRestrictions,
   getMapChartShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
+import { getImageShapeSizeRestrictions } from '@/common/components/front-basic-sapes/image-shape/image-shape';
 
 export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
@@ -182,6 +183,12 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getLargeArrowShapeSizeRestrictions().defaultWidth,
         height: getLargeArrowShapeSizeRestrictions().defaultHeight,
       };
+    case 'image':
+      return {
+        width: getImageShapeSizeRestrictions().defaultWidth,
+        height: getImageShapeSizeRestrictions().defaultHeight,
+      };
+
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -297,7 +304,11 @@ export const generateDefaultOtherProps = (
 // TODO: create interfaces to hold Coordination and Size
 // coordinate: { x: number, y: number }
 // size: { width: number, height: number }
-export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
+export const createShape = (
+  coord: Coord,
+  shapeType: ShapeType,
+  otherProps?: OtherProps
+): ShapeModel => {
   const { x, y } = coord;
   const { width, height } = getDefaultSizeFromShape(shapeType);
 
@@ -312,7 +323,9 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     hasLateralTransformer: doesShapeHaveLateralTransformer(shapeType),
     text: generateDefaultTextValue(shapeType),
     editType: getShapeEditInlineType(shapeType),
-    otherProps: generateDefaultOtherProps(shapeType),
+    otherProps: otherProps
+      ? { ...generateDefaultOtherProps(shapeType), ...otherProps }
+      : generateDefaultOtherProps(shapeType),
   };
 };
 

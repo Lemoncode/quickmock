@@ -38,6 +38,7 @@ import {
   renderPostit,
   renderLargeArrowShape,
 } from './simple-basic-shapes';
+import { renderImage } from './simple-basic-shapes/image.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -102,6 +103,8 @@ export const renderShapeComponent = (
       return renderStar(shape, shapeRenderedProps);
     case 'largeArrow':
       return renderLargeArrowShape(shape, shapeRenderedProps);
+    case 'image':
+      return renderImage(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

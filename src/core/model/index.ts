@@ -39,7 +39,8 @@ export type ShapeType =
   | 'circle'
   | 'star'
   | 'largeArrow'
-  | 'triangle';
+  | 'triangle'
+  | 'image';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -71,7 +72,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   triangle: 'Triangle',
   'horizontal-menu': 'Horizontal Menu',
   largeArrow: 'Large Arrow',
-  triangle: 'Triangle',
+  image: 'Image',
 };
 
 export type EditType = 'input' | 'textarea';
@@ -93,6 +94,7 @@ export interface Coord {
 export interface OtherProps {
   stroke?: string;
   backgroundColor?: string;
+  imageSrc?: string;
 }
 
 export interface ShapeModel {

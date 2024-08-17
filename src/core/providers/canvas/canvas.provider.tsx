@@ -1,5 +1,5 @@
 import React from 'react';
-import { Coord, ShapeModel, ShapeType, Size } from '@/core/model';
+import { Coord, OtherProps, ShapeModel, ShapeType, Size } from '@/core/model';
 import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
 import { createShape } from '@/pods/canvas/canvas.model';
@@ -60,8 +60,13 @@ export const CanvasProvider: React.FC<Props> = props => {
     }));
   };
 
-  const addNewShape = (type: ShapeType, x: number, y: number) => {
-    const newShape = createShape({ x, y }, type);
+  const addNewShape = (
+    type: ShapeType,
+    x: number,
+    y: number,
+    otherProps?: OtherProps
+  ) => {
+    const newShape = createShape({ x, y }, type, otherProps);
 
     setDocument(({ shapes }) => {
       const newShapes = [...shapes, newShape];

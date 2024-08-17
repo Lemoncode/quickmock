@@ -33,7 +33,6 @@ export const CanvasPod = () => {
     handleClearSelection,
     selectedShapeRef,
     selectedShapeId,
-    selectedShapeType,
     updateTextOnSelected,
   } = selectionInfo;
 
@@ -102,11 +101,54 @@ export const CanvasPod = () => {
     };
   }, [selectedShapeId]);
 
+  const isDropImageFile = (e: React.DragEvent<HTMLDivElement>) => {
+    const file = e.dataTransfer.files[0];
+
+    return file?.type?.startsWith('image/');
+  };
+
+  const handleDropImage = (e: React.DragEvent<HTMLDivElement>) => {
+    if (isDropImageFile(e)) {
+      console.log('dropImage', e);
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('drop Image', e);
+
+      const file = e.dataTransfer.files[0];
+      const reader = new FileReader();
+      const { clientX, clientY } = e;
+      reader.onload = e => {
+        const img = new Image();
+        img.src = e.target?.result as string;
+        img.onload = () => {
+          // OJO las coordenadas están mal tnenemos que sacarlo de use-monitor-shape
+          console.log('img', img);
+          addNewShape('image', clientX, clientY, { imageSrc: img.src });
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    // Esto lo he sacado depurando, poner breakpoint
+    if (
+      e.dataTransfer.items.length > 0 &&
+      e.dataTransfer.items[0].kind === 'file' &&
+      e.dataTransfer.items[0].type.startsWith('image/')
+    ) {
+      e.preventDefault(); // Necesario para permitir el drop
+      e.stopPropagation(); // Evita la propagación del evento
+    }
+  };
+
   {
     /* TODO: add other animation for isDraggerOver */
   }
   return (
     <div
+      onDragOver={handleDragOver}
+      onDrop={handleDropImage}
       className={classes.canvas}
       ref={dropRef}
       style={{ opacity: isDraggedOver ? 0.5 : 1 }}
