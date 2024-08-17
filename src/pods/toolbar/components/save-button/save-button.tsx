@@ -1,42 +1,51 @@
 import { SaveIcon } from '@/common/components/icons/save-icon.component';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { ToolbarButton } from '../toolbar-button';
-import { shapes } from 'konva/lib/Shape';
+import React, { ReactNode, useContext, useState } from 'react';
 
-const DEFAULT_FILE_NAME = 'quick-mock';
-const DEFAULT_EXTENSION_DESCRIPTION = 'Quick Mock';
-const DEFAULT_FILE_EXTENSION = 'png'; //sobreentiendo que es png
 
-export const SaveButton = () => {
+interface FileContext {
+  fileName: string;
+  setFileName: (value: string) => void;
+}
+const MyFileContext = React.createContext<FileContext>({
+  fileName: "",
+  setFileName: () => { },
+});
 
-  const myObject = { name: 'hello' };
-  const content = JSON.stringify(myObject);
-  const saveFile = async (openedFilename: string) => {
-    const filename = openedFilename !== '' ? openedFilename : DEFAULT_FILE_NAME;
+export const MyContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [fileName, setFileName] = useState("file");
 
-    const blob = new Blob([content], { type: 'application/json' });
+  return (
+    <MyFileContext.Provider value={{ fileName, setFileName }}>
+      {children}
+    </MyFileContext.Provider>)
+    ;
+};
+
+export const useFile = () => useContext(MyFileContext);
+export const SaveButton: React.FC = () => {
+
+  const { fileName } = useFile();
+  const handleClick = () => {
+    console.log('Save');
+    const myObject = { name: 'hello' };
+    const jsonString = JSON.stringify(myObject);
+    const blob = new Blob([jsonString], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-
-    if (window.showDirectoryPicker === undefined) {  //no me funciona showdirectorypicker
-      downloadFile(filename, content, 'application/json'); //ubicación downloadFile?
-    } else {
-      const savedFilename = await saveFileModern( //ubicación saveFileModern?
-        {
-          filename,
-          extension: DEFAULT_FILE_EXTENSION,
-          description: DEFAULT_EXTENSION_DESCRIPTION,
-        },
-        content
-      );
-    }
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${fileName}.json`;
+    a.click();
     URL.revokeObjectURL(url);
   };
+
   return (
     <ToolbarButton
+      onClick={handleClick}
+      className={classes.button}
       icon={<SaveIcon />}
-      label={'Save'}
-      onClick={() => saveFile('')} //de donde saco el filename
-      className={`${classes.button} hide-mobile`}
+      label="Save"
     />
   );
 };
