@@ -93,7 +93,7 @@ export interface Coord {
 
 type Category = 'IT' | 'business' | 'Ecommerce';
 
-interface IconInfo {
+export interface IconInfo {
   name: string;
   filename: string;
   searchTerms: string[];

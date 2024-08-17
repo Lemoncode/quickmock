@@ -1,6 +1,11 @@
 import { useCanvasContext } from '@/core/providers';
 import classes from './properties.pod.module.css';
-import { ZIndexOptions, ColorPicker, SelectSize } from './components';
+import {
+  ZIndexOptions,
+  ColorPicker,
+  SelectSize,
+  SelectIcon,
+} from './components';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -43,6 +48,18 @@ export const PropertiesPod = () => {
           iconSize={selectedShapeData.otherProps.iconSize}
           onChange={iconSize =>
             updateOtherPropsOnSelected('iconSize', iconSize)
+          }
+        />
+      )}
+      {selectedShapeData?.otherProps?.icon && (
+        <SelectIcon
+          label="Icon"
+          icon={selectedShapeData.otherProps.icon}
+          onChange={icon =>
+            updateOtherPropsOnSelected('icon', {
+              ...icon,
+              filename: icon.filename,
+            })
           }
         />
       )}
