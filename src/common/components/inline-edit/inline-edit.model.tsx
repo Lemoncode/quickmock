@@ -1,4 +1,4 @@
-export type EditType = 'input' | 'textarea';
+//export type EditType = 'input' | 'textarea' ;
 
 type PositionType = 'absolute' | 'relative' | 'fixed' | 'static';
 

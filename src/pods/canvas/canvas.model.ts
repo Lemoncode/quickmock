@@ -211,6 +211,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'horizontal-menu':
     case 'breadcrumb':
     case 'listbox':
+    case 'image':
       return true;
     default:
       return false;
@@ -268,6 +269,9 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'breadcrumb':
     case 'listbox':
       return 'textarea';
+      break;
+    case 'image':
+      return 'imageupload';
       break;
   }
   return result;

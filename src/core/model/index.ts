@@ -75,7 +75,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   image: 'Image',
 };
 
-export type EditType = 'input' | 'textarea';
+export type EditType = 'input' | 'textarea' | 'imageupload';
 
 export type ShapeRefs = {
   [key: string]: React.RefObject<any>;

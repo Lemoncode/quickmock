@@ -1,16 +1,19 @@
 import { Html } from 'react-konva-utils';
 import { forwardRef } from 'react';
-import { EditType, StyleDivProps } from '../inline-edit.model';
+import { StyleDivProps } from '../inline-edit.model';
+import { EditType } from '@/core/model';
+import { ImageUploadWidget } from './image-upload.widget';
 
 interface Props {
   divProps: StyleDivProps;
   value: string;
   editType: EditType;
   onSetEditText: (e: string) => void;
+  onSetImageSrc: (e: string) => void;
 }
 
 export const HtmlEditWidget = forwardRef<any, Props>(
-  ({ divProps, onSetEditText, value, editType }, ref) => {
+  ({ divProps, onSetEditText, onSetImageSrc, value, editType }, ref) => {
     return (
       <Html
         divProps={{
@@ -38,6 +41,9 @@ export const HtmlEditWidget = forwardRef<any, Props>(
             value={value}
             onChange={e => onSetEditText(e.target.value)}
           />
+        )}
+        {editType === 'imageupload' && (
+          <ImageUploadWidget onImageUploaded={onSetImageSrc} />
         )}
       </Html>
     );
