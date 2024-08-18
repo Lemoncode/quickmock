@@ -1,5 +1,5 @@
+import { EditType } from '@/core/model';
 import { useEffect, useRef, useState } from 'react';
-import { EditType } from '../inline-edit.model';
 
 interface Configuration {
   editType: EditType | undefined;
@@ -20,8 +20,18 @@ export const useSubmitCancelHook = (
   const getActiveInputRef = ():
     | HTMLInputElement
     | HTMLTextAreaElement
-    | null => (editType === 'input' ? inputRef.current : textAreaRef.current);
-
+    | null => {
+    switch (editType) {
+      case 'input':
+        return inputRef.current;
+      case 'textarea':
+        return textAreaRef.current;
+      case 'imageupload':
+        return inputRef.current;
+      default:
+        return null;
+    }
+  };
   // handle click outside of the input when editing
   useEffect(() => {
     if (!isEditable) return;

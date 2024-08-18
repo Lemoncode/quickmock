@@ -56,6 +56,7 @@ export const EditableComponent: React.FC<Props> = props => {
 
   const handleImageSrcSubmit = (src: string) => {
     onSetImageSrc(src);
+    setIsEditing(false);
   };
 
   return (
@@ -70,7 +71,11 @@ export const EditableComponent: React.FC<Props> = props => {
             width: calculateWidth(),
             height: calculateHeight(),
           }}
-          ref={editType === 'input' ? inputRef : textAreaRef}
+          ref={
+            editType === 'input' || editType === 'imageupload'
+              ? inputRef
+              : textAreaRef
+          }
           value={editText}
           onSetEditText={setEditText}
           onSetImageSrc={handleImageSrcSubmit}

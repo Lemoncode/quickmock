@@ -43,7 +43,7 @@ export const HtmlEditWidget = forwardRef<any, Props>(
           />
         )}
         {editType === 'imageupload' && (
-          <ImageUploadWidget onImageUploaded={onSetImageSrc} />
+          <ImageUploadWidget onImageUploaded={onSetImageSrc} ref={ref} />
         )}
       </Html>
     );
