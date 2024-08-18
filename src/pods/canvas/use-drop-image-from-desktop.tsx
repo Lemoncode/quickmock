@@ -5,18 +5,16 @@ export const useDropImageFromDesktop = () => {
 
   // TODO: this could be moved to business / util and add unit testing
   const isDropImageFile = (e: React.DragEvent<HTMLDivElement>) => {
-    const file = e.dataTransfer.files[0];
-
-    return file?.type?.startsWith('image/');
+    return (
+      e.dataTransfer.items.length > 0 &&
+      e.dataTransfer.items[0].kind === 'file' &&
+      e.dataTransfer.items[0].type.startsWith('image/')
+    );
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     // Esto lo he sacado depurando, poner breakpoint
-    if (
-      e.dataTransfer.items.length > 0 &&
-      e.dataTransfer.items[0].kind === 'file' &&
-      e.dataTransfer.items[0].type.startsWith('image/')
-    ) {
+    if (isDropImageFile(e)) {
       e.preventDefault(); // Necesario para permitir el drop
       e.stopPropagation(); // Evita la propagación del evento
     }
@@ -24,10 +22,8 @@ export const useDropImageFromDesktop = () => {
 
   const handleDropImage = (e: React.DragEvent<HTMLDivElement>) => {
     if (isDropImageFile(e)) {
-      console.log('dropImage', e);
       e.preventDefault();
       e.stopPropagation();
-      console.log('drop Image', e);
 
       const file = e.dataTransfer.files[0];
       const reader = new FileReader();
