@@ -43,3 +43,17 @@ export const convertFromDivElementCoordsToKonvaCoords = (
 
   return result;
 };
+
+// TODO: Add unit testing to this function (mock stage object)
+export const calculateScaledCoordsFromCanvasDivCoordinates = (
+  stage: Stage,
+  divCoords: Coord
+): Coord => {
+  const scaleX = stage.scaleX();
+  const scaleY = stage.scaleY();
+
+  return {
+    x: divCoords.x / scaleX,
+    y: divCoords.y / scaleY,
+  };
+};
