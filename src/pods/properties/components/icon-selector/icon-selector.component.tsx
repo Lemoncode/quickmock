@@ -1,5 +1,7 @@
 import { IconInfo } from '@/core/model';
 import classes from './icon-selector.component.module.css';
+import { useModalDialogContext } from '@/core/providers/model-dialog-providers/model-dialog.provider';
+import { IconModal } from './modal';
 
 interface Props {
   label: string;
@@ -9,25 +11,19 @@ interface Props {
 
 export const SelectIcon: React.FC<Props> = props => {
   const { label, icon, onChange } = props;
+  const { openModal } = useModalDialogContext();
 
   const handleClick = () => {
-    const updatedIcon: IconInfo = {
-      name: 'Delete',
-      filename: 'delete.svg',
-      searchTerms: ['delete', 'remove', 'erase', 'bin', 'trashcan'],
-      categories: ['IT'],
-    };
-    onChange(updatedIcon);
+    openModal(
+      <IconModal actualIcon={icon} onChange={onChange} />,
+      'Choose Icon'
+    );
   };
 
   return (
     <div className={classes.container}>
       <p>{label}</p>
-      <button
-        value={icon.filename}
-        onClick={handleClick}
-        className={classes.button}
-      >
+      <button onClick={handleClick} className={classes.button}>
         ...
       </button>
     </div>

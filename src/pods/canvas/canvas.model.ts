@@ -309,9 +309,9 @@ export const generateDefaultOtherProps = (
     case 'icon':
       return {
         icon: {
-          name: 'save',
-          filename: 'save.svg',
-          searchTerms: ['save', 'disk', 'store'],
+          name: 'open',
+          filename: 'open.svg',
+          searchTerms: ['open', 'folder', 'load'],
           categories: ['IT'],
         },
         iconSize: 'M',

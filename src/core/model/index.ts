@@ -91,7 +91,7 @@ export interface Coord {
   y: number;
 }
 
-type Category = 'IT' | 'business' | 'Ecommerce';
+type Category = 'IT' | 'business' | 'Ecommerce' | 'Emojis';
 
 export interface IconInfo {
   name: string;
