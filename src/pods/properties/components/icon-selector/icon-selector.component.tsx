@@ -11,7 +11,12 @@ export const SelectIcon: React.FC<Props> = props => {
   const { label, icon, onChange } = props;
 
   const handleClick = () => {
-    const updatedIcon = { ...icon, filename: 'delete.svg' };
+    const updatedIcon: IconInfo = {
+      name: 'Delete',
+      filename: 'delete.svg',
+      searchTerms: ['delete', 'remove', 'erase', 'bin', 'trashcan'],
+      categories: ['IT'],
+    };
     onChange(updatedIcon);
   };
 

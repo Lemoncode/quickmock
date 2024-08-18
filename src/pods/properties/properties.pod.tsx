@@ -55,12 +55,7 @@ export const PropertiesPod = () => {
         <SelectIcon
           label="Icon"
           icon={selectedShapeData.otherProps.icon}
-          onChange={icon =>
-            updateOtherPropsOnSelected('icon', {
-              ...icon,
-              filename: icon.filename,
-            })
-          }
+          onChange={icon => updateOtherPropsOnSelected('icon', icon)}
         />
       )}
     </div>
