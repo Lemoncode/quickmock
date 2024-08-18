@@ -8,6 +8,7 @@ import {
   ComponentGalleryPod,
   BasicShapesGalleryPod,
   RichComponentsGalleryPod,
+  TextComponetGalleryPod,
 } from '@/pods';
 import { PropertiesPod } from '@/pods/properties';
 import { FooterPod } from '@/pods/footer/footer.pod';
@@ -29,9 +30,13 @@ export const MainScene = () => {
           <summary className={classes.title}>Basic Shapes</summary>
           <BasicShapesGalleryPod />
         </details>
-        <details className={classes.container} name="toolsLeft" open>
+        <details className={classes.container} name="toolsLeft">
           <summary className={classes.title}>Rich Components</summary>
           <RichComponentsGalleryPod />
+        </details>
+        <details className={classes.container} name="toolsLeft" open>
+          <summary className={classes.title}>Text Componets</summary>
+          <TextComponetGalleryPod />
         </details>
       </div>
       <CanvasPod />

@@ -38,6 +38,13 @@ export const PropertiesPod = () => {
           }
         />
       )}
+      {selectedShapeData?.otherProps?.textColor && (
+        <ColorPicker
+          label="TextColor"
+          color={selectedShapeData.otherProps.textColor}
+          onChange={color => updateOtherPropsOnSelected('textColor', color)}
+        />
+      )}
     </div>
   );
 };

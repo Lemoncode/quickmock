@@ -41,6 +41,14 @@ import {
   getHorizontalMenuShapeSizeRestrictions,
   getMapChartShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
+import {
+  getHeading1SizeRestrictions,
+  getHeading2SizeRestrictions,
+  getHeading3SizeRestrictions,
+  getNormaltextSizeRestrictions,
+  getParagraphSizeRestrictions,
+  getSmalltextSizeRestrictions,
+} from '@/common/components/front-text-components';
 
 export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
@@ -139,7 +147,7 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getPostItShapeSizeRestrictions().defaultWidth,
         height: getPostItShapeSizeRestrictions().defaultHeight,
-      }
+      };
     case 'pie':
       return {
         width: getPieChartShapeSizeRestrictions().defaultWidth,
@@ -170,6 +178,36 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getStarShapeSizeRestrictions().defaultWidth,
         height: getStarShapeSizeRestrictions().defaultHeight,
       };
+    case 'heading1':
+      return {
+        width: getHeading1SizeRestrictions().defaultWidth,
+        height: getHeading1SizeRestrictions().defaultHeight,
+      };
+    case 'heading2':
+      return {
+        width: getHeading2SizeRestrictions().defaultWidth,
+        height: getHeading2SizeRestrictions().defaultHeight,
+      };
+    case 'heading3':
+      return {
+        width: getHeading3SizeRestrictions().defaultWidth,
+        height: getHeading3SizeRestrictions().defaultHeight,
+      };
+    case 'normaltext':
+      return {
+        width: getNormaltextSizeRestrictions().defaultWidth,
+        height: getNormaltextSizeRestrictions().defaultHeight,
+      };
+    case 'smalltext':
+      return {
+        width: getSmalltextSizeRestrictions().defaultWidth,
+        height: getSmalltextSizeRestrictions().defaultHeight,
+      };
+    case 'paragraph':
+      return {
+        width: getParagraphSizeRestrictions().defaultWidth,
+        height: getParagraphSizeRestrictions().defaultHeight,
+      };
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -191,6 +229,12 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'postit':
     case 'horizontal-menu':
     case 'breadcrumb':
+    case 'heading1':
+    case 'heading2':
+    case 'heading3':
+    case 'normaltext':
+    case 'smalltext':
+    case 'paragraph':
       return true;
     default:
       return false;
@@ -230,6 +274,18 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return '';
     case 'horizontal-menu':
       return 'Home\nAbout\nServices\nContact';
+    case 'heading1':
+      return 'Heading 1';
+    case 'heading2':
+      return 'Heading 2';
+    case 'heading3':
+      return 'Heading 3';
+    case 'normaltext':
+      return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nSed do eiusmod tempor incididunt ut labore et dolore magna\naliqua.Ut enim ad minim veniam, quis nostrud exercitation \nullamco laboris nisi ut aliquip ex ea commodo consequat\nDuis aute irure dolor in reprehenderit in voluptate velit\nesse cillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non proident, sunt in \nculpa qui officia deserunt mollit anim id est laborum.';
+    case 'smalltext':
+      return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nSed do eiusmod tempor incididunt ut labore et dolore magna\naliqua.Ut enim ad minim veniam, quis nostrud exercitation \nullamco laboris nisi ut aliquip ex ea commodo consequat\nDuis aute irure dolor in reprehenderit in voluptate velit\nesse cillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non proident, sunt in \nculpa qui officia deserunt mollit anim id est laborum.';
+    case 'paragraph':
+      return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nSed do eiusmod tempor incididunt ut labore et dolore magna\naliqua.Ut enim ad minim veniam, quis nostrud exercitation \nullamco laboris nisi ut aliquip ex ea commodo consequat\nDuis aute irure dolor in reprehenderit in voluptate velit\nesse cillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non proident, sunt in \nculpa qui officia deserunt mollit anim id est laborum.';
     default:
       return undefined;
   }
@@ -244,6 +300,9 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'postit':
     case 'horizontal-menu':
     case 'breadcrumb':
+    case 'normaltext':
+    case 'smalltext':
+    case 'paragraph':
       return 'textarea';
       break;
   }
@@ -256,7 +315,17 @@ export const generateDefaultOtherProps = (
   switch (shapeType) {
     case 'input':
     case 'button':
-      return { stroke: '#000000', backgroundColor: '#FFFFFF' };
+    case 'heading1':
+    case 'heading2':
+    case 'heading3':
+    case 'normaltext':
+    case 'smalltext':
+    case 'paragraph':
+      return {
+        stroke: '#000000',
+        backgroundColor: '#FFFFFF',
+        textColor: '#000000',
+      };
     default:
       return undefined;
   }

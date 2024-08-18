@@ -34,8 +34,16 @@ import {
   renderLine,
   renderCircle,
   renderStar,
-  renderPostit
+  renderPostit,
 } from './simple-basic-shapes';
+import {
+  renderHeading1,
+  renderHeading2,
+  renderHeading3,
+  renderNormaltext,
+} from './simple-text-components';
+import { renderSmalltext } from './simple-text-components/smalltext.renderer';
+import { renderParagraph } from './simple-text-components/paragraph.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -96,6 +104,18 @@ export const renderShapeComponent = (
       return renderCircle(shape, shapeRenderedProps);
     case 'star':
       return renderStar(shape, shapeRenderedProps);
+    case 'heading1':
+      return renderHeading1(shape, shapeRenderedProps);
+    case 'heading2':
+      return renderHeading2(shape, shapeRenderedProps);
+    case 'heading3':
+      return renderHeading3(shape, shapeRenderedProps);
+    case 'normaltext':
+      return renderNormaltext(shape, shapeRenderedProps);
+    case 'smalltext':
+      return renderSmalltext(shape, shapeRenderedProps);
+    case 'paragraph':
+      return renderParagraph(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

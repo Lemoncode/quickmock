@@ -35,7 +35,13 @@ export type ShapeType =
   | 'breadcrumb'
   | 'map'
   | 'circle'
-  | 'star';
+  | 'star'
+  | 'heading1'
+  | 'heading2'
+  | 'heading3'
+  | 'normaltext'
+  | 'smalltext'
+  | 'paragraph';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -64,6 +70,13 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   circle: 'Circle',
   star: 'Star',
   postit: 'Post-it',
+  heading1: 'Heading1',
+  heading2: 'Heading 2',
+  heading3: 'Heading 3',
+  normaltext: 'Normal text',
+  smalltext: 'Small text',
+  paragraph: 'Paragraph',
+
   'horizontal-menu': 'Horizontal Menu',
 };
 
@@ -86,6 +99,7 @@ export interface Coord {
 export interface OtherProps {
   stroke?: string;
   backgroundColor?: string;
+  textColor: string;
 }
 
 export interface ShapeModel {
