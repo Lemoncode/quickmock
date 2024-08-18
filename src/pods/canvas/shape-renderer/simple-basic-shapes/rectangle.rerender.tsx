@@ -24,6 +24,7 @@ export const renderRectangle = (
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      otherProps={shape.otherProps}
     />
   );
 };

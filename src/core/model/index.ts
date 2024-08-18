@@ -28,6 +28,8 @@ export type ShapeType =
   | 'postit'
   | 'videoPlayer'
   | 'diamond'
+
+  /* | "text"| "button" |  "radio" | "image"*/
   | 'line'
   | 'accordion'
   | 'pie'
@@ -41,7 +43,9 @@ export type ShapeType =
   | 'heading3'
   | 'normaltext'
   | 'smalltext'
-  | 'paragraph';
+  | 'paragraph'
+  | 'largeArrow'
+  | 'triangle';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -76,8 +80,9 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   normaltext: 'Normal text',
   smalltext: 'Small text',
   paragraph: 'Paragraph',
-
+  triangle: 'Triangle',
   'horizontal-menu': 'Horizontal Menu',
+  largeArrow: 'Large Arrow',
 };
 
 export type EditType = 'input' | 'textarea';

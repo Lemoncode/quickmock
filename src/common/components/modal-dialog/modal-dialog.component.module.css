@@ -1,0 +1,43 @@
+.container {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--primary-900-50-opacity);
+}
+
+.dialogHeader {
+  background-color: var(--primary-500);
+  width: 70vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-s) var(--space-md);
+  border-top-left-radius: var(--border-radius-m);
+  border-top-right-radius: var(--border-radius-m);
+}
+
+.dialogTitle {
+  font-size: var(--fs-md);
+  color: var(--pure-white);
+}
+
+.dialogButton {
+  width: fit-content;
+  margin-left: auto;
+  background-color: transparent;
+  color: var(--pure-white);
+  padding: var(--space-xs);
+  line-height: 0;
+  border: none;
+}
+
+.dialogButton:hover {
+  cursor: pointer;
+}

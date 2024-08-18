@@ -30,11 +30,13 @@ import {
 } from './simple-rich-components';
 import {
   renderDiamond,
+  renderTriangle,
   renderRectangle,
   renderLine,
   renderCircle,
   renderStar,
   renderPostit,
+  renderLargeArrowShape,
 } from './simple-basic-shapes';
 import {
   renderHeading1,
@@ -96,6 +98,8 @@ export const renderShapeComponent = (
       return renderLine(shape, shapeRenderedProps);
     case 'accordion':
       return renderAccordion(shape, shapeRenderedProps);
+    case 'triangle':
+      return renderTriangle(shape, shapeRenderedProps);
     case 'horizontal-menu':
       return renderHorizontalMenu(shape, shapeRenderedProps);
     case 'breadcrumb':
@@ -116,6 +120,8 @@ export const renderShapeComponent = (
       return renderSmalltext(shape, shapeRenderedProps);
     case 'paragraph':
       return renderParagraph(shape, shapeRenderedProps);
+    case 'largeArrow':
+      return renderLargeArrowShape(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

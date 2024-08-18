@@ -26,12 +26,14 @@ import {
 } from '@/common/components/front-containers';
 import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 import {
+  getTriangleShapeSizeRestrictions,
   getCircleShapeSizeRestrictions,
   getDiamondShapeSizeRestrictions,
   getPostItShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
   getlineShapeRestrictions,
   getStarShapeSizeRestrictions,
+  getLargeArrowShapeSizeRestrictions,
 } from '@/common/components/front-basic-sapes';
 import {
   getAccordionShapeSizeRestrictions,
@@ -143,6 +145,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getAccordionShapeSizeRestrictions().defaultWidth,
         height: getAccordionShapeSizeRestrictions().defaultHeight,
       };
+    case 'triangle':
+      return {
+        width: getTriangleShapeSizeRestrictions().defaultWidth,
+        height: getTriangleShapeSizeRestrictions().defaultHeight,
+      };
     case 'postit':
       return {
         width: getPostItShapeSizeRestrictions().defaultWidth,
@@ -208,6 +215,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getParagraphSizeRestrictions().defaultWidth,
         height: getParagraphSizeRestrictions().defaultHeight,
       };
+    case 'largeArrow':
+      return {
+        width: getLargeArrowShapeSizeRestrictions().defaultWidth,
+        height: getLargeArrowShapeSizeRestrictions().defaultHeight,
+      };
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -235,6 +247,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'normaltext':
     case 'smalltext':
     case 'paragraph':
+    case 'listbox':
       return true;
     default:
       return false;
@@ -272,6 +285,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Check me!';
     case 'postit':
       return '';
+    case 'listbox':
+      return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
     case 'horizontal-menu':
       return 'Home\nAbout\nServices\nContact';
     case 'heading1':
@@ -303,6 +318,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'normaltext':
     case 'smalltext':
     case 'paragraph':
+    case 'listbox':
       return 'textarea';
       break;
   }
@@ -321,9 +337,22 @@ export const generateDefaultOtherProps = (
     case 'normaltext':
     case 'smalltext':
     case 'paragraph':
+    case 'textarea':
+    case 'combobox':
+    case 'listbox':
+    case 'datepickerinput':
+    case 'timepickerinput':
+    case 'rectangle':
+    case 'circle':
+    case 'star':
+    case 'diamond':
+    case 'triangle':
+    case 'line':
+    case 'postit':
+    case 'largeArrow':
       return {
         stroke: '#000000',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#d3d3d3',
         textColor: '#000000',
       };
     default:

@@ -1,0 +1,16 @@
+.team {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-medium);
+  color: var(--pure-white);
+  text-align: left;
+  margin: 0;
+  margin-bottom: var(--space-lg);
+  align-self: flex-start;
+  color: var(--primary-300);
+}
+
+.teamWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-xxl);
+}
