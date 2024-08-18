@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Group } from 'react-konva';
 import { Coord, EditType, Size } from '@/core/model';
 import { HtmlEditWidget } from './components';
@@ -30,7 +30,7 @@ export const EditableComponent: React.FC<Props> = props => {
   } = props;
   const [editText, setEditText] = useState(text);
 
-  const { inputRef, textAreaRef, isEditing, setIsEditing } =
+  const { inputRef, textAreaRef, divRef, isEditing, setIsEditing } =
     useSubmitCancelHook(
       {
         editType,
@@ -72,9 +72,11 @@ export const EditableComponent: React.FC<Props> = props => {
             height: calculateHeight(),
           }}
           ref={
-            editType === 'input' || editType === 'imageupload'
+            editType === 'input'
               ? inputRef
-              : textAreaRef
+              : editType === 'imageupload'
+                ? divRef
+                : textAreaRef
           }
           value={editText}
           onSetEditText={setEditText}

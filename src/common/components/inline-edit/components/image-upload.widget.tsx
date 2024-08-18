@@ -1,4 +1,5 @@
-import { forwardRef } from 'react';
+import { forwardRef, useRef } from 'react';
+import classes from './image-upload.widget.module.css';
 
 interface Props {
   onImageUploaded: (srcData: string) => void;
@@ -7,6 +8,7 @@ interface Props {
 export const ImageUploadWidget = forwardRef<HTMLInputElement, Props>(
   (props, ref) => {
     const { onImageUploaded } = props;
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
@@ -21,6 +23,24 @@ export const ImageUploadWidget = forwardRef<HTMLInputElement, Props>(
       }
     };
 
-    return <input type="file" onChange={handleFileChange} ref={ref} />;
+    const handleClick = () => {
+      if (fileInputRef.current) {
+        fileInputRef.current.click();
+      }
+    };
+
+    return (
+      <div className={classes.uploadContainer} ref={ref}>
+        <input
+          type="file"
+          onChange={handleFileChange}
+          ref={fileInputRef}
+          className={classes.fileInput}
+        />
+        <button onClick={handleClick} className={classes.uploadButton}>
+          Click to upload an image
+        </button>
+      </div>
+    );
   }
 );

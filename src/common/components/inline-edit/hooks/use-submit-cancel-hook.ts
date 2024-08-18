@@ -15,11 +15,14 @@ export const useSubmitCancelHook = (
   const { editType, isEditable, text, onTextSubmit } = configuration;
   const inputRef = useRef<HTMLInputElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const divRef = useRef<HTMLDivElement>(null);
+
   const [isEditing, setIsEditing] = useState(false);
 
   const getActiveInputRef = ():
     | HTMLInputElement
     | HTMLTextAreaElement
+    | HTMLDivElement
     | null => {
     switch (editType) {
       case 'input':
@@ -27,7 +30,7 @@ export const useSubmitCancelHook = (
       case 'textarea':
         return textAreaRef.current;
       case 'imageupload':
-        return inputRef.current;
+        return divRef.current;
       default:
         return null;
     }
@@ -42,7 +45,10 @@ export const useSubmitCancelHook = (
         !getActiveInputRef()?.contains(event.target as Node)
       ) {
         setIsEditing(false);
-        onTextSubmit(getActiveInputRef()?.value || '');
+        if (editType === 'input' || editType === 'textarea') {
+          const inputRef = getActiveInputRef() as any;
+          onTextSubmit(inputRef?.value || '');
+        }
       }
     };
 
@@ -54,13 +60,19 @@ export const useSubmitCancelHook = (
 
       if (editType === 'input' && isEditable && event.key === 'Enter') {
         setIsEditing(false);
-        onTextSubmit(getActiveInputRef()?.value || '');
+        if (editType === 'input' || editType === 'textarea') {
+          const inputRef = getActiveInputRef() as any;
+          onTextSubmit(inputRef?.value || '');
+        }
       }
     };
 
     if (isEditing) {
-      getActiveInputRef()?.focus();
-      getActiveInputRef()?.select();
+      if (editType === 'input' || editType === 'textarea') {
+        const inputRef = getActiveInputRef() as any;
+        inputRef?.focus();
+        inputRef?.select();
+      }
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleKeyDown);
     } else {
@@ -79,6 +91,7 @@ export const useSubmitCancelHook = (
     setIsEditing,
     inputRef,
     textAreaRef,
+    divRef,
     getActiveInputRef,
   };
 };
