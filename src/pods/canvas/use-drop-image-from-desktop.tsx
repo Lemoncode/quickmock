@@ -49,17 +49,21 @@ export const useDropImageFromDesktop = (
           invariant(stageRef.current);
           const stage = stageRef.current;
 
+          const castedDropRef = dropRef as RefObject<HTMLDivElement>;
+          const { scrollLeft, scrollTop } = getScrollFromDiv(castedDropRef);
+
           let konvaCoord = calculateScaledCoordsFromCanvasDivCoordinates(
             stage,
-            divCoords
+            divCoords,
+            { x: scrollLeft, y: scrollTop }
           );
 
-          const castedDropRef = dropRef as RefObject<HTMLDivElement>;
+          /*
           const { scrollLeft, scrollTop } = getScrollFromDiv(castedDropRef);
           konvaCoord = {
             x: konvaCoord.x + scrollLeft,
             y: konvaCoord.y + scrollTop,
-          };
+          };*/
 
           const positionX =
             konvaCoord.x -
