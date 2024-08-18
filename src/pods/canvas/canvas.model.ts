@@ -216,12 +216,23 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
   }
 };
 
-const doesShapeHaveLateralTransformer = (shapeType: ShapeType): boolean => {
+const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
   switch (shapeType) {
     case 'line':
-      return true;
+      return ['middle-left', 'middle-right'];
+    case 'icon':
+      return [];
     default:
-      return false;
+      return [
+        'top-left',
+        'top-center',
+        'top-right',
+        'middle-left',
+        'middle-right',
+        'bottom-left',
+        'bottom-center',
+        'bottom-right',
+      ];
   }
 };
 
@@ -325,7 +336,7 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     height,
     type: shapeType,
     allowsInlineEdition: doesShapeAllowInlineEdition(shapeType),
-    hasLateralTransformer: doesShapeHaveLateralTransformer(shapeType),
+    typeOfTransformer: generateTypeOfTransformer(shapeType),
     text: generateDefaultTextValue(shapeType),
     editType: getShapeEditInlineType(shapeType),
     otherProps: generateDefaultOtherProps(shapeType),

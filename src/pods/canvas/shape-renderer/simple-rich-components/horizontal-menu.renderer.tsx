@@ -20,6 +20,7 @@ export const renderHorizontalMenu = (
       width={shape.width}
       height={shape.height}
       draggable
+      typeOfTransformer={shape.typeOfTransformer}
       onSelected={handleSelected}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}

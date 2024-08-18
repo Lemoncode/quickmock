@@ -109,7 +109,7 @@ export interface OtherProps {
   iconSize?: IconSize;
 }
 
-export const BASE_ICONS_URL = '/public/icons/';
+export const BASE_ICONS_URL = '/icons/';
 
 export interface ShapeModel {
   id: string;
@@ -119,7 +119,7 @@ export interface ShapeModel {
   height: number;
   type: ShapeType;
   allowsInlineEdition: boolean;
-  hasLateralTransformer: boolean;
+  typeOfTransformer: string[];
   editType?: EditType;
   text?: string;
   otherProps?: OtherProps;
