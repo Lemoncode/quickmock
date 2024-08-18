@@ -11,6 +11,7 @@ import { EditableComponent } from '@/common/components/inline-edit';
 import { useClipboard } from './use-clipboard.hook';
 import { useSnapIn } from './use-snapin.hook';
 import { ShapeType } from '@/core/model';
+import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
 
 export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
@@ -74,6 +75,8 @@ export const CanvasPod = () => {
     updateShapeSizeAndPosition
   );
 
+  const { handleDropImage, handleDragOver } = useDropImageFromDesktop();
+
   const handleDragEnd =
     (id: string) => (e: Konva.KonvaEventObject<DragEvent>) => {
       const { x, y } = e.target.position();
@@ -100,47 +103,6 @@ export const CanvasPod = () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [selectedShapeId]);
-
-  const isDropImageFile = (e: React.DragEvent<HTMLDivElement>) => {
-    const file = e.dataTransfer.files[0];
-
-    return file?.type?.startsWith('image/');
-  };
-
-  const handleDropImage = (e: React.DragEvent<HTMLDivElement>) => {
-    if (isDropImageFile(e)) {
-      console.log('dropImage', e);
-      e.preventDefault();
-      e.stopPropagation();
-      console.log('drop Image', e);
-
-      const file = e.dataTransfer.files[0];
-      const reader = new FileReader();
-      const { clientX, clientY } = e;
-      reader.onload = e => {
-        const img = new Image();
-        img.src = e.target?.result as string;
-        img.onload = () => {
-          // OJO las coordenadas están mal tnenemos que sacarlo de use-monitor-shape
-          console.log('img', img);
-          addNewShape('image', clientX, clientY, { imageSrc: img.src });
-        };
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    // Esto lo he sacado depurando, poner breakpoint
-    if (
-      e.dataTransfer.items.length > 0 &&
-      e.dataTransfer.items[0].kind === 'file' &&
-      e.dataTransfer.items[0].type.startsWith('image/')
-    ) {
-      e.preventDefault(); // Necesario para permitir el drop
-      e.stopPropagation(); // Evita la propagación del evento
-    }
-  };
 
   {
     /* TODO: add other animation for isDraggerOver */
