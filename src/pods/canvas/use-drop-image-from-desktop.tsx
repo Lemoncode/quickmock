@@ -3,8 +3,11 @@ import invariant from 'tiny-invariant';
 import {
   calculateScaledCoordsFromCanvasDivCoordinates,
   convertFromDivElementCoordsToKonvaCoords,
+  getKonvaCanvasScrollPosition,
 } from './canvas.util';
 import { calculateShapeOffsetToXDropCoordinate } from './use-monitor.business';
+import { Stage } from 'konva/lib/Stage';
+import { RefObject } from 'react';
 
 export const useDropImageFromDesktop = (
   dropRef: React.MutableRefObject<null>
@@ -48,10 +51,22 @@ export const useDropImageFromDesktop = (
           invariant(stageRef.current);
           const stage = stageRef.current;
 
-          const konvaCoord = calculateScaledCoordsFromCanvasDivCoordinates(
+          let konvaCoord = calculateScaledCoordsFromCanvasDivCoordinates(
             stage,
             divCoords
           );
+
+          //dropRef.current.scrollPosition.x;
+          //dropRef.current.scrollPosition.y;
+          //const scrollPosition = getKonvaCanvasScrollPosition(stageRef);
+          const castedDropRef = dropRef as RefObject<HTMLDivElement>;
+          const scrollLeft = castedDropRef?.current?.scrollLeft ?? 0;
+          const scrollTop = castedDropRef?.current?.scrollTop ?? 0;
+          konvaCoord = {
+            x: konvaCoord.x + scrollLeft,
+            y: konvaCoord.y + scrollTop,
+          };
+
           const positionX =
             konvaCoord.x -
             calculateShapeOffsetToXDropCoordinate(konvaCoord.x, 'image');

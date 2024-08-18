@@ -57,3 +57,18 @@ export const calculateScaledCoordsFromCanvasDivCoordinates = (
     y: divCoords.y / scaleY,
   };
 };
+
+export const getKonvaCanvasScrollPosition = (
+  stageRef: React.RefObject<Stage>
+): Coord => {
+  let coords = { x: 0, y: 0 };
+
+  if (stageRef.current) {
+    const container = stageRef.current.container();
+    const scrollLeft = container.scrollLeft;
+    const scrollTop = container.scrollTop;
+    coords = { x: scrollLeft, y: scrollTop };
+  }
+
+  return coords;
+};

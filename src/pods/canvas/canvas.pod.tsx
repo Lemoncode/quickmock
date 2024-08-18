@@ -75,7 +75,7 @@ export const CanvasPod = () => {
     updateShapeSizeAndPosition
   );
 
-  const { handleDropImage, handleDragOver } = useDropImageFromDesktop();
+  const { handleDropImage, handleDragOver } = useDropImageFromDesktop(dropRef);
 
   const handleDragEnd =
     (id: string) => (e: Konva.KonvaEventObject<DragEvent>) => {
