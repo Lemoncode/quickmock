@@ -1,7 +1,13 @@
 import { useCanvasContext } from '@/core/providers';
+import invariant from 'tiny-invariant';
+import {
+  calculateScaledCoordsFromCanvasDivCoordinates,
+  convertFromDivElementCoordsToKonvaCoords,
+} from './canvas.util';
+import { calculateShapeOffsetToXDropCoordinate } from './use-monitor.business';
 
 export const useDropImageFromDesktop = () => {
-  const { addNewShape } = useCanvasContext();
+  const { addNewShape, stageRef } = useCanvasContext();
 
   // TODO: move this to utils / business
   // Try to unify the code to check if the file is an image (on DragOver and Drop)
@@ -30,11 +36,28 @@ export const useDropImageFromDesktop = () => {
       const file = e.dataTransfer.files[0];
       const reader = new FileReader();
       const { clientX, clientY } = e;
+      const divCoords = {
+        x: clientX - e.currentTarget.offsetLeft,
+        y: clientY - e.currentTarget.offsetTop,
+      };
+
       reader.onload = e => {
         const img = new Image();
         img.src = e.target?.result as string;
         img.onload = () => {
-          addNewShape('image', clientX, clientY, { imageSrc: img.src });
+          invariant(stageRef.current);
+          const stage = stageRef.current;
+          const konvaCoord = calculateScaledCoordsFromCanvasDivCoordinates(
+            stage,
+            divCoords
+          );
+
+          const positionX =
+            konvaCoord.x -
+            calculateShapeOffsetToXDropCoordinate(konvaCoord.x, 'image');
+          const positionY = konvaCoord.y;
+
+          addNewShape('image', positionX, positionY, { imageSrc: img.src });
         };
       };
 
