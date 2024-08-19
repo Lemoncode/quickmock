@@ -1,0 +1,19 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Eje X -->
+  <line x1="50" y1="250" x2="350" y2="250" style="stroke:black;stroke-width:2"/>
+
+  <!-- Eje Y -->
+  <line x1="50" y1="50" x2="50" y2="250" style="stroke:black;stroke-width:2"/>
+
+  <!-- Barra 1 -->
+  <rect x="70" y="150" width="40" height="100" style="fill:gray;stroke:black;stroke-width:2"/>
+
+  <!-- Barra 2 -->
+  <rect x="150" y="100" width="40" height="150" style="fill:darkgray;stroke:black;stroke-width:2"/>
+
+  <!-- Barra 3 -->
+  <rect x="230" y="50" width="40" height="200" style="fill:dimgray;stroke:black;stroke-width:2"/>
+
+  <!-- Barra 4 -->
+  <rect x="310" y="180" width="40" height="70" style="fill:lightgray;stroke:black;stroke-width:2"/>
+</svg>

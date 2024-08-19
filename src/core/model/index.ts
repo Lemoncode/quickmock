@@ -46,6 +46,7 @@ export type ShapeType =
   | 'smalltext'
   | 'paragraph'
   | 'largeArrow'
+  | 'bar'
   | 'triangle';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
@@ -85,6 +86,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   'horizontal-menu': 'Horizontal Menu',
   largeArrow: 'Large Arrow',
   icon: 'Icon',
+  bar: 'Bar',
 };
 
 export type EditType = 'input' | 'textarea';
