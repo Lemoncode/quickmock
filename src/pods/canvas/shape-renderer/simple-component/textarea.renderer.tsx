@@ -19,6 +19,7 @@ export const renderTextArea = (
       height={shape.height}
       name="shape"
       draggable
+      typeOfTransformer={shape.typeOfTransformer}
       onSelected={handleSelected}
       ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}
@@ -27,6 +28,7 @@ export const renderTextArea = (
       editType={shape.editType}
       isEditable={true}
       text={shape.text}
+      otherProps={shape.otherProps}
     />
   );
 };

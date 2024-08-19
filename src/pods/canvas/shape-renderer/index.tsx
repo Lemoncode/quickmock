@@ -14,6 +14,7 @@ import {
   renderTimepickerinput,
   renderLabel,
   renderRadioButton,
+  renderIcon,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -31,12 +32,22 @@ import {
 } from './simple-rich-components';
 import {
   renderDiamond,
+  renderTriangle,
   renderRectangle,
   renderLine,
   renderCircle,
   renderStar,
   renderPostit,
+  renderLargeArrowShape,
 } from './simple-basic-shapes';
+import {
+  renderHeading1,
+  renderHeading2,
+  renderHeading3,
+  renderNormaltext,
+} from './simple-text-components';
+import { renderSmalltext } from './simple-text-components/smalltext.renderer';
+import { renderParagraph } from './simple-text-components/paragraph.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -91,6 +102,8 @@ export const renderShapeComponent = (
       return renderLine(shape, shapeRenderedProps);
     case 'accordion':
       return renderAccordion(shape, shapeRenderedProps);
+    case 'triangle':
+      return renderTriangle(shape, shapeRenderedProps);
     case 'horizontal-menu':
       return renderHorizontalMenu(shape, shapeRenderedProps);
     case 'breadcrumb':
@@ -99,6 +112,22 @@ export const renderShapeComponent = (
       return renderCircle(shape, shapeRenderedProps);
     case 'star':
       return renderStar(shape, shapeRenderedProps);
+    case 'heading1':
+      return renderHeading1(shape, shapeRenderedProps);
+    case 'heading2':
+      return renderHeading2(shape, shapeRenderedProps);
+    case 'heading3':
+      return renderHeading3(shape, shapeRenderedProps);
+    case 'normaltext':
+      return renderNormaltext(shape, shapeRenderedProps);
+    case 'smalltext':
+      return renderSmalltext(shape, shapeRenderedProps);
+    case 'paragraph':
+      return renderParagraph(shape, shapeRenderedProps);
+    case 'largeArrow':
+      return renderLargeArrowShape(shape, shapeRenderedProps);
+    case 'icon':
+      return renderIcon(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

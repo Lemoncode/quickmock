@@ -18,6 +18,7 @@ export const renderMobilePhoneContainer = (
       width={shape.width}
       height={shape.height}
       draggable
+      typeOfTransformer={shape.typeOfTransformer}
       onSelected={handleSelected}
       ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}

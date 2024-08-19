@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
@@ -24,6 +24,16 @@ export const ButtonShape = forwardRef<any, ShapeProps>(
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(buttonShapeRestrictions, width, height);
 
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
+
     return (
       <Group
         x={x}
@@ -40,9 +50,9 @@ export const ButtonShape = forwardRef<any, ShapeProps>(
           width={restrictedWidth}
           height={restrictedHeight}
           cornerRadius={14}
-          stroke={otherProps?.stroke ?? 'black'}
+          stroke={stroke}
           strokeWidth={2}
-          fill={otherProps?.backgroundColor ?? 'white'}
+          fill={fill}
         />
         <Text
           x={0}

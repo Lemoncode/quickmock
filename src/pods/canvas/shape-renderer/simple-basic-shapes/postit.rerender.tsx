@@ -20,12 +20,14 @@ export const renderPostit = (
       width={shape.width}
       height={shape.height}
       draggable
+      typeOfTransformer={shape.typeOfTransformer}
       onSelected={handleSelected}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
       editType={shape.editType}
       isEditable={true}
+      otherProps={shape.otherProps}
     />
   );
 };
