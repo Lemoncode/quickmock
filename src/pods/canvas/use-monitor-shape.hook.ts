@@ -5,6 +5,7 @@ import {
   extractScreenCoordinatesFromPragmaticLocation,
   portScreenPositionToDivCoordinates,
   convertFromDivElementCoordsToKonvaCoords,
+  getScrollFromDiv,
 } from './canvas.util';
 import { ShapeType } from '@/core/model';
 import { useCanvasContext } from '@/core/providers';
@@ -40,14 +41,14 @@ export const useMonitorShape = (
 
           invariant(stageRef.current);
           const stage = stageRef.current;
-          const konvaCoord = convertFromDivElementCoordsToKonvaCoords(
-            stage,
-            screenPosition,
-            {
-              x: divRelativeX,
-              y: divRelativeY,
-            }
+          const { scrollLeft, scrollTop } = getScrollFromDiv(
+            dropRef as unknown as React.MutableRefObject<HTMLDivElement>
           );
+          const konvaCoord = convertFromDivElementCoordsToKonvaCoords(stage, {
+            screenPosition,
+            relativeDivPosition: { x: divRelativeX, y: divRelativeY },
+            scroll: { x: scrollLeft, y: scrollTop },
+          });
 
           positionX =
             konvaCoord.x -

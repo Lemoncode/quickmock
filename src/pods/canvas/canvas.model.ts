@@ -35,6 +35,7 @@ import {
   getlineShapeRestrictions,
   getStarShapeSizeRestrictions,
   getLargeArrowShapeSizeRestrictions,
+  getImageShapeSizeRestrictions,
 } from '@/common/components/front-basic-sapes';
 import {
   getAccordionShapeSizeRestrictions,
@@ -44,6 +45,7 @@ import {
   getVideoPlayerShapeSizeRestrictions,
   getHorizontalMenuShapeSizeRestrictions,
   getMapChartShapeSizeRestrictions,
+  getLineChartShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -187,6 +189,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getStarShapeSizeRestrictions().defaultWidth,
         height: getStarShapeSizeRestrictions().defaultHeight,
       };
+    case 'linechart':
+      return {
+        width: getLineChartShapeSizeRestrictions().defaultWidth,
+        height: getLineChartShapeSizeRestrictions().defaultHeight,
+      };
     case 'heading1':
       return {
         width: getHeading1SizeRestrictions().defaultWidth,
@@ -231,6 +238,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getBarChartShapeSizeRestrictions().defaultWidth,
         height: getBarChartShapeSizeRestrictions().defaultHeight,
+      };
+    case 'image':
+      return {
+        width: getImageShapeSizeRestrictions().defaultWidth,
+        height: getImageShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(
@@ -399,9 +411,15 @@ export const generateDefaultOtherProps = (
 // TODO: create interfaces to hold Coordination and Size
 // coordinate: { x: number, y: number }
 // size: { width: number, height: number }
-export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
+export const createShape = (
+  coord: Coord,
+  shapeType: ShapeType,
+  otherProps?: OtherProps
+): ShapeModel => {
   const { x, y } = coord;
   const { width, height } = getDefaultSizeFromShape(shapeType);
+
+  const defaultProps = generateDefaultOtherProps(shapeType);
 
   return {
     id: uuidv4(),
@@ -414,7 +432,7 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     typeOfTransformer: generateTypeOfTransformer(shapeType),
     text: generateDefaultTextValue(shapeType),
     editType: getShapeEditInlineType(shapeType),
-    otherProps: generateDefaultOtherProps(shapeType),
+    otherProps: otherProps ? { ...defaultProps, ...otherProps } : defaultProps,
   };
 };
 
