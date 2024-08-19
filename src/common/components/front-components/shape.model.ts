@@ -13,5 +13,4 @@ export interface ShapeProps extends ShapeConfig {
   height: number;
   onSelected: (id: string, type: ShapeType) => void;
   otherProps?: OtherProps;
-  data?: { x: number; y: number }[][];
 }

@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { Group, Line, Circle, Rect } from 'react-konva';
 import { ShapeProps } from '../front-components/shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
@@ -9,18 +9,18 @@ const LineChartShapeSizeRestrictions: ShapeSizeRestrictions = {
   minHeight: 100,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 200,
+  defaultWidth: 250,
   defaultHeight: 200,
 };
 
-const PIE_FIX_WIDTH = 200;
-const PIE_FIX_HEIGHT = 200;
+const LINE_CHART_WIDTH = 350;
+const LINE_CHART_HEIGHT = 250;
 
 export const getLineChartShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   LineChartShapeSizeRestrictions;
 
 export const LineChartShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, data = [], id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         LineChartShapeSizeRestrictions,
@@ -29,26 +29,12 @@ export const LineChartShape = forwardRef<any, ShapeProps>(
       );
 
     const scaleX = useMemo(() => {
-      return restrictedWidth / PIE_FIX_WIDTH;
+      return restrictedWidth / LINE_CHART_WIDTH;
     }, [restrictedWidth]);
 
     const scaleY = useMemo(() => {
-      return restrictedHeight / PIE_FIX_HEIGHT;
-    }, [restrictedWidth]);
-
-    const colors = ['darkgray', 'gray', 'lightgray'];
-
-    // Definir los puntos de inicio y fin de los ejes X e Y
-    const xAxisStart = { x: 50, y: 250 };
-    const xAxisEnd = { x: 350, y: 250 };
-    const yAxisStart = { x: 50, y: 50 };
-    const yAxisEnd = { x: 50, y: 250 };
-
-    // Calcular las dimensiones del rectángulo
-    const rectX = yAxisStart.x;
-    const rectY = yAxisStart.y;
-    const rectWidth = xAxisEnd.x - xAxisStart.x;
-    const rectHeight = yAxisEnd.y - yAxisStart.y;
+      return restrictedHeight / LINE_CHART_HEIGHT;
+    }, [restrictedHeight]);
 
     return (
       <Group
@@ -60,17 +46,9 @@ export const LineChartShape = forwardRef<any, ShapeProps>(
         {...shapeProps}
         onClick={() => onSelected(id, 'linechart')}
       >
-        <Rect
-          x={rectX}
-          y={rectY}
-          width={rectWidth}
-          height={rectHeight}
-          fill="transparent"
-          onClick={() => onSelected(id, 'linechart')}
-        />
         <Group
-          width={PIE_FIX_WIDTH}
-          height={PIE_FIX_HEIGHT}
+          width={LINE_CHART_WIDTH}
+          height={LINE_CHART_HEIGHT}
           scaleX={scaleX}
           scaleY={scaleY}
         >
@@ -80,29 +58,88 @@ export const LineChartShape = forwardRef<any, ShapeProps>(
           {/* Eje Y */}
           <Line points={[50, 50, 50, 250]} stroke="black" strokeWidth={2} />
 
-          {/* Líneas y Puntos */}
-          {data.map((lineData, lineIndex) => {
-            const points = lineData.flatMap(point => [point.x, point.y]);
+          {/* Interior graphics   */}
 
-            return (
-              <React.Fragment key={lineIndex}>
-                <Line
-                  points={points}
-                  stroke={colors[lineIndex]}
-                  strokeWidth={2}
-                />
-                {lineData.map((point, pointIndex) => (
-                  <Circle
-                    key={pointIndex}
-                    x={point.x}
-                    y={point.y}
-                    radius={4}
-                    fill="black"
-                  />
-                ))}
-              </React.Fragment>
-            );
-          })}
+          {/* Línea 1 */}
+          <Line
+            points={[
+              50, 200, 100, 150, 150, 180, 200, 100, 250, 130, 300, 80, 350,
+              120,
+            ]}
+            stroke="darkgray"
+            strokeWidth={2}
+          />
+          {[
+            { x: 50, y: 200 },
+            { x: 100, y: 150 },
+            { x: 150, y: 180 },
+            { x: 200, y: 100 },
+            { x: 250, y: 130 },
+            { x: 300, y: 80 },
+            { x: 350, y: 120 },
+          ].map((point, index) => (
+            <Circle
+              key={index}
+              x={point.x}
+              y={point.y}
+              radius={4}
+              fill="black"
+            />
+          ))}
+
+          {/* Línea 2 */}
+          <Line
+            points={[
+              50, 220, 100, 170, 150, 190, 200, 130, 250, 160, 300, 110, 350,
+              140,
+            ]}
+            stroke="gray"
+            strokeWidth={2}
+          />
+          {[
+            { x: 50, y: 220 },
+            { x: 100, y: 170 },
+            { x: 150, y: 190 },
+            { x: 200, y: 130 },
+            { x: 250, y: 160 },
+            { x: 300, y: 110 },
+            { x: 350, y: 140 },
+          ].map((point, index) => (
+            <Circle
+              key={index}
+              x={point.x}
+              y={point.y}
+              radius={4}
+              fill="black"
+            />
+          ))}
+
+          {/* Línea 3 */}
+          <Line
+            points={[
+              50, 240, 100, 190, 150, 210, 200, 160, 250, 190, 300, 140, 350,
+              170,
+            ]}
+            stroke="lightgray"
+            strokeWidth={2}
+          />
+          {[
+            { x: 50, y: 240 },
+            { x: 100, y: 190 },
+            { x: 150, y: 210 },
+            { x: 200, y: 160 },
+            { x: 250, y: 190 },
+            { x: 300, y: 140 },
+            { x: 350, y: 170 },
+          ].map((point, index) => (
+            <Circle
+              key={index}
+              x={point.x}
+              y={point.y}
+              radius={4}
+              fill="black"
+            />
+          ))}
         </Group>
       </Group>
     );
