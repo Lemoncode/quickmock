@@ -364,6 +364,11 @@ export const generateDefaultOtherProps = (
     case 'triangle':
     case 'line':
     case 'postit':
+      return {
+        stroke: '#000000',
+        backgroundColor: '#ffffff',
+        textColor: '#000000',
+      };
     case 'largeArrow':
       return {
         stroke: '#000000',
