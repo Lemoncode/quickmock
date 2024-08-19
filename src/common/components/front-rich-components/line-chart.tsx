@@ -1,5 +1,5 @@
 import { forwardRef, useMemo } from 'react';
-import { Group, Line, Circle } from 'react-konva';
+import { Group, Line, Circle, Rect } from 'react-konva';
 import { ShapeProps } from '../front-components/shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
@@ -52,6 +52,15 @@ export const LineChartShape = forwardRef<any, ShapeProps>(
           scaleX={scaleX}
           scaleY={scaleY}
         >
+          {
+            <Rect
+              x={50}
+              y={50}
+              width={LINE_CHART_WIDTH - 50}
+              height={LINE_CHART_HEIGHT - 50}
+              fill="transparent"
+            />
+          }
           {/* Eje X */}
           <Line points={[50, 250, 350, 250]} stroke="black" strokeWidth={2} />
 
