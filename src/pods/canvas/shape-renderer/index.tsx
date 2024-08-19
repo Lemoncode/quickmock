@@ -14,6 +14,7 @@ import {
   renderTimepickerinput,
   renderLabel,
   renderRadioButton,
+  renderIcon,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -122,6 +123,8 @@ export const renderShapeComponent = (
       return renderParagraph(shape, shapeRenderedProps);
     case 'largeArrow':
       return renderLargeArrowShape(shape, shapeRenderedProps);
+    case 'icon':
+      return renderIcon(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

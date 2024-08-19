@@ -3,6 +3,7 @@ import classes from './properties.pod.module.css';
 import { ZIndexOptions } from './components/zindex/zindex-option.component';
 import { ColorPicker } from './components/color-picker/color-picker.component';
 import { Checked } from './components/checked/checked.component';
+import { SelectSize, SelectIcon } from './components';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -37,6 +38,22 @@ export const PropertiesPod = () => {
           onChange={color =>
             updateOtherPropsOnSelected('backgroundColor', color)
           }
+        />
+      )}
+      {selectedShapeData?.otherProps?.iconSize && (
+        <SelectSize
+          label="Size"
+          iconSize={selectedShapeData.otherProps.iconSize}
+          onChange={iconSize =>
+            updateOtherPropsOnSelected('iconSize', iconSize)
+          }
+        />
+      )}
+      {selectedShapeData?.otherProps?.icon && (
+        <SelectIcon
+          label="Icon"
+          icon={selectedShapeData.otherProps.icon}
+          onChange={icon => updateOtherPropsOnSelected('icon', icon)}
         />
       )}
       {selectedShapeData?.otherProps?.textColor && (

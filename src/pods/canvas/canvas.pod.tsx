@@ -33,7 +33,6 @@ export const CanvasPod = () => {
     handleClearSelection,
     selectedShapeRef,
     selectedShapeId,
-    selectedShapeType,
     updateTextOnSelected,
   } = selectionInfo;
 
