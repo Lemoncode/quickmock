@@ -4,14 +4,17 @@ import { forwardRef } from 'react';
 import { Group, Image } from 'react-konva';
 import useImage from 'use-image';
 import { ShapeProps } from './shape.model';
+import { useModalDialogContext } from '@/core/providers/model-dialog-providers/model-dialog.provider';
+import { IconModal } from '@/pods/properties/components/icon-selector/modal';
+import { useCanvasContext } from '@/core/providers';
 
 const iconShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 25,
   minHeight: 25,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 25,
-  defaultHeight: 25,
+  defaultWidth: 150,
+  defaultHeight: 150,
 };
 
 export const getIconShapeSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -22,6 +25,20 @@ export const SvgIcon = forwardRef<any, ShapeProps>(
     { x, y, width, height, id, onSelected, iconInfo, iconSize, ...shapeProps },
     ref
   ) => {
+    const { openModal } = useModalDialogContext();
+    const { selectionInfo } = useCanvasContext();
+    const { updateOtherPropsOnSelected } = selectionInfo;
+    const handleDoubleClick = () => {
+      openModal(
+        <IconModal
+          actualIcon={iconInfo}
+          onChange={icon => updateOtherPropsOnSelected('icon', icon)}
+        />,
+        'Choose Icon'
+      );
+    };
+    const [image] = useImage(`${BASE_ICONS_URL}${iconInfo.filename}`);
+
     const returnIconSize = (iconSize: IconSize): number[] => {
       switch (iconSize) {
         case 'XS':
@@ -48,8 +65,6 @@ export const SvgIcon = forwardRef<any, ShapeProps>(
         iconHeight
       );
 
-    const [image] = useImage(`${BASE_ICONS_URL}${iconInfo.filename}`);
-
     return (
       <Group
         x={x}
@@ -59,6 +74,7 @@ export const SvgIcon = forwardRef<any, ShapeProps>(
         ref={ref}
         {...shapeProps}
         onClick={() => onSelected(id, 'icon')}
+        onDblClick={handleDoubleClick}
       >
         <Image
           image={image}
