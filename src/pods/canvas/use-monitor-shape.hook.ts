@@ -44,15 +44,11 @@ export const useMonitorShape = (
           const { scrollLeft, scrollTop } = getScrollFromDiv(
             dropRef as unknown as React.MutableRefObject<HTMLDivElement>
           );
-          const konvaCoord = convertFromDivElementCoordsToKonvaCoords(
-            stage,
+          const konvaCoord = convertFromDivElementCoordsToKonvaCoords(stage, {
             screenPosition,
-            {
-              x: divRelativeX,
-              y: divRelativeY,
-            },
-            { x: scrollLeft, y: scrollTop }
-          );
+            relativeDivPosition: { x: divRelativeX, y: divRelativeY },
+            scroll: { x: scrollLeft, y: scrollTop },
+          });
 
           positionX =
             konvaCoord.x -

@@ -25,12 +25,17 @@ export const portScreenPositionToDivCoordinates = (
   return { x, y };
 };
 
+interface PositionInfo {
+  screenPosition: Coord;
+  relativeDivPosition: Coord;
+  scroll: Coord;
+}
+
 export const convertFromDivElementCoordsToKonvaCoords = (
   stage: Stage,
-  screenPosition: Coord,
-  relativeDivPosition: Coord,
-  scroll: Coord
+  positionInfo: PositionInfo
 ): Coord => {
+  const { screenPosition, relativeDivPosition, scroll } = positionInfo;
   stage.setPointersPositions([screenPosition.x, screenPosition.y]);
   const result: Coord = { x: 0, y: 0 };
 
