@@ -104,7 +104,8 @@ export interface Coord {
 export interface OtherProps {
   stroke?: string;
   backgroundColor?: string;
-  textColor: string;
+  textColor?: string;
+  checked?: boolean;
 }
 
 export interface ShapeModel {

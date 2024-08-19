@@ -9,8 +9,6 @@ export const renderBreadcrumb = (
   const { handleSelected, shapeRefs, handleDragEnd, handleTransform } =
     shapeRenderedProps;
 
-  console.log(shapeRefs.current[shape.id]);
-
   return (
     <BreadcrumbShape
       id={shape.id}

@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { Group, Circle, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
@@ -13,8 +13,14 @@ const radioButtonShapeRestrictions: ShapeSizeRestrictions = {
   defaultHeight: 50,
 };
 
+export const getRadioButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
+  radioButtonShapeRestrictions;
+
 export const RadioButtonShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         radioButtonShapeRestrictions,
@@ -22,7 +28,13 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>(
         height
       );
 
-    const [isOn, setIsOn] = useState(false);
+    const [isOn, setIsOn] = useState(otherProps?.checked ?? false);
+
+    useEffect(() => {
+      if (otherProps?.checked != undefined) {
+        setIsOn(otherProps?.checked);
+      }
+    }, [otherProps?.checked]);
 
     const handleSwitch = () => {
       setIsOn(!isOn);

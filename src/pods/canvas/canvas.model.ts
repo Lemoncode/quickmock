@@ -18,6 +18,8 @@ import {
   getDatepickerInputShapeSizeRestrictions,
   getButtonShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
+  getRadioButtonShapeSizeRestrictions,
+  getCheckboxShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -220,6 +222,16 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getLargeArrowShapeSizeRestrictions().defaultWidth,
         height: getLargeArrowShapeSizeRestrictions().defaultHeight,
       };
+    case 'radiobutton':
+      return {
+        width: getRadioButtonShapeSizeRestrictions().defaultWidth,
+        height: getRadioButtonShapeSizeRestrictions().defaultHeight,
+      };
+    case 'checkbox':
+      return {
+        width: getCheckboxShapeSizeRestrictions().defaultWidth,
+        height: getCheckboxShapeSizeRestrictions().defaultHeight,
+      };
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -353,6 +365,13 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#d3d3d3',
         textColor: '#000000',
       };
+    case 'toggleswitch':
+    case 'radiobutton':
+    case 'checkbox':
+      return {
+        checked: true,
+      };
+
     default:
       return undefined;
   }
