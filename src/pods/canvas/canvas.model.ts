@@ -41,6 +41,7 @@ import {
   getAccordionShapeSizeRestrictions,
   getBreadcrumbShapeSizeRestrictions,
   getPieChartShapeSizeRestrictions,
+  getBarChartShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
   getHorizontalMenuShapeSizeRestrictions,
   getMapChartShapeSizeRestrictions,
@@ -232,6 +233,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getIconShapeSizeRestrictions().defaultWidth,
         height: getIconShapeSizeRestrictions().defaultHeight,
+      };
+    case 'bar':
+      return {
+        width: getBarChartShapeSizeRestrictions().defaultWidth,
+        height: getBarChartShapeSizeRestrictions().defaultHeight,
       };
     case 'image':
       return {

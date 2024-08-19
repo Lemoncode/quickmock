@@ -28,6 +28,7 @@ import {
   renderPieChart,
   renderMapChart,
   renderBreadcrumb,
+  renderBarChart,
   renderLineChart,
 } from './simple-rich-components';
 import {
@@ -129,6 +130,8 @@ export const renderShapeComponent = (
       return renderLargeArrowShape(shape, shapeRenderedProps);
     case 'icon':
       return renderIcon(shape, shapeRenderedProps);
+    case 'bar':
+      return renderBarChart(shape, shapeRenderedProps);
     case 'image':
       return renderImage(shape, shapeRenderedProps);
     default:

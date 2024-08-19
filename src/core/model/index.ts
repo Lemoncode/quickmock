@@ -45,6 +45,7 @@ export type ShapeType =
   | 'smalltext'
   | 'paragraph'
   | 'largeArrow'
+  | 'bar'
   | 'triangle'
   | 'image';
 
@@ -86,6 +87,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   'horizontal-menu': 'Horizontal Menu',
   largeArrow: 'Large Arrow',
   icon: 'Icon',
+  bar: 'Bar Chart',
   image: 'Image',
 };
 
