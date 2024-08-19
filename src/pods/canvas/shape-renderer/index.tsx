@@ -48,6 +48,7 @@ import {
 } from './simple-text-components';
 import { renderSmalltext } from './simple-text-components/smalltext.renderer';
 import { renderParagraph } from './simple-text-components/paragraph.renderer';
+import { renderImage } from './simple-basic-shapes/image.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -128,6 +129,8 @@ export const renderShapeComponent = (
       return renderLargeArrowShape(shape, shapeRenderedProps);
     case 'icon':
       return renderIcon(shape, shapeRenderedProps);
+    case 'image':
+      return renderImage(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

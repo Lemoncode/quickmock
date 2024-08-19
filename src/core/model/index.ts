@@ -29,8 +29,6 @@ export type ShapeType =
   | 'videoPlayer'
   | 'diamond'
   | 'icon'
-
-  /* | "text"| "button" |  "radio" | "image"*/
   | 'line'
   | 'accordion'
   | 'pie'
@@ -47,7 +45,8 @@ export type ShapeType =
   | 'smalltext'
   | 'paragraph'
   | 'largeArrow'
-  | 'triangle';
+  | 'triangle'
+  | 'image';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -77,7 +76,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   star: 'Star',
   postit: 'Post-it',
   linechart: 'Line',
-  heading1: 'Heading1',
+  heading1: 'Heading 1',
   heading2: 'Heading 2',
   heading3: 'Heading 3',
   normaltext: 'Normal text',
@@ -87,6 +86,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   'horizontal-menu': 'Horizontal Menu',
   largeArrow: 'Large Arrow',
   icon: 'Icon',
+  image: 'Image',
 };
 
 export type EditType = 'input' | 'textarea';
@@ -122,6 +122,7 @@ export interface OtherProps {
   icon?: IconInfo;
   iconSize?: IconSize;
   textColor?: string;
+  imageSrc?: string;
 }
 
 export const BASE_ICONS_URL = '/icons/';
