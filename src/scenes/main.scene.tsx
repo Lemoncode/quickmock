@@ -35,7 +35,7 @@ export const MainScene = () => {
           <RichComponentsGalleryPod />
         </details>
         <details className={classes.container} name="toolsLeft" open>
-          <summary className={classes.title}>Text Componets</summary>
+          <summary className={classes.title}>Text Components</summary>
           <TextComponetGalleryPod />
         </details>
       </div>

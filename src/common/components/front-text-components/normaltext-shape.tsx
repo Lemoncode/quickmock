@@ -5,12 +5,12 @@ import { ShapeSizeRestrictions } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
 const normaltextSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 500,
-  minHeight: 150,
+  minWidth: 150,
+  minHeight: 20,
   maxWidth: -1,
-  maxHeight: -1,
+  maxHeight: 30,
   defaultWidth: 500,
-  defaultHeight: 150,
+  defaultHeight: 25,
 };
 
 export const getNormaltextSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -32,7 +32,7 @@ export const NormaltextShape = forwardRef<any, ShapeProps>(
         height={restrictedHeight}
         ref={ref}
         {...shapeProps}
-        onClick={() => onSelected(id, 'label')}
+        onClick={() => onSelected(id, 'input')}
       >
         <Text
           x={0}
@@ -41,7 +41,7 @@ export const NormaltextShape = forwardRef<any, ShapeProps>(
           height={restrictedHeight}
           text={text}
           fontFamily="Comic Sans MS, cursive"
-          fontSize={14}
+          fontSize={18}
           fill={otherProps?.textColor ?? 'black'}
           align="center"
           verticalAlign="middle"

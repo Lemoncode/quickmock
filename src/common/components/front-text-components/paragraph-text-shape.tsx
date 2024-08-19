@@ -5,12 +5,12 @@ import { ShapeSizeRestrictions } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
 const paragraphSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 500,
-  minHeight: 150,
+  minWidth: 300,
+  minHeight: 100,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 500,
-  defaultHeight: 150,
+  defaultWidth: 420,
+  defaultHeight: 125,
 };
 
 export const getParagraphSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -32,7 +32,7 @@ export const ParagraphShape = forwardRef<any, ShapeProps>(
         height={restrictedHeight}
         ref={ref}
         {...shapeProps}
-        onClick={() => onSelected(id, 'label')}
+        onClick={() => onSelected(id, 'textarea')}
       >
         <Text
           x={0}
