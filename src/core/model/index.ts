@@ -37,6 +37,7 @@ export type ShapeType =
   | 'map'
   | 'circle'
   | 'star'
+  | 'linechart'
   | 'heading1'
   | 'heading2'
   | 'heading3'
@@ -74,6 +75,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   circle: 'Circle',
   star: 'Star',
   postit: 'Post-it',
+  linechart: 'Line',
   heading1: 'Heading 1',
   heading2: 'Heading 2',
   heading3: 'Heading 3',
