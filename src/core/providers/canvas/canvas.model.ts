@@ -39,7 +39,12 @@ export interface CanvasContextModel {
   clearCanvas: () => void;
   setScale: React.Dispatch<React.SetStateAction<number>>;
   pasteShape: (shape: ShapeModel) => void;
-  addNewShape: (type: ShapeType, x: number, y: number) => string;
+  addNewShape: (
+    type: ShapeType,
+    x: number,
+    y: number,
+    otherProps?: OtherProps
+  ) => string;
   updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void;
   updateShapePosition: (id: string, position: Coord) => void;
   stageRef: React.RefObject<Konva.Stage>;
