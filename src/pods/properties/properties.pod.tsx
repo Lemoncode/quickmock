@@ -58,6 +58,13 @@ export const PropertiesPod = () => {
           onChange={icon => updateOtherPropsOnSelected('icon', icon)}
         />
       )}
+      {selectedShapeData?.otherProps?.textColor && (
+        <ColorPicker
+          label="TextColor"
+          color={selectedShapeData.otherProps.textColor}
+          onChange={color => updateOtherPropsOnSelected('textColor', color)}
+        />
+      )}
     </div>
   );
 };
