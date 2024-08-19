@@ -11,8 +11,8 @@ export const useDropImageFromDesktop = (
 ) => {
   const { addNewShape, stageRef } = useCanvasContext();
 
-  // TODO: move this to utils / business
-  // Try to unify the code to check if the file is an image (on DragOver and Drop)
+  // TODO: #231  move this to utils / business
+  // https://github.com/Lemoncode/quickmock/issues/231
   const isDropImageFile = (e: React.DragEvent<HTMLDivElement>) => {
     return (
       e.dataTransfer.items.length > 0 &&
@@ -22,8 +22,6 @@ export const useDropImageFromDesktop = (
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    // TODO: Refactor this, try a way to unifiy or get some common way
-    // to handle drag over and drop
     if (isDropImageFile(e)) {
       e.preventDefault();
       e.stopPropagation();
