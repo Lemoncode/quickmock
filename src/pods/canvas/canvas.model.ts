@@ -43,6 +43,14 @@ import {
   getHorizontalMenuShapeSizeRestrictions,
   getMapChartShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
+import {
+  getHeading1SizeRestrictions,
+  getHeading2SizeRestrictions,
+  getHeading3SizeRestrictions,
+  getNormaltextSizeRestrictions,
+  getParagraphSizeRestrictions,
+  getSmalltextSizeRestrictions,
+} from '@/common/components/front-text-components';
 
 export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
   switch (shapeType) {
@@ -177,6 +185,36 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getStarShapeSizeRestrictions().defaultWidth,
         height: getStarShapeSizeRestrictions().defaultHeight,
       };
+    case 'heading1':
+      return {
+        width: getHeading1SizeRestrictions().defaultWidth,
+        height: getHeading1SizeRestrictions().defaultHeight,
+      };
+    case 'heading2':
+      return {
+        width: getHeading2SizeRestrictions().defaultWidth,
+        height: getHeading2SizeRestrictions().defaultHeight,
+      };
+    case 'heading3':
+      return {
+        width: getHeading3SizeRestrictions().defaultWidth,
+        height: getHeading3SizeRestrictions().defaultHeight,
+      };
+    case 'normaltext':
+      return {
+        width: getNormaltextSizeRestrictions().defaultWidth,
+        height: getNormaltextSizeRestrictions().defaultHeight,
+      };
+    case 'smalltext':
+      return {
+        width: getSmalltextSizeRestrictions().defaultWidth,
+        height: getSmalltextSizeRestrictions().defaultHeight,
+      };
+    case 'paragraph':
+      return {
+        width: getParagraphSizeRestrictions().defaultWidth,
+        height: getParagraphSizeRestrictions().defaultHeight,
+      };
     case 'largeArrow':
       return {
         width: getLargeArrowShapeSizeRestrictions().defaultWidth,
@@ -203,6 +241,12 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'postit':
     case 'horizontal-menu':
     case 'breadcrumb':
+    case 'heading1':
+    case 'heading2':
+    case 'heading3':
+    case 'normaltext':
+    case 'smalltext':
+    case 'paragraph':
     case 'listbox':
       return true;
     default:
@@ -245,6 +289,18 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
     case 'horizontal-menu':
       return 'Home\nAbout\nServices\nContact';
+    case 'heading1':
+      return 'Heading 1';
+    case 'heading2':
+      return 'Heading 2';
+    case 'heading3':
+      return 'Heading 3';
+    case 'normaltext':
+      return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+    case 'smalltext':
+      return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+    case 'paragraph':
+      return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nSed do eiusmod tempor incididunt ut labore et dolore magna \naliqua.Ut enim ad minim veniam, quis nostrud exercitation \nullamco laboris nisi ut aliquip ex ea commodo consequat \nDuis aute irure dolor in reprehenderit in voluptate velit\nesse cillum dolore eu fugiat nulla pariatur. \nExcepteur sint occaecat cupidatat non proident, sunt in \nculpa qui officia deserunt mollit anim id est laborum.';
     default:
       return undefined;
   }
@@ -259,6 +315,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'postit':
     case 'horizontal-menu':
     case 'breadcrumb':
+    case 'paragraph':
     case 'listbox':
       return 'textarea';
       break;
@@ -272,6 +329,12 @@ export const generateDefaultOtherProps = (
   switch (shapeType) {
     case 'input':
     case 'button':
+    case 'heading1':
+    case 'heading2':
+    case 'heading3':
+    case 'normaltext':
+    case 'smalltext':
+    case 'paragraph':
     case 'textarea':
     case 'combobox':
     case 'listbox':
@@ -282,13 +345,14 @@ export const generateDefaultOtherProps = (
     case 'star':
     case 'diamond':
     case 'triangle':
-      return { stroke: '#000000', backgroundColor: '#FFFFFF' };
     case 'line':
-      return { stroke: '#000000' };
     case 'postit':
-      return { stroke: '#000000', backgroundColor: '#FFFF99' };
     case 'largeArrow':
-      return { stroke: '#000000', backgroundColor: '#d3d3d3' };
+      return {
+        stroke: '#000000',
+        backgroundColor: '#d3d3d3',
+        textColor: '#000000',
+      };
     default:
       return undefined;
   }

@@ -38,6 +38,12 @@ export type ShapeType =
   | 'map'
   | 'circle'
   | 'star'
+  | 'heading1'
+  | 'heading2'
+  | 'heading3'
+  | 'normaltext'
+  | 'smalltext'
+  | 'paragraph'
   | 'largeArrow'
   | 'triangle';
 
@@ -68,6 +74,12 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   circle: 'Circle',
   star: 'Star',
   postit: 'Post-it',
+  heading1: 'Heading1',
+  heading2: 'Heading 2',
+  heading3: 'Heading 3',
+  normaltext: 'Normal text',
+  smalltext: 'Small text',
+  paragraph: 'Paragraph',
   triangle: 'Triangle',
   'horizontal-menu': 'Horizontal Menu',
   largeArrow: 'Large Arrow',
@@ -92,6 +104,7 @@ export interface Coord {
 export interface OtherProps {
   stroke?: string;
   backgroundColor?: string;
+  textColor: string;
 }
 
 export interface ShapeModel {
