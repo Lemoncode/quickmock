@@ -1,5 +1,5 @@
 import { forwardRef, useMemo } from 'react';
-import { Group, Line, Circle, Rect } from 'react-konva';
+import { Group, Line, Circle } from 'react-konva';
 import { ShapeProps } from '../front-components/shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
