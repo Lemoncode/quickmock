@@ -8,7 +8,7 @@ export const QuickmockLogoComponent = (props: Props) => {
   return (
     <img
       className={styleClass}
-      src={'public/widgets/bombilla.webp'}
+      src={'/widgets/bombilla.webp'}
       alt="Quickmock Logo"
     />
   );

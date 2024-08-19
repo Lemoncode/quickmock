@@ -19,6 +19,7 @@ export const renderTimepickerinput = (
       height={shape.height}
       name="shape"
       draggable
+      typeOfTransformer={shape.typeOfTransformer}
       onSelected={handleSelected}
       ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}

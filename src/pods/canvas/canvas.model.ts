@@ -18,6 +18,7 @@ import {
   getDatepickerInputShapeSizeRestrictions,
   getButtonShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
+  getIconShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -220,6 +221,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getLargeArrowShapeSizeRestrictions().defaultWidth,
         height: getLargeArrowShapeSizeRestrictions().defaultHeight,
       };
+    case 'icon':
+      return {
+        width: getIconShapeSizeRestrictions().defaultWidth,
+        height: getIconShapeSizeRestrictions().defaultHeight,
+      };
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -254,12 +260,23 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
   }
 };
 
-const doesShapeHaveLateralTransformer = (shapeType: ShapeType): boolean => {
+const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
   switch (shapeType) {
     case 'line':
-      return true;
+      return ['middle-left', 'middle-right'];
+    case 'icon':
+      return [];
     default:
-      return false;
+      return [
+        'top-left',
+        'top-center',
+        'top-right',
+        'middle-left',
+        'middle-right',
+        'bottom-left',
+        'bottom-center',
+        'bottom-right',
+      ];
   }
 };
 
@@ -353,6 +370,16 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#d3d3d3',
         textColor: '#000000',
       };
+    case 'icon':
+      return {
+        icon: {
+          name: 'open',
+          filename: 'open.svg',
+          searchTerms: ['open', 'folder', 'load'],
+          categories: ['IT'],
+        },
+        iconSize: 'M',
+      };
     default:
       return undefined;
   }
@@ -373,7 +400,7 @@ export const createShape = (coord: Coord, shapeType: ShapeType): ShapeModel => {
     height,
     type: shapeType,
     allowsInlineEdition: doesShapeAllowInlineEdition(shapeType),
-    hasLateralTransformer: doesShapeHaveLateralTransformer(shapeType),
+    typeOfTransformer: generateTypeOfTransformer(shapeType),
     text: generateDefaultTextValue(shapeType),
     editType: getShapeEditInlineType(shapeType),
     otherProps: generateDefaultOtherProps(shapeType),

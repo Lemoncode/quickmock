@@ -13,21 +13,9 @@ export const useTransform = (
     const selectedShape = selectedShapeRef.current;
     const transformer = transformerRef.current;
     if (selectedShape && transformer) {
-      const hasLateralTransformer = selectedShape.attrs.hasLateralTransformer;
-      if (hasLateralTransformer) {
-        transformerRef.current.enabledAnchors(['middle-left', 'middle-right']);
-      } else {
-        transformerRef.current.enabledAnchors([
-          'top-left',
-          'top-center',
-          'top-right',
-          'middle-left',
-          'middle-right',
-          'bottom-left',
-          'bottom-center',
-          'bottom-right',
-        ]);
-      }
+      transformerRef.current.enabledAnchors(
+        selectedShape.attrs.typeOfTransformer
+      );
     }
   }, [selectedShapeId]);
 

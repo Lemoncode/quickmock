@@ -28,6 +28,7 @@ export type ShapeType =
   | 'postit'
   | 'videoPlayer'
   | 'diamond'
+  | 'icon'
 
   /* | "text"| "button" |  "radio" | "image"*/
   | 'line'
@@ -83,6 +84,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   triangle: 'Triangle',
   'horizontal-menu': 'Horizontal Menu',
   largeArrow: 'Large Arrow',
+  icon: 'Icon',
 };
 
 export type EditType = 'input' | 'textarea';
@@ -101,11 +103,26 @@ export interface Coord {
   y: number;
 }
 
+type Category = 'IT' | 'business' | 'Ecommerce' | 'Emojis';
+
+export interface IconInfo {
+  name: string;
+  filename: string;
+  searchTerms: string[];
+  categories: Category[];
+}
+
+export type IconSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
+
 export interface OtherProps {
   stroke?: string;
   backgroundColor?: string;
-  textColor: string;
+  icon?: IconInfo;
+  iconSize?: IconSize;
+  textColor?: string;
 }
+
+export const BASE_ICONS_URL = '/icons/';
 
 export interface ShapeModel {
   id: string;
@@ -115,7 +132,7 @@ export interface ShapeModel {
   height: number;
   type: ShapeType;
   allowsInlineEdition: boolean;
-  hasLateralTransformer: boolean;
+  typeOfTransformer: string[];
   editType?: EditType;
   text?: string;
   otherProps?: OtherProps;
