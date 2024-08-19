@@ -75,7 +75,11 @@ export const CanvasPod = () => {
     updateShapeSizeAndPosition
   );
 
-  const { handleDragOver, handleDropImage } = useDropImageFromDesktop();
+  // Note here: Limitation, Pragmatic Drag and Drop has any on the DropRef
+  // but we need to cast it to HTMLDivElement
+  const { handleDragOver, handleDropImage } = useDropImageFromDesktop(
+    dropRef as unknown as React.MutableRefObject<HTMLDivElement>
+  );
 
   const handleDragEnd =
     (id: string) => (e: Konva.KonvaEventObject<DragEvent>) => {

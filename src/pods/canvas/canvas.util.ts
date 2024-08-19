@@ -1,6 +1,7 @@
 import { Coord } from '@/core/model';
 import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
 import { Stage } from 'konva/lib/Stage';
+import { RefObject } from 'react';
 
 // TODO Add unit tests to this functions
 export const extractScreenCoordinatesFromPragmaticLocation = (
@@ -46,13 +47,23 @@ export const convertFromDivElementCoordsToKonvaCoords = (
 
 export const calculateScaledCoordsFromCanvasDivCoordinates = (
   stage: Stage,
-  divCoords: Coord
+  divCoords: Coord,
+  scroll: Coord
 ) => {
   const scaleX = stage.scaleX();
   const scaleY = stage.scaleY();
 
   return {
-    x: divCoords.x / scaleX,
-    y: divCoords.y / scaleY,
+    x: (divCoords.x + scroll.x) / scaleX,
+    y: (divCoords.y + scroll.y) / scaleY,
   };
+};
+
+export const getScrollFromDiv = (
+  divRef: React.MutableRefObject<HTMLDivElement>
+) => {
+  const scrollLeft = divRef?.current?.scrollLeft ?? 0;
+  const scrollTop = divRef?.current?.scrollTop ?? 0;
+
+  return { scrollLeft, scrollTop };
 };

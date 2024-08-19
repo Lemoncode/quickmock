@@ -2,11 +2,13 @@ import { useCanvasContext } from '@/core/providers';
 import invariant from 'tiny-invariant';
 import {
   calculateScaledCoordsFromCanvasDivCoordinates,
-  convertFromDivElementCoordsToKonvaCoords,
+  getScrollFromDiv,
 } from './canvas.util';
 import { calculateShapeOffsetToXDropCoordinate } from './use-monitor.business';
 
-export const useDropImageFromDesktop = () => {
+export const useDropImageFromDesktop = (
+  dropRef: React.MutableRefObject<HTMLDivElement>
+) => {
   const { addNewShape, stageRef } = useCanvasContext();
 
   // TODO: move this to utils / business
@@ -47,9 +49,11 @@ export const useDropImageFromDesktop = () => {
         img.onload = () => {
           invariant(stageRef.current);
           const stage = stageRef.current;
-          const konvaCoord = calculateScaledCoordsFromCanvasDivCoordinates(
+          const { scrollLeft, scrollTop } = getScrollFromDiv(dropRef);
+          let konvaCoord = calculateScaledCoordsFromCanvasDivCoordinates(
             stage,
-            divCoords
+            divCoords,
+            { x: scrollLeft, y: scrollTop }
           );
 
           const positionX =
