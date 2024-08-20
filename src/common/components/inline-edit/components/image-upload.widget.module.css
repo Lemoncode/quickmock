@@ -1,0 +1,33 @@
+.uploadContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(200, 200, 200, 0.3); /* Gris claro con opacidad */
+  border-radius: 8px; /* Bordes redondeados */
+  position: relative;
+  padding: 20px;
+}
+
+.fileInput {
+  display: none; /* Escondemos el input de archivo */
+}
+
+.uploadButton {
+  background-color: #4caf50; /* Verde */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.uploadButton:hover {
+  background-color: #45a049; /* Verde más oscuro cuando se pasa el ratón por encima */
+}

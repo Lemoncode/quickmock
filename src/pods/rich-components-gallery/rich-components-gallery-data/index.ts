@@ -10,4 +10,6 @@ export const mockRichComponentsCollection: ItemInfo[] = [
   },
   { thumbnailSrc: '/rich-components/breadcrumb.svg', type: 'breadcrumb' },
   { thumbnailSrc: '/rich-components/map.svg', type: 'map' },
+  { thumbnailSrc: '/rich-components/barchart.svg', type: 'bar' },
+  { thumbnailSrc: '/rich-components/line-chart.svg', type: 'linechart' },
 ];
