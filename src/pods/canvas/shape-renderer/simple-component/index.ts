@@ -12,3 +12,4 @@ export * from './timepickerinput.renderer';
 export * from './label.renderer';
 export * from './radiobutton.renderer';
 export * from './icon.renderer';
+export * from './verticalscrollbar.renderer';

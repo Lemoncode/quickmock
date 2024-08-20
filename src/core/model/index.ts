@@ -47,7 +47,8 @@ export type ShapeType =
   | 'largeArrow'
   | 'bar'
   | 'triangle'
-  | 'image';
+  | 'image'
+  | 'verticalScrollBar';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -89,6 +90,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   icon: 'Icon',
   bar: 'Bar Chart',
   image: 'Image',
+  verticalScrollBar: 'Vertical Scroll Bar',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
