@@ -35,6 +35,7 @@ export const CanvasPod = () => {
     selectedShapeRef,
     selectedShapeId,
     updateTextOnSelected,
+    updateOtherPropsOnSelected,
   } = selectionInfo;
 
   const addNewShapeAndSetSelected = (type: ShapeType, x: number, y: number) => {
@@ -144,6 +145,9 @@ export const CanvasPod = () => {
                   isEditable={shape.allowsInlineEdition}
                   text={shape.text ?? ''}
                   onTextSubmit={updateTextOnSelected}
+                  onImageSrcSubmit={srcData =>
+                    updateOtherPropsOnSelected('imageSrc', srcData)
+                  }
                   scale={scale}
                   editType={shape.editType ?? 'input'}
                 >
