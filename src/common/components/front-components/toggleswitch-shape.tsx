@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Circle, Group, Rect } from 'react-konva';
@@ -25,17 +25,10 @@ export const ToggleSwitch = forwardRef<any, ShapeProps>(
         height
       );
 
-    const [isOn, setIsOn] = useState(otherProps?.checked ?? false);
-
-    const handleSwitch = () => {
-      setIsOn(!isOn);
-    };
-
-    useEffect(() => {
-      if (otherProps?.checked != undefined) {
-        setIsOn(otherProps?.checked);
-      }
-    }, [otherProps?.checked]);
+    const isOn = useMemo(
+      () => otherProps?.checked ?? true,
+      [otherProps?.checked]
+    );
 
     const circleX = isOn
       ? restrictedWidth - restrictedHeight / 2
@@ -62,7 +55,6 @@ export const ToggleSwitch = forwardRef<any, ShapeProps>(
           fill={isOn ? 'lightgreen' : 'lightgray'}
         />
         <Circle
-          onClick={handleSwitch}
           x={circleX}
           y={restrictedHeight / 2}
           radius={restrictedHeight / 2}

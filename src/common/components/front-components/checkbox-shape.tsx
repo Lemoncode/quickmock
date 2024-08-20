@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Line, Text } from 'react-konva';
@@ -28,17 +28,10 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(checkBoxShapeRestrictions, width, height);
 
-    const [isOn, setIsOn] = useState(otherProps?.checked ?? false);
-
-    useEffect(() => {
-      if (otherProps?.checked != undefined) {
-        setIsOn(otherProps?.checked);
-      }
-    }, [otherProps?.checked]);
-
-    const handleClick = () => {
-      setIsOn(!isOn);
-    };
+    const isOn = useMemo(
+      () => otherProps?.checked ?? true,
+      [otherProps?.checked]
+    );
 
     return (
       <Group
@@ -50,7 +43,6 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
         {...shapeProps}
         onClick={() => {
           onSelected(id, 'checkbox');
-          handleClick();
         }}
       >
         <Rect
