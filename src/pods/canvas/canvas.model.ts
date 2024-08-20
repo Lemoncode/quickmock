@@ -47,6 +47,7 @@ import {
   getHorizontalMenuShapeSizeRestrictions,
   getMapChartShapeSizeRestrictions,
   getLineChartShapeSizeRestrictions,
+  getCalendarShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -249,6 +250,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getHorizontalScrollBarShapeSizeRestrictions().defaultWidth,
         height: getHorizontalScrollBarShapeSizeRestrictions().defaultHeight,
+      };
+    case 'calendar':
+      return {
+        width: getCalendarShapeSizeRestrictions().defaultWidth,
+        height: getCalendarShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(
