@@ -19,6 +19,7 @@ import {
   getButtonShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
   getIconShapeSizeRestrictions,
+  getHorizontalScrollBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -243,6 +244,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getImageShapeSizeRestrictions().defaultWidth,
         height: getImageShapeSizeRestrictions().defaultHeight,
+      };
+    case 'horizontalScrollBar':
+      return {
+        width: getHorizontalScrollBarShapeSizeRestrictions().defaultWidth,
+        height: getHorizontalScrollBarShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(
