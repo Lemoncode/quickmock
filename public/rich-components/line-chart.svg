@@ -1,0 +1,46 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Eje X -->
+  <line x1="50" y1="250" x2="350" y2="250" style="stroke:black;stroke-width:2"/>
+
+  <!-- Eje Y -->
+  <line x1="50" y1="50" x2="50" y2="250" style="stroke:black;stroke-width:2"/>
+
+  <!-- Línea 1 -->
+  <polyline points="50,200 100,150 150,180 200,100 250,130 300,80 350,120" 
+            style="fill:none;stroke:darkgray;stroke-width:2"/>
+
+  <!-- Puntos Línea 1 -->
+  <circle cx="50" cy="200" r="4" style="fill:black"/>
+  <circle cx="100" cy="150" r="4" style="fill:black"/>
+  <circle cx="150" cy="180" r="4" style="fill:black"/>
+  <circle cx="200" cy="100" r="4" style="fill:black"/>
+  <circle cx="250" cy="130" r="4" style="fill:black"/>
+  <circle cx="300" cy="80" r="4" style="fill:black"/>
+  <circle cx="350" cy="120" r="4" style="fill:black"/>
+
+  <!-- Línea 2 -->
+  <polyline points="50,220 100,170 150,190 200,130 250,160 300,110 350,140" 
+            style="fill:none;stroke:gray;stroke-width:2"/>
+
+  <!-- Puntos Línea 2 -->
+  <circle cx="50" cy="220" r="4" style="fill:black"/>
+  <circle cx="100" cy="170" r="4" style="fill:black"/>
+  <circle cx="150" cy="190" r="4" style="fill:black"/>
+  <circle cx="200" cy="130" r="4" style="fill:black"/>
+  <circle cx="250" cy="160" r="4" style="fill:black"/>
+  <circle cx="300" cy="110" r="4" style="fill:black"/>
+  <circle cx="350" cy="140" r="4" style="fill:black"/>
+
+  <!-- Línea 3 -->
+  <polyline points="50,240 100,190 150,210 200,160 250,190 300,140 350,170" 
+            style="fill:none;stroke:lightgray;stroke-width:2"/>
+
+  <!-- Puntos Línea 3 -->
+  <circle cx="50" cy="240" r="4" style="fill:black"/>
+  <circle cx="100" cy="190" r="4" style="fill:black"/>
+  <circle cx="150" cy="210" r="4" style="fill:black"/>
+  <circle cx="200" cy="160" r="4" style="fill:black"/>
+  <circle cx="250" cy="190" r="4" style="fill:black"/>
+  <circle cx="300" cy="140" r="4" style="fill:black"/>
+  <circle cx="350" cy="170" r="4" style="fill:black"/>
+</svg>

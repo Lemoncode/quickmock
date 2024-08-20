@@ -1,18 +1,23 @@
-import { Node, NodeConfig } from 'konva/lib/Node';
 import { Box } from 'konva/lib/shapes/Transformer';
-import { Coord, ShapeType, Size } from '@/core/model';
-
-interface TransFormSelectedInfo {
-  selectedShapeRef: React.MutableRefObject<Node<NodeConfig> | null>;
-  selectedShapeId: string;
-  selectedShapeType: ShapeType | null;
-}
+import { Coord, Size } from '@/core/model';
+import { useEffect } from 'react';
+import { useCanvasContext } from '@/core/providers';
 
 export const useTransform = (
-  updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void,
-  transformSelectedInfo: TransFormSelectedInfo
+  updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void
 ) => {
-  const { selectedShapeId, selectedShapeRef } = transformSelectedInfo;
+  const { selectedShapeId, selectedShapeRef, transformerRef } =
+    useCanvasContext().selectionInfo;
+
+  useEffect(() => {
+    const selectedShape = selectedShapeRef.current;
+    const transformer = transformerRef.current;
+    if (selectedShape && transformer) {
+      transformerRef.current.enabledAnchors(
+        selectedShape.attrs.typeOfTransformer
+      );
+    }
+  }, [selectedShapeId]);
 
   const handleTransform = () => {
     const node = selectedShapeRef.current;

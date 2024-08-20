@@ -20,11 +20,15 @@ export const renderListbox = (
       height={shape.height}
       name="shape"
       draggable
+      typeOfTransformer={shape.typeOfTransformer}
       onSelected={handleSelected}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
-      items={['', 'Item1', 'Item2', 'Item3', 'Item4', 'Item5']}
+      editType={shape.editType}
+      isEditable={true}
+      text={shape.text}
+      otherProps={shape.otherProps}
     />
   );
 };

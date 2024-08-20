@@ -11,6 +11,7 @@ import { EditableComponent } from '@/common/components/inline-edit';
 import { useClipboard } from './use-clipboard.hook';
 import { useSnapIn } from './use-snapin.hook';
 import { ShapeType } from '@/core/model';
+import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
 
 export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
@@ -33,8 +34,8 @@ export const CanvasPod = () => {
     handleClearSelection,
     selectedShapeRef,
     selectedShapeId,
-    selectedShapeType,
     updateTextOnSelected,
+    updateOtherPropsOnSelected,
   } = selectionInfo;
 
   const addNewShapeAndSetSelected = (type: ShapeType, x: number, y: number) => {
@@ -72,12 +73,13 @@ export const CanvasPod = () => {
   } = useSnapIn(transformerRef, selectedShapeKonvaId);
 
   const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
-    updateShapeSizeAndPosition,
-    {
-      selectedShapeRef,
-      selectedShapeId,
-      selectedShapeType,
-    }
+    updateShapeSizeAndPosition
+  );
+
+  // Note here: Limitation, Pragmatic Drag and Drop has any on the DropRef
+  // but we need to cast it to HTMLDivElement
+  const { handleDragOver, handleDropImage } = useDropImageFromDesktop(
+    dropRef as unknown as React.MutableRefObject<HTMLDivElement>
   );
 
   const handleDragEnd =
@@ -112,6 +114,8 @@ export const CanvasPod = () => {
   }
   return (
     <div
+      onDragOver={handleDragOver}
+      onDrop={handleDropImage}
       className={classes.canvas}
       ref={dropRef}
       style={{ opacity: isDraggedOver ? 0.5 : 1 }}
@@ -141,6 +145,9 @@ export const CanvasPod = () => {
                   isEditable={shape.allowsInlineEdition}
                   text={shape.text ?? ''}
                   onTextSubmit={updateTextOnSelected}
+                  onImageSrcSubmit={srcData =>
+                    updateOtherPropsOnSelected('imageSrc', srcData)
+                  }
                   scale={scale}
                   editType={shape.editType ?? 'input'}
                 >

@@ -1,0 +1,27 @@
+.categories {
+  display: flex;
+  gap: var(--space-s);
+  width: 80%;
+}
+
+.categoriesTitle {
+  font-size: var(--fs-md);
+  color: var(--pure-white);
+  font-weight: 100;
+}
+
+.category {
+  background-color: var(--primary-100);
+  border-radius: var(--border-radius-m);
+  color: var(--primary-900);
+  cursor: pointer;
+}
+
+.category:hover {
+  background-color: var(--primary-400);
+}
+
+.categorySelected {
+  background-color: var(--primary-400);
+  border-style: inset;
+}

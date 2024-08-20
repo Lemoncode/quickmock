@@ -21,7 +21,7 @@ const boxTickWidth = 50;
 const tickWidth = boxTickWidth - marginTick;
 
 export const CheckBoxShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(checkBoxShapeRestrictions, width, height);
 
@@ -64,7 +64,7 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
           y={height / 2}
           width={width - boxTickWidth - marginTick}
           height={height / 3}
-          text="Check me!"
+          text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
           fill="black"
