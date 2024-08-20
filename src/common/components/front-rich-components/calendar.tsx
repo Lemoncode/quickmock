@@ -1,15 +1,15 @@
-import { Group, Rect, Circle, Line, Text } from 'react-konva';
+import { useState, forwardRef } from 'react';
+import { Group, Rect, Text, Line } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
 const calendarShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 200,
-  minHeight: 150,
+  minWidth: 350,
+  minHeight: 350,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 600,
+  defaultWidth: 500,
   defaultHeight: 500,
 };
 
@@ -25,18 +25,45 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
         height
       );
 
-    const month = 'January';
-    const year = 2021;
-    const days = [
-      [1, 2, 3, 4, 5, 6, 7],
-      [8, 9, 10, 11, 12, 13, 14],
-      [15, 16, 17, 18, 19, 20, 21],
-      [22, 23, 24, 25, 26, 27, 28],
-      [29, 30, 31],
-    ];
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+    const getCurrentMonthDays = (date: Date) => {
+      const month = date.toLocaleString('default', { month: 'long' });
+      const year = date.getFullYear();
+      const daysInMonth = new Date(year, date.getMonth() + 1, 0).getDate();
+      const startDay = new Date(year, date.getMonth(), 1).getDay();
+
+      const days = [];
+      let week = new Array(startDay).fill(null); // Fill the first week with nulls up to the start day
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        week.push(day);
+        if (week.length === 7 || day === daysInMonth) {
+          days.push(week);
+          week = [];
+        }
+      }
+
+      return { month, year, days };
+    };
+
+    const handlePrevMonth = () => {
+      setCurrentDate(
+        prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() - 1, 1)
+      );
+    };
+
+    const handleNextMonth = () => {
+      setCurrentDate(
+        prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() + 1, 1)
+      );
+    };
+
+    const { month, year, days } = getCurrentMonthDays(currentDate);
 
     const margin = 10;
     const headerHeight = 50;
+    const dayBoxWidth = (restrictedWidth - margin * 2) / 7;
     const dayBoxHeight = (height - headerHeight) / days.length;
 
     return (
@@ -64,15 +91,19 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
         {/* Flecha izquierda */}
         <Line
           points={[
-            margin + 15,
-            restrictedHeight - headerHeight - 5,
-            margin + 35,
-            restrictedHeight - headerHeight + 10,
-            margin + 15,
-            restrictedHeight - headerHeight + 25,
+            margin + 20,
+            margin + 10,
+            margin + 10,
+            margin + 20,
+            margin + 20,
+            margin + 30,
           ]}
+          closed
           fill="black"
-          closed={true}
+          stroke="black"
+          strokeWidth={2}
+          onClick={handlePrevMonth}
+          cursor="pointer"
         />
 
         {/* Mes y Año */}
@@ -88,15 +119,19 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
         {/* Flecha derecha */}
         <Line
           points={[
-            margin + 15,
-            restrictedHeight - headerHeight - 5,
-            margin + 35,
-            restrictedHeight - headerHeight + 10,
-            margin + 15,
-            restrictedHeight - headerHeight + 25,
+            restrictedWidth - margin - 30,
+            margin + 10,
+            restrictedWidth - margin - 20,
+            margin + 20,
+            restrictedWidth - margin - 30,
+            margin + 30,
           ]}
+          closed
           fill="black"
-          closed={true}
+          stroke="black"
+          strokeWidth={2}
+          onClick={handleNextMonth}
+          cursor="pointer"
         />
 
         {/* Tabla del calendario */}
@@ -115,7 +150,7 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
         {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
           <Text
             key={i}
-            x={35 + i * (width / 7)}
+            x={35 + i * dayBoxWidth}
             y={headerHeight + 20}
             text={day}
             fontFamily="Comic Sans MS, cursive"
@@ -129,9 +164,9 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
           week.map((day, colIndex) => (
             <Text
               key={`${rowIndex}-${colIndex}`}
-              x={35 + colIndex * (width / 7)}
+              x={35 + colIndex * dayBoxWidth}
               y={headerHeight + 70 + rowIndex * dayBoxHeight}
-              text={day.toString()}
+              text={day ? day.toString() : ''}
               fontFamily="Comic Sans MS, cursive"
               fontSize={16}
               fill="black"
