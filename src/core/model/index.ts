@@ -47,6 +47,7 @@ export type ShapeType =
   | 'largeArrow'
   | 'bar'
   | 'triangle'
+  | 'horizontalScrollBar'
   | 'image';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
@@ -89,6 +90,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   icon: 'Icon',
   bar: 'Bar Chart',
   image: 'Image',
+  horizontalScrollBar: 'Horizontal Scroll Bar',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
