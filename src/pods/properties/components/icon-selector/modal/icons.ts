@@ -268,4 +268,23 @@ export const iconCollection: IconInfo[] = [
     ],
     categories: ['IT'],
   },
+  {
+    name: 'Add User',
+    filename: 'userplus.svg',
+    searchTerms: [
+      'add user',
+      'new user',
+      'invite',
+      'register',
+      'create account',
+      'signup',
+      'join',
+      'enroll',
+      'add member',
+      'add person',
+      'add customer',
+      'add client',
+    ],
+    categories: ['IT'],
+  },
 ];
