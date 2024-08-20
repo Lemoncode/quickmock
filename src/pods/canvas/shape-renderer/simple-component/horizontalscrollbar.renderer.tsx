@@ -1,8 +1,8 @@
-import { BreadcrumbShape } from '@/common/components/front-rich-components';
+import { HorizontalScrollBarShape } from '@/common/components/front-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 
-export const renderBreadcrumb = (
+export const renderHorizontalScrollBar = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
@@ -10,24 +10,21 @@ export const renderBreadcrumb = (
     shapeRenderedProps;
 
   return (
-    <BreadcrumbShape
+    <HorizontalScrollBarShape
       id={shape.id}
       key={shape.id}
       ref={shapeRefs.current[shape.id]}
       x={shape.x}
       y={shape.y}
-      name="shape"
       width={shape.width}
       height={shape.height}
+      name="horizontalScrollBar"
       draggable
       typeOfTransformer={shape.typeOfTransformer}
       onSelected={handleSelected}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
-      editType={shape.editType}
-      isEditable={true}
-      text={shape.text}
     />
   );
 };

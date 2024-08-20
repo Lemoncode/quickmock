@@ -15,6 +15,7 @@ import {
   renderLabel,
   renderRadioButton,
   renderIcon,
+  renderHorizontalScrollBar,
   renderVerticalScrollBar,
 } from './simple-component';
 import {
@@ -135,8 +136,6 @@ export const renderShapeComponent = (
       return renderBarChart(shape, shapeRenderedProps);
     case 'image':
       return renderImage(shape, shapeRenderedProps);
-    case 'verticalScrollBar':
-      return renderVerticalScrollBar(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { Group, Circle, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
@@ -13,8 +13,14 @@ const radioButtonShapeRestrictions: ShapeSizeRestrictions = {
   defaultHeight: 50,
 };
 
+export const getRadioButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
+  radioButtonShapeRestrictions;
+
 export const RadioButtonShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         radioButtonShapeRestrictions,
@@ -22,11 +28,10 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>(
         height
       );
 
-    const [isOn, setIsOn] = useState(false);
-
-    const handleSwitch = () => {
-      setIsOn(!isOn);
-    };
+    const isOn = useMemo(
+      () => otherProps?.checked ?? true,
+      [otherProps?.checked]
+    );
 
     const radius = restrictedHeight / 2;
 
@@ -51,7 +56,6 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>(
 
         {/* Círculo interior del radio button (checked) */}
         <Circle
-          onClick={handleSwitch}
           x={radius}
           y={radius}
           radius={radius * 0.5}

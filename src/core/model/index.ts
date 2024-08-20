@@ -47,6 +47,7 @@ export type ShapeType =
   | 'largeArrow'
   | 'bar'
   | 'triangle'
+  | 'horizontalScrollBar'
   | 'image'
   | 'verticalScrollBar';
 
@@ -90,7 +91,6 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   icon: 'Icon',
   bar: 'Bar Chart',
   image: 'Image',
-  verticalScrollBar: 'Vertical Scroll Bar',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
@@ -123,9 +123,10 @@ export type IconSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
 export interface OtherProps {
   stroke?: string;
   backgroundColor?: string;
+  textColor?: string;
+  checked?: boolean;
   icon?: IconInfo;
   iconSize?: IconSize;
-  textColor?: string;
   imageSrc?: string;
 }
 

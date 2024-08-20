@@ -15,4 +15,8 @@ export const mockWidgetCollection: ItemInfo[] = [
   { thumbnailSrc: '/widgets/timepicker.svg', type: 'timepickerinput' },
   { thumbnailSrc: '/widgets/radiobutton.svg', type: 'radiobutton' },
   { thumbnailSrc: '/widgets/verticalscrollbar.svg', type: 'verticalScrollBar' },
+  {
+    thumbnailSrc: '/widgets/horizontalscrollbar.svg',
+    type: 'horizontalScrollBar',
+  },
 ];
