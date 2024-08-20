@@ -31,5 +31,9 @@ export const useClipboard = () => {
     }
   };
 
-  return { copyShapeToClipboard, pasteShapeFromClipboard };
+  const isClipboardFilled = () => {
+    return clipboardShapeRef.current !== null;
+  };
+
+  return { copyShapeToClipboard, pasteShapeFromClipboard, isClipboardFilled };
 };
