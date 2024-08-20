@@ -41,9 +41,11 @@ import {
   getAccordionShapeSizeRestrictions,
   getBreadcrumbShapeSizeRestrictions,
   getPieChartShapeSizeRestrictions,
+  getBarChartShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
   getHorizontalMenuShapeSizeRestrictions,
   getMapChartShapeSizeRestrictions,
+  getLineChartShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -187,6 +189,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getStarShapeSizeRestrictions().defaultWidth,
         height: getStarShapeSizeRestrictions().defaultHeight,
       };
+    case 'linechart':
+      return {
+        width: getLineChartShapeSizeRestrictions().defaultWidth,
+        height: getLineChartShapeSizeRestrictions().defaultHeight,
+      };
     case 'heading1':
       return {
         width: getHeading1SizeRestrictions().defaultWidth,
@@ -226,6 +233,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getIconShapeSizeRestrictions().defaultWidth,
         height: getIconShapeSizeRestrictions().defaultHeight,
+      };
+    case 'bar':
+      return {
+        width: getBarChartShapeSizeRestrictions().defaultWidth,
+        height: getBarChartShapeSizeRestrictions().defaultHeight,
       };
     case 'image':
       return {

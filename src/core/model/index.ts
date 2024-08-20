@@ -37,6 +37,7 @@ export type ShapeType =
   | 'map'
   | 'circle'
   | 'star'
+  | 'linechart'
   | 'heading1'
   | 'heading2'
   | 'heading3'
@@ -44,6 +45,7 @@ export type ShapeType =
   | 'smalltext'
   | 'paragraph'
   | 'largeArrow'
+  | 'bar'
   | 'triangle'
   | 'image';
 
@@ -74,6 +76,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   circle: 'Circle',
   star: 'Star',
   postit: 'Post-it',
+  linechart: 'Line',
   heading1: 'Heading 1',
   heading2: 'Heading 2',
   heading3: 'Heading 3',
@@ -84,6 +87,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   'horizontal-menu': 'Horizontal Menu',
   largeArrow: 'Large Arrow',
   icon: 'Icon',
+  bar: 'Bar Chart',
   image: 'Image',
 };
 
