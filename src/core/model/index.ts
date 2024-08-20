@@ -123,9 +123,10 @@ export type IconSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
 export interface OtherProps {
   stroke?: string;
   backgroundColor?: string;
+  textColor?: string;
+  checked?: boolean;
   icon?: IconInfo;
   iconSize?: IconSize;
-  textColor?: string;
   imageSrc?: string;
 }
 
