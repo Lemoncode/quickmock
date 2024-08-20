@@ -51,6 +51,7 @@ import {
 import { renderSmalltext } from './simple-text-components/smalltext.renderer';
 import { renderParagraph } from './simple-text-components/paragraph.renderer';
 import { renderImage } from './simple-basic-shapes/image.renderer';
+import { renderCalendar } from './simple-rich-components/calendar.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -97,6 +98,8 @@ export const renderShapeComponent = (
       return renderPieChart(shape, shapeRenderedProps);
     case 'map':
       return renderMapChart(shape, shapeRenderedProps);
+    case 'calendar':
+      return renderCalendar(shape, shapeRenderedProps);
     case 'linechart':
       return renderLineChart(shape, shapeRenderedProps);
     case 'diamond':
