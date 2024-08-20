@@ -43,9 +43,9 @@ export const VerticalScrollBarShape = forwardRef<any, ShapeProps>(
         {/* Fondo de la barra de scroll */}
         <Rect
           x={0}
-          y={arrowHeight}
+          y={0}
           width={restrictedWidth}
-          height={restrictedHeight - arrowHeight * 2}
+          height={restrictedHeight}
           fill="#D0D0D0"
           stroke="#A0A0A0"
           strokeWidth={1}
@@ -54,7 +54,7 @@ export const VerticalScrollBarShape = forwardRef<any, ShapeProps>(
         {/* Flecha superior */}
         <Rect
           x={0}
-          y={6}
+          y={0}
           width={restrictedWidth}
           height={arrowHeight}
           fill="#E0E0E0"
@@ -64,7 +64,7 @@ export const VerticalScrollBarShape = forwardRef<any, ShapeProps>(
 
         <Line
           x={restrictedWidth / 2}
-          y={arrowHeight - 8}
+          y={4}
           points={[-2, 8, 0, 2, 4, 8]}
           fill="black"
           closed={true}
@@ -84,7 +84,7 @@ export const VerticalScrollBarShape = forwardRef<any, ShapeProps>(
         {/* Flecha inferior */}
         <Rect
           x={0}
-          y={restrictedHeight - arrowHeight - 6}
+          y={restrictedHeight - arrowHeight}
           width={restrictedWidth}
           height={arrowHeight}
           fill="#E0E0E0"
@@ -94,7 +94,7 @@ export const VerticalScrollBarShape = forwardRef<any, ShapeProps>(
 
         <Line
           x={restrictedWidth / 2}
-          y={restrictedHeight - arrowHeight + 8}
+          y={restrictedHeight - arrowHeight + 16}
           points={[-4, -8, 0, -2, 4, -8]}
           fill="black"
           closed={true}
