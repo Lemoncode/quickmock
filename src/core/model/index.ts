@@ -107,7 +107,7 @@ export interface Coord {
   y: number;
 }
 
-type Category = 'IT' | 'business' | 'Ecommerce' | 'Emojis';
+export type Category = 'IT' | 'business' | 'Ecommerce' | 'Emojis';
 
 export interface IconInfo {
   name: string;
