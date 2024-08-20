@@ -272,6 +272,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'smalltext':
     case 'paragraph':
     case 'listbox':
+    case 'image':
       return true;
     default:
       return false;
@@ -353,6 +354,9 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'paragraph':
     case 'listbox':
       return 'textarea';
+      break;
+    case 'image':
+      return 'imageupload';
       break;
   }
   return result;

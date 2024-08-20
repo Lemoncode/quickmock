@@ -24,6 +24,8 @@ export const renderImage = (
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      isEditable={shape.allowsInlineEdition}
+      editType={shape.editType}
       otherProps={shape.otherProps}
     />
   );
