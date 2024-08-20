@@ -88,14 +88,14 @@ export const CanvasPod = () => {
       updateShapePosition(id, { x, y });
     };
 
-  const { copyShape, pasteShapeFromClipboard } = useClipboard();
+  const { copyShapeToClipboard, pasteShapeFromClipboard } = useClipboard();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const isCtrlOrCmdPressed = e.ctrlKey || e.metaKey;
 
       if (isCtrlOrCmdPressed && e.key === 'c') {
-        copyShape();
+        copyShapeToClipboard();
       }
       if (isCtrlOrCmdPressed && e.key === 'v') {
         pasteShapeFromClipboard();

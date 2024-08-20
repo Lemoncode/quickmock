@@ -1,4 +1,6 @@
 import { DeleteButton } from './components/delete-button';
+import { CopyButton } from './components/copy-paste-button';
+import { PasteButton } from './components/paste-button';
 import {
   ZoomInButton,
   ZoomOutButton,
@@ -35,6 +37,9 @@ export const ToolbarPod: React.FC = () => {
         </li>
         <li>
           <RedoButton />
+        </li>
+        <li>
+          <CopyButton />
         </li>
         <li>
           <DeleteButton />

@@ -13,7 +13,7 @@ export const useClipboard = () => {
   const clipboardShapeRef = useRef<ShapeModel | null>(null);
   const copyCount = useRef(1);
 
-  const copyShape = () => {
+  const copyShapeToClipboard = () => {
     const selectedShape = findShapeById(selectionInfo.selectedShapeId, shapes);
     if (selectedShape) {
       clipboardShapeRef.current = cloneShape(selectedShape);
@@ -31,5 +31,5 @@ export const useClipboard = () => {
     }
   };
 
-  return { copyShape, pasteShapeFromClipboard };
+  return { copyShapeToClipboard, pasteShapeFromClipboard };
 };
