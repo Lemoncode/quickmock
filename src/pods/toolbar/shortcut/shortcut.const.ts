@@ -14,13 +14,13 @@ export const SHORTCUTS: Shortcut = {
   copy: {
     description: 'Copy',
     id: 'copy-button-shortcut',
-    targetKey: ['Ctrl', 'C'],
+    targetKey: ['c'],
     targetKeyLabel: 'Ctrl + C',
   },
   paste: {
     description: 'Paste',
     id: 'paste-button-shortcut',
-    targetKey: ['Ctrl', 'V'],
+    targetKey: ['v'],
     targetKeyLabel: 'Ctrl + V',
   },
 };

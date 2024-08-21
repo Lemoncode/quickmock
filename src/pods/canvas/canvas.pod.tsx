@@ -91,27 +91,6 @@ export const CanvasPod = () => {
       updateShapePosition(id, { x, y });
     };
 
-  /*
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const isCtrlOrCmdPressed = e.ctrlKey || e.metaKey;
-
-      if (isCtrlOrCmdPressed && e.key === 'c' && canCopy) {
-        copyShapeToClipboard();
-      }
-      if (isCtrlOrCmdPressed && e.key === 'v' && canPaste) {
-        pasteShapeFromClipboard();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [selectedShapeId]);
-*/
-
   {
     /* TODO: add other animation for isDraggerOver */
   }
