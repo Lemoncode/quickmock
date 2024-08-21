@@ -1,91 +1,17 @@
 import { SaveIcon } from '@/common/components/icons/save-icon.component';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { ToolbarButton } from '../toolbar-button';
-import { useCanvasContext } from '@/core/providers';
-import { saveFileModern } from '@/common/export';
-import { ShapeModel } from '@/core/model';
-
-interface Page {
-  id: string;
-  name: string;
-  shape: ShapeModel[];
-}
-interface QuickMockFileContract {
-  version: string;
-  pages: Page[];
-}
-/*interface Document {
-  pages: Page[];
-}*/
-
-const DEFAULT_FILE_NAME = 'mymockui';
-const DEFAULT_FILE_EXTENSION = 'qm';
-const DEFAULT_EXTENSION_DESCRIPTION = 'quick mock'
+import { useLocalDisk } from '@/core/local-disk';
 
 export const SaveButton: React.FC = () => {
-
-  const { shapes } = useCanvasContext();
-
-  
-  const serializeShapes = (): string => {
-    const quickMockDocument = mapFromShapesArrayToQuickMockDocument(shapes)
-    return JSON.stringify(quickMockDocument);
-  };
-
-  const OldBrowsersDownloadFile = (filename: string, content: string) => {
-
-    const blob = new Blob([content], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${filename}.qm`;
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-  const newBrowsersDownloadFile = async (filename: string, content: string) => {
-
-    const savedFilename = await saveFileModern(
-      {
-        filename,
-        extension: DEFAULT_FILE_EXTENSION,
-        description: DEFAULT_EXTENSION_DESCRIPTION,
-      },
-      content
-    );
-    console.log('saveFilename', savedFilename);
-  }
-
-  const mapFromShapesArrayToQuickMockDocument = (shapes: ShapeModel[]): QuickMockFileContract => {
-    return {
-      version: '0.1',
-      pages:[
-        {
-          id:'1',
-          name: 'Page 1',
-          shape : shapes
-        }
-      ]
-    }
-  }
-  const handleClick = () => {
-    const filename = DEFAULT_FILE_NAME;
-    const content = serializeShapes();
-    if (window.showDirectoryPicker === undefined) {
-      OldBrowsersDownloadFile(filename, content);
-    } else {
-      newBrowsersDownloadFile(filename, content);
-    }
-  };
-
+  const { handleSave } = useLocalDisk();
 
   return (
     <ToolbarButton
-      onClick={handleClick}
+      onClick={handleSave}
       className={classes.button}
       icon={<SaveIcon />}
       label="Save"
     />
   );
-
 };
-
