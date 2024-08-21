@@ -136,6 +136,10 @@ export const renderShapeComponent = (
       return renderBarChart(shape, shapeRenderedProps);
     case 'image':
       return renderImage(shape, shapeRenderedProps);
+    case 'horizontalScrollBar':
+      return renderHorizontalScrollBar(shape, shapeRenderedProps);
+    case 'verticalScrollBar':
+      return renderVerticalScrollBar(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

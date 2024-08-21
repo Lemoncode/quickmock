@@ -258,6 +258,16 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getImageShapeSizeRestrictions().defaultWidth,
         height: getImageShapeSizeRestrictions().defaultHeight,
       };
+    case 'horizontalScrollBar':
+      return {
+        width: getHorizontalScrollBarShapeSizeRestrictions().defaultWidth,
+        height: getHorizontalScrollBarShapeSizeRestrictions().defaultHeight,
+      };
+    case 'verticalScrollBar':
+      return {
+        width: getVerticalScrollBarShapeSizeRestrictions().defaultWidth,
+        height: getVerticalScrollBarShapeSizeRestrictions().defaultHeight,
+      };
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
