@@ -6,3 +6,5 @@ export * from './send-to-back-icon.component';
 export * from './linkedin-icon.component';
 export * from './x-icon.component';
 export * from './quickmock-logo.component';
+export * from './copy-icon.component';
+export * from './paste-icon.component';
