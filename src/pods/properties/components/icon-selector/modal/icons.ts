@@ -604,15 +604,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Arrow down',
     filename: 'arrowdown.svg',
-    searchTerms: [
-      'arrow down',
-      'down',
-      'move down',
-      'go down',
-      'download',
-      'decrease',
-      'reduce',
-    ],
+    searchTerms: ['arrow down', 'down', 'move down', 'go down'],
     categories: ['IT'],
   },
   {
@@ -640,6 +632,42 @@ export const iconCollection: IconInfo[] = [
       'forward',
       'next',
     ],
+    categories: ['IT'],
+  },
+  {
+    name: 'Arrow up',
+    filename: 'arrowup.svg',
+    searchTerms: ['arrow up', 'up', 'move up', 'go up'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Battery full',
+    filename: 'batteryfull.svg',
+    searchTerms: [
+      'battery full',
+      'full',
+      'charged',
+      'power complete',
+      'energy',
+    ],
+    categories: ['IT'],
+  },
+  {
+    name: 'Battery mid',
+    filename: 'batterymid.svg',
+    searchTerms: ['battery mid', 'mid', 'half', 'power half', 'energy'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Battery low',
+    filename: 'batterylow.svg',
+    searchTerms: ['battery low', 'low', 'power low', 'energy'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Arrows out',
+    filename: 'arrowsout.svg',
+    searchTerms: ['arrows out', 'directions', 'spread', 'expand'],
     categories: ['IT'],
   },
 ];
