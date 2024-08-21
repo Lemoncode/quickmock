@@ -16,6 +16,7 @@ import {
   renderRadioButton,
   renderIcon,
   renderHorizontalScrollBar,
+  renderVerticalScrollBar,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -140,6 +141,8 @@ export const renderShapeComponent = (
       return renderTable(shape, shapeRenderedProps);
     case 'horizontalScrollBar':
       return renderHorizontalScrollBar(shape, shapeRenderedProps);
+    case 'verticalScrollBar':
+      return renderVerticalScrollBar(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

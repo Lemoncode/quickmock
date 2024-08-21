@@ -22,6 +22,7 @@ import {
   getCheckboxShapeSizeRestrictions,
   getIconShapeSizeRestrictions,
   getHorizontalScrollBarShapeSizeRestrictions,
+  getVerticalScrollBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -267,6 +268,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getHorizontalScrollBarShapeSizeRestrictions().defaultWidth,
         height: getHorizontalScrollBarShapeSizeRestrictions().defaultHeight,
+      };
+    case 'verticalScrollBar':
+      return {
+        width: getVerticalScrollBarShapeSizeRestrictions().defaultWidth,
+        height: getVerticalScrollBarShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(
