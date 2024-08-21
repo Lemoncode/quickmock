@@ -3,7 +3,20 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { ToolbarButton } from '../toolbar-button';
 import { useCanvasContext } from '@/core/providers';
 import { saveFileModern } from '@/common/export';
+import { ShapeModel } from '@/core/model';
 
+interface Page {
+  id: string;
+  name: string;
+  shape: ShapeModel[];
+}
+interface QuickMockFileContract {
+  version: string;
+  pages: Page[];
+}
+/*interface Document {
+  pages: Page[];
+}*/
 
 const DEFAULT_FILE_NAME = 'mymockui';
 const DEFAULT_FILE_EXTENSION = 'qm';
@@ -13,9 +26,10 @@ export const SaveButton: React.FC = () => {
 
   const { shapes } = useCanvasContext();
 
-
+  
   const serializeShapes = (): string => {
-    return JSON.stringify(shapes);
+    const quickMockDocument = mapFromShapesArrayToQuickMockDocument(shapes)
+    return JSON.stringify(quickMockDocument);
   };
 
   const OldBrowsersDownloadFile = (filename: string, content: string) => {
@@ -39,6 +53,19 @@ export const SaveButton: React.FC = () => {
       content
     );
     console.log('saveFilename', savedFilename);
+  }
+
+  const mapFromShapesArrayToQuickMockDocument = (shapes: ShapeModel[]): QuickMockFileContract => {
+    return {
+      version: '0.1',
+      pages:[
+        {
+          id:'1',
+          name: 'Page 1',
+          shape : shapes
+        }
+      ]
+    }
   }
   const handleClick = () => {
     const filename = DEFAULT_FILE_NAME;
