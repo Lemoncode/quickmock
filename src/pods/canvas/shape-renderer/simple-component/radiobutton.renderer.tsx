@@ -27,6 +27,7 @@ export const renderRadioButton = (
       onTransformEnd={handleTransform}
       isEditable={shape.allowsInlineEdition}
       text={shape.text}
+      otherProps={shape.otherProps}
     />
   );
 };

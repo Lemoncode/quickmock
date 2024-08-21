@@ -18,7 +18,10 @@ import {
   getDatepickerInputShapeSizeRestrictions,
   getButtonShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
+  getRadioButtonShapeSizeRestrictions,
+  getCheckboxShapeSizeRestrictions,
   getIconShapeSizeRestrictions,
+  getHorizontalScrollBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -230,6 +233,16 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getLargeArrowShapeSizeRestrictions().defaultWidth,
         height: getLargeArrowShapeSizeRestrictions().defaultHeight,
       };
+    case 'radiobutton':
+      return {
+        width: getRadioButtonShapeSizeRestrictions().defaultWidth,
+        height: getRadioButtonShapeSizeRestrictions().defaultHeight,
+      };
+    case 'checkbox':
+      return {
+        width: getCheckboxShapeSizeRestrictions().defaultWidth,
+        height: getCheckboxShapeSizeRestrictions().defaultHeight,
+      };
     case 'icon':
       return {
         width: getIconShapeSizeRestrictions().defaultWidth,
@@ -249,6 +262,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getTableSizeRestrictions().defaultWidth,
         height: getTableSizeRestrictions().defaultHeight,
+      };
+    case 'horizontalScrollBar':
+      return {
+        width: getHorizontalScrollBarShapeSizeRestrictions().defaultWidth,
+        height: getHorizontalScrollBarShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(
@@ -407,6 +425,13 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#d3d3d3',
         textColor: '#000000',
       };
+    case 'toggleswitch':
+    case 'radiobutton':
+    case 'checkbox':
+      return {
+        checked: true,
+      };
+
     case 'icon':
       return {
         icon: {
