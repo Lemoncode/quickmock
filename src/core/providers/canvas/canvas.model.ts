@@ -38,7 +38,6 @@ export interface CanvasContextModel {
   scale: number;
   clearCanvas: () => void;
   setScale: React.Dispatch<React.SetStateAction<number>>;
-  pasteShape: (shape: ShapeModel) => void;
   addNewShape: (
     type: ShapeType,
     x: number,
@@ -54,6 +53,10 @@ export interface CanvasContextModel {
   canRedo: () => boolean;
   doUndo: () => void;
   doRedo: () => void;
+  canCopy: boolean;
+  canPaste: boolean;
+  copyShapeToClipboard: () => void;
+  pasteShapeFromClipboard: () => void;
 }
 
 export interface DocumentModel {

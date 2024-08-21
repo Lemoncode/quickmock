@@ -8,7 +8,6 @@ import { useDropShape } from './use-drop-shape.hook';
 import { useMonitorShape } from './use-monitor-shape.hook';
 import classes from './canvas.pod.module.css';
 import { EditableComponent } from '@/common/components/inline-edit';
-import { useClipboard } from './use-clipboard.hook';
 import { useSnapIn } from './use-snapin.hook';
 import { ShapeType } from '@/core/model';
 import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
@@ -25,6 +24,10 @@ export const CanvasPod = () => {
     updateShapeSizeAndPosition,
     updateShapePosition,
     stageRef,
+    canCopy,
+    canPaste,
+    copyShapeToClipboard,
+    pasteShapeFromClipboard,
   } = useCanvasContext();
 
   const {
@@ -88,16 +91,15 @@ export const CanvasPod = () => {
       updateShapePosition(id, { x, y });
     };
 
-  const { copyShapeToClipboard, pasteShapeFromClipboard } = useClipboard();
-
+  /*
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const isCtrlOrCmdPressed = e.ctrlKey || e.metaKey;
 
-      if (isCtrlOrCmdPressed && e.key === 'c') {
+      if (isCtrlOrCmdPressed && e.key === 'c' && canCopy) {
         copyShapeToClipboard();
       }
-      if (isCtrlOrCmdPressed && e.key === 'v') {
+      if (isCtrlOrCmdPressed && e.key === 'v' && canPaste) {
         pasteShapeFromClipboard();
       }
     };
@@ -108,6 +110,7 @@ export const CanvasPod = () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [selectedShapeId]);
+*/
 
   {
     /* TODO: add other animation for isDraggerOver */

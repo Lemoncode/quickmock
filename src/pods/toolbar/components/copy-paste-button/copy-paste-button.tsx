@@ -3,29 +3,22 @@ import { ToolbarButton } from '../toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { useCanvasContext } from '@/core/providers';
 import { SHORTCUTS } from '../../shortcut/shortcut.const';
-import { useClipboard } from '@/pods/canvas/use-clipboard.hook';
-import { useState, useEffect } from 'react';
 
 export const CopyButton = () => {
-  const { selectionInfo } = useCanvasContext();
-  const { copyShapeToClipboard, pasteShapeFromClipboard, isClipboardFilled } =
-    useClipboard();
-  const [clipboardFilled, setClipboardFilled] = useState(false);
+  const { canCopy, canPaste, copyShapeToClipboard, pasteShapeFromClipboard } =
+    useCanvasContext();
 
   const handleCopyClick = () => {
-    if (selectionInfo.selectedShapeId) {
+    if (canCopy) {
       copyShapeToClipboard();
-      setClipboardFilled(true);
     }
   };
 
   const handlePasteClick = () => {
-    pasteShapeFromClipboard();
+    if (canPaste) {
+      pasteShapeFromClipboard();
+    }
   };
-
-  useEffect(() => {
-    setClipboardFilled(isClipboardFilled());
-  }, [isClipboardFilled]);
 
   return (
     <div>
@@ -36,7 +29,7 @@ export const CopyButton = () => {
             label="Copy"
             onClick={handleCopyClick}
             className={classes.button}
-            disabled={!selectionInfo.selectedShapeId}
+            disabled={!canCopy}
             shortcutOptions={SHORTCUTS.copy}
           />
         </li>
@@ -46,7 +39,7 @@ export const CopyButton = () => {
             label="Paste"
             onClick={handlePasteClick}
             className={classes.button}
-            disabled={!clipboardFilled} // Disable the button if the clipboard is not filled
+            disabled={!canPaste} // Disable the button if the clipboard is not filled
             shortcutOptions={SHORTCUTS.paste}
           />
         </li>
