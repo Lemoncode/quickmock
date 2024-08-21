@@ -1,8 +1,13 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Text, Line } from 'react-konva';
-import { ShapeProps } from '../front-components/shape.model';
+import { ShapeProps } from '../../front-components/shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import {
+  extractDataRows,
+  extractHeaderRow,
+  parseCSVRowsIntoArray,
+} from './table.utils';
 
 const tableSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 1,
@@ -21,15 +26,13 @@ export const Table = forwardRef<any, ShapeProps>(
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(tableSizeRestrictions, width, height);
 
-    const rows: string[] = text.trim().split('\n');
-    const headerRow = rows[0].split(',').map(header => header.trim());
-    const dataRows = rows
-      .slice(1, rows.length)
-      .map(row => row.split(',').map(cell => cell.trim()));
+    const rows = parseCSVRowsIntoArray(text);
+    const headerRow = extractHeaderRow(rows[0]);
+    const dataRows = extractDataRows(rows);
 
     const columnCount = headerRow.length;
     const cellWidth = restrictedWidth / columnCount;
-    const cellHeight = restrictedHeight / (dataRows.length + 1); // Ajustar la altura de las celdas
+    const cellHeight = restrictedHeight / (dataRows.length + 1);
 
     return (
       <Group
@@ -41,17 +44,6 @@ export const Table = forwardRef<any, ShapeProps>(
         {...shapeProps}
         onClick={() => onSelected(id, 'table')}
       >
-        {/* Dibujar el borde de la tabla */}
-        <Rect
-          x={0}
-          y={0}
-          width={restrictedWidth}
-          height={restrictedHeight}
-          stroke="black"
-          strokeWidth={2}
-          fill="white"
-        />
-
         {/* Dibujar celdas de encabezado */}
         {headerRow.map((header, colIdx) => (
           <Group key={`header-${colIdx}`}>
@@ -91,6 +83,7 @@ export const Table = forwardRef<any, ShapeProps>(
                 height={cellHeight}
                 stroke="black"
                 strokeWidth={1}
+                fill="white"
               />
               <Text
                 x={colIdx * cellWidth + 5}
