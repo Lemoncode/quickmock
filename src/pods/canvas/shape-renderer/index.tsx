@@ -31,6 +31,7 @@ import {
   renderBreadcrumb,
   renderBarChart,
   renderLineChart,
+  renderTable,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -135,6 +136,8 @@ export const renderShapeComponent = (
       return renderBarChart(shape, shapeRenderedProps);
     case 'image':
       return renderImage(shape, shapeRenderedProps);
+    case 'table':
+      return renderTable(shape, shapeRenderedProps);
     case 'horizontalScrollBar':
       return renderHorizontalScrollBar(shape, shapeRenderedProps);
     default:

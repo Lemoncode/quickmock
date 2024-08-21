@@ -6,3 +6,4 @@ export * from './map-chart.renderer';
 export * from './breadcrumb.renderer';
 export * from './bar-chart.renderer';
 export * from './line-chart.renderer';
+export * from './table.renderer';

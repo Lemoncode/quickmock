@@ -47,8 +47,9 @@ export type ShapeType =
   | 'largeArrow'
   | 'bar'
   | 'triangle'
-  | 'horizontalScrollBar'
-  | 'image';
+  | 'image'
+  | 'table'
+  | 'horizontalScrollBar';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -90,6 +91,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   icon: 'Icon',
   bar: 'Bar Chart',
   image: 'Image',
+  table: 'Table',
   horizontalScrollBar: 'Horizontal Scroll Bar',
 };
 
