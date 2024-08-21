@@ -82,13 +82,22 @@ export const CanvasProvider: React.FC<Props> = props => {
   const updateShapeSizeAndPosition = (
     id: string,
     position: Coord,
-    size: Size
+    size: Size,
+    skipHistory: boolean = false
   ) => {
-    setDocument(({ shapes }) => ({
-      shapes: shapes.map(shape =>
-        shape.id === id ? { ...shape, ...position, ...size } : shape
-      ),
-    }));
+    if (skipHistory) {
+      setShapesSkipHistory(({ shapes }) => ({
+        shapes: shapes.map(shape =>
+          shape.id === id ? { ...shape, ...position, ...size } : shape
+        ),
+      }));
+    } else {
+      setDocument(({ shapes }) => ({
+        shapes: shapes.map(shape =>
+          shape.id === id ? { ...shape, ...position, ...size } : shape
+        ),
+      }));
+    }
   };
 
   const updateShapePosition = (id: string, { x, y }: Coord) => {

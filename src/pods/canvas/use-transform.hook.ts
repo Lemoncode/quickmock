@@ -4,7 +4,12 @@ import { useEffect } from 'react';
 import { useCanvasContext } from '@/core/providers';
 
 export const useTransform = (
-  updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void
+  updateShapeSizeAndPosition: (
+    id: string,
+    position: Coord,
+    size: Size,
+    skipHistory: boolean
+  ) => void
 ) => {
   const { selectedShapeId, selectedShapeRef, transformerRef } =
     useCanvasContext().selectionInfo;
@@ -19,7 +24,7 @@ export const useTransform = (
     }
   }, [selectedShapeId]);
 
-  const handleTransform = () => {
+  const handleTransform = (skipHistory: boolean = false) => {
     const node = selectedShapeRef.current;
     if (!node) {
       return;
@@ -32,10 +37,15 @@ export const useTransform = (
     const newWidth = node.width() * scaleX;
     const newHeight = node.height() * scaleY;
 
-    updateShapeSizeAndPosition(selectedShapeId, position, {
-      width: newWidth,
-      height: newHeight,
-    });
+    updateShapeSizeAndPosition(
+      selectedShapeId,
+      position,
+      {
+        width: newWidth,
+        height: newHeight,
+      },
+      skipHistory
+    );
 
     node.scaleX(1);
     node.scaleY(1);

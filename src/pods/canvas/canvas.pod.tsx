@@ -88,6 +88,11 @@ export const CanvasPod = () => {
       updateShapePosition(id, { x, y });
     };
 
+  //ToDo: Raquel Review this. It's called not only with resize
+  const handleResizeEnd = () => {
+    handleTransform();
+  };
+
   const { copyShape, pasteShapeFromClipboard } = useClipboard();
 
   useEffect(() => {
@@ -126,6 +131,7 @@ export const CanvasPod = () => {
         height={3000}
         onMouseDown={handleClearSelection}
         onTouchStart={handleClearSelection}
+        onMouseUp={handleResizeEnd}
         ref={stageRef}
         scale={{ x: scale, y: scale }}
       >
@@ -156,6 +162,7 @@ export const CanvasPod = () => {
                     shapeRefs,
                     handleDragEnd,
                     handleTransform,
+                    handleResizeEnd,
                   })}
                 </EditableComponent>
               );
