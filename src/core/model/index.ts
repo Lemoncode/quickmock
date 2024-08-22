@@ -47,7 +47,9 @@ export type ShapeType =
   | 'largeArrow'
   | 'bar'
   | 'triangle'
+  | 'horizontalScrollBar'
   | 'image'
+  | 'calendar'
   | 'image'
   | 'table'
   | 'verticalScrollBar'
@@ -95,6 +97,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   image: 'Image',
   table: 'Table',
   horizontalScrollBar: 'Horizontal Scroll Bar',
+  calendar: 'Calendar',
   verticalScrollBar: 'Vertical Scroll Bar',
 };
 
