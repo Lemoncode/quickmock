@@ -670,4 +670,34 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['arrows out', 'directions', 'spread', 'expand'],
     categories: ['IT'],
   },
+  {
+    name: 'Volume High',
+    filename: 'volumehigh.svg',
+    searchTerms: ['volume high', 'high', 'loud', 'sound', 'audio'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Volume',
+    filename: 'volume.svg',
+    searchTerms: ['volume', 'sound', 'audio'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Volume Low',
+    filename: 'volumelow.svg',
+    searchTerms: ['volume low', 'low', 'quiet', 'sound', 'audio'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Volume Mute',
+    filename: 'volumemuted.svg',
+    searchTerms: ['volume muted', 'mute', 'silent', 'sound', 'audio', 'off'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Bell',
+    filename: 'bell.svg',
+    searchTerms: ['bell', 'ring', 'sound', 'campane'],
+    categories: ['IT'],
+  },
 ];
