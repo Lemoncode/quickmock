@@ -1,4 +1,5 @@
 import { ShapeModel } from '../model';
+import { DocumentModel } from '../providers/canvas/canvas.model';
 import { QuickMockFileContract, Page } from './local-disk.model';
 
 export const mapFromShapesArrayToQuickMockFileDocument = (
@@ -17,5 +18,16 @@ export const mapFromShapesArrayToQuickMockFileDocument = (
   return {
     version: '0.1',
     pages,
+  };
+};
+
+export const mapFromQuickMockFileDocumentToAplicationDocument = (
+  fileDocument: QuickMockFileContract
+): DocumentModel => {
+  const allShapes: ShapeModel[] = fileDocument.pages.reduce((acc, page) => {
+    return [...acc, ...page.shapes];
+  }, [] as ShapeModel[]);
+  return {
+    shapes: allShapes,
   };
 };

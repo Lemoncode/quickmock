@@ -1,14 +1,18 @@
 import { saveFileModern } from '@/common/export';
 import { useCanvasContext } from '../providers';
-import { mapFromShapesArrayToQuickMockFileDocument } from './shapes-to-document.mapper';
+import {
+  mapFromShapesArrayToQuickMockFileDocument,
+  mapFromQuickMockFileDocumentToAplicationDocument,
+} from './shapes-to-document.mapper';
 import { fileInput, OnFileSelectedCallback } from '@/common/file-input';
+import { QuickMockFileContract } from './local-disk.model';
 
 const DEFAULT_FILE_NAME = 'mymockui';
 const DEFAULT_FILE_EXTENSION = 'qm';
 const DEFAULT_EXTENSION_DESCRIPTION = 'quick mock';
 
 export const useLocalDisk = () => {
-  const { shapes } = useCanvasContext();
+  const { shapes, loadDocument } = useCanvasContext();
 
   const serializeShapes = (): string => {
     const quickMockDocument = mapFromShapesArrayToQuickMockFileDocument(shapes);
@@ -50,8 +54,10 @@ export const useLocalDisk = () => {
     const reader = new FileReader();
     reader.onload = () => {
       const content = reader.result as string;
-      const parseDAta = JSON.parse(content);
-      console.log(parseDAta);
+      const parseData: QuickMockFileContract = JSON.parse(content);
+      const appDocument =
+        mapFromQuickMockFileDocumentToAplicationDocument(parseData);
+      loadDocument(appDocument);
     };
     reader.readAsText(file);
   };

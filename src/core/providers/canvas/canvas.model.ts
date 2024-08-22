@@ -57,6 +57,7 @@ export interface CanvasContextModel {
   canPaste: boolean;
   copyShapeToClipboard: () => void;
   pasteShapeFromClipboard: () => void;
+  loadDocument: (document: DocumentModel) => void;
 }
 
 export interface DocumentModel {

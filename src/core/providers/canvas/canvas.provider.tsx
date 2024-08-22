@@ -125,6 +125,10 @@ export const CanvasProvider: React.FC<Props> = props => {
     return canUndoLogic();
   };
 
+  const loadDocument = (document: DocumentModel) => {
+    setDocument(document);
+  };
+
   return (
     <CanvasContext.Provider
       value={{
@@ -146,6 +150,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         pasteShapeFromClipboard,
         stageRef,
         deleteSelectedShape,
+        loadDocument,
       }}
     >
       {children}
