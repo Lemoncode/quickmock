@@ -784,4 +784,34 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['cloud', 'day', 'partly', 'cloudy', 'weather'],
     categories: ['IT'],
   },
+  {
+    name: 'Rain',
+    filename: 'rain.svg',
+    searchTerms: ['rain', 'weather', 'wet', 'storm', 'rainy'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Rainbow',
+    filename: 'rainbow.svg',
+    searchTerms: ['rainbow', 'weather', 'colors', 'multicolored', 'harmonious'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Umbrella',
+    filename: 'umbrella.svg',
+    searchTerms: ['umbrella', 'rain', 'protection', 'cover'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Sunglasses',
+    filename: 'sunglass.svg',
+    searchTerms: ['sunglass', 'glasses', 'sun', 'protection'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Bus',
+    filename: 'bus.svg',
+    searchTerms: ['bus', 'public transport', 'transport', 'travel', 'school'],
+    categories: ['IT'],
+  },
 ];
