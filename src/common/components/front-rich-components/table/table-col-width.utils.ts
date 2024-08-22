@@ -26,6 +26,76 @@ const calculateColumnsWithZeroWidth = (widthRow: string[]): number => {
   return widthRow.filter(width => width === '0').length;
 };
 
+export const generateCellsWidthsCasePercentagesSumTo100OrMore = (
+  widthRow: string[],
+  columnCount: number,
+  restrictedWidth: number
+) => {
+  let cellWidths: number[] = [];
+
+  for (let i = 0; i < columnCount; i++) {
+    cellWidths.push((restrictedWidth * parseInt(widthRow[i])) / 100);
+  }
+
+  return cellWidths;
+};
+
+export const generateCellsWidthsCasePercentagesSumLessThan100AndNoBlankWidthColumns =
+  (
+    widthRow: string[],
+    columnCount: number,
+    restrictedWidth: number,
+    remainingWidth: number
+  ): number[] => {
+    let cellWidths: number[] = [];
+
+    const remainWidthCol =
+      (remainingWidth * restrictedWidth) / 100 / columnCount; // Divide el ancho restante entre el número de columnas
+    for (let i = 0; i < columnCount; i++) {
+      cellWidths.push(
+        (restrictedWidth * parseInt(widthRow[i])) / 100 + remainWidthCol
+      );
+    }
+
+    return cellWidths;
+  };
+
+export const generateCellsWidthsCasePercentagesSumLessThan100AndBlankWidthColumns =
+  (
+    widthRow: string[],
+    columnCount: number,
+    restrictedWidth: number,
+    remainingWidth: number
+  ): number[] => {
+    let cellWidths: number[] = [];
+
+    for (let i = 0; i < columnCount; i++) {
+      if (widthRow[i] === '0') {
+        cellWidths.push(
+          (restrictedWidth * remainingWidth) /
+            calculateColumnsWithZeroWidth(widthRow) /
+            100
+        );
+      } else {
+        cellWidths.push((restrictedWidth * parseInt(widthRow[i])) / 100);
+      }
+    }
+
+    return cellWidths;
+  };
+
+export const generateCellsWidthsCaseNoWidthRowPresent = (
+  columnCount: number,
+  restrictedWidth: number
+) => {
+  let cellWidths: number[] = [];
+  for (let i = 0; i < columnCount; i++) {
+    cellWidths.push(restrictedWidth / columnCount);
+  }
+
+  return cellWidths;
+};
+
 export const calculateCellWidths = (
   restrictedWidth: number,
   columnCount: number,
@@ -36,43 +106,40 @@ export const calculateCellWidths = (
     const remainingWidth = 100 - calculateTotalWidth(widthRow);
     // The percentages sum to 100% or more
     if (remainingWidth <= 0) {
-      for (let i = 0; i < columnCount; i++) {
-        cellWidths.push((restrictedWidth * parseInt(widthRow[i])) / 100);
-      }
+      return generateCellsWidthsCasePercentagesSumTo100OrMore(
+        widthRow,
+        columnCount,
+        restrictedWidth
+      );
     }
     // The percentages sum to less than 100%
     else if (remainingWidth > 0) {
       // No columns have a width of 0; the remaining width is divided among all columns
       if (calculateColumnsWithZeroWidth(widthRow) === 0) {
-        const remainWidthCol =
-          (remainingWidth * restrictedWidth) / 100 / columnCount; // Divide el ancho restante entre el número de columnas
-        for (let i = 0; i < columnCount; i++) {
-          cellWidths.push(
-            (restrictedWidth * parseInt(widthRow[i])) / 100 + remainWidthCol
-          );
-        }
+        return generateCellsWidthsCasePercentagesSumLessThan100AndNoBlankWidthColumns(
+          widthRow,
+          columnCount,
+          restrictedWidth,
+          remainingWidth
+        );
       }
       // There are columns with a width of 0; the remaining width is divided among those columns
       else {
-        for (let i = 0; i < columnCount; i++) {
-          if (widthRow[i] === '0') {
-            cellWidths.push(
-              (restrictedWidth * remainingWidth) /
-                calculateColumnsWithZeroWidth(widthRow) /
-                100
-            );
-          } else {
-            cellWidths.push((restrictedWidth * parseInt(widthRow[i])) / 100);
-          }
-        }
+        return generateCellsWidthsCasePercentagesSumLessThan100AndBlankWidthColumns(
+          widthRow,
+          columnCount,
+          restrictedWidth,
+          remainingWidth
+        );
       }
     }
   }
   // No width row present
   else {
-    for (let i = 0; i < columnCount; i++) {
-      cellWidths.push(restrictedWidth / columnCount);
-    }
+    return generateCellsWidthsCaseNoWidthRowPresent(
+      columnCount,
+      restrictedWidth
+    );
   }
   return cellWidths;
 };
