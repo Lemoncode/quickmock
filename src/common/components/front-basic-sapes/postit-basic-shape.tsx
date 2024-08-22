@@ -44,8 +44,13 @@ export const PostItShape = forwardRef<any, ShapeProps>(
     );
 
     const fill = useMemo(
-      () => otherProps?.backgroundColor ?? 'white',
+      () => otherProps?.backgroundColor ?? '#FFFF99',
       [otherProps?.backgroundColor]
+    );
+
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'black',
+      [otherProps?.textColor]
     );
 
     return (
@@ -88,7 +93,7 @@ export const PostItShape = forwardRef<any, ShapeProps>(
           height={restrictedHeight - tapeHeight - 10}
           text={text}
           fontSize={18}
-          fill="black"
+          fill={textColor}
           wrap="wrap"
           ellipsis={true}
         />

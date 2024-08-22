@@ -28,6 +28,7 @@ export const renderHorizontalMenu = (
       editType={shape.editType}
       isEditable={true}
       text={shape.text}
+      otherProps={shape.otherProps}
     />
   );
 };

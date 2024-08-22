@@ -34,6 +34,11 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>(
       [otherProps?.backgroundColor]
     );
 
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'white',
+      [otherProps?.textColor]
+    );
+
     return (
       <Group
         x={x}
@@ -70,7 +75,7 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>(
           text={text}
           fontSize={20}
           fontFamily="Arial"
-          fill="black"
+          fill={textColor}
           width={width - 50}
           ellipsis={true}
           wrap="none"

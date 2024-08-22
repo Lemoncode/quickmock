@@ -33,6 +33,11 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>(
       [otherProps?.checked]
     );
 
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'black',
+      [otherProps?.textColor]
+    );
+
     const radius = restrictedHeight / 2;
 
     return (
@@ -69,7 +74,7 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>(
           text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
-          fill="none"
+          fill={textColor}
           verticalAllign="middle"
         />
       </Group>

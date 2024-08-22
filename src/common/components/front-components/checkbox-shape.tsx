@@ -32,6 +32,10 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
       () => otherProps?.checked ?? true,
       [otherProps?.checked]
     );
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'black',
+      [otherProps?.textColor]
+    );
 
     return (
       <Group
@@ -79,7 +83,7 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
           text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
-          fill="black"
+          fill={textColor}
           align="left"
           verticalAlign="middle"
           ellipsis={true}
