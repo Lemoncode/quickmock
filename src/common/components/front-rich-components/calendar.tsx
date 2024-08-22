@@ -80,7 +80,7 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
         <Rect
           x={0}
           y={0}
-          width={width}
+          width={restrictedWidth}
           height={headerHeight}
           cornerRadius={10}
           stroke="black"
@@ -106,17 +106,21 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
           cursor="pointer"
         />
 
-        {/* Mes y Año */}
+        {/* Year and month */}
+        {/*          x={width / 2 - 50}*/}
         <Text
-          x={width / 2 - 50}
+          x={0}
           y={headerHeight / 3}
           text={`${month} ${year}`}
+          width={restrictedWidth}
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
           fill="black"
+          align="center"
+          ellipsis={true}
         />
 
-        {/* Flecha derecha */}
+        {/* Right arrow */}
         <Line
           points={[
             restrictedWidth - margin - 30,
@@ -134,11 +138,11 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
           cursor="pointer"
         />
 
-        {/* Tabla del calendario */}
+        {/* Calendar table */}
         <Rect
           x={0}
           y={headerHeight + 10}
-          width={width}
+          width={restrictedWidth}
           height={height - headerHeight + 20}
           cornerRadius={10}
           stroke="black"
@@ -146,7 +150,7 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
           fill="white"
         />
 
-        {/* Días de la semana */}
+        {/* Week days */}
         {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
           <Text
             key={i}
@@ -159,7 +163,7 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
           />
         ))}
 
-        {/* Días del mes */}
+        {/* Month days */}
         {days.map((week: any[], rowIndex: number) =>
           week.map((day, colIndex) => (
             <Text
