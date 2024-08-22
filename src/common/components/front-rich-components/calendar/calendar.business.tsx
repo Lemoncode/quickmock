@@ -7,7 +7,7 @@ export const calculateNextMonth = (date: Date) =>
   new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
 export const getCurrentMonthDays = (date: Date) => {
-  const month = date.toLocaleString('default', { month: 'long' });
+  const month = date.toLocaleString('en', { month: 'long' });
   const year = date.getFullYear();
   const daysInMonth = new Date(year, date.getMonth() + 1, 0).getDate();
   const startDay = new Date(year, date.getMonth(), 1).getDay();
