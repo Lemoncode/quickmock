@@ -120,7 +120,7 @@ export const Table = forwardRef<any, ShapeProps>(
         })}
 
         {/* Dibujar líneas de la cuadrícula verticales */}
-        {cellWidths.reduce((lines: JSX.Element[], width, colIdx) => {
+        {cellWidths.reduce((lines: JSX.Element[], _width, colIdx) => {
           const accumulatedWidth = cellWidths
             .slice(0, colIdx)
             .reduce((a, b) => a + b, 0);
