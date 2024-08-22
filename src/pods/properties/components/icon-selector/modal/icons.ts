@@ -700,4 +700,42 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['bell', 'ring', 'sound', 'campane'],
     categories: ['IT'],
   },
+  {
+    name: 'Bell Off',
+    filename: 'bellmuted.svg',
+    searchTerms: ['bell', 'mute', 'silent', 'sound', 'off'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Bell snooze',
+    filename: 'bellsnooze.svg',
+    searchTerms: ['bell', 'snooze', 'sleep', 'pause', 'nap'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Search',
+    filename: 'search.svg',
+    searchTerms: ['search', 'find', 'lookup', 'query', 'magnifier'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Search Document',
+    filename: 'searchdocument.svg',
+    searchTerms: ['search', 'document', 'find', 'lookup'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Dollar',
+    filename: 'dollar.svg',
+    searchTerms: [
+      'dollar',
+      'money',
+      'cash',
+      'currency',
+      'usd',
+      'finance',
+      'economy',
+    ],
+    categories: ['IT'],
+  },
 ];
