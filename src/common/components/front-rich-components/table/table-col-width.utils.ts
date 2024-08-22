@@ -26,7 +26,7 @@ const calculateColumnsWithZeroWidth = (widthRow: string[]): number => {
   return widthRow.filter(width => width === '0').length;
 };
 
-export const generateCellsWidthsCasePercentagesSumTo100OrMore = (
+const generateCellsWidthsCasePercentagesSumTo100OrMore = (
   widthRow: string[],
   columnCount: number,
   restrictedWidth: number
@@ -40,51 +40,48 @@ export const generateCellsWidthsCasePercentagesSumTo100OrMore = (
   return cellWidths;
 };
 
-export const generateCellsWidthsCasePercentagesSumLessThan100AndNoBlankWidthColumns =
-  (
-    widthRow: string[],
-    columnCount: number,
-    restrictedWidth: number,
-    remainingWidth: number
-  ): number[] => {
-    let cellWidths: number[] = [];
+const generateCellsWidthsCasePercentagesSumLessThan100AndNoBlankWidthColumns = (
+  widthRow: string[],
+  columnCount: number,
+  restrictedWidth: number,
+  remainingWidth: number
+): number[] => {
+  let cellWidths: number[] = [];
 
-    const remainWidthCol =
-      (remainingWidth * restrictedWidth) / 100 / columnCount; // Divide el ancho restante entre el número de columnas
-    for (let i = 0; i < columnCount; i++) {
+  const remainWidthCol = (remainingWidth * restrictedWidth) / 100 / columnCount; // Divide el ancho restante entre el número de columnas
+  for (let i = 0; i < columnCount; i++) {
+    cellWidths.push(
+      (restrictedWidth * parseInt(widthRow[i])) / 100 + remainWidthCol
+    );
+  }
+
+  return cellWidths;
+};
+
+const generateCellsWidthsCasePercentagesSumLessThan100AndBlankWidthColumns = (
+  widthRow: string[],
+  columnCount: number,
+  restrictedWidth: number,
+  remainingWidth: number
+): number[] => {
+  let cellWidths: number[] = [];
+
+  for (let i = 0; i < columnCount; i++) {
+    if (widthRow[i] === '0') {
       cellWidths.push(
-        (restrictedWidth * parseInt(widthRow[i])) / 100 + remainWidthCol
+        (restrictedWidth * remainingWidth) /
+          calculateColumnsWithZeroWidth(widthRow) /
+          100
       );
+    } else {
+      cellWidths.push((restrictedWidth * parseInt(widthRow[i])) / 100);
     }
+  }
 
-    return cellWidths;
-  };
+  return cellWidths;
+};
 
-export const generateCellsWidthsCasePercentagesSumLessThan100AndBlankWidthColumns =
-  (
-    widthRow: string[],
-    columnCount: number,
-    restrictedWidth: number,
-    remainingWidth: number
-  ): number[] => {
-    let cellWidths: number[] = [];
-
-    for (let i = 0; i < columnCount; i++) {
-      if (widthRow[i] === '0') {
-        cellWidths.push(
-          (restrictedWidth * remainingWidth) /
-            calculateColumnsWithZeroWidth(widthRow) /
-            100
-        );
-      } else {
-        cellWidths.push((restrictedWidth * parseInt(widthRow[i])) / 100);
-      }
-    }
-
-    return cellWidths;
-  };
-
-export const generateCellsWidthsCaseNoWidthRowPresent = (
+const generateCellsWidthsCaseNoWidthRowPresent = (
   columnCount: number,
   restrictedWidth: number
 ) => {
@@ -96,50 +93,46 @@ export const generateCellsWidthsCaseNoWidthRowPresent = (
   return cellWidths;
 };
 
+// TODO: Add unit tests to this function
+// #253
+// https://github.com/Lemoncode/quickmock/issues/253
 export const calculateCellWidths = (
   restrictedWidth: number,
   columnCount: number,
   widthRow: string[] | false
 ): number[] => {
-  const cellWidths: number[] = [];
-  if (widthRow) {
-    const remainingWidth = 100 - calculateTotalWidth(widthRow);
-    // The percentages sum to 100% or more
-    if (remainingWidth <= 0) {
-      return generateCellsWidthsCasePercentagesSumTo100OrMore(
-        widthRow,
-        columnCount,
-        restrictedWidth
-      );
-    }
-    // The percentages sum to less than 100%
-    else if (remainingWidth > 0) {
-      // No columns have a width of 0; the remaining width is divided among all columns
-      if (calculateColumnsWithZeroWidth(widthRow) === 0) {
-        return generateCellsWidthsCasePercentagesSumLessThan100AndNoBlankWidthColumns(
-          widthRow,
-          columnCount,
-          restrictedWidth,
-          remainingWidth
-        );
-      }
-      // There are columns with a width of 0; the remaining width is divided among those columns
-      else {
-        return generateCellsWidthsCasePercentagesSumLessThan100AndBlankWidthColumns(
-          widthRow,
-          columnCount,
-          restrictedWidth,
-          remainingWidth
-        );
-      }
-    }
-  }
-  // No width row present
-  else {
+  if (!widthRow) {
+    // No width row present
     return generateCellsWidthsCaseNoWidthRowPresent(
       columnCount,
       restrictedWidth
     );
   }
-  return cellWidths;
+
+  const remainingWidth = 100 - calculateTotalWidth(widthRow);
+  // The percentages sum to 100% or more
+  if (remainingWidth <= 0) {
+    return generateCellsWidthsCasePercentagesSumTo100OrMore(
+      widthRow,
+      columnCount,
+      restrictedWidth
+    );
+  }
+  // The percentages sum to less than 100%
+  // No columns have a width of 0; the remaining width is divided among all columns
+  if (calculateColumnsWithZeroWidth(widthRow) === 0) {
+    return generateCellsWidthsCasePercentagesSumLessThan100AndNoBlankWidthColumns(
+      widthRow,
+      columnCount,
+      restrictedWidth,
+      remainingWidth
+    );
+  }
+  // There are columns with a width of 0; the remaining width is divided among those columns
+  return generateCellsWidthsCasePercentagesSumLessThan100AndBlankWidthColumns(
+    widthRow,
+    columnCount,
+    restrictedWidth,
+    remainingWidth
+  );
 };
