@@ -408,24 +408,12 @@ export const generateDefaultOtherProps = (
   switch (shapeType) {
     case 'input':
     case 'button':
-    case 'heading1':
-    case 'heading2':
-    case 'heading3':
-    case 'normaltext':
-    case 'smalltext':
-    case 'paragraph':
     case 'textarea':
     case 'combobox':
-    case 'listbox':
+    case 'horizontal-menu':
     case 'datepickerinput':
     case 'timepickerinput':
-    case 'rectangle':
-    case 'circle':
-    case 'star':
-    case 'diamond':
-    case 'triangle':
-    case 'line':
-    case 'postit':
+    case 'listbox':
       return {
         stroke: '#000000',
         backgroundColor: '#ffffff',
@@ -435,13 +423,46 @@ export const generateDefaultOtherProps = (
       return {
         stroke: '#000000',
         backgroundColor: '#d3d3d3',
+      };
+    case 'postit':
+      return {
+        stroke: '#000000',
+        backgroundColor: '#FFFF99',
+        textColor: '#000000',
+      };
+    case 'rectangle':
+    case 'circle':
+    case 'star':
+    case 'diamond':
+    case 'triangle':
+      return {
+        stroke: '#000000',
+        backgroundColor: '#ffffff',
+      };
+    case 'line':
+      return {
+        stroke: '#000000',
+      };
+    case 'breadcrumb':
+    case 'heading1':
+    case 'heading2':
+    case 'heading3':
+    case 'normaltext':
+    case 'smalltext':
+    case 'paragraph':
+    case 'label':
+      return {
         textColor: '#000000',
       };
     case 'toggleswitch':
-    case 'radiobutton':
-    case 'checkbox':
       return {
         checked: true,
+      };
+    case 'checkbox':
+    case 'radiobutton':
+      return {
+        checked: true,
+        textColor: '#000000',
       };
 
     case 'icon':
