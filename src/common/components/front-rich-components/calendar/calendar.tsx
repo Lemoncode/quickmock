@@ -69,7 +69,7 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
           fill="white"
         />
 
-        {/* Flecha izquierda */}
+        {/* Left arrow  */}
         <Line
           points={[
             margin + 20,
@@ -88,11 +88,12 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
         />
 
         {/* Year and month */}
+
         <Text
-          x={0}
+          x={margin + 20}
           y={headerHeight / 3}
           text={`${month} ${year}`}
-          width={restrictedWidth}
+          width={restrictedWidth - margin - 20 - margin - 30}
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
           fill="black"
