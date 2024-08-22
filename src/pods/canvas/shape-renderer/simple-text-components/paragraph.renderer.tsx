@@ -9,8 +9,6 @@ export const renderParagraph = (
   const { handleSelected, shapeRefs, handleDragEnd, handleTransform } =
     shapeRenderedProps;
 
-  console.log(shapeRefs.current[shape.id]);
-
   return (
     <ParagraphShape
       id={shape.id}

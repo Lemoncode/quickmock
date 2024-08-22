@@ -9,8 +9,6 @@ export const renderNormaltext = (
   const { handleSelected, shapeRefs, handleDragEnd, handleTransform } =
     shapeRenderedProps;
 
-  console.log(shapeRefs.current[shape.id]);
-
   return (
     <NormaltextShape
       id={shape.id}

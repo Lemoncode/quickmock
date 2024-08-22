@@ -18,8 +18,11 @@ import {
   getDatepickerInputShapeSizeRestrictions,
   getButtonShapeSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
+  getRadioButtonShapeSizeRestrictions,
+  getCheckboxShapeSizeRestrictions,
   getIconShapeSizeRestrictions,
   getHorizontalScrollBarShapeSizeRestrictions,
+  getVerticalScrollBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -48,6 +51,7 @@ import {
   getMapChartShapeSizeRestrictions,
   getLineChartShapeSizeRestrictions,
   getCalendarShapeSizeRestrictions,
+  getTableSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -231,6 +235,16 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getLargeArrowShapeSizeRestrictions().defaultWidth,
         height: getLargeArrowShapeSizeRestrictions().defaultHeight,
       };
+    case 'radiobutton':
+      return {
+        width: getRadioButtonShapeSizeRestrictions().defaultWidth,
+        height: getRadioButtonShapeSizeRestrictions().defaultHeight,
+      };
+    case 'checkbox':
+      return {
+        width: getCheckboxShapeSizeRestrictions().defaultWidth,
+        height: getCheckboxShapeSizeRestrictions().defaultHeight,
+      };
     case 'icon':
       return {
         width: getIconShapeSizeRestrictions().defaultWidth,
@@ -246,6 +260,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getImageShapeSizeRestrictions().defaultWidth,
         height: getImageShapeSizeRestrictions().defaultHeight,
       };
+    case 'table':
+      return {
+        width: getTableSizeRestrictions().defaultWidth,
+        height: getTableSizeRestrictions().defaultHeight,
+      };
     case 'horizontalScrollBar':
       return {
         width: getHorizontalScrollBarShapeSizeRestrictions().defaultWidth,
@@ -255,6 +274,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
       return {
         width: getCalendarShapeSizeRestrictions().defaultWidth,
         height: getCalendarShapeSizeRestrictions().defaultHeight,
+      };
+    case 'verticalScrollBar':
+      return {
+        width: getVerticalScrollBarShapeSizeRestrictions().defaultWidth,
+        height: getVerticalScrollBarShapeSizeRestrictions().defaultHeight,
       };
     default:
       console.warn(
@@ -285,6 +309,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'paragraph':
     case 'listbox':
     case 'image':
+    case 'table':
       return true;
     default:
       return false;
@@ -349,6 +374,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
     case 'paragraph':
       return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nSed do eiusmod tempor incididunt ut labore et dolore magna \naliqua.Ut enim ad minim veniam, quis nostrud exercitation \nullamco laboris nisi ut aliquip ex ea commodo consequat \nDuis aute irure dolor in reprehenderit in voluptate velit\nesse cillum dolore eu fugiat nulla pariatur. \nExcepteur sint occaecat cupidatat non proident, sunt in \nculpa qui officia deserunt mollit anim id est laborum.';
+    case 'table':
+      return 'Name , Age , Country\nJohn Doe, 30, USA\nJane Smith, 25, UK\nLuis Gomez, 35, Argentina';
     default:
       return undefined;
   }
@@ -365,6 +392,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'breadcrumb':
     case 'paragraph':
     case 'listbox':
+    case 'table':
       return 'textarea';
       break;
     case 'image':
@@ -409,6 +437,13 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#d3d3d3',
         textColor: '#000000',
       };
+    case 'toggleswitch':
+    case 'radiobutton':
+    case 'checkbox':
+      return {
+        checked: true,
+      };
+
     case 'icon':
       return {
         icon: {

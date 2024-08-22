@@ -16,6 +16,7 @@ import {
   renderRadioButton,
   renderIcon,
   renderHorizontalScrollBar,
+  renderVerticalScrollBar,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -31,6 +32,7 @@ import {
   renderBreadcrumb,
   renderBarChart,
   renderLineChart,
+  renderTable,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -138,8 +140,12 @@ export const renderShapeComponent = (
       return renderBarChart(shape, shapeRenderedProps);
     case 'image':
       return renderImage(shape, shapeRenderedProps);
+    case 'table':
+      return renderTable(shape, shapeRenderedProps);
     case 'horizontalScrollBar':
       return renderHorizontalScrollBar(shape, shapeRenderedProps);
+    case 'verticalScrollBar':
+      return renderVerticalScrollBar(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

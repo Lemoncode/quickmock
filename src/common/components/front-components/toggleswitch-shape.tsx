@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Circle, Group, Rect } from 'react-konva';
@@ -17,7 +17,7 @@ export const getToggleSwitchShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   toggleSwitchShapeRestrictions;
 
 export const ToggleSwitch = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, otherProps, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         toggleSwitchShapeRestrictions,
@@ -25,14 +25,14 @@ export const ToggleSwitch = forwardRef<any, ShapeProps>(
         height
       );
 
-    const [isOn, setIsOn] = useState(false);
+    const isOn = useMemo(
+      () => otherProps?.checked ?? true,
+      [otherProps?.checked]
+    );
 
-    const handleSwitch = () => {
-      //TODO: Only available when shape is selected
-      setIsOn(!isOn);
-    };
-
-    const circleX = isOn ? width - height / 2 : height / 2;
+    const circleX = isOn
+      ? restrictedWidth - restrictedHeight / 2
+      : restrictedHeight / 2;
 
     return (
       <Group
@@ -55,7 +55,6 @@ export const ToggleSwitch = forwardRef<any, ShapeProps>(
           fill={isOn ? 'lightgreen' : 'lightgray'}
         />
         <Circle
-          onClick={handleSwitch}
           x={circleX}
           y={restrictedHeight / 2}
           radius={restrictedHeight / 2}

@@ -7,3 +7,4 @@ export * from './video-player';
 export * from './bar-chart';
 export * from './line-chart';
 export * from './calendar/calendar';
+export * from './table/table';
