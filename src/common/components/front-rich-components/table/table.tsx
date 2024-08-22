@@ -4,12 +4,12 @@ import { ShapeProps } from '../../front-components/shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import {
-  calculateCellWidths,
   extractDataRows,
   extractHeaderRow,
   extractWidthRow,
   parseCSVRowsIntoArray,
 } from './table.utils';
+import { calculateCellWidths } from './table-col-width.utils';
 
 const tableSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 1,
@@ -17,7 +17,7 @@ const tableSizeRestrictions: ShapeSizeRestrictions = {
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 250,
-  defaultHeight: 100,
+  defaultHeight: 150,
 };
 
 export const getTableSizeRestrictions = (): ShapeSizeRestrictions =>
