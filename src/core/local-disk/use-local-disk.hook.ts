@@ -1,6 +1,7 @@
 import { saveFileModern } from '@/common/export';
 import { useCanvasContext } from '../providers';
 import { mapFromShapesArrayToQuickMockFileDocument } from './shapes-to-document.mapper';
+import { fileInput, OnFileSelectedCallback } from '@/common/file-input';
 
 const DEFAULT_FILE_NAME = 'mymockui';
 const DEFAULT_FILE_EXTENSION = 'qm';
@@ -45,8 +46,22 @@ export const useLocalDisk = () => {
       newBrowsersDownloadFile(filename, content);
     }
   };
+  const handleFileSelected: OnFileSelectedCallback = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const content = reader.result as string;
+      const parseDAta = JSON.parse(content);
+      console.log(parseDAta);
+    };
+    reader.readAsText(file);
+  };
+
+  const handleLoad = () => {
+    fileInput(handleFileSelected);
+  };
 
   return {
     handleSave,
+    handleLoad,
   };
 };
