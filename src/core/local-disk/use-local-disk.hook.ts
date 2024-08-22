@@ -1,6 +1,6 @@
 import { saveFileModern } from '@/common/export';
 import { useCanvasContext } from '../providers';
-import { mapFromShapesArrayToQuickMockDocument } from './shapes-to-document.mapper';
+import { mapFromShapesArrayToQuickMockFileDocument } from './shapes-to-document.mapper';
 
 const DEFAULT_FILE_NAME = 'mymockui';
 const DEFAULT_FILE_EXTENSION = 'qm';
@@ -10,7 +10,7 @@ export const useLocalDisk = () => {
   const { shapes } = useCanvasContext();
 
   const serializeShapes = (): string => {
-    const quickMockDocument = mapFromShapesArrayToQuickMockDocument(shapes);
+    const quickMockDocument = mapFromShapesArrayToQuickMockFileDocument(shapes);
     return JSON.stringify(quickMockDocument);
   };
 

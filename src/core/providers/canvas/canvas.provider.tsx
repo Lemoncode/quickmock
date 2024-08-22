@@ -18,7 +18,6 @@ export const CanvasProvider: React.FC<Props> = props => {
   const { children } = props;
 
   const [scale, setScale] = React.useState(1);
-  const [fileName, setFileName] = React.useState("");
   const stageRef = React.useRef<Konva.Stage>(null);
 
   const {
@@ -127,8 +126,6 @@ export const CanvasProvider: React.FC<Props> = props => {
       value={{
         shapes: document.shapes,
         scale,
-        fileName,
-        setFileName,
         setScale,
         clearCanvas,
         selectionInfo,

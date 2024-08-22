@@ -36,8 +36,6 @@ export interface SelectionInfo {
 export interface CanvasContextModel {
   shapes: ShapeModel[];
   scale: number;
-  fileName: string;
-  setFileName: (filename: string) => void;
   clearCanvas: () => void;
   setScale: React.Dispatch<React.SetStateAction<number>>;
   pasteShape: (shape: ShapeModel) => void;

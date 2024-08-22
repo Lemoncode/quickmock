@@ -1,6 +1,6 @@
 import { ShapeModel } from '../model';
 
-interface Page {
+export interface Page {
   id: string;
   name: string;
   shapes: ShapeModel[];
