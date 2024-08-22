@@ -1,8 +1,13 @@
 import { useState, forwardRef } from 'react';
 import { Group, Rect, Text, Line } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
-import { ShapeProps } from '../front-components/shape.model';
+import { ShapeProps } from '../../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import {
+  calculateNextMonth,
+  calculatePreviousMonth,
+  getCurrentMonthDays,
+} from './calendar.business';
 
 const calendarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 350,
@@ -27,36 +32,12 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
 
     const [currentDate, setCurrentDate] = useState(new Date());
 
-    const getCurrentMonthDays = (date: Date) => {
-      const month = date.toLocaleString('default', { month: 'long' });
-      const year = date.getFullYear();
-      const daysInMonth = new Date(year, date.getMonth() + 1, 0).getDate();
-      const startDay = new Date(year, date.getMonth(), 1).getDay();
-
-      const days = [];
-      let week = new Array(startDay).fill(null); // Fill the first week with nulls up to the start day
-
-      for (let day = 1; day <= daysInMonth; day++) {
-        week.push(day);
-        if (week.length === 7 || day === daysInMonth) {
-          days.push(week);
-          week = [];
-        }
-      }
-
-      return { month, year, days };
-    };
-
     const handlePrevMonth = () => {
-      setCurrentDate(
-        prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() - 1, 1)
-      );
+      setCurrentDate(prevDate => calculatePreviousMonth(prevDate));
     };
 
     const handleNextMonth = () => {
-      setCurrentDate(
-        prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() + 1, 1)
-      );
+      setCurrentDate(prevDate => calculateNextMonth(prevDate));
     };
 
     const { month, year, days } = getCurrentMonthDays(currentDate);
@@ -107,7 +88,6 @@ export const CalendarShape = forwardRef<any, ShapeProps>(
         />
 
         {/* Year and month */}
-        {/*          x={width / 2 - 50}*/}
         <Text
           x={0}
           y={headerHeight / 3}
