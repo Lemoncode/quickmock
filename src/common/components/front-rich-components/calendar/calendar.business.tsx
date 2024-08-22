@@ -1,4 +1,5 @@
-// TODO: Add Unit tests
+// TODO: #250 Add Unit tests
+// https://github.com/Lemoncode/quickmock/issues/250
 
 export const calculatePreviousMonth = (date: Date) =>
   new Date(date.getFullYear(), date.getMonth() - 1, 1);
