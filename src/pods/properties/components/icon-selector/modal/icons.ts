@@ -709,7 +709,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Bell snooze',
     filename: 'bellsnooze.svg',
-    searchTerms: ['bell', 'snooze', 'sleep', 'pause', 'nap'],
+    searchTerms: ['bell', 'snooze', 'sleep', 'pause'],
     categories: ['IT'],
   },
   {
@@ -736,6 +736,52 @@ export const iconCollection: IconInfo[] = [
       'finance',
       'economy',
     ],
+    categories: ['IT'],
+  },
+  {
+    name: 'Euro',
+    filename: 'euro.svg',
+    searchTerms: [
+      'euro',
+      'money',
+      'cash',
+      'currency',
+      'eur',
+      'finance',
+      'economy',
+    ],
+    categories: ['IT'],
+  },
+  {
+    name: 'Pound',
+    filename: 'pound.svg',
+    searchTerms: [
+      'pound',
+      'money',
+      'cash',
+      'currency',
+      'gbp',
+      'finance',
+      'economy',
+    ],
+    categories: ['IT'],
+  },
+  {
+    name: 'Bed',
+    filename: 'bed.svg',
+    searchTerms: ['bed', 'sleep', 'rest', 'nap', 'hotel', 'room'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Sun',
+    filename: 'sun.svg',
+    searchTerms: ['sun', 'day', 'light', 'bright', 'shine', 'sunny', 'weather'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cloud sun',
+    filename: 'cloudsun.svg',
+    searchTerms: ['cloud', 'day', 'partly', 'cloudy', 'weather'],
     categories: ['IT'],
   },
 ];
