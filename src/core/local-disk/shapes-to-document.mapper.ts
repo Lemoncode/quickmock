@@ -21,7 +21,7 @@ export const mapFromShapesArrayToQuickMockFileDocument = (
   };
 };
 
-export const mapFromQuickMockFileDocumentToAplicationDocument = (
+export const mapFromQuickMockFileDocumentToApplicationDocument = (
   fileDocument: QuickMockFileContract
 ): DocumentModel => {
   const allShapes: ShapeModel[] = fileDocument.pages.reduce((acc, page) => {
