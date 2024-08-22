@@ -6,8 +6,10 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 import {
   extractDataRows,
   extractHeaderRow,
+  extractWidthRow,
   parseCSVRowsIntoArray,
 } from './table.utils';
+import { calculateCellWidths } from './table-col-width.utils';
 
 const tableSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 1,
@@ -15,7 +17,7 @@ const tableSizeRestrictions: ShapeSizeRestrictions = {
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 250,
-  defaultHeight: 100,
+  defaultHeight: 150,
 };
 
 export const getTableSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -28,10 +30,13 @@ export const Table = forwardRef<any, ShapeProps>(
 
     const rows = parseCSVRowsIntoArray(text);
     const headerRow = extractHeaderRow(rows[0]);
-    const dataRows = extractDataRows(rows);
-
-    const columnCount = headerRow.length;
-    const cellWidth = restrictedWidth / columnCount;
+    const widthRow: string[] | false = extractWidthRow(rows[rows.length - 1]);
+    const dataRows = extractDataRows(rows, widthRow);
+    const cellWidths = calculateCellWidths(
+      restrictedWidth,
+      headerRow.length,
+      widthRow
+    );
     const cellHeight = restrictedHeight / (dataRows.length + 1);
 
     return (
@@ -45,76 +50,90 @@ export const Table = forwardRef<any, ShapeProps>(
         onClick={() => onSelected(id, 'table')}
       >
         {/* Dibujar celdas de encabezado */}
-        {headerRow.map((header, colIdx) => (
-          <Group key={`header-${colIdx}`}>
-            <Rect
-              x={colIdx * cellWidth}
-              y={0}
-              width={cellWidth}
-              height={cellHeight}
-              stroke="black"
-              strokeWidth={1}
-              fill="lightgrey"
-            />
-            <Text
-              x={colIdx * cellWidth + 5}
-              y={5}
-              width={cellWidth - 10}
-              height={cellHeight - 10}
-              text={header}
-              fontSize={14}
-              fontStyle="bold"
-              align="center"
-              verticalAlign="middle"
-              wrap="none"
-              ellipsis={true}
-            />
-          </Group>
-        ))}
+        {headerRow.map((header, colIdx) => {
+          // Calcular la posición acumulativa para la celda
+          const accumulatedWidth = cellWidths
+            .slice(0, colIdx)
+            .reduce((a, b) => a + b, 0);
 
-        {/* Dibujar celdas de datos */}
-        {dataRows.map((row, rowIdx) =>
-          row.map((cell, colIdx) => (
-            <Group key={`cell-${rowIdx}-${colIdx}`}>
+          return (
+            <Group key={`header-${colIdx}`}>
               <Rect
-                x={colIdx * cellWidth}
-                y={(rowIdx + 1) * cellHeight}
-                width={cellWidth}
+                x={accumulatedWidth}
+                y={0}
+                width={cellWidths[colIdx]}
                 height={cellHeight}
                 stroke="black"
                 strokeWidth={1}
-                fill="white"
+                fill="lightgrey"
               />
               <Text
-                x={colIdx * cellWidth + 5}
-                y={(rowIdx + 1) * cellHeight + 5}
-                width={cellWidth - 10}
+                x={accumulatedWidth + 5}
+                y={5}
+                width={cellWidths[colIdx] - 10}
                 height={cellHeight - 10}
-                text={cell}
-                fontSize={12}
+                text={header}
+                fontSize={14}
+                fontStyle="bold"
                 align="center"
                 verticalAlign="middle"
                 wrap="none"
                 ellipsis={true}
               />
             </Group>
-          ))
-        )}
+          );
+        })}
+
+        {/* Dibujar celdas de datos */}
+        {dataRows.map((row, rowIdx) => {
+          let accumulatedWidth = 0;
+          return row.map((cell, colIdx) => {
+            const currentX = accumulatedWidth;
+            accumulatedWidth += cellWidths[colIdx];
+
+            return (
+              <Group key={`cell-${rowIdx}-${colIdx}`}>
+                <Rect
+                  x={currentX}
+                  y={(rowIdx + 1) * cellHeight}
+                  width={cellWidths[colIdx]}
+                  height={cellHeight}
+                  stroke="black"
+                  strokeWidth={1}
+                  fill="white"
+                />
+                <Text
+                  x={currentX + 5}
+                  y={(rowIdx + 1) * cellHeight + 5}
+                  width={cellWidths[colIdx] - 10}
+                  height={cellHeight - 10}
+                  text={cell}
+                  fontSize={12}
+                  align="center"
+                  verticalAlign="middle"
+                  wrap="none"
+                  ellipsis={true}
+                />
+              </Group>
+            );
+          });
+        })}
 
         {/* Dibujar líneas de la cuadrícula verticales */}
-        {[...Array(columnCount + 1)].map((_, colIdx) => (
-          <Line
-            key={`vline-${colIdx}`}
-            points={[
-              colIdx * cellWidth,
-              0,
-              colIdx * cellWidth,
-              restrictedHeight,
-            ]}
-            stroke="black"
-            strokeWidth={1}
-          />
-        ))}
+        {cellWidths.reduce((lines: JSX.Element[], _width, colIdx) => {
+          const accumulatedWidth = cellWidths
+            .slice(0, colIdx)
+            .reduce((a, b) => a + b, 0);
+          lines.push(
+            <Line
+              key={`vline-${colIdx}`}
+              points={[accumulatedWidth, 0, accumulatedWidth, restrictedHeight]}
+              stroke="black"
+              strokeWidth={1}
+            />
+          );
+          return lines;
+        }, [])}
 
         {/* Dibujar líneas de la cuadrícula horizontales */}
         {[...Array(dataRows.length + 2)].map((_, rowIdx) => (
