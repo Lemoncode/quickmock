@@ -134,7 +134,7 @@ describe('shapes to document mapper', () => {
   });
 
   describe('mapFromQuickMockFileDocumentToApplicationDocument', () => {
-    it('should return a document model with a empty shapes array when we feed a empty pages array', () => {
+    it('Should return a document model with a empty shapes array when we feed a empty pages array', () => {
       //arrange
       const fileDocument: QuickMockFileContract = {
         version: '0.1',
@@ -150,7 +150,7 @@ describe('shapes to document mapper', () => {
       expect(result).toEqual(expectedResult);
     });
 
-    it('should return a document model with a empty shapes array when we feed a file document with a one page but with empty shapes', () => {
+    it('Should return a document model with a empty shapes array when we feed a file document with a one page but with empty shapes', () => {
       //arrange
       const fileDocument: QuickMockFileContract = {
         version: '0.1',
@@ -172,7 +172,7 @@ describe('shapes to document mapper', () => {
       expect(result).toEqual(expectedResult);
     });
 
-    it('should return a document model with shapes when we feed a file document with a one page and shapes', () => {
+    it('Should return a document model with shapes when we feed a file document with one page and shapes', () => {
       //arrange
       const fileDocument: QuickMockFileContract = {
         version: '0.1',
@@ -216,7 +216,7 @@ describe('shapes to document mapper', () => {
       expect(result).toEqual(expectedResult);
     });
 
-    it('should return a document model with shapes when we feed a file document with a two page and shapes', () => {
+    it('Should return a document model with shapes when we feed a file document with two pages and shapes', () => {
       //arrange
       const fileDocument: QuickMockFileContract = {
         version: '0.1',

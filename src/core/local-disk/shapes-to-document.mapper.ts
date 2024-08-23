@@ -24,10 +24,10 @@ export const mapFromShapesArrayToQuickMockFileDocument = (
 export const mapFromQuickMockFileDocumentToApplicationDocument = (
   fileDocument: QuickMockFileContract
 ): DocumentModel => {
-  const allShapes: ShapeModel[] = fileDocument.pages.reduce((acc, page) => {
+  const shapes: ShapeModel[] = fileDocument.pages.reduce((acc, page) => {
     return [...acc, ...page.shapes];
   }, [] as ShapeModel[]);
   return {
-    shapes: allShapes,
+    shapes,
   };
 };
