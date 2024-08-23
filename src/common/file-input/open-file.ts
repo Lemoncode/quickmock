@@ -1,4 +1,5 @@
 export type OnFileSelectedCallback = (file: File) => void;
+
 export const fileInput = (onFileSelected: OnFileSelectedCallback) => {
   const fileInput = document.createElement('input');
   fileInput.type = 'file';
