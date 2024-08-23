@@ -914,4 +914,34 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['clock', 'time', 'watch', 'timer', 'analogical'],
     categories: ['IT'],
   },
+  {
+    name: 'Handheart',
+    filename: 'handheart.svg',
+    searchTerms: ['hand', 'heart', 'like', 'support'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Heart',
+    filename: 'heart.svg',
+    searchTerms: ['heart', 'love', 'like', 'support'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Stethoscope',
+    filename: 'stethoscope.svg',
+    searchTerms: ['stethoscope', 'medicine', 'hospital', 'heart'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Pulse',
+    filename: 'pulse.svg',
+    searchTerms: ['pulse', 'heart', 'beat', 'hospital', 'medicine'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Hand pointing',
+    filename: 'handpointing.svg',
+    searchTerms: ['hand', 'pointing', 'finger', 'click'],
+    categories: ['IT'],
+  },
 ];
