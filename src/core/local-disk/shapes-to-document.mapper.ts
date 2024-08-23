@@ -6,6 +6,9 @@ export const mapFromShapesArrayToQuickMockFileDocument = (
   shapes: ShapeModel[]
 ): QuickMockFileContract => {
   const pages: Page[] = shapes.reduce((acc, shape) => {
+    /*
+     * TODO: Add the correct id, name and version values.
+     */
     const newPage: Page = {
       id: '1',
       name: 'default',
