@@ -46,6 +46,7 @@ import {
   getHorizontalMenuShapeSizeRestrictions,
   getMapChartShapeSizeRestrictions,
   getLineChartShapeSizeRestrictions,
+  getVerticalMenuShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -169,6 +170,11 @@ export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
         width: getHorizontalMenuShapeSizeRestrictions().defaultWidth,
         height: getHorizontalMenuShapeSizeRestrictions().defaultHeight,
       };
+    case 'vertical-menu':
+      return {
+        width: getVerticalMenuShapeSizeRestrictions().defaultWidth,
+        height: getVerticalMenuShapeSizeRestrictions().defaultHeight,
+      };
     case 'breadcrumb':
       return {
         width: getBreadcrumbShapeSizeRestrictions().defaultWidth,
@@ -264,6 +270,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'radiobutton':
     case 'postit':
     case 'horizontal-menu':
+    case 'vertical-menu':
     case 'breadcrumb':
     case 'heading1':
     case 'heading2':
@@ -324,6 +331,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
     case 'horizontal-menu':
       return 'Home\nAbout\nServices\nContact';
+    case 'vertical-menu':
+      return 'Option 1\nOption 2\n----\nOption 3\nOption 4';
     case 'heading1':
       return 'Heading 1';
     case 'heading2':
@@ -352,6 +361,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'breadcrumb':
     case 'paragraph':
     case 'listbox':
+    case 'vertical-menu':
       return 'textarea';
       break;
   }
@@ -373,6 +383,7 @@ export const generateDefaultOtherProps = (
     case 'textarea':
     case 'combobox':
     case 'listbox':
+    case 'vertical-menu':
     case 'datepickerinput':
     case 'timepickerinput':
     case 'rectangle':

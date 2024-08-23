@@ -30,6 +30,7 @@ import {
   renderBreadcrumb,
   renderBarChart,
   renderLineChart,
+  renderVerticalMenuShape,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -108,6 +109,8 @@ export const renderShapeComponent = (
       return renderTriangle(shape, shapeRenderedProps);
     case 'horizontal-menu':
       return renderHorizontalMenu(shape, shapeRenderedProps);
+    case 'vertical-menu':
+      return renderVerticalMenuShape(shape, shapeRenderedProps);
     case 'breadcrumb':
       return renderBreadcrumb(shape, shapeRenderedProps);
     case 'circle':
