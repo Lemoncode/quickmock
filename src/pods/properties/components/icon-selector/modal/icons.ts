@@ -872,4 +872,46 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['tablet', 'device', 'ipad', 'gadget'],
     categories: ['IT'],
   },
+  {
+    name: 'Laptop',
+    filename: 'laptop.svg',
+    searchTerms: ['laptop', 'computer', 'device', 'notebook', 'pc'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Computer',
+    filename: 'computer.svg',
+    searchTerms: [
+      'computer',
+      'device',
+      'pc',
+      'workstation',
+      'computer desktop',
+    ],
+    categories: ['IT'],
+  },
+  {
+    name: 'Github',
+    filename: 'github.svg',
+    searchTerms: [
+      'github',
+      'code',
+      'repository',
+      'version control',
+      'pull request',
+    ],
+    categories: ['IT'],
+  },
+  {
+    name: 'Hourglass',
+    filename: 'hourglass.svg',
+    searchTerms: ['hourglass', 'time', 'clock', 'sand', 'timer'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Clock',
+    filename: 'clock.svg',
+    searchTerms: ['clock', 'time', 'watch', 'timer', 'analogical'],
+    categories: ['IT'],
+  },
 ];
