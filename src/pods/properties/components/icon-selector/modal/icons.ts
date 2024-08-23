@@ -974,4 +974,34 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['orange', 'fruit', 'food', 'citrus', 'vitamin'],
     categories: ['IT'],
   },
+  {
+    name: 'Orange slice',
+    filename: 'orangeslice.svg',
+    searchTerms: ['orange', 'slice', 'fruit', 'food', 'citrus', 'vitamin'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Eye',
+    filename: 'eye.svg',
+    searchTerms: ['eye', 'visible', 'watch', 'view'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Eye slash',
+    filename: 'eyeslash.svg',
+    searchTerms: ['eye', 'slash', 'invisible', 'hide'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Incognito',
+    filename: 'incognito.svg',
+    searchTerms: ['incognito', 'private', 'secret', 'hidden'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Smiley',
+    filename: 'smiley.svg',
+    searchTerms: ['smiley', 'happy', 'face', 'emoji'],
+    categories: ['IT'],
+  },
 ];
