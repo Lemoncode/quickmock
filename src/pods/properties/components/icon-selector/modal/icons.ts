@@ -944,4 +944,34 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['hand', 'pointing', 'finger', 'click'],
     categories: ['IT'],
   },
+  {
+    name: 'Hand waving',
+    filename: 'handwaving.svg',
+    searchTerms: ['hand', 'waving', 'greet', 'greeting'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Hand shake',
+    filename: 'handshake.svg',
+    searchTerms: ['hand', 'shake', 'deal', 'agreement', 'greet'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Avocado',
+    filename: 'avocado.svg',
+    searchTerms: ['avocado', 'fruit', 'food', 'healthy', 'green'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cherries',
+    filename: 'cherries.svg',
+    searchTerms: ['cherries', 'fruit', 'food', 'red'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Orange',
+    filename: 'orange.svg',
+    searchTerms: ['orange', 'fruit', 'food', 'citrus', 'vitamin'],
+    categories: ['IT'],
+  },
 ];
