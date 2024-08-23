@@ -1,8 +1,10 @@
-import { iconCollection } from './icons';
 import classes from './icon-modal.module.css';
-import { BASE_ICONS_URL, IconInfo } from '@/core/model';
-import { useState } from 'react';
+import { IconInfo } from '@/core/model';
 import { useModalDialogContext } from '@/core/providers/model-dialog-providers/model-dialog.provider';
+import { useIconModal } from './use-icon-modal.hook';
+import { IconModalSearchBar } from './components/searchbar.component';
+import { IconModalCategories } from './components/categories.component';
+import { IconList } from './components/icon-list.component';
 
 interface IconModalProps {
   actualIcon: IconInfo;
@@ -12,37 +14,47 @@ interface IconModalProps {
 export const IconModal: React.FC<IconModalProps> = props => {
   const { actualIcon, onChange } = props;
   const { closeModal } = useModalDialogContext();
-  const [selectedIcon, setSelectedIcon] = useState<IconInfo>(actualIcon);
 
-  const handleIconSelected = (icon: IconInfo) => {
-    setSelectedIcon(icon);
-  };
+  const {
+    selectedIcon,
+    handleIconSelected,
+    selectedCategory,
+    setSelectedCategory,
+    searchTerm,
+    setSearchTerm,
+    isIconSelected,
+    listAllCategories,
+    isCategorySelected,
+    filterIcons,
+  } = useIconModal(actualIcon);
 
   const handleSelection = () => {
     onChange(selectedIcon);
     closeModal();
   };
 
-  const isIconSelected = (icon: IconInfo) => {
-    return icon.name.toLowerCase() === selectedIcon.name.toLowerCase();
-  };
-
   return (
     <div className={classes.container}>
       <h2 className={classes.title}>Choose your icon</h2>
-      {/*TODO - Add search bar and categories filters*/}
-      <div className={classes.iconWrapper}>
-        {iconCollection.map(icon => (
-          <img
-            key={icon.name}
-            src={`${BASE_ICONS_URL}${icon.filename}`}
-            alt={icon.name}
-            title={icon.name}
-            className={`${classes.icon} ${isIconSelected(icon) ? classes.selected : ''}`}
-            onClick={() => handleIconSelected(icon)}
-          />
-        ))}
-      </div>
+
+      <IconModalSearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
+
+      <IconModalCategories
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        isCategorySelected={isCategorySelected}
+        listAllCategories={listAllCategories}
+      />
+
+      <IconList
+        isIconSelected={isIconSelected}
+        handleIconSelected={handleIconSelected}
+        filterIcons={filterIcons}
+      />
+
       <button className={classes.button} onClick={handleSelection}>
         Select
       </button>

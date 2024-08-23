@@ -34,6 +34,11 @@ export const InputShape = forwardRef<any, ShapeProps>(
       [otherProps?.backgroundColor]
     );
 
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'black',
+      [otherProps?.textColor]
+    );
+
     return (
       <Group
         x={x}
@@ -62,7 +67,7 @@ export const InputShape = forwardRef<any, ShapeProps>(
           text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
-          fill="gray"
+          fill={textColor}
           align="left"
           ellipsis={true}
           wrap="none"

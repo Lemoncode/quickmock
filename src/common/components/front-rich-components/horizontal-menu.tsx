@@ -1,6 +1,6 @@
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
@@ -17,7 +17,10 @@ export const getHorizontalMenuShapeSizeRestrictions =
   (): ShapeSizeRestrictions => horizontalMenuShapeSizeRestrictions;
 
 export const HorizontalMenu = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const menuElements: string[] = text.split('\n');
     const numberOfItems = menuElements.length;
     const minItemWidth = 100;
@@ -35,6 +38,19 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>(
     const totalMargins = restrictedWidth - itemSpacing * (numberOfItems + 1);
     const itemWidth = totalMargins / numberOfItems;
 
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'black',
+      [otherProps?.textColor]
+    );
+    const backgroundColor = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
+    const strokeColor = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
+
     return (
       <Group
         x={x}
@@ -50,9 +66,9 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>(
           y={0}
           width={restrictedWidth}
           height={restrictedHeight}
-          stroke="black"
+          stroke={strokeColor}
           strokeWidth={2}
-          fill="white"
+          fill={backgroundColor}
         />
 
         {menuElements.map((e: string, index: number) => (
@@ -63,7 +79,7 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>(
               text={e}
               fontFamily="Arial"
               fontSize={16}
-              fill="black"
+              fill={textColor}
               width={itemWidth}
               align="center"
               wrap="none"

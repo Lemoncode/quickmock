@@ -9,8 +9,6 @@ export const renderBreadcrumb = (
   const { handleSelected, shapeRefs, handleDragEnd, handleTransform } =
     shapeRenderedProps;
 
-  console.log(shapeRefs.current[shape.id]);
-
   return (
     <BreadcrumbShape
       id={shape.id}
@@ -30,6 +28,7 @@ export const renderBreadcrumb = (
       editType={shape.editType}
       isEditable={true}
       text={shape.text}
+      otherProps={shape.otherProps}
     />
   );
 };

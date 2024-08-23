@@ -7,3 +7,5 @@ export * from './breadcrumb.renderer';
 export * from './bar-chart.renderer';
 export * from './line-chart.renderer';
 export * from './vertical-menu.renderer';
+export * from './calendar.renderer';
+export * from './table.renderer';

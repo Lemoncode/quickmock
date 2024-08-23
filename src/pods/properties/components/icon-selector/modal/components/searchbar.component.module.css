@@ -1,0 +1,21 @@
+.searchContainer {
+  display: flex;
+  gap: var(--space-s);
+  width: 80%;
+}
+
+.searchTitle {
+  font-size: var(--fs-md);
+  color: var(--pure-white);
+  font-weight: 100;
+}
+
+.searchInput {
+  padding: 0 var(--space-s);
+  border-radius: var(--border-radius-m);
+  border: none;
+}
+
+.searchInput:focus {
+  outline-color: var(--primary-500);
+}

@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 import { Group, Text } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { ShapeProps } from '../../front-components/shape.model';
@@ -19,7 +19,10 @@ export const getBreadcrumbShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   breadcrumbShapeSizeRestrictions;
 
 export const BreadcrumbShape = forwardRef<any, ShapeProps>(
-  ({ x, y, id, width, height, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, id, width, height, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const [sections, setSections] = useState<string[]>([]);
     const [positions, setPositions] = useState<number[]>([]);
     const [groupWidth, setGroupWidth] = useState<number>(0);
@@ -35,6 +38,11 @@ export const BreadcrumbShape = forwardRef<any, ShapeProps>(
       setPositions(newPositions);
       setGroupWidth(newGroupWidth);
     }, [sections]);
+
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'black',
+      [otherProps?.textColor]
+    );
 
     return (
       <Group
@@ -57,7 +65,7 @@ export const BreadcrumbShape = forwardRef<any, ShapeProps>(
                 text={section}
                 fontFamily="Arial"
                 fontSize={16}
-                fill="blue"
+                fill={textColor}
                 textDecoration="underline"
               />
               {index < sections.length - 1 && (

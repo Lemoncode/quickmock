@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Group } from 'react-konva';
-import { Coord, Size } from '@/core/model';
+import { Coord, EditType, Size } from '@/core/model';
 import { HtmlEditWidget } from './components';
-import { EditType } from './inline-edit.model';
 import { useSubmitCancelHook, usePositionHook } from './hooks';
 
 interface Props {
@@ -13,6 +12,7 @@ interface Props {
   text: string;
   scale: number;
   onTextSubmit: (text: string) => void;
+  onImageSrcSubmit: (e: string) => void;
   children: React.ReactNode;
 }
 
@@ -23,13 +23,14 @@ export const EditableComponent: React.FC<Props> = props => {
     isEditable,
     text,
     onTextSubmit,
+    onImageSrcSubmit,
     scale,
     children,
     editType,
   } = props;
   const [editText, setEditText] = useState(text);
 
-  const { inputRef, textAreaRef, isEditing, setIsEditing } =
+  const { inputRef, textAreaRef, divRef, isEditing, setIsEditing } =
     useSubmitCancelHook(
       {
         editType,
@@ -53,6 +54,11 @@ export const EditableComponent: React.FC<Props> = props => {
     calculateHeight,
   } = usePositionHook(coords, size, scale);
 
+  const handleImageSrcSubmit = (src: string) => {
+    onImageSrcSubmit(src);
+    setIsEditing(false);
+  };
+
   return (
     <>
       <Group onDblClick={handleDoubleClick}>{children}</Group>
@@ -65,9 +71,16 @@ export const EditableComponent: React.FC<Props> = props => {
             width: calculateWidth(),
             height: calculateHeight(),
           }}
-          ref={editType === 'input' ? inputRef : textAreaRef}
+          ref={
+            editType === 'input'
+              ? inputRef
+              : editType === 'imageupload'
+                ? divRef
+                : textAreaRef
+          }
           value={editText}
           onSetEditText={setEditText}
+          onSetImageSrc={handleImageSrcSubmit}
           editType={editType ?? 'input'}
         />
       ) : null}

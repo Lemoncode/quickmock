@@ -16,4 +16,6 @@ export const mockRichComponentsCollection: ItemInfo[] = [
   { thumbnailSrc: '/rich-components/map.svg', type: 'map' },
   { thumbnailSrc: '/rich-components/barchart.svg', type: 'bar' },
   { thumbnailSrc: '/rich-components/line-chart.svg', type: 'linechart' },
+  { thumbnailSrc: '/rich-components/calendar.svg', type: 'calendar' },
+  { thumbnailSrc: '/rich-components/table.svg', type: 'table' },
 ];

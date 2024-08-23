@@ -10,3 +10,5 @@ export * from './button-shape';
 export * from './timepickerinput-shape';
 export * from './radiobutton-shape';
 export * from './icon-shape';
+export * from './verticalscrollbar-shape';
+export * from './horizontalscrollbar-shape';

@@ -19,31 +19,6 @@
   line-height: 1.3;
 }
 
-.iconWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: white;
-  padding: var(--space-md);
-  width: 80%;
-  gap: var(--space-s);
-  border-radius: var(--border-radius-m);
-}
-
-.icon {
-  width: var(--fs-xxl);
-}
-
-.icon:hover {
-  cursor: pointer;
-  background-color: var(--primary-200);
-  border-radius: var(--border-radius-m);
-}
-
-.selected {
-  background-color: var(--primary-200);
-  border-radius: var(--border-radius-m);
-}
-
 .button {
   color: white;
   margin-top: var(--space-lg);

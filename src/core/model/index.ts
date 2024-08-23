@@ -48,7 +48,14 @@ export type ShapeType =
   | 'bar'
   | 'triangle'
   | 'image'
-  | 'vertical-menu';
+  | 'vertical-menu'
+  | 'horizontalScrollBar'
+  | 'image'
+  | 'calendar'
+  | 'image'
+  | 'table'
+  | 'verticalScrollBar'
+  | 'horizontalScrollBar';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -91,9 +98,13 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   bar: 'Bar Chart',
   image: 'Image',
   'vertical-menu': 'Vertical Menu',
+  table: 'Table',
+  horizontalScrollBar: 'Horizontal Scroll Bar',
+  calendar: 'Calendar',
+  verticalScrollBar: 'Vertical Scroll Bar',
 };
 
-export type EditType = 'input' | 'textarea';
+export type EditType = 'input' | 'textarea' | 'imageupload';
 
 export type ShapeRefs = {
   [key: string]: React.RefObject<any>;
@@ -109,7 +120,7 @@ export interface Coord {
   y: number;
 }
 
-type Category = 'IT' | 'business' | 'Ecommerce' | 'Emojis';
+export type Category = 'IT' | 'business' | 'Ecommerce' | 'Emojis';
 
 export interface IconInfo {
   name: string;
@@ -123,9 +134,10 @@ export type IconSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
 export interface OtherProps {
   stroke?: string;
   backgroundColor?: string;
+  textColor?: string;
+  checked?: boolean;
   icon?: IconInfo;
   iconSize?: IconSize;
-  textColor?: string;
   imageSrc?: string;
 }
 

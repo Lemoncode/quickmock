@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Line, Text } from 'react-konva';
@@ -21,9 +21,21 @@ const boxTickWidth = 50;
 const tickWidth = boxTickWidth - marginTick;
 
 export const CheckBoxShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(checkBoxShapeRestrictions, width, height);
+
+    const isOn = useMemo(
+      () => otherProps?.checked ?? true,
+      [otherProps?.checked]
+    );
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'black',
+      [otherProps?.textColor]
+    );
 
     return (
       <Group
@@ -33,7 +45,9 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
         width={restrictedWidth}
         height={restrictedHeight}
         {...shapeProps}
-        onClick={() => onSelected(id, 'checkbox')}
+        onClick={() => {
+          onSelected(id, 'checkbox');
+        }}
       >
         <Rect
           x={0}
@@ -45,29 +59,31 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>(
           strokeWidth={2}
           fill="white"
         />
-        <Line
-          points={[
-            marginTick,
-            height / 2,
-            marginTick + boxTickWidth / 4,
-            height - marginTick,
-            tickWidth - marginTick,
-            marginTick,
-          ]}
-          stroke="black"
-          strokeWidth={2}
-          lineCap="round"
-          lineJoin="round"
-        />
+        {isOn && (
+          <Line
+            points={[
+              marginTick,
+              restrictedHeight / 2,
+              marginTick + boxTickWidth / 4,
+              restrictedHeight - marginTick,
+              tickWidth - marginTick,
+              marginTick,
+            ]}
+            stroke="black"
+            strokeWidth={2}
+            lineCap="round"
+            lineJoin="round"
+          />
+        )}
         <Text
           x={boxTickWidth + marginTick}
-          y={height / 2}
-          width={width - boxTickWidth - marginTick}
-          height={height / 3}
+          y={restrictedHeight / 3}
+          width={restrictedWidth - boxTickWidth - marginTick}
+          height={restrictedHeight / 3}
           text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
-          fill="black"
+          fill={textColor}
           align="left"
           verticalAlign="middle"
           ellipsis={true}

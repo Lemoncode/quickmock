@@ -11,4 +11,16 @@ export const SHORTCUTS: Shortcut = {
     targetKey: ['Backspace'],
     targetKeyLabel: 'Backspace',
   },
+  copy: {
+    description: 'Copy',
+    id: 'copy-button-shortcut',
+    targetKey: ['c'],
+    targetKeyLabel: 'Ctrl + C',
+  },
+  paste: {
+    description: 'Paste',
+    id: 'paste-button-shortcut',
+    targetKey: ['v'],
+    targetKeyLabel: 'Ctrl + V',
+  },
 };
