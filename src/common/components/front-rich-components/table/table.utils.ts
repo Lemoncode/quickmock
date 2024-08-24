@@ -26,11 +26,32 @@ export const extractWidthRow = (lastRow: string): string[] | false => {
         .split(',')
         .map(width => {
           const trimmedWidth = width.trim();
-          return trimmedWidth === '0' ||
-            trimmedWidth === '' ||
-            trimmedWidth === '*'
-            ? '0'
-            : trimmedWidth;
+          const widthMatch = trimmedWidth.match(/(\d+)/);
+          return widthMatch ? widthMatch[0] : '0'; // Si hay un match, devuelve el porcentaje; si no, '0'
         })
     : false;
+};
+
+type ALIGNMENT = 'left' | 'center' | 'right';
+const parseAligment = (alignment: string | null): ALIGNMENT => {
+  switch (alignment) {
+    case 'L':
+      return 'left';
+    case 'C':
+      return 'center';
+    case 'R':
+      return 'right';
+    default:
+      return 'left';
+  }
+};
+
+export const extractAlignments = (lastRow: string): string[] => {
+  return lastRow
+    .slice(1, -1)
+    .split(',')
+    .map(width => {
+      const alignmentMatch = width.trim().match(/(L|C|R)/);
+      return parseAligment(alignmentMatch ? alignmentMatch[0] : null);
+    });
 };

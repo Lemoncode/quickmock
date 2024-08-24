@@ -4,6 +4,7 @@ import { ShapeProps } from '../../front-components/shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import {
+  extractAlignments,
   extractDataRows,
   extractHeaderRow,
   extractWidthRow,
@@ -16,7 +17,7 @@ const tableSizeRestrictions: ShapeSizeRestrictions = {
   minHeight: 75,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 250,
+  defaultWidth: 300,
   defaultHeight: 150,
 };
 
@@ -31,6 +32,7 @@ export const Table = forwardRef<any, ShapeProps>(
     const rows = parseCSVRowsIntoArray(text);
     const headerRow = extractHeaderRow(rows[0]);
     const widthRow: string[] | false = extractWidthRow(rows[rows.length - 1]);
+    const alignments = extractAlignments(rows[rows.length - 1]);
     const dataRows = extractDataRows(rows, widthRow);
     const cellWidths = calculateCellWidths(
       restrictedWidth,
@@ -75,7 +77,7 @@ export const Table = forwardRef<any, ShapeProps>(
                 text={header}
                 fontSize={14}
                 fontStyle="bold"
-                align="center"
+                align={alignments[colIdx]}
                 verticalAlign="middle"
                 wrap="none"
                 ellipsis={true}
@@ -109,7 +111,7 @@ export const Table = forwardRef<any, ShapeProps>(
                   height={cellHeight - 10}
                   text={cell}
                   fontSize={12}
-                  align="center"
+                  align={alignments[colIdx]}
                   verticalAlign="middle"
                   wrap="none"
                   ellipsis={true}
