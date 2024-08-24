@@ -11,6 +11,7 @@ import {
   parseCSVRowsIntoArray,
 } from './table.utils';
 import { calculateCellWidths } from './table-col-width.utils';
+import { Triangle } from './components/filter-triangle';
 
 const tableSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 1,
@@ -30,7 +31,9 @@ export const Table = forwardRef<any, ShapeProps>(
       fitSizeToShapeSizeRestrictions(tableSizeRestrictions, width, height);
 
     const rows = parseCSVRowsIntoArray(text);
-    const headerRow = extractHeaderRow(rows[0]);
+    const headerInfo = extractHeaderRow(rows[0]);
+    const headerRow = headerInfo.map(header => header.text);
+    const filterHeaderRow = headerInfo.map(header => header.filter);
     const widthRow: string[] | false = extractWidthRow(rows[rows.length - 1]);
     const alignments = extractAlignments(rows[rows.length - 1]);
     const dataRows = extractDataRows(rows, widthRow);
@@ -51,12 +54,12 @@ export const Table = forwardRef<any, ShapeProps>(
         {...shapeProps}
         onClick={() => onSelected(id, 'table')}
       >
-        {/* Dibujar celdas de encabezado */}
+        {/* Draw header cells */}
         {headerRow.map((header, colIdx) => {
-          // Calcular la posición acumulativa para la celda
           const accumulatedWidth = cellWidths
             .slice(0, colIdx)
             .reduce((a, b) => a + b, 0);
+          const triangleSize = 7; // Adjust the size of the triangle
 
           return (
             <Group key={`header-${colIdx}`}>
@@ -70,9 +73,9 @@ export const Table = forwardRef<any, ShapeProps>(
                 fill="lightgrey"
               />
               <Text
-                x={accumulatedWidth + 5}
+                x={accumulatedWidth}
                 y={5}
-                width={cellWidths[colIdx] - 10}
+                width={cellWidths[colIdx] - 15 - triangleSize}
                 height={cellHeight - 10}
                 text={header}
                 fontSize={14}
@@ -82,11 +85,37 @@ export const Table = forwardRef<any, ShapeProps>(
                 wrap="none"
                 ellipsis={true}
               />
+              {/* Draw filter triangles if defined */}
+              {filterHeaderRow[colIdx] && (
+                <Group
+                  x={accumulatedWidth + cellWidths[colIdx] - triangleSize - 7}
+                  y={10}
+                >
+                  {filterHeaderRow[colIdx].includes('^') && (
+                    <Triangle
+                      x={0}
+                      y={0}
+                      width={triangleSize}
+                      height={triangleSize}
+                      direction="up"
+                    />
+                  )}
+                  {filterHeaderRow[colIdx].includes('v') && (
+                    <Triangle
+                      x={0}
+                      y={triangleSize + 5}
+                      width={triangleSize}
+                      height={triangleSize}
+                      direction="down"
+                    />
+                  )}
+                </Group>
+              )}
             </Group>
           );
         })}
 
-        {/* Dibujar celdas de datos */}
+        {/* Draw data cells */}
         {dataRows.map((row, rowIdx) => {
           let accumulatedWidth = 0;
           return row.map((cell, colIdx) => {
@@ -121,7 +150,7 @@ export const Table = forwardRef<any, ShapeProps>(
           });
         })}
 
-        {/* Dibujar líneas de la cuadrícula verticales */}
+        {/* Draw vertical grid lines */}
         {cellWidths.reduce((lines: JSX.Element[], _width, colIdx) => {
           const accumulatedWidth = cellWidths
             .slice(0, colIdx)
@@ -137,7 +166,7 @@ export const Table = forwardRef<any, ShapeProps>(
           return lines;
         }, [])}
 
-        {/* Dibujar líneas de la cuadrícula horizontales */}
+        {/* Draw horizontal grid lines */}
         {[...Array(dataRows.length + 2)].map((_, rowIdx) => (
           <Line
             key={`hline-${rowIdx}`}

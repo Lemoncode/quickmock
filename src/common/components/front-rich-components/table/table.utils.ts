@@ -2,8 +2,35 @@ export const parseCSVRowsIntoArray = (csvContent: string): string[] => {
   return csvContent.trim().split('\n');
 };
 
-export const extractHeaderRow = (headerRow: string): string[] => {
-  return headerRow.split(',').map(header => header.trim());
+export interface Header {
+  text: string;
+  filter: string;
+}
+
+export const extractHeaderRow = (headerRow: string): Header[] => {
+  return headerRow.split(',').map(header => {
+    const trimmedHeader = header.trim();
+
+    // Captura los caracteres '^' y 'v'
+    const alignmentMatches = trimmedHeader.match(
+      /(?:\s+\^?\s*v?|\s+v?\s*\^?)$/
+    );
+
+    // Captura el texto sin el sorting ni espacios
+    const textWithoutAlignment = trimmedHeader
+      .replace(/(?:\s+\^?\s*v?|\s+v?\s*\^?)$/, '')
+      .trim();
+
+    // Procesa el sorting quitando espacios, si no hay sorting, devuelve ''
+    const filter = alignmentMatches
+      ? alignmentMatches[0].trim().replace(/\s+/g, '')
+      : '';
+
+    return {
+      text: textWithoutAlignment,
+      filter: filter,
+    };
+  });
 };
 
 export const extractDataRows = (
