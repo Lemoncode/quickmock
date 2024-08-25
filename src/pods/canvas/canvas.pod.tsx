@@ -24,10 +24,6 @@ export const CanvasPod = () => {
     updateShapeSizeAndPosition,
     updateShapePosition,
     stageRef,
-    canCopy,
-    canPaste,
-    copyShapeToClipboard,
-    pasteShapeFromClipboard,
   } = useCanvasContext();
 
   const {
@@ -36,7 +32,6 @@ export const CanvasPod = () => {
     handleSelected,
     handleClearSelection,
     selectedShapeRef,
-    selectedShapeId,
     updateTextOnSelected,
     updateOtherPropsOnSelected,
   } = selectionInfo;
