@@ -18,7 +18,7 @@ If the values are less than 100%, the number of columns with a null value is cal
 * --> mean take all remaining space avialable
 */
 
-const calculateTotalWidth = (widthRow: string[]): number => {
+export const calculateTotalWidth = (widthRow: string[]): number => {
   return widthRow.reduce((acc, width) => acc + parseInt(width), 0);
 };
 
@@ -26,7 +26,7 @@ const calculateColumnsWithZeroWidth = (widthRow: string[]): number => {
   return widthRow.filter(width => width === '0').length;
 };
 
-const generateCellsWidthsCasePercentagesSumTo100OrMore = (
+const generateCellsWidthsCasePercentagesSumTo100 = (
   widthRow: string[],
   columnCount: number,
   restrictedWidth: number
@@ -35,6 +35,22 @@ const generateCellsWidthsCasePercentagesSumTo100OrMore = (
 
   for (let i = 0; i < columnCount; i++) {
     cellWidths.push((restrictedWidth * parseInt(widthRow[i])) / 100);
+  }
+
+  return cellWidths;
+};
+
+const generateCellsWidthsCasePercentagesSumMoreThan100 = (
+  widthRow: string[],
+  columnCount: number,
+  restrictedWidth: number
+) => {
+  let cellWidths: number[] = [];
+
+  for (let i = 0; i < columnCount; i++) {
+    cellWidths.push(
+      (restrictedWidth * parseInt(widthRow[i])) / calculateTotalWidth(widthRow)
+    );
   }
 
   return cellWidths;
@@ -110,9 +126,17 @@ export const calculateCellWidths = (
   }
 
   const remainingWidth = 100 - calculateTotalWidth(widthRow);
-  // The percentages sum to 100% or more
-  if (remainingWidth <= 0) {
-    return generateCellsWidthsCasePercentagesSumTo100OrMore(
+  // The percentages sum to 100%
+  if (remainingWidth === 0) {
+    return generateCellsWidthsCasePercentagesSumTo100(
+      widthRow,
+      columnCount,
+      restrictedWidth
+    );
+  }
+  // The percentages sum to more than 100%
+  if (remainingWidth < 0) {
+    return generateCellsWidthsCasePercentagesSumMoreThan100(
       widthRow,
       columnCount,
       restrictedWidth
