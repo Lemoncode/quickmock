@@ -1,7 +1,6 @@
 import { Coord } from '@/core/model';
 import { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types';
 import { Stage } from 'konva/lib/Stage';
-import { RefObject } from 'react';
 
 // TODO Add unit tests to this functions
 export const extractScreenCoordinatesFromPragmaticLocation = (
