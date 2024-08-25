@@ -1,7 +1,7 @@
 import { createRef, useMemo, useEffect, useState } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
-import { Layer, Line, Stage, Transformer } from 'react-konva';
+import { Layer, Line, Rect, Stage, Transformer } from 'react-konva';
 import { useTransform } from './use-transform.hook';
 import { renderShapeComponent } from './shape-renderer';
 import { useDropShape } from './use-drop-shape.hook';
@@ -11,6 +11,7 @@ import { EditableComponent } from '@/common/components/inline-edit';
 import { useSnapIn } from './use-snapin.hook';
 import { ShapeType } from '@/core/model';
 import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
+import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
 
 export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
@@ -35,6 +36,9 @@ export const CanvasPod = () => {
     updateTextOnSelected,
     updateOtherPropsOnSelected,
   } = selectionInfo;
+
+  const { selectionRect, handleMouseDown, handleMouseMove, handleMouseUp } =
+    useMultipleSelectionShapeHook(selectionInfo);
 
   const addNewShapeAndSetSelected = (type: ShapeType, x: number, y: number) => {
     const shapeId = addNewShape(type, x, y);
@@ -98,13 +102,16 @@ export const CanvasPod = () => {
       style={{ opacity: isDraggedOver ? 0.5 : 1 }}
     >
       {/*TODO: move size to canvas provider?*/}
+      {/*         onMouseDown={handleClearSelection}*/}
       <Stage
         width={3000}
         height={3000}
-        onMouseDown={handleClearSelection}
         onTouchStart={handleClearSelection}
         ref={stageRef}
         scale={{ x: scale, y: scale }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
       >
         <Layer>
           {
@@ -172,6 +179,17 @@ export const CanvasPod = () => {
               strokeWidth={1}
             />
           )}
+          {/*Selection Rect*/}
+          <Rect
+            x={selectionRect.x}
+            y={selectionRect.y}
+            width={selectionRect.width}
+            height={selectionRect.height}
+            fill="rgba(0, 161, 255, 0.5)"
+            visible={selectionRect.visible}
+            stroke="blue"
+            strokeWidth={1}
+          />
         </Layer>
       </Stage>
     </div>
