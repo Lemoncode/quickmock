@@ -325,8 +325,29 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
 
 const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
   switch (shapeType) {
+    case 'label':
+    case 'input':
+    case 'button':
+    case 'combobox':
     case 'line':
+    case 'combobox':
+    case 'checkbox':
+    case 'toggleswitch':
+    case 'progressbar':
+    case 'datepickerinput':
+    case 'timepickerinput':
+    case 'radiobutton':
+    case 'horizontal-menu':
+    case 'breadcrumb':
+    case 'heading1':
+    case 'heading2':
+    case 'heading3':
+    case 'normaltext':
+    case 'smalltext':
+    case 'horizontalScrollBar':
       return ['middle-left', 'middle-right'];
+    case 'verticalScrollBar':
+      return ['top-center', 'bottom-center'];
     case 'icon':
       return [];
     default:
