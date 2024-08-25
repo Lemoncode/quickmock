@@ -2,12 +2,17 @@ import { Box } from 'konva/lib/shapes/Transformer';
 import { Coord, Size } from '@/core/model';
 import { useEffect } from 'react';
 import { useCanvasContext } from '@/core/providers';
+import { getMinSizeFromShape } from './canvas.model';
 
 export const useTransform = (
   updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void
 ) => {
-  const { selectedShapeId, selectedShapeRef, transformerRef } =
-    useCanvasContext().selectionInfo;
+  const {
+    selectedShapeId,
+    selectedShapeRef,
+    transformerRef,
+    selectedShapeType,
+  } = useCanvasContext().selectionInfo;
 
   useEffect(() => {
     const selectedShape = selectedShapeRef.current;
@@ -42,9 +47,11 @@ export const useTransform = (
   };
 
   const handleTransformerBoundBoxFunc = (oldBox: Box, newBox: Box) => {
-    if (newBox.width < 5 || newBox.height < 5) {
+    const minSize = getMinSizeFromShape(selectedShapeType ?? 'rectangle');
+    if (newBox.width < minSize.width || newBox.height < minSize.height) {
       return oldBox;
     }
+
     return newBox;
   };
 

@@ -5,6 +5,7 @@ import {
   ShapeModel,
   EditType,
   OtherProps,
+  ShapeSizeRestrictions,
 } from '@/core/model';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -63,235 +64,126 @@ import {
   getSmalltextSizeRestrictions,
 } from '@/common/components/front-text-components';
 
-export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
+export const getSizeRestrictionFromShape = (
+  shapeType: ShapeType
+): ShapeSizeRestrictions => {
   switch (shapeType) {
     case 'label':
-      return {
-        width: getLabelSizeRestrictions().defaultWidth,
-        height: getLabelSizeRestrictions().defaultHeight,
-      };
+      return getLabelSizeRestrictions();
     case 'combobox':
-      return {
-        width: getComboBoxShapeSizeRestrictions().defaultWidth,
-        height: getComboBoxShapeSizeRestrictions().defaultHeight,
-      };
+      return getComboBoxShapeSizeRestrictions();
     case 'input':
-      return {
-        width: getInputShapeSizeRestrictions().defaultWidth,
-        height: getInputShapeSizeRestrictions().defaultHeight,
-      };
+      return getInputShapeSizeRestrictions();
     case 'toggleswitch':
-      return {
-        width: getToggleSwitchShapeSizeRestrictions().defaultWidth,
-        height: getToggleSwitchShapeSizeRestrictions().defaultHeight,
-      };
+      return getToggleSwitchShapeSizeRestrictions();
     case 'textarea':
-      return {
-        width: getTextAreaSizeRestrictions().defaultWidth,
-        height: getTextAreaSizeRestrictions().defaultHeight,
-      };
+      return getTextAreaSizeRestrictions();
     case 'datepickerinput':
-      return {
-        width: getDatepickerInputShapeSizeRestrictions().defaultWidth,
-        height: getDatepickerInputShapeSizeRestrictions().defaultHeight,
-      };
+      return getDatepickerInputShapeSizeRestrictions();
     case 'button':
-      return {
-        width: getButtonShapeSizeRestrictions().defaultWidth,
-        height: getButtonShapeSizeRestrictions().defaultHeight,
-      };
+      return getButtonShapeSizeRestrictions();
     case 'progressbar': {
-      return {
-        width: getProgressBarShapeSizeRestrictions().defaultWidth,
-        height: getProgressBarShapeSizeRestrictions().defaultHeight,
-      };
+      return getProgressBarShapeSizeRestrictions();
     }
     case 'listbox':
-      return {
-        width: getListboxShapeSizeRestrictions().defaultWidth,
-        height: getListboxShapeSizeRestrictions().defaultHeight,
-      };
+      return getListboxShapeSizeRestrictions();
     case 'browser':
-      return {
-        width: getBrowserWindowShapeSizeRestrictions().defaultWidth,
-        height: getBrowserWindowShapeSizeRestrictions().defaultHeight,
-      };
+      return getBrowserWindowShapeSizeRestrictions();
     case 'mobilePhone':
-      return {
-        width: getMobilePhoneShapeSizeRestrictions().defaultWidth,
-        height: getMobilePhoneShapeSizeRestrictions().defaultHeight,
-      };
+      return getMobilePhoneShapeSizeRestrictions();
     case 'tablet':
-      return {
-        width: getTabletShapeSizeRestrictions().defaultWidth,
-        height: getTabletShapeSizeRestrictions().defaultHeight,
-      };
+      return getTabletShapeSizeRestrictions();
     case 'timepickerinput':
-      return {
-        width: getTimepickerInputShapeSizeRestrictions().defaultWidth,
-        height: getTimepickerInputShapeSizeRestrictions().defaultHeight,
-      };
+      return getTimepickerInputShapeSizeRestrictions();
     case 'rectangle':
-      return {
-        width: getRectangleShapeSizeRestrictions().defaultWidth,
-        height: getRectangleShapeSizeRestrictions().defaultHeight,
-      };
+      return getRectangleShapeSizeRestrictions();
     case 'videoPlayer':
-      return {
-        width: getVideoPlayerShapeSizeRestrictions().defaultWidth,
-        height: getVideoPlayerShapeSizeRestrictions().defaultHeight,
-      };
+      return getVideoPlayerShapeSizeRestrictions();
     case 'diamond':
-      return {
-        width: getDiamondShapeSizeRestrictions().defaultWidth,
-        height: getDiamondShapeSizeRestrictions().defaultHeight,
-      };
+      return getDiamondShapeSizeRestrictions();
     case 'line':
-      return {
-        width: getlineShapeRestrictions().defaultWidth,
-        height: getlineShapeRestrictions().defaultHeight,
-      };
+      return getlineShapeRestrictions();
     case 'accordion':
-      return {
-        width: getAccordionShapeSizeRestrictions().defaultWidth,
-        height: getAccordionShapeSizeRestrictions().defaultHeight,
-      };
+      return getAccordionShapeSizeRestrictions();
     case 'triangle':
-      return {
-        width: getTriangleShapeSizeRestrictions().defaultWidth,
-        height: getTriangleShapeSizeRestrictions().defaultHeight,
-      };
+      return getTriangleShapeSizeRestrictions();
     case 'postit':
-      return {
-        width: getPostItShapeSizeRestrictions().defaultWidth,
-        height: getPostItShapeSizeRestrictions().defaultHeight,
-      };
+      return getPostItShapeSizeRestrictions();
     case 'pie':
-      return {
-        width: getPieChartShapeSizeRestrictions().defaultWidth,
-        height: getPieChartShapeSizeRestrictions().defaultHeight,
-      };
+      return getPieChartShapeSizeRestrictions();
     case 'horizontal-menu':
-      return {
-        width: getHorizontalMenuShapeSizeRestrictions().defaultWidth,
-        height: getHorizontalMenuShapeSizeRestrictions().defaultHeight,
-      };
+      return getHorizontalMenuShapeSizeRestrictions();
     case 'vertical-menu':
-      return {
-        width: getVerticalMenuShapeSizeRestrictions().defaultWidth,
-        height: getVerticalMenuShapeSizeRestrictions().defaultHeight,
-      };
+      return getVerticalMenuShapeSizeRestrictions();
     case 'breadcrumb':
-      return {
-        width: getBreadcrumbShapeSizeRestrictions().defaultWidth,
-        height: getBreadcrumbShapeSizeRestrictions().defaultHeight,
-      };
+      return getBreadcrumbShapeSizeRestrictions();
     case 'map':
-      return {
-        width: getMapChartShapeSizeRestrictions().defaultWidth,
-        height: getMapChartShapeSizeRestrictions().defaultHeight,
-      };
+      return getMapChartShapeSizeRestrictions();
     case 'circle':
-      return {
-        width: getCircleShapeSizeRestrictions().defaultWidth,
-        height: getCircleShapeSizeRestrictions().defaultHeight,
-      };
+      return getCircleShapeSizeRestrictions();
     case 'star':
-      return {
-        width: getStarShapeSizeRestrictions().defaultWidth,
-        height: getStarShapeSizeRestrictions().defaultHeight,
-      };
+      return getStarShapeSizeRestrictions();
     case 'linechart':
-      return {
-        width: getLineChartShapeSizeRestrictions().defaultWidth,
-        height: getLineChartShapeSizeRestrictions().defaultHeight,
-      };
+      return getLineChartShapeSizeRestrictions();
     case 'heading1':
-      return {
-        width: getHeading1SizeRestrictions().defaultWidth,
-        height: getHeading1SizeRestrictions().defaultHeight,
-      };
+      return getHeading1SizeRestrictions();
     case 'heading2':
-      return {
-        width: getHeading2SizeRestrictions().defaultWidth,
-        height: getHeading2SizeRestrictions().defaultHeight,
-      };
+      return getHeading2SizeRestrictions();
     case 'heading3':
-      return {
-        width: getHeading3SizeRestrictions().defaultWidth,
-        height: getHeading3SizeRestrictions().defaultHeight,
-      };
+      return getHeading3SizeRestrictions();
     case 'normaltext':
-      return {
-        width: getNormaltextSizeRestrictions().defaultWidth,
-        height: getNormaltextSizeRestrictions().defaultHeight,
-      };
+      return getNormaltextSizeRestrictions();
     case 'smalltext':
-      return {
-        width: getSmalltextSizeRestrictions().defaultWidth,
-        height: getSmalltextSizeRestrictions().defaultHeight,
-      };
+      return getSmalltextSizeRestrictions();
     case 'paragraph':
-      return {
-        width: getParagraphSizeRestrictions().defaultWidth,
-        height: getParagraphSizeRestrictions().defaultHeight,
-      };
+      return getParagraphSizeRestrictions();
     case 'largeArrow':
-      return {
-        width: getLargeArrowShapeSizeRestrictions().defaultWidth,
-        height: getLargeArrowShapeSizeRestrictions().defaultHeight,
-      };
+      return getLargeArrowShapeSizeRestrictions();
     case 'radiobutton':
-      return {
-        width: getRadioButtonShapeSizeRestrictions().defaultWidth,
-        height: getRadioButtonShapeSizeRestrictions().defaultHeight,
-      };
+      return getRadioButtonShapeSizeRestrictions();
     case 'checkbox':
-      return {
-        width: getCheckboxShapeSizeRestrictions().defaultWidth,
-        height: getCheckboxShapeSizeRestrictions().defaultHeight,
-      };
+      return getCheckboxShapeSizeRestrictions();
     case 'icon':
-      return {
-        width: getIconShapeSizeRestrictions().defaultWidth,
-        height: getIconShapeSizeRestrictions().defaultHeight,
-      };
+      return getIconShapeSizeRestrictions();
     case 'bar':
-      return {
-        width: getBarChartShapeSizeRestrictions().defaultWidth,
-        height: getBarChartShapeSizeRestrictions().defaultHeight,
-      };
+      return getBarChartShapeSizeRestrictions();
     case 'image':
-      return {
-        width: getImageShapeSizeRestrictions().defaultWidth,
-        height: getImageShapeSizeRestrictions().defaultHeight,
-      };
+      return getImageShapeSizeRestrictions();
     case 'table':
-      return {
-        width: getTableSizeRestrictions().defaultWidth,
-        height: getTableSizeRestrictions().defaultHeight,
-      };
+      return getTableSizeRestrictions();
     case 'horizontalScrollBar':
-      return {
-        width: getHorizontalScrollBarShapeSizeRestrictions().defaultWidth,
-        height: getHorizontalScrollBarShapeSizeRestrictions().defaultHeight,
-      };
+      return getHorizontalScrollBarShapeSizeRestrictions();
     case 'calendar':
-      return {
-        width: getCalendarShapeSizeRestrictions().defaultWidth,
-        height: getCalendarShapeSizeRestrictions().defaultHeight,
-      };
+      return getCalendarShapeSizeRestrictions();
     case 'verticalScrollBar':
-      return {
-        width: getVerticalScrollBarShapeSizeRestrictions().defaultWidth,
-        height: getVerticalScrollBarShapeSizeRestrictions().defaultHeight,
-      };
+      return getVerticalScrollBarShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
       );
-      return { width: 200, height: 50 };
+      return {
+        minWidth: 200,
+        minHeight: 50,
+        maxWidth: -1,
+        maxHeight: -1,
+        defaultWidth: 200,
+        defaultHeight: 50,
+      };
   }
+};
+
+export const getMinSizeFromShape = (shapeType: ShapeType): Size => {
+  const { minWidth: width, minHeight: height } =
+    getSizeRestrictionFromShape(shapeType);
+
+  return { width, height };
+};
+
+export const getDefaultSizeFromShape = (shapeType: ShapeType): Size => {
+  const { defaultWidth: width, defaultHeight: height } =
+    getSizeRestrictionFromShape(shapeType);
+
+  return { width, height };
 };
 
 const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
@@ -330,7 +222,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'button':
     case 'combobox':
     case 'line':
-    case 'combobox':
+    case 'listbox':
     case 'checkbox':
     case 'toggleswitch':
     case 'progressbar':
