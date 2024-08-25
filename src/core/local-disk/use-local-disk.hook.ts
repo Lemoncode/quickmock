@@ -44,7 +44,7 @@ export const useLocalDisk = () => {
   const handleSave = () => {
     const filename = DEFAULT_FILE_NAME;
     const content = serializeShapes();
-    if (window.showDirectoryPicker === undefined) {
+    if ((window as any).showDirectoryPicker === undefined) {
       OldBrowsersDownloadFile(filename, content);
     } else {
       newBrowsersDownloadFile(filename, content);
