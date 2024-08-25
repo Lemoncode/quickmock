@@ -222,7 +222,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'button':
     case 'combobox':
     case 'line':
-    case 'combobox':
+    case 'listbox':
     case 'checkbox':
     case 'toggleswitch':
     case 'progressbar':
