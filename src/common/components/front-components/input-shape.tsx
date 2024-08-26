@@ -3,15 +3,15 @@ import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
-import { BASIC_SHAPE } from './shape.const';
+import { INPUT_SHAPE } from './shape.const';
 
 const inputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 60,
   minHeight: 38,
   maxWidth: -1,
   maxHeight: 38,
-  defaultWidth: 155,
-  defaultHeight: 38,
+  defaultWidth: INPUT_SHAPE.DEFAULT_TEXT_WIDTH,
+  defaultHeight: INPUT_SHAPE.DEFAULT_TEXT_HEIGHT,
 };
 
 export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -26,17 +26,17 @@ export const InputShape = forwardRef<any, ShapeProps>(
       fitSizeToShapeSizeRestrictions(inputShapeRestrictions, width, height);
 
     const stroke = useMemo(
-      () => otherProps?.stroke ?? BASIC_SHAPE.STROKE_COLOR,
+      () => otherProps?.stroke ?? INPUT_SHAPE.DEFAULT_STROKE_COLOR,
       [otherProps?.stroke]
     );
 
     const fill = useMemo(
-      () => otherProps?.backgroundColor ?? BASIC_SHAPE.FILL_BACKGROUND,
+      () => otherProps?.backgroundColor ?? INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
       [otherProps?.backgroundColor]
     );
 
     const textColor = useMemo(
-      () => otherProps?.textColor ?? BASIC_SHAPE.FILL_TEXT_INPUT,
+      () => otherProps?.textColor ?? INPUT_SHAPE.DEFAULT_FILL_TEXT,
       [otherProps?.textColor]
     );
 
@@ -55,19 +55,19 @@ export const InputShape = forwardRef<any, ShapeProps>(
           y={0}
           width={restrictedWidth}
           height={restrictedHeight}
-          cornerRadius={BASIC_SHAPE.CORNER_RADIUS}
+          cornerRadius={INPUT_SHAPE.DEFAULT_CORNER_RADIUS}
           stroke={stroke}
-          strokeWidth={BASIC_SHAPE.STROKE_WIDTH}
+          strokeWidth={INPUT_SHAPE.DEFAULT_STROKE_WIDTH}
           fill={fill}
         />
         <Text
-          x={BASIC_SHAPE.PADDING}
-          y={BASIC_SHAPE.PADDING + 1}
-          width={width - BASIC_SHAPE.PADDING * 2}
+          x={INPUT_SHAPE.DEFAULT_PADDING}
+          y={INPUT_SHAPE.DEFAULT_PADDING + 1}
+          width={width - INPUT_SHAPE.DEFAULT_PADDING * 2}
           text={text}
-          fontFamily={BASIC_SHAPE.FONT_FAMILY}
-          fontSize={BASIC_SHAPE.FONT_SIZE_INPUT}
-          lineHeight={BASIC_SHAPE.LINE_HEIGHT}
+          fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
+          fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
+          lineHeight={INPUT_SHAPE.DEFAULT_LINE_HEIGHT}
           fill={textColor}
           align="left"
           ellipsis={true}

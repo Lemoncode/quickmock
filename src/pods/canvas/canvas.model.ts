@@ -63,7 +63,10 @@ import {
   getParagraphSizeRestrictions,
   getSmalltextSizeRestrictions,
 } from '@/common/components/front-text-components';
-import { BASIC_SHAPE } from '@/common/components/front-components/shape.const';
+import {
+  BASIC_SHAPE,
+  INPUT_SHAPE,
+} from '@/common/components/front-components/shape.const';
 
 export const getSizeRestrictionFromShape = (
   shapeType: ShapeType
@@ -332,9 +335,9 @@ export const generateDefaultOtherProps = (
   switch (shapeType) {
     case 'input':
       return {
-        stroke: BASIC_SHAPE.STROKE_COLOR,
-        backgroundColor: BASIC_SHAPE.FILL_BACKGROUND,
-        textColor: BASIC_SHAPE.FILL_TEXT_INPUT,
+        stroke: INPUT_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
       };
     case 'button':
     case 'textarea':
@@ -346,9 +349,9 @@ export const generateDefaultOtherProps = (
     case 'timepickerinput':
     case 'listbox':
       return {
-        stroke: BASIC_SHAPE.STROKE_COLOR,
-        backgroundColor: BASIC_SHAPE.FILL_BACKGROUND,
-        textColor: BASIC_SHAPE.FILL_TEXT,
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
       };
     case 'largeArrow':
       return {
