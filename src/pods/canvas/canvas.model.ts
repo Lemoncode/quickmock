@@ -346,6 +346,7 @@ export const generateDefaultOtherProps = (
     case 'datepickerinput':
     case 'timepickerinput':
     case 'listbox':
+    case 'modal':
       return {
         stroke: '#000000',
         backgroundColor: '#ffffff',

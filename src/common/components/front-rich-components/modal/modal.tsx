@@ -1,9 +1,9 @@
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { getModalPartsText } from './modal.utils';
+import { darkenColor, getModalPartsText } from './modal.utils';
 
 const modalShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 235,
@@ -36,6 +36,21 @@ export const Modal = forwardRef<any, ShapeProps>(
     const buttonWidth =
       (restrictedWidth - (buttons.length + 1) * buttonSpacing) / buttons.length;
 
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? '000000',
+      [otherProps?.textColor]
+    );
+    const backgroundColor = useMemo(
+      () => otherProps?.backgroundColor ?? '#00FFFF',
+      [otherProps?.backgroundColor]
+    );
+    const darkHeaderColor = darkenColor(backgroundColor, 40);
+    const darkButtonColor = darkenColor(backgroundColor, 60);
+    const strokeColor = useMemo(
+      () => otherProps?.stroke ?? '000000',
+      [otherProps?.stroke]
+    );
+
     return (
       <Group
         x={x}
@@ -52,9 +67,10 @@ export const Modal = forwardRef<any, ShapeProps>(
           y={0}
           width={restrictedWidth}
           height={restrictedHeight}
-          fill="white"
-          stroke="black"
+          fill={backgroundColor}
+          stroke={strokeColor}
           strokeWidth={2}
+          s
         />
 
         {/* Header */}
@@ -63,8 +79,8 @@ export const Modal = forwardRef<any, ShapeProps>(
           y={0}
           width={restrictedWidth}
           height={headerHeight}
-          fill="#d3d3d3"
-          stroke="black"
+          fill={darkHeaderColor}
+          stroke={strokeColor}
           strokeWidth={2}
         />
         <Text
@@ -74,7 +90,7 @@ export const Modal = forwardRef<any, ShapeProps>(
           text={modalTitle}
           fontFamily="Arial"
           fontSize={18}
-          fill="black"
+          fill="white"
           wrap="none"
           ellipsis={true}
         />
@@ -84,7 +100,7 @@ export const Modal = forwardRef<any, ShapeProps>(
           <Rect
             width={30}
             height={30}
-            fill="#a0a0a0"
+            fill="white"
             stroke="black"
             strokeWidth={1}
           />
@@ -107,7 +123,7 @@ export const Modal = forwardRef<any, ShapeProps>(
           text={modalText}
           fontFamily="Arial"
           fontSize={16}
-          fill="black"
+          fill={textColor}
           ellipsis={true}
         />
 
@@ -121,7 +137,7 @@ export const Modal = forwardRef<any, ShapeProps>(
             <Rect
               width={buttonWidth}
               height={buttonHeight}
-              fill="#808080"
+              fill={darkButtonColor}
               stroke="black"
               strokeWidth={1}
             />
