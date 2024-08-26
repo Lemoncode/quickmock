@@ -55,7 +55,8 @@ export type ShapeType =
   | 'image'
   | 'table'
   | 'verticalScrollBar'
-  | 'horizontalScrollBar';
+  | 'horizontalScrollBar'
+  | 'modal';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -102,6 +103,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   horizontalScrollBar: 'Horizontal Scroll Bar',
   calendar: 'Calendar',
   verticalScrollBar: 'Vertical Scroll Bar',
+  modal: 'Modal',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';

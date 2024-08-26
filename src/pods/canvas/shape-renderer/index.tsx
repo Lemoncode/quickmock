@@ -34,6 +34,7 @@ import {
   renderLineChart,
   renderVerticalMenuShape,
   renderTable,
+  renderModal,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -149,6 +150,8 @@ export const renderShapeComponent = (
       return renderHorizontalScrollBar(shape, shapeRenderedProps);
     case 'verticalScrollBar':
       return renderVerticalScrollBar(shape, shapeRenderedProps);
+    case 'modal':
+      return renderModal(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
