@@ -1,3 +1,25 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.itemText {
+  font-size: var(--fs-xxs);
+  color: var(--primary-700);
+}
+
+.image {
+  padding: var(--space-xs);
   width: var(--gallery-item-size);
+  height: var(--gallery-item-size);
+  border-radius: var(--border-radius-s);
+  display: flex;
+  align-items: center;
+}
+.image img {
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
