@@ -14,7 +14,6 @@
   width: var(--gallery-item-size);
   height: var(--gallery-item-size);
   border-radius: var(--border-radius-s);
-  background-color: var(--primary-50);
   display: flex;
   align-items: center;
 }
