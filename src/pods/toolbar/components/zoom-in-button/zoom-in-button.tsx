@@ -1,7 +1,7 @@
-import ToolbarButton from '../toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { ZoomInIcon } from '@/common/components/icons/zoom-in.component';
 import { useCanvasContext } from '@/core/providers';
+import { ToolbarButton } from '../toolbar-button';
 
 export const ZoomInButton = () => {
   const { scale, setScale } = useCanvasContext();
@@ -17,11 +17,8 @@ export const ZoomInButton = () => {
       onClick={handleClick}
       className={classes.button}
       disabled={isDisabled}
-    >
-      <ZoomInIcon />
-      <span>Zoom In</span>
-    </ToolbarButton>
+      icon={<ZoomInIcon />}
+      label="Zoom In"
+    />
   );
 };
-
-export default ZoomInButton;

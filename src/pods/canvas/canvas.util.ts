@@ -24,11 +24,17 @@ export const portScreenPositionToDivCoordinates = (
   return { x, y };
 };
 
+interface PositionInfo {
+  screenPosition: Coord;
+  relativeDivPosition: Coord;
+  scroll: Coord;
+}
+
 export const convertFromDivElementCoordsToKonvaCoords = (
   stage: Stage,
-  screenPosition: Coord,
-  relativeDivPosition: Coord
+  positionInfo: PositionInfo
 ): Coord => {
+  const { screenPosition, relativeDivPosition, scroll } = positionInfo;
   stage.setPointersPositions([screenPosition.x, screenPosition.y]);
   const result: Coord = { x: 0, y: 0 };
 
@@ -37,9 +43,32 @@ export const convertFromDivElementCoordsToKonvaCoords = (
     const scaleX = stage.scaleX();
     const scaleY = stage.scaleY();
 
-    result.x = (relativeDivPosition.x - stage.x()) / scaleX;
-    result.y = (relativeDivPosition.y - stage.y()) / scaleY;
+    result.x = (relativeDivPosition.x - stage.x() + scroll.x) / scaleX;
+    result.y = (relativeDivPosition.y - stage.y() + scroll.y) / scaleY;
   }
 
   return result;
+};
+
+export const calculateScaledCoordsFromCanvasDivCoordinates = (
+  stage: Stage,
+  divCoords: Coord,
+  scroll: Coord
+) => {
+  const scaleX = stage.scaleX();
+  const scaleY = stage.scaleY();
+
+  return {
+    x: (divCoords.x + scroll.x) / scaleX,
+    y: (divCoords.y + scroll.y) / scaleY,
+  };
+};
+
+export const getScrollFromDiv = (
+  divRef: React.MutableRefObject<HTMLDivElement>
+) => {
+  const scrollLeft = divRef?.current?.scrollLeft ?? 0;
+  const scrollTop = divRef?.current?.scrollTop ?? 0;
+
+  return { scrollLeft, scrollTop };
 };

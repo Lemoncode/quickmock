@@ -1,16 +1,17 @@
 import { SaveIcon } from '@/common/components/icons/save-icon.component';
-import ToolbarButton from '../toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
+import { ToolbarButton } from '../toolbar-button';
+import { useLocalDisk } from '@/core/local-disk';
 
-export const SaveButton = () => {
-  const handleClick = () => {
-    console.log('Save');
-  };
+export const SaveButton: React.FC = () => {
+  const { handleSave } = useLocalDisk();
 
   return (
-    <ToolbarButton onClick={handleClick} className={classes.button}>
-      <SaveIcon />
-      <span>Save</span>
-    </ToolbarButton>
+    <ToolbarButton
+      onClick={handleSave}
+      className={classes.button}
+      icon={<SaveIcon />}
+      label="Save"
+    />
   );
 };

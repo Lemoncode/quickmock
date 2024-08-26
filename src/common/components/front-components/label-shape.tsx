@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { Group, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
@@ -17,9 +17,17 @@ export const getLabelSizeRestrictions = (): ShapeSizeRestrictions =>
   labelSizeRestrictions;
 
 export const LabelShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(labelSizeRestrictions, width, height);
+
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'black',
+      [otherProps?.textColor]
+    );
 
     return (
       <Group
@@ -38,8 +46,8 @@ export const LabelShape = forwardRef<any, ShapeProps>(
           height={restrictedHeight}
           text={text}
           fontFamily="Comic Sans MS, cursive"
-          fontSize={16}
-          fill="black"
+          fontSize={15}
+          fill={textColor}
           align="center"
           verticalAlign="middle"
           ellipsis={true}

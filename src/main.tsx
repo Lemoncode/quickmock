@@ -5,11 +5,14 @@ import './normalize.css';
 import './reset.css';
 import './main.css';
 import { CanvasProvider } from './core/providers';
+import { ModalDialogProvider } from './core/providers/model-dialog-providers/model-dialog.provider.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <CanvasProvider>
-      <App />
+      <ModalDialogProvider>
+        <App />
+      </ModalDialogProvider>
     </CanvasProvider>
   </React.StrictMode>
 );

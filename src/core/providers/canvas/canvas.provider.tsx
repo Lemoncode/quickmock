@@ -1,11 +1,15 @@
 import React from 'react';
-import { Coord, ShapeModel, ShapeType, Size } from '@/core/model';
+import { Coord, OtherProps, ShapeModel, ShapeType, Size } from '@/core/model';
 import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
 import { createShape } from '@/pods/canvas/canvas.model';
+import { useHistoryManager } from '@/common/undo-redo';
+import { useStateWithInterceptor } from './canvas.hook';
+import { createDefaultDocumentModel, DocumentModel } from './canvas.model';
 import { v4 as uuidv4 } from 'uuid';
 import Konva from 'konva';
 import { removeShapeFromList } from './canvas.business';
+import { useClipboard } from './use-clipboard.hook';
 
 interface Props {
   children: React.ReactNode;
@@ -13,32 +17,70 @@ interface Props {
 
 export const CanvasProvider: React.FC<Props> = props => {
   const { children } = props;
-  const [shapes, setShapes] = React.useState<ShapeModel[]>([]);
+
   const [scale, setScale] = React.useState(1);
   const stageRef = React.useRef<Konva.Stage>(null);
 
-  const selectionInfo = useSelection(shapes, setShapes);
+  const {
+    addSnapshot,
+    canRedo: canRedoLogic,
+    canUndo: canUndoLogic,
+    redo,
+    undo,
+    getCurrentState: getCurrentUndoHistoryState,
+  } = useHistoryManager<DocumentModel>(createDefaultDocumentModel());
 
-  const deleteSelectedShape = () => {
-    setShapes(prevShapes =>
-      removeShapeFromList(selectionInfo.selectedShapeId, prevShapes)
+  const [document, setDocument, setShapesSkipHistory] =
+    useStateWithInterceptor<DocumentModel>(
+      createDefaultDocumentModel(),
+      addSnapshot
     );
-  };
 
-  const clearCanvas = () => {
-    setShapes([]);
-  };
-
-  const addNewShape = (type: ShapeType, x: number, y: number): string => {
-    const newShape = createShape({ x, y }, type);
-    setShapes(shapes => [...shapes, newShape]);
-
-    return newShape.id;
-  };
+  const selectionInfo = useSelection(document, setDocument);
 
   const pasteShape = (shape: ShapeModel) => {
     shape.id = uuidv4();
-    setShapes(shapes => [...shapes, shape]);
+
+    setDocument(prevDocument => ({
+      ...prevDocument,
+      shapes: [...prevDocument.shapes, shape],
+    }));
+  };
+
+  const { copyShapeToClipboard, pasteShapeFromClipboard, canCopy, canPaste } =
+    useClipboard(pasteShape, document.shapes, selectionInfo);
+
+  const clearCanvas = () => {
+    setDocument({ shapes: [] });
+  };
+
+  const deleteSelectedShape = () => {
+    setDocument(prevDocument => ({
+      ...prevDocument,
+      shapes: removeShapeFromList(
+        selectionInfo.selectedShapeId,
+        prevDocument.shapes
+      ),
+    }));
+  };
+
+  // TODO: instenad of x,y use Coord and reduce the number of arguments
+  const addNewShape = (
+    type: ShapeType,
+    x: number,
+    y: number,
+    otherProps?: OtherProps
+  ) => {
+    const newShape = createShape({ x, y }, type, otherProps);
+
+    setDocument(({ shapes }) => {
+      const newShapes = [...shapes, newShape];
+      return {
+        shapes: newShapes,
+      };
+    });
+
+    return newShape.id;
   };
 
   const updateShapeSizeAndPosition = (
@@ -46,33 +88,69 @@ export const CanvasProvider: React.FC<Props> = props => {
     position: Coord,
     size: Size
   ) => {
-    setShapes(prevShapes =>
-      prevShapes.map(shape =>
+    setDocument(({ shapes }) => ({
+      shapes: shapes.map(shape =>
         shape.id === id ? { ...shape, ...position, ...size } : shape
-      )
-    );
+      ),
+    }));
   };
 
   const updateShapePosition = (id: string, { x, y }: Coord) => {
-    setShapes(prevShapes =>
-      prevShapes.map(shape => (shape.id === id ? { ...shape, x, y } : shape))
-    );
+    setDocument(({ shapes }) => ({
+      shapes: shapes.map(shape =>
+        shape.id === id ? { ...shape, x, y } : shape
+      ),
+    }));
+  };
+
+  const doUndo = () => {
+    if (canUndo()) {
+      undo();
+      setShapesSkipHistory(getCurrentUndoHistoryState());
+    }
+  };
+
+  const doRedo = () => {
+    if (canRedo()) {
+      redo();
+      setShapesSkipHistory(getCurrentUndoHistoryState());
+    }
+  };
+
+  const canRedo = () => {
+    return canRedoLogic();
+  };
+
+  const canUndo = () => {
+    return canUndoLogic();
+  };
+
+  const loadDocument = (document: DocumentModel) => {
+    setDocument(document);
   };
 
   return (
     <CanvasContext.Provider
       value={{
-        shapes,
+        shapes: document.shapes,
         scale,
         setScale,
         clearCanvas,
         selectionInfo,
         addNewShape,
-        pasteShape,
         updateShapeSizeAndPosition,
         updateShapePosition,
+        canUndo,
+        canRedo,
+        doUndo,
+        doRedo,
+        canCopy,
+        canPaste,
+        copyShapeToClipboard,
+        pasteShapeFromClipboard,
         stageRef,
         deleteSelectedShape,
+        loadDocument,
       }}
     >
       {children}

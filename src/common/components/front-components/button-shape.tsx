@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
@@ -17,9 +17,27 @@ export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   buttonShapeRestrictions;
 
 export const ButtonShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, text, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(buttonShapeRestrictions, width, height);
+
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
+
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'black',
+      [otherProps?.textColor]
+    );
 
     return (
       <Group
@@ -37,9 +55,9 @@ export const ButtonShape = forwardRef<any, ShapeProps>(
           width={restrictedWidth}
           height={restrictedHeight}
           cornerRadius={6}
-          stroke="black"
+          stroke={stroke}
           strokeWidth={1.5}
-          fill="white"
+          fill={fill}
         />
         <Text
           x={0}
@@ -50,7 +68,7 @@ export const ButtonShape = forwardRef<any, ShapeProps>(
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
           lineHeight={1.25}
-          fill="black"
+          fill={textColor}
           align="center"
           ellipsis={true}
           wrap="none"

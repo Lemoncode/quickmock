@@ -1,0 +1,30 @@
+.iconWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+  padding: var(--space-md);
+  width: 80%;
+  gap: var(--space-s);
+  border-radius: var(--border-radius-m);
+}
+
+.icon {
+  width: var(--fs-xxl);
+}
+
+.icon:hover {
+  cursor: pointer;
+  background-color: var(--primary-200);
+  border-radius: var(--border-radius-m);
+}
+
+.iconSelected {
+  background-color: var(--primary-200);
+  border-radius: var(--border-radius-m);
+}
+
+.noIcons {
+  color: var(--primary-400);
+  font-size: var(--fs-md);
+  font-style: italic;
+}

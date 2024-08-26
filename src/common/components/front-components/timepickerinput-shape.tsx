@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
@@ -17,7 +17,7 @@ export const getTimepickerInputShapeSizeRestrictions =
   (): ShapeSizeRestrictions => timepickerInputShapeRestrictions;
 
 export const TimepickerInputShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, otherProps, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         timepickerInputShapeRestrictions,
@@ -28,6 +28,16 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
     const separatorPadding = 3; // Extra padding for spacers
     const separator1X = restrictedWidth / 3;
     const separator2X = (2 * restrictedWidth) / 3;
+
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? 'black',
+      [otherProps?.stroke]
+    );
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
 
     return (
       <Group
@@ -46,9 +56,9 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           width={restrictedWidth}
           height={restrictedHeight}
           cornerRadius={10}
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
-          fill="white"
+          fill={fill}
         />
 
         {/* Separators : */}
@@ -58,7 +68,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           text=":"
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
-          fill="black"
+          fill={stroke}
         />
         <Text
           x={separator2X - 10}
@@ -66,7 +76,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           text=":"
           fontFamily="Comic Sans MS, cursive"
           fontSize={20}
-          fill="black"
+          fill={stroke}
         />
       </Group>
     );

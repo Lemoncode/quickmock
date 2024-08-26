@@ -1,6 +1,7 @@
 import { ItemInfo } from '@/common/components/gallery/components/model';
 
 export const mockWidgetCollection: ItemInfo[] = [
+  { thumbnailSrc: '/widgets/icon.svg', type: 'icon' },
   { thumbnailSrc: '/widgets/label.svg', type: 'label' },
   { thumbnailSrc: '/widgets/input.svg', type: 'input' },
   { thumbnailSrc: '/widgets/button.svg', type: 'button' },
@@ -13,4 +14,9 @@ export const mockWidgetCollection: ItemInfo[] = [
   { thumbnailSrc: '/widgets/datepicker.svg', type: 'datepickerinput' },
   { thumbnailSrc: '/widgets/timepicker.svg', type: 'timepickerinput' },
   { thumbnailSrc: '/widgets/radiobutton.svg', type: 'radiobutton' },
+  { thumbnailSrc: '/widgets/verticalscrollbar.svg', type: 'verticalScrollBar' },
+  {
+    thumbnailSrc: '/widgets/horizontalscrollbar.svg',
+    type: 'horizontalScrollBar',
+  },
 ];

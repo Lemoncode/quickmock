@@ -19,6 +19,7 @@ export const renderLabel = (
       height={shape.height}
       name="shape"
       draggable
+      typeOfTransformer={shape.typeOfTransformer}
       onSelected={handleSelected}
       ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}
@@ -26,6 +27,7 @@ export const renderLabel = (
       onTransformEnd={handleTransform}
       isEditable={shape.allowsInlineEdition}
       text={shape.text}
+      otherProps={shape.otherProps}
     />
   );
 };
