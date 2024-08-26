@@ -24,13 +24,13 @@ import {
   getIconShapeSizeRestrictions,
   getHorizontalScrollBarShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
+  getLabelSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
   getMobilePhoneShapeSizeRestrictions,
   getTabletShapeSizeRestrictions,
 } from '@/common/components/front-containers';
-import { getLabelSizeRestrictions } from '@/common/components/front-components/label-shape';
 import {
   getTriangleShapeSizeRestrictions,
   getCircleShapeSizeRestrictions,
@@ -54,6 +54,7 @@ import {
   getVerticalMenuShapeSizeRestrictions,
   getCalendarShapeSizeRestrictions,
   getTableSizeRestrictions,
+  getModalShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -157,6 +158,8 @@ export const getSizeRestrictionFromShape = (
       return getCalendarShapeSizeRestrictions();
     case 'verticalScrollBar':
       return getVerticalScrollBarShapeSizeRestrictions();
+    case 'modal':
+      return getModalShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -298,6 +301,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nSed do eiusmod tempor incididunt ut labore et dolore magna \naliqua.Ut enim ad minim veniam, quis nostrud exercitation \nullamco laboris nisi ut aliquip ex ea commodo consequat \nDuis aute irure dolor in reprehenderit in voluptate velit\nesse cillum dolore eu fugiat nulla pariatur. \nExcepteur sint occaecat cupidatat non proident, sunt in \nculpa qui officia deserunt mollit anim id est laborum.';
     case 'table':
       return 'Name ^, Age ^v, Country v\nJohn Doe, 30, USA\nJane Smith, 25, UK\nLuis Gomez, 35, Argentina\n{*L,20R,30C}';
+    case 'modal':
+      return 'Option 1\nOption 2\n----\nOption 3\nOption 4';
     default:
       return undefined;
   }
