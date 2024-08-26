@@ -26,17 +26,17 @@ export const InputShape = forwardRef<any, ShapeProps>(
       fitSizeToShapeSizeRestrictions(inputShapeRestrictions, width, height);
 
     const stroke = useMemo(
-      () => otherProps?.stroke ?? 'black',
+      () => otherProps?.stroke ?? BASIC_SHAPE.STROKE_COLOR,
       [otherProps?.stroke]
     );
 
     const fill = useMemo(
-      () => otherProps?.backgroundColor ?? 'white',
+      () => otherProps?.backgroundColor ?? BASIC_SHAPE.FILL_BACKGROUND,
       [otherProps?.backgroundColor]
     );
 
     const textColor = useMemo(
-      () => otherProps?.textColor ?? 'black',
+      () => otherProps?.textColor ?? BASIC_SHAPE.FILL_TEXT_INPUT,
       [otherProps?.textColor]
     );
 
@@ -56,19 +56,19 @@ export const InputShape = forwardRef<any, ShapeProps>(
           width={restrictedWidth}
           height={restrictedHeight}
           cornerRadius={BASIC_SHAPE.CORNER_RADIUS}
-          stroke={stroke ? stroke : BASIC_SHAPE.STROKE_COLOR}
+          stroke={stroke}
           strokeWidth={BASIC_SHAPE.STROKE_WIDTH}
-          fill={fill ? fill : BASIC_SHAPE.FILL_BACKGROUND}
+          fill={fill}
         />
         <Text
           x={BASIC_SHAPE.PADDING}
-          y={BASIC_SHAPE.PADDING}
+          y={BASIC_SHAPE.PADDING + 1}
           width={width - BASIC_SHAPE.PADDING * 2}
           text={text}
           fontFamily={BASIC_SHAPE.FONT_FAMILY}
           fontSize={BASIC_SHAPE.FONT_SIZE_INPUT}
           lineHeight={BASIC_SHAPE.LINE_HEIGHT}
-          fill={textColor ? textColor : BASIC_SHAPE.FILL_TEXT_INPUT}
+          fill={textColor}
           align="left"
           ellipsis={true}
           wrap="none"

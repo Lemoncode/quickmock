@@ -63,6 +63,7 @@ import {
   getParagraphSizeRestrictions,
   getSmalltextSizeRestrictions,
 } from '@/common/components/front-text-components';
+import { BASIC_SHAPE } from '@/common/components/front-components/shape.const';
 
 export const getSizeRestrictionFromShape = (
   shapeType: ShapeType
@@ -259,7 +260,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
 const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
   switch (shapeType) {
     case 'input':
-      return '';
+      return 'Placeholder';
     case 'label':
       return 'Label';
     case 'combobox':
@@ -330,6 +331,11 @@ export const generateDefaultOtherProps = (
 ): OtherProps | undefined => {
   switch (shapeType) {
     case 'input':
+      return {
+        stroke: BASIC_SHAPE.STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.FILL_TEXT_INPUT,
+      };
     case 'button':
     case 'textarea':
     case 'combobox':
@@ -340,9 +346,9 @@ export const generateDefaultOtherProps = (
     case 'timepickerinput':
     case 'listbox':
       return {
-        stroke: '#000000',
-        backgroundColor: '#ffffff',
-        textColor: '#000000',
+        stroke: BASIC_SHAPE.STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.FILL_TEXT,
       };
     case 'largeArrow':
       return {

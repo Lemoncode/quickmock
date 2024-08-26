@@ -1,13 +1,13 @@
 const CORNER_RADIUS = 4;
-const STROKE_COLOR = 'black';
-const STROKE_WIDTH = 1.5;
-const FILL_BACKGROUND = 'TRANSPARENT';
+const STROKE_COLOR = '#000000';
+const STROKE_WIDTH = 1;
+const FILL_BACKGROUND = '#ffffff';
 const FONT_FAMILY = 'Comic Sans MS, cursive';
 const FONT_SIZE = 16;
-const FILL_TEXT = 'gray';
+const FILL_TEXT = '#000000';
 const PADDING = 10;
 const LINE_HEIGHT = 1.25;
-const FILL_TEXT_INPUT = 'gray';
+const FILL_TEXT_INPUT = '#8c8c8c';
 const FONT_SIZE_INPUT = 16;
 
 export const BASIC_SHAPE = {
