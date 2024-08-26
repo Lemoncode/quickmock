@@ -1004,4 +1004,34 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['smiley', 'happy', 'face', 'emoji'],
     categories: ['IT'],
   },
+  {
+    name: 'Smiley wink',
+    filename: 'smileywink.svg',
+    searchTerms: ['wink', 'playful', 'face', 'emoji'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Sad',
+    filename: 'sad.svg',
+    searchTerms: ['sad', 'face', 'emoji', 'unhappy', 'disappointed'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Dog',
+    filename: 'dog.svg',
+    searchTerms: ['dog', 'pet', 'animal', 'puppy'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cat',
+    filename: 'cat.svg',
+    searchTerms: ['cat', 'pet', 'animal', 'kitty'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Share',
+    filename: 'share.svg',
+    searchTerms: ['share', 'distribute', 'forward', 'allocate'],
+    categories: ['IT'],
+  },
 ];
