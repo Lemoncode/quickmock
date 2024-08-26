@@ -212,6 +212,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'listbox':
     case 'image':
     case 'table':
+    case 'modal':
       return true;
     default:
       return false;
@@ -302,7 +303,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'table':
       return 'Name ^, Age ^v, Country v\nJohn Doe, 30, USA\nJane Smith, 25, UK\nLuis Gomez, 35, Argentina\n{*L,20R,30C}';
     case 'modal':
-      return 'Option 1\nOption 2\n----\nOption 3\nOption 4';
+      return 'Alert\nWarning: The action you are about to perform may affect existing data. Are you sure you want to proceed? Once confirmed, this action cannot be undone.\nConfirm,Cancel';
     default:
       return undefined;
   }
@@ -321,6 +322,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'listbox':
     case 'vertical-menu':
     case 'table':
+    case 'modal':
       return 'textarea';
       break;
     case 'image':

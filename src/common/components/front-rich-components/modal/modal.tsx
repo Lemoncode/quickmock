@@ -1,8 +1,9 @@
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef } from 'react';
-import { ShapeProps } from '../front-components/shape.model';
+import { ShapeProps } from '../../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import { getModalPartsText } from './modal.utils';
 
 const modalShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 235,
@@ -25,10 +26,15 @@ export const Modal = forwardRef<any, ShapeProps>(
       fitSizeToShapeSizeRestrictions(modalShapeSizeRestrictions, width, height);
 
     const headerHeight = 50;
-    const buttonWidth = 80;
     const buttonHeight = 30;
     const buttonSpacing = 20;
     const buttonY = restrictedHeight - 50;
+
+    const { modalTitle, modalText, buttons } = getModalPartsText(text);
+
+    // Calculate button width and spacing dynamically
+    const buttonWidth =
+      (restrictedWidth - (buttons.length + 1) * buttonSpacing) / buttons.length;
 
     return (
       <Group
@@ -40,7 +46,7 @@ export const Modal = forwardRef<any, ShapeProps>(
         {...shapeProps}
         onClick={() => onSelected(id, 'modal')}
       >
-        {/* Fondo del diálogo */}
+        {/* Background */}
         <Rect
           x={0}
           y={0}
@@ -51,7 +57,7 @@ export const Modal = forwardRef<any, ShapeProps>(
           strokeWidth={2}
         />
 
-        {/* Cabecera del diálogo */}
+        {/* Header */}
         <Rect
           x={0}
           y={0}
@@ -64,13 +70,16 @@ export const Modal = forwardRef<any, ShapeProps>(
         <Text
           x={20}
           y={headerHeight / 2 - 5}
-          text="Alert"
+          width={restrictedWidth - 60}
+          text={modalTitle}
           fontFamily="Arial"
           fontSize={18}
           fill="black"
+          wrap="none"
+          ellipsis={true}
         />
 
-        {/* Botón de cierre en la cabecera */}
+        {/* Close button in header */}
         <Group x={restrictedWidth - 40} y={10}>
           <Rect
             width={30}
@@ -89,69 +98,47 @@ export const Modal = forwardRef<any, ShapeProps>(
           />
         </Group>
 
-        {/* Cuerpo del mensaje */}
+        {/* Message body */}
         <Text
           x={20}
           y={headerHeight + 30}
           width={restrictedWidth - 40}
           height={restrictedHeight - headerHeight - 90}
-          text={
-            'Warning: The action you are about to perform may affect existing data. Are you sure you want to proceed? Once confirmed, this action cannot be undone.'
-          }
+          text={modalText}
           fontFamily="Arial"
           fontSize={16}
           fill="black"
           ellipsis={true}
         />
 
-        {/* Botón Aceptar */}
-        <Group
-          x={restrictedWidth / 2 - buttonWidth - buttonSpacing / 2}
-          y={buttonY}
-        >
-          <Rect
-            width={buttonWidth}
-            height={buttonHeight}
-            fill="#808080"
-            stroke="black"
-            strokeWidth={1}
-          />
-          <Text
-            x={buttonWidth / 2 - 35}
-            y={buttonHeight / 2 - 6}
-            width={buttonWidth - 10}
-            text="Confirm"
-            fontFamily="Arial"
-            fontSize={16}
-            fill="white"
-            align="center"
-            wrap="none"
-            ellipsis={true}
-          />
-        </Group>
-
-        {/* Botón Cancelar */}
-        <Group x={restrictedWidth / 2 + buttonSpacing / 2} y={buttonY}>
-          <Rect
-            width={buttonWidth}
-            height={buttonHeight}
-            fill="#505050"
-            stroke="black"
-            strokeWidth={1}
-          />
-          <Text
-            x={buttonWidth / 2 - 35}
-            y={buttonHeight / 2 - 6}
-            width={buttonWidth - 10}
-            text="Cancel"
-            fontFamily="Arial"
-            fontSize={16}
-            fill="white"
-            align="center"
-            wrap="none"
-            ellipsis={true}
-          />
-        </Group>
+        {/* Dynamic buttons */}
+        {buttons.map((buttonText: string, index: number) => (
+          <Group
+            key={index}
+            x={buttonSpacing + index * (buttonWidth + buttonSpacing)}
+            y={buttonY}
+          >
+            <Rect
+              width={buttonWidth}
+              height={buttonHeight}
+              fill="#808080"
+              stroke="black"
+              strokeWidth={1}
+            />
+            <Text
+              x={10}
+              y={buttonHeight / 2 - 6}
+              width={buttonWidth - 20}
+              text={buttonText}
+              fontFamily="Arial"
+              fontSize={16}
+              fill="white"
+              align="center"
+              wrap="none"
+              ellipsis={true}
+            />
+          </Group>
+        ))}
       </Group>
     );
   }

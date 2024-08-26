@@ -9,4 +9,4 @@ export * from './line-chart';
 export * from './vertical-menu/vertical-menu';
 export * from './calendar/calendar';
 export * from './table/table';
-export * from './modal';
+export * from './modal/modal';
