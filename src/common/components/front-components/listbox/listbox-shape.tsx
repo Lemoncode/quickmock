@@ -71,6 +71,11 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
       [otherProps?.backgroundColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -90,6 +95,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
           cornerRadius={10}
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
           fill={fill}
         />
 

@@ -47,6 +47,11 @@ export const TriangleShape = forwardRef<any, ShapeProps>(
       [otherProps?.backgroundColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -62,6 +67,7 @@ export const TriangleShape = forwardRef<any, ShapeProps>(
           closed
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
           fill={fill}
         />
       </Group>

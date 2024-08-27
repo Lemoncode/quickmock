@@ -418,17 +418,20 @@ export const generateDefaultOtherProps = (
         stroke: '#000000',
         backgroundColor: '#ffffff',
         textColor: '#000000',
+        strokeStyle: [],
       };
     case 'largeArrow':
       return {
         stroke: '#000000',
         backgroundColor: '#d3d3d3',
+        strokeStyle: [],
       };
     case 'postit':
       return {
         stroke: '#000000',
         backgroundColor: '#FFFF99',
         textColor: '#000000',
+        strokeStyle: [],
       };
     case 'rectangle':
     case 'circle':
@@ -438,10 +441,12 @@ export const generateDefaultOtherProps = (
       return {
         stroke: '#000000',
         backgroundColor: '#ffffff',
+        strokeStyle: [],
       };
     case 'line':
       return {
         stroke: '#000000',
+        strokeStyle: [],
       };
     case 'breadcrumb':
     case 'heading1':

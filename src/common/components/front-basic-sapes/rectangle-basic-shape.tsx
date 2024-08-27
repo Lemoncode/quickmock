@@ -34,6 +34,11 @@ export const RectangleShape = forwardRef<any, ShapeProps>(
       [otherProps?.backgroundColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -52,6 +57,7 @@ export const RectangleShape = forwardRef<any, ShapeProps>(
           strokeWidth={2}
           stroke={stroke}
           fill={fill}
+          dash={strokeStyle}
           cornerRadius={5}
         />
       </Group>

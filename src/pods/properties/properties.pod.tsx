@@ -4,6 +4,7 @@ import { ZIndexOptions } from './components/zindex/zindex-option.component';
 import { ColorPicker } from './components/color-picker/color-picker.component';
 import { Checked } from './components/checked/checked.component';
 import { SelectSize, SelectIcon } from './components';
+import { StrokeStyle } from './components/stroke-style/stroke.style.component';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -29,6 +30,15 @@ export const PropertiesPod = () => {
           label="Stroke"
           color={selectedShapeData.otherProps.stroke}
           onChange={color => updateOtherPropsOnSelected('stroke', color)}
+        />
+      )}
+      {selectedShapeData?.otherProps?.strokeStyle && (
+        <StrokeStyle
+          label="Stroke style"
+          strokeStyle={selectedShapeData.otherProps?.strokeStyle}
+          onChange={strokeStyle =>
+            updateOtherPropsOnSelected('strokeStyle', strokeStyle)
+          }
         />
       )}
       {selectedShapeData?.otherProps?.backgroundColor && (

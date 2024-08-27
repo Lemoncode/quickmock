@@ -39,6 +39,11 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>(
       [otherProps?.textColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -54,6 +59,7 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>(
           data={`M1,1 H${width - 2} V${height - 2} H1 Z`}
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
           fill={fill}
         />
         {/* Polygon (Arrow), combo triangle dropdown */}
@@ -68,6 +74,7 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>(
           data={`M${width - 40},1 L${width - 40},${height - 1}`}
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
         />
         <Text
           x={10}

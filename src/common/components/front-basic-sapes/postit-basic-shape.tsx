@@ -53,6 +53,11 @@ export const PostItShape = forwardRef<any, ShapeProps>(
       [otherProps?.textColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -72,6 +77,7 @@ export const PostItShape = forwardRef<any, ShapeProps>(
           cornerRadius={10}
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
           fill={fill}
         />
 

@@ -50,6 +50,10 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>(
       () => otherProps?.stroke ?? 'black',
       [otherProps?.stroke]
     );
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
 
     return (
       <Group
@@ -68,6 +72,7 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>(
           height={restrictedHeight}
           stroke={strokeColor}
           strokeWidth={2}
+          dash={strokeStyle}
           fill={backgroundColor}
         />
 
