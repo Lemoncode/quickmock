@@ -39,6 +39,11 @@ export const ButtonShape = forwardRef<any, ShapeProps>(
       [otherProps?.textColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -56,6 +61,7 @@ export const ButtonShape = forwardRef<any, ShapeProps>(
           height={restrictedHeight}
           cornerRadius={6}
           stroke={stroke}
+          dash={strokeStyle}
           strokeWidth={1.5}
           fill={fill}
         />

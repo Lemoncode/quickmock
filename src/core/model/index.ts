@@ -135,6 +135,7 @@ export type IconSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
 
 export interface OtherProps {
   stroke?: string;
+  strokeStyle?: number[];
   backgroundColor?: string;
   textColor?: string;
   checked?: boolean;

@@ -33,6 +33,11 @@ export const CircleShape = forwardRef<any, ShapeProps>(
       [otherProps?.backgroundColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -50,6 +55,7 @@ export const CircleShape = forwardRef<any, ShapeProps>(
           stroke={stroke}
           strokeWidth={2}
           fill={fill}
+          dash={strokeStyle}
         />
       </Group>
     );

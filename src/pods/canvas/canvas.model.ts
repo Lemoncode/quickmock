@@ -345,6 +345,7 @@ export const generateDefaultOtherProps = (
         stroke: INPUT_SHAPE.DEFAULT_STROKE_COLOR,
         backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
       };
     case 'button':
     case 'textarea':
@@ -354,23 +355,25 @@ export const generateDefaultOtherProps = (
     case 'horizontal-menu':
     case 'datepickerinput':
     case 'timepickerinput':
-    case 'listbox':
     case 'modal':
       return {
         stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
         backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
       };
     case 'largeArrow':
       return {
         stroke: '#000000',
         backgroundColor: '#d3d3d3',
+        strokeStyle: [],
       };
     case 'postit':
       return {
         stroke: '#000000',
         backgroundColor: '#FFFF99',
         textColor: '#000000',
+        strokeStyle: [],
       };
     case 'rectangle':
     case 'circle':
@@ -380,10 +383,12 @@ export const generateDefaultOtherProps = (
       return {
         stroke: '#000000',
         backgroundColor: '#ffffff',
+        strokeStyle: [],
       };
     case 'line':
       return {
         stroke: '#000000',
+        strokeStyle: [],
       };
     case 'breadcrumb':
     case 'heading1':

@@ -40,6 +40,11 @@ export const InputShape = forwardRef<any, ShapeProps>(
       [otherProps?.textColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -57,6 +62,7 @@ export const InputShape = forwardRef<any, ShapeProps>(
           height={restrictedHeight}
           cornerRadius={INPUT_SHAPE.DEFAULT_CORNER_RADIUS}
           stroke={stroke}
+          dash={strokeStyle}
           strokeWidth={INPUT_SHAPE.DEFAULT_STROKE_WIDTH}
           fill={fill}
         />
