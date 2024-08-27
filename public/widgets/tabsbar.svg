@@ -1,0 +1,16 @@
+<svg width="533" height="210" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo de la tabs bar -->
+  <rect x="0" y="40" width="533" height="170" style="fill:lightgray;stroke:black;stroke-width:1"/>
+
+  <!-- Tab 1 -->
+  <rect x="10" y="10" width="106" height="30" style="fill:white;stroke:black;stroke-width:1"/>
+  <text x="30" y="30" font-family="Arial" font-size="14" fill="black">Tab 1</text>
+
+  <!-- Tab 2 -->
+  <rect x="126" y="10" width="106" height="30" style="fill:#E0E0E0;stroke:black;stroke-width:1"/>
+  <text x="146" y="30" font-family="Arial" font-size="14" fill="black">Tab 2</text>
+
+  <!-- Tab 3 -->
+  <rect x="242" y="10" width="106" height="30" style="fill:#E0E0E0;stroke:black;stroke-width:1"/>
+  <text x="262" y="30" font-family="Arial" font-size="14" fill="black">Tab 3</text>
+</svg>
