@@ -1124,4 +1124,28 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['wifi', 'internet', 'connection', 'network', 'navigate'],
     categories: ['IT'],
   },
+  {
+    name: 'Disconected wifi',
+    filename: 'nowifi.svg',
+    searchTerms: ['disconnected', 'wifi', 'disconnection', 'network'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cell signal',
+    filename: 'cellsignal.svg',
+    searchTerms: ['cell', 'signal', 'coverage', 'mobile'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cell signal off',
+    filename: 'nosignal.svg',
+    searchTerms: ['cell', 'signal', 'off', 'coverage', 'mobile'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Network',
+    filename: 'network.svg',
+    searchTerms: ['network', 'connectivity', 'connect', 'linked'],
+    categories: ['IT'],
+  },
 ];
