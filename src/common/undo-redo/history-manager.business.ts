@@ -9,20 +9,20 @@ export function addSnapshotToHistory<T>(
   currentIndex: number,
   maxHistoryLength: number
 ): [T[], number] {
-  if (isEqual(newSnapshot, history[currentIndex]))
+  /*if (isEqual(newSnapshot, history[currentIndex]))
     return [history, currentIndex];
-  else {
-    let newHistory = history.slice(0, currentIndex + 1);
-    newHistory.push(newSnapshot);
+  else {*/
+  let newHistory = history.slice(0, currentIndex + 1);
+  newHistory.push(newSnapshot);
 
-    if (newHistory.length > maxHistoryLength) {
-      newHistory = newHistory.slice(1);
-    } else {
-      currentIndex++;
-    }
-
-    return [newHistory, currentIndex];
+  if (newHistory.length > maxHistoryLength) {
+    newHistory = newHistory.slice(1);
+  } else {
+    currentIndex++;
   }
+
+  return [newHistory, currentIndex];
+  //}
 }
 
 export function canUndo(currentIndex: number): boolean {
