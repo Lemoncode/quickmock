@@ -34,6 +34,16 @@ export const TextAreaShape = forwardRef<any, ShapeProps>(
       [otherProps?.backgroundColor]
     );
 
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'black',
+      [otherProps?.textColor]
+    );
+
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -53,6 +63,7 @@ export const TextAreaShape = forwardRef<any, ShapeProps>(
           stroke={stroke}
           strokeWidth={2}
           fill={fill}
+          dash={strokeStyle}
         />
         <Text
           x={10}
@@ -62,7 +73,7 @@ export const TextAreaShape = forwardRef<any, ShapeProps>(
           text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
-          fill="gray"
+          fill={textColor}
           align="left"
           ellipsis={true}
         />

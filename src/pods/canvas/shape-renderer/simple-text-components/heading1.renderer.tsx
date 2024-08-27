@@ -9,8 +9,6 @@ export const renderHeading1 = (
   const { handleSelected, shapeRefs, handleDragEnd, handleTransform } =
     shapeRenderedProps;
 
-  console.log(shapeRefs.current[shape.id]);
-
   return (
     <Heading1Shape
       id={shape.id}

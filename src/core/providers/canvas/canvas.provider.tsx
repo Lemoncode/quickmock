@@ -9,6 +9,7 @@ import { createDefaultDocumentModel, DocumentModel } from './canvas.model';
 import { v4 as uuidv4 } from 'uuid';
 import Konva from 'konva';
 import { removeShapeFromList } from './canvas.business';
+import { useClipboard } from './use-clipboard.hook';
 
 interface Props {
   children: React.ReactNode;
@@ -37,6 +38,18 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const selectionInfo = useSelection(document, setDocument);
 
+  const pasteShape = (shape: ShapeModel) => {
+    shape.id = uuidv4();
+
+    setDocument(prevDocument => ({
+      ...prevDocument,
+      shapes: [...prevDocument.shapes, shape],
+    }));
+  };
+
+  const { copyShapeToClipboard, pasteShapeFromClipboard, canCopy, canPaste } =
+    useClipboard(pasteShape, document.shapes, selectionInfo);
+
   const clearCanvas = () => {
     setDocument({ shapes: [] });
   };
@@ -48,15 +61,6 @@ export const CanvasProvider: React.FC<Props> = props => {
         selectionInfo.selectedShapeId,
         prevDocument.shapes
       ),
-    }));
-  };
-
-  const pasteShape = (shape: ShapeModel) => {
-    shape.id = uuidv4();
-
-    setDocument(prevDocument => ({
-      ...prevDocument,
-      shapes: [...prevDocument.shapes, shape],
     }));
   };
 
@@ -130,6 +134,10 @@ export const CanvasProvider: React.FC<Props> = props => {
     return canUndoLogic();
   };
 
+  const loadDocument = (document: DocumentModel) => {
+    setDocument(document);
+  };
+
   return (
     <CanvasContext.Provider
       value={{
@@ -139,15 +147,19 @@ export const CanvasProvider: React.FC<Props> = props => {
         clearCanvas,
         selectionInfo,
         addNewShape,
-        pasteShape,
         updateShapeSizeAndPosition,
         updateShapePosition,
         canUndo,
         canRedo,
         doUndo,
         doRedo,
+        canCopy,
+        canPaste,
+        copyShapeToClipboard,
+        pasteShapeFromClipboard,
         stageRef,
         deleteSelectedShape,
+        loadDocument,
       }}
     >
       {children}

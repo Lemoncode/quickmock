@@ -47,7 +47,16 @@ export type ShapeType =
   | 'largeArrow'
   | 'bar'
   | 'triangle'
-  | 'image';
+  | 'image'
+  | 'vertical-menu'
+  | 'horizontalScrollBar'
+  | 'image'
+  | 'calendar'
+  | 'image'
+  | 'table'
+  | 'verticalScrollBar'
+  | 'horizontalScrollBar'
+  | 'modal';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -89,6 +98,12 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   icon: 'Icon',
   bar: 'Bar Chart',
   image: 'Image',
+  'vertical-menu': 'Vertical Menu',
+  table: 'Table',
+  horizontalScrollBar: 'Horizontal Scroll Bar',
+  calendar: 'Calendar',
+  verticalScrollBar: 'Vertical Scroll Bar',
+  modal: 'Modal',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
@@ -120,10 +135,12 @@ export type IconSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
 
 export interface OtherProps {
   stroke?: string;
+  strokeStyle?: number[];
   backgroundColor?: string;
+  textColor?: string;
+  checked?: boolean;
   icon?: IconInfo;
   iconSize?: IconSize;
-  textColor?: string;
   imageSrc?: string;
 }
 

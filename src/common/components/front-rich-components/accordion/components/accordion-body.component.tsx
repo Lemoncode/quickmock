@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { Group, Rect } from 'react-konva';
-import { ShapeProps } from '../../front-components/shape.model';
+import { ShapeProps } from '@/common/components/front-components/shape.model';
 
 export const AccordionBody = forwardRef<any, ShapeProps>(
   ({ x, y, width, height, ...shapeProps }, ref) => {

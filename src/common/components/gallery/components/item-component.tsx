@@ -1,8 +1,9 @@
-import { ItemInfo } from './model';
-import classes from './item-component.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { draggable } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import invariant from 'tiny-invariant';
+import { ShapeDisplayName, ShapeType } from '@/core/model';
+import { ItemInfo } from './model';
+import classes from './item-component.module.css';
 
 interface Props {
   item: ItemInfo;
@@ -27,12 +28,19 @@ export const ItemComponent: React.FC<Props> = props => {
   }, []);
 
   return (
-    // TODO: Move Style to Sass
     <div
       className={classes.container}
       style={{ opacity: isDragging ? 0.5 : 1 }}
     >
-      <img src={props.item.thumbnailSrc} ref={dragRef} />
+      <div className={classes.image} ref={dragRef}>
+        <img
+          src={props.item.thumbnailSrc}
+          title={ShapeDisplayName[item.type as ShapeType]}
+        />
+      </div>
+      <span className={classes.itemText}>
+        {ShapeDisplayName[item.type as ShapeType]}
+      </span>
     </div>
   );
 };

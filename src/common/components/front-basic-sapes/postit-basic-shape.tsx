@@ -44,8 +44,18 @@ export const PostItShape = forwardRef<any, ShapeProps>(
     );
 
     const fill = useMemo(
-      () => otherProps?.backgroundColor ?? 'white',
+      () => otherProps?.backgroundColor ?? '#FFFF99',
       [otherProps?.backgroundColor]
+    );
+
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'black',
+      [otherProps?.textColor]
+    );
+
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
     );
 
     return (
@@ -67,6 +77,7 @@ export const PostItShape = forwardRef<any, ShapeProps>(
           cornerRadius={10}
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
           fill={fill}
         />
 
@@ -88,7 +99,7 @@ export const PostItShape = forwardRef<any, ShapeProps>(
           height={restrictedHeight - tapeHeight - 10}
           text={text}
           fontSize={18}
-          fill="black"
+          fill={textColor}
           wrap="wrap"
           ellipsis={true}
         />

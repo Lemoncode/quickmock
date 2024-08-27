@@ -15,6 +15,8 @@ import {
   renderLabel,
   renderRadioButton,
   renderIcon,
+  renderHorizontalScrollBar,
+  renderVerticalScrollBar,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -30,6 +32,9 @@ import {
   renderBreadcrumb,
   renderBarChart,
   renderLineChart,
+  renderVerticalMenuShape,
+  renderTable,
+  renderModal,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -50,6 +55,7 @@ import {
 import { renderSmalltext } from './simple-text-components/smalltext.renderer';
 import { renderParagraph } from './simple-text-components/paragraph.renderer';
 import { renderImage } from './simple-basic-shapes/image.renderer';
+import { renderCalendar } from './simple-rich-components/calendar.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -96,6 +102,8 @@ export const renderShapeComponent = (
       return renderPieChart(shape, shapeRenderedProps);
     case 'map':
       return renderMapChart(shape, shapeRenderedProps);
+    case 'calendar':
+      return renderCalendar(shape, shapeRenderedProps);
     case 'linechart':
       return renderLineChart(shape, shapeRenderedProps);
     case 'diamond':
@@ -108,6 +116,8 @@ export const renderShapeComponent = (
       return renderTriangle(shape, shapeRenderedProps);
     case 'horizontal-menu':
       return renderHorizontalMenu(shape, shapeRenderedProps);
+    case 'vertical-menu':
+      return renderVerticalMenuShape(shape, shapeRenderedProps);
     case 'breadcrumb':
       return renderBreadcrumb(shape, shapeRenderedProps);
     case 'circle':
@@ -134,6 +144,14 @@ export const renderShapeComponent = (
       return renderBarChart(shape, shapeRenderedProps);
     case 'image':
       return renderImage(shape, shapeRenderedProps);
+    case 'table':
+      return renderTable(shape, shapeRenderedProps);
+    case 'horizontalScrollBar':
+      return renderHorizontalScrollBar(shape, shapeRenderedProps);
+    case 'verticalScrollBar':
+      return renderVerticalScrollBar(shape, shapeRenderedProps);
+    case 'modal':
+      return renderModal(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

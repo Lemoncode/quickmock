@@ -1,0 +1,68 @@
+<svg width="400" height="350" xmlns="http://www.w3.org/2000/svg">
+  <!-- Encabezado del calendario -->
+  <rect x="10" y="10" width="380" height="50" rx="10" ry="10" style="fill:none;stroke:black;stroke-width:2"/>
+  
+  <!-- Flecha izquierda -->
+  <polygon points="30,35 45,25 45,45" style="fill:black;stroke:none"/>
+  
+  <!-- Mes y Año -->
+  <text x="180" y="40" font-family="Comic Sans MS, cursive" font-size="20" fill="black">
+    June 2024
+  </text>
+  
+  <!-- Flecha derecha -->
+  <polygon points="370,35 355,25 355,45" style="fill:black;stroke:none"/>
+  
+  <!-- Tabla del calendario -->
+  <rect x="10" y="70" width="380" height="270" rx="10" ry="10" style="fill:none;stroke:black;stroke-width:2"/>
+  
+  <!-- Días de la semana -->
+  <text x="35" y="100" font-family="Comic Sans MS, cursive" font-size="16" fill="black">S</text>
+  <text x="85" y="100" font-family="Comic Sans MS, cursive" font-size="16" fill="black">M</text>
+  <text x="135" y="100" font-family="Comic Sans MS, cursive" font-size="16" fill="black">T</text>
+  <text x="185" y="100" font-family="Comic Sans MS, cursive" font-size="16" fill="black">W</text>
+  <text x="235" y="100" font-family="Comic Sans MS, cursive" font-size="16" fill="black">T</text>
+  <text x="285" y="100" font-family="Comic Sans MS, cursive" font-size="16" fill="black">F</text>
+  <text x="335" y="100" font-family="Comic Sans MS, cursive" font-size="16" fill="black">S</text>
+
+  <!-- Días del mes -->
+  <!-- Fila 1 -->
+  <text x="35" y="140" font-family="Comic Sans MS, cursive" font-size="16" fill="black">1</text>
+  <text x="85" y="140" font-family="Comic Sans MS, cursive" font-size="16" fill="black">2</text>
+  <text x="135" y="140" font-family="Comic Sans MS, cursive" font-size="16" fill="black">3</text>
+  <text x="185" y="140" font-family="Comic Sans MS, cursive" font-size="16" fill="black">4</text>
+  <text x="235" y="140" font-family="Comic Sans MS, cursive" font-size="16" fill="black">5</text>
+  <text x="285" y="140" font-family="Comic Sans MS, cursive" font-size="16" fill="black">6</text>
+  <text x="335" y="140" font-family="Comic Sans MS, cursive" font-size="16" fill="black">7</text>
+  
+  <!-- Fila 2 -->
+  <text x="35" y="180" font-family="Comic Sans MS, cursive" font-size="16" fill="black">8</text>
+  <text x="85" y="180" font-family="Comic Sans MS, cursive" font-size="16" fill="black">9</text>
+  <text x="135" y="180" font-family="Comic Sans MS, cursive" font-size="16" fill="black">10</text>
+  <text x="185" y="180" font-family="Comic Sans MS, cursive" font-size="16" fill="black">11</text>
+  <text x="235" y="180" font-family="Comic Sans MS, cursive" font-size="16" fill="black">12</text>
+  <text x="285" y="180" font-family="Comic Sans MS, cursive" font-size="16" fill="black">13</text>
+  <text x="335" y="180" font-family="Comic Sans MS, cursive" font-size="16" fill="black">14</text>
+  
+  <!-- Fila 3 -->
+  <text x="35" y="220" font-family="Comic Sans MS, cursive" font-size="16" fill="black">15</text>
+  <text x="85" y="220" font-family="Comic Sans MS, cursive" font-size="16" fill="black">16</text>
+  <text x="135" y="220" font-family="Comic Sans MS, cursive" font-size="16" fill="black">17</text>
+  <text x="185" y="220" font-family="Comic Sans MS, cursive" font-size="16" fill="black">18</text>
+  <text x="235" y="220" font-family="Comic Sans MS, cursive" font-size="16" fill="black">19</text>
+  <text x="285" y="220" font-family="Comic Sans MS, cursive" font-size="16" fill="black">20</text>
+  <text x="335" y="220" font-family="Comic Sans MS, cursive" font-size="16" fill="black">21</text>
+  
+  <!-- Fila 4 -->
+  <text x="35" y="260" font-family="Comic Sans MS, cursive" font-size="16" fill="black">22</text>
+  <text x="85" y="260" font-family="Comic Sans MS, cursive" font-size="16" fill="black">23</text>
+  <text x="135" y="260" font-family="Comic Sans MS, cursive" font-size="16" fill="black">24</text>
+  <text x="185" y="260" font-family="Comic Sans MS, cursive" font-size="16" fill="black">25</text>
+  <text x="235" y="260" font-family="Comic Sans MS, cursive" font-size="16" fill="black">26</text>
+  <text x="285" y="260" font-family="Comic Sans MS, cursive" font-size="16" fill="black">27</text>
+  <text x="335" y="260" font-family="Comic Sans MS, cursive" font-size="16" fill="black">28</text>
+
+  <!-- Fila 5 -->
+  <text x="35" y="300" font-family="Comic Sans MS, cursive" font-size="16" fill="black">29</text>
+  <text x="85" y="300" font-family="Comic Sans MS, cursive" font-size="16" fill="black">30</text>
+</svg>

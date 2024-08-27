@@ -1,0 +1,25 @@
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo del diálogo -->
+  <rect x="0" y="0" width="400" height="200" style="fill:white;stroke:black;stroke-width:2"/>
+
+  <!-- Cabecera del diálogo -->
+  <rect x="0" y="0" width="400" height="50" style="fill:#d3d3d3;stroke:black;stroke-width:2"/>
+  <text x="20" y="30" font-family="Arial" font-size="18" fill="black">Warning</text>
+
+  <!-- Botón de cierre en la cabecera -->
+  <rect x="360" y="10" width="30" height="30" style="fill:#a0a0a0;stroke:black;stroke-width:1"/>
+  <text x="370" y="30" font-family="Arial" font-size="18" fill="black">X</text>
+
+  <!-- Cuerpo del mensaje -->
+  <text x="20" y="80" font-family="Arial" font-size="14" fill="black" width="360">
+   Modal Message
+  </text>
+
+  <!-- Botón Aceptar -->
+  <rect x="180" y="150" width="80" height="30" style="fill:#808080;stroke:black;stroke-width:1"/>
+  <text x="200" y="170" font-family="Arial" font-size="14" fill="white">Accept</text>
+
+  <!-- Botón Cancelar -->
+  <rect x="280" y="150" width="80" height="30" style="fill:#505050;stroke:black;stroke-width:1"/>
+  <text x="290" y="170" font-family="Arial" font-size="14" fill="white">Cancel</text>
+</svg>

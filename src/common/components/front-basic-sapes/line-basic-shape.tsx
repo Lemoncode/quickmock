@@ -29,6 +29,11 @@ export const LineShape = forwardRef<any, ShapeProps>(
       [otherProps?.stroke]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -52,6 +57,7 @@ export const LineShape = forwardRef<any, ShapeProps>(
           points={[0, 0, restrictedWidth, 0]}
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
         />
       </Group>
     );

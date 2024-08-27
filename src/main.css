@@ -24,6 +24,7 @@
   --pure-white: #ffffff;
 
   /*font-sizes*/
+  --fs-xxs: 12px;
   --fs-xs: 14px;
   --fs-s: 16px;
   --fs-md: 18px;
@@ -43,7 +44,7 @@
   --canvas-min-size: 500px;
 
   /*gallery*/
-  --gallery-item-size: 120px;
+  --gallery-item-size: 110px;
 
   /*Main styles*/
   font-family: Inter, system-ui, Helvetica, Arial, sans-serif;

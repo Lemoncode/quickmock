@@ -1,0 +1,19 @@
+<svg width="220" height="180" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rectángulo que rodea todo el menú -->
+  <rect x="5" y="5" width="210" height="170" style="fill:none;stroke:black;stroke-width:2"/>
+
+  <!-- Opción 1 -->
+  <text x="20" y="30" font-family="Arial" font-size="16" fill="black">Option 1</text>
+
+  <!-- Opción 2 -->
+  <text x="20" y="60" font-family="Arial" font-size="16" fill="black">Option 2</text>
+
+  <!-- Separador -->
+  <line x1="20" y1="80" x2="200" y2="80" style="stroke:black;stroke-width:2"/>
+
+  <!-- Opción 3 -->
+  <text x="20" y="110" font-family="Arial" font-size="16" fill="black">Option 3</text>
+
+  <!-- Opción 4 -->
+  <text x="20" y="140" font-family="Arial" font-size="16" fill="black">Option 4</text>
+</svg>

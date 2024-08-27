@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { Group, Text } from 'react-konva';
 import { ShapeProps } from '../front-components/shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
@@ -24,6 +24,11 @@ export const Heading2Shape = forwardRef<any, ShapeProps>(
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(heading2SizeRestrictions, width, height);
 
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? 'black',
+      [otherProps?.textColor]
+    );
+
     return (
       <Group
         x={x}
@@ -42,7 +47,7 @@ export const Heading2Shape = forwardRef<any, ShapeProps>(
           text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={25}
-          fill={otherProps?.textColor ?? 'black'}
+          fill={textColor}
           align="center"
           verticalAlign="middle"
           ellipsis={true}

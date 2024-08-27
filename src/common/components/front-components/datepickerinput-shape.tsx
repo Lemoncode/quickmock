@@ -39,6 +39,11 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
       [otherProps?.backgroundColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -58,6 +63,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           cornerRadius={10}
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
           fill={fill}
         />
         {/* Inverted diagonal spacers */}

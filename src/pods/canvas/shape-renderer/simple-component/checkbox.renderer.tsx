@@ -27,6 +27,7 @@ export const renderCheckbox = (
       onTransformEnd={handleTransform}
       isEditable={shape.allowsInlineEdition}
       text={shape.text}
+      otherProps={shape.otherProps}
     />
   );
 };
