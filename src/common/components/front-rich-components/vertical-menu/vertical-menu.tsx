@@ -79,6 +79,11 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
       [otherProps?.textColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -97,6 +102,7 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
           stroke={stroke}
           strokeWidth={2}
           fill={fill}
+          dash={strokeStyle}
         />
         {verticalMenuItems.map((option, index) => (
           <Group key={index}>
