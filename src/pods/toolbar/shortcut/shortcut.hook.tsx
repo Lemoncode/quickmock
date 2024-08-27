@@ -16,7 +16,6 @@ export const useShortcut = ({ targetKey, callback }: ShortcutHookProps) => {
       (isWindowsOrLinux() && isAltKeyPressed) ||
       (isMacOS() && isCtrlOrCmdPressed)
     ) {
-      console.log('event.key', event.key);
       if (targetKey.includes(event.key)) {
         event.preventDefault();
         callback();

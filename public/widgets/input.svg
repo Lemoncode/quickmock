@@ -1,7 +1,6 @@
-<svg width="200" height="50" xmlns="http://www.w3.org/2000/svg">
-  <rect x="10" y="10" width="180" height="30" rx="5" ry="5" 
-        style="fill:none;stroke:black;stroke-width:2"/>
-  <text x="20" y="30" font-family="Comic Sans MS, cursive" font-size="15" fill="gray">
-    Input
+<svg width="159" height="42" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="155" height="38" fill="white" stroke="black" stroke-width="1" rx="4" ry="4"/>
+  <text x="12" y="25" font-family="Comic Sans MS, cursive" font-size="15" fill="#8c8c8c" width="135" >
+    Placeholder
   </text>
 </svg>
