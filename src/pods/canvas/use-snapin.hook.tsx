@@ -17,7 +17,7 @@ export const useSnapIn = (
   const [xCoordVerticalLine, setXCoordVerticalLine] = useState(0);
   const { stageRef } = useCanvasContext();
 
-  const handleTransformerDragMove = (e: KonvaEventObject<DragEvent>) => {
+  const handleTransformerDragMove = (_: KonvaEventObject<DragEvent>) => {
     if (!excludedShapeId) return;
 
     const possibleSnapLines = getSnapLines(excludedShapeId);
