@@ -1064,4 +1064,34 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['pause', 'suspension', 'wait', 'controls'],
     categories: ['IT'],
   },
+  {
+    name: 'Envelope',
+    filename: 'envelope.svg',
+    searchTerms: ['envelope', 'mail', 'postbag', 'letter'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Envelope open',
+    filename: 'envelopeopen.svg',
+    searchTerms: ['envelope', 'open', 'mail', 'postbag', 'letter'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Pie chart',
+    filename: 'piechart.svg',
+    searchTerms: ['pie chart', 'chart', 'graph', 'stats'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Chart line',
+    filename: 'chartline.svg',
+    searchTerms: ['line chart', 'chart', 'graph', 'stats'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Chart donut',
+    filename: 'chartdonut.svg',
+    searchTerms: ['donut chart', 'chart', 'graph', 'stats'],
+    categories: ['IT'],
+  },
 ];
