@@ -1,7 +1,6 @@
 // TODO Add Unit tests to this Undo/Redo helpers
 // #162
 // https://github.com/Lemoncode/mongo-modeler/issues/162
-import isEqual from 'lodash/isEqual';
 
 export function addSnapshotToHistory<T>(
   history: T[],
@@ -9,9 +8,6 @@ export function addSnapshotToHistory<T>(
   currentIndex: number,
   maxHistoryLength: number
 ): [T[], number] {
-  /*if (isEqual(newSnapshot, history[currentIndex]))
-    return [history, currentIndex];
-  else {*/
   let newHistory = history.slice(0, currentIndex + 1);
   newHistory.push(newSnapshot);
 
@@ -22,7 +18,6 @@ export function addSnapshotToHistory<T>(
   }
 
   return [newHistory, currentIndex];
-  //}
 }
 
 export function canUndo(currentIndex: number): boolean {

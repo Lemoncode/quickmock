@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './normalize.css';
@@ -15,5 +14,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   </CanvasProvider>
 );
 
+/* TODO: Undo redo not working as expected on strict mode */
+/* Delete shape and inline edit click outside shape */
+/* Add issue to track this */
 /*<React.StrictMode>*/
 /*</React.StrictMode>*/
