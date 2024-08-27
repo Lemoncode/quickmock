@@ -16,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 /* TODO: Undo redo not working as expected on strict mode */
 /* Delete shape and inline edit click outside shape */
-/* Add issue to track this */
+/* Add issue to track this: #279 */
+/* https://github.com/Lemoncode/quickmock/issues/279 */
 /*<React.StrictMode>*/
 /*</React.StrictMode>*/
