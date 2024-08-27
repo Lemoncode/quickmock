@@ -26,6 +26,7 @@ describe('calculateCanvasBounds', () => {
         id: '1',
         type: 'button',
         allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
       },
     ];
     const expected: CanvasBounds = {
@@ -54,6 +55,7 @@ describe('calculateCanvasBounds', () => {
         id: '1',
         type: 'button',
         allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
       },
       {
         x: 30,
@@ -63,6 +65,7 @@ describe('calculateCanvasBounds', () => {
         id: '2',
         type: 'button',
         allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
       },
     ];
     const expected: CanvasBounds = {
@@ -91,6 +94,7 @@ describe('calculateCanvasBounds', () => {
         id: '1',
         type: 'button',
         allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
       },
       {
         x: 15,
@@ -100,6 +104,7 @@ describe('calculateCanvasBounds', () => {
         id: '2',
         type: 'button',
         allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
       },
     ];
     const expected: CanvasBounds = {
@@ -128,6 +133,7 @@ describe('calculateCanvasBounds', () => {
         id: '1',
         type: 'button',
         allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
       },
     ];
     const expected: CanvasBounds = {
@@ -156,6 +162,7 @@ describe('calculateCanvasBounds', () => {
         id: '1',
         type: 'button',
         allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
       },
       {
         x: 20,
@@ -165,6 +172,7 @@ describe('calculateCanvasBounds', () => {
         id: '2',
         type: 'button',
         allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
       },
     ];
     const expected: CanvasBounds = {
@@ -193,6 +201,7 @@ describe('calculateCanvasBounds', () => {
         id: '1',
         type: 'button',
         allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
       },
     ];
     const expected: CanvasBounds = {

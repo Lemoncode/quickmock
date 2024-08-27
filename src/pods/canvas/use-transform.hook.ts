@@ -3,6 +3,7 @@ import { Coord, Size } from '@/core/model';
 import { useEffect } from 'react';
 import { useCanvasContext } from '@/core/providers';
 import { getMinSizeFromShape } from './canvas.model';
+import { KonvaEventObject } from 'konva/lib/Node';
 
 export const useTransform = (
   updateShapeSizeAndPosition: (
@@ -29,7 +30,7 @@ export const useTransform = (
     }
   }, [selectedShapeId]);
 
-  const handleTransform = (e: MouseEvent) => {
+  const handleTransform = (e: KonvaEventObject<Event>) => {
     const skipHistory = e.type !== 'transformend';
 
     const node = selectedShapeRef.current;

@@ -10,7 +10,7 @@ export const saveFileModern = async (
   let savedFilename = '';
   const { filename, extension, description } = fileInfo;
   try {
-    const newFileHandle = await window.showSaveFilePicker({
+    const newFileHandle = await (window as any).showSaveFilePicker({
       suggestedName: filename,
       types: [
         {
