@@ -5,12 +5,12 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 import { Group, Rect, Text } from 'react-konva';
 
 const buttonShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 60,
-  minHeight: 45,
+  minWidth: 50,
+  minHeight: 35,
   maxWidth: -1,
-  maxHeight: 50,
-  defaultWidth: 140,
-  defaultHeight: 45,
+  maxHeight: 35,
+  defaultWidth: 100,
+  defaultHeight: 35,
 };
 
 export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -54,23 +54,26 @@ export const ButtonShape = forwardRef<any, ShapeProps>(
           y={0}
           width={restrictedWidth}
           height={restrictedHeight}
-          cornerRadius={14}
+          cornerRadius={6}
           stroke={stroke}
-          strokeWidth={2}
+          strokeWidth={1.5}
           fill={fill}
         />
         <Text
           x={0}
-          y={20}
+          y={10}
           width={width}
-          height={height - 20}
+          height={height - 10}
           text={text}
           fontFamily="Comic Sans MS, cursive"
           fontSize={15}
+          lineHeight={1.25}
           fill={textColor}
           align="center"
           ellipsis={true}
           wrap="none"
+          fontStyle="bold"
+          letterSpacing={1}
         />
       </Group>
     );
