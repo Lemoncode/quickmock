@@ -5,7 +5,12 @@ import { useCanvasContext } from '@/core/providers';
 import { getMinSizeFromShape } from './canvas.model';
 
 export const useTransform = (
-  updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void
+  updateShapeSizeAndPosition: (
+    id: string,
+    position: Coord,
+    size: Size,
+    skipHistory: boolean
+  ) => void
 ) => {
   const {
     selectedShapeId,
@@ -24,7 +29,9 @@ export const useTransform = (
     }
   }, [selectedShapeId]);
 
-  const handleTransform = () => {
+  const handleTransform = (e: MouseEvent) => {
+    const skipHistory = e.type !== 'transformend';
+
     const node = selectedShapeRef.current;
     if (!node) {
       return;
@@ -37,10 +44,15 @@ export const useTransform = (
     const newWidth = node.width() * scaleX;
     const newHeight = node.height() * scaleY;
 
-    updateShapeSizeAndPosition(selectedShapeId, position, {
-      width: newWidth,
-      height: newHeight,
-    });
+    updateShapeSizeAndPosition(
+      selectedShapeId,
+      position,
+      {
+        width: newWidth,
+        height: newHeight,
+      },
+      skipHistory
+    );
 
     node.scaleX(1);
     node.scaleY(1);
