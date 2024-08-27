@@ -1034,4 +1034,34 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['share', 'distribute', 'forward', 'allocate'],
     categories: ['IT'],
   },
+  {
+    name: 'Play',
+    filename: 'play.svg',
+    searchTerms: ['play', 'start', 'begin', 'action', 'controls'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Rewind',
+    filename: 'rewind.svg',
+    searchTerms: ['rewind', 'back', 'previous', 'rewinding', 'controls'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Fast forward',
+    filename: 'fastforward.svg',
+    searchTerms: ['skip', 'forward', 'next', 'advance', 'controls'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Stop',
+    filename: 'stop.svg',
+    searchTerms: ['stop', 'end', 'halt', 'finish', 'controls'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Pause',
+    filename: 'pause.svg',
+    searchTerms: ['pause', 'suspension', 'wait', 'controls'],
+    categories: ['IT'],
+  },
 ];
