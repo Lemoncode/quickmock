@@ -1094,4 +1094,34 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['donut chart', 'chart', 'graph', 'stats'],
     categories: ['IT'],
   },
+  {
+    name: 'Chart bar',
+    filename: 'chartbar.svg',
+    searchTerms: ['bar chart', 'chart', 'graph', 'stats'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Map pin area',
+    filename: 'pinarea.svg',
+    searchTerms: ['map', 'area', 'location', 'place', 'plat'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Map pin',
+    filename: 'pin.svg',
+    searchTerms: ['map', 'location', 'place', 'plat'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Map',
+    filename: 'maptrifold.svg',
+    searchTerms: ['map', 'trifold', 'mapping', 'plat'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Wifi',
+    filename: 'wifi.svg',
+    searchTerms: ['wifi', 'internet', 'connection', 'network', 'navigate'],
+    categories: ['IT'],
+  },
 ];
