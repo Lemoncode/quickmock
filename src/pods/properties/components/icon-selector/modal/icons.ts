@@ -1094,4 +1094,58 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['donut chart', 'chart', 'graph', 'stats'],
     categories: ['IT'],
   },
+  {
+    name: 'Chart bar',
+    filename: 'chartbar.svg',
+    searchTerms: ['bar chart', 'chart', 'graph', 'stats'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Map pin area',
+    filename: 'pinarea.svg',
+    searchTerms: ['map', 'area', 'location', 'place', 'plat'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Map pin',
+    filename: 'pin.svg',
+    searchTerms: ['map', 'location', 'place', 'plat'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Map',
+    filename: 'maptrifold.svg',
+    searchTerms: ['map', 'trifold', 'mapping', 'plat'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Wifi',
+    filename: 'wifi.svg',
+    searchTerms: ['wifi', 'internet', 'connection', 'network', 'navigate'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Disconected wifi',
+    filename: 'nowifi.svg',
+    searchTerms: ['disconnected', 'wifi', 'disconnection', 'network'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cell signal',
+    filename: 'cellsignal.svg',
+    searchTerms: ['cell', 'signal', 'coverage', 'mobile'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cell signal off',
+    filename: 'nosignal.svg',
+    searchTerms: ['cell', 'signal', 'off', 'coverage', 'mobile'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Network',
+    filename: 'network.svg',
+    searchTerms: ['network', 'connectivity', 'connect', 'linked'],
+    categories: ['IT'],
+  },
 ];
