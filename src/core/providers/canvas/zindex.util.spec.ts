@@ -11,19 +11,91 @@ describe('moveZIndexToTop', () => {
     // Arrange
     const selectedShapeId: string = '2';
     const shapes: ShapeModel[] = [
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
     ];
     // Act
     const result = moveZIndexToTop(selectedShapeId, shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
     ]);
   });
 

@@ -28,6 +28,7 @@ describe('canvas.business', () => {
           height: 10,
           type: 'combobox',
           allowsInlineEdition: false,
+          typeOfTransformer: ['top-center', 'bottom-center'],
         },
         {
           id: '2',
@@ -37,6 +38,7 @@ describe('canvas.business', () => {
           height: 20,
           type: 'input',
           allowsInlineEdition: true,
+          typeOfTransformer: ['top-center', 'bottom-center'],
         },
       ];
 
@@ -60,6 +62,7 @@ describe('canvas.business', () => {
           height: 10,
           type: 'combobox',
           allowsInlineEdition: false,
+          typeOfTransformer: ['top-center', 'bottom-center'],
         },
         {
           id: '2',
@@ -69,6 +72,7 @@ describe('canvas.business', () => {
           height: 20,
           type: 'input',
           allowsInlineEdition: true,
+          typeOfTransformer: ['top-center', 'bottom-center'],
         },
         {
           id: '3',
@@ -78,6 +82,7 @@ describe('canvas.business', () => {
           height: 30,
           type: 'button',
           allowsInlineEdition: false,
+          typeOfTransformer: ['top-center', 'bottom-center'],
         },
         {
           id: '4',
@@ -87,6 +92,7 @@ describe('canvas.business', () => {
           height: 40,
           type: 'checkbox',
           allowsInlineEdition: true,
+          typeOfTransformer: ['top-center', 'bottom-center'],
         },
       ];
 
@@ -138,6 +144,7 @@ describe('canvas.business', () => {
           height: 10,
           type: 'combobox',
           allowsInlineEdition: false,
+          typeOfTransformer: ['top-center', 'bottom-center'],
         },
       ];
 
@@ -160,6 +167,7 @@ describe('canvas.business', () => {
         height: 10,
         type: 'combobox',
         allowsInlineEdition: false,
+        typeOfTransformer: ['top-center', 'bottom-center'],
       },
     ];
     const result = removeShapeFromList(shapeId, shapeCollection);
