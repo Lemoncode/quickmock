@@ -24,7 +24,9 @@ export const useTransform = (
     }
   }, [selectedShapeId]);
 
-  const handleTransform = (skipHistory: boolean = false) => {
+  const handleTransform = (e: MouseEvent) => {
+    const skipHistory = e.type !== 'transformend';
+
     const node = selectedShapeRef.current;
     if (!node) {
       return;
