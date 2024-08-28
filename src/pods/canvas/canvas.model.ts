@@ -436,6 +436,10 @@ export const generateDefaultOtherProps = (
         },
         iconSize: 'M',
       };
+    case 'progressbar':
+      return {
+        progress: '50',
+      };
     default:
       return undefined;
   }

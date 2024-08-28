@@ -5,6 +5,7 @@ import { ColorPicker } from './components/color-picker/color-picker.component';
 import { Checked } from './components/checked/checked.component';
 import { SelectSize, SelectIcon } from './components';
 import { StrokeStyle } from './components/stroke-style/stroke.style.component';
+import { Progress } from './components/progress/progress.component';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -78,6 +79,15 @@ export const PropertiesPod = () => {
           label="Checked"
           checked={selectedShapeData?.otherProps?.checked}
           onChange={checked => updateOtherPropsOnSelected('checked', checked)}
+        />
+      )}
+      {selectedShapeData?.otherProps?.progress && (
+        <Progress
+          label="Progress"
+          progress={selectedShapeData?.otherProps?.progress}
+          onChange={progress =>
+            updateOtherPropsOnSelected('progress', progress)
+          }
         />
       )}
     </div>

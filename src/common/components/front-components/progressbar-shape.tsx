@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect } from 'react-konva';
@@ -17,13 +17,23 @@ export const getProgressBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   progressBarShapeRestrictions;
 
 export const ProgressBarShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  ({ x, y, width, height, id, onSelected, otherProps, ...shapeProps }, ref) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         progressBarShapeRestrictions,
         width,
         height
       );
+
+    const progress = useMemo(() => {
+      const prog = otherProps?.progress ?? 50;
+      return typeof prog === 'string' ? parseFloat(prog) : prog;
+    }, [otherProps?.progress]);
+
+    const progressWidth = useMemo(
+      () => (progress / 100) * restrictedWidth,
+      [progress, restrictedWidth]
+    );
 
     return (
       <Group
@@ -51,12 +61,12 @@ export const ProgressBarShape = forwardRef<any, ShapeProps>(
         <Rect
           x={0}
           y={0}
-          width={restrictedWidth / 2}
+          width={progressWidth}
           height={restrictedHeight}
           cornerRadius={10}
           stroke="black"
           strokeWidth={2}
-          fill="lightgrey"
+          fill="green"
         />
       </Group>
     );
