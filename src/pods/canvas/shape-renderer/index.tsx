@@ -22,6 +22,7 @@ import {
   renderBrowserWindow,
   renderMobilePhoneContainer,
   renderTablet,
+  renderModalDialogContainer,
 } from './simple-container';
 import {
   renderVideoPlayer,
@@ -88,6 +89,8 @@ export const renderShapeComponent = (
       return renderTimepickerinput(shape, shapeRenderedProps);
     case 'mobilePhone':
       return renderMobilePhoneContainer(shape, shapeRenderedProps);
+    case 'modalDialog':
+      return renderModalDialogContainer(shape, shapeRenderedProps);
     case 'label':
       return renderLabel(shape, shapeRenderedProps);
     case 'radiobutton':

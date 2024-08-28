@@ -21,6 +21,7 @@ export type ShapeType =
   | 'timepickerinput'
   | 'mobilePhone'
   | 'tablet'
+  | 'modalDialog'
   | 'timepickerinput'
   | 'label'
   | 'radiobutton'
@@ -72,6 +73,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   timepickerinput: 'Time Picker Input',
   mobilePhone: 'Mobile Phone',
   tablet: 'Tablet',
+  modalDialog: 'Modal Dialog',
   label: 'Label',
   radiobutton: 'Radio Button',
   rectangle: 'Rectangle',
