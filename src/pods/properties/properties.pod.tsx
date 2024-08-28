@@ -6,6 +6,7 @@ import { Checked } from './components/checked/checked.component';
 import { SelectSize, SelectIcon } from './components';
 import { StrokeStyle } from './components/stroke-style/stroke.style.component';
 import { ImageSrc } from './components/image-src/image-selector.component';
+import { ImageBlackAndWhite } from './components/image-black-and-white/image-black-and-white-selector.component';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -86,6 +87,15 @@ export const PropertiesPod = () => {
           label="Image Source"
           onChange={imageSrc =>
             updateOtherPropsOnSelected('imageSrc', imageSrc)
+          }
+        />
+      )}
+      {selectedShapeData?.otherProps?.imageBlackAndWhite != undefined && (
+        <ImageBlackAndWhite
+          label="B/W filter"
+          imageBlackAndWhite={selectedShapeData?.otherProps?.imageBlackAndWhite}
+          onChange={imageBlackAndWhite =>
+            updateOtherPropsOnSelected('imageBlackAndWhite', imageBlackAndWhite)
           }
         />
       )}
