@@ -425,6 +425,11 @@ export const generateDefaultOtherProps = (
         },
         iconSize: 'M',
       };
+    case 'image':
+      return {
+        imageSrc: '',
+        imageBlackAndWhite: false,
+      };
     default:
       return undefined;
   }

@@ -144,6 +144,7 @@ export interface OtherProps {
   icon?: IconInfo;
   iconSize?: IconSize;
   imageSrc?: string;
+  imageBlackAndWhite?: boolean;
 }
 
 export const BASE_ICONS_URL = '/icons/';
