@@ -56,6 +56,7 @@ import {
   getCalendarShapeSizeRestrictions,
   getTableSizeRestrictions,
   getModalShapeSizeRestrictions,
+  getAppBarShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -88,9 +89,8 @@ export const getSizeRestrictionFromShape = (
       return getDatepickerInputShapeSizeRestrictions();
     case 'button':
       return getButtonShapeSizeRestrictions();
-    case 'progressbar': {
+    case 'progressbar':
       return getProgressBarShapeSizeRestrictions();
-    }
     case 'listbox':
       return getListboxShapeSizeRestrictions();
     case 'browser':
@@ -167,6 +167,8 @@ export const getSizeRestrictionFromShape = (
       return getVerticalScrollBarShapeSizeRestrictions();
     case 'modal':
       return getModalShapeSizeRestrictions();
+    case 'appBar':
+      return getAppBarShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -220,6 +222,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'image':
     case 'table':
     case 'modal':
+    case 'appBar':
       return true;
     default:
       return false;
@@ -248,6 +251,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'normaltext':
     case 'smalltext':
     case 'horizontalScrollBar':
+    case 'appBar':
       return ['middle-left', 'middle-right'];
     case 'verticalScrollBar':
       return ['top-center', 'bottom-center'];
@@ -311,6 +315,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Name ^, Age ^v, Country v\nJohn Doe, 30, USA\nJane Smith, 25, UK\nLuis Gomez, 35, Argentina\n{*L,20R,30C}';
     case 'modal':
       return 'Alert\nWarning: The action you are about to perform may affect existing data. Are you sure you want to proceed? Once confirmed, this action cannot be undone.\nConfirm,Cancel';
+    case 'appBar':
+      return 'AppBar';
     default:
       return undefined;
   }
@@ -330,6 +336,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'vertical-menu':
     case 'table':
     case 'modal':
+    case 'appBar':
       return 'textarea';
       break;
     case 'image':
@@ -415,6 +422,13 @@ export const generateDefaultOtherProps = (
         textColor: '#000000',
       };
 
+    case 'appBar':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: '#A9A9A9',
+        textColor: '#ffffff',
+        strokeStyle: [],
+      };
     case 'icon':
       return {
         icon: {
@@ -424,6 +438,10 @@ export const generateDefaultOtherProps = (
           categories: ['IT'],
         },
         iconSize: 'M',
+      };
+    case 'progressbar':
+      return {
+        progress: '50',
       };
     default:
       return undefined;
