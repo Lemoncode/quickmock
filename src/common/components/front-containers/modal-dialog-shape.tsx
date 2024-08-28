@@ -25,8 +25,6 @@ export const ModalDialogContainer = forwardRef<any, ShapeProps>(
         height
       );
 
-    console.log(restrictedWidth, restrictedHeight);
-
     const titleBarHeight = 50;
 
     return (
