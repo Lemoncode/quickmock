@@ -24,6 +24,7 @@ import {
   getIconShapeSizeRestrictions,
   getHorizontalScrollBarShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
+  getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
 } from '@/common/components/front-components';
 import {
@@ -167,6 +168,8 @@ export const getSizeRestrictionFromShape = (
       return getVerticalScrollBarShapeSizeRestrictions();
     case 'modal':
       return getModalShapeSizeRestrictions();
+    case 'tooltip':
+      return getTooltipShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -301,6 +304,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Heading 2';
     case 'heading3':
       return 'Heading 3';
+    case 'tooltip':
+      return 'Tooltip';
     case 'normaltext':
       return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
     case 'smalltext':
@@ -358,6 +363,7 @@ export const generateDefaultOtherProps = (
     case 'horizontal-menu':
     case 'datepickerinput':
     case 'timepickerinput':
+    case 'tooltip':
     case 'modal':
       return {
         stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,

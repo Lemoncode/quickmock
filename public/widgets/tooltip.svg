@@ -1,0 +1,6 @@
+<svg width="200" height="70" xmlns="http://www.w3.org/2000/svg">
+  <!-- Caja del tooltip -->
+  <rect x="10" y="10" width="180" height="50" rx="10" ry="10" style="fill:lightyellow;stroke:black;stroke-width:2"/>
+  <!-- Texto del tooltip -->
+  <text x="20" y="40" font-family="Arial" font-size="16" fill="black">This is a tooltip</text>
+</svg>
