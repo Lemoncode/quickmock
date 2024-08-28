@@ -29,6 +29,7 @@ import {
 import {
   getBrowserWindowShapeSizeRestrictions,
   getMobilePhoneShapeSizeRestrictions,
+  getModalDialogShapeSizeRestrictions,
   getTabletShapeSizeRestrictions,
 } from '@/common/components/front-containers';
 import {
@@ -98,6 +99,8 @@ export const getSizeRestrictionFromShape = (
       return getMobilePhoneShapeSizeRestrictions();
     case 'tablet':
       return getTabletShapeSizeRestrictions();
+    case 'modalDialog':
+      return getModalDialogShapeSizeRestrictions();
     case 'timepickerinput':
       return getTimepickerInputShapeSizeRestrictions();
     case 'rectangle':
