@@ -223,6 +223,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'image':
     case 'table':
     case 'modal':
+    case 'tooltip':
       return true;
     default:
       return false;
@@ -250,6 +251,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'heading3':
     case 'normaltext':
     case 'smalltext':
+    case 'tooltip':
     case 'horizontalScrollBar':
       return ['middle-left', 'middle-right'];
     case 'verticalScrollBar':
