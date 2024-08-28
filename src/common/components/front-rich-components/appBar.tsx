@@ -68,6 +68,10 @@ export const AppBarShape = forwardRef<any, ShapeProps>(
     const textStartX = iconPadding + iconWidth + padding;
     const textWidth = restrictedWidth - textStartX - padding;
 
+    const barHeight = 3; // Height bar
+    const barSpacing = 2; // Space between bars
+    const totalIconHeight = 3 * barHeight + 2 * barSpacing; // Total height including spacing
+
     return (
       <Group
         x={x}
@@ -78,7 +82,7 @@ export const AppBarShape = forwardRef<any, ShapeProps>(
         {...shapeProps}
         onClick={() => onSelected(id, 'appBar')}
       >
-        {/* AppBar background*/}
+        {/* AppBar background */}
         <Rect
           x={0}
           y={0}
@@ -90,29 +94,30 @@ export const AppBarShape = forwardRef<any, ShapeProps>(
           strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
         />
 
-        {/* Menu Icon*/}
+        {/* Menu Icon */}
         <Rect
           x={iconPadding}
-          y={height / 2 - 10}
+          y={(height - totalIconHeight) / 2}
           width={iconWidth}
-          height={iconSize}
-        />
-        <Rect
-          x={iconPadding}
-          y={height / 2 - 4}
-          width={iconWidth}
-          height={iconSize}
+          height={barHeight}
           fill="lightgrey"
         />
         <Rect
           x={iconPadding}
-          y={height / 2 + 2}
+          y={(height - totalIconHeight) / 2 + barHeight + barSpacing}
           width={iconWidth}
-          height={iconSize}
+          height={barHeight}
+          fill="lightgrey"
+        />
+        <Rect
+          x={iconPadding}
+          y={(height - totalIconHeight) / 2 + 2 * (barHeight + barSpacing)}
+          width={iconWidth}
+          height={barHeight}
           fill="lightgrey"
         />
 
-        {/* AppBar title*/}
+        {/* AppBar title */}
         <Text
           x={textStartX}
           y={restrictedHeight / 2 - 7}
