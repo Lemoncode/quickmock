@@ -6,10 +6,10 @@ import { BASIC_SHAPE } from '../front-components/shape.const';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
 const AppBarShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 100,
+  minWidth: 155,
+  minHeight: 38,
   maxWidth: -1,
-  maxHeight: 38,
+  maxHeight: -1,
   defaultWidth: 250,
   defaultHeight: BASIC_SHAPE.DEFAULT_TEXT_HEIGHT,
 };
@@ -19,7 +19,18 @@ export const getAppBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
 
 export const AppBarShape = forwardRef<any, ShapeProps>(
   (
-    { x, y, width, height, title, id, text, otherProps, ...shapeProps },
+    {
+      x,
+      y,
+      width,
+      height,
+      title,
+      id,
+      text,
+      otherProps,
+      onSelected,
+      ...shapeProps
+    },
     ref
   ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
@@ -61,6 +72,7 @@ export const AppBarShape = forwardRef<any, ShapeProps>(
         width={restrictedWidth}
         height={restrictedHeight}
         {...shapeProps}
+        onClick={() => onSelected(id, 'appBar')}
       >
         {/* AppBar background*/}
         <Rect

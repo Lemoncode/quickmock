@@ -363,7 +363,6 @@ export const generateDefaultOtherProps = (
     case 'datepickerinput':
     case 'timepickerinput':
     case 'modal':
-    case 'appBar':
       return {
         stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
         backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
@@ -420,6 +419,13 @@ export const generateDefaultOtherProps = (
         textColor: '#000000',
       };
 
+    case 'appBar':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: '#A9A9A9',
+        textColor: '#ffffff',
+        strokeStyle: [],
+      };
     case 'icon':
       return {
         icon: {
