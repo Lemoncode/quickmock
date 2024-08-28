@@ -70,7 +70,6 @@ export const Modal = forwardRef<any, ShapeProps>(
           fill={backgroundColor}
           stroke={strokeColor}
           strokeWidth={2}
-          s
         />
 
         {/* Header */}
