@@ -7,6 +7,7 @@ import { SelectSize, SelectIcon } from './components';
 import { StrokeStyle } from './components/stroke-style/stroke.style.component';
 import { ImageSrc } from './components/image-src/image-selector.component';
 import { ImageBlackAndWhite } from './components/image-black-and-white/image-black-and-white-selector.component';
+import { Progress } from './components/progress/progress.component';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -96,6 +97,15 @@ export const PropertiesPod = () => {
           imageBlackAndWhite={selectedShapeData?.otherProps?.imageBlackAndWhite}
           onChange={imageBlackAndWhite =>
             updateOtherPropsOnSelected('imageBlackAndWhite', imageBlackAndWhite)
+          }
+        />
+      )}
+      {selectedShapeData?.otherProps?.progress && (
+        <Progress
+          label="Progress"
+          progress={selectedShapeData?.otherProps?.progress}
+          onChange={progress =>
+            updateOtherPropsOnSelected('progress', progress)
           }
         />
       )}
