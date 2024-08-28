@@ -1,6 +1,7 @@
 const DEFAULT_CORNER_RADIUS = 4;
 const DEFAULT_STROKE_COLOR = '#000000';
 const DEFAULT_STROKE_WIDTH = 1;
+const DEFAULT_STROKE_STYLE: number[] = [];
 const DEFAULT_FILL_BACKGROUND = '#ffffff';
 const DEFAULT_FONT_FAMILY = 'Comic Sans MS, cursive';
 const DEFAULT_FONT_SIZE = 16;
@@ -24,6 +25,7 @@ interface DefaultStyleShape {
   DEFAULT_LINE_HEIGHT: number;
   DEFAULT_TEXT_WIDTH: number;
   DEFAULT_TEXT_HEIGHT: number;
+  DEFAULT_STROKE_STYLE: number[];
 }
 
 export const BASIC_SHAPE: DefaultStyleShape = {
@@ -38,6 +40,7 @@ export const BASIC_SHAPE: DefaultStyleShape = {
   DEFAULT_LINE_HEIGHT,
   DEFAULT_TEXT_WIDTH,
   DEFAULT_TEXT_HEIGHT,
+  DEFAULT_STROKE_STYLE,
 };
 
 export const INPUT_SHAPE: DefaultStyleShape = {
@@ -52,6 +55,7 @@ export const INPUT_SHAPE: DefaultStyleShape = {
   DEFAULT_LINE_HEIGHT,
   DEFAULT_TEXT_WIDTH,
   DEFAULT_TEXT_HEIGHT,
+  DEFAULT_STROKE_STYLE,
 };
 
 //! maybe a function to calc max height base on the text
