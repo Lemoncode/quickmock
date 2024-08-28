@@ -40,7 +40,6 @@ export const AppBarShape = forwardRef<any, ShapeProps>(
         height
       );
 
-    const iconSize = 4;
     const iconWidth = 30;
     const iconPadding = 10;
 
