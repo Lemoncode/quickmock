@@ -49,9 +49,9 @@ export const AppBarShape = forwardRef<any, ShapeProps>(
       [otherProps?.textColor]
     );
 
-    const backgroundColor = useMemo(
-      () => otherProps?.backgroundColor ?? '#A9A9A9',
-      [otherProps?.textColor]
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'lightgrey',
+      [otherProps?.backgroundColor]
     );
 
     const stroke = useMemo(
@@ -63,6 +63,10 @@ export const AppBarShape = forwardRef<any, ShapeProps>(
       () => otherProps?.strokeStyle ?? BASIC_SHAPE.DEFAULT_STROKE_STYLE,
       [otherProps?.strokeStyle]
     );
+
+    const padding = 10;
+    const textStartX = iconPadding + iconWidth + padding;
+    const textWidth = restrictedWidth - textStartX - padding;
 
     return (
       <Group
@@ -80,7 +84,7 @@ export const AppBarShape = forwardRef<any, ShapeProps>(
           y={0}
           width={width}
           height={height}
-          fill={backgroundColor}
+          fill={fill}
           stroke={stroke}
           dash={strokeStyle}
           strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
@@ -92,7 +96,6 @@ export const AppBarShape = forwardRef<any, ShapeProps>(
           y={height / 2 - 10}
           width={iconWidth}
           height={iconSize}
-          fill={backgroundColor}
         />
         <Rect
           x={iconPadding}
@@ -111,13 +114,16 @@ export const AppBarShape = forwardRef<any, ShapeProps>(
 
         {/* AppBar title*/}
         <Text
-          x={60}
-          y={height / 2 - 7}
+          x={textStartX}
+          y={restrictedHeight / 2 - 7}
+          width={textWidth}
           text={text}
           fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE}
           fill={textColor}
-          align="left"
+          align="center"
+          ellipsis={true}
+          wrap="none"
         />
       </Group>
     );
