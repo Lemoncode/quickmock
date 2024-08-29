@@ -58,6 +58,7 @@ import { renderSmalltext } from './simple-text-components/smalltext.renderer';
 import { renderParagraph } from './simple-text-components/paragraph.renderer';
 import { renderImage } from './simple-basic-shapes/image.renderer';
 import { renderCalendar } from './simple-rich-components/calendar.renderer';
+import { renderAppBar } from './simple-rich-components/appBar.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -156,6 +157,8 @@ export const renderShapeComponent = (
       return renderVerticalScrollBar(shape, shapeRenderedProps);
     case 'modal':
       return renderModal(shape, shapeRenderedProps);
+    case 'appBar':
+      return renderAppBar(shape, shapeRenderedProps);
     case 'tooltip':
       return renderTooltip(shape, shapeRenderedProps);
     default:

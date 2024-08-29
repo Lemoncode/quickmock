@@ -58,6 +58,7 @@ export type ShapeType =
   | 'verticalScrollBar'
   | 'horizontalScrollBar'
   | 'modal'
+  | 'appBar'
   | 'tooltip';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
@@ -107,6 +108,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   calendar: 'Calendar',
   verticalScrollBar: 'Vertical Scroll Bar',
   modal: 'Modal',
+  appBar: 'AppBar',
   tooltip: 'Tooltip',
 };
 
@@ -146,6 +148,7 @@ export interface OtherProps {
   icon?: IconInfo;
   iconSize?: IconSize;
   imageSrc?: string;
+  progress?: string;
 }
 
 export const BASE_ICONS_URL = '/icons/';
