@@ -5,6 +5,8 @@ import { ColorPicker } from './components/color-picker/color-picker.component';
 import { Checked } from './components/checked/checked.component';
 import { SelectSize, SelectIcon } from './components';
 import { StrokeStyle } from './components/stroke-style/stroke.style.component';
+import { ImageSrc } from './components/image-src/image-selector.component';
+import { ImageBlackAndWhite } from './components/image-black-and-white/image-black-and-white-selector.component';
 import { Progress } from './components/progress/progress.component';
 
 export const PropertiesPod = () => {
@@ -79,6 +81,23 @@ export const PropertiesPod = () => {
           label="Checked"
           checked={selectedShapeData?.otherProps?.checked}
           onChange={checked => updateOtherPropsOnSelected('checked', checked)}
+        />
+      )}
+      {selectedShapeData?.otherProps?.imageSrc != undefined && (
+        <ImageSrc
+          label="Image Source"
+          onChange={imageSrc =>
+            updateOtherPropsOnSelected('imageSrc', imageSrc)
+          }
+        />
+      )}
+      {selectedShapeData?.otherProps?.imageBlackAndWhite != undefined && (
+        <ImageBlackAndWhite
+          label="B/W filter"
+          imageBlackAndWhite={selectedShapeData?.otherProps?.imageBlackAndWhite}
+          onChange={imageBlackAndWhite =>
+            updateOtherPropsOnSelected('imageBlackAndWhite', imageBlackAndWhite)
+          }
         />
       )}
       {selectedShapeData?.otherProps?.progress && (
