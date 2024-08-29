@@ -1,0 +1,21 @@
+<svg width="600" height="100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Botón de retroceso -->
+  <polygon points="55,40 45,50 55,60" style="fill:black;stroke:black;stroke-width:2"/>
+  <line x1="65" y1="40" x2="65" y2="60" style="stroke:black;stroke-width:2"/>
+
+  <!-- Botón de play -->
+  <polygon points="135,40 155,50 135,60" style="fill:black;stroke:black;stroke-width:2"/>
+
+  <!-- Botón de avance -->
+  <polygon points="215,40 225,50 215,60" style="fill:black;stroke:black;stroke-width:2"/>
+  <line x1="205" y1="40" x2="205" y2="60" style="stroke:black;stroke-width:2"/>
+
+  <!-- Barra de progreso -->
+  <rect x="270" y="45" width="200" height="10" style="fill:none;stroke:black;stroke-width:2"/>
+  <rect x="270" y="45" width="100" height="10" style="fill:black;stroke:none"/>
+
+  <!-- Control de volumen mejorado -->
+  <path d="M500,45 L510,45 L520,35 L520,65 L510,55 L500,55 Z" style="fill:black;stroke:black;stroke-width:2"/>
+  <path d="M530,40 Q540,50 530,60" style="fill:none;stroke:black;stroke-width:2"/>
+  <path d="M545,35 Q560,50 545,65" style="fill:none;stroke:black;stroke-width:2"/>
+</svg>

@@ -58,6 +58,7 @@ import { renderParagraph } from './simple-text-components/paragraph.renderer';
 import { renderImage } from './simple-basic-shapes/image.renderer';
 import { renderCalendar } from './simple-rich-components/calendar.renderer';
 import { renderAppBar } from './simple-rich-components/appBar.renderer';
+import { renderAudioPlayer } from './simple-rich-components/audio-player.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -102,6 +103,8 @@ export const renderShapeComponent = (
       return renderPostit(shape, shapeRenderedProps);
     case 'videoPlayer':
       return renderVideoPlayer(shape, shapeRenderedProps);
+    case 'audioPlayer':
+      return renderAudioPlayer(shape, shapeRenderedProps);
     case 'pie':
       return renderPieChart(shape, shapeRenderedProps);
     case 'map':
