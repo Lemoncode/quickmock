@@ -148,6 +148,7 @@ export interface OtherProps {
   imageSrc?: string;
   imageBlackAndWhite?: boolean;
   progress?: string;
+  borderRadius?: string;
 }
 
 export const BASE_ICONS_URL = '/icons/';
