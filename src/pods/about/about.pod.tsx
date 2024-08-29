@@ -8,7 +8,7 @@ export const AboutPod = () => {
   return (
     <div className={classes.container}>
       <QuickmockLogoComponent styleClass={classes.projectLogo} />
-      <h2 className={classes.projectName}>QuickMock</h2>
+      <h2 className={classes.projectName}>Quickmock</h2>
       <p className={classes.projectVersion}>Version 0.0</p>
       <p className={classes.projectCommunity}>Community preview</p>
       <DevelopmentTeamComponent />
