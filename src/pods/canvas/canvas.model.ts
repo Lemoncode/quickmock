@@ -356,15 +356,29 @@ export const generateDefaultOtherProps = (
         backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
+        borderRadius: '12',
       };
     case 'button':
     case 'textarea':
-    case 'combobox':
     case 'listbox':
     case 'vertical-menu':
     case 'horizontal-menu':
     case 'datepickerinput':
     case 'timepickerinput':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+        borderRadius: '12',
+      };
+    case 'combobox':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+      };
     case 'modal':
       return {
         stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
@@ -384,8 +398,9 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#FFFF99',
         textColor: '#000000',
         strokeStyle: [],
+        borderRadius: '12',
       };
-    case 'rectangle':
+
     case 'circle':
     case 'star':
     case 'diamond':
@@ -394,6 +409,13 @@ export const generateDefaultOtherProps = (
         stroke: '#000000',
         backgroundColor: '#ffffff',
         strokeStyle: [],
+      };
+    case 'rectangle':
+      return {
+        stroke: '#000000',
+        backgroundColor: '#ffffff',
+        strokeStyle: [],
+        borderRadius: '12',
       };
     case 'line':
       return {

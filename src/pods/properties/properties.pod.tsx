@@ -3,7 +3,7 @@ import classes from './properties.pod.module.css';
 import { ZIndexOptions } from './components/zindex/zindex-option.component';
 import { ColorPicker } from './components/color-picker/color-picker.component';
 import { Checked } from './components/checked/checked.component';
-import { SelectSize, SelectIcon } from './components';
+import { SelectSize, SelectIcon, BorderRadius } from './components';
 import { StrokeStyle } from './components/stroke-style/stroke.style.component';
 import { Progress } from './components/progress/progress.component';
 
@@ -87,6 +87,15 @@ export const PropertiesPod = () => {
           progress={selectedShapeData?.otherProps?.progress}
           onChange={progress =>
             updateOtherPropsOnSelected('progress', progress)
+          }
+        />
+      )}
+      {selectedShapeData?.otherProps?.borderRadius && (
+        <BorderRadius
+          label="Border-radius"
+          borderRadius={selectedShapeData?.otherProps?.borderRadius}
+          onChange={borderRadius =>
+            updateOtherPropsOnSelected('borderRadius', borderRadius)
           }
         />
       )}

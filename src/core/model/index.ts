@@ -147,6 +147,7 @@ export interface OtherProps {
   iconSize?: IconSize;
   imageSrc?: string;
   progress?: string;
+  borderRadius?: string;
 }
 
 export const BASE_ICONS_URL = '/icons/';

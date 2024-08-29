@@ -45,6 +45,11 @@ export const InputShape = forwardRef<any, ShapeProps>(
       [otherProps?.strokeStyle]
     );
 
+    const borderRadius = useMemo(() => {
+      const radius = Number(otherProps?.borderRadius);
+      return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
+    }, [otherProps?.borderRadius]);
+
     return (
       <Group
         x={x}
@@ -60,7 +65,7 @@ export const InputShape = forwardRef<any, ShapeProps>(
           y={0}
           width={restrictedWidth}
           height={restrictedHeight}
-          cornerRadius={INPUT_SHAPE.DEFAULT_CORNER_RADIUS}
+          cornerRadius={borderRadius}
           stroke={stroke}
           dash={strokeStyle}
           strokeWidth={INPUT_SHAPE.DEFAULT_STROKE_WIDTH}
