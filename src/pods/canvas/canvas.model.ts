@@ -364,6 +364,13 @@ export const generateDefaultOtherProps = (
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
       };
+    case 'tooltip':
+      return {
+        stroke: '#bbbbbb',
+        backgroundColor: '#bbbbbb',
+        textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+      };
     case 'button':
     case 'textarea':
     case 'combobox':
@@ -372,7 +379,6 @@ export const generateDefaultOtherProps = (
     case 'horizontal-menu':
     case 'datepickerinput':
     case 'timepickerinput':
-    case 'tooltip':
     case 'modal':
       return {
         stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,

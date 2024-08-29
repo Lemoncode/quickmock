@@ -24,8 +24,8 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
   ) => {
     const tooltipWidth = 100;
     const tooltipHeight = 50;
-    const pointerHeight = 10;
-    const pointerWidth = 20;
+    const pointerHeight = 25;
+    const pointerWidth = 45;
 
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(tooltipShapeRestrictions, width, height);
@@ -90,13 +90,13 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
           fill={textColor}
           wrap="none"
           ellipsis={true}
+          align="center"
         />
         {/* Triángulo para la punta */}
         <Line
-          width={100}
-          height={200}
           x={-48}
-          y={-10}
+          y={-12}
+          strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
           points={[
             tooltipWidth / 2 - pointerWidth / 20,
             tooltipHeight,
@@ -106,7 +106,6 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
             tooltipHeight + pointerHeight,
           ]}
           closed
-          shadowBlur={5}
           stroke={stroke}
           dash={strokeStyle}
           fill={fill}
