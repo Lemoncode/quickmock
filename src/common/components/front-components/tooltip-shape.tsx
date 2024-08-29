@@ -93,9 +93,9 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
         />
         {/* Triángulo para la punta */}
         <Line
-          width={20}
+          width={100}
           height={200}
-          x={-40}
+          x={-48}
           y={-10}
           points={[
             tooltipWidth / 2 - pointerWidth / 20,
@@ -109,6 +109,7 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
           shadowBlur={5}
           stroke={stroke}
           dash={strokeStyle}
+          fill={fill}
         />
       </Group>
     );
