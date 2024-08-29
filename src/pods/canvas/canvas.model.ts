@@ -25,6 +25,7 @@ import {
   getHorizontalScrollBarShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
   getLabelSizeRestrictions,
+  getTabsBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -164,6 +165,8 @@ export const getSizeRestrictionFromShape = (
       return getVerticalScrollBarShapeSizeRestrictions();
     case 'modal':
       return getModalShapeSizeRestrictions();
+    case 'tabsbar':
+      return getTabsBarShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`

@@ -13,3 +13,4 @@ export * from './icon-shape';
 export * from './verticalscrollbar-shape';
 export * from './horizontalscrollbar-shape';
 export * from './label-shape';
+export * from './tabsbar-shape';

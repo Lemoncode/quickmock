@@ -19,4 +19,5 @@ export const mockWidgetCollection: ItemInfo[] = [
     thumbnailSrc: '/widgets/horizontalscrollbar.svg',
     type: 'horizontalScrollBar',
   },
+  { thumbnailSrc: '/widgets/tabsbar.svg', type: 'tabsbar' },
 ];
