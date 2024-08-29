@@ -83,13 +83,21 @@ export const memberList: Member[] = [
 
   {
     id: '11',
+    name: 'Pablo',
+    surname: 'Reinaldo',
+    urlLinkedin: 'https://www.linkedin.com/in/pabloreinaldo90/',
+    image: '/src/assets/pablo-reinaldo.jpeg',
+  },
+
+  {
+    id: '12',
     name: 'Leticia',
     surname: 'de la Osa',
     urlLinkedin: 'https://www.linkedin.com/in/deletidev/',
     image: '/src/assets/leticia-de-la-osa.jpeg',
   },
   {
-    id: '12',
+    id: '13',
     name: 'Braulio',
     surname: 'Diez',
     urlLinkedin: 'https://www.linkedin.com/in/brauliodiez/',
