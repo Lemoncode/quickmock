@@ -148,6 +148,7 @@ export interface OtherProps {
   icon?: IconInfo;
   iconSize?: IconSize;
   imageSrc?: string;
+  imageBlackAndWhite?: boolean;
   progress?: string;
 }
 

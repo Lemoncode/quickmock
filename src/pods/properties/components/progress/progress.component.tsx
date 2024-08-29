@@ -14,7 +14,6 @@ export const Progress: React.FC<Props> = props => {
       <p>{label}</p>
       <select
         onChange={e => {
-          console.log('Selected Progress:', e.target.value);
           onChange(e.target.value);
         }}
         className={classes.select}

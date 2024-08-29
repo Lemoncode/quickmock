@@ -447,6 +447,11 @@ export const generateDefaultOtherProps = (
         },
         iconSize: 'M',
       };
+    case 'image':
+      return {
+        imageSrc: '',
+        imageBlackAndWhite: false,
+      };
     case 'progressbar':
       return {
         progress: '50',
