@@ -57,6 +57,7 @@ import {
   getTableSizeRestrictions,
   getModalShapeSizeRestrictions,
   getAppBarShapeSizeRestrictions,
+  getButtonBarShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -169,6 +170,8 @@ export const getSizeRestrictionFromShape = (
       return getModalShapeSizeRestrictions();
     case 'appBar':
       return getAppBarShapeSizeRestrictions();
+    case 'buttonBar':
+      return getButtonBarShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -223,6 +226,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'table':
     case 'modal':
     case 'appBar':
+    case 'buttonBar':
       return true;
     default:
       return false;
@@ -252,6 +256,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'smalltext':
     case 'horizontalScrollBar':
     case 'appBar':
+    case 'buttonBar':
       return ['middle-left', 'middle-right'];
     case 'verticalScrollBar':
       return ['top-center', 'bottom-center'];
@@ -317,6 +322,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Alert\nWarning: The action you are about to perform may affect existing data. Are you sure you want to proceed? Once confirmed, this action cannot be undone.\nConfirm,Cancel';
     case 'appBar':
       return 'AppBar';
+    case 'buttonBar':
+      return 'Button 1\nButton 2\nButton 3';
     default:
       return undefined;
   }
@@ -337,6 +344,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'table':
     case 'modal':
     case 'appBar':
+    case 'buttonBar':
       return 'textarea';
       break;
     case 'image':
@@ -366,6 +374,7 @@ export const generateDefaultOtherProps = (
     case 'datepickerinput':
     case 'timepickerinput':
     case 'modal':
+    case 'buttonBar':
       return {
         stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
         backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,

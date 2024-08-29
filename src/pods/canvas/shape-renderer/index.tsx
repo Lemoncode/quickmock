@@ -36,6 +36,7 @@ import {
   renderVerticalMenuShape,
   renderTable,
   renderModal,
+  renderButtonBar,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -158,6 +159,8 @@ export const renderShapeComponent = (
       return renderModal(shape, shapeRenderedProps);
     case 'appBar':
       return renderAppBar(shape, shapeRenderedProps);
+    case 'buttonBar':
+      return renderButtonBar(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
