@@ -98,7 +98,7 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
           x={-40}
           y={-10}
           points={[
-            tooltipWidth / 2 - pointerWidth / 2,
+            tooltipWidth / 2 - pointerWidth / 20,
             tooltipHeight,
             tooltipWidth / 2 + pointerWidth / 2,
             tooltipHeight,
