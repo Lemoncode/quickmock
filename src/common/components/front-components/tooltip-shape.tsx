@@ -2,7 +2,7 @@ import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { Text, Group, Rect } from 'react-konva';
+import { Text, Group, Rect, Line } from 'react-konva';
 import { BASIC_SHAPE } from './shape.const';
 
 const tooltipShapeRestrictions: ShapeSizeRestrictions = {
@@ -22,6 +22,11 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
     { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
     ref
   ) => {
+    const tooltipWidth = 100;
+    const tooltipHeight = 50;
+    const pointerHeight = 10;
+    const pointerWidth = 20;
+
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(tooltipShapeRestrictions, width, height);
 
@@ -65,7 +70,12 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
           stroke={stroke}
           dash={strokeStyle}
           strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
-          cornerRadius={BASIC_SHAPE.DEFAULT_CORNER_RADIUS}
+          cornerRadius={[
+            BASIC_SHAPE.DEFAULT_CORNER_RADIUS,
+            BASIC_SHAPE.DEFAULT_CORNER_RADIUS,
+            BASIC_SHAPE.DEFAULT_CORNER_RADIUS,
+            0,
+          ]}
         />
 
         {/* Texto del tooltip */}
@@ -80,6 +90,25 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
           fill={textColor}
           wrap="none"
           ellipsis={true}
+        />
+        {/* Triángulo para la punta */}
+        <Line
+          width={20}
+          height={200}
+          x={-40}
+          y={-10}
+          points={[
+            tooltipWidth / 2 - pointerWidth / 2,
+            tooltipHeight,
+            tooltipWidth / 2 + pointerWidth / 2,
+            tooltipHeight,
+            tooltipWidth / 2,
+            tooltipHeight + pointerHeight,
+          ]}
+          closed
+          shadowBlur={5}
+          stroke={stroke}
+          dash={strokeStyle}
         />
       </Group>
     );
