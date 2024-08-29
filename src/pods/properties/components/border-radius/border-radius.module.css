@@ -18,7 +18,8 @@
   color: var(--text-color);
   background-color: inherit;
   width: auto;
-  min-width: 80px;
+  min-width: 30px;
+  border-radius: 10px;
   font-size: var(--fs-xs);
   display: flex;
   align-items: center;
