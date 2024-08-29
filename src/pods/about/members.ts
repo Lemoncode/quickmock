@@ -96,8 +96,18 @@ export const memberList: Member[] = [
     urlLinkedin: 'https://www.linkedin.com/in/deletidev/',
     image: '/src/assets/leticia-de-la-osa.jpeg',
   },
+
   {
     id: '13',
+    name: 'Antonio',
+    surname: 'Contreras',
+    urlLinkedin:
+      'https://www.linkedin.com/in/antonio-contreras-rom%C3%A1n-a32978116/',
+    image: '/src/assets/antonio-contreras.jpeg',
+  },
+
+  {
+    id: '14',
     name: 'Braulio',
     surname: 'Diez',
     urlLinkedin: 'https://www.linkedin.com/in/brauliodiez/',

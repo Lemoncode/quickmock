@@ -8,7 +8,7 @@ export const QuickmockLogoComponent = (props: Props) => {
   return (
     <img
       className={styleClass}
-      src={'/widgets/isotipo.svg'}
+      src={'/widgets/isotypeok.svg'}
       alt="Quickmock Logo"
     />
   );
