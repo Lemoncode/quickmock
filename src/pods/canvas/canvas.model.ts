@@ -310,7 +310,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'heading3':
       return 'Heading 3';
     case 'tooltip':
-      return 'Tooltip';
+      return 'Sample Text';
     case 'normaltext':
       return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
     case 'smalltext':
