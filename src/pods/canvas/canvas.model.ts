@@ -24,6 +24,7 @@ import {
   getIconShapeSizeRestrictions,
   getHorizontalScrollBarShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
+  getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
   getTabsBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
@@ -172,6 +173,8 @@ export const getSizeRestrictionFromShape = (
       return getTabsBarShapeSizeRestrictions();
     case 'appBar':
       return getAppBarShapeSizeRestrictions();
+    case 'tooltip':
+      return getTooltipShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -227,6 +230,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'modal':
     case 'appBar':
     case 'tabsbar':
+    case 'tooltip':
       return true;
     default:
       return false;
@@ -309,6 +313,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Heading 2';
     case 'heading3':
       return 'Heading 3';
+    case 'tooltip':
+      return 'Sample Text';
     case 'normaltext':
       return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
     case 'smalltext':
@@ -344,6 +350,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'modal':
     case 'appBar':
     case 'tabsbar':
+    case 'tooltip':
       return 'textarea';
       break;
     case 'image':
@@ -364,6 +371,13 @@ export const generateDefaultOtherProps = (
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         borderRadius: '12',
+      };
+    case 'tooltip':
+      return {
+        stroke: '#bbbbbb',
+        backgroundColor: '#bbbbbb',
+        textColor: '#ffffff',
+        strokeStyle: [],
       };
     case 'button':
     case 'textarea':

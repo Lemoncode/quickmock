@@ -59,7 +59,9 @@ export type ShapeType =
   | 'horizontalScrollBar'
   | 'modal'
   | 'tabsbar'
-  | 'appBar';
+  | 'appBar'
+  | 'appBar'
+  | 'tooltip';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -110,6 +112,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   modal: 'Modal',
   tabsbar: 'Tabs Bar',
   appBar: 'AppBar',
+  tooltip: 'Tooltip',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';

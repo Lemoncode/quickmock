@@ -18,6 +18,7 @@ import {
   renderHorizontalScrollBar,
   renderVerticalScrollBar,
   renderTabsBar,
+  renderTooltip,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -161,6 +162,8 @@ export const renderShapeComponent = (
       return renderTabsBar(shape, shapeRenderedProps);
     case 'appBar':
       return renderAppBar(shape, shapeRenderedProps);
+    case 'tooltip':
+      return renderTooltip(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
