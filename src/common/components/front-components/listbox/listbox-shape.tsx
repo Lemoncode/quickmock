@@ -6,6 +6,7 @@ import {
   calculateDynamicContentSizeRestriction,
   mapListboxTextToItems,
 } from './listbox-shape.business';
+import { INPUT_SHAPE } from '../shape.const';
 
 const listboxShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 75,
@@ -71,6 +72,16 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
       [otherProps?.backgroundColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
+    const borderRadius = useMemo(() => {
+      const radius = Number(otherProps?.borderRadius);
+      return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
+    }, [otherProps?.borderRadius]);
+
     return (
       <Group
         x={x}
@@ -87,9 +98,10 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
           width={restrictedWidth + 20}
           height={restrictedHeight + 20}
           ref={rectRef}
-          cornerRadius={10}
+          cornerRadius={borderRadius}
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
           fill={fill}
         />
 

@@ -19,6 +19,9 @@ jobs:
         run: npm ci
 
       - name: Build
+        run: npm run build
+
+      - name: Check TypeScript types
         run: npm run tsc-check
 
       - name: Run tests

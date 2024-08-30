@@ -34,6 +34,11 @@ export const StarShape = forwardRef<any, ShapeProps>(
       [otherProps?.backgroundColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -54,6 +59,7 @@ export const StarShape = forwardRef<any, ShapeProps>(
           outerRadius={restrictedWidth / 2}
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
           fill={fill}
         />
       </Group>

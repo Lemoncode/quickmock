@@ -36,6 +36,7 @@ export const ImageUploadWidget = forwardRef<HTMLInputElement, Props>(
           onChange={handleFileChange}
           ref={fileInputRef}
           className={classes.fileInput}
+          accept="image/*"
         />
         <button onClick={handleClick} className={classes.uploadButton}>
           Click to upload an image

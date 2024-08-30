@@ -39,6 +39,29 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>(
       [otherProps?.textColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
+    const borderRadius = useMemo(() => {
+      const stringBorderRadius = otherProps?.borderRadius ?? '12';
+      return parseFloat(stringBorderRadius);
+    }, [otherProps?.borderRadius]);
+
+    const createPathWithRoundedCorners = (w: number, h: number, r: number) => {
+      return `M${r},0 
+              H${w - r} 
+              Q${w},0 ${w},${r} 
+              V${h - r} 
+              Q${w},${h} ${w - r},${h} 
+              H${r} 
+              Q0,${h} 0,${h - r} 
+              V${r} 
+              Q0,0 ${r},0 
+              Z`;
+    };
+
     return (
       <Group
         x={x}
@@ -49,34 +72,41 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>(
         {...shapeProps}
         onClick={() => onSelected(id, 'combobox')}
       >
-        {/* Rectangle */}
+        {/* Rectangle with rounded corners */}
         <Path
-          data={`M1,1 H${width - 2} V${height - 2} H1 Z`}
+          data={createPathWithRoundedCorners(
+            restrictedWidth,
+            restrictedHeight,
+            borderRadius
+          )}
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
           fill={fill}
         />
         {/* Polygon (Arrow), combo triangle dropdown */}
         <Path
-          data={`M${width - 30},${(height + 10) / 2 - 15} L${width - 10},${
-            (height + 10) / 2 - 15
-          } L${width - 20},${(height + 10) / 2}`}
+          data={`M${restrictedWidth - 30},${(restrictedHeight + 10) / 2 - 15} 
+                L${restrictedWidth - 10},${(restrictedHeight + 10) / 2 - 15} 
+                L${restrictedWidth - 20},${(restrictedHeight + 10) / 2}`}
           fill={stroke}
         />
         {/* Combo arrow vertical line separator */}
         <Path
-          data={`M${width - 40},1 L${width - 40},${height - 1}`}
+          data={`M${restrictedWidth - 40},1 
+                L${restrictedWidth - 40},${restrictedHeight - 1}`}
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
         />
         <Text
           x={10}
-          y={(height - 25) / 2 + 5}
+          y={(restrictedHeight - 25) / 2 + 5}
           text={text}
           fontSize={20}
           fontFamily="Arial"
           fill={textColor}
-          width={width - 50}
+          width={restrictedWidth - 50}
           ellipsis={true}
           wrap="none"
         />

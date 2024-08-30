@@ -3,14 +3,15 @@ import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
+import { INPUT_SHAPE } from './shape.const';
 
 const inputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 60,
-  minHeight: 45,
+  minHeight: 38,
   maxWidth: -1,
-  maxHeight: 50,
-  defaultWidth: 170,
-  defaultHeight: 45,
+  maxHeight: 38,
+  defaultWidth: INPUT_SHAPE.DEFAULT_TEXT_WIDTH,
+  defaultHeight: INPUT_SHAPE.DEFAULT_TEXT_HEIGHT,
 };
 
 export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -25,19 +26,29 @@ export const InputShape = forwardRef<any, ShapeProps>(
       fitSizeToShapeSizeRestrictions(inputShapeRestrictions, width, height);
 
     const stroke = useMemo(
-      () => otherProps?.stroke ?? 'black',
+      () => otherProps?.stroke ?? INPUT_SHAPE.DEFAULT_STROKE_COLOR,
       [otherProps?.stroke]
     );
 
     const fill = useMemo(
-      () => otherProps?.backgroundColor ?? 'white',
+      () => otherProps?.backgroundColor ?? INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
       [otherProps?.backgroundColor]
     );
 
     const textColor = useMemo(
-      () => otherProps?.textColor ?? 'black',
+      () => otherProps?.textColor ?? INPUT_SHAPE.DEFAULT_FILL_TEXT,
       [otherProps?.textColor]
     );
+
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
+    const borderRadius = useMemo(() => {
+      const radius = Number(otherProps?.borderRadius);
+      return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
+    }, [otherProps?.borderRadius]);
 
     return (
       <Group
@@ -54,19 +65,20 @@ export const InputShape = forwardRef<any, ShapeProps>(
           y={0}
           width={restrictedWidth}
           height={restrictedHeight}
-          cornerRadius={5}
+          cornerRadius={borderRadius}
           stroke={stroke}
-          strokeWidth={2}
+          dash={strokeStyle}
+          strokeWidth={INPUT_SHAPE.DEFAULT_STROKE_WIDTH}
           fill={fill}
         />
         <Text
-          x={10}
-          y={20}
-          width={width - 10}
-          height={height - 20}
+          x={INPUT_SHAPE.DEFAULT_PADDING}
+          y={INPUT_SHAPE.DEFAULT_PADDING + 1}
+          width={width - INPUT_SHAPE.DEFAULT_PADDING * 2}
           text={text}
-          fontFamily="Comic Sans MS, cursive"
-          fontSize={15}
+          fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
+          fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
+          lineHeight={INPUT_SHAPE.DEFAULT_LINE_HEIGHT}
           fill={textColor}
           align="left"
           ellipsis={true}

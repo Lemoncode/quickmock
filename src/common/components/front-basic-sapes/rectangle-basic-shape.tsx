@@ -3,6 +3,7 @@ import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect } from 'react-konva';
+import { INPUT_SHAPE } from '../front-components/shape.const';
 
 const rectangleShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
@@ -34,6 +35,16 @@ export const RectangleShape = forwardRef<any, ShapeProps>(
       [otherProps?.backgroundColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
+    const borderRadius = useMemo(() => {
+      const radius = Number(otherProps?.borderRadius);
+      return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
+    }, [otherProps?.borderRadius]);
+
     return (
       <Group
         x={x}
@@ -52,7 +63,8 @@ export const RectangleShape = forwardRef<any, ShapeProps>(
           strokeWidth={2}
           stroke={stroke}
           fill={fill}
-          cornerRadius={5}
+          dash={strokeStyle}
+          cornerRadius={borderRadius}
         />
       </Group>
     );

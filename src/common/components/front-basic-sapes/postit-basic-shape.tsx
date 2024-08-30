@@ -3,6 +3,7 @@ import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
+import { INPUT_SHAPE } from '../front-components/shape.const';
 
 const postItShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 80,
@@ -53,6 +54,16 @@ export const PostItShape = forwardRef<any, ShapeProps>(
       [otherProps?.textColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
+    const borderRadius = useMemo(() => {
+      const radius = Number(otherProps?.borderRadius);
+      return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
+    }, [otherProps?.borderRadius]);
+
     return (
       <Group
         x={x}
@@ -69,9 +80,10 @@ export const PostItShape = forwardRef<any, ShapeProps>(
           y={10}
           width={postItWidth}
           height={restrictedHeight - 10}
-          cornerRadius={10}
+          cornerRadius={borderRadius}
           stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
           fill={fill}
         />
 

@@ -1,4 +1,4 @@
-import { createRef, useMemo, useEffect, useState } from 'react';
+import { createRef, useMemo, useState } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
 import { Layer, Line, Rect, Stage, Transformer } from 'react-konva';

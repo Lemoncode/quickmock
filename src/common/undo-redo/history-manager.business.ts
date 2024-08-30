@@ -1,6 +1,7 @@
 // TODO Add Unit tests to this Undo/Redo helpers
 // #162
 // https://github.com/Lemoncode/mongo-modeler/issues/162
+
 export function addSnapshotToHistory<T>(
   history: T[],
   newSnapshot: T,

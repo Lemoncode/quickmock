@@ -6,6 +6,7 @@ import {
   calculateDynamicContentSizeRestriction,
   mapTextToOptions,
 } from './vertical-menu.business';
+import { INPUT_SHAPE } from '../../front-components/shape.const';
 
 const verticalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 220,
@@ -79,6 +80,16 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
       [otherProps?.textColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
+    const borderRadius = useMemo(() => {
+      const radius = Number(otherProps?.borderRadius);
+      return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
+    }, [otherProps?.borderRadius]);
+
     return (
       <Group
         x={x}
@@ -97,6 +108,8 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
           stroke={stroke}
           strokeWidth={2}
           fill={fill}
+          dash={strokeStyle}
+          cornerRadius={borderRadius}
         />
         {verticalMenuItems.map((option, index) => (
           <Group key={index}>

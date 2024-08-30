@@ -47,6 +47,11 @@ export const LargeArrowShape = forwardRef<any, ShapeProps>(
       [otherProps?.backgroundColor]
     );
 
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
+
     return (
       <Group
         x={x}
@@ -63,7 +68,13 @@ export const LargeArrowShape = forwardRef<any, ShapeProps>(
           scaleX={scaleX}
           scaleY={scaleY}
         >
-          <Path data={pathData} fill={fill} stroke={stroke} strokeWidth={2} />
+          <Path
+            data={pathData}
+            fill={fill}
+            stroke={stroke}
+            strokeWidth={2}
+            dash={strokeStyle}
+          />
         </Group>
       </Group>
     );

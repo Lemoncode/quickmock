@@ -21,6 +21,7 @@ export type ShapeType =
   | 'timepickerinput'
   | 'mobilePhone'
   | 'tablet'
+  | 'modalDialog'
   | 'timepickerinput'
   | 'label'
   | 'radiobutton'
@@ -55,7 +56,10 @@ export type ShapeType =
   | 'image'
   | 'table'
   | 'verticalScrollBar'
-  | 'horizontalScrollBar';
+  | 'horizontalScrollBar'
+  | 'modal'
+  | 'appBar'
+  | 'tooltip';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -71,6 +75,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   timepickerinput: 'Time Picker Input',
   mobilePhone: 'Mobile Phone',
   tablet: 'Tablet',
+  modalDialog: 'Modal Dialog',
   label: 'Label',
   radiobutton: 'Radio Button',
   rectangle: 'Rectangle',
@@ -102,6 +107,9 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   horizontalScrollBar: 'Horizontal Scroll Bar',
   calendar: 'Calendar',
   verticalScrollBar: 'Vertical Scroll Bar',
+  modal: 'Modal',
+  appBar: 'AppBar',
+  tooltip: 'Tooltip',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
@@ -133,12 +141,16 @@ export type IconSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
 
 export interface OtherProps {
   stroke?: string;
+  strokeStyle?: number[];
   backgroundColor?: string;
   textColor?: string;
   checked?: boolean;
   icon?: IconInfo;
   iconSize?: IconSize;
   imageSrc?: string;
+  imageBlackAndWhite?: boolean;
+  progress?: string;
+  borderRadius?: string;
 }
 
 export const BASE_ICONS_URL = '/icons/';
