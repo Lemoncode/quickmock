@@ -37,7 +37,12 @@ export const ImageShape = forwardRef<any, ShapeProps>(
         imageRef.current.filters([]); // Remove filter
         imageRef.current.getLayer()?.batchDraw(); // Redraw
       }
-    }, [image, otherProps?.imageBlackAndWhite]);
+    }, [
+      image,
+      otherProps?.imageBlackAndWhite,
+      restrictedWidth,
+      restrictedHeight,
+    ]);
 
     return (
       <Group
