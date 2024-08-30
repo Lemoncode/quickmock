@@ -3,7 +3,7 @@ import { Coord, Size } from '@/core/model';
 import { useEffect } from 'react';
 import { useCanvasContext } from '@/core/providers';
 import { getMinSizeFromShape } from './canvas.model';
-import { KonvaEventObject } from 'konva/lib/Node';
+import { KonvaEventObject, NodeConfig, Node } from 'konva/lib/Node';
 
 export const useTransform = (
   updateShapeSizeAndPosition: (
@@ -14,13 +14,16 @@ export const useTransform = (
   ) => void
 ) => {
   const {
-    selectedShapeId,
+    selectedShapesIds,
     selectedShapeRef,
     transformerRef,
     selectedShapeType,
   } = useCanvasContext().selectionInfo;
 
   useEffect(() => {
+    // Right now let's only apply anchors when there is a single shape selected
+    if (selectedShapesIds.length !== 1) return;
+
     const selectedShape = selectedShapeRef.current;
     const transformer = transformerRef.current;
     if (selectedShape && transformer) {
@@ -28,7 +31,30 @@ export const useTransform = (
         selectedShape.attrs.typeOfTransformer
       );
     }
-  }, [selectedShapeId]);
+  }, [selectedShapesIds]);
+
+  const updateSingleItem = (node: Node<NodeConfig>, skipHistory: boolean) => {
+    const scaleX = node.scaleX();
+    const scaleY = node.scaleY();
+    const position = { x: node.x(), y: node.y() };
+    const selectedShapeId = selectedShapesIds[0];
+
+    const newWidth = node.width() * scaleX;
+    const newHeight = node.height() * scaleY;
+
+    updateShapeSizeAndPosition(
+      selectedShapeId,
+      position,
+      {
+        width: newWidth,
+        height: newHeight,
+      },
+      skipHistory
+    );
+
+    node.scaleX(1);
+    node.scaleY(1);
+  };
 
   const handleTransform = (e: KonvaEventObject<Event>) => {
     const skipHistory = e.type !== 'transformend';
@@ -38,6 +64,9 @@ export const useTransform = (
       return;
     }
 
+    // Single item will allow move and resize
+    updateSingleItem(node, skipHistory);
+    /*
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();
     const position = { x: node.x(), y: node.y() };
@@ -56,7 +85,7 @@ export const useTransform = (
     );
 
     node.scaleX(1);
-    node.scaleY(1);
+    node.scaleY(1);*/
   };
 
   const handleTransformerBoundBoxFunc = (oldBox: Box, newBox: Box) => {

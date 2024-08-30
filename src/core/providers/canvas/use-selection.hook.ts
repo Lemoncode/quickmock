@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Konva from 'konva';
 import { OtherProps, ShapeModel, ShapeRefs, ShapeType } from '@/core/model';
 import { DocumentModel, SelectionInfo, ZIndexAction } from './canvas.model';
-import { performZIndexAction } from './zindex.util';
+import { performZIndexActionMultiple } from './zindex.util';
 
 export const useSelection = (
   document: DocumentModel,
@@ -11,22 +11,22 @@ export const useSelection = (
   const transformerRef = useRef<Konva.Transformer>(null);
   const shapeRefs = useRef<ShapeRefs>({});
   const selectedShapeRef = useRef<Konva.Node | null>(null);
-  const [selectedShapesId, setSelectedShapesId] = useState<string[]>([]);
+  const [selectedShapesIds, setSelectedShapesIds] = useState<string[]>([]);
   const [selectedShapeType, setSelectedShapeType] = useState<ShapeType | null>(
     null
   );
 
   // Remove unused shapes and reset selectedShapeId if it no longer exists
   useEffect(() => {
-    const shapes = document.shapes;
-    const currentIds = shapes.map(shape => shape.id);
-
+    //const shapes = document.shapes;
+    //const currentIds = shapes.map(shape => shape.id);
+    // TODO: Fix this, right now we have multipleshapes
+    /*
     Object.keys(shapeRefs.current).forEach(id => {
       if (!currentIds.includes(id)) {
         delete shapeRefs.current[id];
       }
-    });
-
+    });*/
     // TODO: Fix this, right now we have multipleshapes
     // We have check if the currentId is on the selectedShape
     // if it is remove it
@@ -38,12 +38,16 @@ export const useSelection = (
       setSelectedShapeId('');
       setSelectedShapeType(null);
     }*/
-  }, [document.shapes, selectedShapesId]);
+  }, [document.shapes, selectedShapesIds]);
 
-  const handleSelected = (id: string, type: ShapeType) => {
-    selectedShapeRef.current = shapeRefs.current[id].current;
-    transformerRef?.current?.nodes([shapeRefs.current[id].current]);
-    setSelectedShapesId(id);
+  const handleSelected = (ids: string[], type: ShapeType) => {
+    //selectedShapeRef.current = shapeRefs.current[id].current;
+    const selectedShapeRefs = ids.map(id => shapeRefs.current[id].current);
+
+    transformerRef?.current?.nodes(selectedShapeRefs);
+    //transformerRef?.current?.nodes([shapeRefs.current[id].current]);
+    setSelectedShapesIds(ids);
+    // Todo set type only if single selection
     setSelectedShapeType(type);
   };
 
@@ -55,15 +59,15 @@ export const useSelection = (
     if (mouseEvent.target === mouseEvent.target.getStage()) {
       transformerRef.current?.nodes([]);
       selectedShapeRef.current = null;
-      setSelectedShapesId('');
+      setSelectedShapesIds([]);
       setSelectedShapeType(null);
     }
   };
 
   const setZIndexOnSelected = (action: ZIndexAction) => {
     setDocument(prevDocument => ({
-      shapes: performZIndexAction(
-        selectedShapesId,
+      shapes: performZIndexActionMultiple(
+        selectedShapesIds,
         action,
         prevDocument.shapes
       ),
@@ -71,9 +75,15 @@ export const useSelection = (
   };
 
   const updateTextOnSelected = (text: string) => {
+    // Only when selection is one
+    if (selectedShapesIds.length !== 1) {
+      return;
+    }
+
+    const selectedShapeId = selectedShapesIds[0];
     setDocument(prevDocument => ({
       shapes: prevDocument.shapes.map(shape =>
-        shape.id === selectedShapesId ? { ...shape, text } : shape
+        shape.id === selectedShapeId ? { ...shape, text } : shape
       ),
     }));
   };
@@ -84,17 +94,35 @@ export const useSelection = (
     key: K,
     value: OtherProps[K]
   ) => {
+    // TODO: Right now applying this only to single selection
+    // in the future we could apply to all selected shapes
+    // BUT, we have to show only common shapes (pain in the neck)
+    // Only when selection is one
+    if (selectedShapesIds.length !== 1) {
+      return;
+    }
+
+    const selectedShapeId = selectedShapesIds[0];
     setDocument(prevDocument => ({
       shapes: prevDocument.shapes.map(shape =>
-        shape.id === selectedShapesId
+        shape.id === selectedShapeId
           ? { ...shape, otherProps: { ...shape.otherProps, [key]: value } }
           : shape
       ),
     }));
   };
 
-  const getSelectedShapeData = (): ShapeModel | undefined =>
-    document.shapes.find(shape => shape.id === selectedShapesId);
+  const getSelectedShapeData = (): ShapeModel | undefined => {
+    // TODO: we will only allow this when there is a single selection
+    // check if it can be applied to multiple data
+    if (selectedShapesIds.length !== 1) {
+      return;
+    }
+
+    const selectedShapeId = selectedShapesIds[0];
+
+    return document.shapes.find(shape => shape.id === selectedShapeId);
+  };
 
   return {
     transformerRef,
@@ -102,7 +130,7 @@ export const useSelection = (
     handleSelected,
     handleClearSelection,
     selectedShapeRef,
-    selectedShapeId: selectedShapesId,
+    selectedShapesIds,
     selectedShapeType,
     getSelectedShapeData,
     setZIndexOnSelected,

@@ -56,6 +56,10 @@ export const useMultipleSelectionShapeHook = (
       selectionRect
     );
 
+    //selectionInfo.
+    // TODO: type should be option parameters in this case
+    selectionInfo.handleSelected(selectedShapes, 'rectangle');
+
     setSelectionRect(prevState => ({
       ...prevState,
       visible: false,
