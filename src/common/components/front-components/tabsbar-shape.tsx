@@ -25,9 +25,9 @@ export const TabsBarShape = forwardRef<any, ShapeProps>(
         height
       );
 
-    const tabWidth = 106; // Ancho de cada pestaña
-    const tabHeight = 30; // Altura de las pestañas
-    const bodyHeight = restrictedHeight - tabHeight - 10; // Altura del cuerpo de la tabs bar
+    const tabWidth = 106; // Width of each tab
+    const tabHeight = 30; // Tab height
+    const bodyHeight = restrictedHeight - tabHeight - 10; // Height of the tabs bar body
 
     return (
       <Group
