@@ -8,6 +8,7 @@ import { StrokeStyle } from './components/stroke-style/stroke.style.component';
 import { ImageSrc } from './components/image-src/image-selector.component';
 import { ImageBlackAndWhite } from './components/image-black-and-white/image-black-and-white-selector.component';
 import { Progress } from './components/progress/progress.component';
+import { NodeConfig, Node } from 'konva/lib/Node';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -16,12 +17,12 @@ export const PropertiesPod = () => {
   // TODO: Right now we will enable properties when we have single selection
   // if we have multiple selection or no selection we won't allow that
   // in the future we can just merge common props etc... but that's not straight forward
+
   const selectedShapeRef =
     selectionInfo?.selectedShapesRefs.current &&
-    selectionInfo?.selectedShapesRefs.current.length !== 1
+    selectionInfo?.selectedShapesRefs.current.length === 1
       ? selectionInfo.selectedShapesRefs.current[0]
       : null;
-  //const selectedShapeRef = selectionInfo?.selectedShapeRef.current ?? null;
 
   if (!selectedShapeRef) {
     return null;
