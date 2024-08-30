@@ -2,7 +2,8 @@ import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { ShapeProps } from './shape.model';
+import { ShapeProps } from '../shape.model';
+import { parseCSVHeader, splitCSVIntoRows } from './tabsbar.utils';
 
 const tabsBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 450,
@@ -17,7 +18,10 @@ export const getTabsBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   tabsBarShapeSizeRestrictions;
 
 export const TabsBarShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, otherProps, ...shapeProps }, ref) => {
+  (
+    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
+    ref
+  ) => {
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         tabsBarShapeSizeRestrictions,
@@ -25,8 +29,14 @@ export const TabsBarShape = forwardRef<any, ShapeProps>(
         height
       );
 
+    const csvData = splitCSVIntoRows(text);
+    const headers = parseCSVHeader(csvData[0]);
+    const tabLabels = headers.map(header => header.text);
+
+    // Calculate tab dimensions and margin
     const tabWidth = 106; // Width of each tab
     const tabHeight = 30; // Tab height
+    const tabMargin = 10; // Horizontal margin between tabs
     const bodyHeight = restrictedHeight - tabHeight - 10; // Height of the tabs bar body
 
     return (
@@ -48,63 +58,26 @@ export const TabsBarShape = forwardRef<any, ShapeProps>(
           strokeWidth={1}
           fill="lightgray"
         />
-
-        {/* Tab 1 */}
-        <Group x={10} y={10}>
-          <Rect
-            width={tabWidth}
-            height={tabHeight}
-            fill="white"
-            stroke="black"
-            strokeWidth={1}
-          />
-          <Text
-            x={20}
-            y={8}
-            text="Tab 1"
-            fontFamily="Arial"
-            fontSize={14}
-            fill="black"
-          />
-        </Group>
-
-        {/* Tab 2 */}
-        <Group x={126} y={10}>
-          <Rect
-            width={tabWidth}
-            height={tabHeight}
-            fill="#E0E0E0"
-            stroke="black"
-            strokeWidth={1}
-          />
-          <Text
-            x={20}
-            y={8}
-            text="Tab 2"
-            fontFamily="Arial"
-            fontSize={14}
-            fill="black"
-          />
-        </Group>
-
-        {/* Tab 3 */}
-        <Group x={242} y={10}>
-          <Rect
-            width={tabWidth}
-            height={tabHeight}
-            fill="#E0E0E0"
-            stroke="black"
-            strokeWidth={1}
-          />
-          <Text
-            x={20}
-            y={8}
-            text="Tab 3"
-            fontFamily="Arial"
-            fontSize={14}
-            fill="black"
-          />
-        </Group>
+        {/* Map through headerRow to create tabs */}
+        {tabLabels.map((header, index) => (
+          <Group key={index} x={10 + index * (tabWidth + tabMargin)} y={10}>
+            <Rect
+              width={tabWidth}
+              height={tabHeight}
+              fill={index === 0 ? 'white' : '#E0E0E0'} // First tab is selected
+              stroke="black"
+              strokeWidth={1}
+            />
+            <Text
+              x={20}
+              y={8}
+              text={header} // Use the header text
+              fontFamily="Arial"
+              fontSize={14}
+              fill="black"
+            />
+          </Group>
+        ))}
       </Group>
     );
   }

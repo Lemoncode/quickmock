@@ -226,6 +226,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'table':
     case 'modal':
     case 'appBar':
+    case 'tabsbar':
       return true;
     default:
       return false;
@@ -320,6 +321,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Alert\nWarning: The action you are about to perform may affect existing data. Are you sure you want to proceed? Once confirmed, this action cannot be undone.\nConfirm,Cancel';
     case 'appBar':
       return 'AppBar';
+    case 'tabsbar':
+      return 'Tab 1, Tab 2, Tab 3';
     default:
       return undefined;
   }
@@ -340,6 +343,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'table':
     case 'modal':
     case 'appBar':
+    case 'tabsbar':
       return 'textarea';
       break;
     case 'image':
