@@ -38,25 +38,27 @@ export const TabsBarShape = forwardRef<any, ShapeProps>(
     const tabHeight = 30; // Tab height
     const tabMargin = 10; // Horizontal margin between tabs
     const bodyHeight = restrictedHeight - tabHeight - 10; // Height of the tabs bar body
+    const totalTabsWidth = tabLabels.length * (tabWidth + tabMargin) + tabWidth; // Total width required plus one additional tab
 
     return (
       <Group
         x={x}
         y={y}
-        width={restrictedWidth}
+        width={Math.max(restrictedWidth, totalTabsWidth)} // Ensures that the total width is sufficient
         height={restrictedHeight}
         ref={ref}
         {...shapeProps}
         onClick={() => onSelected(id, 'tabsbar')}
       >
+        {/* Background of the tab bar body */}
         <Rect
           x={0}
           y={tabHeight + 10}
-          width={restrictedWidth}
+          width={Math.max(restrictedWidth, totalTabsWidth)} // Adjusts the width of the background to include an additional tab
           height={bodyHeight}
           stroke="black"
           strokeWidth={1}
-          fill="lightgray"
+          fill="white"
         />
         {/* Map through headerRow to create tabs */}
         {tabLabels.map((header, index) => (
