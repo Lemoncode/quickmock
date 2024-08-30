@@ -20,8 +20,10 @@ export const NoImageSelected: React.FC<Props> = props => {
         fill="white"
       />
       <Text
-        x={width / 2}
-        y={height / 2}
+        x={0}
+        y={0}
+        width={width}
+        height={height}
         text="Double click to add image"
         fontSize={20}
         fill="black"

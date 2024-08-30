@@ -1,10 +1,11 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
 import { ShapeProps } from '../../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Image as KonvaImage } from 'react-konva';
 import { NoImageSelected } from './components/no-image.component';
 import useImage from 'use-image';
+import Konva from 'konva';
 
 const imageShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
@@ -24,6 +25,19 @@ export const ImageShape = forwardRef<any, ShapeProps>(
       fitSizeToShapeSizeRestrictions(imageShapeRestrictions, width, height);
 
     const [image] = useImage(otherProps?.imageSrc ?? '');
+    const imageRef = useRef<Konva.Image>(null);
+
+    useEffect(() => {
+      if (imageRef.current && otherProps?.imageBlackAndWhite) {
+        imageRef.current.cache(); // Cache
+        imageRef.current.filters([Konva.Filters.Grayscale]); // Apply filter
+        imageRef.current.getLayer()?.batchDraw(); // Redraw
+      } else if (imageRef.current) {
+        imageRef.current.clearCache(); // Clear cache
+        imageRef.current.filters([]); // Remove filter
+        imageRef.current.getLayer()?.batchDraw(); // Redraw
+      }
+    }, [image, otherProps?.imageBlackAndWhite]);
 
     return (
       <Group
@@ -42,6 +56,7 @@ export const ImageShape = forwardRef<any, ShapeProps>(
             width={restrictedWidth}
             height={restrictedHeight}
             image={image}
+            ref={imageRef}
           />
         ) : (
           <NoImageSelected width={restrictedWidth} height={restrictedHeight} />

@@ -44,7 +44,12 @@ export interface CanvasContextModel {
     y: number,
     otherProps?: OtherProps
   ) => string;
-  updateShapeSizeAndPosition: (id: string, position: Coord, size: Size) => void;
+  updateShapeSizeAndPosition: (
+    id: string,
+    position: Coord,
+    size: Size,
+    skipHistory: boolean
+  ) => void;
   updateShapePosition: (id: string, position: Coord) => void;
   stageRef: React.RefObject<Konva.Stage>;
   selectionInfo: SelectionInfo;

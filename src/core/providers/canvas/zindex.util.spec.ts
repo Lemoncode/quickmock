@@ -11,19 +11,91 @@ describe('moveZIndexToTop', () => {
     // Arrange
     const selectedShapeId: string = '2';
     const shapes: ShapeModel[] = [
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
     ];
     // Act
     const result = moveZIndexToTop(selectedShapeId, shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        allowsInlineEdition: true,
+        typeOfTransformer: ['top-center', 'bottom-center'],
+      },
     ]);
   });
 
@@ -31,10 +103,46 @@ describe('moveZIndexToTop', () => {
     // Arrange
     const selectedShapeId: string = '2';
     const shapes: ShapeModel[] = [
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ];
     // Act
     const result = moveZIndexToTop(selectedShapeId, shapes);
@@ -56,10 +164,46 @@ describe('moveZIndexToTop', () => {
     // Arrange
     const selectedShapeId: string = '5';
     const shapes: ShapeModel[] = [
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ];
     // Act
     const result = moveZIndexToTop(selectedShapeId, shapes);
@@ -73,19 +217,91 @@ describe('moveZIndexToBottom', () => {
     // Arrange
     const selectedShapeId: string = '3';
     const shapes: ShapeModel[] = [
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ];
     // Act
     const result = moveZIndexToBottom(selectedShapeId, shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ]);
   });
 
@@ -93,10 +309,46 @@ describe('moveZIndexToBottom', () => {
     // Arrange
     const selectedShapeId: string = '2';
     const shapes: ShapeModel[] = [
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ];
     // Act
     const result = moveZIndexToBottom(selectedShapeId, shapes);
@@ -118,10 +370,46 @@ describe('moveZIndexToBottom', () => {
     // Arrange
     const selectedShapeId: string = '5';
     const shapes: ShapeModel[] = [
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ];
     // Act
     const result = moveZIndexToBottom(selectedShapeId, shapes);
@@ -135,19 +423,91 @@ describe('moveZIndexDownOneLevel', () => {
     // Arrange
     const selectedShapeId: string = '3';
     const shapes: ShapeModel[] = [
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ];
     // Act
     const result = moveZIndexDownOneLevel(selectedShapeId, shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ]);
   });
 
@@ -155,10 +515,46 @@ describe('moveZIndexDownOneLevel', () => {
     // Arrange
     const selectedShapeId: string = '1';
     const shapes: ShapeModel[] = [
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ];
     // Act
     const result = moveZIndexDownOneLevel(selectedShapeId, shapes);
@@ -180,10 +576,46 @@ describe('moveZIndexDownOneLevel', () => {
     // Arrange
     const selectedShapeId: string = '5';
     const shapes: ShapeModel[] = [
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ];
     // Act
     const result = moveZIndexDownOneLevel(selectedShapeId, shapes);
@@ -197,19 +629,91 @@ describe('moveZIndexTopOneLevel', () => {
     // Arrange
     const selectedShapeId: string = '2';
     const shapes: ShapeModel[] = [
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ];
     // Act
     const result = moveZIndexTopOneLevel(selectedShapeId, shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ]);
   });
 
@@ -217,10 +721,46 @@ describe('moveZIndexTopOneLevel', () => {
     // Arrange
     const selectedShapeId: string = '4';
     const shapes: ShapeModel[] = [
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ];
     // Act
     const result = moveZIndexTopOneLevel(selectedShapeId, shapes);
@@ -242,10 +782,46 @@ describe('moveZIndexTopOneLevel', () => {
     // Arrange
     const selectedShapeId: string = '5';
     const shapes: ShapeModel[] = [
-      { id: '1', x: 0, y: 0, width: 0, height: 0, type: 'button' },
-      { id: '2', x: 0, y: 0, width: 0, height: 0, type: 'input' },
-      { id: '3', x: 0, y: 0, width: 0, height: 0, type: 'combobox' },
-      { id: '4', x: 0, y: 0, width: 0, height: 0, type: 'checkbox' },
+      {
+        id: '1',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'button',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '2',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'input',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '3',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'combobox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
+      {
+        id: '4',
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+        type: 'checkbox',
+        typeOfTransformer: ['top-center', 'bottom-center'],
+        allowsInlineEdition: true,
+      },
     ];
     // Act
     const result = moveZIndexTopOneLevel(selectedShapeId, shapes);

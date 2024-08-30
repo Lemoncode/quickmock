@@ -23,6 +23,7 @@ import {
   renderBrowserWindow,
   renderMobilePhoneContainer,
   renderTablet,
+  renderModalDialogContainer,
 } from './simple-container';
 import {
   renderVideoPlayer,
@@ -57,6 +58,7 @@ import { renderSmalltext } from './simple-text-components/smalltext.renderer';
 import { renderParagraph } from './simple-text-components/paragraph.renderer';
 import { renderImage } from './simple-basic-shapes/image.renderer';
 import { renderCalendar } from './simple-rich-components/calendar.renderer';
+import { renderAppBar } from './simple-rich-components/appBar.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -89,6 +91,8 @@ export const renderShapeComponent = (
       return renderTimepickerinput(shape, shapeRenderedProps);
     case 'mobilePhone':
       return renderMobilePhoneContainer(shape, shapeRenderedProps);
+    case 'modalDialog':
+      return renderModalDialogContainer(shape, shapeRenderedProps);
     case 'label':
       return renderLabel(shape, shapeRenderedProps);
     case 'radiobutton':
@@ -155,6 +159,8 @@ export const renderShapeComponent = (
       return renderModal(shape, shapeRenderedProps);
     case 'tabsbar':
       return renderTabsBar(shape, shapeRenderedProps);
+    case 'appBar':
+      return renderAppBar(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

@@ -83,13 +83,39 @@ export const memberList: Member[] = [
 
   {
     id: '11',
+    name: 'Pablo',
+    surname: 'Reinaldo',
+    urlLinkedin: 'https://www.linkedin.com/in/pabloreinaldo90/',
+    image: '/src/assets/pablo-reinaldo.jpeg',
+  },
+
+  {
+    id: '12',
     name: 'Leticia',
     surname: 'de la Osa',
     urlLinkedin: 'https://www.linkedin.com/in/deletidev/',
     image: '/src/assets/leticia-de-la-osa.jpeg',
   },
+
   {
-    id: '12',
+    id: '13',
+    name: 'Gabriel',
+    surname: 'Ionut',
+    urlLinkedin: 'https://www.linkedin.com/in/gabriel-ionut-birsan-b14816307/',
+    image: '/src/assets/gabriel-ionut.jpeg',
+  },
+
+  {
+    id: '14',
+    name: 'Antonio',
+    surname: 'Contreras',
+    urlLinkedin:
+      'https://www.linkedin.com/in/antonio-contreras-rom%C3%A1n-a32978116/',
+    image: '/src/assets/antonio-contreras.jpeg',
+  },
+
+  {
+    id: '15',
     name: 'Braulio',
     surname: 'Diez',
     urlLinkedin: 'https://www.linkedin.com/in/brauliodiez/',
