@@ -40,16 +40,19 @@ export const Modal = forwardRef<any, ShapeProps>(
       () => otherProps?.textColor ?? '000000',
       [otherProps?.textColor]
     );
+
     const backgroundColor = useMemo(
       () => otherProps?.backgroundColor ?? '#00FFFF',
       [otherProps?.backgroundColor]
     );
-    const darkHeaderColor = darkenColor(backgroundColor, 40);
-    const darkButtonColor = darkenColor(backgroundColor, 60);
+
     const strokeColor = useMemo(
       () => otherProps?.stroke ?? '000000',
       [otherProps?.stroke]
     );
+
+    const darkHeaderColor = darkenColor(backgroundColor, 40);
+    const darkButtonColor = darkenColor(backgroundColor, 60);
 
     return (
       <Group
