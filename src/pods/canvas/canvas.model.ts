@@ -293,7 +293,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'accordion':
       return '[*]Section A\nSection B';
     case 'breadcrumb':
-      return 'Home\nCategory\nProducts';
+      return 'Home, Category, Products';
     case 'checkbox':
       return 'Check me!';
     case 'postit':
@@ -301,7 +301,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'listbox':
       return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
     case 'horizontal-menu':
-      return 'Home\nAbout\nServices\nContact';
+      return 'Home, About, Services, Contact';
     case 'vertical-menu':
       return 'Option 1\nOption 2\n----\nOption 3\nOption 4';
     case 'heading1':
@@ -323,7 +323,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'appBar':
       return 'AppBar';
     case 'buttonBar':
-      return 'Button 1\nButton 2\nButton 3';
+      return 'Button 1, Button 2, Button 3';
     default:
       return undefined;
   }

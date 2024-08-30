@@ -21,7 +21,7 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>(
     { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
     ref
   ) => {
-    const menuElements: string[] = text.split('\n');
+    const menuElements: string[] = text.split(',');
     const numberOfItems = menuElements.length;
     const minItemWidth = 100;
     const itemSpacing = 20;

@@ -9,8 +9,8 @@ export const breadcrumbShapeSizeRestrictions: ShapeSizeRestrictions = {
   minHeight: 60,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 60,
-  defaultHeight: 400,
+  defaultWidth: 200,
+  defaultHeight: 60,
 };
 
 export const GROUP_HEIGHT = 60;
@@ -76,6 +76,8 @@ export const BreadcrumbShape = forwardRef<any, ShapeProps>(
                   fontFamily="Arial"
                   fontSize={16}
                   fill="black"
+                  wrap="none"
+                  ellipsis={true}
                 />
               )}
             </Group>

@@ -1,4 +1,4 @@
-import { ButtonBarShape } from '@/common/components/front-rich-components/buttonBar';
+import { ButtonBarShape } from '@/common/components/front-rich-components/buttonBar/buttonBar';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

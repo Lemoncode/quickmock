@@ -11,4 +11,4 @@ export * from './calendar/calendar';
 export * from './table/table';
 export * from './modal/modal';
 export * from './appBar';
-export * from './buttonBar';
+export * from './buttonBar/buttonBar';
