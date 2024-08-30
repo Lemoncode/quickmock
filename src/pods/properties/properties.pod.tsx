@@ -8,7 +8,6 @@ import { StrokeStyle } from './components/stroke-style/stroke.style.component';
 import { ImageSrc } from './components/image-src/image-selector.component';
 import { ImageBlackAndWhite } from './components/image-black-and-white/image-black-and-white-selector.component';
 import { Progress } from './components/progress/progress.component';
-import { NodeConfig, Node } from 'konva/lib/Node';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
