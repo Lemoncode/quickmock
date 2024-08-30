@@ -6,12 +6,12 @@ import { Text, Group, Rect, Line } from 'react-konva';
 import { BASIC_SHAPE } from './shape.const';
 
 const tooltipShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 60,
+  minWidth: 80,
   minHeight: 70,
   maxWidth: -1,
-  maxHeight: 38,
+  maxHeight: 500,
   defaultWidth: BASIC_SHAPE.DEFAULT_TEXT_WIDTH,
-  defaultHeight: BASIC_SHAPE.DEFAULT_TEXT_HEIGHT,
+  defaultHeight: 100,
 };
 
 export const getTooltipShapeSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -23,7 +23,6 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
     ref
   ) => {
     const tooltipWidth = 100;
-    const tooltipHeight = 50 + 25;
     const pointerHeight = 25;
     const pointerWidth = 45;
 
@@ -49,6 +48,16 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
       () => otherProps?.strokeStyle ?? [],
       [otherProps?.strokeStyle]
     );
+
+    // Ajusta la posición del triángulo en función del alto del rectángulo
+    const trianglePoints = [
+      tooltipWidth / 2 - pointerWidth / 20, // x1
+      restrictedHeight, // y1
+      tooltipWidth / 2 + pointerWidth / 2, // x2
+      restrictedHeight, // y2
+      tooltipWidth / 2, // x3
+      restrictedHeight + pointerHeight, // y3
+    ];
 
     return (
       <Group
@@ -96,16 +105,9 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
         {/* Triángulo para la punta */}
         <Line
           x={-48}
-          y={-12}
+          y={-5}
           strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
-          points={[
-            tooltipWidth / 2 - pointerWidth / 20,
-            tooltipHeight,
-            tooltipWidth / 2 + pointerWidth / 2,
-            tooltipHeight,
-            tooltipWidth / 2,
-            tooltipHeight + pointerHeight,
-          ]}
+          points={trianglePoints}
           closed
           stroke={stroke}
           dash={strokeStyle}
