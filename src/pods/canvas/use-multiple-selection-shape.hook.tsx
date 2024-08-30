@@ -56,8 +56,6 @@ export const useMultipleSelectionShapeHook = (
       selectionRect
     );
 
-    console.log(selectedShapes);
-
     setSelectionRect(prevState => ({
       ...prevState,
       visible: false,

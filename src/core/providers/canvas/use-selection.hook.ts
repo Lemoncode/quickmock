@@ -11,7 +11,7 @@ export const useSelection = (
   const transformerRef = useRef<Konva.Transformer>(null);
   const shapeRefs = useRef<ShapeRefs>({});
   const selectedShapeRef = useRef<Konva.Node | null>(null);
-  const [selectedShapeId, setSelectedShapeId] = useState<string>('');
+  const [selectedShapesId, setSelectedShapesId] = useState<string[]>([]);
   const [selectedShapeType, setSelectedShapeType] = useState<ShapeType | null>(
     null
   );
@@ -27,18 +27,23 @@ export const useSelection = (
       }
     });
 
-    if (!currentIds.includes(selectedShapeId)) {
+    // TODO: Fix this, right now we have multipleshapes
+    // We have check if the currentId is on the selectedShape
+    // if it is remove it
+    // once all is checked if selectedShape is empty then
+    // cleanup transformerRef, and selectionShape
+    /*if (!currentIds.includes(selectedShapeId)) {
       transformerRef.current?.nodes([]);
       selectedShapeRef.current = null;
       setSelectedShapeId('');
       setSelectedShapeType(null);
-    }
-  }, [document.shapes, selectedShapeId]);
+    }*/
+  }, [document.shapes, selectedShapesId]);
 
   const handleSelected = (id: string, type: ShapeType) => {
     selectedShapeRef.current = shapeRefs.current[id].current;
     transformerRef?.current?.nodes([shapeRefs.current[id].current]);
-    setSelectedShapeId(id);
+    setSelectedShapesId(id);
     setSelectedShapeType(type);
   };
 
@@ -50,21 +55,25 @@ export const useSelection = (
     if (mouseEvent.target === mouseEvent.target.getStage()) {
       transformerRef.current?.nodes([]);
       selectedShapeRef.current = null;
-      setSelectedShapeId('');
+      setSelectedShapesId('');
       setSelectedShapeType(null);
     }
   };
 
   const setZIndexOnSelected = (action: ZIndexAction) => {
     setDocument(prevDocument => ({
-      shapes: performZIndexAction(selectedShapeId, action, prevDocument.shapes),
+      shapes: performZIndexAction(
+        selectedShapesId,
+        action,
+        prevDocument.shapes
+      ),
     }));
   };
 
   const updateTextOnSelected = (text: string) => {
     setDocument(prevDocument => ({
       shapes: prevDocument.shapes.map(shape =>
-        shape.id === selectedShapeId ? { ...shape, text } : shape
+        shape.id === selectedShapesId ? { ...shape, text } : shape
       ),
     }));
   };
@@ -77,7 +86,7 @@ export const useSelection = (
   ) => {
     setDocument(prevDocument => ({
       shapes: prevDocument.shapes.map(shape =>
-        shape.id === selectedShapeId
+        shape.id === selectedShapesId
           ? { ...shape, otherProps: { ...shape.otherProps, [key]: value } }
           : shape
       ),
@@ -85,7 +94,7 @@ export const useSelection = (
   };
 
   const getSelectedShapeData = (): ShapeModel | undefined =>
-    document.shapes.find(shape => shape.id === selectedShapeId);
+    document.shapes.find(shape => shape.id === selectedShapesId);
 
   return {
     transformerRef,
@@ -93,7 +102,7 @@ export const useSelection = (
     handleSelected,
     handleClearSelection,
     selectedShapeRef,
-    selectedShapeId,
+    selectedShapeId: selectedShapesId,
     selectedShapeType,
     getSelectedShapeData,
     setZIndexOnSelected,
