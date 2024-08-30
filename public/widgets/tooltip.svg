@@ -1,6 +1,44 @@
-<svg width="200" height="70" xmlns="http://www.w3.org/2000/svg">
-  <!-- Caja del tooltip -->
-  <rect x="10" y="10" width="180" height="50" rx="10" ry="10" style="fill:lightyellow;stroke:black;stroke-width:2"/>
+<svg width="100" height="75" xmlns="http://www.w3.org/2000/svg">
+  <!-- Caja del tooltip sin borde redondeado en la esquina inferior izquierda -->
+  <rect
+    x="0"
+    y="0"
+    width="100"
+    height="50"
+    fill="#bbbbbb"
+    stroke="#bbbbbb"
+    stroke-width="2"
+    rx="0"
+    ry="0"
+  />
+  <rect
+    x="0"
+    y="0"
+    width="100"
+    height="50"
+    fill="#bbbbbb"
+    stroke="#bbbbbb"
+    stroke-width="2"
+    rx="10"
+    ry="10"
+  />
   <!-- Texto del tooltip -->
-  <text x="20" y="40" font-family="Arial" font-size="16" fill="black">This is a tooltip</text>
+  <text
+    x="50"
+    y="25"
+    font-family="Comic Sans MS, cursive"
+    font-size="14"
+    fill="#ffffff"
+    text-anchor="middle"
+    alignment-baseline="middle"
+  >
+    Sample Text
+  </text>
+  <!-- Triángulo escaleno para la punta -->
+  <polygon
+    points="0,50 20,50 5,75"
+    fill="#bbbbbb"
+    stroke="#bbbbbb"
+    stroke-width="2"
+  />
 </svg>

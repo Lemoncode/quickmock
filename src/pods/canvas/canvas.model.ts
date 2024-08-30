@@ -254,7 +254,6 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'heading3':
     case 'normaltext':
     case 'smalltext':
-    case 'tooltip':
     case 'horizontalScrollBar':
     case 'appBar':
       return ['middle-left', 'middle-right'];
@@ -344,6 +343,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'table':
     case 'modal':
     case 'appBar':
+    case 'tooltip':
       return 'textarea';
       break;
     case 'image':
@@ -369,7 +369,7 @@ export const generateDefaultOtherProps = (
       return {
         stroke: '#bbbbbb',
         backgroundColor: '#bbbbbb',
-        textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
+        textColor: '#ffffff',
         strokeStyle: [],
       };
     case 'button':

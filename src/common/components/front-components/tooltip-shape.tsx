@@ -7,7 +7,7 @@ import { BASIC_SHAPE } from './shape.const';
 
 const tooltipShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 60,
-  minHeight: 38,
+  minHeight: 70,
   maxWidth: -1,
   maxHeight: 38,
   defaultWidth: BASIC_SHAPE.DEFAULT_TEXT_WIDTH,
@@ -23,7 +23,7 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
     ref
   ) => {
     const tooltipWidth = 100;
-    const tooltipHeight = 50;
+    const tooltipHeight = 50 + 25;
     const pointerHeight = 25;
     const pointerWidth = 45;
 
@@ -80,15 +80,16 @@ export const TooltipShape = forwardRef<any, ShapeProps>(
 
         {/* Texto del tooltip */}
         <Text
-          x={BASIC_SHAPE.DEFAULT_PADDING}
-          y={BASIC_SHAPE.DEFAULT_PADDING + 1} // Centrar verticalmente
-          width={width - BASIC_SHAPE.DEFAULT_PADDING * 2}
+          x={10}
+          y={10}
+          width={restrictedWidth - 10}
+          height={restrictedHeight - 10}
           text={text}
           fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE}
           lineHeight={BASIC_SHAPE.DEFAULT_LINE_HEIGHT}
           fill={textColor}
-          wrap="none"
+          verticalAlign="middle"
           ellipsis={true}
           align="center"
         />
