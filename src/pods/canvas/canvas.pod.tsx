@@ -38,7 +38,7 @@ export const CanvasPod = () => {
   } = selectionInfo;
 
   const { selectionRect, handleMouseDown, handleMouseMove, handleMouseUp } =
-    useMultipleSelectionShapeHook(selectionInfo);
+    useMultipleSelectionShapeHook(selectionInfo, shapeRefs);
 
   const addNewShapeAndSetSelected = (type: ShapeType, x: number, y: number) => {
     const shapeId = addNewShape(type, x, y);

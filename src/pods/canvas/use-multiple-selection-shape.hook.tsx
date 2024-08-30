@@ -1,9 +1,15 @@
+import { ShapeRefs } from '@/core/model';
 import { SelectionInfo } from '@/core/providers/canvas/canvas.model';
 import Konva from 'konva';
 import { useState } from 'react';
+import { SelectionRect } from './canvas.model';
+import { getSelectedShapesFromSelectionRect } from './use-multiple-selection.business';
 
-export const useMultipleSelectionShapeHook = (selectionInfo: SelectionInfo) => {
-  const [selectionRect, setSelectionRect] = useState({
+export const useMultipleSelectionShapeHook = (
+  selectionInfo: SelectionInfo,
+  shapeRefs: React.MutableRefObject<ShapeRefs>
+) => {
+  const [selectionRect, setSelectionRect] = useState<SelectionRect>({
     x: 0,
     y: 0,
     width: 0,
@@ -43,6 +49,15 @@ export const useMultipleSelectionShapeHook = (selectionInfo: SelectionInfo) => {
     if (!selectionRect.visible) {
       return;
     }
+
+    // Iterate through all the shapes and check which shapes are inside that rect
+    const selectedShapes: string[] = getSelectedShapesFromSelectionRect(
+      shapeRefs,
+      selectionRect
+    );
+
+    console.log(selectedShapes);
+
     setSelectionRect(prevState => ({
       ...prevState,
       visible: false,

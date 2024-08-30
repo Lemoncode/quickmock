@@ -465,3 +465,11 @@ export type ClosestSnapLines = {
   vertical: SnapLineSubset | null;
   horizontal: SnapLineSubset | null;
 };
+
+export interface SelectionRect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  visible: boolean;
+}
