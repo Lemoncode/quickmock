@@ -15,21 +15,34 @@ export const useTransform = (
 ) => {
   const {
     selectedShapesIds,
-    selectedShapeRef,
+    selectedShapesRefs,
     transformerRef,
     selectedShapeType,
   } = useCanvasContext().selectionInfo;
 
-  useEffect(() => {
-    // Right now let's only apply anchors when there is a single shape selected
-    if (selectedShapesIds.length !== 1) return;
-
-    const selectedShape = selectedShapeRef.current;
+  const setTransfomerSingleSelection = () => {
+    if (
+      selectedShapesRefs.current == null ||
+      selectedShapesRefs.current.length !== 1
+    ) {
+      return;
+    }
+    // TODO: Check this selectedShape should not be in use
+    const selectedShape = selectedShapesRefs.current[0];
     const transformer = transformerRef.current;
     if (selectedShape && transformer) {
       transformerRef.current.enabledAnchors(
         selectedShape.attrs.typeOfTransformer
       );
+    }
+  };
+
+  useEffect(() => {
+    // Right now let's only apply anchors when there is a single shape selected
+    if (selectedShapesIds.length !== 1) {
+      transformerRef.current?.enabledAnchors([]);
+    } else {
+      setTransfomerSingleSelection();
     }
   }, [selectedShapesIds]);
 
@@ -59,13 +72,27 @@ export const useTransform = (
   const handleTransform = (e: KonvaEventObject<Event>) => {
     const skipHistory = e.type !== 'transformend';
 
-    const node = selectedShapeRef.current;
-    if (!node) {
+    const nodes = selectedShapesRefs.current;
+    if (!nodes) {
       return;
     }
 
+    if (nodes.length === 1) {
+      updateSingleItem(nodes[0], skipHistory);
+    } else {
+      console.log('Update Multiple');
+      // Just get node x and y
+      // updateShapesSizeAndPosition
+      // here we update multple shapes
+      // rahter call it
+      // updateMultipleShapePosition
+      // This is going to be though
+      // we should calculate the offset and apply to everyshape
+      // maybe this is already done by konva and updated in the props?
+      // give a try save the document an load
+    }
+
     // Single item will allow move and resize
-    updateSingleItem(node, skipHistory);
     /*
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();

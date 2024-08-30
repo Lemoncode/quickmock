@@ -32,7 +32,7 @@ export const CanvasPod = () => {
     transformerRef,
     handleSelected,
     handleClearSelection,
-    selectedShapeRef,
+    selectedShapesRefs,
     updateTextOnSelected,
     updateOtherPropsOnSelected,
   } = selectionInfo;
@@ -51,19 +51,20 @@ export const CanvasPod = () => {
   const { isDraggedOver, dropRef } = useDropShape();
   useMonitorShape(dropRef, addNewShapeAndSetSelected);
 
-  const getSelectedShapeKonvaId = (): string => {
-    let result = '';
+  const getSelectedShapeKonvaId = (): string[] => {
+    let result: string[] = [];
 
-    if (selectedShapeRef.current) {
-      result = String(selectedShapeRef.current._id);
+    if (selectedShapesRefs.current) {
+      result = selectedShapesRefs.current.map(item => String(item._id));
+      //result = String(selectedShapesRefs.current._id);
     }
 
     return result;
   };
 
-  const selectedShapeKonvaId = useMemo(
+  const selectedShapesKonvaId = useMemo(
     () => getSelectedShapeKonvaId(),
-    [selectedShapeRef.current]
+    [selectedShapesRefs.current]
   );
 
   const {
@@ -72,7 +73,7 @@ export const CanvasPod = () => {
     showSnapInVerticalLine,
     yCoordHorizontalLine,
     xCoordVerticalLine,
-  } = useSnapIn(transformerRef, selectedShapeKonvaId);
+  } = useSnapIn(transformerRef, selectedShapesKonvaId);
 
   const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
     updateShapeSizeAndPosition

@@ -10,7 +10,7 @@ export const useSelection = (
 ): SelectionInfo => {
   const transformerRef = useRef<Konva.Transformer>(null);
   const shapeRefs = useRef<ShapeRefs>({});
-  const selectedShapeRef = useRef<Konva.Node | null>(null);
+  const selectedShapesRefs = useRef<Konva.Node[]>([]);
   const [selectedShapesIds, setSelectedShapesIds] = useState<string[]>([]);
   const [selectedShapeType, setSelectedShapeType] = useState<ShapeType | null>(
     null
@@ -40,13 +40,17 @@ export const useSelection = (
     }*/
   }, [document.shapes, selectedShapesIds]);
 
-  const handleSelected = (ids: string[], type: ShapeType) => {
-    //selectedShapeRef.current = shapeRefs.current[id].current;
-    const selectedShapeRefs = ids.map(id => shapeRefs.current[id].current);
+  const handleSelected = (ids: string[] | string, type: ShapeType) => {
+    // quiero saber si ids es string o array
+    const arrayIds = typeof ids === 'string' ? [ids] : ids;
 
-    transformerRef?.current?.nodes(selectedShapeRefs);
+    selectedShapesRefs.current = arrayIds.map(
+      id => shapeRefs.current[id].current
+    );
+
+    transformerRef?.current?.nodes(selectedShapesRefs.current);
     //transformerRef?.current?.nodes([shapeRefs.current[id].current]);
-    setSelectedShapesIds(ids);
+    setSelectedShapesIds(arrayIds);
     // Todo set type only if single selection
     setSelectedShapeType(type);
   };
@@ -58,7 +62,7 @@ export const useSelection = (
   ) => {
     if (mouseEvent.target === mouseEvent.target.getStage()) {
       transformerRef.current?.nodes([]);
-      selectedShapeRef.current = null;
+      selectedShapesRefs.current = [];
       setSelectedShapesIds([]);
       setSelectedShapeType(null);
     }
@@ -129,7 +133,7 @@ export const useSelection = (
     shapeRefs,
     handleSelected,
     handleClearSelection,
-    selectedShapeRef,
+    selectedShapesRefs,
     selectedShapesIds,
     selectedShapeType,
     getSelectedShapeData,

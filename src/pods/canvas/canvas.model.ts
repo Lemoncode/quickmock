@@ -260,6 +260,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'verticalScrollBar':
       return ['top-center', 'bottom-center'];
     case 'icon':
+    case 'multiple':
       return [];
     default:
       return [
