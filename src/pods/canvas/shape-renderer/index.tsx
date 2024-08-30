@@ -17,6 +17,7 @@ import {
   renderIcon,
   renderHorizontalScrollBar,
   renderVerticalScrollBar,
+  renderTooltip,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -161,6 +162,8 @@ export const renderShapeComponent = (
       return renderAppBar(shape, shapeRenderedProps);
     case 'buttonBar':
       return renderButtonBar(shape, shapeRenderedProps);
+    case 'tooltip':
+      return renderTooltip(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

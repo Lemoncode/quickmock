@@ -24,6 +24,7 @@ import {
   getIconShapeSizeRestrictions,
   getHorizontalScrollBarShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
+  getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
 } from '@/common/components/front-components';
 import {
@@ -172,6 +173,8 @@ export const getSizeRestrictionFromShape = (
       return getAppBarShapeSizeRestrictions();
     case 'buttonBar':
       return getButtonBarShapeSizeRestrictions();
+    case 'tooltip':
+      return getTooltipShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -227,6 +230,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'modal':
     case 'appBar':
     case 'buttonBar':
+    case 'tooltip':
       return true;
     default:
       return false;
@@ -310,6 +314,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Heading 2';
     case 'heading3':
       return 'Heading 3';
+    case 'tooltip':
+      return 'Sample Text';
     case 'normaltext':
       return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
     case 'smalltext':
@@ -345,6 +351,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'modal':
     case 'appBar':
     case 'buttonBar':
+    case 'tooltip':
       return 'textarea';
       break;
     case 'image':
@@ -364,15 +371,37 @@ export const generateDefaultOtherProps = (
         backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
+        borderRadius: '12',
+      };
+    case 'tooltip':
+      return {
+        stroke: '#bbbbbb',
+        backgroundColor: '#bbbbbb',
+        textColor: '#ffffff',
+        strokeStyle: [],
       };
     case 'button':
     case 'textarea':
-    case 'combobox':
     case 'listbox':
     case 'vertical-menu':
     case 'horizontal-menu':
     case 'datepickerinput':
     case 'timepickerinput':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+        borderRadius: '12',
+      };
+    case 'combobox':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+        borderRadius: '12',
+      };
     case 'modal':
     case 'buttonBar':
       return {
@@ -393,8 +422,9 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#FFFF99',
         textColor: '#000000',
         strokeStyle: [],
+        borderRadius: '12',
       };
-    case 'rectangle':
+
     case 'circle':
     case 'star':
     case 'diamond':
@@ -403,6 +433,13 @@ export const generateDefaultOtherProps = (
         stroke: '#000000',
         backgroundColor: '#ffffff',
         strokeStyle: [],
+      };
+    case 'rectangle':
+      return {
+        stroke: '#000000',
+        backgroundColor: '#ffffff',
+        strokeStyle: [],
+        borderRadius: '12',
       };
     case 'line':
       return {
@@ -447,6 +484,11 @@ export const generateDefaultOtherProps = (
           categories: ['IT'],
         },
         iconSize: 'M',
+      };
+    case 'image':
+      return {
+        imageSrc: '',
+        imageBlackAndWhite: false,
       };
     case 'progressbar':
       return {

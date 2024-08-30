@@ -59,7 +59,8 @@ export type ShapeType =
   | 'horizontalScrollBar'
   | 'modal'
   | 'appBar'
-  | 'buttonBar';
+  | 'buttonBar'
+  | 'tooltip';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   combobox: 'Combobox',
@@ -110,6 +111,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   modal: 'Modal',
   appBar: 'AppBar',
   buttonBar: 'Button Bar',
+  tooltip: 'Tooltip',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
@@ -148,7 +150,9 @@ export interface OtherProps {
   icon?: IconInfo;
   iconSize?: IconSize;
   imageSrc?: string;
+  imageBlackAndWhite?: boolean;
   progress?: string;
+  borderRadius?: string;
 }
 
 export const BASE_ICONS_URL = '/icons/';

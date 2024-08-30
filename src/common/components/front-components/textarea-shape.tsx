@@ -3,6 +3,7 @@ import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
+import { INPUT_SHAPE } from './shape.const';
 
 const textAreaShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 80,
@@ -44,6 +45,11 @@ export const TextAreaShape = forwardRef<any, ShapeProps>(
       [otherProps?.strokeStyle]
     );
 
+    const borderRadius = useMemo(() => {
+      const radius = Number(otherProps?.borderRadius);
+      return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
+    }, [otherProps?.borderRadius]);
+
     return (
       <Group
         x={x}
@@ -59,7 +65,7 @@ export const TextAreaShape = forwardRef<any, ShapeProps>(
           y={0}
           width={restrictedWidth}
           height={restrictedHeight}
-          cornerRadius={5}
+          cornerRadius={borderRadius}
           stroke={stroke}
           strokeWidth={2}
           fill={fill}

@@ -3,6 +3,7 @@ import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import { INPUT_SHAPE } from '../front-components/shape.const';
 
 const horizontalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 75,
@@ -42,18 +43,26 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>(
       () => otherProps?.textColor ?? 'black',
       [otherProps?.textColor]
     );
+
     const backgroundColor = useMemo(
       () => otherProps?.backgroundColor ?? 'white',
       [otherProps?.backgroundColor]
     );
+
     const strokeColor = useMemo(
       () => otherProps?.stroke ?? 'black',
       [otherProps?.stroke]
     );
+
     const strokeStyle = useMemo(
       () => otherProps?.strokeStyle ?? [],
       [otherProps?.strokeStyle]
     );
+
+    const borderRadius = useMemo(() => {
+      const radius = Number(otherProps?.borderRadius);
+      return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
+    }, [otherProps?.borderRadius]);
 
     return (
       <Group
@@ -74,6 +83,7 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>(
           strokeWidth={2}
           dash={strokeStyle}
           fill={backgroundColor}
+          cornerRadius={borderRadius}
         />
 
         {menuElements.map((e: string, index: number) => (

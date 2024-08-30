@@ -1,8 +1,8 @@
-import { ProgressBarShape } from '@/common/components/front-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
+import { TooltipShape } from '@/common/components/front-components/tooltip-shape';
 
-export const renderProgressbar = (
+export const renderTooltip = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
@@ -10,10 +10,9 @@ export const renderProgressbar = (
     shapeRenderedProps;
 
   return (
-    <ProgressBarShape
+    <TooltipShape
       id={shape.id}
       key={shape.id}
-      ref={shapeRefs.current[shape.id]}
       x={shape.x}
       y={shape.y}
       width={shape.width}
@@ -22,9 +21,12 @@ export const renderProgressbar = (
       draggable
       typeOfTransformer={shape.typeOfTransformer}
       onSelected={handleSelected}
+      ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      isEditable={shape.allowsInlineEdition}
+      text={shape.text}
       otherProps={shape.otherProps}
     />
   );

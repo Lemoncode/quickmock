@@ -66,7 +66,7 @@ export const ProgressBarShape = forwardRef<any, ShapeProps>(
           cornerRadius={10}
           stroke="black"
           strokeWidth={2}
-          fill="green"
+          fill="lightgrey"
         />
       </Group>
     );
