@@ -8,7 +8,7 @@ import { useCanvasContext } from '@/core/providers';
 
 export const useSnapIn = (
   transformRef: React.RefObject<Konva.Transformer>,
-  excludedShapeId: string
+  excludedShapeIds: string[]
 ) => {
   const [showSnapInHorizontalLine, setShowSnapInHorizontalLine] =
     useState(false);
@@ -18,7 +18,10 @@ export const useSnapIn = (
   const { stageRef } = useCanvasContext();
 
   const handleTransformerDragMove = (_: KonvaEventObject<DragEvent>) => {
-    if (!excludedShapeId) return;
+    // TODO: Right now let's limit snap in to single selection
+    if (!excludedShapeIds || excludedShapeIds.length !== 1) return;
+
+    const excludedShapeId = excludedShapeIds[0];
 
     const possibleSnapLines = getSnapLines(excludedShapeId);
     const selectedShapeSnappingEdges = getShapeSnappingEdges(transformRef);

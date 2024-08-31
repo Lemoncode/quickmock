@@ -1,8 +1,9 @@
-import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef, useMemo } from 'react';
 import { Group, Circle, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 
 const radioButtonShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 50,
@@ -16,68 +17,74 @@ const radioButtonShapeRestrictions: ShapeSizeRestrictions = {
 export const getRadioButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   radioButtonShapeRestrictions;
 
-export const RadioButtonShape = forwardRef<any, ShapeProps>(
-  (
-    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
-    ref
-  ) => {
-    const { width: restrictedWidth, height: restrictedHeight } =
-      fitSizeToShapeSizeRestrictions(
-        radioButtonShapeRestrictions,
-        width,
-        height
-      );
+const shapeType: ShapeType = 'radiobutton';
 
-    const isOn = useMemo(
-      () => otherProps?.checked ?? true,
-      [otherProps?.checked]
-    );
+export const RadioButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
+  const {
+    x,
+    y,
+    width,
+    height,
+    id,
+    onSelected,
+    text,
+    otherProps,
+    ...shapeProps
+  } = props;
+  const { width: restrictedWidth, height: restrictedHeight } =
+    fitSizeToShapeSizeRestrictions(radioButtonShapeRestrictions, width, height);
 
-    const textColor = useMemo(
-      () => otherProps?.textColor ?? 'black',
-      [otherProps?.textColor]
-    );
+  const isOn = useMemo(
+    () => otherProps?.checked ?? true,
+    [otherProps?.checked]
+  );
 
-    const radius = restrictedHeight / 2;
+  const textColor = useMemo(
+    () => otherProps?.textColor ?? 'black',
+    [otherProps?.textColor]
+  );
 
-    return (
-      <Group
-        x={x}
-        y={y}
-        ref={ref}
-        width={restrictedWidth}
-        height={restrictedHeight}
-        {...shapeProps}
-        onClick={() => onSelected(id, 'radiobutton')}
-      >
-        {/* Círculo exterior del radio button */}
-        <Circle
-          x={radius}
-          y={radius}
-          radius={radius}
-          stroke="black"
-          strokeWidth={2}
-        />
+  const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
-        {/* Círculo interior del radio button (checked) */}
-        <Circle
-          x={radius}
-          y={radius}
-          radius={radius * 0.5}
-          fill={isOn ? 'black' : 'white'}
-        />
+  const radius = restrictedHeight / 2;
 
-        {/* Texto */}
-        <Text
-          x={radius * 2 + 10}
-          y={radius * 0.5 + 5}
-          text={text}
-          fontFamily="Comic Sans MS, cursive"
-          fontSize={20}
-          fill={textColor}
-          verticalAllign="middle"
-        />
-      </Group>
-    );
-  }
-);
+  return (
+    <Group
+      x={x}
+      y={y}
+      ref={ref}
+      width={restrictedWidth}
+      height={restrictedHeight}
+      {...shapeProps}
+      onClick={handleSelection}
+    >
+      {/* Círculo exterior del radio button */}
+      <Circle
+        x={radius}
+        y={radius}
+        radius={radius}
+        stroke="black"
+        strokeWidth={2}
+      />
+
+      {/* Círculo interior del radio button (checked) */}
+      <Circle
+        x={radius}
+        y={radius}
+        radius={radius * 0.5}
+        fill={isOn ? 'black' : 'white'}
+      />
+
+      {/* Texto */}
+      <Text
+        x={radius * 2 + 10}
+        y={radius * 0.5 + 5}
+        text={text}
+        fontFamily="Comic Sans MS, cursive"
+        fontSize={20}
+        fill={textColor}
+        verticalAllign="middle"
+      />
+    </Group>
+  );
+});

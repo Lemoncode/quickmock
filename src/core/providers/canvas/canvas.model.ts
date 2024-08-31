@@ -14,14 +14,18 @@ export type ZIndexAction = 'top' | 'bottom' | 'up' | 'down';
 export interface SelectionInfo {
   transformerRef: React.RefObject<Konva.Transformer>;
   shapeRefs: React.MutableRefObject<ShapeRefs>;
-  handleSelected: (id: string, type: ShapeType) => void;
+  handleSelected: (
+    id: string[] | string,
+    type: ShapeType,
+    isUserDoingMultipleSelection: boolean
+  ) => void;
   handleClearSelection: (
     mouseEvent:
       | Konva.KonvaEventObject<MouseEvent>
       | Konva.KonvaEventObject<TouchEvent>
   ) => void;
-  selectedShapeRef: React.MutableRefObject<Node<NodeConfig> | null>;
-  selectedShapeId: string;
+  selectedShapesRefs: React.MutableRefObject<Node<NodeConfig>[] | null>;
+  selectedShapesIds: string[];
   selectedShapeType: ShapeType | null;
   getSelectedShapeData: () => ShapeModel | undefined;
   setZIndexOnSelected: (action: ZIndexAction) => void;
@@ -53,7 +57,7 @@ export interface CanvasContextModel {
   updateShapePosition: (id: string, position: Coord) => void;
   stageRef: React.RefObject<Konva.Stage>;
   selectionInfo: SelectionInfo;
-  deleteSelectedShape: (id: string) => void;
+  deleteSelectedShapes: (id: string[]) => void;
   canUndo: () => boolean;
   canRedo: () => boolean;
   doUndo: () => void;

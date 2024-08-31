@@ -13,9 +13,17 @@ export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
   const { getSelectedShapeData, updateOtherPropsOnSelected } = selectionInfo;
 
-  const selectedShapeID = selectionInfo?.selectedShapeRef.current ?? null;
+  // TODO: Right now we will enable properties when we have single selection
+  // if we have multiple selection or no selection we won't allow that
+  // in the future we can just merge common props etc... but that's not straight forward
 
-  if (!selectedShapeID) {
+  const selectedShapeRef =
+    selectionInfo?.selectedShapesRefs.current &&
+    selectionInfo?.selectedShapesRefs.current.length === 1
+      ? selectionInfo.selectedShapesRefs.current[0]
+      : null;
+
+  if (!selectedShapeRef) {
     return null;
   }
 
