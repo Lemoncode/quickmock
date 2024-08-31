@@ -9,15 +9,6 @@ export const findShapesById = (
   return shapes.filter(shape => shapeIds.includes(shape.id));
 };
 
-/*
-export const findShapeById = (
-  shapeId: string,
-  shapes: ShapeModel[]
-): ShapeModel | undefined => {
-  return shapes.find(shape => shape.id === shapeId);
-};
-*/
-
 export const cloneShapes = (shapes: ShapeModel[]): ShapeModel[] => {
   return shapes.map(shape => cloneDeep(shape));
 };

@@ -18,8 +18,6 @@ export const useClipboard = (
   const clipboardShapesRef = useRef<ShapeModel[] | null>(null);
   const copyCount = useRef(1);
 
-  // TODO: Fix this copyShape to clipboar should iterate through all selected shapes
-  // and then selectionInfo should be string[]
   const copyShapesToClipboard = () => {
     const selectedShapes: ShapeModel[] = findShapesById(
       selectionInfo.selectedShapesIds ?? [],
@@ -32,7 +30,6 @@ export const useClipboard = (
     }
   };
 
-  // Same here, expect list of shape
   const pasteShapeFromClipboard = () => {
     if (clipboardShapesRef.current) {
       const newShapes: ShapeModel[] = cloneShapes(clipboardShapesRef.current);

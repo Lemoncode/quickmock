@@ -13,6 +13,13 @@ const isShapeInsideSelectionRect = (
   );
 };
 
+// TODO: Check if works in all directions:
+// - top left to bottom right
+// - bottom right to top left
+// - top right to bottom left
+// - bottom left to top right
+// #309
+// https://github.com/Lemoncode/quickmock/issues/309
 export const getSelectedShapesFromSelectionRect = (
   shapeRefs: React.MutableRefObject<ShapeRefs>,
   selectionRect: SelectionRect

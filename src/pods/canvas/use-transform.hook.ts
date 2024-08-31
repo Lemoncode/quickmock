@@ -27,7 +27,6 @@ export const useTransform = (
     ) {
       return;
     }
-    // TODO: Check this selectedShape should not be in use
     const selectedShape = selectedShapesRefs.current[0];
     const transformer = transformerRef.current;
     if (selectedShape && transformer) {
@@ -80,7 +79,10 @@ export const useTransform = (
     if (nodes.length === 1) {
       updateSingleItem(nodes[0], skipHistory);
     } else {
-      console.log('Update Multiple');
+      // TODO: Double check, since it's only movement no need to update the shape
+      // it will be automatically updated (we need to update the size because we don't
+      // want to apply default scale behavior, we won't resize)
+      // ***
       // Just get node x and y
       // updateShapesSizeAndPosition
       // here we update multple shapes

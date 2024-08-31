@@ -16,18 +16,24 @@ export const useSelection = (
     null
   );
 
-  // Remove unused shapes and reset selectedShapeId if it no longer exists
-  useEffect(() => {
-    // 1. First cleanup Refs, let's get the list of shape and if there are any
-    //    shapeRef that is not in the data Ref let's remove (just performance wise)
-    const shapes = document.shapes;
-    const currentIds = shapes.map(shape => shape.id);
-
+  const removeShapesNotInDocument = (currentIds: string[]) => {
+    // Cleanup Refs, let's get the list of shape and if there are any
+    // shapeRef that is not in the data Ref let's remove (just performance wise)
     Object.keys(shapeRefs.current).forEach(id => {
       if (!currentIds.includes(id)) {
         delete shapeRefs.current[id];
       }
     });
+  };
+
+  // Remove unused shapes and reset selectedShapeId if it no longer exists
+  useEffect(() => {
+    const shapes = document.shapes;
+    const currentIds = shapes.map(shape => shape.id);
+
+    // 1. First cleanup Refs, let's get the list of shape and if there are any
+    //    shapeRef that is not in the data Ref let's remove (just performance wise)
+    removeShapesNotInDocument(currentIds);
 
     // 2. Now we've got a list of selected shape, let's ensure that at least one of them
     // exists, if not let's wipe the list selection

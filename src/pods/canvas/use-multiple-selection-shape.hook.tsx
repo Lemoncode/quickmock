@@ -16,7 +16,8 @@ import { getSelectedShapesFromSelectionRect } from './use-multiple-selection.bus
 //  - We can set a temporary flag here
 //  - When user moves check the flag
 //  - When user mouse up then reset the flag to false
-
+// #308
+// https://github.com/Lemoncode/quickmock/issues/308
 export const useMultipleSelectionShapeHook = (
   selectionInfo: SelectionInfo,
   shapeRefs: React.MutableRefObject<ShapeRefs>,

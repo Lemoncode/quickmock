@@ -1,6 +1,6 @@
 import Konva from 'konva';
 
-export const isUserDoingMultipleSelection = (
+export const isUserDoingMultipleSelectionUsingCtrlOrCmdKey = (
   e: Konva.KonvaEventObject<MouseEvent>
 ) => {
   // Ctrl in Windows o Cmd en Mac

@@ -10,16 +10,3 @@ export const removeShapesFromList = (
 
   return shapeCollection.filter(shape => !shapeIds.includes(shape.id));
 };
-
-/*
-// TODO: remove this code
-export const removeShapeFromList = (
-  shapeId: string,
-  shapeCollection: ShapeModel[]
-): ShapeModel[] => {
-  if (shapeId === '') {
-    return shapeCollection;
-  }
-  return shapeCollection.filter(shape => shape.id !== shapeId);
-};
-*/
