@@ -44,7 +44,7 @@ export const CanvasPod = () => {
     const shapeId = addNewShape(type, x, y);
     // TODO add issue enhance this
     setTimeout(() => {
-      handleSelected([shapeId], type);
+      handleSelected([shapeId], type, false);
     });
   };
 

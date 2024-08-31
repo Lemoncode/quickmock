@@ -1,8 +1,9 @@
 import { Group, Line, Rect } from 'react-konva';
-import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 
 const HorizontalScrollBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -16,8 +17,11 @@ const HorizontalScrollBarShapeSizeRestrictions: ShapeSizeRestrictions = {
 export const getHorizontalScrollBarShapeSizeRestrictions =
   (): ShapeSizeRestrictions => HorizontalScrollBarShapeSizeRestrictions;
 
+const shapeType: ShapeType = 'horizontalScrollBar';
+
 export const HorizontalScrollBarShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  (props, ref) => {
+    const { x, y, width, height, id, onSelected, ...shapeProps } = props;
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         HorizontalScrollBarShapeSizeRestrictions,
@@ -30,6 +34,8 @@ export const HorizontalScrollBarShape = forwardRef<any, ShapeProps>(
     const thumbX =
       arrowWidth + (restrictedWidth - thumbWidth - arrowWidth * 2) / 2; // Centrar el thumb dentro del área disponible
 
+    const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
     return (
       <Group
         x={x}
@@ -38,7 +44,7 @@ export const HorizontalScrollBarShape = forwardRef<any, ShapeProps>(
         width={restrictedWidth}
         height={restrictedHeight}
         {...shapeProps}
-        onClick={() => onSelected(id, 'horizontalScrollBar')}
+        onClick={handleSelection}
       >
         {/* Fondo de la barra de scroll */}
         <Rect

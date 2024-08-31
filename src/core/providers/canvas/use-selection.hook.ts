@@ -46,13 +46,25 @@ export const useSelection = (
     }
   }, [document.shapes, selectedShapesIds]);
 
-  const handleSelected = (ids: string[] | string, type: ShapeType) => {
-    // quiero saber si ids es string o array
+  const handleSelected = (
+    ids: string[] | string,
+    type: ShapeType,
+    isUserDoingMultipleSelection: boolean
+  ) => {
+    // I want to kniw if the ids is string or array
     const arrayIds = typeof ids === 'string' ? [ids] : ids;
 
-    selectedShapesRefs.current = arrayIds.map(
-      id => shapeRefs.current[id].current
-    );
+    if (!isUserDoingMultipleSelection) {
+      // No multiple selectio, just replace selection with current selected item(s)
+      selectedShapesRefs.current = arrayIds.map(
+        id => shapeRefs.current[id].current
+      );
+    } else {
+      // Multiple selection, just push what is selected to the current selection
+      selectedShapesRefs.current = selectedShapesRefs.current.concat(
+        arrayIds.map(id => shapeRefs.current[id].current)
+      );
+    }
 
     transformerRef?.current?.nodes(selectedShapesRefs.current);
     //transformerRef?.current?.nodes([shapeRefs.current[id].current]);

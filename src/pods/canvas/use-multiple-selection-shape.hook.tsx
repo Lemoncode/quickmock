@@ -60,7 +60,11 @@ export const useMultipleSelectionShapeHook = (
     // TODO: type should be option parameters in this case
     // Edge case here, you may go with this drag and drop selection
     // and select only one element, then multiple doesn't apply
-    selectionInfo.handleSelected(selectedShapes, 'multiple');
+
+    // Watch out this case can be a bit confusing, third parameter is null
+    // because user is doing multiple selection by dragging and dropping an area
+    // not by selecting a shape and at the same time clicking on the CMD/CTRL key
+    selectionInfo.handleSelected(selectedShapes, 'multiple', false);
 
     setSelectionRect(prevState => ({
       ...prevState,

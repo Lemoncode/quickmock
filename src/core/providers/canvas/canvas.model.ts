@@ -14,7 +14,11 @@ export type ZIndexAction = 'top' | 'bottom' | 'up' | 'down';
 export interface SelectionInfo {
   transformerRef: React.RefObject<Konva.Transformer>;
   shapeRefs: React.MutableRefObject<ShapeRefs>;
-  handleSelected: (id: string[] | string, type: ShapeType) => void;
+  handleSelected: (
+    id: string[] | string,
+    type: ShapeType,
+    isUserDoingMultipleSelection: boolean
+  ) => void;
   handleClearSelection: (
     mouseEvent:
       | Konva.KonvaEventObject<MouseEvent>
