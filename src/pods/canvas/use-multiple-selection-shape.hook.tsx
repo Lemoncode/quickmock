@@ -1,13 +1,26 @@
-import { ShapeRefs } from '@/core/model';
+import { ShapeModel, ShapeRefs } from '@/core/model';
 import { SelectionInfo } from '@/core/providers/canvas/canvas.model';
 import Konva from 'konva';
 import { useState } from 'react';
 import { SelectionRect } from './canvas.model';
 import { getSelectedShapesFromSelectionRect } from './use-multiple-selection.business';
 
+// There's a bug here: if you make a multiple selectin and start dragging
+// inside the selection but on a blank area it won't drag the selection
+// it will just clear the selection
+//
+// What do we need to do here?
+//
+// We could get the selection transformer current coords and size
+//  - if the mouseDown event is click inside that rectangle abort the multiple selection by dragging
+//  - We can set a temporary flag here
+//  - When user moves check the flag
+//  - When user mouse up then reset the flag to false
+
 export const useMultipleSelectionShapeHook = (
   selectionInfo: SelectionInfo,
-  shapeRefs: React.MutableRefObject<ShapeRefs>
+  shapeRefs: React.MutableRefObject<ShapeRefs>,
+  shapes: ShapeModel[]
 ) => {
   const [selectionRect, setSelectionRect] = useState<SelectionRect>({
     x: 0,
@@ -45,7 +58,7 @@ export const useMultipleSelectionShapeHook = (
     }));
   };
 
-  const handleMouseUp = (_: any) => {
+  const handleMouseUp = (e: any) => {
     if (!selectionRect.visible) {
       return;
     }
@@ -64,7 +77,24 @@ export const useMultipleSelectionShapeHook = (
     // Watch out this case can be a bit confusing, third parameter is null
     // because user is doing multiple selection by dragging and dropping an area
     // not by selecting a shape and at the same time clicking on the CMD/CTRL key
-    selectionInfo.handleSelected(selectedShapes, 'multiple', false);
+    if (selectedShapes.length === 0) {
+      selectionInfo.handleClearSelection(e);
+    }
+
+    if (selectedShapes.length === 1) {
+      const selectedShapeId = selectedShapes[0];
+      const shapeData = shapes.find(shape => shape.id === selectedShapeId);
+
+      selectionInfo.handleSelected(
+        selectedShapes,
+        shapeData?.type ?? 'multiple',
+        false
+      );
+    }
+
+    if (selectedShapes.length > 1) {
+      selectionInfo.handleSelected(selectedShapes, 'multiple', false);
+    }
 
     setSelectionRect(prevState => ({
       ...prevState,
