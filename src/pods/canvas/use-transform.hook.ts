@@ -91,28 +91,6 @@ export const useTransform = (
       // maybe this is already done by konva and updated in the props?
       // give a try save the document an load
     }
-
-    // Single item will allow move and resize
-    /*
-    const scaleX = node.scaleX();
-    const scaleY = node.scaleY();
-    const position = { x: node.x(), y: node.y() };
-
-    const newWidth = node.width() * scaleX;
-    const newHeight = node.height() * scaleY;
-
-    updateShapeSizeAndPosition(
-      selectedShapeId,
-      position,
-      {
-        width: newWidth,
-        height: newHeight,
-      },
-      skipHistory
-    );
-
-    node.scaleX(1);
-    node.scaleY(1);*/
   };
 
   const handleTransformerBoundBoxFunc = (oldBox: Box, newBox: Box) => {

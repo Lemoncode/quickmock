@@ -18,26 +18,32 @@ export const useSelection = (
 
   // Remove unused shapes and reset selectedShapeId if it no longer exists
   useEffect(() => {
-    //const shapes = document.shapes;
-    //const currentIds = shapes.map(shape => shape.id);
-    // TODO: Fix this, right now we have multipleshapes
-    /*
+    // 1. First cleanup Refs, let's get the list of shape and if there are any
+    //    shapeRef that is not in the data Ref let's remove (just performance wise)
+    const shapes = document.shapes;
+    const currentIds = shapes.map(shape => shape.id);
+
     Object.keys(shapeRefs.current).forEach(id => {
       if (!currentIds.includes(id)) {
         delete shapeRefs.current[id];
       }
-    });*/
-    // TODO: Fix this, right now we have multipleshapes
-    // We have check if the currentId is on the selectedShape
-    // if it is remove it
-    // once all is checked if selectedShape is empty then
-    // cleanup transformerRef, and selectionShape
-    /*if (!currentIds.includes(selectedShapeId)) {
-      transformerRef.current?.nodes([]);
-      selectedShapeRef.current = null;
-      setSelectedShapeId('');
-      setSelectedShapeType(null);
-    }*/
+    });
+
+    // 2. Now we've got a list of selected shape, let's ensure that at least one of them
+    // exists, if not let's wipe the list selection
+    //
+    // Why only one? Because usually we select a group of shapes, if we keep the selection
+    // we can whether remove all, or keep all, if we click outside the selection it should
+    // wipe the whole colletion
+    if (selectedShapesIds.length > 0) {
+      const exists = selectedShapesIds.some(id => currentIds.includes(id));
+      if (!exists) {
+        transformerRef.current?.nodes([]);
+        selectedShapesRefs.current = [];
+        setSelectedShapesIds([]);
+        setSelectedShapeType(null);
+      }
+    }
   }, [document.shapes, selectedShapesIds]);
 
   const handleSelected = (ids: string[] | string, type: ShapeType) => {

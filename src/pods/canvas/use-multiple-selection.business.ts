@@ -17,6 +17,21 @@ export const getSelectedShapesFromSelectionRect = (
   shapeRefs: React.MutableRefObject<ShapeRefs>,
   selectionRect: SelectionRect
 ): string[] => {
+  // If you drag from the bottom selectionRect coords could be negative
+  const absSelectionRect: SelectionRect = {
+    ...selectionRect,
+    x:
+      selectionRect.width >= 0
+        ? selectionRect.x
+        : selectionRect.x - selectionRect.width,
+    y:
+      selectionRect.height >= 0
+        ? selectionRect.y
+        : selectionRect.y - selectionRect.height,
+    width: Math.abs(selectionRect.width),
+    height: Math.abs(selectionRect.height),
+  };
+
   if (!shapeRefs.current) return [];
 
   const selectionIds: string[] = [];
@@ -24,7 +39,7 @@ export const getSelectedShapesFromSelectionRect = (
     if (
       isShapeInsideSelectionRect(
         shapeRefs.current[id].current.attrs,
-        selectionRect
+        absSelectionRect
       )
     ) {
       selectionIds.push(id);
