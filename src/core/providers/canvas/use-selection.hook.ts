@@ -65,16 +65,18 @@ export const useSelection = (
       selectedShapesRefs.current = arrayIds.map(
         id => shapeRefs.current[id].current
       );
+      setSelectedShapesIds(arrayIds);
     } else {
       // Multiple selection, just push what is selected to the current selection
       selectedShapesRefs.current = selectedShapesRefs.current.concat(
         arrayIds.map(id => shapeRefs.current[id].current)
       );
+
+      setSelectedShapesIds(formerShapeIds => [...formerShapeIds, ...arrayIds]);
     }
 
     transformerRef?.current?.nodes(selectedShapesRefs.current);
     //transformerRef?.current?.nodes([shapeRefs.current[id].current]);
-    setSelectedShapesIds(arrayIds);
     // Todo set type only if single selection
     setSelectedShapeType(type);
   };
