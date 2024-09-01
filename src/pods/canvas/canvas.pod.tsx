@@ -103,7 +103,7 @@ export const CanvasPod = () => {
       ref={dropRef}
       style={{ opacity: isDraggedOver ? 0.5 : 1 }}
     >
-      <ContextMenu />
+      <ContextMenu dropRef={dropRef} />
       {/*TODO: move size to canvas provider?*/}
       {/*         onMouseDown={handleClearSelection}*/}
       <Stage
