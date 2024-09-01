@@ -11,6 +11,7 @@ import { EditableComponent } from '@/common/components/inline-edit';
 import { useSnapIn } from './use-snapin.hook';
 import { ShapeType } from '@/core/model';
 import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
+import { useKeyboardDisplacement } from './use-keyboard-displacement';
 import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
 
 export const CanvasPod = () => {
@@ -90,6 +91,8 @@ export const CanvasPod = () => {
       const { x, y } = e.target.position();
       updateShapePosition(id, { x, y });
     };
+
+  useKeyboardDisplacement();
 
   {
     /* TODO: add other animation for isDraggerOver */
