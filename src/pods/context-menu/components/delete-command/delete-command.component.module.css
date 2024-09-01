@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  padding: var(--space-xs) var(--space-md);
+  border-bottom: 1px solid var(--primary-300);
+  cursor: pointer;
+}
+
+.container :first-child {
+  flex: 1;
+}
+
+.container:hover {
+  background-color: var(--primary-100);
+}
+
+.shortcut {
+  color: var(--primary-400);
+  font-weight: 500;
+}
