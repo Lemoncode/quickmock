@@ -19,7 +19,9 @@ export const DeleteCommand: React.FC<DeleteCommandProps> = props => {
 
   return (
     <div onClick={handleDelete} className={classes.container}>
-      <p>Delete</p>
+      <p>
+        Delete <span className={classes.shortcut}>(↩)</span>
+      </p>
       <DeleteIcon />
     </div>
   );
