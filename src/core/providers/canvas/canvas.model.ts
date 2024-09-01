@@ -27,7 +27,7 @@ export interface SelectionInfo {
   selectedShapesRefs: React.MutableRefObject<Node<NodeConfig>[] | null>;
   selectedShapesIds: string[];
   selectedShapeType: ShapeType | null;
-  getSelectedShapeData: () => ShapeModel | undefined;
+  getSelectedShapeData: (index?: number) => ShapeModel | undefined;
   setZIndexOnSelected: (action: ZIndexAction) => void;
   updateTextOnSelected: (text: string) => void;
   // TODO: Update, A. KeyOf B. Move To useSelectionInfo

@@ -142,14 +142,18 @@ export const useSelection = (
     }));
   };
 
-  const getSelectedShapeData = (): ShapeModel | undefined => {
+  // Added index, right now we got multiple selection
+  // if not returning just 0 (first element)
+  const getSelectedShapeData = (index: number = 0): ShapeModel | undefined => {
     // TODO: we will only allow this when there is a single selection
     // check if it can be applied to multiple data
-    if (selectedShapesIds.length !== 1) {
+    // This is is used to lock temporarily the multiple selection properties
+    // (right side panel) edit, it only will work when there is a single selection
+    if (index === undefined && selectedShapesIds.length !== 1) {
       return;
     }
 
-    const selectedShapeId = selectedShapesIds[0];
+    const selectedShapeId = selectedShapesIds[index];
 
     return document.shapes.find(shape => shape.id === selectedShapeId);
   };
