@@ -264,6 +264,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'verticalScrollBar':
       return ['top-center', 'bottom-center'];
     case 'icon':
+    case 'multiple':
       return [];
     default:
       return [
@@ -557,3 +558,11 @@ export type ClosestSnapLines = {
   vertical: SnapLineSubset | null;
   horizontal: SnapLineSubset | null;
 };
+
+export interface SelectionRect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  visible: boolean;
+}

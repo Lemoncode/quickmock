@@ -8,6 +8,7 @@ export interface ShapeSizeRestrictions {
 }
 
 export type ShapeType =
+  | 'multiple' // TODO: check whether we could remove this and just and shapeType as optional where we use it
   | 'combobox'
   | 'input'
   | 'button'
@@ -64,6 +65,7 @@ export type ShapeType =
   | 'tooltip';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
+  multiple: 'multiple',
   combobox: 'Combobox',
   input: 'Input',
   button: 'Button',

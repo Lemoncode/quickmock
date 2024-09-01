@@ -1,16 +1,16 @@
 import { describe, it, expect } from 'vitest';
-import { removeShapeFromList } from './canvas.business';
+import { removeShapesFromList } from './canvas.business';
 import { ShapeModel } from '@/core/model';
 
 describe('canvas.business', () => {
   describe('removeShapeFromList', () => {
     it('should return an empty array if shapeCollection is empty', () => {
       // Arrange
-      const shapeId = '';
+      const shapeIds: string[] = [];
       const shapeCollection: ShapeModel[] = [];
 
       // Act
-      const result = removeShapeFromList(shapeId, shapeCollection);
+      const result = removeShapesFromList(shapeIds, shapeCollection);
 
       // Assert
       expect(result).toEqual([]);
@@ -43,7 +43,7 @@ describe('canvas.business', () => {
       ];
 
       // Act
-      const result = removeShapeFromList(shapeId, shapeCollection);
+      const result = removeShapesFromList([shapeId], shapeCollection);
 
       // Assert
       expect(result).toHaveLength(2);
@@ -97,7 +97,7 @@ describe('canvas.business', () => {
       ];
 
       // Act
-      const result = removeShapeFromList(shapeId, shapeCollection);
+      const result = removeShapesFromList([shapeId], shapeCollection);
 
       // Assert
       expect(result).toHaveLength(3);
@@ -152,7 +152,7 @@ describe('canvas.business', () => {
       ];
 
       // Act
-      const result = removeShapeFromList(shapeId, shapeCollection);
+      const result = removeShapesFromList([shapeId], shapeCollection);
 
       // Assert
       expect(result).toEqual([]);
@@ -173,7 +173,7 @@ describe('canvas.business', () => {
         typeOfTransformer: ['top-center', 'bottom-center'],
       },
     ];
-    const result = removeShapeFromList(shapeId, shapeCollection);
+    const result = removeShapesFromList([shapeId], shapeCollection);
     expect(result).toEqual([]);
   });
 });
