@@ -12,8 +12,8 @@ const imageShapeRestrictions: ShapeSizeRestrictions = {
   minHeight: 10,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 520,
-  defaultHeight: 520,
+  defaultWidth: 300,
+  defaultHeight: 300,
 };
 
 export const getImageShapeSizeRestrictions = (): ShapeSizeRestrictions =>
