@@ -100,7 +100,9 @@ export const CanvasPod = () => {
       updateShapePosition(id, { x, y });
     };
 
-  useKeyboardDisplacement();
+  // TODO: Temporary disabled, conflicts with inline edition
+  // and likely keboard shortcuts
+  //useKeyboardDisplacement();
 
   {
     /* TODO: add other animation for isDraggerOver */
