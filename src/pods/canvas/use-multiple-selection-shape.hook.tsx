@@ -1,9 +1,10 @@
-import { ShapeModel, ShapeRefs } from '@/core/model';
+import { ShapeModel, ShapeRefs, Coord } from '@/core/model';
 import { SelectionInfo } from '@/core/providers/canvas/canvas.model';
 import Konva from 'konva';
 import { useState } from 'react';
 import { SelectionRect } from './canvas.model';
 import { getSelectedShapesFromSelectionRect } from './use-multiple-selection.business';
+import { getTransformerBoxAndCoords } from './transformer.utils';
 
 // There's a bug here: if you make a multiple selectin and start dragging
 // inside the selection but on a blank area it won't drag the selection
@@ -20,6 +21,7 @@ import { getSelectedShapesFromSelectionRect } from './use-multiple-selection.bus
 // https://github.com/Lemoncode/quickmock/issues/308
 export const useMultipleSelectionShapeHook = (
   selectionInfo: SelectionInfo,
+  transformerRef: React.RefObject<Konva.Transformer>,
   shapeRefs: React.MutableRefObject<ShapeRefs>,
   shapes: ShapeModel[]
 ) => {
@@ -31,9 +33,41 @@ export const useMultipleSelectionShapeHook = (
     visible: false,
   });
 
+  const isDraggingSelection = (mouseCoords: Coord) => {
+    if (!transformerRef.current) {
+      return false;
+    }
+
+    const transfomerInfo = getTransformerBoxAndCoords(transformerRef);
+    if (!transfomerInfo || !transfomerInfo.boxRelativeToStage) {
+      return false;
+    }
+
+    const { boxRelativeToStage: box } = transfomerInfo;
+
+    if (!box) {
+      return false;
+    }
+
+    const { x, y, width, height } = box;
+    const { x: mouseX, y: mouseY } = mouseCoords;
+
+    return (
+      mouseX > x && mouseX < x + width && mouseY > y && mouseY < y + height
+    );
+  };
+
   const handleMouseDown = (
     e: Konva.KonvaEventObject<MouseEvent> | Konva.KonvaEventObject<TouchEvent>
   ) => {
+    const mousePointerCoord = e.target?.getStage()?.getPointerPosition() ?? {
+      x: 0,
+      y: 0,
+    };
+    if (isDraggingSelection(mousePointerCoord)) {
+      return;
+    }
+
     selectionInfo.handleClearSelection(e);
     if (e.target !== e.target.getStage()) {
       return;
