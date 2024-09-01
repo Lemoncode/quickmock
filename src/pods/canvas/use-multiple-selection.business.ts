@@ -30,11 +30,11 @@ export const getSelectedShapesFromSelectionRect = (
     x:
       selectionRect.width >= 0
         ? selectionRect.x
-        : selectionRect.x - selectionRect.width,
+        : selectionRect.x + selectionRect.width,
     y:
       selectionRect.height >= 0
         ? selectionRect.y
-        : selectionRect.y - selectionRect.height,
+        : selectionRect.y + selectionRect.height,
     width: Math.abs(selectionRect.width),
     height: Math.abs(selectionRect.height),
   };
