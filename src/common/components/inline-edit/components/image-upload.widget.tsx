@@ -25,7 +25,7 @@ export const ImageUploadWidget = forwardRef<HTMLInputElement, Props>(
             img.onload = () => {
               const aspectRatio = img.width / img.height;
               const imageSelected = shapes.find(
-                shape => shape.id === selectionInfo.selectedShapeId
+                shape => shape.id === selectionInfo.selectedShapesIds[0]
               );
               if (imageSelected) {
                 updateShapeSizeAndPosition(

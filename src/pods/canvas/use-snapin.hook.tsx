@@ -5,10 +5,11 @@ import { ClosestSnapLines, SnapEdges, SnapLines } from './canvas.model';
 import { getClosestSnapLines } from './snap.utils';
 import { useState } from 'react';
 import { useCanvasContext } from '@/core/providers';
+import { getTransformerBoxAndCoords } from './transformer.utils';
 
 export const useSnapIn = (
   transformRef: React.RefObject<Konva.Transformer>,
-  excludedShapeId: string
+  excludedShapeIds: string[]
 ) => {
   const [showSnapInHorizontalLine, setShowSnapInHorizontalLine] =
     useState(false);
@@ -18,7 +19,10 @@ export const useSnapIn = (
   const { stageRef } = useCanvasContext();
 
   const handleTransformerDragMove = (_: KonvaEventObject<DragEvent>) => {
-    if (!excludedShapeId) return;
+    // TODO: Right now let's limit snap in to single selection
+    if (!excludedShapeIds || excludedShapeIds.length !== 1) return;
+
+    const excludedShapeId = excludedShapeIds[0];
 
     const possibleSnapLines = getSnapLines(excludedShapeId);
     const selectedShapeSnappingEdges = getShapeSnappingEdges(transformRef);
@@ -115,17 +119,16 @@ export const useSnapIn = (
     const transformer = transformerRef.current;
     invariant(transformer, 'Transformer is not defined');
 
-    const stage = transformer.getStage();
-    if (!stage) return { vertical: [], horizontal: [] };
+    const transformerInfo = getTransformerBoxAndCoords(transformerRef);
+    if (
+      !transformerInfo ||
+      !transformerInfo.boxRelativeToStage ||
+      !transformerInfo.absolutePosition
+    ) {
+      return { vertical: [], horizontal: [] };
+    }
 
-    const box = transformer
-      .findOne('.back')
-      ?.getClientRect({ relativeTo: stage });
-    const absolutePosition = transformer
-      .findOne('.back')
-      ?.getAbsolutePosition();
-
-    if (!box || !absolutePosition) return { vertical: [], horizontal: [] };
+    const { boxRelativeToStage: box, absolutePosition } = transformerInfo;
 
     return {
       vertical: [

@@ -1,8 +1,9 @@
 import { forwardRef, useMemo } from 'react';
 import { Group, Line, Rect } from 'react-konva';
-import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeProps } from '../front-components/shape.model';
+import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 
 const lineShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 50,
@@ -16,50 +17,60 @@ const lineShapeRestrictions: ShapeSizeRestrictions = {
 export const getlineShapeRestrictions = (): ShapeSizeRestrictions =>
   lineShapeRestrictions;
 
-export const LineShape = forwardRef<any, ShapeProps>(
-  (
-    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
-    ref
-  ) => {
-    const { width: restrictedWidth, height: restrictedHeight } =
-      fitSizeToShapeSizeRestrictions(lineShapeRestrictions, width, height);
+const shapeType: ShapeType = 'line';
 
-    const stroke = useMemo(
-      () => otherProps?.stroke ?? 'black',
-      [otherProps?.stroke]
-    );
+export const LineShape = forwardRef<any, ShapeProps>((props, ref) => {
+  const {
+    x,
+    y,
+    width,
+    height,
+    id,
+    onSelected,
+    text,
+    otherProps,
+    ...shapeProps
+  } = props;
+  const { width: restrictedWidth, height: restrictedHeight } =
+    fitSizeToShapeSizeRestrictions(lineShapeRestrictions, width, height);
 
-    const strokeStyle = useMemo(
-      () => otherProps?.strokeStyle ?? [],
-      [otherProps?.strokeStyle]
-    );
+  const stroke = useMemo(
+    () => otherProps?.stroke ?? 'black',
+    [otherProps?.stroke]
+  );
 
-    return (
-      <Group
-        x={x}
-        y={y}
-        ref={ref}
+  const strokeStyle = useMemo(
+    () => otherProps?.strokeStyle ?? [],
+    [otherProps?.strokeStyle]
+  );
+
+  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  return (
+    <Group
+      x={x}
+      y={y}
+      ref={ref}
+      width={restrictedWidth}
+      height={restrictedHeight}
+      {...shapeProps}
+      onClick={handleSelection}
+    >
+      {/* Transparent rectangle for applying margin */}
+      <Rect
         width={restrictedWidth}
         height={restrictedHeight}
-        {...shapeProps}
-        onClick={() => onSelected(id, 'line')}
-      >
-        {/* Transparent rectangle for applying margin */}
-        <Rect
-          width={restrictedWidth}
-          height={restrictedHeight}
-          fill="transparent"
-        />
+        fill="transparent"
+      />
 
-        <Line
-          x={0}
-          y={restrictedHeight / 2}
-          points={[0, 0, restrictedWidth, 0]}
-          stroke={stroke}
-          strokeWidth={2}
-          dash={strokeStyle}
-        />
-      </Group>
-    );
-  }
-);
+      <Line
+        x={0}
+        y={restrictedHeight / 2}
+        points={[0, 0, restrictedWidth, 0]}
+        stroke={stroke}
+        strokeWidth={2}
+        dash={strokeStyle}
+      />
+    </Group>
+  );
+});

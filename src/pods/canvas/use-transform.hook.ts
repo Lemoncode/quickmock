@@ -3,7 +3,7 @@ import { Coord, Size } from '@/core/model';
 import { useEffect } from 'react';
 import { useCanvasContext } from '@/core/providers';
 import { getMinSizeFromShape } from './canvas.model';
-import { KonvaEventObject } from 'konva/lib/Node';
+import { KonvaEventObject, NodeConfig, Node } from 'konva/lib/Node';
 
 export const useTransform = (
   updateShapeSizeAndPosition: (
@@ -14,33 +14,42 @@ export const useTransform = (
   ) => void
 ) => {
   const {
-    selectedShapeId,
-    selectedShapeRef,
+    selectedShapesIds,
+    selectedShapesRefs,
     transformerRef,
     selectedShapeType,
   } = useCanvasContext().selectionInfo;
 
-  useEffect(() => {
-    const selectedShape = selectedShapeRef.current;
+  const setTransfomerSingleSelection = () => {
+    if (
+      selectedShapesRefs.current == null ||
+      selectedShapesRefs.current.length !== 1
+    ) {
+      return;
+    }
+    const selectedShape = selectedShapesRefs.current[0];
     const transformer = transformerRef.current;
     if (selectedShape && transformer) {
       transformerRef.current.enabledAnchors(
         selectedShape.attrs.typeOfTransformer
       );
     }
-  }, [selectedShapeId]);
+  };
 
-  const handleTransform = (e: KonvaEventObject<Event>) => {
-    const skipHistory = e.type !== 'transformend';
-
-    const node = selectedShapeRef.current;
-    if (!node) {
-      return;
+  useEffect(() => {
+    // Right now let's only apply anchors when there is a single shape selected
+    if (selectedShapesIds.length !== 1) {
+      transformerRef.current?.enabledAnchors([]);
+    } else {
+      setTransfomerSingleSelection();
     }
+  }, [selectedShapesIds]);
 
+  const updateSingleItem = (node: Node<NodeConfig>, skipHistory: boolean) => {
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();
     const position = { x: node.x(), y: node.y() };
+    const selectedShapeId = selectedShapesIds[0];
 
     const newWidth = node.width() * scaleX;
     const newHeight = node.height() * scaleY;
@@ -57,6 +66,33 @@ export const useTransform = (
 
     node.scaleX(1);
     node.scaleY(1);
+  };
+
+  const handleTransform = (e: KonvaEventObject<Event>) => {
+    const skipHistory = e.type !== 'transformend';
+
+    const nodes = selectedShapesRefs.current;
+    if (!nodes) {
+      return;
+    }
+
+    if (nodes.length === 1) {
+      updateSingleItem(nodes[0], skipHistory);
+    } else {
+      // TODO: Double check, since it's only movement no need to update the shape
+      // it will be automatically updated (we need to update the size because we don't
+      // want to apply default scale behavior, we won't resize)
+      // ***
+      // Just get node x and y
+      // updateShapesSizeAndPosition
+      // here we update multple shapes
+      // rahter call it
+      // updateMultipleShapePosition
+      // This is going to be though
+      // we should calculate the offset and apply to everyshape
+      // maybe this is already done by konva and updated in the props?
+      // give a try save the document an load
+    }
   };
 
   const handleTransformerBoundBoxFunc = (oldBox: Box, newBox: Box) => {

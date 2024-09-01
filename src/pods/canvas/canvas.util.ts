@@ -50,6 +50,23 @@ export const convertFromDivElementCoordsToKonvaCoords = (
   return result;
 };
 
+// Use this method if the coordinates are already provided from the Stage
+// (Stage already got the scroll and the div position, but NOT the zooming scale factor)
+export const calculateScaledCoordsFromCanvasDivCoordinatesNoScroll = (
+  stage: Stage,
+  divCoords: Coord
+) => {
+  const scaleX = stage.scaleX();
+  const scaleY = stage.scaleY();
+
+  return {
+    x: divCoords.x / scaleX,
+    y: divCoords.y / scaleY,
+  };
+};
+
+// If what you got are X,Y coordinates relative to the canvas div (e.g. dropping an image)
+// you will need to use this (sum up canvas scroll and calculate zooming scale)
 export const calculateScaledCoordsFromCanvasDivCoordinates = (
   stage: Stage,
   divCoords: Coord,

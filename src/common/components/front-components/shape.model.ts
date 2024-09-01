@@ -11,6 +11,10 @@ export interface ShapeProps extends ShapeConfig {
   y: number;
   width: number;
   height: number;
-  onSelected: (id: string, type: ShapeType) => void;
+  onSelected: (
+    id: string,
+    type: ShapeType,
+    userIsMultipleSelecting: boolean
+  ) => void;
   otherProps?: OtherProps;
 }
