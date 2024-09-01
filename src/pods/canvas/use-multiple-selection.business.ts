@@ -13,7 +13,7 @@ const isShapeInsideSelectionRect = (
   );
 };
 
-// TODO: Check if works in all directions:
+// TODO: Check if works in all directions (wathc out some negative offset X or Y depending where the user starts dragging):
 // - top left to bottom right
 // - bottom right to top left
 // - top right to bottom left
