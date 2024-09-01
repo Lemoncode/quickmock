@@ -38,14 +38,6 @@ export const CanvasPod = () => {
     updateOtherPropsOnSelected,
   } = selectionInfo;
 
-  const { selectionRect, handleMouseDown, handleMouseMove, handleMouseUp } =
-    useMultipleSelectionShapeHook(
-      selectionInfo,
-      transformerRef,
-      shapeRefs,
-      shapes
-    );
-
   const addNewShapeAndSetSelected = (type: ShapeType, x: number, y: number) => {
     const shapeId = addNewShape(type, x, y);
     // TODO add issue enhance this
@@ -84,6 +76,17 @@ export const CanvasPod = () => {
   const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
     updateShapeSizeAndPosition
   );
+
+  const { selectionRect, handleMouseDown, handleMouseMove, handleMouseUp } =
+    useMultipleSelectionShapeHook(
+      selectionInfo,
+      {
+        stageRef,
+        transformerRef,
+        shapeRefs,
+      },
+      shapes
+    );
 
   // Note here: Limitation, Pragmatic Drag and Drop has any on the DropRef
   // but we need to cast it to HTMLDivElement

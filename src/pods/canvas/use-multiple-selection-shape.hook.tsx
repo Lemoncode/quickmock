@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { SelectionRect } from './canvas.model';
 import { getSelectedShapesFromSelectionRect } from './use-multiple-selection.business';
 import { getTransformerBoxAndCoords } from './transformer.utils';
+import { calculateScaledCoordsFromCanvasDivCoordinatesNoScroll } from './canvas.util';
+import { Stage } from 'konva/lib/Stage';
 
 // There's a bug here: if you make a multiple selectin and start dragging
 // inside the selection but on a blank area it won't drag the selection
@@ -19,12 +21,20 @@ import { getTransformerBoxAndCoords } from './transformer.utils';
 //  - When user mouse up then reset the flag to false
 // #308
 // https://github.com/Lemoncode/quickmock/issues/308
+
+interface SelectionRefs {
+  transformerRef: React.RefObject<Konva.Transformer>;
+  stageRef: React.RefObject<Stage>;
+  shapeRefs: React.MutableRefObject<ShapeRefs>;
+}
+
 export const useMultipleSelectionShapeHook = (
   selectionInfo: SelectionInfo,
-  transformerRef: React.RefObject<Konva.Transformer>,
-  shapeRefs: React.MutableRefObject<ShapeRefs>,
+  selectionRefs: SelectionRefs,
   shapes: ShapeModel[]
 ) => {
+  const { transformerRef, stageRef, shapeRefs } = selectionRefs;
+
   const [selectionRect, setSelectionRect] = useState<SelectionRect>({
     x: 0,
     y: 0,
@@ -57,14 +67,33 @@ export const useMultipleSelectionShapeHook = (
     );
   };
 
+  const applyZoomScaleToCoords = (mousePointerCoord: Coord): Coord => {
+    const stage = stageRef.current;
+    if (stage === null) {
+      return mousePointerCoord;
+    }
+    return calculateScaledCoordsFromCanvasDivCoordinatesNoScroll(
+      stage,
+      mousePointerCoord
+    );
+  };
+
   const handleMouseDown = (
     e: Konva.KonvaEventObject<MouseEvent> | Konva.KonvaEventObject<TouchEvent>
   ) => {
-    const mousePointerCoord = e.target?.getStage()?.getPointerPosition() ?? {
+    let mousePointerStageBasedCoord = e.target
+      ?.getStage()
+      ?.getPointerPosition() ?? {
       x: 0,
       y: 0,
     };
-    if (isDraggingSelection(mousePointerCoord)) {
+
+    // Apply zoom scale
+    mousePointerStageBasedCoord = applyZoomScaleToCoords(
+      mousePointerStageBasedCoord
+    );
+
+    if (isDraggingSelection(mousePointerStageBasedCoord)) {
       return;
     }
 
@@ -73,19 +102,27 @@ export const useMultipleSelectionShapeHook = (
       return;
     }
 
-    const pointerPosition = e.target.getStage().getPointerPosition();
-    if (pointerPosition === null) {
-      return;
-    }
-    const { x, y } = pointerPosition;
-    setSelectionRect({ x, y, width: 0, height: 0, visible: true });
+    setSelectionRect({
+      x: mousePointerStageBasedCoord.x,
+      y: mousePointerStageBasedCoord.y,
+      width: 0,
+      height: 0,
+      visible: true,
+    });
   };
 
   const handleMouseMove = (e: any) => {
     if (!selectionRect.visible) {
       return;
     }
-    const { x, y } = e.target.getStage().getPointerPosition();
+    let mousePointerStageBasedCoord = e.target.getStage().getPointerPosition();
+    // Apply zoom scale
+    mousePointerStageBasedCoord = applyZoomScaleToCoords(
+      mousePointerStageBasedCoord
+    );
+
+    const { x, y } = mousePointerStageBasedCoord;
+
     setSelectionRect(prevState => ({
       ...prevState,
       width: x - prevState.x,

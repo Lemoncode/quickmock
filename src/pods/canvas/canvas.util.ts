@@ -50,6 +50,19 @@ export const convertFromDivElementCoordsToKonvaCoords = (
   return result;
 };
 
+export const calculateScaledCoordsFromCanvasDivCoordinatesNoScroll = (
+  stage: Stage,
+  divCoords: Coord
+) => {
+  const scaleX = stage.scaleX();
+  const scaleY = stage.scaleY();
+
+  return {
+    x: divCoords.x / scaleX,
+    y: divCoords.y / scaleY,
+  };
+};
+
 export const calculateScaledCoordsFromCanvasDivCoordinates = (
   stage: Stage,
   divCoords: Coord,
