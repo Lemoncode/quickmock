@@ -26,6 +26,7 @@ import {
   getVerticalScrollBarShapeSizeRestrictions,
   getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
+  getTabsBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -168,6 +169,8 @@ export const getSizeRestrictionFromShape = (
       return getVerticalScrollBarShapeSizeRestrictions();
     case 'modal':
       return getModalShapeSizeRestrictions();
+    case 'tabsbar':
+      return getTabsBarShapeSizeRestrictions();
     case 'appBar':
       return getAppBarShapeSizeRestrictions();
     case 'tooltip':
@@ -226,6 +229,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'table':
     case 'modal':
     case 'appBar':
+    case 'tabsbar':
     case 'tooltip':
       return true;
     default:
@@ -324,6 +328,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Alert\nWarning: The action you are about to perform may affect existing data. Are you sure you want to proceed? Once confirmed, this action cannot be undone.\nConfirm,Cancel';
     case 'appBar':
       return 'AppBar';
+    case 'tabsbar':
+      return 'Tab 1, Tab 2, Tab 3';
     default:
       return undefined;
   }
@@ -344,6 +350,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'table':
     case 'modal':
     case 'appBar':
+    case 'tabsbar':
     case 'tooltip':
       return 'textarea';
       break;
