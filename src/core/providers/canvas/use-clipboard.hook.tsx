@@ -1,50 +1,57 @@
 import { useMemo, useRef, useState } from 'react';
 import { ShapeModel } from '@/core/model';
 import {
-  adjustShapePosition,
-  cloneShape,
-  findShapeById,
-  validateShape,
+  adjustShapesPosition,
+  cloneShapes,
+  findShapesById,
+  validateShapes,
 } from '../../../pods/canvas/clipboard.utils';
 
 export const useClipboard = (
-  pasteShape: (shape: ShapeModel) => void,
+  pasteShapes: (shapes: ShapeModel[]) => void,
   shapes: ShapeModel[],
-  selectionInfo: { selectedShapeId: string | null }
+  selectionInfo: { selectedShapesIds: string[] | null }
 ) => {
-  const [clipboardShape, setClipboardShape] = useState<ShapeModel | null>(null);
-  const clipboardShapeRef = useRef<ShapeModel | null>(null);
+  const [clipboardShape, setClipboardShape] = useState<ShapeModel[] | null>(
+    null
+  );
+  const clipboardShapesRef = useRef<ShapeModel[] | null>(null);
   const copyCount = useRef(1);
 
-  const copyShapeToClipboard = () => {
-    const selectedShape = findShapeById(
-      selectionInfo.selectedShapeId ?? '',
+  const copyShapesToClipboard = () => {
+    const selectedShapes: ShapeModel[] = findShapesById(
+      selectionInfo.selectedShapesIds ?? [],
       shapes
     );
-    if (selectedShape) {
-      clipboardShapeRef.current = cloneShape(selectedShape);
-      setClipboardShape(clipboardShapeRef.current);
+    if (selectedShapes) {
+      clipboardShapesRef.current = cloneShapes(selectedShapes);
+      setClipboardShape(clipboardShapesRef.current);
       copyCount.current = 1;
     }
   };
 
   const pasteShapeFromClipboard = () => {
-    if (clipboardShapeRef.current) {
-      const newShape: ShapeModel = cloneShape(clipboardShapeRef.current);
-      validateShape(newShape);
-      adjustShapePosition(newShape, copyCount.current);
-      pasteShape(newShape);
+    if (clipboardShapesRef.current) {
+      const newShapes: ShapeModel[] = cloneShapes(clipboardShapesRef.current);
+      validateShapes(newShapes);
+      adjustShapesPosition(newShapes, copyCount.current);
+      pasteShapes(newShapes);
       copyCount.current++;
     }
   };
 
   const canCopy: boolean = useMemo(() => {
-    return !!selectionInfo.selectedShapeId;
-  }, [selectionInfo.selectedShapeId]);
+    return !!selectionInfo.selectedShapesIds;
+  }, [selectionInfo.selectedShapesIds]);
 
   const canPaste: boolean = useMemo(() => {
-    return clipboardShapeRef.current !== null;
+    return clipboardShapesRef.current !== null;
   }, [clipboardShape]);
 
-  return { copyShapeToClipboard, pasteShapeFromClipboard, canCopy, canPaste };
+  return {
+    copyShapeToClipboard: copyShapesToClipboard,
+    pasteShapeFromClipboard,
+    canCopy,
+    canPaste,
+  };
 };

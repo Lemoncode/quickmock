@@ -1,7 +1,7 @@
 import { createRef, useMemo, useState } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
-import { Layer, Line, Stage, Transformer } from 'react-konva';
+import { Layer, Line, Rect, Stage, Transformer } from 'react-konva';
 import { useTransform } from './use-transform.hook';
 import { renderShapeComponent } from './shape-renderer';
 import { useDropShape } from './use-drop-shape.hook';
@@ -12,6 +12,7 @@ import { useSnapIn } from './use-snapin.hook';
 import { ShapeType } from '@/core/model';
 import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
 import { useKeyboardDisplacement } from './use-keyboard-displacement';
+import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
 
 export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
@@ -32,35 +33,39 @@ export const CanvasPod = () => {
     transformerRef,
     handleSelected,
     handleClearSelection,
-    selectedShapeRef,
+    selectedShapesRefs,
     updateTextOnSelected,
     updateOtherPropsOnSelected,
   } = selectionInfo;
+
+  const { selectionRect, handleMouseDown, handleMouseMove, handleMouseUp } =
+    useMultipleSelectionShapeHook(selectionInfo, shapeRefs, shapes);
 
   const addNewShapeAndSetSelected = (type: ShapeType, x: number, y: number) => {
     const shapeId = addNewShape(type, x, y);
     // TODO add issue enhance this
     setTimeout(() => {
-      handleSelected(shapeId, type);
+      handleSelected([shapeId], type, false);
     });
   };
 
   const { isDraggedOver, dropRef } = useDropShape();
   useMonitorShape(dropRef, addNewShapeAndSetSelected);
 
-  const getSelectedShapeKonvaId = (): string => {
-    let result = '';
+  const getSelectedShapeKonvaId = (): string[] => {
+    let result: string[] = [];
 
-    if (selectedShapeRef.current) {
-      result = String(selectedShapeRef.current._id);
+    if (selectedShapesRefs.current) {
+      result = selectedShapesRefs.current.map(item => String(item._id));
+      //result = String(selectedShapesRefs.current._id);
     }
 
     return result;
   };
 
-  const selectedShapeKonvaId = useMemo(
+  const selectedShapesKonvaId = useMemo(
     () => getSelectedShapeKonvaId(),
-    [selectedShapeRef.current]
+    [selectedShapesRefs.current]
   );
 
   const {
@@ -69,7 +74,7 @@ export const CanvasPod = () => {
     showSnapInVerticalLine,
     yCoordHorizontalLine,
     xCoordVerticalLine,
-  } = useSnapIn(transformerRef, selectedShapeKonvaId);
+  } = useSnapIn(transformerRef, selectedShapesKonvaId);
 
   const { handleTransform, handleTransformerBoundBoxFunc } = useTransform(
     updateShapeSizeAndPosition
@@ -101,13 +106,16 @@ export const CanvasPod = () => {
       style={{ opacity: isDraggedOver ? 0.5 : 1 }}
     >
       {/*TODO: move size to canvas provider?*/}
+      {/*         onMouseDown={handleClearSelection}*/}
       <Stage
         width={3000}
         height={3000}
-        onMouseDown={handleClearSelection}
         onTouchStart={handleClearSelection}
         ref={stageRef}
         scale={{ x: scale, y: scale }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
       >
         <Layer>
           {
@@ -175,6 +183,17 @@ export const CanvasPod = () => {
               strokeWidth={1}
             />
           )}
+          {/*Selection Rect*/}
+          <Rect
+            x={selectionRect.x}
+            y={selectionRect.y}
+            width={selectionRect.width}
+            height={selectionRect.height}
+            fill="rgba(0, 161, 255, 0.5)"
+            visible={selectionRect.visible}
+            stroke="blue"
+            strokeWidth={1}
+          />
         </Layer>
       </Stage>
     </div>

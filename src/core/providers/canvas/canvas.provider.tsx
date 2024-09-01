@@ -8,7 +8,7 @@ import { useStateWithInterceptor } from './canvas.hook';
 import { createDefaultDocumentModel, DocumentModel } from './canvas.model';
 import { v4 as uuidv4 } from 'uuid';
 import Konva from 'konva';
-import { removeShapeFromList } from './canvas.business';
+import { removeShapesFromList } from './canvas.business';
 import { useClipboard } from './use-clipboard.hook';
 
 interface Props {
@@ -38,27 +38,30 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const selectionInfo = useSelection(document, setDocument);
 
-  const pasteShape = (shape: ShapeModel) => {
-    shape.id = uuidv4();
+  const pasteShapes = (shapes: ShapeModel[]) => {
+    const newShapes: ShapeModel[] = shapes.map(shape => {
+      shape.id = uuidv4();
+      return shape;
+    });
 
     setDocument(prevDocument => ({
       ...prevDocument,
-      shapes: [...prevDocument.shapes, shape],
+      shapes: [...prevDocument.shapes, ...newShapes],
     }));
   };
 
   const { copyShapeToClipboard, pasteShapeFromClipboard, canCopy, canPaste } =
-    useClipboard(pasteShape, document.shapes, selectionInfo);
+    useClipboard(pasteShapes, document.shapes, selectionInfo);
 
   const clearCanvas = () => {
     setDocument({ shapes: [] });
   };
 
-  const deleteSelectedShape = () => {
+  const deleteSelectedShapes = () => {
     setDocument(prevDocument => ({
       ...prevDocument,
-      shapes: removeShapeFromList(
-        selectionInfo.selectedShapeId,
+      shapes: removeShapesFromList(
+        selectionInfo.selectedShapesIds,
         prevDocument.shapes
       ),
     }));
@@ -158,7 +161,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         copyShapeToClipboard,
         pasteShapeFromClipboard,
         stageRef,
-        deleteSelectedShape,
+        deleteSelectedShapes,
         loadDocument,
       }}
     >

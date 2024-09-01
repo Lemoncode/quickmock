@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { Group, Line, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../../front-components/shape.model';
@@ -7,6 +7,7 @@ import {
   mapTextToOptions,
 } from './vertical-menu.business';
 import { INPUT_SHAPE } from '../../front-components/shape.const';
+import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 
 const verticalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 220,
@@ -28,9 +29,11 @@ interface VerticalMenuShapeProps extends ShapeProps {
 
 const singleHeaderHeight = 35;
 
+const shapeType: ShapeType = 'vertical-menu';
+
 export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
-  (
-    {
+  (props, ref) => {
+    const {
       x,
       y,
       width,
@@ -41,9 +44,7 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
       separator = 'black',
       otherProps,
       ...shapeProps
-    },
-    ref
-  ) => {
+    } = props;
     const [verticalMenuItems, setVerticalMenuItems] = useState<string[]>([
       'Option 1\nOption 2\n----\nOption 3\nOption 4',
     ]);
@@ -90,6 +91,8 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
       return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
     }, [otherProps?.borderRadius]);
 
+    const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
     return (
       <Group
         x={x}
@@ -98,7 +101,7 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
         height={restrictedHeight}
         ref={ref}
         {...shapeProps}
-        onClick={() => onSelected(id, 'vertical-menu')}
+        onClick={handleSelection}
       >
         <Rect
           x={-10}

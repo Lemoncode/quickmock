@@ -5,11 +5,11 @@ import { useCanvasContext } from '@/core/providers';
 import { SHORTCUTS } from '../../shortcut/shortcut.const';
 
 export const DeleteButton = () => {
-  const { selectionInfo, deleteSelectedShape } = useCanvasContext();
+  const { selectionInfo, deleteSelectedShapes } = useCanvasContext();
 
   const handleDeleteSelectedItemClick = () => {
-    if (selectionInfo.selectedShapeId) {
-      deleteSelectedShape(selectionInfo.selectedShapeId);
+    if (selectionInfo.selectedShapesIds) {
+      deleteSelectedShapes(selectionInfo.selectedShapesIds);
     }
   };
 
@@ -19,7 +19,7 @@ export const DeleteButton = () => {
       label="Delete"
       onClick={handleDeleteSelectedItemClick}
       className={classes.button}
-      disabled={!selectionInfo.selectedShapeId}
+      disabled={!selectionInfo.selectedShapesIds}
       shortcutOptions={SHORTCUTS.delete}
     />
   );

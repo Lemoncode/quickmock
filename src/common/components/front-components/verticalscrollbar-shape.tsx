@@ -1,8 +1,9 @@
 import { Group, Line, Rect } from 'react-konva';
-import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 
 const VerticalScrollBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
@@ -13,17 +14,22 @@ const VerticalScrollBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   defaultHeight: 250,
 };
 
+const shapeType: ShapeType = 'verticalScrollBar';
+
 export const getVerticalScrollBarShapeSizeRestrictions =
   (): ShapeSizeRestrictions => VerticalScrollBarShapeSizeRestrictions;
 
 export const VerticalScrollBarShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
+  (props, ref) => {
+    const { x, y, width, height, id, onSelected, ...shapeProps } = props;
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         VerticalScrollBarShapeSizeRestrictions,
         width,
         height
       );
+
+    const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
     const arrowHeight = 20;
     const thumbHeight = restrictedHeight * 0.3; // Ajuste de la altura del thumb al 30% de la barra
@@ -38,7 +44,7 @@ export const VerticalScrollBarShape = forwardRef<any, ShapeProps>(
         width={restrictedWidth}
         height={restrictedHeight}
         {...shapeProps}
-        onClick={() => onSelected(id, 'verticalScrollBar')}
+        onClick={handleSelection}
       >
         {/* Fondo de la barra de scroll */}
         <Rect
