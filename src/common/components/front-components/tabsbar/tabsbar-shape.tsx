@@ -73,6 +73,10 @@ export const TabsBarShape = forwardRef<any, ShapeProps>(
             <Text
               x={20}
               y={8}
+              width={tabWidth - 20}
+              height={tabHeight}
+              ellipsis={true}
+              wrap="none"
               text={header} // Use the header text
               fontFamily="Arial"
               fontSize={14}
