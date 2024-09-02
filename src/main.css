@@ -69,3 +69,7 @@
   --border-radius-l: calc(var(--border-radius-unit) * 4);
   --border-radius-xl: calc(var(--border-radius-unit) * 6);
 }
+
+body {
+  overflow: hidden;
+}
