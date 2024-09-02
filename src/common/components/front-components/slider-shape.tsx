@@ -1,9 +1,10 @@
-import { useState, forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { Group, Line, Circle } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
-const sliderRestrictions: ShapeSizeRestrictions = {
+const sliderShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
   minHeight: 20,
   maxWidth: -1,
@@ -13,28 +14,42 @@ const sliderRestrictions: ShapeSizeRestrictions = {
 };
 
 export const getSliderShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  sliderRestrictions;
+  sliderShapeRestrictions;
 
 export const SliderShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, ...shapeProps }, ref) => {
-    const [thumbPosition, setThumbPosition] = useState(100);
+  ({ x, y, width, height, id, onSelected, otherProps, ...shapeProps }, ref) => {
+    const { width: restrictedWidth, height: restrictedHeight } =
+      fitSizeToShapeSizeRestrictions(sliderShapeRestrictions, width, height);
+
     const sliderHeight = 4;
     const thumbRadius = 10;
     const sliderStart = thumbRadius;
     const sliderEnd = width - thumbRadius;
 
-    const handleDragMove = (e: any) => {
-      const posX = e.target.x();
-      setThumbPosition(Math.max(sliderStart, Math.min(posX, sliderEnd)));
-    };
+    const progressPosition = useMemo(() => {
+      const prog = otherProps?.progress ?? 50;
+      console.log('Raw progress:', otherProps?.progress);
+      const progressValue = typeof prog === 'string' ? parseFloat(prog) : prog;
+      console.log('Parsed progress:', progressValue);
+
+      const position =
+        sliderStart + (progressValue / 100) * (sliderEnd - sliderStart);
+      console.log('Calculated position:', position);
+      return position;
+    }, [otherProps?.progress, sliderStart, sliderEnd]);
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? 'white',
+      [otherProps?.backgroundColor]
+    );
 
     return (
       <Group
         x={x}
         y={y}
         ref={ref}
-        height={height}
-        width={width}
+        height={restrictedHeight}
+        width={restrictedWidth}
         {...shapeProps}
         onClick={() => onSelected(id, 'slider')}
       >
@@ -48,18 +63,12 @@ export const SliderShape = forwardRef<any, ShapeProps>(
 
         {/* Thumb del slider */}
         <Circle
-          x={thumbPosition}
+          x={progressPosition}
           y={height / 2}
           radius={thumbRadius}
-          fill="gray"
+          fill={fill}
           stroke="black"
           strokeWidth={1}
-          draggable
-          onDragMove={handleDragMove}
-          dragBoundFunc={pos => ({
-            x: Math.max(sliderStart, Math.min(pos.x, sliderEnd)),
-            y: height / 2, // Limita el movimiento vertical al centro del slider
-          })}
         />
       </Group>
     );

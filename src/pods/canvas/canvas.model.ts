@@ -264,6 +264,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'horizontalScrollBar':
     case 'appBar':
     case 'buttonBar':
+    case 'slider':
       return ['middle-left', 'middle-right'];
     case 'verticalScrollBar':
       return ['top-center', 'bottom-center'];
@@ -496,6 +497,11 @@ export const generateDefaultOtherProps = (
     case 'progressbar':
       return {
         progress: '50',
+      };
+    case 'slider':
+      return {
+        progress: '50',
+        backgroundColor: '#A9A9A9',
       };
     default:
       return undefined;
