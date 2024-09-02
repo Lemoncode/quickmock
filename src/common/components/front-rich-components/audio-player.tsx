@@ -1,18 +1,21 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Line, Path } from 'react-konva';
-import { ShapeConfig } from 'konva/lib/Shape';
+import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeProps } from '../front-components/shape.model';
 
-interface AudioPlayerProps extends ShapeConfig {
-  id: string;
-  x: number;
-  y: number;
-  onPlay: () => void;
-  onRewind: () => void;
-  onForward: () => void;
-  onVolumeChange: () => void;
-}
+const audioPlayerShapeSizeRestrictions: ShapeSizeRestrictions = {
+  minWidth: 200,
+  minHeight: 150,
+  maxWidth: -1,
+  maxHeight: -1,
+  defaultWidth: 600,
+  defaultHeight: 400,
+};
 
-export const AudioPlayer = forwardRef<any, AudioPlayerProps>(
+export const getAudioPlayerShapeSizeRestrictions = (): ShapeSizeRestrictions =>
+  audioPlayerShapeSizeRestrictions;
+
+export const AudioPlayer = forwardRef<any, ShapeProps>(
   (
     { x, y, id, onPlay, onRewind, onForward, onVolumeChange, ...shapeProps },
     ref

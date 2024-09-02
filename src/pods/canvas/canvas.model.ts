@@ -57,6 +57,7 @@ import {
   getTableSizeRestrictions,
   getModalShapeSizeRestrictions,
   getAppBarShapeSizeRestrictions,
+  getAudioPlayerShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -169,6 +170,8 @@ export const getSizeRestrictionFromShape = (
       return getModalShapeSizeRestrictions();
     case 'appBar':
       return getAppBarShapeSizeRestrictions();
+    case 'audioPlayer':
+      return getAudioPlayerShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -251,6 +254,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'normaltext':
     case 'smalltext':
     case 'horizontalScrollBar':
+    case 'audioPlayer':
     case 'appBar':
       return ['middle-left', 'middle-right'];
     case 'verticalScrollBar':
