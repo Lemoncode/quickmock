@@ -51,7 +51,7 @@ export const SliderShape = forwardRef<any, ShapeProps>(
         height={restrictedHeight}
         width={restrictedWidth}
         {...shapeProps}
-        onClick={() => onSelected(id, 'slider')}
+        onClick={() => onSelected(id, 'slider', true)}
       >
         {/* Línea del slider */}
         <Line

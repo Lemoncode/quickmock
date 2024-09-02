@@ -70,7 +70,7 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>(
         height={restrictedHeight}
         ref={ref}
         {...shapeProps}
-        onClick={() => onSelected(id, 'horizontal-menu')}
+        onClick={() => onSelected(id, 'horizontal-menu', true)}
       >
         <Path
           data={`M0,0 H${restrictedWidth} V${restrictedHeight} H0 Z`}
