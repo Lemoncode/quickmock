@@ -5,11 +5,13 @@ import {
   getScrollFromDiv,
 } from './canvas.util';
 import { calculateShapeOffsetToXDropCoordinate } from './use-monitor.business';
+import { getImageShapeSizeRestrictions } from '@/common/components/front-basic-sapes';
 
 export const useDropImageFromDesktop = (
   dropRef: React.MutableRefObject<HTMLDivElement>
 ) => {
-  const { addNewShape, stageRef } = useCanvasContext();
+  const { addNewShape, updateShapeSizeAndPosition, stageRef } =
+    useCanvasContext();
 
   // TODO: #231  move this to utils / business
   // https://github.com/Lemoncode/quickmock/issues/231
@@ -59,7 +61,19 @@ export const useDropImageFromDesktop = (
             calculateShapeOffsetToXDropCoordinate(konvaCoord.x, 'image');
           const positionY = konvaCoord.y;
 
-          addNewShape('image', positionX, positionY, { imageSrc: img.src });
+          const newImg = addNewShape('image', positionX, positionY, {
+            imageSrc: img.src,
+          });
+
+          // Preserves aspect ratio
+          const aspectRatio = img.width / img.height;
+          const defaultWidth = getImageShapeSizeRestrictions().defaultWidth;
+          updateShapeSizeAndPosition(
+            newImg,
+            { x: positionX, y: positionY },
+            { width: defaultWidth, height: defaultWidth / aspectRatio },
+            false
+          );
         };
       };
 

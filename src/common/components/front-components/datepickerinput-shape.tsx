@@ -1,9 +1,10 @@
-import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Line } from 'react-konva';
 import { INPUT_SHAPE } from './shape.const';
+import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 
 const datepickerInputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 80,
@@ -14,11 +15,15 @@ const datepickerInputShapeRestrictions: ShapeSizeRestrictions = {
   defaultHeight: 50,
 };
 
+const shapeType: ShapeType = 'datepickerinput';
+
 export const getDatepickerInputShapeSizeRestrictions =
   (): ShapeSizeRestrictions => datepickerInputShapeRestrictions;
 
 export const DatepickerInputShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, otherProps, ...shapeProps }, ref) => {
+  (props, ref) => {
+    const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
+      props;
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         datepickerInputShapeRestrictions,
@@ -50,6 +55,8 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
       return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
     }, [otherProps?.borderRadius]);
 
+    const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
     return (
       <Group
         x={x}
@@ -58,7 +65,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
         width={restrictedWidth}
         height={restrictedHeight}
         {...shapeProps}
-        onClick={() => onSelected(id, 'datepickerinput')}
+        onClick={handleSelection}
       >
         {/* input frame */}
         <Rect

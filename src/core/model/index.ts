@@ -8,6 +8,7 @@ export interface ShapeSizeRestrictions {
 }
 
 export type ShapeType =
+  | 'multiple' // TODO: check whether we could remove this and just and shapeType as optional where we use it
   | 'combobox'
   | 'input'
   | 'button'
@@ -58,11 +59,14 @@ export type ShapeType =
   | 'verticalScrollBar'
   | 'horizontalScrollBar'
   | 'modal'
+  | 'tabsbar'
+  | 'appBar'
   | 'appBar'
   | 'buttonBar'
   | 'tooltip';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
+  multiple: 'multiple',
   combobox: 'Combobox',
   input: 'Input',
   button: 'Button',
@@ -109,6 +113,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   calendar: 'Calendar',
   verticalScrollBar: 'Vertical Scroll Bar',
   modal: 'Modal',
+  tabsbar: 'Tabs Bar',
   appBar: 'AppBar',
   buttonBar: 'Button Bar',
   tooltip: 'Tooltip',
