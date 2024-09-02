@@ -140,7 +140,7 @@ export const PropertiesPod = () => {
               type="number"
               value={selectedShapeData?.otherProps?.activeElement}
               onChange={e =>
-                updateOtherPropsOnSelected('activeElement', e.target.value)
+                updateOtherPropsOnSelected('activeElement', +e.target.value)
               }
             />
           </div>
