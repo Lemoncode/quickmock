@@ -59,6 +59,16 @@ export const EditableComponent: React.FC<Props> = props => {
     setIsEditing(false);
   };
 
+  const handleFocus = () => {
+    if (inputRef && inputRef.current) {
+      inputRef.current.focus();
+    }
+
+    if (textAreaRef && textAreaRef.current) {
+      textAreaRef.current.focus();
+    }
+  };
+
   return (
     <>
       <Group onDblClick={handleDoubleClick}>{children}</Group>
@@ -82,6 +92,7 @@ export const EditableComponent: React.FC<Props> = props => {
           onSetEditText={setEditText}
           onSetImageSrc={handleImageSrcSubmit}
           editType={editType ?? 'input'}
+          handleFocus={handleFocus}
         />
       ) : null}
     </>

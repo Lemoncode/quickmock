@@ -10,10 +10,14 @@ interface Props {
   editType: EditType;
   onSetEditText: (e: string) => void;
   onSetImageSrc: (e: string) => void;
+  handleFocus: () => void;
 }
 
 export const HtmlEditWidget = forwardRef<any, Props>(
-  ({ divProps, onSetEditText, onSetImageSrc, value, editType }, ref) => {
+  (
+    { divProps, onSetEditText, onSetImageSrc, value, editType, handleFocus },
+    ref
+  ) => {
     return (
       <Html
         divProps={{
@@ -32,6 +36,7 @@ export const HtmlEditWidget = forwardRef<any, Props>(
             style={{ width: '100%', height: '100%' }}
             value={value}
             onChange={e => onSetEditText(e.target.value)}
+            onFocus={handleFocus}
           />
         )}
         {editType === 'textarea' && (
@@ -40,6 +45,7 @@ export const HtmlEditWidget = forwardRef<any, Props>(
             style={{ width: '100%', height: '100%' }}
             value={value}
             onChange={e => onSetEditText(e.target.value)}
+            onFocus={handleFocus}
           />
         )}
         {editType === 'imageupload' && (
