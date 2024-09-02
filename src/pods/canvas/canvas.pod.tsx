@@ -11,6 +11,7 @@ import { EditableComponent } from '@/common/components/inline-edit';
 import { useSnapIn } from './use-snapin.hook';
 import { ShapeType } from '@/core/model';
 import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
+//import { useKeyboardDisplacement } from './use-keyboard-displacement';
 import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
 import { ContextMenu } from '../context-menu/use-context-menu.hook';
 
@@ -37,9 +38,6 @@ export const CanvasPod = () => {
     updateTextOnSelected,
     updateOtherPropsOnSelected,
   } = selectionInfo;
-
-  const { selectionRect, handleMouseDown, handleMouseMove, handleMouseUp } =
-    useMultipleSelectionShapeHook(selectionInfo, shapeRefs, shapes);
 
   const addNewShapeAndSetSelected = (type: ShapeType, x: number, y: number) => {
     const shapeId = addNewShape(type, x, y);
@@ -80,6 +78,17 @@ export const CanvasPod = () => {
     updateShapeSizeAndPosition
   );
 
+  const { selectionRect, handleMouseDown, handleMouseMove, handleMouseUp } =
+    useMultipleSelectionShapeHook(
+      selectionInfo,
+      {
+        stageRef,
+        transformerRef,
+        shapeRefs,
+      },
+      shapes
+    );
+
   // Note here: Limitation, Pragmatic Drag and Drop has any on the DropRef
   // but we need to cast it to HTMLDivElement
   const { handleDragOver, handleDropImage } = useDropImageFromDesktop(
@@ -91,6 +100,10 @@ export const CanvasPod = () => {
       const { x, y } = e.target.position();
       updateShapePosition(id, { x, y });
     };
+
+  // TODO: Temporary disabled, conflicts with inline edition
+  // and likely keboard shortcuts
+  //useKeyboardDisplacement();
 
   {
     /* TODO: add other animation for isDraggerOver */
