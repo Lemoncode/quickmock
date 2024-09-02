@@ -27,6 +27,7 @@ import {
   getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
   getSliderShapeSizeRestrictions,
+  getTabsBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -170,6 +171,8 @@ export const getSizeRestrictionFromShape = (
       return getVerticalScrollBarShapeSizeRestrictions();
     case 'modal':
       return getModalShapeSizeRestrictions();
+    case 'tabsbar':
+      return getTabsBarShapeSizeRestrictions();
     case 'appBar':
       return getAppBarShapeSizeRestrictions();
     case 'buttonBar':
@@ -233,6 +236,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'modal':
     case 'appBar':
     case 'buttonBar':
+    case 'tabsbar':
     case 'tooltip':
       return true;
     default:
@@ -269,6 +273,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'verticalScrollBar':
       return ['top-center', 'bottom-center'];
     case 'icon':
+    case 'multiple':
       return [];
     default:
       return [
@@ -334,6 +339,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'AppBar';
     case 'buttonBar':
       return 'Button 1, Button 2, Button 3';
+    case 'tabsbar':
+      return 'Tab 1, Tab 2, Tab 3';
     default:
       return undefined;
   }
@@ -355,6 +362,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'modal':
     case 'appBar':
     case 'buttonBar':
+    case 'tabsbar':
     case 'tooltip':
       return 'textarea';
       break;
@@ -568,3 +576,11 @@ export type ClosestSnapLines = {
   vertical: SnapLineSubset | null;
   horizontal: SnapLineSubset | null;
 };
+
+export interface SelectionRect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  visible: boolean;
+}
