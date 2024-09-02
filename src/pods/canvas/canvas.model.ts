@@ -26,6 +26,7 @@ import {
   getVerticalScrollBarShapeSizeRestrictions,
   getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
+  getSliderShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -175,6 +176,8 @@ export const getSizeRestrictionFromShape = (
       return getButtonBarShapeSizeRestrictions();
     case 'tooltip':
       return getTooltipShapeSizeRestrictions();
+    case 'slider':
+      return getSliderShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`

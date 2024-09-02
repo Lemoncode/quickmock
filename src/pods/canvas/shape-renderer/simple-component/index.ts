@@ -15,3 +15,4 @@ export * from './icon.renderer';
 export * from './verticalscrollbar.renderer';
 export * from './horizontalscrollbar.renderer';
 export * from './tooltip.renderer';
+export * from './slider.renderer';
