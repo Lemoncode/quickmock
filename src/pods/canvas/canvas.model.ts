@@ -493,6 +493,11 @@ export const generateDefaultOtherProps = (
       return {
         progress: '50',
       };
+    case 'tabsbar': {
+      return {
+        activeElement: 0,
+      };
+    }
     default:
       return undefined;
   }

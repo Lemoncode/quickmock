@@ -29,6 +29,10 @@ export const PropertiesPod = () => {
 
   const selectedShapeData = getSelectedShapeData();
 
+  // Mirar si es un tipo TabBar y si es asi parsear el texto y pasarlo a lista de string
+  // elementos
+  // [{0 "nombre tab"}, {1 "nombre"}]
+
   return (
     <div>
       <div className={classes.title}>
@@ -126,6 +130,22 @@ export const PropertiesPod = () => {
           }
         />
       )}
+
+      {
+        //selectedShapeData.text
+        selectedShapeData?.otherProps?.activeElement && (
+          <div>
+            <label>Active Element</label>
+            <input
+              type="number"
+              value={selectedShapeData?.otherProps?.activeElement}
+              onChange={e =>
+                updateOtherPropsOnSelected('activeElement', e.target.value)
+              }
+            />
+          </div>
+        )
+      }
     </div>
   );
 };
