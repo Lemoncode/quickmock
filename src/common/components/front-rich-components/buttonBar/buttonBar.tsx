@@ -89,6 +89,7 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>(
               },0 V${restrictedHeight}`}
               stroke={strokeColor}
               strokeWidth={1}
+              dash={strokeStyle}
             />
             <Text
               x={index * itemWidth}

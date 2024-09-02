@@ -349,15 +349,12 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'textarea':
     case 'accordion':
     case 'postit':
-    case 'horizontal-menu':
-    case 'breadcrumb':
     case 'paragraph':
     case 'listbox':
     case 'vertical-menu':
     case 'table':
     case 'modal':
     case 'appBar':
-    case 'buttonBar':
     case 'tabsbar':
     case 'tooltip':
       return 'textarea';
