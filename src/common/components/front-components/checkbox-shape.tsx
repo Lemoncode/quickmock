@@ -1,9 +1,10 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Line, Text } from 'react-konva';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProperties } from '../shapes/use-shape-properties.hook';
 
 const checkBoxShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -38,14 +39,7 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } =
     fitSizeToShapeSizeRestrictions(checkBoxShapeRestrictions, width, height);
 
-  const isOn = useMemo(
-    () => otherProps?.checked ?? true,
-    [otherProps?.checked]
-  );
-  const textColor = useMemo(
-    () => otherProps?.textColor ?? 'black',
-    [otherProps?.textColor]
-  );
+  const { isOn, textColor } = useShapeProperties(otherProps);
 
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
 

@@ -1,10 +1,10 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
-import { INPUT_SHAPE } from './shape.const';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProperties } from '../shapes/use-shape-properties.hook';
 
 const buttonShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 50,
@@ -35,30 +35,8 @@ export const ButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } =
     fitSizeToShapeSizeRestrictions(buttonShapeRestrictions, width, height);
 
-  const stroke = useMemo(
-    () => otherProps?.stroke ?? 'black',
-    [otherProps?.stroke]
-  );
-
-  const fill = useMemo(
-    () => otherProps?.backgroundColor ?? 'white',
-    [otherProps?.backgroundColor]
-  );
-
-  const textColor = useMemo(
-    () => otherProps?.textColor ?? 'black',
-    [otherProps?.textColor]
-  );
-
-  const strokeStyle = useMemo(
-    () => otherProps?.strokeStyle ?? [],
-    [otherProps?.strokeStyle]
-  );
-
-  const borderRadius = useMemo(() => {
-    const radius = Number(otherProps?.borderRadius);
-    return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
-  }, [otherProps?.borderRadius]);
+  const { stroke, fill, textColor, strokeStyle, borderRadius } =
+    useShapeProperties(otherProps);
 
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
