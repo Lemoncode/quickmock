@@ -24,7 +24,9 @@ import {
   getIconShapeSizeRestrictions,
   getHorizontalScrollBarShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
+  getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
+  getTabsBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -168,10 +170,14 @@ export const getSizeRestrictionFromShape = (
       return getVerticalScrollBarShapeSizeRestrictions();
     case 'modal':
       return getModalShapeSizeRestrictions();
+    case 'tabsbar':
+      return getTabsBarShapeSizeRestrictions();
     case 'appBar':
       return getAppBarShapeSizeRestrictions();
     case 'audioPlayer':
       return getAudioPlayerShapeSizeRestrictions();
+    case 'tooltip':
+      return getTooltipShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -226,6 +232,8 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'table':
     case 'modal':
     case 'appBar':
+    case 'tabsbar':
+    case 'tooltip':
       return true;
     default:
       return false;
@@ -260,6 +268,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'verticalScrollBar':
       return ['top-center', 'bottom-center'];
     case 'icon':
+    case 'multiple':
       return [];
     default:
       return [
@@ -309,6 +318,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Heading 2';
     case 'heading3':
       return 'Heading 3';
+    case 'tooltip':
+      return 'Sample Text';
     case 'normaltext':
       return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
     case 'smalltext':
@@ -321,6 +332,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Alert\nWarning: The action you are about to perform may affect existing data. Are you sure you want to proceed? Once confirmed, this action cannot be undone.\nConfirm,Cancel';
     case 'appBar':
       return 'AppBar';
+    case 'tabsbar':
+      return 'Tab 1, Tab 2, Tab 3';
     default:
       return undefined;
   }
@@ -341,6 +354,8 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'table':
     case 'modal':
     case 'appBar':
+    case 'tabsbar':
+    case 'tooltip':
       return 'textarea';
       break;
     case 'image':
@@ -360,15 +375,37 @@ export const generateDefaultOtherProps = (
         backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
+        borderRadius: '12',
+      };
+    case 'tooltip':
+      return {
+        stroke: '#bbbbbb',
+        backgroundColor: '#bbbbbb',
+        textColor: '#ffffff',
+        strokeStyle: [],
       };
     case 'button':
     case 'textarea':
-    case 'combobox':
     case 'listbox':
     case 'vertical-menu':
     case 'horizontal-menu':
     case 'datepickerinput':
     case 'timepickerinput':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+        borderRadius: '12',
+      };
+    case 'combobox':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+        borderRadius: '12',
+      };
     case 'modal':
       return {
         stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
@@ -388,8 +425,9 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#FFFF99',
         textColor: '#000000',
         strokeStyle: [],
+        borderRadius: '12',
       };
-    case 'rectangle':
+
     case 'circle':
     case 'star':
     case 'diamond':
@@ -398,6 +436,13 @@ export const generateDefaultOtherProps = (
         stroke: '#000000',
         backgroundColor: '#ffffff',
         strokeStyle: [],
+      };
+    case 'rectangle':
+      return {
+        stroke: '#000000',
+        backgroundColor: '#ffffff',
+        strokeStyle: [],
+        borderRadius: '12',
       };
     case 'line':
       return {
@@ -517,3 +562,11 @@ export type ClosestSnapLines = {
   vertical: SnapLineSubset | null;
   horizontal: SnapLineSubset | null;
 };
+
+export interface SelectionRect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  visible: boolean;
+}

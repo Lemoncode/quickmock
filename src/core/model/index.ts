@@ -8,6 +8,7 @@ export interface ShapeSizeRestrictions {
 }
 
 export type ShapeType =
+  | 'multiple' // TODO: check whether we could remove this and just and shapeType as optional where we use it
   | 'combobox'
   | 'input'
   | 'button'
@@ -59,9 +60,13 @@ export type ShapeType =
   | 'verticalScrollBar'
   | 'horizontalScrollBar'
   | 'modal'
-  | 'appBar';
+  | 'tabsbar'
+  | 'appBar'
+  | 'appBar'
+  | 'tooltip';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
+  multiple: 'multiple',
   combobox: 'Combobox',
   input: 'Input',
   button: 'Button',
@@ -109,7 +114,9 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   calendar: 'Calendar',
   verticalScrollBar: 'Vertical Scroll Bar',
   modal: 'Modal',
+  tabsbar: 'Tabs Bar',
   appBar: 'AppBar',
+  tooltip: 'Tooltip',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
@@ -150,6 +157,7 @@ export interface OtherProps {
   imageSrc?: string;
   imageBlackAndWhite?: boolean;
   progress?: string;
+  borderRadius?: string;
 }
 
 export const BASE_ICONS_URL = '/icons/';

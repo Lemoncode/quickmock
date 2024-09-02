@@ -1,4 +1,5 @@
-import { Group, Rect, Text } from 'react-konva';
+import { Group, Text, Image as KonvaImage } from 'react-konva';
+import useImage from 'use-image';
 
 interface Props {
   width: number;
@@ -7,18 +8,11 @@ interface Props {
 
 export const NoImageSelected: React.FC<Props> = props => {
   const { width, height } = props;
+  const [image] = useImage('/shapes/image.svg');
 
   return (
     <Group x={0} y={0} width={width} height={height}>
-      <Rect
-        x={0}
-        y={0}
-        width={width}
-        height={height}
-        strokeWidth={2}
-        stroke="black"
-        fill="white"
-      />
+      <KonvaImage x={0} y={0} width={width} height={height} image={image} />
       <Text
         x={0}
         y={0}
@@ -30,6 +24,7 @@ export const NoImageSelected: React.FC<Props> = props => {
         align="center"
         ellipsis={true}
         verticalAlign="middle"
+        textDecoration="underline"
       />
     </Group>
   );

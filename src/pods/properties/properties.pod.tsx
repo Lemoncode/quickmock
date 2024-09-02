@@ -3,7 +3,7 @@ import classes from './properties.pod.module.css';
 import { ZIndexOptions } from './components/zindex/zindex-option.component';
 import { ColorPicker } from './components/color-picker/color-picker.component';
 import { Checked } from './components/checked/checked.component';
-import { SelectSize, SelectIcon } from './components';
+import { SelectSize, SelectIcon, BorderRadius } from './components';
 import { StrokeStyle } from './components/stroke-style/stroke.style.component';
 import { ImageSrc } from './components/image-src/image-selector.component';
 import { ImageBlackAndWhite } from './components/image-black-and-white/image-black-and-white-selector.component';
@@ -13,9 +13,17 @@ export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
   const { getSelectedShapeData, updateOtherPropsOnSelected } = selectionInfo;
 
-  const selectedShapeID = selectionInfo?.selectedShapeRef.current ?? null;
+  // TODO: Right now we will enable properties when we have single selection
+  // if we have multiple selection or no selection we won't allow that
+  // in the future we can just merge common props etc... but that's not straight forward
 
-  if (!selectedShapeID) {
+  const selectedShapeRef =
+    selectionInfo?.selectedShapesRefs.current &&
+    selectionInfo?.selectedShapesRefs.current.length === 1
+      ? selectionInfo.selectedShapesRefs.current[0]
+      : null;
+
+  if (!selectedShapeRef) {
     return null;
   }
 
@@ -106,6 +114,15 @@ export const PropertiesPod = () => {
           progress={selectedShapeData?.otherProps?.progress}
           onChange={progress =>
             updateOtherPropsOnSelected('progress', progress)
+          }
+        />
+      )}
+      {selectedShapeData?.otherProps?.borderRadius && (
+        <BorderRadius
+          label="Border-radius"
+          borderRadius={selectedShapeData?.otherProps?.borderRadius}
+          onChange={borderRadius =>
+            updateOtherPropsOnSelected('borderRadius', borderRadius)
           }
         />
       )}

@@ -78,7 +78,7 @@ export const moveZIndexTopOneLevel = (
     : shapeCollection;
 };
 
-export const performZIndexAction = (
+const performZIndexAction = (
   selectedShapeId: string,
   action: ZIndexAction,
   shapes: ShapeModel[]
@@ -96,4 +96,19 @@ export const performZIndexAction = (
     case 'down':
       return moveZIndexDownOneLevel(selectedShapeId, shapes);
   }
+};
+
+export const performZIndexActionMultiple = (
+  selectedShapesId: string[],
+  action: ZIndexAction,
+  shapes: ShapeModel[]
+): ShapeModel[] => {
+  // TODO: Enhance this, this won't perform well
+  let workShapes = [...shapes];
+
+  selectedShapesId.forEach(selectedShapeId => {
+    workShapes = performZIndexAction(selectedShapeId, action, workShapes);
+  });
+
+  return workShapes;
 };
