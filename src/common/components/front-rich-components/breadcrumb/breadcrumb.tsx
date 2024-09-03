@@ -10,8 +10,8 @@ export const breadcrumbShapeSizeRestrictions: ShapeSizeRestrictions = {
   minHeight: 60,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 60,
-  defaultHeight: 400,
+  defaultWidth: 200,
+  defaultHeight: 60,
 };
 
 export const GROUP_HEIGHT = 60;

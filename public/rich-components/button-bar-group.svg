@@ -1,0 +1,13 @@
+<svg width="400" height="100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Botón 1 -->
+  <rect x="20" y="20" width="100" height="40" style="fill:white;stroke:black;stroke-width:2"/>
+  <text x="70" y="45" font-family="Arial" font-size="16" fill="black" text-anchor="middle" alignment-baseline="middle">Button 1</text>
+
+  <!-- Botón 2 (agrupado) -->
+  <rect x="120" y="20" width="100" height="40" style="fill:white;stroke:black;stroke-width:2;stroke-left-width:1"/>
+  <text x="170" y="45" font-family="Arial" font-size="16" fill="black" text-anchor="middle" alignment-baseline="middle">Button 2</text>
+
+  <!-- Botón 3 (agrupado) -->
+  <rect x="220" y="20" width="100" height="40" style="fill:white;stroke:black;stroke-width:2;stroke-left-width:1"/>
+  <text x="270" y="45" font-family="Arial" font-size="16" fill="black" text-anchor="middle" alignment-baseline="middle">Button 3</text>
+</svg>

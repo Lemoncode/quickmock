@@ -4,7 +4,7 @@ export interface SectionsInfo {
 
 export const mapTextToSections = (text: string): SectionsInfo => {
   return {
-    sections: text.split('\n').map(section => section.replace(/^\[\*\]/, '')),
+    sections: text.split(',').map(section => section.replace(/^\[\*\]/, '')),
   };
 };
 
