@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Group } from 'react-konva';
 import { Coord, EditType, Size } from '@/core/model';
 import { HtmlEditWidget } from './components';
@@ -29,6 +29,7 @@ export const EditableComponent: React.FC<Props> = props => {
     editType,
   } = props;
   const [editText, setEditText] = useState(text);
+  const isInputInitiallyFocused = useRef(false);
 
   const { inputRef, textAreaRef, divRef, isEditing, setIsEditing } =
     useSubmitCancelHook(
@@ -46,6 +47,38 @@ export const EditableComponent: React.FC<Props> = props => {
       setIsEditing(true);
     }
   };
+
+  const IsInputReadyToBeFocused = () => {
+    return (
+      editType === 'input' &&
+      isEditable &&
+      isInputInitiallyFocused.current === false &&
+      inputRef.current
+    );
+  };
+
+  const isTextAreaReadyToBeFocused = () => {
+    return (
+      editType === 'textarea' &&
+      isEditable &&
+      isInputInitiallyFocused.current === false &&
+      textAreaRef.current
+    );
+  };
+
+  React.useEffect(() => {
+    if (IsInputReadyToBeFocused()) {
+      inputRef.current?.focus();
+      inputRef.current?.select();
+      isInputInitiallyFocused.current = true;
+    }
+
+    if (isTextAreaReadyToBeFocused()) {
+      textAreaRef.current?.focus();
+      textAreaRef.current?.select();
+      isInputInitiallyFocused.current = true;
+    }
+  });
 
   const {
     calculateTextAreaXPosition,
