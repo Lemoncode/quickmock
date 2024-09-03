@@ -3,7 +3,7 @@ import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
-import { INPUT_SHAPE } from './shape.const';
+import { BASIC_SHAPE, INPUT_SHAPE } from './shape.const';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 
 const timepickerInputShapeRestrictions: ShapeSizeRestrictions = {
@@ -85,7 +85,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           x={separator1X - 10}
           y={restrictedHeight / separatorPadding}
           text=":"
-          fontFamily="Comic Sans MS, cursive"
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={20}
           fill={stroke}
         />
@@ -93,7 +93,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           x={separator2X - 10}
           y={restrictedHeight / separatorPadding}
           text=":"
-          fontFamily="Comic Sans MS, cursive"
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={20}
           fill={stroke}
         />

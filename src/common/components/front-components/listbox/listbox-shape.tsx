@@ -6,7 +6,7 @@ import {
   calculateDynamicContentSizeRestriction,
   mapListboxTextToItems,
 } from './listbox-shape.business';
-import { INPUT_SHAPE } from '../shape.const';
+import { BASIC_SHAPE, INPUT_SHAPE } from '../shape.const';
 
 const listboxShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 75,
@@ -124,7 +124,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
                 text={item}
                 width={restrictedWidth - 10}
                 height={singleHeaderHeight - 12}
-                fontFamily="Comic Sans MS, cursive"
+                fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
                 fontSize={15}
                 fill="black"
                 wrap="none"

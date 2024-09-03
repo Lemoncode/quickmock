@@ -4,10 +4,10 @@
         style="fill:none;stroke:black;stroke-width:2"/>
 
   <!-- Separadores -->
-  <text x="120" y="60" font-family="Comic Sans MS, cursive" font-size="20" fill="black">
+  <text x="120" y="60" font-family="Comic Sans MS, Balsamiq Sans, cursive" font-size="20" fill="black">
     :
   </text>
-  <text x="220" y="60" font-family="Comic Sans MS, cursive" font-size="20" fill="black">
+  <text x="220" y="60" font-family="Comic Sans MS, Balsamiq Sans, cursive" font-size="20" fill="black">
     :
   </text>
 </svg>

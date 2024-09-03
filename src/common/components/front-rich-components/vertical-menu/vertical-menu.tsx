@@ -6,7 +6,7 @@ import {
   calculateDynamicContentSizeRestriction,
   mapTextToOptions,
 } from './vertical-menu.business';
-import { INPUT_SHAPE } from '../../front-components/shape.const';
+import { BASIC_SHAPE, INPUT_SHAPE } from '../../front-components/shape.const';
 import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 
 const verticalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
@@ -131,7 +131,7 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
                 text={option}
                 width={restrictedWidth}
                 height={singleHeaderHeight}
-                fontFamily="Comic Sans MS, cursive"
+                fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
                 fontSize={15}
                 fill={textColor}
                 wrap="none"

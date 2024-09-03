@@ -4,6 +4,7 @@ import { ShapeProps } from '../front-components/shape.model';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { BASIC_SHAPE } from '../front-components/shape.const';
 
 const normaltextSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 150,
@@ -57,7 +58,7 @@ export const NormaltextShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth}
         height={restrictedHeight}
         text={text}
-        fontFamily="Comic Sans MS, cursive"
+        fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={18}
         fill={textColor}
         align="center"
