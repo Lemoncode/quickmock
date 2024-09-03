@@ -25,6 +25,7 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>(
     const [buttonItems, setButtonItems] = useState<string[]>([]);
 
     useEffect(() => {
+      console.log('Hola');
       if (typeof text === 'string') {
         const { items } = mapButtonBarTextToItems(text);
         setButtonItems(items);
@@ -70,7 +71,7 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>(
         height={restrictedHeight}
         ref={ref}
         {...shapeProps}
-        onClick={() => onSelected(id, 'horizontal-menu', true)}
+        onClick={() => onSelected(id, 'buttonBar', true)}
       >
         <Path
           data={`M0,0 H${restrictedWidth} V${restrictedHeight} H0 Z`}
