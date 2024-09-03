@@ -1,0 +1,7 @@
+<svg width="400" height="50" xmlns="http://www.w3.org/2000/svg">
+  <!-- Línea del slider -->
+  <line x1="20" y1="25" x2="380" y2="25" style="stroke:lightgray;stroke-width:4"/>
+
+  <!-- Thumb del slider -->
+  <circle cx="100" cy="25" r="10" style="fill:gray;stroke:black;stroke-width:1"/>
+</svg>

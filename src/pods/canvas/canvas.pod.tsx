@@ -13,6 +13,7 @@ import { ShapeType } from '@/core/model';
 import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
 //import { useKeyboardDisplacement } from './use-keyboard-displacement';
 import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
+import { ContextMenu } from '../context-menu/use-context-menu.hook';
 
 export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
@@ -115,6 +116,7 @@ export const CanvasPod = () => {
       ref={dropRef}
       style={{ opacity: isDraggedOver ? 0.5 : 1 }}
     >
+      <ContextMenu dropRef={dropRef} />
       {/*TODO: move size to canvas provider?*/}
       {/*         onMouseDown={handleClearSelection}*/}
       <Stage

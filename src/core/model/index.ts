@@ -63,7 +63,8 @@ export type ShapeType =
   | 'appBar'
   | 'appBar'
   | 'buttonBar'
-  | 'tooltip';
+  | 'tooltip'
+  | 'slider';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -117,6 +118,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   appBar: 'AppBar',
   buttonBar: 'Button Bar',
   tooltip: 'Tooltip',
+  slider: 'Slider',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
