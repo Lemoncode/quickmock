@@ -48,6 +48,8 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
+  const activeTab = otherProps?.activeTab ?? 0;
+
   return (
     <Group
       x={x}
@@ -74,7 +76,7 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
           <Rect
             width={tabWidth}
             height={tabHeight}
-            fill={index === 0 ? 'white' : '#E0E0E0'} // First tab is selected
+            fill={index === activeTab ? 'white' : '#E0E0E0'} // First tab is selected
             stroke="black"
             strokeWidth={1}
           />

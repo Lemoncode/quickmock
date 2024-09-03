@@ -29,6 +29,21 @@ export const PropertiesPod = () => {
 
   const selectedShapeData = getSelectedShapeData();
 
+  // Function to parse the tabsbar text and get the names of the tabs
+  const parseTabsBarText = (text: string): string[] => {
+    return text
+      .trim()
+      .split(',')
+      .map(row => row.trim());
+  };
+
+  // Checking whether the type is tabsbar and parsing the text
+  const isTabsBar = selectedShapeData?.type === 'tabsbar';
+  const tabs =
+    isTabsBar && selectedShapeData?.text
+      ? parseTabsBarText(selectedShapeData.text)
+      : [];
+
   return (
     <div>
       <div className={classes.title}>
@@ -125,6 +140,23 @@ export const PropertiesPod = () => {
             updateOtherPropsOnSelected('borderRadius', borderRadius)
           }
         />
+      )}
+      {isTabsBar && (
+        <div>
+          <label>Active Tab</label>
+          <select
+            value={selectedShapeData?.otherProps?.activeTab}
+            onChange={e =>
+              updateOtherPropsOnSelected('activeTab', Number(e.target.value))
+            }
+          >
+            {tabs.map((tab, index) => (
+              <option key={index} value={index}>
+                {tab}
+              </option>
+            ))}
+          </select>
+        </div>
       )}
     </div>
   );

@@ -511,6 +511,10 @@ export const generateDefaultOtherProps = (
         progress: '50',
         backgroundColor: '#A9A9A9',
       };
+    case 'tabsbar':
+      return {
+        activeTab: 0,
+      };
     default:
       return undefined;
   }
