@@ -84,9 +84,7 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>(
           <Group key={index}>
             {/* Vertical strokes */}
             <Path
-              data={`M${index * itemWidth},0 V${restrictedHeight} M${
-                (index + 1) * itemWidth
-              },0 V${restrictedHeight}`}
+              data={`M${index * itemWidth},0 V${restrictedHeight}`}
               stroke={strokeColor}
               strokeWidth={1}
               dash={strokeStyle}
