@@ -14,18 +14,18 @@ export const PropertiesPod = () => {
   const { getSelectedShapeData, updateOtherPropsOnSelected } = selectionInfo;
 
   // TODO: Right now we will enable properties when we have single selection
-  // if we have multiple selection or no selection we won't allow that
+  // if we have multiple selection only zindex will be enabled
   // in the future we can just merge common props etc... but that's not straight forward
-
   const selectedShapeRef =
     selectionInfo?.selectedShapesRefs.current &&
     selectionInfo?.selectedShapesRefs.current.length === 1
       ? selectionInfo.selectedShapesRefs.current[0]
       : null;
 
-  if (!selectedShapeRef) {
-    return null;
-  }
+  // Check if there are any shapes selected
+  const hasSelectedShapes =
+    selectionInfo?.selectedShapesRefs.current &&
+    selectionInfo.selectedShapesRefs.current.length > 0;
 
   const selectedShapeData = getSelectedShapeData();
 
@@ -34,97 +34,107 @@ export const PropertiesPod = () => {
       <div className={classes.title}>
         <p>Properties</p>
       </div>
-      <ZIndexOptions selectionInfo={selectionInfo} />
-
-      {selectedShapeData?.otherProps?.stroke && (
-        <ColorPicker
-          label="Stroke"
-          color={selectedShapeData.otherProps.stroke}
-          onChange={color => updateOtherPropsOnSelected('stroke', color)}
-        />
-      )}
-      {selectedShapeData?.otherProps?.strokeStyle && (
-        <StrokeStyle
-          label="Stroke style"
-          strokeStyle={selectedShapeData.otherProps?.strokeStyle}
-          onChange={strokeStyle =>
-            updateOtherPropsOnSelected('strokeStyle', strokeStyle)
-          }
-        />
-      )}
-      {selectedShapeData?.otherProps?.backgroundColor && (
-        <ColorPicker
-          label="Background"
-          color={selectedShapeData.otherProps.backgroundColor}
-          onChange={color =>
-            updateOtherPropsOnSelected('backgroundColor', color)
-          }
-        />
-      )}
-      {selectedShapeData?.otherProps?.iconSize && (
-        <SelectSize
-          label="Size"
-          iconSize={selectedShapeData.otherProps.iconSize}
-          onChange={iconSize =>
-            updateOtherPropsOnSelected('iconSize', iconSize)
-          }
-        />
-      )}
-      {selectedShapeData?.otherProps?.icon && (
-        <SelectIcon
-          label="Icon"
-          icon={selectedShapeData.otherProps.icon}
-          onChange={icon => updateOtherPropsOnSelected('icon', icon)}
-        />
-      )}
-      {selectedShapeData?.otherProps?.textColor && (
-        <ColorPicker
-          label="TextColor"
-          color={selectedShapeData.otherProps.textColor}
-          onChange={color => updateOtherPropsOnSelected('textColor', color)}
-        />
-      )}
-      {selectedShapeData?.otherProps?.checked != undefined && (
-        <Checked
-          label="Checked"
-          checked={selectedShapeData?.otherProps?.checked}
-          onChange={checked => updateOtherPropsOnSelected('checked', checked)}
-        />
-      )}
-      {selectedShapeData?.otherProps?.imageSrc != undefined && (
-        <ImageSrc
-          label="Image Source"
-          onChange={imageSrc =>
-            updateOtherPropsOnSelected('imageSrc', imageSrc)
-          }
-        />
-      )}
-      {selectedShapeData?.otherProps?.imageBlackAndWhite != undefined && (
-        <ImageBlackAndWhite
-          label="B/W filter"
-          imageBlackAndWhite={selectedShapeData?.otherProps?.imageBlackAndWhite}
-          onChange={imageBlackAndWhite =>
-            updateOtherPropsOnSelected('imageBlackAndWhite', imageBlackAndWhite)
-          }
-        />
-      )}
-      {selectedShapeData?.otherProps?.progress && (
-        <Progress
-          label="Progress"
-          progress={selectedShapeData?.otherProps?.progress}
-          onChange={progress =>
-            updateOtherPropsOnSelected('progress', progress)
-          }
-        />
-      )}
-      {selectedShapeData?.otherProps?.borderRadius && (
-        <BorderRadius
-          label="Border-radius"
-          borderRadius={selectedShapeData?.otherProps?.borderRadius}
-          onChange={borderRadius =>
-            updateOtherPropsOnSelected('borderRadius', borderRadius)
-          }
-        />
+      {hasSelectedShapes && <ZIndexOptions selectionInfo={selectionInfo} />}
+      {selectedShapeRef && (
+        <>
+          {selectedShapeData?.otherProps?.stroke && (
+            <ColorPicker
+              label="Stroke"
+              color={selectedShapeData.otherProps.stroke}
+              onChange={color => updateOtherPropsOnSelected('stroke', color)}
+            />
+          )}
+          {selectedShapeData?.otherProps?.strokeStyle && (
+            <StrokeStyle
+              label="Stroke style"
+              strokeStyle={selectedShapeData.otherProps?.strokeStyle}
+              onChange={strokeStyle =>
+                updateOtherPropsOnSelected('strokeStyle', strokeStyle)
+              }
+            />
+          )}
+          {selectedShapeData?.otherProps?.backgroundColor && (
+            <ColorPicker
+              label="Background"
+              color={selectedShapeData.otherProps.backgroundColor}
+              onChange={color =>
+                updateOtherPropsOnSelected('backgroundColor', color)
+              }
+            />
+          )}
+          {selectedShapeData?.otherProps?.iconSize && (
+            <SelectSize
+              label="Size"
+              iconSize={selectedShapeData.otherProps.iconSize}
+              onChange={iconSize =>
+                updateOtherPropsOnSelected('iconSize', iconSize)
+              }
+            />
+          )}
+          {selectedShapeData?.otherProps?.icon && (
+            <SelectIcon
+              label="Icon"
+              icon={selectedShapeData.otherProps.icon}
+              onChange={icon => updateOtherPropsOnSelected('icon', icon)}
+            />
+          )}
+          {selectedShapeData?.otherProps?.textColor && (
+            <ColorPicker
+              label="TextColor"
+              color={selectedShapeData.otherProps.textColor}
+              onChange={color => updateOtherPropsOnSelected('textColor', color)}
+            />
+          )}
+          {selectedShapeData?.otherProps?.checked != undefined && (
+            <Checked
+              label="Checked"
+              checked={selectedShapeData?.otherProps?.checked}
+              onChange={checked =>
+                updateOtherPropsOnSelected('checked', checked)
+              }
+            />
+          )}
+          {selectedShapeData?.otherProps?.imageSrc != undefined && (
+            <ImageSrc
+              label="Image Source"
+              onChange={imageSrc =>
+                updateOtherPropsOnSelected('imageSrc', imageSrc)
+              }
+            />
+          )}
+          {selectedShapeData?.otherProps?.imageBlackAndWhite != undefined && (
+            <ImageBlackAndWhite
+              label="B/W filter"
+              imageBlackAndWhite={
+                selectedShapeData?.otherProps?.imageBlackAndWhite
+              }
+              onChange={imageBlackAndWhite =>
+                updateOtherPropsOnSelected(
+                  'imageBlackAndWhite',
+                  imageBlackAndWhite
+                )
+              }
+            />
+          )}
+          {selectedShapeData?.otherProps?.progress && (
+            <Progress
+              label="Progress"
+              progress={selectedShapeData?.otherProps?.progress}
+              onChange={progress =>
+                updateOtherPropsOnSelected('progress', progress)
+              }
+            />
+          )}
+          {selectedShapeData?.otherProps?.borderRadius && (
+            <BorderRadius
+              label="Border-radius"
+              borderRadius={selectedShapeData?.otherProps?.borderRadius}
+              onChange={borderRadius =>
+                updateOtherPropsOnSelected('borderRadius', borderRadius)
+              }
+            />
+          )}
+        </>
       )}
     </div>
   );
