@@ -38,7 +38,7 @@ export const PropertiesPod = () => {
   };
 
   // Checking whether the type is tabsbar and parsing the text
-  const isTabsBar = selectedShapeData?.type === 'tabsbar';
+  const isTabsBar = selectedShapeData?.type === 'tabsBar';
   const tabs =
     isTabsBar && selectedShapeData?.text
       ? parseTabsBarText(selectedShapeData.text)
