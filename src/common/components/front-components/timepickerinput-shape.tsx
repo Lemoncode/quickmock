@@ -1,9 +1,10 @@
-import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
 import { INPUT_SHAPE } from './shape.const';
+import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 
 const timepickerInputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -14,11 +15,15 @@ const timepickerInputShapeRestrictions: ShapeSizeRestrictions = {
   defaultHeight: 50,
 };
 
+const shapeType: ShapeType = 'timepickerinput';
+
 export const getTimepickerInputShapeSizeRestrictions =
   (): ShapeSizeRestrictions => timepickerInputShapeRestrictions;
 
 export const TimepickerInputShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, otherProps, ...shapeProps }, ref) => {
+  (props, ref) => {
+    const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
+      props;
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         timepickerInputShapeRestrictions,
@@ -50,6 +55,8 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
       return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
     }, [otherProps?.borderRadius]);
 
+    const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
     return (
       <Group
         x={x}
@@ -58,7 +65,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
         width={restrictedWidth}
         height={restrictedHeight}
         {...shapeProps}
-        onClick={() => onSelected(id, 'timepickerinput')}
+        onClick={handleSelection}
       >
         {/* input frame */}
         <Rect

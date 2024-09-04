@@ -1,9 +1,10 @@
-import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
 import { INPUT_SHAPE } from './shape.const';
+import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 
 const buttonShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 50,
@@ -17,77 +18,87 @@ const buttonShapeRestrictions: ShapeSizeRestrictions = {
 export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   buttonShapeRestrictions;
 
-export const ButtonShape = forwardRef<any, ShapeProps>(
-  (
-    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
-    ref
-  ) => {
-    const { width: restrictedWidth, height: restrictedHeight } =
-      fitSizeToShapeSizeRestrictions(buttonShapeRestrictions, width, height);
+const shapeType: ShapeType = 'button';
 
-    const stroke = useMemo(
-      () => otherProps?.stroke ?? 'black',
-      [otherProps?.stroke]
-    );
+export const ButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
+  const {
+    x,
+    y,
+    width,
+    height,
+    id,
+    onSelected,
+    text,
+    otherProps,
+    ...shapeProps
+  } = props;
+  const { width: restrictedWidth, height: restrictedHeight } =
+    fitSizeToShapeSizeRestrictions(buttonShapeRestrictions, width, height);
 
-    const fill = useMemo(
-      () => otherProps?.backgroundColor ?? 'white',
-      [otherProps?.backgroundColor]
-    );
+  const stroke = useMemo(
+    () => otherProps?.stroke ?? 'black',
+    [otherProps?.stroke]
+  );
 
-    const textColor = useMemo(
-      () => otherProps?.textColor ?? 'black',
-      [otherProps?.textColor]
-    );
+  const fill = useMemo(
+    () => otherProps?.backgroundColor ?? 'white',
+    [otherProps?.backgroundColor]
+  );
 
-    const strokeStyle = useMemo(
-      () => otherProps?.strokeStyle ?? [],
-      [otherProps?.strokeStyle]
-    );
+  const textColor = useMemo(
+    () => otherProps?.textColor ?? 'black',
+    [otherProps?.textColor]
+  );
 
-    const borderRadius = useMemo(() => {
-      const radius = Number(otherProps?.borderRadius);
-      return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
-    }, [otherProps?.borderRadius]);
+  const strokeStyle = useMemo(
+    () => otherProps?.strokeStyle ?? [],
+    [otherProps?.strokeStyle]
+  );
 
-    return (
-      <Group
-        x={x}
-        y={y}
-        ref={ref}
+  const borderRadius = useMemo(() => {
+    const radius = Number(otherProps?.borderRadius);
+    return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
+  }, [otherProps?.borderRadius]);
+
+  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  return (
+    <Group
+      x={x}
+      y={y}
+      ref={ref}
+      width={restrictedWidth}
+      height={restrictedHeight}
+      {...shapeProps}
+      onClick={handleSelection}
+    >
+      <Rect
+        x={0}
+        y={0}
         width={restrictedWidth}
         height={restrictedHeight}
-        {...shapeProps}
-        onClick={() => onSelected(id, 'button')}
-      >
-        <Rect
-          x={0}
-          y={0}
-          width={restrictedWidth}
-          height={restrictedHeight}
-          cornerRadius={borderRadius}
-          stroke={stroke}
-          dash={strokeStyle}
-          strokeWidth={1.5}
-          fill={fill}
-        />
-        <Text
-          x={0}
-          y={10}
-          width={width}
-          height={height - 10}
-          text={text}
-          fontFamily="Comic Sans MS, cursive"
-          fontSize={15}
-          lineHeight={1.25}
-          fill={textColor}
-          align="center"
-          ellipsis={true}
-          wrap="none"
-          fontStyle="bold"
-          letterSpacing={1}
-        />
-      </Group>
-    );
-  }
-);
+        cornerRadius={borderRadius}
+        stroke={stroke}
+        dash={strokeStyle}
+        strokeWidth={1.5}
+        fill={fill}
+      />
+      <Text
+        x={0}
+        y={10}
+        width={width}
+        height={height - 10}
+        text={text}
+        fontFamily="Comic Sans MS, cursive"
+        fontSize={15}
+        lineHeight={1.25}
+        fill={textColor}
+        align="center"
+        ellipsis={true}
+        wrap="none"
+        fontStyle="bold"
+        letterSpacing={1}
+      />
+    </Group>
+  );
+});
