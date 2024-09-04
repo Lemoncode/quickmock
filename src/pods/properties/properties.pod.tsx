@@ -8,6 +8,7 @@ import { StrokeStyle } from './components/stroke-style/stroke.style.component';
 import { ImageSrc } from './components/image-src/image-selector.component';
 import { ImageBlackAndWhite } from './components/image-black-and-white/image-black-and-white-selector.component';
 import { Progress } from './components/progress/progress.component';
+import { ActiveTabSelector } from './components/active-tab-selector/active-tab-selector.component';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -28,21 +29,6 @@ export const PropertiesPod = () => {
   }
 
   const selectedShapeData = getSelectedShapeData();
-
-  // Function to parse the tabsbar text and get the names of the tabs
-  const parseTabsBarText = (text: string): string[] => {
-    return text
-      .trim()
-      .split(',')
-      .map(row => row.trim());
-  };
-
-  // Checking whether the type is tabsbar and parsing the text
-  const isTabsBar = selectedShapeData?.type === 'tabsBar';
-  const tabs =
-    isTabsBar && selectedShapeData?.text
-      ? parseTabsBarText(selectedShapeData.text)
-      : [];
 
   return (
     <div>
@@ -141,22 +127,16 @@ export const PropertiesPod = () => {
           }
         />
       )}
-      {isTabsBar && (
-        <div>
-          <label>Active Tab</label>
-          <select
-            value={selectedShapeData?.otherProps?.activeTab}
-            onChange={e =>
-              updateOtherPropsOnSelected('activeTab', Number(e.target.value))
-            }
-          >
-            {tabs.map((tab, index) => (
-              <option key={index} value={index}>
-                {tab}
-              </option>
-            ))}
-          </select>
-        </div>
+      {selectedShapeData?.otherProps?.activeTab !== undefined && (
+        <ActiveTabSelector
+          label="Active Tab"
+          text={selectedShapeData?.text}
+          type={selectedShapeData?.type}
+          activeTab={selectedShapeData?.otherProps?.activeTab ?? 0}
+          onChange={activeTab =>
+            updateOtherPropsOnSelected('activeTab', activeTab)
+          }
+        />
       )}
     </div>
   );
