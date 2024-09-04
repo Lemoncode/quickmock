@@ -11,7 +11,7 @@ import { EditableComponent } from '@/common/components/inline-edit';
 import { useSnapIn } from './use-snapin.hook';
 import { ShapeType } from '@/core/model';
 import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
-//import { useKeyboardDisplacement } from './use-keyboard-displacement';
+import { useKeyboardDisplacement } from './use-keyboard-displacement';
 import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
 import { ContextMenu } from '../context-menu/use-context-menu.hook';
 
@@ -101,9 +101,7 @@ export const CanvasPod = () => {
       updateShapePosition(id, { x, y });
     };
 
-  // TODO: Temporary disabled, conflicts with inline edition
-  // and likely keboard shortcuts
-  //useKeyboardDisplacement();
+  useKeyboardDisplacement();
 
   {
     /* TODO: add other animation for isDraggerOver */
