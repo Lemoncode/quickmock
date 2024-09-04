@@ -6,6 +6,7 @@ import {
 } from './canvas.util';
 import { calculateShapeOffsetToXDropCoordinate } from './use-monitor.business';
 import { getImageShapeSizeRestrictions } from '@/common/components/front-basic-sapes';
+import { adjustSizeKeepingAspectRatio } from '@/common/utils/image.utils';
 
 export const useDropImageFromDesktop = (
   dropRef: React.MutableRefObject<HTMLDivElement>
@@ -66,12 +67,15 @@ export const useDropImageFromDesktop = (
           });
 
           // Preserves aspect ratio
-          const aspectRatio = img.width / img.height;
           const defaultWidth = getImageShapeSizeRestrictions().defaultWidth;
+          const defaultHeight = getImageShapeSizeRestrictions().defaultHeight;
           updateShapeSizeAndPosition(
             newImg,
             { x: positionX, y: positionY },
-            { width: defaultWidth, height: defaultWidth / aspectRatio },
+            adjustSizeKeepingAspectRatio(
+              { width: img.width, height: img.height },
+              { width: defaultWidth, height: defaultHeight }
+            ),
             false
           );
         };
