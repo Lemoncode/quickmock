@@ -37,6 +37,7 @@ import {
   renderLineChart,
   renderVerticalMenuShape,
   renderTable,
+  renderAudioPlayer,
   renderModal,
 } from './simple-rich-components';
 import {
@@ -60,7 +61,6 @@ import { renderParagraph } from './simple-text-components/paragraph.renderer';
 import { renderImage } from './simple-basic-shapes/image.renderer';
 import { renderCalendar } from './simple-rich-components/calendar.renderer';
 import { renderAppBar } from './simple-rich-components/appBar.renderer';
-import { renderAudioPlayer } from './simple-rich-components/audio-player.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,

@@ -1,6 +1,6 @@
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
-import AudioPlayer from '@/common/components/front-rich-components/audio-player';
+import { AudioPlayerShape } from '@/common/components/front-rich-components/audio-player';
 
 export const renderAudioPlayer = (
   shape: ShapeModel,
@@ -10,7 +10,7 @@ export const renderAudioPlayer = (
     shapeRenderedProps;
 
   return (
-    <AudioPlayer
+    <AudioPlayerShape
       id={shape.id}
       key={shape.id}
       ref={shapeRefs.current[shape.id]}
