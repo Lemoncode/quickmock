@@ -48,6 +48,8 @@ export const CanvasProvider: React.FC<Props> = props => {
       ...prevDocument,
       shapes: [...prevDocument.shapes, ...newShapes],
     }));
+
+    selectionInfo.handleClearSelection();
   };
 
   const { copyShapeToClipboard, pasteShapeFromClipboard, canCopy, canPaste } =
