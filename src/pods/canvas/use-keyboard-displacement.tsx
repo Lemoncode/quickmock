@@ -13,9 +13,8 @@ export const useKeyboardDisplacement = () => {
     // Here check
     shapeCollection.forEach((shapeId, index) => {
       const shapeData = selectionInfo.getSelectedShapeData(index);
-      if (!shapeData) {
-        return;
-      }
+      if (!shapeData) return;
+
       const newPosition: Coord = {
         x: shapeData.x + delta.x,
         y: shapeData.y + delta.y,
@@ -27,40 +26,48 @@ export const useKeyboardDisplacement = () => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      event.preventDefault();
+      const isInputFocused =
+        document.activeElement instanceof HTMLInputElement ||
+        document.activeElement instanceof HTMLTextAreaElement;
 
-      if (selectionInfo.selectedShapesIds.length === 0) {
-        return;
-      }
+      // Prevent canvas scrolling only if a selection is active
+      // and the focus is not on a text input field.
+      if (
+        selectionInfo.selectedShapesIds.length > 0 &&
+        !isInputFocused &&
+        ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)
+      ) {
+        event.preventDefault();
 
-      const step = event.shiftKey ? 25 : 2; // If shift is pressed, move faster
-      switch (event.key) {
-        case 'ArrowUp':
-          updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
-            x: 0,
-            y: -step,
-          });
-          break;
-        case 'ArrowDown':
-          updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
-            x: 0,
-            y: step,
-          });
-          break;
-        case 'ArrowLeft':
-          updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
-            x: -step,
-            y: 0,
-          });
-          break;
-        case 'ArrowRight':
-          updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
-            x: step,
-            y: 0,
-          });
-          break;
-        default:
-          break;
+        const step = event.shiftKey ? 20 : 2; // Si shift está presionado, moverse más rápido
+        switch (event.key) {
+          case 'ArrowUp':
+            updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
+              x: 0,
+              y: -step,
+            });
+            break;
+          case 'ArrowDown':
+            updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
+              x: 0,
+              y: step,
+            });
+            break;
+          case 'ArrowLeft':
+            updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
+              x: -step,
+              y: 0,
+            });
+            break;
+          case 'ArrowRight':
+            updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
+              x: step,
+              y: 0,
+            });
+            break;
+          default:
+            break;
+        }
       }
     };
 
