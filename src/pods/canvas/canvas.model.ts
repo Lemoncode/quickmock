@@ -275,6 +275,8 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'icon':
     case 'multiple':
       return [];
+    case 'image':
+      return ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
     default:
       return [
         'top-left',
