@@ -14,4 +14,6 @@ export * from './radiobutton.renderer';
 export * from './icon.renderer';
 export * from './verticalscrollbar.renderer';
 export * from './horizontalscrollbar.renderer';
+export * from './tabsbar.renderer';
 export * from './tooltip.renderer';
+export * from './slider.renderer';

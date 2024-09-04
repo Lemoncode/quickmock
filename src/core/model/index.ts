@@ -59,8 +59,12 @@ export type ShapeType =
   | 'verticalScrollBar'
   | 'horizontalScrollBar'
   | 'modal'
+  | 'tabsbar'
   | 'appBar'
-  | 'tooltip';
+  | 'appBar'
+  | 'buttonBar'
+  | 'tooltip'
+  | 'slider';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -110,8 +114,11 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   calendar: 'Calendar',
   verticalScrollBar: 'Vertical Scroll Bar',
   modal: 'Modal',
+  tabsbar: 'Tabs Bar',
   appBar: 'AppBar',
+  buttonBar: 'Button Bar',
   tooltip: 'Tooltip',
+  slider: 'Slider',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';

@@ -11,3 +11,4 @@ export * from './calendar.renderer';
 export * from './table.renderer';
 export * from './modal.renderer';
 export * from './appBar.renderer';
+export * from './button-bar.renderer';

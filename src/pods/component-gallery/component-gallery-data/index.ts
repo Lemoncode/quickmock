@@ -16,8 +16,10 @@ export const mockWidgetCollection: ItemInfo[] = [
   { thumbnailSrc: '/widgets/radiobutton.svg', type: 'radiobutton' },
   { thumbnailSrc: '/widgets/verticalscrollbar.svg', type: 'verticalScrollBar' },
   { thumbnailSrc: '/widgets/tooltip.svg', type: 'tooltip' },
+  { thumbnailSrc: '/widgets/slider.svg', type: 'slider' },
   {
     thumbnailSrc: '/widgets/horizontalscrollbar.svg',
     type: 'horizontalScrollBar',
   },
+  { thumbnailSrc: '/widgets/tabsbar.svg', type: 'tabsbar' },
 ];
