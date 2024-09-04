@@ -1,3 +1,4 @@
+import { Group } from 'react-konva';
 import { AccordionBody } from './accordion-body.component';
 import { AccordionHeader } from './accordion-header.component';
 
@@ -35,7 +36,7 @@ export const AccordionAllParts: React.FC<Props> = props => {
   const renderAccordion = () => {
     const textMarginLeft = 10;
     return sections.map((section, index) => (
-      <>
+      <Group key={index}>
         <AccordionHeader
           x={textMarginLeft}
           y={singleHeaderHeight * index + accordionBodyAppliedOffset}
@@ -45,7 +46,7 @@ export const AccordionAllParts: React.FC<Props> = props => {
           isSelected={selectedSectionIndex === index}
         />
         {selectedSectionIndex === index ? renderAccordionBody(index) : null}
-      </>
+      </Group>
     ));
   };
 
