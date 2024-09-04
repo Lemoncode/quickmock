@@ -314,7 +314,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'listbox':
       return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
     case 'horizontal-menu':
-      return 'Home, About, Services, Contact';
+      return '[*]Home, About, Services, Contact';
     case 'vertical-menu':
       return 'Option 1\nOption 2\n----\nOption 3\nOption 4';
     case 'heading1':
