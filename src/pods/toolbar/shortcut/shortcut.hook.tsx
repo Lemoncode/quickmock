@@ -8,12 +8,14 @@ export interface ShortcutHookProps {
 
 export const useShortcut = ({ targetKey, callback }: ShortcutHookProps) => {
   const handleKeyPress = (event: KeyboardEvent) => {
-    const isAltKeyPressed = event.getModifierState('Alt');
+    // TODO: later on this needs discussio about shortcut keys
+    // Right now enable CTRL+C, CTRL+V for windows, linux and mac
+    //const isAltKeyPressed = event.getModifierState('Alt');
     //const isCtrlKeyPressed = event.getModifierState('Control');
     const isCtrlOrCmdPressed = event.ctrlKey || event.metaKey;
 
     if (
-      (isWindowsOrLinux() && isAltKeyPressed) ||
+      (isWindowsOrLinux() && isCtrlOrCmdPressed) ||
       (isMacOS() && isCtrlOrCmdPressed)
     ) {
       if (targetKey.includes(event.key)) {
