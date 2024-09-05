@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useCanvasContext } from '@/core/providers';
 import { Coord } from '@/core/model';
 
-export const useKeyboardDisplacement = () => {
+export const useKeyboardDisplacement = (isEditing: boolean) => {
   const { selectionInfo, updateShapePosition } = useCanvasContext();
 
   // TODO: move this to business/utils
@@ -26,15 +26,9 @@ export const useKeyboardDisplacement = () => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      const isInputFocused =
-        document.activeElement instanceof HTMLInputElement ||
-        document.activeElement instanceof HTMLTextAreaElement;
-
-      // Prevent canvas scrolling only if a selection is active
-      // and the focus is not on a text input field.
+      if (isEditing) return;
       if (
         selectionInfo.selectedShapesIds.length > 0 &&
-        !isInputFocused &&
         ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)
       ) {
         event.preventDefault();

@@ -3,6 +3,7 @@ import { Group } from 'react-konva';
 import { Coord, EditType, Size } from '@/core/model';
 import { HtmlEditWidget } from './components';
 import { useSubmitCancelHook, usePositionHook } from './hooks';
+import { useKeyboardDisplacement } from '@/pods/canvas/use-keyboard-displacement';
 
 interface Props {
   coords: Coord;
@@ -47,6 +48,8 @@ export const EditableComponent: React.FC<Props> = props => {
       setIsEditing(true);
     }
   };
+
+  useKeyboardDisplacement(isEditing);
 
   const IsInputReadyToBeFocused = () => {
     return (
