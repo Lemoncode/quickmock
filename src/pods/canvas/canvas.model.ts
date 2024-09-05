@@ -26,6 +26,7 @@ import {
   getVerticalScrollBarShapeSizeRestrictions,
   getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
+  getSliderShapeSizeRestrictions,
   getTabsBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
@@ -59,6 +60,7 @@ import {
   getTableSizeRestrictions,
   getModalShapeSizeRestrictions,
   getAppBarShapeSizeRestrictions,
+  getButtonBarShapeSizeRestrictions,
   getAudioPlayerShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
@@ -174,10 +176,14 @@ export const getSizeRestrictionFromShape = (
       return getTabsBarShapeSizeRestrictions();
     case 'appBar':
       return getAppBarShapeSizeRestrictions();
+    case 'buttonBar':
+      return getButtonBarShapeSizeRestrictions();
     case 'audioPlayer':
       return getAudioPlayerShapeSizeRestrictions();
     case 'tooltip':
       return getTooltipShapeSizeRestrictions();
+    case 'slider':
+      return getSliderShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -232,6 +238,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'table':
     case 'modal':
     case 'appBar':
+    case 'buttonBar':
     case 'tabsbar':
     case 'tooltip':
       return true;
@@ -264,12 +271,16 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'horizontalScrollBar':
     case 'audioPlayer':
     case 'appBar':
+    case 'buttonBar':
+    case 'slider':
       return ['middle-left', 'middle-right'];
     case 'verticalScrollBar':
       return ['top-center', 'bottom-center'];
     case 'icon':
     case 'multiple':
       return [];
+    case 'image':
+      return ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
     default:
       return [
         'top-left',
@@ -301,7 +312,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'accordion':
       return '[*]Section A\nSection B';
     case 'breadcrumb':
-      return 'Home\nCategory\nProducts';
+      return 'Home, Category, Products';
     case 'checkbox':
       return 'Check me!';
     case 'postit':
@@ -309,7 +320,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'listbox':
       return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
     case 'horizontal-menu':
-      return 'Home\nAbout\nServices\nContact';
+      return 'Home, About, Services, Contact';
     case 'vertical-menu':
       return 'Option 1\nOption 2\n----\nOption 3\nOption 4';
     case 'heading1':
@@ -332,6 +343,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Alert\nWarning: The action you are about to perform may affect existing data. Are you sure you want to proceed? Once confirmed, this action cannot be undone.\nConfirm,Cancel';
     case 'appBar':
       return 'AppBar';
+    case 'buttonBar':
+      return 'Button 1, Button 2, Button 3';
     case 'tabsbar':
       return 'Tab 1, Tab 2, Tab 3';
     default:
@@ -346,8 +359,6 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'textarea':
     case 'accordion':
     case 'postit':
-    case 'horizontal-menu':
-    case 'breadcrumb':
     case 'paragraph':
     case 'listbox':
     case 'vertical-menu':
@@ -407,6 +418,7 @@ export const generateDefaultOtherProps = (
         borderRadius: '12',
       };
     case 'modal':
+    case 'buttonBar':
       return {
         stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
         backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
@@ -496,6 +508,11 @@ export const generateDefaultOtherProps = (
     case 'progressbar':
       return {
         progress: '50',
+      };
+    case 'slider':
+      return {
+        progress: '50',
+        backgroundColor: '#A9A9A9',
       };
     default:
       return undefined;

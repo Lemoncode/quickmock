@@ -1,4 +1,4 @@
-import { ShapeRefs } from '@/core/model';
+import { Coord, ShapeModel, ShapeRefs } from '@/core/model';
 import { SelectionRect } from './canvas.model';
 
 const isShapeInsideSelectionRect = (
@@ -54,4 +54,14 @@ export const getSelectedShapesFromSelectionRect = (
   });
 
   return selectionIds;
+};
+
+export const findFirstShapeInCoords = (shapes: ShapeModel[], coords: Coord) => {
+  return shapes.find(
+    shape =>
+      shape.x <= coords.x &&
+      shape.x + shape.width >= coords.x &&
+      shape.y <= coords.y &&
+      shape.y + shape.height >= coords.y
+  );
 };

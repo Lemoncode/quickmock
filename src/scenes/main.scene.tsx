@@ -22,7 +22,7 @@ export const MainScene = () => {
           <summary className={classes.title}>Devices</summary>
           <ContainerGalleryPod />
         </details>
-        <details className={classes.container} name="toolsLeft">
+        <details className={classes.container} name="toolsLeft" open>
           <summary className={classes.title}>Components</summary>
           <ComponentGalleryPod />
         </details>
@@ -34,7 +34,7 @@ export const MainScene = () => {
           <summary className={classes.title}>Rich Components</summary>
           <RichComponentsGalleryPod />
         </details>
-        <details className={classes.container} name="toolsLeft" open>
+        <details className={classes.container} name="toolsLeft">
           <summary className={classes.title}>Text Components</summary>
           <TextComponetGalleryPod />
         </details>

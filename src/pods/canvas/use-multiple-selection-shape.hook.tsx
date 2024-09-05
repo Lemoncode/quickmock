@@ -3,7 +3,10 @@ import { SelectionInfo } from '@/core/providers/canvas/canvas.model';
 import Konva from 'konva';
 import { useState } from 'react';
 import { SelectionRect } from './canvas.model';
-import { getSelectedShapesFromSelectionRect } from './use-multiple-selection.business';
+import {
+  findFirstShapeInCoords,
+  getSelectedShapesFromSelectionRect,
+} from './use-multiple-selection.business';
 import { getTransformerBoxAndCoords } from './transformer.utils';
 import { calculateScaledCoordsFromCanvasDivCoordinatesNoScroll } from './canvas.util';
 import { Stage } from 'konva/lib/Stage';
@@ -94,6 +97,15 @@ export const useMultipleSelectionShapeHook = (
     );
 
     if (isDraggingSelection(mousePointerStageBasedCoord)) {
+      return;
+    }
+
+    const shape = findFirstShapeInCoords(shapes, mousePointerStageBasedCoord);
+
+    // If you are not dragging, but you click on a shape you should select that shape
+    // and abort the dragging selection (dragging selection must be started from a blank area)
+    if (shape) {
+      selectionInfo.handleSelected([shape.id], shape.type, false);
       return;
     }
 

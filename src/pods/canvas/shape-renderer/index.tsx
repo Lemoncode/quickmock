@@ -19,6 +19,7 @@ import {
   renderVerticalScrollBar,
   renderTabsBar,
   renderTooltip,
+  renderSlider,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -39,6 +40,7 @@ import {
   renderTable,
   renderAudioPlayer,
   renderModal,
+  renderButtonBar,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -165,8 +167,12 @@ export const renderShapeComponent = (
       return renderTabsBar(shape, shapeRenderedProps);
     case 'appBar':
       return renderAppBar(shape, shapeRenderedProps);
+    case 'buttonBar':
+      return renderButtonBar(shape, shapeRenderedProps);
     case 'tooltip':
       return renderTooltip(shape, shapeRenderedProps);
+    case 'slider':
+      return renderSlider(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
