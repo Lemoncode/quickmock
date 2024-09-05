@@ -5,7 +5,7 @@ import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 
-const audioPlayerShapeSizeRestrictions: ShapeSizeRestrictions = {
+const AudioPlayerShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
   minHeight: 150,
   maxWidth: -1,
@@ -15,7 +15,7 @@ const audioPlayerShapeSizeRestrictions: ShapeSizeRestrictions = {
 };
 
 export const getAudioPlayerShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  audioPlayerShapeSizeRestrictions;
+  AudioPlayerShapeSizeRestrictions;
 
 const shapeType: ShapeType = 'audioPlayer';
 
@@ -25,146 +25,91 @@ export const AudioPlayerShape = forwardRef<any, ShapeProps>((props, ref) => {
   // Ajuste de las dimensiones del componente según restricciones
   const { width: restrictedWidth, height: restrictedHeight } =
     fitSizeToShapeSizeRestrictions(
-      audioPlayerShapeSizeRestrictions,
+      AudioPlayerShapeSizeRestrictions,
       width,
       height
     );
-
-  const originalWidth = 600; // Ancho del diseño original
-  const originalHeight = 400; // Alto del diseño original
-
-  // Calcular la escala
-  const scale = Math.min(
-    restrictedWidth / originalWidth,
-    restrictedHeight / originalHeight
-  );
-
-  // Calcular el offset para centrar el componente
-  const offsetX = (restrictedWidth - originalWidth * scale) / 2;
-  const offsetY = (restrictedHeight - originalHeight * scale) / 2;
 
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
   return (
     <Group
-      x={x + offsetX}
-      y={y + offsetY}
+      x={x}
+      y={y}
+      ref={ref}
+      onClick={handleSelection}
       width={restrictedWidth}
       height={restrictedHeight}
-      ref={ref}
       {...shapeProps}
-      onClick={handleSelection}
     >
       {/* Botón de retroceso */}
       <Group>
         <Line
-          points={[
-            55 * scale,
-            40 * scale,
-            45 * scale,
-            50 * scale,
-            55 * scale,
-            60 * scale,
-            55 * scale,
-            40 * scale,
-          ]}
+          points={[55, 40, 45, 50, 55, 60]}
+          closed
           fill="black"
           stroke="black"
-          strokeWidth={2 * scale}
-          closed
+          strokeWidth={2}
         />
-        <Line
-          points={[65 * scale, 40 * scale, 65 * scale, 60 * scale]}
-          stroke="black"
-          strokeWidth={2 * scale}
-        />
+        <Line points={[65, 40, 65, 60]} stroke="black" strokeWidth={2} />
       </Group>
 
       {/* Botón de play */}
       <Group>
         <Line
-          points={[
-            135 * scale,
-            40 * scale,
-            155 * scale,
-            50 * scale,
-            135 * scale,
-            60 * scale,
-            135 * scale,
-            40 * scale,
-          ]}
+          points={[135, 40, 155, 50, 135, 60]}
+          closed
           fill="black"
           stroke="black"
-          strokeWidth={2 * scale}
-          closed
+          strokeWidth={2}
         />
       </Group>
 
       {/* Botón de avance */}
       <Group>
         <Line
-          points={[
-            215 * scale,
-            40 * scale,
-            225 * scale,
-            50 * scale,
-            215 * scale,
-            60 * scale,
-            215 * scale,
-            40 * scale,
-          ]}
+          points={[215, 40, 225, 50, 215, 60]}
+          closed
           fill="black"
           stroke="black"
-          strokeWidth={2 * scale}
-          closed
+          strokeWidth={2}
         />
-        <Line
-          points={[205 * scale, 40 * scale, 205 * scale, 60 * scale]}
-          stroke="black"
-          strokeWidth={2 * scale}
-        />
+        <Line points={[205, 40, 205, 60]} stroke="black" strokeWidth={2} />
       </Group>
 
       {/* Barra de progreso */}
-      <Group>
-        <Rect
-          x={270 * scale}
-          y={45 * scale}
-          width={200 * scale}
-          height={10 * scale}
-          strokeWidth={2 * scale}
-          fill="white"
-          stroke="black"
-        />
-        <Rect
-          x={270 * scale}
-          y={45 * scale}
-          width={100 * scale}
-          height={10 * scale}
-          fill="black"
-          stroke="black"
-        />
-      </Group>
+      <Rect
+        x={270}
+        y={45}
+        width={200}
+        height={10}
+        stroke="black"
+        strokeWidth={2}
+        fill="white"
+      />
+      <Rect x={270} y={45} width={100} height={10} fill="black" />
 
       {/* Control de volumen mejorado */}
       <Group>
+        {/* Altavoz */}
         <Path
           data="M500,45 L510,45 L520,35 L520,65 L510,55 L500,55 Z"
           fill="black"
           stroke="black"
-          strokeWidth={2 * scale}
+          strokeWidth={2}
         />
+        {/* Ondas de sonido */}
         <Path
           data="M530,40 Q540,50 530,60"
           fill="none"
           stroke="black"
-          strokeWidth={2 * scale}
+          strokeWidth={2}
         />
         <Path
           data="M545,35 Q560,50 545,65"
           fill="none"
           stroke="black"
-          strokeWidth={2 * scale}
+          strokeWidth={2}
         />
       </Group>
     </Group>
