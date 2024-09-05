@@ -275,6 +275,8 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'icon':
     case 'multiple':
       return [];
+    case 'image':
+      return ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
     default:
       return [
         'top-left',
@@ -353,8 +355,6 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'textarea':
     case 'accordion':
     case 'postit':
-    case 'horizontal-menu':
-    case 'breadcrumb':
     case 'paragraph':
     case 'listbox':
     case 'vertical-menu':
