@@ -18,9 +18,11 @@ export const ActiveTabSelector: React.FC<Props> = ({
   // Function to parse the tabsbar text and get the names of the tabs
   const parseTabsBarText = (text: string): string[] => {
     return text
+      .split('\n')[0]
       .trim()
       .split(',')
-      .map(tab => tab.trim());
+      .map(tab => tab.trim())
+      .filter(tab => tab.length > 0);
   };
 
   // Checking whether the type is tabsBar and parsing the text
@@ -36,9 +38,13 @@ export const ActiveTabSelector: React.FC<Props> = ({
     tabs.length > 0 && (
       <div className={classes.container}>
         <p>{label}</p>
-        <select value={activeTab} onChange={handleTabChange}>
+        <select
+          value={activeTab}
+          onChange={handleTabChange}
+          className={classes.select}
+        >
           {tabs.map((tab, index) => (
-            <option key={index} value={index}>
+            <option key={index} value={index} className={classes.select}>
               {tab}
             </option>
           ))}
