@@ -9,3 +9,10 @@
 .container :first-child {
   flex: 1;
 }
+
+.select {
+  max-width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
