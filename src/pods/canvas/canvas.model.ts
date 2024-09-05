@@ -27,7 +27,6 @@ import {
   getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
   getSliderShapeSizeRestrictions,
-  getTabsBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -61,6 +60,7 @@ import {
   getModalShapeSizeRestrictions,
   getAppBarShapeSizeRestrictions,
   getButtonBarShapeSizeRestrictions,
+  getTabsBarShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -171,7 +171,7 @@ export const getSizeRestrictionFromShape = (
       return getVerticalScrollBarShapeSizeRestrictions();
     case 'modal':
       return getModalShapeSizeRestrictions();
-    case 'tabsbar':
+    case 'tabsBar':
       return getTabsBarShapeSizeRestrictions();
     case 'appBar':
       return getAppBarShapeSizeRestrictions();
@@ -236,7 +236,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'modal':
     case 'appBar':
     case 'buttonBar':
-    case 'tabsbar':
+    case 'tabsBar':
     case 'tooltip':
       return true;
     default:
@@ -341,7 +341,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'AppBar';
     case 'buttonBar':
       return 'Button 1, Button 2, Button 3';
-    case 'tabsbar':
+    case 'tabsBar':
       return 'Tab 1, Tab 2, Tab 3';
     default:
       return undefined;
@@ -361,7 +361,8 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'table':
     case 'modal':
     case 'appBar':
-    case 'tabsbar':
+    case 'buttonBar':
+    case 'tabsBar':
     case 'tooltip':
       return 'textarea';
       break;
@@ -509,6 +510,10 @@ export const generateDefaultOtherProps = (
       return {
         progress: '50',
         backgroundColor: '#A9A9A9',
+      };
+    case 'tabsBar':
+      return {
+        activeTab: 0,
       };
     default:
       return undefined;
