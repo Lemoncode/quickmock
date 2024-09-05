@@ -1,7 +1,7 @@
 export * from './accordion';
 export * from './breadcrumb/breadcrumb';
 export * from './pie-chart';
-export * from './horizontal-menu';
+export * from './horizontal-menu/horizontal-menu';
 export * from './map-chart';
 export * from './video-player';
 export * from './bar-chart';
@@ -12,3 +12,4 @@ export * from './table/table';
 export * from './modal/modal';
 export * from './appBar';
 export * from './buttonBar/buttonBar';
+export * from './tabsbar';

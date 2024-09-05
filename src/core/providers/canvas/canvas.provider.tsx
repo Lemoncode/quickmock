@@ -48,6 +48,24 @@ export const CanvasProvider: React.FC<Props> = props => {
       ...prevDocument,
       shapes: [...prevDocument.shapes, ...newShapes],
     }));
+
+    // Just select the new pasted shapes
+    // need to wait for the shapes to be rendered (previous set document is async)
+    setTimeout(() => {
+      if (newShapes.length == 1) {
+        selectionInfo.handleSelected(
+          newShapes.map(shape => shape.id),
+          shapes[0].type,
+          false
+        );
+      } else {
+        selectionInfo.handleSelected(
+          newShapes.map(shape => shape.id),
+          'multiple',
+          false
+        );
+      }
+    });
   };
 
   const { copyShapeToClipboard, pasteShapeFromClipboard, canCopy, canPaste } =

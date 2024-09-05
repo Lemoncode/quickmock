@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  padding: var(--space-xs) var(--space-md);
+  border-bottom: 1px solid var(--primary-300);
+}
+
+.container :first-child {
+  flex: 1;
+}
+
+.select {
+  max-width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

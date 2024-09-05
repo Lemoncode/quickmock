@@ -1,6 +1,10 @@
 import { useRef } from 'react';
 import classes from './image-selector.component.module.css';
 import { useCanvasContext } from '@/core/providers';
+import {
+  adjustSizeKeepingAspectRatio,
+  getShapeById,
+} from '@/common/utils/image.utils';
 
 interface Props {
   label: string;
@@ -29,18 +33,18 @@ export const ImageSrc: React.FC<Props> = props => {
           img.src = reader.result as string;
 
           img.onload = () => {
-            const aspectRatio = img.width / img.height;
-            const imageSelected = shapes.find(
-              shape => shape.id === selectionInfo.selectedShapesIds[0]
+            const imageSelected = getShapeById(
+              shapes,
+              selectionInfo.selectedShapesIds[0]
             );
             if (imageSelected) {
               updateShapeSizeAndPosition(
                 imageSelected.id,
                 { x: imageSelected.x, y: imageSelected.y },
-                {
-                  width: imageSelected.width,
-                  height: imageSelected.width / aspectRatio,
-                },
+                adjustSizeKeepingAspectRatio(
+                  { width: img.width, height: img.height },
+                  { width: imageSelected.width, height: imageSelected.height }
+                ),
                 false
               );
             }

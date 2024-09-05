@@ -1,17 +1,18 @@
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useMemo } from 'react';
-import { ShapeProps } from '../front-components/shape.model';
+import { forwardRef, useEffect, useMemo, useState } from 'react';
+import { ShapeProps } from '../../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { INPUT_SHAPE } from '../front-components/shape.const';
-import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { INPUT_SHAPE } from '../../front-components/shape.const';
+import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { mapHorizontalMenuTextToItems } from './hozontal-menu.business';
 
 const horizontalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 75,
   minHeight: 25,
   maxWidth: -1,
   maxHeight: 100,
-  defaultWidth: 200,
+  defaultWidth: 500,
   defaultHeight: 50,
 };
 
@@ -32,8 +33,19 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
     otherProps,
     ...shapeProps
   } = props;
-  const menuElements: string[] = text.split('\n');
-  const numberOfItems = menuElements.length;
+
+  const [items, setItems] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (typeof text === 'string') {
+      const { items } = mapHorizontalMenuTextToItems(text);
+      setItems(items);
+    } else {
+      setItems([]);
+    }
+  }, [text]);
+
+  const numberOfItems = items.length;
   const minItemWidth = 100;
   const itemSpacing = 20;
   const totalWidth = Math.max(
@@ -98,7 +110,7 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
         cornerRadius={borderRadius}
       />
 
-      {menuElements.map((e: string, index: number) => (
+      {items.map((e: string, index: number) => (
         <Group key={index}>
           <Text
             x={itemSpacing * (index + 1) + itemWidth * index}
