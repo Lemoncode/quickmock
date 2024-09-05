@@ -1,9 +1,9 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
-import { INPUT_SHAPE, POSTIT_SHAPE } from '../front-components/shape.const';
+import { POSTIT_SHAPE } from '../front-components/shape.const';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../shapes/use-shape-props.hook';
 
