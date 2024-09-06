@@ -2,6 +2,7 @@ import { RedoIcon } from '@/common/components/icons/redo-icon.component';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { ToolbarButton } from '../toolbar-button';
 import { useCanvasContext } from '@/core/providers';
+import { SHORTCUTS } from '../../shortcut/shortcut.const';
 
 export const RedoButton = () => {
   const { doRedo, canRedo } = useCanvasContext();
@@ -16,6 +17,7 @@ export const RedoButton = () => {
       disabled={!canRedo()}
       icon={<RedoIcon />}
       label="Redo"
+      shortcutOptions={SHORTCUTS.redo}
     />
   );
 };
