@@ -32,11 +32,23 @@ export const useShapeProps = (
     return isNaN(radius) ? defaultStyleShape.DEFAULT_CORNER_RADIUS : radius;
   }, [otherProps?.borderRadius]);
 
+  const isOn = useMemo(
+    () => otherProps?.checked ?? true,
+    [otherProps?.checked]
+  );
+
+  const progress = useMemo(() => {
+    const prog = otherProps?.progress ?? 50;
+    return typeof prog === 'string' ? parseFloat(prog) : prog;
+  }, [otherProps?.progress]);
+
   return {
     stroke,
     fill,
     textColor,
     strokeStyle,
     borderRadius,
+    isOn,
+    progress,
   };
 };
