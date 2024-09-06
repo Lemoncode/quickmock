@@ -42,14 +42,11 @@ export const useKeyboardDisplacement = () => {
       const isInlineEditing =
         (event.target as any)?.attributes['data-is-inline-edition-on'] !==
           undefined ?? false;
-      if (isInlineEditing) {
+      if (isInlineEditing || !isKeyboardKey(event.key)) {
         return;
       }
 
-      // Prevent default behavior only for arrow keys
-      if (isKeyboardKey(event.key)) {
-        event.preventDefault();
-      }
+      event.preventDefault();
 
       if (selectionInfo.selectedShapesIds.length === 0) {
         return;
