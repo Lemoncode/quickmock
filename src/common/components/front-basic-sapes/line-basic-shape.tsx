@@ -1,9 +1,11 @@
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { Group, Line, Rect } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeProps } from '../front-components/shape.model';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from '../front-components/shape.const';
 
 const lineShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 50,
@@ -34,17 +36,9 @@ export const LineShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } =
     fitSizeToShapeSizeRestrictions(lineShapeRestrictions, width, height);
 
-  const stroke = useMemo(
-    () => otherProps?.stroke ?? 'black',
-    [otherProps?.stroke]
-  );
-
-  const strokeStyle = useMemo(
-    () => otherProps?.strokeStyle ?? [],
-    [otherProps?.strokeStyle]
-  );
-
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  const { stroke, strokeStyle } = useShapeProps(otherProps, BASIC_SHAPE);
 
   return (
     <Group

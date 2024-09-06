@@ -4,6 +4,8 @@ import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from '../front-components/shape.const';
 
 const LargeArrowShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 50,
@@ -41,22 +43,9 @@ export const LargeArrowShape = forwardRef<any, ShapeProps>((props, ref) => {
     return restrictedHeight / LARGE_ARROW_FIX_HEIGHT;
   }, [restrictedHeight]);
 
-  const stroke = useMemo(
-    () => otherProps?.stroke ?? 'black',
-    [otherProps?.stroke]
-  );
-
-  const fill = useMemo(
-    () => otherProps?.backgroundColor ?? 'white',
-    [otherProps?.backgroundColor]
-  );
-
-  const strokeStyle = useMemo(
-    () => otherProps?.strokeStyle ?? [],
-    [otherProps?.strokeStyle]
-  );
-
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  const { stroke, fill, strokeStyle } = useShapeProps(otherProps, BASIC_SHAPE);
 
   return (
     <Group
