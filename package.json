@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^1.2.1",
+    "@fontsource-variable/montserrat": "^5.0.20",
+    "@fontsource/balsamiq-sans": "^5.0.21",
     "@types/lodash.clonedeep": "^4.5.9",
     "immer": "^10.1.1",
     "konva": "^9.3.12",

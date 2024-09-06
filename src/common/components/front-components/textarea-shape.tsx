@@ -3,7 +3,7 @@ import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
-import { INPUT_SHAPE } from './shape.const';
+import { BASIC_SHAPE, INPUT_SHAPE } from './shape.const';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 
 const textAreaShapeRestrictions: ShapeSizeRestrictions = {
@@ -89,7 +89,7 @@ export const TextAreaShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth - 10}
         height={restrictedHeight - 10}
         text={text}
-        fontFamily="Comic Sans MS, cursive"
+        fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={15}
         fill={textColor}
         align="left"

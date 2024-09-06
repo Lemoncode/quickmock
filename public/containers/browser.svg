@@ -19,7 +19,7 @@
   <!-- Barra de URL -->
   <rect x="30" y="70" width="340" height="20" rx="5" ry="5"
         style="fill:none;stroke:black;stroke-width:1"/>
-  <text x="40" y="85" font-family="Comic Sans MS, cursive" font-size="12" fill="black">
+  <text x="40" y="85" font-family="Comic Sans MS, Balsamiq Sans, cursive" font-size="12" fill="black">
     https://example.com
   </text>
 </svg>
