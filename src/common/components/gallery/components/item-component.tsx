@@ -29,6 +29,21 @@ export const ItemComponent: React.FC<Props> = props => {
       onGenerateDragPreview: ({ nativeSetDragImage }) => {
         setCustomNativeDragPreview({
           //Important: this numbers are the half of the width and height of var(--gallery-item-size)
+          // TODO, we may extract the size variable value from the HTML variable it self
+          // watch out this variable returs an string something like "110px"
+          //
+          // Sample
+          //   const getGallerySize = () => {
+          //
+          // const rootElement = document.documentElement;
+          // const itemSize = getComputedStyle(rootElement)
+          //  .getPropertyValue('--gallery-item-size')
+          //  .trim();
+          //
+          // console.log('itemSize', itemSize);
+          //
+          // return itemSize;
+          //};
           getOffset: () => ({ x: 55, y: 55 }),
           render({ container }) {
             const root = createRoot(container);
