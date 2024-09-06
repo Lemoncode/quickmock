@@ -22,6 +22,7 @@
   border-bottom: 1px solid var(--primary-900);
 }
 .title {
+  z-index: 1;
   position: sticky;
   top: 0;
   background-color: var(--primary-200);
