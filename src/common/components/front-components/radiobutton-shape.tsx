@@ -1,9 +1,11 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { Group, Circle, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from './shape.const';
 
 const radioButtonShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 50,
@@ -34,19 +36,11 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } =
     fitSizeToShapeSizeRestrictions(radioButtonShapeRestrictions, width, height);
 
-  const isOn = useMemo(
-    () => otherProps?.checked ?? true,
-    [otherProps?.checked]
-  );
-
-  const textColor = useMemo(
-    () => otherProps?.textColor ?? 'black',
-    [otherProps?.textColor]
-  );
-
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
   const radius = restrictedHeight / 2;
+
+  const { isOn, textColor } = useShapeProps(otherProps, BASIC_SHAPE);
 
   return (
     <Group

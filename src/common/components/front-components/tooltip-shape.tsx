@@ -1,10 +1,11 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Text, Group, Rect, Line } from 'react-konva';
 import { BASIC_SHAPE } from './shape.const';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../shapes/use-shape-props.hook';
 
 const tooltipShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 80,
@@ -39,27 +40,12 @@ export const TooltipShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } =
     fitSizeToShapeSizeRestrictions(tooltipShapeRestrictions, width, height);
 
-  const stroke = useMemo(
-    () => otherProps?.stroke ?? BASIC_SHAPE.DEFAULT_STROKE_COLOR,
-    [otherProps?.stroke]
-  );
-
-  const fill = useMemo(
-    () => otherProps?.backgroundColor ?? BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
-    [otherProps?.backgroundColor]
-  );
-
-  const textColor = useMemo(
-    () => otherProps?.textColor ?? BASIC_SHAPE.DEFAULT_FILL_TEXT,
-    [otherProps?.textColor]
-  );
-
-  const strokeStyle = useMemo(
-    () => otherProps?.strokeStyle ?? [],
-    [otherProps?.strokeStyle]
-  );
-
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  const { stroke, strokeStyle, fill, textColor } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
 
   // Ajusta la posición del triángulo en función del alto del rectángulo
   const trianglePoints = [

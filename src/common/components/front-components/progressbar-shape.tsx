@@ -4,6 +4,8 @@ import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect } from 'react-konva';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from './shape.const';
 
 const progressBarShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -25,17 +27,14 @@ export const ProgressBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } =
     fitSizeToShapeSizeRestrictions(progressBarShapeRestrictions, width, height);
 
-  const progress = useMemo(() => {
-    const prog = otherProps?.progress ?? 50;
-    return typeof prog === 'string' ? parseFloat(prog) : prog;
-  }, [otherProps?.progress]);
+  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  const { progress } = useShapeProps(otherProps, BASIC_SHAPE);
 
   const progressWidth = useMemo(
     () => (progress / 100) * restrictedWidth,
     [progress, restrictedWidth]
   );
-
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
   return (
     <Group

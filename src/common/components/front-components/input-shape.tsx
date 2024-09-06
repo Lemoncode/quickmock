@@ -36,11 +36,12 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } =
     fitSizeToShapeSizeRestrictions(inputShapeRestrictions, width, height);
 
+  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
   const { stroke, fill, textColor, strokeStyle, borderRadius } = useShapeProps(
     otherProps,
     INPUT_SHAPE
   );
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
   return (
     <Group
