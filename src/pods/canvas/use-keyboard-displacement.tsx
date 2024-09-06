@@ -25,9 +25,31 @@ export const useKeyboardDisplacement = () => {
     });
   };
 
+  const isKeyboardKey = (key: string) => {
+    return ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(key);
+  };
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      event.preventDefault();
+      // Keydown keys can conflict when we are performing inlne edtiion
+      // input and textarea will use the cursosr and stage keyboard should not
+      // the bubble order is Stage >> Input, so we cannot stop propagation
+      // BUT
+      // We have added a data attribute to the input and textarea to check
+      // if the inline edition is on
+      // here we check if the event target has the data attribute
+      // then we return and let the input and textare control it
+      const isInlineEditing =
+        (event.target as any)?.attributes['data-is-inline-edition-on'] !==
+          undefined ?? false;
+      if (isInlineEditing) {
+        return;
+      }
+
+      // Prevent default behavior only for arrow keys
+      if (isKeyboardKey(event.key)) {
+        event.preventDefault();
+      }
 
       if (selectionInfo.selectedShapesIds.length === 0) {
         return;
