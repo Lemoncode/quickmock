@@ -27,12 +27,12 @@ export const MainScene = () => {
           <ComponentGalleryPod />
         </details>
         <details className={classes.container} name="toolsLeft">
-          <summary className={classes.title}>Basic Shapes</summary>
-          <BasicShapesGalleryPod />
-        </details>
-        <details className={classes.container} name="toolsLeft">
           <summary className={classes.title}>Rich Components</summary>
           <RichComponentsGalleryPod />
+        </details>
+        <details className={classes.container} name="toolsLeft">
+          <summary className={classes.title}>Basic Shapes</summary>
+          <BasicShapesGalleryPod />
         </details>
         <details className={classes.container} name="toolsLeft">
           <summary className={classes.title}>Text Components</summary>
