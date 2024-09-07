@@ -41,7 +41,7 @@ export const useKeyboardDisplacement = () => {
       // then we return and let the input and textare control it
       const isInlineEditing =
         (event.target as any)?.attributes['data-is-inline-edition-on'] !==
-          undefined ?? false;
+        undefined;
       if (isInlineEditing || !isKeyboardKey(event.key)) {
         return;
       }
