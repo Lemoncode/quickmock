@@ -1,9 +1,11 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef, useEffect, useMemo, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { Group, Path, Text } from 'react-konva';
 import { ShapeProps } from '../../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { mapButtonBarTextToItems } from './buttonBar.utils';
+import { BASIC_SHAPE } from '../../front-components/shape.const';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
 
 const horizontalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 75,
@@ -46,21 +48,9 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>(
     const itemWidth =
       numberOfItems > 0 ? restrictedWidth / numberOfItems : restrictedWidth;
 
-    const textColor = useMemo(
-      () => otherProps?.textColor ?? 'black',
-      [otherProps?.textColor]
-    );
-    const backgroundColor = useMemo(
-      () => otherProps?.backgroundColor ?? 'white',
-      [otherProps?.backgroundColor]
-    );
-    const strokeColor = useMemo(
-      () => otherProps?.stroke ?? 'black',
-      [otherProps?.stroke]
-    );
-    const strokeStyle = useMemo(
-      () => otherProps?.strokeStyle ?? [],
-      [otherProps?.strokeStyle]
+    const { stroke, strokeStyle, fill, textColor } = useShapeProps(
+      otherProps,
+      BASIC_SHAPE
     );
 
     return (
@@ -75,10 +65,10 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>(
       >
         <Path
           data={`M0,0 H${restrictedWidth} V${restrictedHeight} H0 Z`}
-          stroke={strokeColor}
+          stroke={stroke}
           strokeWidth={2}
           dash={strokeStyle}
-          fill={backgroundColor}
+          fill={fill}
         />
 
         {buttonItems.map((e: string, index: number) => (
@@ -86,7 +76,7 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>(
             {/* Vertical strokes */}
             <Path
               data={`M${index * itemWidth},0 V${restrictedHeight}`}
-              stroke={strokeColor}
+              stroke={stroke}
               strokeWidth={1}
               dash={strokeStyle}
             />

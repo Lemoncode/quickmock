@@ -1,10 +1,12 @@
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { ShapeProps } from '../../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { darkenColor, getModalPartsText } from './modal.utils';
 import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from '../../front-components/shape.const';
 
 const modalShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 235,
@@ -46,25 +48,15 @@ export const Modal = forwardRef<any, ShapeProps>((props, ref) => {
   const buttonWidth =
     (restrictedWidth - (buttons.length + 1) * buttonSpacing) / buttons.length;
 
-  const textColor = useMemo(
-    () => otherProps?.textColor ?? '000000',
-    [otherProps?.textColor]
-  );
-
-  const backgroundColor = useMemo(
-    () => otherProps?.backgroundColor ?? '#00FFFF',
-    [otherProps?.backgroundColor]
-  );
-
-  const strokeColor = useMemo(
-    () => otherProps?.stroke ?? '000000',
-    [otherProps?.stroke]
-  );
-
-  const darkHeaderColor = darkenColor(backgroundColor, 40);
-  const darkButtonColor = darkenColor(backgroundColor, 60);
-
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  const { stroke, strokeStyle, fill, textColor } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
+
+  const darkHeaderColor = darkenColor(fill, 40);
+  const darkButtonColor = darkenColor(fill, 60);
 
   return (
     <Group
@@ -82,9 +74,10 @@ export const Modal = forwardRef<any, ShapeProps>((props, ref) => {
         y={0}
         width={restrictedWidth}
         height={restrictedHeight}
-        fill={backgroundColor}
-        stroke={strokeColor}
+        fill={fill}
+        stroke={stroke}
         strokeWidth={2}
+        dash={strokeStyle}
       />
 
       {/* Header */}
@@ -94,8 +87,9 @@ export const Modal = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth}
         height={headerHeight}
         fill={darkHeaderColor}
-        stroke={strokeColor}
+        stroke={stroke}
         strokeWidth={2}
+        dash={strokeStyle}
       />
       <Text
         x={20}

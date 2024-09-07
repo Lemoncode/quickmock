@@ -1,13 +1,14 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useEffect, useMemo, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { Group, Line, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../../front-components/shape.model';
 import {
   calculateDynamicContentSizeRestriction,
   mapTextToOptions,
 } from './vertical-menu.business';
-import { INPUT_SHAPE } from '../../front-components/shape.const';
+import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
 
 const verticalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 220,
@@ -66,32 +67,10 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
         verticalMenuShapeSizeRestrictions,
       });
 
-    const stroke = useMemo(
-      () => otherProps?.stroke ?? 'black',
-      [otherProps?.stroke]
-    );
-
-    const fill = useMemo(
-      () => otherProps?.backgroundColor ?? 'white',
-      [otherProps?.backgroundColor]
-    );
-
-    const textColor = useMemo(
-      () => otherProps?.textColor ?? 'black',
-      [otherProps?.textColor]
-    );
-
-    const strokeStyle = useMemo(
-      () => otherProps?.strokeStyle ?? [],
-      [otherProps?.strokeStyle]
-    );
-
-    const borderRadius = useMemo(() => {
-      const radius = Number(otherProps?.borderRadius);
-      return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
-    }, [otherProps?.borderRadius]);
-
     const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+    const { stroke, strokeStyle, fill, textColor, borderRadius } =
+      useShapeProps(otherProps, BASIC_SHAPE);
 
     return (
       <Group
