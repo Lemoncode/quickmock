@@ -8,7 +8,7 @@
 
 ## Project
 
-Quick Mock is a free, open source online tool for quickly creating low fidelity UI mockups. 
+Quick Mock is a free, open source online tool for quickly creating low fidelity UI mockups.
 
 You can take a look at the desktop community preview at [Quick Mock](https://www.quickmock.net/)
 
@@ -25,13 +25,7 @@ To install the project, clone the repository and run the following commands:
 git clone https://github.com/Lemoncode/quickmock.git
 ```
 
-**Work in progres... 🚧 **
-
-The goal of this project is to create an open source low fidelity UI mock tool 
-
-![quickmock](https://github.com/user-attachments/assets/a26e7302-0847-4377-80f0-39098791b371)
-
-Install dependencies
+Install the dependencies
 
 ```bash
 npm install
@@ -83,7 +77,6 @@ Why Sponsor Quick Mock?
 If you're interested in sponsoring this project, please feel free to reach out to us at: info@lemoncode.net
 
 Thank you for supporting open-source development!
-
 
 ## 👥 Team
 
