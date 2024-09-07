@@ -1,10 +1,10 @@
 # Quick mock
 
-![Contributors](https://img.shields.io/github/contributors/Lemoncode/mongo-modeler)
-![Forks](https://img.shields.io/github/forks/Lemoncode/mongo-modeler)
-![Stars](https://img.shields.io/github/stars/Lemoncode/mongo-modeler)
-![Licence](https://img.shields.io/github/license/Lemoncode/mongo-modeler)
-![Issues](https://img.shields.io/github/issues/Lemoncode/mongo-modeler)
+![Contributors](https://img.shields.io/github/contributors/Lemoncode/quickmock)
+![Forks](https://img.shields.io/github/forks/Lemoncode/quickmock)
+![Stars](https://img.shields.io/github/stars/Lemoncode/quickmock)
+![Licence](https://img.shields.io/github/license/Lemoncode/quickmock)
+![Issues](https://img.shields.io/github/issues/Lemoncode/quickmock)
 
 ## Project
 
