@@ -1,9 +1,10 @@
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { Group, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from './shape.const';
 
 const labelSizeRestrictions: ShapeSizeRestrictions = {
@@ -35,12 +36,9 @@ export const LabelShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } =
     fitSizeToShapeSizeRestrictions(labelSizeRestrictions, width, height);
 
-  const textColor = useMemo(
-    () => otherProps?.textColor ?? 'black',
-    [otherProps?.textColor]
-  );
-
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  const { textColor } = useShapeProps(otherProps, BASIC_SHAPE);
 
   return (
     <Group

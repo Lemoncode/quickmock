@@ -361,7 +361,6 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'table':
     case 'modal':
     case 'appBar':
-    case 'buttonBar':
     case 'tabsBar':
     case 'tooltip':
       return 'textarea';
