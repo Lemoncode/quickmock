@@ -1,114 +1,85 @@
 import { ShapeModel } from '@/core/model';
 import { ZIndexAction } from './canvas.model';
 
-// TOO Add Unit tests to all these methods: #65
 export const moveZIndexToTop = (
-  selectedShapeId: string,
+  selectedShapesIds: string[],
   shapeCollection: ShapeModel[]
 ): ShapeModel[] => {
-  const selectedShape = shapeCollection.find(
-    shape => shape.id === selectedShapeId
+  const selectedShapes = shapeCollection.filter(shape =>
+    selectedShapesIds.includes(shape.id)
   );
-  return selectedShape
-    ? [
-        ...shapeCollection.filter(shape => shape.id !== selectedShapeId),
-        selectedShape,
-      ]
-    : shapeCollection;
+  const remainingShapes = shapeCollection.filter(
+    shape => !selectedShapesIds.includes(shape.id)
+  );
+  return [...remainingShapes, ...selectedShapes];
 };
 
 export const moveZIndexToBottom = (
-  selectedShapeId: string,
+  selectedShapesIds: string[],
   shapeCollection: ShapeModel[]
 ): ShapeModel[] => {
-  const selectedShape = shapeCollection.find(
-    shape => shape.id === selectedShapeId
+  const selectedShapes = shapeCollection.filter(shape =>
+    selectedShapesIds.includes(shape.id)
   );
-  return selectedShape
-    ? [
-        selectedShape,
-        ...shapeCollection.filter(shape => shape.id !== selectedShapeId),
-      ]
-    : shapeCollection;
+  const remainingShapes = shapeCollection.filter(
+    shape => !selectedShapesIds.includes(shape.id)
+  );
+  return [...selectedShapes, ...remainingShapes];
 };
 
 export const moveZIndexDownOneLevel = (
-  selectedShapeId: string,
+  selectedShapesIds: string[],
   shapeCollection: ShapeModel[]
 ): ShapeModel[] => {
-  const selectedShapeIndex = shapeCollection.findIndex(
-    shape => shape.id === selectedShapeId
-  );
-  const selectedShape = shapeCollection.find(
-    shape => shape.id === selectedShapeId
-  );
-
-  return selectedShape &&
-    selectedShapeIndex > 0 &&
-    selectedShapeIndex < shapeCollection.length
-    ? [
-        ...shapeCollection.slice(0, selectedShapeIndex - 1),
-        selectedShape,
-        shapeCollection[selectedShapeIndex - 1],
-        ...shapeCollection.slice(selectedShapeIndex + 1),
-      ]
-    : shapeCollection;
+  let newCollection = [...shapeCollection];
+  for (let i = 0; i < newCollection.length; i++) {
+    const shape = newCollection[i];
+    if (selectedShapesIds.includes(shape.id) && i > 0) {
+      const previousShape = newCollection[i - 1];
+      if (!selectedShapesIds.includes(previousShape.id)) {
+        // Swap positions if previous shape is not part of the selection
+        newCollection[i - 1] = shape;
+        newCollection[i] = previousShape;
+      }
+    }
+  }
+  return newCollection;
 };
 
 export const moveZIndexTopOneLevel = (
-  selectedShapeId: string,
+  selectedShapesIds: string[],
   shapeCollection: ShapeModel[]
 ): ShapeModel[] => {
-  const selectedShapeIndex = shapeCollection.findIndex(
-    shape => shape.id === selectedShapeId
-  );
-  const selectedShape = shapeCollection.find(
-    shape => shape.id === selectedShapeId
-  );
-
-  return selectedShape &&
-    selectedShapeIndex >= 0 &&
-    selectedShapeIndex < shapeCollection.length - 1
-    ? [
-        ...shapeCollection.slice(0, selectedShapeIndex),
-        shapeCollection[selectedShapeIndex + 1],
-        selectedShape,
-        ...shapeCollection.slice(selectedShapeIndex + 2),
-      ]
-    : shapeCollection;
+  let newCollection = [...shapeCollection];
+  for (let i = newCollection.length - 1; i >= 0; i--) {
+    const shape = newCollection[i];
+    if (selectedShapesIds.includes(shape.id) && i < newCollection.length - 1) {
+      const nextShape = newCollection[i + 1];
+      if (!selectedShapesIds.includes(nextShape.id)) {
+        // Swap positions if next shape is not part of the selection
+        newCollection[i + 1] = shape;
+        newCollection[i] = nextShape;
+      }
+    }
+  }
+  return newCollection;
 };
 
-const performZIndexAction = (
-  selectedShapeId: string,
+export const performZIndexAction = (
+  selectedShapesIds: string[],
   action: ZIndexAction,
   shapes: ShapeModel[]
 ): ShapeModel[] => {
   switch (action) {
     case 'top':
-      return moveZIndexToTop(selectedShapeId, shapes);
-      break;
+      return moveZIndexToTop(selectedShapesIds, shapes);
     case 'bottom':
-      return moveZIndexToBottom(selectedShapeId, shapes);
-      break;
+      return moveZIndexToBottom(selectedShapesIds, shapes);
     case 'up':
-      return moveZIndexTopOneLevel(selectedShapeId, shapes);
-      break;
+      return moveZIndexTopOneLevel(selectedShapesIds, shapes);
     case 'down':
-      return moveZIndexDownOneLevel(selectedShapeId, shapes);
+      return moveZIndexDownOneLevel(selectedShapesIds, shapes);
+    default:
+      return shapes;
   }
-};
-
-export const performZIndexActionMultiple = (
-  selectedShapesId: string[],
-  action: ZIndexAction,
-  shapes: ShapeModel[]
-): ShapeModel[] => {
-  // TODO: Enhance this, this won't perform well
-  let workShapes = [...shapes];
-
-  selectedShapesId.forEach(selectedShapeId => {
-    workShapes = performZIndexAction(selectedShapeId, action, workShapes);
-  });
-
-  return workShapes;
 };

@@ -86,7 +86,7 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth - boxTickWidth - marginTick}
         height={restrictedHeight / 3}
         text={text}
-        fontFamily="Comic Sans MS, cursive"
+        fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={20}
         fill={textColor}
         align="left"

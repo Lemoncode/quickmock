@@ -6,7 +6,7 @@
   <circle cx="25" cy="25" r="8" fill="black"/>
 
   <!-- Texto -->
-  <text x="50" y="30" font-family="Comic Sans MS, cursive" font-size="20" fill="black">
+  <text x="50" y="30" font-family="Comic Sans MS, Balsamiq Sans, cursive" font-size="20" fill="black">
     Select me!
   </text>
 </svg>

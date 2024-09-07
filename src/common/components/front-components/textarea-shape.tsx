@@ -70,7 +70,7 @@ export const TextAreaShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth - 10}
         height={restrictedHeight - 10}
         text={text}
-        fontFamily="Comic Sans MS, cursive"
+        fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={15}
         fill={textColor}
         align="left"

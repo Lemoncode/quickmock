@@ -20,7 +20,7 @@ export interface SelectionInfo {
     isUserDoingMultipleSelection: boolean
   ) => void;
   handleClearSelection: (
-    mouseEvent:
+    mouseEvent?:
       | Konva.KonvaEventObject<MouseEvent>
       | Konva.KonvaEventObject<TouchEvent>
   ) => void;

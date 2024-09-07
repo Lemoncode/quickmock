@@ -74,7 +74,7 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
         x={radius * 2 + 10}
         y={radius * 0.5 + 5}
         text={text}
-        fontFamily="Comic Sans MS, cursive"
+        fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={20}
         fill={textColor}
         verticalAllign="middle"

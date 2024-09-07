@@ -70,7 +70,7 @@ export const ButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={width}
         height={height - 10}
         text={text}
-        fontFamily="Comic Sans MS, cursive"
+        fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={15}
         lineHeight={1.25}
         fill={textColor}

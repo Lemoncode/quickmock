@@ -71,7 +71,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           x={separator1X - 10}
           y={restrictedHeight / separatorPadding}
           text=":"
-          fontFamily="Comic Sans MS, cursive"
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={20}
           fill={stroke}
         />
@@ -79,7 +79,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           x={separator2X - 10}
           y={restrictedHeight / separatorPadding}
           text=":"
-          fontFamily="Comic Sans MS, cursive"
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={20}
           fill={stroke}
         />
