@@ -78,6 +78,12 @@ If you're interested in sponsoring this project, please feel free to reach out t
 
 Thank you for supporting open-source development!
 
+## 📐 Custom Component Libraries for Enterprise
+
+If your organization has its own design system and component library, we can create a custom set of low-fidelity mock components tailored to your palette and guidelines. This allows your team to create wireframes that align perfectly with your branding and design standards.
+
+For more information and to request a quote, feel free to contact us at: info@lemoncode.net.
+
 ## 👥 Team
 
 Team members participating in this project
