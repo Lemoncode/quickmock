@@ -6,7 +6,7 @@
 ![Licence](https://img.shields.io/github/license/Lemoncode/quickmock)
 ![Issues](https://img.shields.io/github/issues/Lemoncode/quickmock)
 
-## Project
+## 🌟 Project
 
 Quick Mock is a free, open source online tool for quickly creating low fidelity UI mockups.
 
@@ -39,7 +39,7 @@ npm run dev
 
 Open your browser and go to http://localhost:5173 (if this port is busy it will be changed to the next available port)
 
-## Contributing
+## 🤝 Contributing
 
 Your feedback and contributions are welcome! If you have ideas for new features or have found a bug, we would love to hear about it. Here's how you can contribute:
 
@@ -51,7 +51,7 @@ If you encounter a bug in the project, please first check if it has already been
 
 Do you have an idea to improve the project? Great! Share your thoughts with us by opening a new GitHub Issue under the feature request label. Describe the feature you would like to see, how and why you think it would be a valuable addition to the project.
 
-## Technologies
+## 🛠️ Technologies
 
 The application is being developed using the following technologies:
 
@@ -62,7 +62,7 @@ The application is being developed using the following technologies:
 - [Vite](https://vitejs.dev/)
 - [Vitest](https://vitest.dev/)
 
-## Sponsor Quick Mock
+## 💖 Sponsor Quick Mock
 
 Are you or your company interested in supporting Quick Mock? Sponsorship is a powerful way to contribute to the development and maintenance of our project, and we're always looking for partners who share our vision.
 
