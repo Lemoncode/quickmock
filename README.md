@@ -1,14 +1,35 @@
-# Quick mock 🎨
+# Quick mock
+
+![Contributors](https://img.shields.io/github/contributors/Lemoncode/mongo-modeler)
+![Forks](https://img.shields.io/github/forks/Lemoncode/mongo-modeler)
+![Stars](https://img.shields.io/github/stars/Lemoncode/mongo-modeler)
+![Licence](https://img.shields.io/github/license/Lemoncode/mongo-modeler)
+![Issues](https://img.shields.io/github/issues/Lemoncode/mongo-modeler)
+
+## Project
+
+Quick Mock is a free, open source online tool for quickly creating low fidelity UI mockups. 
+
+You can take a look at the desktop community preview at [Quick Mock](https://www.quickmock.net/)
+
+Click to watch the video tutorial:
+
+TODO: replace with the final video tutorial once uploaded to YouTube
+[![Quick mock video tutorial](https://img.youtube.com/vi/87ZZbDZLido/0.jpg)](https://www.youtube.com/watch?v=87ZZbDZLido)
+
+## 🚀 Installation
+
+To install the project, clone the repository and run the following commands:
+
+```sh
+git clone https://github.com/Lemoncode/quickmock.git
+```
 
 **Work in progres... 🚧 **
 
 The goal of this project is to create an open source low fidelity UI mock tool 
 
 ![quickmock](https://github.com/user-attachments/assets/a26e7302-0847-4377-80f0-39098791b371)
-
-# 🚀 Installation
-
-Clone this repository and run the following commands:
 
 Install dependencies
 
@@ -24,9 +45,49 @@ npm run dev
 
 Open your browser and go to http://localhost:5173 (if this port is busy it will be changed to the next available port)
 
+## Contributing
+
+Your feedback and contributions are welcome! If you have ideas for new features or have found a bug, we would love to hear about it. Here's how you can contribute:
+
+Report a Bug 🐛
+
+If you encounter a bug in the project, please first check if it has already been reported in our GitHub Issues. If you don't find it there, feel free to open a new issue. Provide as many details as possible, including steps to reproduce the bug, the environment in which it occurs (operating system, project version, etc.), and any other relevant details.
+
+Propose a New Feature ✨
+
+Do you have an idea to improve the project? Great! Share your thoughts with us by opening a new GitHub Issue under the feature request label. Describe the feature you would like to see, how and why you think it would be a valuable addition to the project.
+
+## Technologies
+
+The application is being developed using the following technologies:
+
+- [React](https://react.dev/)
+- [React Konva](https://konvajs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) / [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) / [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG)
+- [Vite](https://vitejs.dev/)
+- [Vitest](https://vitest.dev/)
+
+## Sponsor Quick Mock
+
+Are you or your company interested in supporting Quick Mock? Sponsorship is a powerful way to contribute to the development and maintenance of our project, and we're always looking for partners who share our vision.
+
+Why Sponsor Quick Mock?
+
+- **Support Open Source:** Your sponsorship directly contributes to the open-source community, enabling us to maintain and improve our project.
+
+- **Visibility for Your Brand:** Sponsoring Quick Mock can provide visibility for your brand in the tech community. It's an excellent way to demonstrate your commitment to supporting innovative software development.
+
+- **Direct Impact:** Your support makes a tangible difference, allowing us to focus more on development, add new features, and improve the user experience.
+
+If you're interested in sponsoring this project, please feel free to reach out to us at: info@lemoncode.net
+
+Thank you for supporting open-source development!
+
+
 ## 👥 Team
 
-Contributors to this project
+Team members participating in this project
 
 <p align="left">
   <a href="https://github.com/LourdesRsdp">
