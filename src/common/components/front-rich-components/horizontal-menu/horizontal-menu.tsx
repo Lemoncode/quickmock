@@ -34,12 +34,20 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
     ...shapeProps
   } = props;
 
-  const [items, setItems] = useState<string[]>([]);
+  const [selectedItem, setSelectedItem] = useState<number | null>(null);
+  const [items, setItems] = useState<string[]>([
+    '[*]Home, About, Services, Contact',
+  ]);
+  const handleClick = (itemIndex: number) => {
+    setSelectedItem(itemIndex);
+    onSelected(id, 'horizontal-menu', true);
+  };
 
   useEffect(() => {
     if (typeof text === 'string') {
-      const { items } = mapHorizontalMenuTextToItems(text);
+      const { items, selectedItemIndex } = mapHorizontalMenuTextToItems(text);
       setItems(items);
+      setSelectedItem(selectedItemIndex);
     } else {
       setItems([]);
     }
@@ -88,6 +96,8 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
+  const itemVerticalPadding = 4;
+
   return (
     <Group
       x={x}
@@ -111,7 +121,16 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
       />
 
       {items.map((e: string, index: number) => (
-        <Group key={index}>
+        <Group key={index} onClick={() => handleClick(index)}>
+          <Rect
+            x={itemSpacing * (index + 1) + itemWidth * index}
+            y={itemVerticalPadding}
+            width={itemWidth}
+            height={restrictedHeight - 2 * itemVerticalPadding}
+            fill={selectedItem === index ? 'lightblue' : backgroundColor}
+            stroke={selectedItem === index ? 'skyblue' : 'transparent'}
+            strokeWidth={selectedItem === index ? 1 : 0}
+          />
           <Text
             x={itemSpacing * (index + 1) + itemWidth * index}
             y={restrictedHeight / 2 - 8}
