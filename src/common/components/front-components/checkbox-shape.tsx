@@ -7,13 +7,15 @@ import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from './shape.const';
 
+const CHECKBOX_DEFAULT_HEIGHT = 20;
+
 const checkBoxShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
-  minHeight: 30,
+  minHeight: CHECKBOX_DEFAULT_HEIGHT,
   maxWidth: -1,
-  maxHeight: 50,
-  defaultWidth: 200,
-  defaultHeight: 50,
+  maxHeight: CHECKBOX_DEFAULT_HEIGHT,
+  defaultWidth: BASIC_SHAPE.DEFAULT_TEXT_WIDTH,
+  defaultHeight: CHECKBOX_DEFAULT_HEIGHT,
 };
 
 const shapeType: ShapeType = 'checkbox';
@@ -22,8 +24,9 @@ export const getCheckboxShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   checkBoxShapeRestrictions;
 
 const marginTick = 5;
-const boxTickWidth = 50;
-const tickWidth = boxTickWidth - marginTick;
+const boxTickWidth = CHECKBOX_DEFAULT_HEIGHT;
+const tickWidth = boxTickWidth;
+const marginText = 3;
 
 export const CheckBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
@@ -59,35 +62,37 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
         y={0}
         width={boxTickWidth}
         height={restrictedHeight}
-        cornerRadius={5}
-        stroke="black"
-        strokeWidth={2}
+        cornerRadius={BASIC_SHAPE.DEFAULT_CORNER_RADIUS}
+        stroke={BASIC_SHAPE.DEFAULT_STROKE_COLOR}
+        strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
         fill="white"
       />
       {isOn && (
         <Line
+          x={0}
+          y={0}
           points={[
             marginTick,
-            restrictedHeight / 2,
-            marginTick + boxTickWidth / 4,
-            restrictedHeight - marginTick,
+            boxTickWidth / 2,
+            marginTick + boxTickWidth / 5,
+            boxTickWidth - marginTick,
             tickWidth - marginTick,
             marginTick,
           ]}
-          stroke="black"
-          strokeWidth={2}
+          stroke={BASIC_SHAPE.DEFAULT_STROKE_COLOR}
+          strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
           lineCap="round"
           lineJoin="round"
         />
       )}
       <Text
-        x={boxTickWidth + marginTick}
-        y={restrictedHeight / 3}
-        width={restrictedWidth - boxTickWidth - marginTick}
-        height={restrictedHeight / 3}
+        x={boxTickWidth + BASIC_SHAPE.DEFAULT_PADDING}
+        y={marginText}
+        width={restrictedWidth - boxTickWidth - BASIC_SHAPE.DEFAULT_PADDING}
+        height={restrictedHeight - marginText}
         text={text}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
-        fontSize={20}
+        fontSize={15}
         fill={textColor}
         align="left"
         verticalAlign="middle"
