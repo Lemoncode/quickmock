@@ -3,14 +3,10 @@ import { SelectionInfo } from '@/core/providers/canvas/canvas.model';
 import Konva from 'konva';
 import { useState } from 'react';
 import { SelectionRect } from './canvas.model';
-import {
-  findFirstShapeInCoords,
-  getSelectedShapesFromSelectionRect,
-} from './use-multiple-selection.business';
+import { getSelectedShapesFromSelectionRect } from './use-multiple-selection.business';
 import { getTransformerBoxAndCoords } from './transformer.utils';
 import { calculateScaledCoordsFromCanvasDivCoordinatesNoScroll } from './canvas.util';
 import { Stage } from 'konva/lib/Stage';
-import { isUserDoingMultipleSelectionUsingCtrlOrCmdKey } from '@/common/utils/shapes';
 
 // There's a bug here: if you make a multiple selectin and start dragging
 // inside the selection but on a blank area it won't drag the selection
