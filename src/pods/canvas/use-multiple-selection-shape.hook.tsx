@@ -101,6 +101,7 @@ export const useMultipleSelectionShapeHook = (
       return;
     }
 
+    /*
     const shape = findFirstShapeInCoords(shapes, mousePointerStageBasedCoord);
 
     // If you are not dragging, but you click on a shape you should select that shape
@@ -115,6 +116,7 @@ export const useMultipleSelectionShapeHook = (
       );
       return;
     }
+		*/
 
     selectionInfo.handleClearSelection(e);
     if (e.target !== e.target.getStage()) {

@@ -67,12 +67,24 @@ export const useSelection = (
       );
       setSelectedShapesIds(arrayIds);
     } else {
-      // Multiple selection, just push what is selected to the current selection
-      selectedShapesRefs.current = selectedShapesRefs.current.concat(
-        arrayIds.map(id => shapeRefs.current[id].current)
-      );
+      // Multiple selection, add or remove from current selection
+      const auxSelectedShapesIds = [...selectedShapesIds];
+      const auxSelectedShapesRefs = [...selectedShapesRefs.current];
+      const selectedShapeId = arrayIds[0];
 
-      setSelectedShapesIds(formerShapeIds => [...formerShapeIds, ...arrayIds]);
+      // If the shape is already selected, remove it
+      if (auxSelectedShapesIds.includes(selectedShapeId)) {
+        const index = auxSelectedShapesIds.indexOf(selectedShapeId);
+        auxSelectedShapesIds.splice(index, 1);
+        auxSelectedShapesRefs.splice(index, 1);
+      } else {
+        // Else add it to the selection
+        auxSelectedShapesIds.push(selectedShapeId);
+        auxSelectedShapesRefs.push(shapeRefs.current[selectedShapeId].current);
+      }
+
+      selectedShapesRefs.current = auxSelectedShapesRefs;
+      setSelectedShapesIds(auxSelectedShapesIds);
     }
 
     transformerRef?.current?.nodes(selectedShapesRefs.current);
