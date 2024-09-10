@@ -1,3 +1,4 @@
+import { BASIC_SHAPE } from '@/common/components/front-components/shape.const';
 import classes from './border-radius.module.css';
 
 interface Props {
@@ -5,6 +6,10 @@ interface Props {
   label: string;
   onChange: (borderRadius: string) => void;
 }
+
+const BORDER_RADIUS_NONE = '0';
+const BORDER_RADIUS_SMALL = `${BASIC_SHAPE.DEFAULT_CORNER_RADIUS}`;
+const BORDER_RADIUS_BIG = '12';
 
 export const BorderRadius: React.FC<Props> = props => {
   const { label, borderRadius, onChange } = props;
@@ -14,8 +19,8 @@ export const BorderRadius: React.FC<Props> = props => {
       <p>{label}</p>
       <div className={classes.buttonsContainer}>
         <button
-          onClick={() => onChange('0')}
-          className={`${classes.button} ${borderRadius === '0' ? classes.active : ''}`}
+          onClick={() => onChange(BORDER_RADIUS_NONE)}
+          className={`${classes.button} ${borderRadius === BORDER_RADIUS_NONE ? classes.active : ''}`}
           style={{ borderRadius: '0' }}
         >
           <svg
@@ -35,8 +40,8 @@ export const BorderRadius: React.FC<Props> = props => {
           </svg>
         </button>
         <button
-          onClick={() => onChange('12')}
-          className={`${classes.button} ${borderRadius === '12' ? classes.active : ''}`}
+          onClick={() => onChange(BORDER_RADIUS_SMALL)}
+          className={`${classes.button} ${borderRadius === BORDER_RADIUS_SMALL ? classes.active : ''}`}
           style={{ borderRadius: '0' }}
         >
           <svg
@@ -56,8 +61,8 @@ export const BorderRadius: React.FC<Props> = props => {
           </svg>
         </button>
         <button
-          onClick={() => onChange('30')}
-          className={`${classes.button} ${borderRadius === '30' ? classes.active : ''}`}
+          onClick={() => onChange(BORDER_RADIUS_BIG)}
+          className={`${classes.button} ${borderRadius === BORDER_RADIUS_BIG ? classes.active : ''}`}
           style={{ borderRadius: '0' }}
         >
           <svg
