@@ -1,7 +1,6 @@
 <!-- public/combobox.svg -->
-<svg width="200" height="50" xmlns="http://www.w3.org/2000/svg">
-  <rect x="1" y="1" width="198" height="48" fill="none" stroke="black" stroke-width="2"/>
-  <line x1="160" y1="1" x2="160" y2="49" stroke="black" stroke-width="2"/>
-  <polygon points="170,20 190,20 180,35" fill="black"/>
-  <text x="10" y="30" font-family="Arial" font-size="20">Select an option</text>
+<svg width="170" height="40" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="168" height="38" fill="none" stroke="black" stroke-width="1" rx="4" ry="4"/>
+  <polygon points="146,18 152,25 158,18" fill="black"/>
+  <text x="10" y="25" font-family="Comic Sans MS, Balsamiq Sans, cursive" font-size="15">Select an option</text>
 </svg>
