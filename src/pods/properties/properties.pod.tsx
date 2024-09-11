@@ -139,7 +139,7 @@ export const PropertiesPod = () => {
       )}
       {selectedShapeData?.otherProps?.activeTab !== undefined && (
         <ActiveTabSelector
-          label="Active Tab"
+          label="Active Element"
           text={selectedShapeData?.text}
           type={selectedShapeData?.type}
           activeTab={selectedShapeData?.otherProps?.activeTab ?? 0}
