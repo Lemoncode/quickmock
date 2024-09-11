@@ -26,7 +26,7 @@ export const ActiveTabSelector: React.FC<Props> = ({
   };
 
   // Checking whether the type is tabsBar and parsing the text
-  const isTabsBar = type === 'tabsBar';
+  const isTabsBar = type === 'tabsBar' || 'buttonBar';
   const tabs = isTabsBar && text ? parseTabsBarText(text) : [];
 
   const handleTabChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
