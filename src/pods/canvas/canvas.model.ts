@@ -382,7 +382,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'tooltip':
       return {
@@ -403,7 +403,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'combobox':
       return {
@@ -411,7 +411,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'modal':
     case 'buttonBar':
@@ -433,7 +433,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#FFFF99',
         textColor: '#000000',
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
 
     case 'circle':
@@ -450,7 +450,7 @@ export const generateDefaultOtherProps = (
         stroke: '#000000',
         backgroundColor: '#ffffff',
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'line':
       return {
