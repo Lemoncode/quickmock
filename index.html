@@ -150,17 +150,13 @@
         align-items: center;
         margin: 0 auto;
         border-radius: 10px;
-        /*Remove aspect-ratio when iframe uncomment*/
-        aspect-ratio: 16 / 9;
-        background-image: url(./quickmock-frame.png);
-        background-size: 100%;
-        background-repeat: no-repeat;
         border: 1px solid black;
       }
+
       iframe {
         width: 100%;
-        aspect-ratio: 14.35 / 9;
-        border-radius: 10px;
+        aspect-ratio: 16 / 9;
+        border-radius: 9px;
       }
       .content {
         display: grid;
@@ -256,7 +252,7 @@
         .title {
           top: 2vw;
           width: 60%;
-          max-width: 1000px;
+          max-width: 900px;
           margin-right: auto;
           padding-left: 1.5vw;
         }
@@ -320,11 +316,13 @@
           </div>
           <div>
             <div class="video">
-              <!-- <iframe
-                src="https://www.youtube.com/embed/87ZZbDZLido?si=fanae_ZvATEOIkHZ"
+              <iframe
+                src="https://www.youtube.com/embed/NqswxUvXm4c?si=CouwMULhG-OBGlZT"
+                title="YouTube video player"
                 frameborder="0"
+                referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen
-              ></iframe> -->
+              ></iframe>
             </div>
           </div>
           <div class="right">
