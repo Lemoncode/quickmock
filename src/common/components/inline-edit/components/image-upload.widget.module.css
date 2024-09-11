@@ -15,19 +15,23 @@
 }
 
 .uploadButton {
-  background-color: #4caf50; /* Verde */
+  background-color: #2d9a8b;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 12px var(--space-lg);
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  display: block;
+  font-size: var(--fs-s);
   cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+  border-radius: var(--border-radius-m);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
 }
 
 .uploadButton:hover {
-  background-color: #45a049; /* Verde más oscuro cuando se pasa el ratón por encima */
+  background-color: #257f72;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.uploadButton:active {
+  background-color: #1d6359;
 }

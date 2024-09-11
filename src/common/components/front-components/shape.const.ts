@@ -10,7 +10,7 @@ const DEFAULT_PADDING = 10;
 const DEFAULT_LINE_HEIGHT = 1.25;
 const DEFAULT_FILL_TEXT_INPUT = '#8c8c8c';
 const DEFAULT_FONT_SIZE_INPUT = 15;
-const DEFAULT_TEXT_WIDTH = 155;
+const DEFAULT_TEXT_WIDTH = 165;
 const DEFAULT_TEXT_HEIGHT = 38;
 
 export interface DefaultStyleShape {

@@ -7,13 +7,15 @@ import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from './shape.const';
 
+const RADIO_BUTTON_DEFAULT_HEIGHT = 18;
+
 const radioButtonShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 50,
-  minHeight: 30,
-  maxWidth: 200,
-  maxHeight: 50,
-  defaultWidth: 120,
-  defaultHeight: 50,
+  minHeight: RADIO_BUTTON_DEFAULT_HEIGHT,
+  maxWidth: -1,
+  maxHeight: RADIO_BUTTON_DEFAULT_HEIGHT,
+  defaultWidth: BASIC_SHAPE.DEFAULT_TEXT_WIDTH,
+  defaultHeight: RADIO_BUTTON_DEFAULT_HEIGHT,
 };
 
 export const getRadioButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -57,27 +59,32 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
         x={radius}
         y={radius}
         radius={radius}
-        stroke="black"
-        strokeWidth={2}
+        stroke={BASIC_SHAPE.DEFAULT_STROKE_COLOR}
+        strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
       />
 
       {/* Círculo interior del radio button (checked) */}
       <Circle
         x={radius}
         y={radius}
-        radius={radius * 0.5}
+        radius={radius * 0.6}
         fill={isOn ? 'black' : 'white'}
       />
 
       {/* Texto */}
       <Text
-        x={radius * 2 + 10}
-        y={radius * 0.5 + 5}
+        x={radius * 2 + BASIC_SHAPE.DEFAULT_PADDING}
+        y={2}
         text={text}
+        width={restrictedWidth - radius * 2 - BASIC_SHAPE.DEFAULT_PADDING}
+        height={restrictedHeight}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
-        fontSize={20}
+        fontSize={15}
         fill={textColor}
-        verticalAllign="middle"
+        align="left"
+        verticalAlign="middle"
+        ellipsis={true}
+        wrap="none"
       />
     </Group>
   );
