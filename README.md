@@ -15,7 +15,7 @@ You can take a look at the desktop community preview at [Quick Mock](https://www
 Click to watch the video tutorial:
 
 TODO: replace with the final video tutorial once uploaded to YouTube
-[![Quick mock video tutorial](https://img.youtube.com/vi/87ZZbDZLido/0.jpg)](https://www.youtube.com/watch?v=87ZZbDZLido)
+[![Quick mock video tutorial](https://img.youtube.com/vi/NqswxUvXm4c/0.jpg)](https://www.youtube.com/watch?v=NqswxUvXm4c)
 
 ## 🚀 Installation
 
