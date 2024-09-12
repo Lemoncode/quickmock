@@ -6,7 +6,10 @@ import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 import { forwardRef } from 'react';
-import { parseCSVHeader, splitCSVIntoRows } from '../tabsbar/tabsbar.utils';
+import {
+  extractCSVHeaders,
+  splitCSVContentIntoRows,
+} from '@/common/utils/active-element-selector.utils';
 
 const buttonBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
@@ -42,8 +45,8 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>((props, ref) => {
       height
     );
 
-  const csvData = splitCSVIntoRows(text);
-  const headers = parseCSVHeader(csvData[0]);
+  const csvData = splitCSVContentIntoRows(text);
+  const headers = extractCSVHeaders(csvData[0]);
   const tabLabels = headers.map(header => header.text);
 
   const dynamicTabWidth = restrictedWidth / tabLabels.length;
@@ -55,7 +58,7 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>((props, ref) => {
     BASIC_SHAPE
   );
 
-  const activeTab = otherProps?.activeTab ?? 0;
+  const activeTab = otherProps?.activeElement ?? 0;
 
   return (
     <Group

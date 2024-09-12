@@ -420,7 +420,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
-        activeTab: 0,
+        activeElement: 0,
       };
     case 'largeArrow':
       return {
@@ -513,7 +513,7 @@ export const generateDefaultOtherProps = (
       };
     case 'tabsBar':
       return {
-        activeTab: 0,
+        activeElement: 0,
       };
     default:
       return undefined;
