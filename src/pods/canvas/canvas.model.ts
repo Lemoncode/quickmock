@@ -61,6 +61,7 @@ import {
   getModalShapeSizeRestrictions,
   getAppBarShapeSizeRestrictions,
   getButtonBarShapeSizeRestrictions,
+  getBadgeLabelShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -181,6 +182,8 @@ export const getSizeRestrictionFromShape = (
       return getTooltipShapeSizeRestrictions();
     case 'slider':
       return getSliderShapeSizeRestrictions();
+    case 'badgelabel':
+      return getBadgeLabelShapeSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -238,6 +241,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'buttonBar':
     case 'tabsbar':
     case 'tooltip':
+    case 'badgelabel':
       return true;
     default:
       return false;
@@ -269,6 +273,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'appBar':
     case 'buttonBar':
     case 'slider':
+    case 'badgelabel':
       return ['middle-left', 'middle-right'];
     case 'verticalScrollBar':
       return ['top-center', 'bottom-center'];
@@ -341,6 +346,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Button 1, Button 2, Button 3';
     case 'tabsbar':
       return 'Tab 1, Tab 2, Tab 3';
+    case 'badgelabel':
+      return 'Badge Label';
     default:
       return undefined;
   }
@@ -364,6 +371,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'buttonBar':
     case 'tabsbar':
     case 'tooltip':
+    case 'badgelabel':
       return 'textarea';
       break;
     case 'image':

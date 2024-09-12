@@ -21,4 +21,5 @@ export const mockRichComponentsCollection: ItemInfo[] = [
   { thumbnailSrc: '/rich-components/modal.svg', type: 'modal' },
   { thumbnailSrc: '/rich-components/appBar.svg', type: 'appBar' },
   { thumbnailSrc: '/rich-components/button-bar-group.svg', type: 'buttonBar' },
+  { thumbnailSrc: '/rich-components/badgelabel.svg', type: 'badgelabel' },
 ];
