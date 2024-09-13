@@ -20,7 +20,6 @@ export const getAudioPlayerShapeSizeRestrictions = (): ShapeSizeRestrictions =>
 
 const shapeType: ShapeType = 'audioPlayer';
 const arrowWidth = 20;
-const volumeWidth = 25;
 
 export const AudioPlayerShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { x, y, width, height, id, onSelected, ...shapeProps } = props;
@@ -34,13 +33,7 @@ export const AudioPlayerShape = forwardRef<any, ShapeProps>((props, ref) => {
     );
 
   const calculateWidth =
-    restrictedWidth -
-    volumeWidth -
-    BASIC_SHAPE.DEFAULT_PADDING -
-    (arrowWidth + BASIC_SHAPE.DEFAULT_PADDING) * 4;
-
-  const margin = 10;
-  const controlBarHeight = 30;
+    restrictedWidth - arrowWidth * 3 - BASIC_SHAPE.DEFAULT_PADDING * 5;
 
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
@@ -55,82 +48,96 @@ export const AudioPlayerShape = forwardRef<any, ShapeProps>((props, ref) => {
       {...shapeProps}
     >
       <Rect
-        x={arrowWidth}
+        x={0}
         y={0}
-        width={restrictedWidth - arrowWidth * 2}
+        width={restrictedWidth}
         height={restrictedHeight}
-        fill="white"
+        fill="red"
         strokeWidth={1}
       />
 
       {/* Flecha izquierda */}
-      <Rect
-        x={0}
-        y={0}
-        width={arrowWidth}
-        height={restrictedHeight}
-        strokeWidth={1}
-      />
+      <Group>
+        <Rect
+          x={0}
+          y={0}
+          width={arrowWidth}
+          height={restrictedHeight}
+          strokeWidth={1}
+        />
 
-      <Line
-        x={-37}
-        y={-30}
-        points={[65, 45, 65, 60]}
-        stroke="black"
-        strokeWidth={2}
-      />
+        <Line
+          x={4}
+          y={restrictedHeight / 2.3}
+          points={[16, -8, 4, 0, 16, 8]}
+          fill="black"
+          closed={true}
+        />
 
-      <Line
-        x={4}
-        y={restrictedHeight / 2.3}
-        points={[16, -8, 4, 0, 16, 8]}
-        fill="black"
-        closed={true}
-      />
+        <Line
+          x={8}
+          y={0}
+          points={[arrowWidth, 15, arrowWidth, 30]}
+          stroke="black"
+          strokeWidth={2}
+        />
+      </Group>
 
       {/* Flecha derecha */}
+      <Group>
+        <Rect
+          x={arrowWidth + BASIC_SHAPE.DEFAULT_PADDING}
+          y={0}
+          width={arrowWidth}
+          height={restrictedHeight}
+          strokeWidth={1}
+        />
+
+        <Line
+          x={arrowWidth + BASIC_SHAPE.DEFAULT_PADDING + 6}
+          y={restrictedHeight / 2.3}
+          points={[4, -8, 16, 0, 4, 8]}
+          fill="black"
+          closed={true}
+        />
+      </Group>
+
+      <Group>
+        <Rect
+          x={(arrowWidth + BASIC_SHAPE.DEFAULT_PADDING) * 2}
+          y={0}
+          width={arrowWidth}
+          height={restrictedHeight}
+          strokeWidth={1}
+        />
+
+        <Line
+          x={0}
+          y={0}
+          points={[
+            (arrowWidth + BASIC_SHAPE.DEFAULT_PADDING + 4) * 2,
+            15,
+            (arrowWidth + BASIC_SHAPE.DEFAULT_PADDING + 4) * 2,
+            30,
+          ]}
+          stroke="black"
+          strokeWidth={2}
+        />
+
+        <Line
+          x={(arrowWidth + BASIC_SHAPE.DEFAULT_PADDING + 6) * 2}
+          y={restrictedHeight / 2.3}
+          points={[4, -8, 16, 0, 4, 8]}
+          fill="black"
+          closed={true}
+        />
+      </Group>
+
       <Rect
-        x={arrowWidth + BASIC_SHAPE.DEFAULT_PADDING}
-        y={0}
-        width={arrowWidth}
-        height={restrictedHeight}
-        strokeWidth={1}
-      />
-
-      <Line
-        x={arrowWidth + BASIC_SHAPE.DEFAULT_PADDING + 6}
-        y={restrictedHeight / 2.3}
-        points={[4, -8, 16, 0, 4, 8]}
-        fill="black"
-        closed={true}
-      />
-
-      <Rect
-        x={(arrowWidth + BASIC_SHAPE.DEFAULT_PADDING) * 2}
-        y={0}
-        width={arrowWidth}
-        height={restrictedHeight}
-        strokeWidth={1}
-      />
-
-      <Line
-        x={0}
-        y={-30}
-        points={[65, 45, 65, 60]}
-        stroke="black"
-        strokeWidth={2}
-      />
-
-      <Line
-        x={(arrowWidth + BASIC_SHAPE.DEFAULT_PADDING + 6) * 2}
-        y={restrictedHeight / 2.3}
-        points={[4, -8, 16, 0, 4, 8]}
-        fill="black"
-        closed={true}
-      />
-
-      <Rect
-        x={(arrowWidth + BASIC_SHAPE.DEFAULT_PADDING) * 3}
+        x={
+          (arrowWidth + BASIC_SHAPE.DEFAULT_PADDING) * 3 +
+          BASIC_SHAPE.DEFAULT_PADDING
+        }
         y={restrictedHeight / 4}
         width={calculateWidth}
         height={restrictedHeight / 3}
@@ -139,7 +146,10 @@ export const AudioPlayerShape = forwardRef<any, ShapeProps>((props, ref) => {
         closed={true}
       />
       <Rect
-        x={(arrowWidth + BASIC_SHAPE.DEFAULT_PADDING) * 3}
+        x={
+          (arrowWidth + BASIC_SHAPE.DEFAULT_PADDING) * 3 +
+          BASIC_SHAPE.DEFAULT_PADDING
+        }
         y={restrictedHeight / 4}
         width={calculateWidth / 2}
         height={restrictedHeight / 3}
@@ -152,8 +162,8 @@ export const AudioPlayerShape = forwardRef<any, ShapeProps>((props, ref) => {
       {/* Control de volumen mejorado */}
       <Group>
         {/* Altavoz */}
-        <Line
-          x={arrowWidth + BASIC_SHAPE.DEFAULT_PADDING + 15}
+        {/* <Line
+          x={restrictedWidth}
           y={-10}
           points={[
             restrictedWidth - 2 * margin - 70,
@@ -177,7 +187,7 @@ export const AudioPlayerShape = forwardRef<any, ShapeProps>((props, ref) => {
           closed={true}
         />
         <Line
-          x={arrowWidth + BASIC_SHAPE.DEFAULT_PADDING + 15}
+          x={restrictedWidth}
           y={-10}
           points={[
             restrictedWidth - 2 * margin - 60,
@@ -190,7 +200,7 @@ export const AudioPlayerShape = forwardRef<any, ShapeProps>((props, ref) => {
           stroke="black"
           fill="black"
           strokeWidth={2}
-        />
+        /> */}
       </Group>
     </Group>
   );
