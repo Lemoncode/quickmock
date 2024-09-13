@@ -9,10 +9,10 @@ import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 const inputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 60,
   minHeight: 38,
-  maxWidth: -1,
+  maxWidth: 2000,
   maxHeight: 38,
-  defaultWidth: INPUT_SHAPE.DEFAULT_TEXT_WIDTH,
-  defaultHeight: INPUT_SHAPE.DEFAULT_TEXT_HEIGHT,
+  defaultWidth: 155,
+  defaultHeight: 38,
 };
 
 export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions =>

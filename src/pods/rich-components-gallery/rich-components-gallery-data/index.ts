@@ -22,5 +22,8 @@ export const mockRichComponentsCollection: ItemInfo[] = [
   { thumbnailSrc: '/rich-components/appBar.svg', type: 'appBar' },
   { thumbnailSrc: '/rich-components/button-bar-group.svg', type: 'buttonBar' },
   { thumbnailSrc: '/rich-components/tabsbar.svg', type: 'tabsBar' },
-  { thumbnailSrc: '/rich-components/input-stepper.svg', type: 'input-stepper' },
+  {
+    thumbnailSrc: '/rich-components/input-with-stepper.svg',
+    type: 'inputWithStepper',
+  },
 ];

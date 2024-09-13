@@ -13,3 +13,4 @@ export * from './modal/modal';
 export * from './appBar';
 export * from './buttonBar/buttonBar';
 export * from './tabsbar';
+export * from './input-with-stepper';

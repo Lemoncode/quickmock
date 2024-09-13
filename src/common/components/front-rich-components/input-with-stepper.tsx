@@ -1,6 +1,10 @@
 import { useState, forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeConfig } from 'konva/lib/Shape';
+import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeType } from '../../../core/model/index';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
+import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 
 interface InputWithStepperProps extends ShapeConfig {
   id: string;
@@ -9,10 +13,44 @@ interface InputWithStepperProps extends ShapeConfig {
   width: number;
   height: number;
   initialValue?: number;
+  onSelected: () => void;
 }
 
-export const InputWithStepper = forwardRef<any, InputWithStepperProps>(
-  ({ x, y, width, height, initialValue = 0, id, ...shapeProps }, ref) => {
+const inputWithStepperSizeRestrictions: ShapeSizeRestrictions = {
+  minWidth: 100,
+  minHeight: 20,
+  maxWidth: 600,
+  maxHeight: 40,
+  defaultWidth: 150,
+  defaultHeight: 30,
+};
+
+export const getInputWithStepperSizeRestrictions = (): ShapeSizeRestrictions =>
+  inputWithStepperSizeRestrictions;
+
+const shapeType: ShapeType = 'inputWithStepper';
+
+export const InputWithStepperShape = forwardRef<any, InputWithStepperProps>(
+  (props, ref) => {
+    const {
+      x,
+      y,
+      width,
+      height,
+      initialValue = 0,
+      id,
+      OtherProps,
+      ...shapeProps
+    } = props;
+
+    const { width: restrictedWidth, height: restrictedHeight } =
+      fitSizeToShapeSizeRestrictions(
+        inputWithStepperSizeRestrictions,
+        width,
+        height
+      );
+
+    const { handleSelection } = useShapeComponentSelection(props, shapeType);
     const [value, setValue] = useState(initialValue);
 
     const handleIncrement = () => {
@@ -23,17 +61,17 @@ export const InputWithStepper = forwardRef<any, InputWithStepperProps>(
       setValue(value - 1);
     };
 
-    const inputWidth = width - 30; // Reservar espacio para el stepper
-    const buttonHeight = height / 2;
+    const inputWidth = restrictedWidth - 30; // Reservar espacio para el stepper
+    const buttonHeight = restrictedHeight / 2;
 
     return (
-      <Group x={x} y={y} ref={ref} {...shapeProps}>
+      <Group x={x} y={y} ref={ref} onClick={handleSelection} {...shapeProps}>
         {/* Caja del input */}
         <Rect
           x={0}
           y={0}
           width={inputWidth / 2} // Reducir ancho a la mitad
-          height={height}
+          height={restrictedHeight}
           fill="white"
           stroke="black"
           strokeWidth={2}
@@ -42,8 +80,8 @@ export const InputWithStepper = forwardRef<any, InputWithStepperProps>(
 
         {/* Texto del input */}
         <Text
-          x={inputWidth / 2 - 10} // Alinear a la derecha
-          y={height / 2 - 8} // Centrar verticalmente
+          x={inputWidth / 2 - 20} // Alinear a la derecha
+          y={restrictedHeight / 2 - 8} // Centrar verticalmente
           text={value.toString()}
           fontFamily="Arial"
           fontSize={16}
@@ -64,7 +102,7 @@ export const InputWithStepper = forwardRef<any, InputWithStepperProps>(
           />
           <Text
             x={10}
-            y={buttonHeight / 2 - 8}
+            y={buttonHeight / 2 - 6}
             text="▲"
             fontFamily="Arial"
             fontSize={14}
@@ -97,4 +135,4 @@ export const InputWithStepper = forwardRef<any, InputWithStepperProps>(
   }
 );
 
-export default InputWithStepper;
+export default InputWithStepperShape;

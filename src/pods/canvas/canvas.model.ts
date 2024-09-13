@@ -61,6 +61,7 @@ import {
   getAppBarShapeSizeRestrictions,
   getButtonBarShapeSizeRestrictions,
   getTabsBarShapeSizeRestrictions,
+  getInputWithStepperSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -181,6 +182,8 @@ export const getSizeRestrictionFromShape = (
       return getTooltipShapeSizeRestrictions();
     case 'slider':
       return getSliderShapeSizeRestrictions();
+    case 'inputWithStepper':
+      return getInputWithStepperSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -269,6 +272,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'appBar':
     case 'buttonBar':
     case 'slider':
+    case 'inputWithStepper':
       return ['middle-left', 'middle-right'];
     case 'verticalScrollBar':
       return ['top-center', 'bottom-center'];
@@ -377,6 +381,7 @@ export const generateDefaultOtherProps = (
   shapeType: ShapeType
 ): OtherProps | undefined => {
   switch (shapeType) {
+    case 'inputWithStepper':
     case 'input':
       return {
         stroke: INPUT_SHAPE.DEFAULT_STROKE_COLOR,
