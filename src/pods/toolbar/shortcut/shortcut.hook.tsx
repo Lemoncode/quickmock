@@ -13,15 +13,15 @@ export const useShortcut = ({ targetKey, callback }: ShortcutHookProps) => {
     //const isAltKeyPressed = event.getModifierState('Alt');
     //const isCtrlKeyPressed = event.getModifierState('Control');
     const isCtrlOrCmdPressed = event.ctrlKey || event.metaKey;
+    const ctrlKey = isMacOS() ? 'Meta' : 'Ctrl';
+    const pressedKey = event.key.toLowerCase();
 
     if (
-      (isWindowsOrLinux() && isCtrlOrCmdPressed) ||
-      (isMacOS() && isCtrlOrCmdPressed)
+      targetKey.includes(pressedKey) ||
+      (isCtrlOrCmdPressed && targetKey.includes(`${ctrlKey}+${pressedKey}`))
     ) {
-      if (targetKey.includes(event.key)) {
-        event.preventDefault();
-        callback();
-      }
+      event.preventDefault();
+      callback();
     }
   };
 
