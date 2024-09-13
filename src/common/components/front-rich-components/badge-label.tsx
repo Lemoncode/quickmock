@@ -1,6 +1,7 @@
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef } from 'react';
+import { BASIC_SHAPE } from '../front-components/shape.const';
+import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
@@ -25,10 +26,10 @@ export const BadgeLabelShape = forwardRef<any, ShapeProps>((props, ref) => {
     y,
     width,
     height,
-    fillColor = 'lightgrey',
-    textColor = '#000',
     id,
+    text,
     onSelected,
+    otherProps,
     ...shapeProps
   } = props;
   const { width: restrictedWidth, height: restrictedHeigth } =
@@ -37,6 +38,31 @@ export const BadgeLabelShape = forwardRef<any, ShapeProps>((props, ref) => {
       width,
       height
     );
+
+  const textColor = useMemo(
+    () => otherProps?.textColor ?? 'black',
+    [otherProps?.textColor]
+  );
+
+  const backgroundColor = useMemo(
+    () => otherProps?.backgroundColor ?? 'lightgray',
+    [otherProps?.backgroundColor]
+  );
+
+  const strokeColor = useMemo(
+    () => otherProps?.stroke ?? 'gray',
+    [otherProps?.stroke]
+  );
+
+  const strokeStyle = useMemo(
+    () => otherProps?.strokeStyle ?? [],
+    [otherProps?.strokeStyle]
+  );
+
+  const borderRadius = useMemo(() => {
+    const radius = Number(otherProps?.borderRadius);
+    return isNaN(radius) ? BASIC_SHAPE.DEFAULT_CORNER_RADIUS : radius;
+  }, [otherProps?.borderRadius]);
 
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
@@ -55,19 +81,24 @@ export const BadgeLabelShape = forwardRef<any, ShapeProps>((props, ref) => {
         y={0}
         width={restrictedWidth}
         height={restrictedHeigth}
-        fill={fillColor}
-        stroke={'gray'}
+        fill={backgroundColor}
+        stroke={strokeColor}
+        dash={strokeStyle}
         strokeWidth={2}
-        cornerRadius={restrictedHeigth / 2}
+        cornerRadius={borderRadius}
       />
 
       <Text
-        x={restrictedWidth / 3}
-        y={restrictedHeigth / 2 - 6}
-        text={'Badge Label'}
+        x={BASIC_SHAPE.DEFAULT_PADDING}
+        y={BASIC_SHAPE.DEFAULT_PADDING}
+        width={restrictedWidth - BASIC_SHAPE.DEFAULT_PADDING}
+        height={restrictedHeigth - BASIC_SHAPE.DEFAULT_FONT_SIZE}
+        text={text}
         fontFamily="Arial"
-        fontSize={16}
+        fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE}
         fill={textColor}
+        verticalAlign="middle"
+        align="center"
       />
     </Group>
   );

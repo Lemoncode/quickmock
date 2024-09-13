@@ -519,6 +519,14 @@ export const generateDefaultOtherProps = (
         progress: '50',
         backgroundColor: '#A9A9A9',
       };
+    case 'badgelabel':
+      return {
+        stroke: '#808080',
+        backgroundColor: '#D3D3D3',
+        textColor: '#000000',
+        strokeStyle: [],
+        borderRadius: '30',
+      };
     default:
       return undefined;
   }
