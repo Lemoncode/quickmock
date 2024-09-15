@@ -1,4 +1,4 @@
-import { isMacOS, isWindowsOrLinux } from '@/common/helpers/platform.helpers';
+import { isMacOS } from '@/common/helpers/platform.helpers';
 import { useEffect } from 'react';
 
 export interface ShortcutHookProps {
@@ -14,14 +14,15 @@ export const useShortcut = ({ targetKey, callback }: ShortcutHookProps) => {
     //const isCtrlKeyPressed = event.getModifierState('Control');
     const isCtrlOrCmdPressed = event.ctrlKey || event.metaKey;
 
+    const ctrlKey = isMacOS() ? 'Meta' : 'Ctrl';
+    const pressedKey = event.key.toLowerCase();
+
     if (
-      (isWindowsOrLinux() && isCtrlOrCmdPressed) ||
-      (isMacOS() && isCtrlOrCmdPressed)
+      targetKey.includes(pressedKey) ||
+      (isCtrlOrCmdPressed && targetKey.includes(`${ctrlKey}+${pressedKey}`))
     ) {
-      if (targetKey.includes(event.key)) {
-        event.preventDefault();
-        callback();
-      }
+      event.preventDefault();
+      callback();
     }
   };
 

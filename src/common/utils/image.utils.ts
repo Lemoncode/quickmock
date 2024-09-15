@@ -5,17 +5,31 @@ export const adjustSizeKeepingAspectRatio = (
   componentSize: Size
 ) => {
   const aspectRatio = imageSize.width / imageSize.height;
-  const width =
-    componentSize.width > imageSize.width
-      ? imageSize.width
-      : componentSize.width;
-  const height =
-    componentSize.height > imageSize.height
-      ? imageSize.height
-      : componentSize.height;
+
+  // If the image is smaller than the component in both dimensions, keep its original size
+  if (
+    imageSize.width <= componentSize.width &&
+    imageSize.height <= componentSize.height
+  ) {
+    return {
+      width: imageSize.width,
+      height: imageSize.height,
+    };
+  }
+
+  // Adjust the size based on the component's width
+  let newWidth = componentSize.width;
+  let newHeight = newWidth / aspectRatio;
+
+  // If the new height exceeds the component's height, adjust the size based on the height
+  if (newHeight > componentSize.height) {
+    newHeight = componentSize.height;
+    newWidth = newHeight * aspectRatio;
+  }
+
   return {
-    width: width,
-    height: height / aspectRatio,
+    width: newWidth,
+    height: newHeight,
   };
 };
 

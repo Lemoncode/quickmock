@@ -8,7 +8,7 @@ import { StrokeStyle } from './components/stroke-style/stroke.style.component';
 import { ImageSrc } from './components/image-src/image-selector.component';
 import { ImageBlackAndWhite } from './components/image-black-and-white/image-black-and-white-selector.component';
 import { Progress } from './components/progress/progress.component';
-import { ActiveTabSelector } from './components/active-tab-selector/active-tab-selector.component';
+import { ActiveElementSelector } from './components/active-element-selector/active-element-selector.component';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -137,14 +137,14 @@ export const PropertiesPod = () => {
           )}
         </>
       )}
-      {selectedShapeData?.otherProps?.activeTab !== undefined && (
-        <ActiveTabSelector
-          label="Active Tab"
+      {selectedShapeData?.otherProps?.activeElement !== undefined && (
+        <ActiveElementSelector
+          label="Active Element"
           text={selectedShapeData?.text}
           type={selectedShapeData?.type}
-          activeTab={selectedShapeData?.otherProps?.activeTab ?? 0}
-          onChange={activeTab =>
-            updateOtherPropsOnSelected('activeTab', activeTab)
+          activeElement={selectedShapeData?.otherProps?.activeElement ?? 0}
+          onChange={activeElement =>
+            updateOtherPropsOnSelected('activeElement', activeElement)
           }
         />
       )}

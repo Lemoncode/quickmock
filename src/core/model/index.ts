@@ -160,7 +160,7 @@ export interface OtherProps {
   imageBlackAndWhite?: boolean;
   progress?: string;
   borderRadius?: string;
-  activeTab?: number;
+  activeElement?: number;
 }
 
 export const BASE_ICONS_URL = '/icons/';
