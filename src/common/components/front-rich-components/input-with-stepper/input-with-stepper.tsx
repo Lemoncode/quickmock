@@ -1,20 +1,12 @@
-import { useState, forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { Group, Rect, Text } from 'react-konva';
-import { ShapeConfig } from 'konva/lib/Shape';
 import { ShapeSizeRestrictions } from '@/core/model';
-import { ShapeType } from '../../../core/model/index';
+import { ShapeType } from '../../../../core/model/index';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
-import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
-
-interface InputWithStepperProps extends ShapeConfig {
-  id: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  initialValue?: number;
-  onSelected: () => void;
-}
+import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { ShapeProps } from '../../front-components/shape.model';
+import { useHandleCounterInputWithStepper } from './input-with-stepper.business';
+import { INPUT_SHAPE } from '../../front-components/shape.const';
 
 const inputWithStepperSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -30,18 +22,9 @@ export const getInputWithStepperSizeRestrictions = (): ShapeSizeRestrictions =>
 
 const shapeType: ShapeType = 'inputWithStepper';
 
-export const InputWithStepperShape = forwardRef<any, InputWithStepperProps>(
+export const InputWithStepperShape = forwardRef<any, ShapeProps>(
   (props, ref) => {
-    const {
-      x,
-      y,
-      width,
-      height,
-      initialValue = 0,
-      id,
-      OtherProps,
-      ...shapeProps
-    } = props;
+    const { x, y, width, height, id, otherProps, ...shapeProps } = props;
 
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
@@ -51,15 +34,29 @@ export const InputWithStepperShape = forwardRef<any, InputWithStepperProps>(
       );
 
     const { handleSelection } = useShapeComponentSelection(props, shapeType);
-    const [value, setValue] = useState(initialValue);
 
-    const handleIncrement = () => {
-      setValue(value + 1);
-    };
+    const { value, handleIncrement, handleDecrement } =
+      useHandleCounterInputWithStepper();
 
-    const handleDecrement = () => {
-      setValue(value - 1);
-    };
+    const stroke = useMemo(
+      () => otherProps?.stroke ?? INPUT_SHAPE.DEFAULT_STROKE_COLOR,
+      [otherProps?.stroke]
+    );
+
+    const fill = useMemo(
+      () => otherProps?.backgroundColor ?? INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
+      [otherProps?.backgroundColor]
+    );
+
+    const textColor = useMemo(
+      () => otherProps?.textColor ?? INPUT_SHAPE.DEFAULT_FILL_TEXT,
+      [otherProps?.textColor]
+    );
+
+    const strokeStyle = useMemo(
+      () => otherProps?.strokeStyle ?? [],
+      [otherProps?.strokeStyle]
+    );
 
     const inputWidth = restrictedWidth - 30; // Reservar espacio para el stepper
     const buttonHeight = restrictedHeight / 2;
@@ -72,10 +69,10 @@ export const InputWithStepperShape = forwardRef<any, InputWithStepperProps>(
           y={0}
           width={inputWidth / 2} // Reducir ancho a la mitad
           height={restrictedHeight}
-          fill="white"
-          stroke="black"
+          fill={fill}
+          stroke={stroke}
           strokeWidth={2}
-          cornerRadius={0} // Sin bordes redondeados
+          dash={strokeStyle}
         />
 
         {/* Texto del input */}
@@ -85,7 +82,7 @@ export const InputWithStepperShape = forwardRef<any, InputWithStepperProps>(
           text={value.toString()}
           fontFamily="Arial"
           fontSize={16}
-          fill="black"
+          fill={textColor}
           align="right"
         />
 
@@ -96,17 +93,18 @@ export const InputWithStepperShape = forwardRef<any, InputWithStepperProps>(
             y={0}
             width={30}
             height={buttonHeight}
-            fill="lightgray"
-            stroke="black"
+            fill={fill}
+            stroke={stroke}
             strokeWidth={2}
+            dash={strokeStyle}
           />
           <Text
             x={10}
-            y={buttonHeight / 2 - 6}
+            y={buttonHeight / 2 - 7}
             text="▲"
             fontFamily="Arial"
             fontSize={14}
-            fill="black"
+            fill={textColor}
           />
         </Group>
 
@@ -117,17 +115,18 @@ export const InputWithStepperShape = forwardRef<any, InputWithStepperProps>(
             y={0}
             width={30}
             height={buttonHeight}
-            fill="lightgray"
-            stroke="black"
+            fill={fill}
+            stroke={stroke}
             strokeWidth={2}
+            dash={strokeStyle}
           />
           <Text
             x={10}
-            y={buttonHeight / 2 - 8}
+            y={buttonHeight / 2 - 7}
             text="▼"
             fontFamily="Arial"
             fontSize={14}
-            fill="black"
+            fill={textColor}
           />
         </Group>
       </Group>

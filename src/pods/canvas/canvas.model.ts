@@ -382,6 +382,12 @@ export const generateDefaultOtherProps = (
 ): OtherProps | undefined => {
   switch (shapeType) {
     case 'inputWithStepper':
+      return {
+        stroke: INPUT_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+      };
     case 'input':
       return {
         stroke: INPUT_SHAPE.DEFAULT_STROKE_COLOR,

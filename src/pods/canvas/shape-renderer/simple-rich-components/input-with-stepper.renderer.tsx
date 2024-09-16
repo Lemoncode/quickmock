@@ -25,7 +25,7 @@ export const renderInputWithStepper = (
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
-      OtherProps={shape.otherProps}
+      otherProps={shape.otherProps}
     />
   );
 };
