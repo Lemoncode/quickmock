@@ -5,16 +5,19 @@ import { ShapeType } from '../../../../core/model/index';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
 import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 import { ShapeProps } from '../../front-components/shape.model';
-import { useHandleCounterInputWithStepper } from './input-with-stepper.business';
+import {
+  adjustAlignmentByDigitCount,
+  useHandleCounterInputWithStepper,
+} from './input-with-stepper.business';
 import { INPUT_SHAPE } from '../../front-components/shape.const';
 
 const inputWithStepperSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
-  minHeight: 20,
-  maxWidth: 600,
-  maxHeight: 40,
+  minHeight: 38,
+  maxWidth: 250,
+  maxHeight: 50,
   defaultWidth: 150,
-  defaultHeight: 30,
+  defaultHeight: 38,
 };
 
 export const getInputWithStepperSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -58,11 +61,22 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
       [otherProps?.strokeStyle]
     );
 
-    const inputWidth = restrictedWidth - 30; // Reservar espacio para el stepper
+    const inputWidth = restrictedWidth * 0.8; // Reservar espacio para el stepper
+    const buttonWidth = restrictedWidth * 0.2;
     const buttonHeight = restrictedHeight / 2;
 
+    const adjustAlignmentByDigits = adjustAlignmentByDigitCount(value);
+
     return (
-      <Group x={x} y={y} ref={ref} onClick={handleSelection} {...shapeProps}>
+      <Group
+        x={x}
+        y={y}
+        width={restrictedWidth}
+        height={restrictedHeight}
+        ref={ref}
+        onClick={handleSelection}
+        {...shapeProps}
+      >
         {/* Caja del input */}
         <Rect
           x={0}
@@ -77,13 +91,13 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
 
         {/* Texto del input */}
         <Text
-          x={inputWidth / 2 - 20} // Alinear a la derecha
-          y={restrictedHeight / 2 - 8} // Centrar verticalmente
+          x={inputWidth / 2 - adjustAlignmentByDigits} // Alinear a la derecha dependiendo de la cantidad de dígitos
+          y={restrictedHeight / 2 - 6} // Centrar verticalmente
           text={value.toString()}
-          fontFamily="Arial"
-          fontSize={16}
+          fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
+          fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
           fill={textColor}
-          align="right"
+          align="center"
         />
 
         {/* Botón de incremento (flecha arriba) */}
@@ -91,7 +105,7 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
           <Rect
             x={0}
             y={0}
-            width={30}
+            width={buttonWidth}
             height={buttonHeight}
             fill={fill}
             stroke={stroke}
@@ -99,11 +113,11 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
             dash={strokeStyle}
           />
           <Text
-            x={10}
-            y={buttonHeight / 2 - 7}
+            x={buttonWidth / 2 - 6}
+            y={buttonHeight / 2 - 6}
             text="▲"
-            fontFamily="Arial"
-            fontSize={14}
+            fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
+            fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
             fill={textColor}
           />
         </Group>
@@ -113,7 +127,7 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
           <Rect
             x={0}
             y={0}
-            width={30}
+            width={buttonWidth}
             height={buttonHeight}
             fill={fill}
             stroke={stroke}
@@ -121,11 +135,11 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
             dash={strokeStyle}
           />
           <Text
-            x={10}
-            y={buttonHeight / 2 - 7}
+            x={buttonWidth / 2 - 6}
+            y={buttonHeight / 2 - 6}
             text="▼"
-            fontFamily="Arial"
-            fontSize={14}
+            fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
+            fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
             fill={textColor}
           />
         </Group>
