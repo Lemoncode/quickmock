@@ -23,4 +23,16 @@ export const SHORTCUTS: Shortcut = {
     targetKey: ['v'],
     targetKeyLabel: 'Ctrl + V',
   },
+  undo: {
+    description: 'Undo',
+    id: 'undo-button-shortcut',
+    targetKey: ['z'],
+    targetKeyLabel: 'Ctrl + Z',
+  },
+  redo: {
+    description: 'Redo',
+    id: 'red-button-shortcut',
+    targetKey: ['y'],
+    targetKeyLabel: 'Ctrl + Y',
+  },
 };

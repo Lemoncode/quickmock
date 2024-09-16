@@ -53,7 +53,7 @@ describe('moveZIndexToTop', () => {
       },
     ];
     // Act
-    const result = moveZIndexToTop(selectedShapeId, shapes);
+    const result = moveZIndexToTop([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([
       {
@@ -145,7 +145,7 @@ describe('moveZIndexToTop', () => {
       },
     ];
     // Act
-    const result = moveZIndexToTop(selectedShapeId, shapes);
+    const result = moveZIndexToTop([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual(shapes);
   });
@@ -155,7 +155,7 @@ describe('moveZIndexToTop', () => {
     const selectedShapeId: string = '2';
     const shapes: ShapeModel[] = [];
     // Act
-    const result = moveZIndexToTop(selectedShapeId, shapes);
+    const result = moveZIndexToTop([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([]);
   });
@@ -206,7 +206,7 @@ describe('moveZIndexToTop', () => {
       },
     ];
     // Act
-    const result = moveZIndexToTop(selectedShapeId, shapes);
+    const result = moveZIndexToTop([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual(shapes);
   });
@@ -259,7 +259,7 @@ describe('moveZIndexToBottom', () => {
       },
     ];
     // Act
-    const result = moveZIndexToBottom(selectedShapeId, shapes);
+    const result = moveZIndexToBottom([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([
       {
@@ -351,7 +351,7 @@ describe('moveZIndexToBottom', () => {
       },
     ];
     // Act
-    const result = moveZIndexToBottom(selectedShapeId, shapes);
+    const result = moveZIndexToBottom([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual(shapes);
   });
@@ -361,7 +361,7 @@ describe('moveZIndexToBottom', () => {
     const selectedShapeId: string = '2';
     const shapes: ShapeModel[] = [];
     // Act
-    const result = moveZIndexToBottom(selectedShapeId, shapes);
+    const result = moveZIndexToBottom([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([]);
   });
@@ -412,7 +412,7 @@ describe('moveZIndexToBottom', () => {
       },
     ];
     // Act
-    const result = moveZIndexToBottom(selectedShapeId, shapes);
+    const result = moveZIndexToBottom([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual(shapes);
   });
@@ -465,7 +465,7 @@ describe('moveZIndexDownOneLevel', () => {
       },
     ];
     // Act
-    const result = moveZIndexDownOneLevel(selectedShapeId, shapes);
+    const result = moveZIndexDownOneLevel([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([
       {
@@ -557,7 +557,7 @@ describe('moveZIndexDownOneLevel', () => {
       },
     ];
     // Act
-    const result = moveZIndexDownOneLevel(selectedShapeId, shapes);
+    const result = moveZIndexDownOneLevel([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual(shapes);
   });
@@ -567,7 +567,7 @@ describe('moveZIndexDownOneLevel', () => {
     const selectedShapeId: string = '2';
     const shapes: ShapeModel[] = [];
     // Act
-    const result = moveZIndexDownOneLevel(selectedShapeId, shapes);
+    const result = moveZIndexDownOneLevel([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([]);
   });
@@ -618,7 +618,7 @@ describe('moveZIndexDownOneLevel', () => {
       },
     ];
     // Act
-    const result = moveZIndexDownOneLevel(selectedShapeId, shapes);
+    const result = moveZIndexDownOneLevel([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual(shapes);
   });
@@ -671,7 +671,7 @@ describe('moveZIndexTopOneLevel', () => {
       },
     ];
     // Act
-    const result = moveZIndexTopOneLevel(selectedShapeId, shapes);
+    const result = moveZIndexTopOneLevel([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([
       {
@@ -763,7 +763,7 @@ describe('moveZIndexTopOneLevel', () => {
       },
     ];
     // Act
-    const result = moveZIndexTopOneLevel(selectedShapeId, shapes);
+    const result = moveZIndexTopOneLevel([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual(shapes);
   });
@@ -773,7 +773,7 @@ describe('moveZIndexTopOneLevel', () => {
     const selectedShapeId: string = '2';
     const shapes: ShapeModel[] = [];
     // Act
-    const result = moveZIndexTopOneLevel(selectedShapeId, shapes);
+    const result = moveZIndexTopOneLevel([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual<ShapeModel[]>([]);
   });
@@ -824,7 +824,7 @@ describe('moveZIndexTopOneLevel', () => {
       },
     ];
     // Act
-    const result = moveZIndexTopOneLevel(selectedShapeId, shapes);
+    const result = moveZIndexTopOneLevel([selectedShapeId], shapes);
     // Assert
     expect(result).toStrictEqual(shapes);
   });

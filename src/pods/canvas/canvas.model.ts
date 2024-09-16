@@ -27,7 +27,6 @@ import {
   getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
   getSliderShapeSizeRestrictions,
-  getTabsBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -62,6 +61,7 @@ import {
   getAppBarShapeSizeRestrictions,
   getButtonBarShapeSizeRestrictions,
   getBadgeLabelShapeSizeRestrictions,
+  getTabsBarShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -172,7 +172,7 @@ export const getSizeRestrictionFromShape = (
       return getVerticalScrollBarShapeSizeRestrictions();
     case 'modal':
       return getModalShapeSizeRestrictions();
-    case 'tabsbar':
+    case 'tabsBar':
       return getTabsBarShapeSizeRestrictions();
     case 'appBar':
       return getAppBarShapeSizeRestrictions();
@@ -239,7 +239,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'modal':
     case 'appBar':
     case 'buttonBar':
-    case 'tabsbar':
+    case 'tabsBar':
     case 'tooltip':
     case 'badgelabel':
       return true;
@@ -280,6 +280,8 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'icon':
     case 'multiple':
       return [];
+    case 'image':
+      return ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
     default:
       return [
         'top-left',
@@ -319,7 +321,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'listbox':
       return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
     case 'horizontal-menu':
-      return 'Home, About, Services, Contact';
+      return '[*]Home, About, Services, Contact';
     case 'vertical-menu':
       return 'Option 1\nOption 2\n----\nOption 3\nOption 4';
     case 'heading1':
@@ -344,7 +346,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'AppBar';
     case 'buttonBar':
       return 'Button 1, Button 2, Button 3';
-    case 'tabsbar':
+    case 'tabsBar':
       return 'Tab 1, Tab 2, Tab 3';
     case 'badgelabel':
       return 'Badge Label';
@@ -360,16 +362,13 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'textarea':
     case 'accordion':
     case 'postit':
-    case 'horizontal-menu':
-    case 'breadcrumb':
     case 'paragraph':
     case 'listbox':
     case 'vertical-menu':
     case 'table':
     case 'modal':
     case 'appBar':
-    case 'buttonBar':
-    case 'tabsbar':
+    case 'tabsBar':
     case 'tooltip':
     case 'badgelabel':
       return 'textarea';
@@ -391,7 +390,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'tooltip':
       return {
@@ -412,7 +411,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'combobox':
       return {
@@ -420,7 +419,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'modal':
     case 'buttonBar':
@@ -442,7 +441,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#FFFF99',
         textColor: '#000000',
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
 
     case 'circle':
@@ -459,7 +458,7 @@ export const generateDefaultOtherProps = (
         stroke: '#000000',
         backgroundColor: '#ffffff',
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'line':
       return {
@@ -526,6 +525,10 @@ export const generateDefaultOtherProps = (
         textColor: '#000000',
         strokeStyle: [],
         borderRadius: '30',
+      };
+    case 'tabsBar':
+      return {
+        activeTab: 0,
       };
     default:
       return undefined;

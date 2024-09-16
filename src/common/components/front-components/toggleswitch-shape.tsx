@@ -1,9 +1,11 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Circle, Group, Rect } from 'react-konva';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from './shape.const';
 
 const toggleSwitchShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 50,
@@ -29,12 +31,9 @@ export const ToggleSwitch = forwardRef<any, ShapeProps>((props, ref) => {
       height
     );
 
-  const isOn = useMemo(
-    () => otherProps?.checked ?? true,
-    [otherProps?.checked]
-  );
-
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  const { isOn } = useShapeProps(otherProps, BASIC_SHAPE);
 
   const circleX = isOn
     ? restrictedWidth - restrictedHeight / 2

@@ -14,6 +14,14 @@ interface Props {
 
 export const HtmlEditWidget = forwardRef<any, Props>(
   ({ divProps, onSetEditText, onSetImageSrc, value, editType }, ref) => {
+    const handleTextChange = (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+      e.stopPropagation();
+      e.preventDefault();
+      onSetEditText(e.target.value);
+    };
+
     return (
       <Html
         divProps={{
@@ -31,7 +39,8 @@ export const HtmlEditWidget = forwardRef<any, Props>(
             ref={ref}
             style={{ width: '100%', height: '100%' }}
             value={value}
-            onChange={e => onSetEditText(e.target.value)}
+            onChange={handleTextChange}
+            data-is-inline-edition-on="true"
           />
         )}
         {editType === 'textarea' && (
@@ -39,7 +48,8 @@ export const HtmlEditWidget = forwardRef<any, Props>(
             ref={ref}
             style={{ width: '100%', height: '100%' }}
             value={value}
-            onChange={e => onSetEditText(e.target.value)}
+            onChange={handleTextChange}
+            data-is-inline-edition-on="true"
           />
         )}
         {editType === 'imageupload' && (

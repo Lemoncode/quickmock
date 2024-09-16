@@ -17,7 +17,6 @@ import {
   renderIcon,
   renderHorizontalScrollBar,
   renderVerticalScrollBar,
-  renderTabsBar,
   renderTooltip,
   renderSlider,
 } from './simple-component';
@@ -41,6 +40,7 @@ import {
   renderModal,
   renderButtonBar,
   renderBadgeLabel,
+  renderTabsBar,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -161,7 +161,7 @@ export const renderShapeComponent = (
       return renderVerticalScrollBar(shape, shapeRenderedProps);
     case 'modal':
       return renderModal(shape, shapeRenderedProps);
-    case 'tabsbar':
+    case 'tabsBar':
       return renderTabsBar(shape, shapeRenderedProps);
     case 'appBar':
       return renderAppBar(shape, shapeRenderedProps);

@@ -1,10 +1,11 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
-import { INPUT_SHAPE } from './shape.const';
+import { BASIC_SHAPE } from './shape.const';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../shapes/use-shape-props.hook';
 
 const timepickerInputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -35,27 +36,12 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
     const separator1X = restrictedWidth / 3;
     const separator2X = (2 * restrictedWidth) / 3;
 
-    const stroke = useMemo(
-      () => otherProps?.stroke ?? 'black',
-      [otherProps?.stroke]
-    );
-
-    const fill = useMemo(
-      () => otherProps?.backgroundColor ?? 'white',
-      [otherProps?.backgroundColor]
-    );
-
-    const strokeStyle = useMemo(
-      () => otherProps?.strokeStyle ?? [],
-      [otherProps?.strokeStyle]
-    );
-
-    const borderRadius = useMemo(() => {
-      const radius = Number(otherProps?.borderRadius);
-      return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
-    }, [otherProps?.borderRadius]);
-
     const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+    const { stroke, strokeStyle, fill, borderRadius } = useShapeProps(
+      otherProps,
+      BASIC_SHAPE
+    );
 
     return (
       <Group
@@ -85,7 +71,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           x={separator1X - 10}
           y={restrictedHeight / separatorPadding}
           text=":"
-          fontFamily="Comic Sans MS, cursive"
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={20}
           fill={stroke}
         />
@@ -93,7 +79,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           x={separator2X - 10}
           y={restrictedHeight / separatorPadding}
           text=":"
-          fontFamily="Comic Sans MS, cursive"
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={20}
           fill={stroke}
         />

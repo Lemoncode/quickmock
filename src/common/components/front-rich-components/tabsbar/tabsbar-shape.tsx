@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { ShapeProps } from '../shape.model';
+import { ShapeProps } from '../../front-components/shape.model';
 import { parseCSVHeader, splitCSVIntoRows } from './tabsbar.utils';
 import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 
@@ -18,7 +18,7 @@ const tabsBarShapeSizeRestrictions: ShapeSizeRestrictions = {
 export const getTabsBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   tabsBarShapeSizeRestrictions;
 
-const shapeType: ShapeType = 'tabsbar';
+const shapeType: ShapeType = 'tabsBar';
 
 export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
@@ -48,6 +48,8 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
+  const activeTab = otherProps?.activeTab ?? 0;
+
   return (
     <Group
       x={x}
@@ -74,7 +76,7 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
           <Rect
             width={tabWidth}
             height={tabHeight}
-            fill={index === 0 ? 'white' : '#E0E0E0'} // First tab is selected
+            fill={index === activeTab ? 'white' : '#E0E0E0'}
             stroke="black"
             strokeWidth={1}
           />
