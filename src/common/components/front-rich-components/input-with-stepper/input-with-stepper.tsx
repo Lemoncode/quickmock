@@ -12,10 +12,10 @@ import {
 import { INPUT_SHAPE } from '../../front-components/shape.const';
 
 const inputWithStepperSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
+  minWidth: 70,
   minHeight: 38,
   maxWidth: 250,
-  maxHeight: 50,
+  maxHeight: 38,
   defaultWidth: 150,
   defaultHeight: 38,
 };
@@ -95,7 +95,7 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
           y={restrictedHeight / 2 - 6} // Centrar verticalmente
           text={value.toString()}
           fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
-          fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
+          fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE + 2}
           fill={textColor}
           align="center"
         />
