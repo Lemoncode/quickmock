@@ -370,7 +370,6 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'appBar':
     case 'tabsBar':
     case 'tooltip':
-    case 'badgelabel':
       return 'textarea';
       break;
     case 'image':
@@ -525,7 +524,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#D3D3D3',
         textColor: '#000000',
         strokeStyle: [],
-        borderRadius: '30',
+        borderRadius: '12',
       };
     case 'tabsBar':
       return {

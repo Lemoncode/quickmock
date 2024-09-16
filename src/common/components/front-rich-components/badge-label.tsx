@@ -7,7 +7,7 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 
 const BadgeLabelShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 150,
+  minWidth: 40,
   minHeight: 40,
   maxWidth: -1,
   maxHeight: -1,
@@ -99,6 +99,7 @@ export const BadgeLabelShape = forwardRef<any, ShapeProps>((props, ref) => {
         fill={textColor}
         verticalAlign="middle"
         align="center"
+        ellipsis={true}
       />
     </Group>
   );
