@@ -11,7 +11,7 @@ const BadgeLabelShapeSizeRestrictions: ShapeSizeRestrictions = {
   minHeight: 40,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 250,
+  defaultWidth: 150,
   defaultHeight: 40,
 };
 
