@@ -241,6 +241,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'buttonBar':
     case 'tabsBar':
     case 'tooltip':
+    case 'inputWithStepper':
       return true;
     default:
       return false;
@@ -297,6 +298,8 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
 
 const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
   switch (shapeType) {
+    case 'inputWithStepper':
+      return '0';
     case 'input':
       return 'Placeholder';
     case 'label':

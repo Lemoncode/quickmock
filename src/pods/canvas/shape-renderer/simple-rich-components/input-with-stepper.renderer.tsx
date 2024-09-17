@@ -26,6 +26,7 @@ export const renderInputWithStepper = (
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
       otherProps={shape.otherProps}
+      text={shape.text}
     />
   );
 };

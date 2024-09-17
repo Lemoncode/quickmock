@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const useHandleCounterInputWithStepper = () => {
-  const [value, setValue] = React.useState(0);
+export const useHandleCounterInputWithStepper = (text: string) => {
+  const [value, setValue] = React.useState(Number(text));
 
   const handleIncrement = () => {
     setValue(value + 1);
