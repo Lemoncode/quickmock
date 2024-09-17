@@ -97,7 +97,7 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
         <Text
           x={inputWidth / 2 - adjustAlignmentByDigits} // Alinear a la derecha dependiendo de la cantidad de dígitos
           y={restrictedHeight / 2 - 6} // Centrar verticalmente
-          text={isTextANumber ? value.toString() : ''}
+          text={isTextANumber ? value : ''}
           fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE + 2}
           fill={textColor}
@@ -152,7 +152,7 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
             <Text
               x={0}
               y={0}
-              text={value.toString()}
+              text={value}
               fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
               fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
               fill="gray"

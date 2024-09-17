@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 
-type MustBeANumberError = 'You must enter a number';
+type MustBeANumberError =
+  | 'You must enter a number'
+  | 'You must enter a integer number';
 
 interface handleCounterInputWithStepperHook {
   valueToString: string | MustBeANumberError;
@@ -16,11 +18,11 @@ export const useHandleCounterInputWithStepper = (
 ): handleCounterInputWithStepperHook => {
   const [value, setValue] = React.useState<number | MustBeANumberError>(0);
 
-  const isTextANumber: boolean = !isNaN(Number(text));
+  const isTextANumber: boolean = !isNaN(parseInt(text));
 
   useEffect(() => {
     if (isTextANumber) {
-      setValue(Number(text));
+      setValue(parseInt(text));
     } else {
       setValue(MUST_BE_A_NUMBER);
     }
@@ -55,11 +57,11 @@ export const adjustAlignmentByDigitCount = (
 ): number => {
   const valueToNumber = Number(value);
 
-  if (isNaN(valueToNumber)) {
-    return 20;
-  }
-
   const pixelsToMove = 20;
+
+  if (isNaN(valueToNumber)) {
+    return pixelsToMove;
+  }
 
   return valueToNumber > 9 && valueToNumber < 100
     ? pixelsToMove + 8
