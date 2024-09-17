@@ -1,12 +1,18 @@
-import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef, useEffect, useMemo, useState } from 'react';
-import { Group, Path, Text } from 'react-konva';
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
+import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { mapButtonBarTextToItems } from './buttonBar.utils';
+import { BASIC_SHAPE } from '../../front-components/shape.const';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { forwardRef } from 'react';
+import {
+  extractCSVHeaders,
+  splitCSVContentIntoRows,
+} from '@/common/utils/active-element-selector.utils';
 
-const horizontalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 75,
+const buttonBarShapeSizeRestrictions: ShapeSizeRestrictions = {
+  minWidth: 200,
   minHeight: 25,
   maxWidth: -1,
   maxHeight: 100,
@@ -15,98 +21,80 @@ const horizontalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
 };
 
 export const getButtonBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  horizontalMenuShapeSizeRestrictions;
+  buttonBarShapeSizeRestrictions;
 
-export const ButtonBarShape = forwardRef<any, ShapeProps>(
-  (
-    { x, y, width, height, id, onSelected, text, otherProps, ...shapeProps },
-    ref
-  ) => {
-    const [buttonItems, setButtonItems] = useState<string[]>([]);
+const shapeType: ShapeType = 'buttonBar';
 
-    useEffect(() => {
-      console.log('Hola');
-      if (typeof text === 'string') {
-        const { items } = mapButtonBarTextToItems(text);
-        setButtonItems(items);
-      } else {
-        setButtonItems([]);
-      }
-    }, [text]);
+export const ButtonBarShape = forwardRef<any, ShapeProps>((props, ref) => {
+  const {
+    x,
+    y,
+    width,
+    height,
+    id,
+    onSelected,
+    text,
+    otherProps,
+    ...shapeProps
+  } = props;
 
-    const numberOfItems = buttonItems.length;
-
-    const { width: restrictedWidth, height: restrictedHeight } =
-      fitSizeToShapeSizeRestrictions(
-        horizontalMenuShapeSizeRestrictions,
-        width,
-        height
-      );
-
-    const itemWidth =
-      numberOfItems > 0 ? restrictedWidth / numberOfItems : restrictedWidth;
-
-    const textColor = useMemo(
-      () => otherProps?.textColor ?? 'black',
-      [otherProps?.textColor]
-    );
-    const backgroundColor = useMemo(
-      () => otherProps?.backgroundColor ?? 'white',
-      [otherProps?.backgroundColor]
-    );
-    const strokeColor = useMemo(
-      () => otherProps?.stroke ?? 'black',
-      [otherProps?.stroke]
-    );
-    const strokeStyle = useMemo(
-      () => otherProps?.strokeStyle ?? [],
-      [otherProps?.strokeStyle]
+  const { width: restrictedWidth, height: restrictedHeight } =
+    fitSizeToShapeSizeRestrictions(
+      buttonBarShapeSizeRestrictions,
+      width,
+      height
     );
 
-    return (
-      <Group
-        x={x}
-        y={y}
-        width={restrictedWidth}
-        height={restrictedHeight}
-        ref={ref}
-        {...shapeProps}
-        onClick={() => onSelected(id, 'buttonBar', true)}
-      >
-        <Path
-          data={`M0,0 H${restrictedWidth} V${restrictedHeight} H0 Z`}
-          stroke={strokeColor}
-          strokeWidth={2}
-          dash={strokeStyle}
-          fill={backgroundColor}
-        />
+  const csvData = splitCSVContentIntoRows(text);
+  const headers = extractCSVHeaders(csvData[0]);
+  const tabLabels = headers.map(header => header.text);
 
-        {buttonItems.map((e: string, index: number) => (
-          <Group key={index}>
-            {/* Vertical strokes */}
-            <Path
-              data={`M${index * itemWidth},0 V${restrictedHeight}`}
-              stroke={strokeColor}
-              strokeWidth={1}
-              dash={strokeStyle}
-            />
-            <Text
-              x={index * itemWidth}
-              y={restrictedHeight / 2 - 8}
-              text={e}
-              fontFamily="Arial"
-              fontSize={16}
-              fill={textColor}
-              width={itemWidth}
-              align="center"
-              wrap="none"
-              ellipsis={true}
-            />
-          </Group>
-        ))}
-      </Group>
-    );
-  }
-);
+  const dynamicTabWidth = restrictedWidth / tabLabels.length;
 
-export default ButtonBarShape;
+  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  const { stroke, strokeStyle, fill, textColor } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
+
+  const activeTab = otherProps?.activeElement ?? 0;
+
+  return (
+    <Group
+      x={x}
+      y={y}
+      width={restrictedWidth}
+      height={restrictedHeight}
+      ref={ref}
+      {...shapeProps}
+      onClick={handleSelection}
+    >
+      {tabLabels.map((header, index) => (
+        <Group key={index} x={index * dynamicTabWidth}>
+          <Rect
+            width={dynamicTabWidth}
+            height={restrictedHeight}
+            fill={index === activeTab ? 'lightblue' : fill}
+            stroke={stroke}
+            strokeWidth={1}
+            dash={strokeStyle}
+          />
+          <Text
+            x={0}
+            y={18}
+            width={dynamicTabWidth - 20}
+            height={restrictedHeight - 20}
+            ellipsis={true}
+            wrap="none"
+            text={header} // Use the header text
+            fontFamily="Arial"
+            fontSize={16}
+            fill={textColor}
+            align="center"
+          />
+        </Group>
+      ))}
+    </Group>
+  );
+});

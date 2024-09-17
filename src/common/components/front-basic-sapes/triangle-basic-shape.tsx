@@ -1,9 +1,11 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Line } from 'react-konva';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from '../front-components/shape.const';
 
 const WIDTH = 160;
 const HEIGHT = (WIDTH * 1.732) / 2;
@@ -47,22 +49,9 @@ export const TriangleShape = forwardRef<any, ShapeProps>((props, ref) => {
     restrictedHeight, // Left point
   ];
 
-  const stroke = useMemo(
-    () => otherProps?.stroke ?? 'black',
-    [otherProps?.stroke]
-  );
-
-  const fill = useMemo(
-    () => otherProps?.backgroundColor ?? 'white',
-    [otherProps?.backgroundColor]
-  );
-
-  const strokeStyle = useMemo(
-    () => otherProps?.strokeStyle ?? [],
-    [otherProps?.strokeStyle]
-  );
-
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  const { stroke, strokeStyle, fill } = useShapeProps(otherProps, BASIC_SHAPE);
 
   return (
     <Group

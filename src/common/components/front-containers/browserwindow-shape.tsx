@@ -4,6 +4,7 @@ import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Circle, Text } from 'react-konva';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { BASIC_SHAPE } from '../front-components/shape.const';
 
 const browserWindowShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
@@ -118,7 +119,7 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth - 50}
         height={restrictedHeight - 50}
         text="https://example.com"
-        fontFamily="Comic Sans MS, cursive"
+        fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={12}
         fill="black"
         ellipsis={true}

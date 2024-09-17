@@ -9,6 +9,7 @@ import {
   getCurrentMonthDays,
 } from './calendar.business';
 import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { BASIC_SHAPE } from '../../front-components/shape.const';
 
 const calendarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 350,
@@ -99,7 +100,7 @@ export const CalendarShape = forwardRef<any, ShapeProps>((props, ref) => {
         y={headerHeight / 3}
         text={`${month} ${year}`}
         width={restrictedWidth - margin - 20 - margin - 30}
-        fontFamily="Comic Sans MS, cursive"
+        fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={20}
         fill="black"
         align="center"
@@ -143,7 +144,7 @@ export const CalendarShape = forwardRef<any, ShapeProps>((props, ref) => {
           x={35 + i * dayBoxWidth}
           y={headerHeight + 20}
           text={day}
-          fontFamily="Comic Sans MS, cursive"
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={16}
           fill="black"
         />
@@ -157,7 +158,7 @@ export const CalendarShape = forwardRef<any, ShapeProps>((props, ref) => {
             x={35 + colIndex * dayBoxWidth}
             y={headerHeight + 70 + rowIndex * dayBoxHeight}
             text={day ? day.toString() : ''}
-            fontFamily="Comic Sans MS, cursive"
+            fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
             fontSize={16}
             fill="black"
           />

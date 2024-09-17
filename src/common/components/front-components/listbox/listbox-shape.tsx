@@ -1,12 +1,13 @@
 import { ShapeSizeRestrictions } from '@/core/model';
-import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../shape.model';
 import {
   calculateDynamicContentSizeRestriction,
   mapListboxTextToItems,
 } from './listbox-shape.business';
-import { INPUT_SHAPE } from '../shape.const';
+import { BASIC_SHAPE } from '../shape.const';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
 
 const listboxShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 75,
@@ -62,25 +63,8 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
         listboxShapeSizeRestrictions,
       });
 
-    const stroke = useMemo(
-      () => otherProps?.stroke ?? 'black',
-      [otherProps?.stroke]
-    );
-
-    const fill = useMemo(
-      () => otherProps?.backgroundColor ?? 'white',
-      [otherProps?.backgroundColor]
-    );
-
-    const strokeStyle = useMemo(
-      () => otherProps?.strokeStyle ?? [],
-      [otherProps?.strokeStyle]
-    );
-
-    const borderRadius = useMemo(() => {
-      const radius = Number(otherProps?.borderRadius);
-      return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
-    }, [otherProps?.borderRadius]);
+    const { stroke, strokeStyle, fill, borderRadius, textColor } =
+      useShapeProps(otherProps, BASIC_SHAPE);
 
     return (
       <Group
@@ -124,9 +108,9 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>(
                 text={item}
                 width={restrictedWidth - 10}
                 height={singleHeaderHeight - 12}
-                fontFamily="Comic Sans MS, cursive"
+                fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
                 fontSize={15}
-                fill="black"
+                fill={textColor}
                 wrap="none"
                 ellipsis={true}
               />

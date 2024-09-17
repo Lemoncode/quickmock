@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Konva from 'konva';
 import { OtherProps, ShapeModel, ShapeRefs, ShapeType } from '@/core/model';
 import { DocumentModel, SelectionInfo, ZIndexAction } from './canvas.model';
-import { performZIndexActionMultiple } from './zindex.util';
+import { performZIndexAction } from './zindex.util';
 
 export const useSelection = (
   document: DocumentModel,
@@ -82,11 +82,11 @@ export const useSelection = (
   };
 
   const handleClearSelection = (
-    mouseEvent:
+    mouseEvent?:
       | Konva.KonvaEventObject<MouseEvent>
       | Konva.KonvaEventObject<TouchEvent>
   ) => {
-    if (mouseEvent.target === mouseEvent.target.getStage()) {
+    if (!mouseEvent || mouseEvent.target === mouseEvent.target.getStage()) {
       transformerRef.current?.nodes([]);
       selectedShapesRefs.current = [];
       setSelectedShapesIds([]);
@@ -96,7 +96,7 @@ export const useSelection = (
 
   const setZIndexOnSelected = (action: ZIndexAction) => {
     setDocument(prevDocument => ({
-      shapes: performZIndexActionMultiple(
+      shapes: performZIndexAction(
         selectedShapesIds,
         action,
         prevDocument.shapes

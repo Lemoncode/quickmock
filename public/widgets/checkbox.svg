@@ -1,14 +1,14 @@
-<svg width="200" height="50" xmlns="http://www.w3.org/2000/svg">
+<svg width="134" height="26" xmlns="http://www.w3.org/2000/svg">
   <!-- Caja del checkbox -->
-  <rect x="10" y="10" width="30" height="30" rx="5" ry="5" 
-        style="fill:none;stroke:black;stroke-width:2"/>
+  <rect x="11" y="1" width="22" height="22" rx="4" ry="4" 
+        style="fill:none;stroke:black;stroke-width:1"/>
 
   <!-- Marca de verificación (checked) -->
-  <polyline points="15,25 25,35 35,15" 
-            style="fill:none;stroke:black;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"/>
+  <polyline  points="16,12 20.5,18 28, 7" 
+            style="fill:none;stroke:black;stroke-width:1;stroke-linecap:round;stroke-linejoin:round"/>
 
   <!-- Texto -->
-  <text x="50" y="35" font-family="Comic Sans MS, cursive" font-size="20" fill="black">
+  <text x="44" y="18" font-family="Comic Sans MS, Balsamiq Sans, cursive" font-size="17" fill="black" >
     Check me!
   </text>
 </svg>

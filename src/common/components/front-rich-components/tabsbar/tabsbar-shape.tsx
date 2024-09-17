@@ -2,8 +2,11 @@ import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { ShapeProps } from '../shape.model';
-import { parseCSVHeader, splitCSVIntoRows } from './tabsbar.utils';
+import { ShapeProps } from '../../front-components/shape.model';
+import {
+  extractCSVHeaders,
+  splitCSVContentIntoRows,
+} from '@/common/utils/active-element-selector.utils';
 import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 
 const tabsBarShapeSizeRestrictions: ShapeSizeRestrictions = {
@@ -18,7 +21,7 @@ const tabsBarShapeSizeRestrictions: ShapeSizeRestrictions = {
 export const getTabsBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   tabsBarShapeSizeRestrictions;
 
-const shapeType: ShapeType = 'tabsbar';
+const shapeType: ShapeType = 'tabsBar';
 
 export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
@@ -35,8 +38,8 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } =
     fitSizeToShapeSizeRestrictions(tabsBarShapeSizeRestrictions, width, height);
 
-  const csvData = splitCSVIntoRows(text);
-  const headers = parseCSVHeader(csvData[0]);
+  const csvData = splitCSVContentIntoRows(text);
+  const headers = extractCSVHeaders(csvData[0]);
   const tabLabels = headers.map(header => header.text);
 
   // Calculate tab dimensions and margin
@@ -47,6 +50,8 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const totalTabsWidth = tabLabels.length * (tabWidth + tabMargin) + tabWidth; // Total width required plus one additional tab
 
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  const activeTab = otherProps?.activeElement ?? 0;
 
   return (
     <Group
@@ -74,7 +79,7 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
           <Rect
             width={tabWidth}
             height={tabHeight}
-            fill={index === 0 ? 'white' : '#E0E0E0'} // First tab is selected
+            fill={index === activeTab ? 'white' : '#E0E0E0'}
             stroke="black"
             strokeWidth={1}
           />

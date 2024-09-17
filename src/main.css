@@ -44,6 +44,7 @@
   --canvas-min-size: 500px;
 
   /*gallery*/
+  /*If this var change need to change getOffset x and y on item-component.tsx*/
   --gallery-item-size: 110px;
 
   /*Main styles*/

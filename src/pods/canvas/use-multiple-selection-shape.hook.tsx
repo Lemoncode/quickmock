@@ -10,6 +10,7 @@ import {
 import { getTransformerBoxAndCoords } from './transformer.utils';
 import { calculateScaledCoordsFromCanvasDivCoordinatesNoScroll } from './canvas.util';
 import { Stage } from 'konva/lib/Stage';
+import { isUserDoingMultipleSelectionUsingCtrlOrCmdKey } from '@/common/utils/shapes';
 
 // There's a bug here: if you make a multiple selectin and start dragging
 // inside the selection but on a blank area it won't drag the selection
@@ -105,7 +106,13 @@ export const useMultipleSelectionShapeHook = (
     // If you are not dragging, but you click on a shape you should select that shape
     // and abort the dragging selection (dragging selection must be started from a blank area)
     if (shape) {
-      selectionInfo.handleSelected([shape.id], shape.type, false);
+      // Temporary fix, casting to any, right now mouse event
+      // in the future we will have to provide support for touch events
+      selectionInfo.handleSelected(
+        [shape.id],
+        shape.type,
+        isUserDoingMultipleSelectionUsingCtrlOrCmdKey(e as any)
+      );
       return;
     }
 

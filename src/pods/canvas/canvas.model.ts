@@ -27,7 +27,6 @@ import {
   getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
   getSliderShapeSizeRestrictions,
-  getTabsBarShapeSizeRestrictions,
 } from '@/common/components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -61,6 +60,7 @@ import {
   getModalShapeSizeRestrictions,
   getAppBarShapeSizeRestrictions,
   getButtonBarShapeSizeRestrictions,
+  getTabsBarShapeSizeRestrictions,
   getAudioPlayerShapeSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
@@ -172,7 +172,7 @@ export const getSizeRestrictionFromShape = (
       return getVerticalScrollBarShapeSizeRestrictions();
     case 'modal':
       return getModalShapeSizeRestrictions();
-    case 'tabsbar':
+    case 'tabsBar':
       return getTabsBarShapeSizeRestrictions();
     case 'appBar':
       return getAppBarShapeSizeRestrictions();
@@ -239,7 +239,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'modal':
     case 'appBar':
     case 'buttonBar':
-    case 'tabsbar':
+    case 'tabsBar':
     case 'tooltip':
       return true;
     default:
@@ -320,7 +320,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'listbox':
       return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
     case 'horizontal-menu':
-      return 'Home, About, Services, Contact';
+      return '[*]Home, About, Services, Contact';
     case 'vertical-menu':
       return 'Option 1\nOption 2\n----\nOption 3\nOption 4';
     case 'heading1':
@@ -345,7 +345,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'AppBar';
     case 'buttonBar':
       return 'Button 1, Button 2, Button 3';
-    case 'tabsbar':
+    case 'tabsBar':
       return 'Tab 1, Tab 2, Tab 3';
     default:
       return undefined;
@@ -365,7 +365,7 @@ const getShapeEditInlineType = (shapeType: ShapeType): EditType | undefined => {
     case 'table':
     case 'modal':
     case 'appBar':
-    case 'tabsbar':
+    case 'tabsBar':
     case 'tooltip':
       return 'textarea';
       break;
@@ -386,7 +386,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'tooltip':
       return {
@@ -407,7 +407,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'combobox':
       return {
@@ -415,7 +415,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'modal':
     case 'buttonBar':
@@ -424,6 +424,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
+        activeElement: 0,
       };
     case 'largeArrow':
       return {
@@ -437,7 +438,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#FFFF99',
         textColor: '#000000',
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
 
     case 'circle':
@@ -454,7 +455,7 @@ export const generateDefaultOtherProps = (
         stroke: '#000000',
         backgroundColor: '#ffffff',
         strokeStyle: [],
-        borderRadius: '12',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'line':
       return {
@@ -513,6 +514,10 @@ export const generateDefaultOtherProps = (
       return {
         progress: '50',
         backgroundColor: '#A9A9A9',
+      };
+    case 'tabsBar':
+      return {
+        activeElement: 0,
       };
     default:
       return undefined;

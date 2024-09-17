@@ -3,6 +3,8 @@ import { Group, Line, Circle } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { ShapeSizeRestrictions } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import { useShapeProps } from '../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from './shape.const';
 
 const sliderShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -26,21 +28,11 @@ export const SliderShape = forwardRef<any, ShapeProps>(
     const sliderStart = thumbRadius;
     const sliderEnd = width - thumbRadius;
 
-    const progressPosition = useMemo(() => {
-      const prog = otherProps?.progress ?? 50;
-      console.log('Raw progress:', otherProps?.progress);
-      const progressValue = typeof prog === 'string' ? parseFloat(prog) : prog;
-      console.log('Parsed progress:', progressValue);
+    const { fill, progress } = useShapeProps(otherProps, BASIC_SHAPE);
 
-      const position =
-        sliderStart + (progressValue / 100) * (sliderEnd - sliderStart);
-      console.log('Calculated position:', position);
-      return position;
-    }, [otherProps?.progress, sliderStart, sliderEnd]);
-
-    const fill = useMemo(
-      () => otherProps?.backgroundColor ?? 'white',
-      [otherProps?.backgroundColor]
+    const progressWidth = useMemo(
+      () => (progress / 100) * restrictedWidth,
+      [progress, restrictedWidth]
     );
 
     return (
@@ -63,7 +55,7 @@ export const SliderShape = forwardRef<any, ShapeProps>(
 
         {/* Thumb del slider */}
         <Circle
-          x={progressPosition}
+          x={progressWidth}
           y={height / 2}
           radius={thumbRadius}
           fill={fill}

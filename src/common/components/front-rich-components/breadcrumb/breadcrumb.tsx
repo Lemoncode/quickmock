@@ -1,9 +1,11 @@
-import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { ShapeProps } from '../../front-components/shape.model';
 import { calculatePositions, mapTextToSections } from './breadcrumb.business';
 import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from '../../front-components/shape.const';
 
 export const breadcrumbShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 600,
@@ -49,12 +51,9 @@ export const BreadcrumbShape = forwardRef<any, ShapeProps>((props, ref) => {
     setGroupWidth(newGroupWidth);
   }, [sections]);
 
-  const textColor = useMemo(
-    () => otherProps?.textColor ?? 'black',
-    [otherProps?.textColor]
-  );
-
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  const { textColor } = useShapeProps(otherProps, BASIC_SHAPE);
 
   return (
     <Group
