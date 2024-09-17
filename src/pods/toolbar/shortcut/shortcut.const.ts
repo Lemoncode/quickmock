@@ -8,8 +8,8 @@ export const SHORTCUTS: Shortcut = {
   delete: {
     description: 'Delete',
     id: 'delete-button-shortcut',
-    targetKey: ['backspace'],
-    targetKeyLabel: 'Backspace',
+    targetKey: ['Ctrl+backspace', 'Meta+backspace'],
+    targetKeyLabel: 'Ctrl + Backspace',
   },
   copy: {
     description: 'Copy',
