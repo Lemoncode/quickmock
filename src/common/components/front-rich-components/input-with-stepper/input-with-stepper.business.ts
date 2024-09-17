@@ -1,26 +1,69 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-export const useHandleCounterInputWithStepper = (text: string) => {
-  const [value, setValue] = React.useState(Number(text));
+type MustBeANumberError = 'You must enter a number';
+
+interface handleCounterInputWithStepperHook {
+  valueToString: string | MustBeANumberError;
+  handleIncrement: () => void;
+  handleDecrement: () => void;
+  isTextANumber: boolean;
+}
+
+const MUST_BE_A_NUMBER: MustBeANumberError = 'You must enter a number';
+
+export const useHandleCounterInputWithStepper = (
+  text: string
+): handleCounterInputWithStepperHook => {
+  const [value, setValue] = React.useState<number | MustBeANumberError>(0);
+
+  const isTextANumber: boolean = !isNaN(Number(text));
+
+  useEffect(() => {
+    if (isTextANumber) {
+      setValue(Number(text));
+    } else {
+      setValue(MUST_BE_A_NUMBER);
+    }
+  }, [text]);
 
   const handleIncrement = () => {
-    setValue(value + 1);
+    if (typeof value === 'number') {
+      setValue(value + 1);
+    }
   };
 
   const handleDecrement = () => {
-    if (value === 0) return;
-    setValue(value - 1);
+    if (typeof value === 'number') {
+      if (value === 0) return;
+      setValue(value - 1);
+    }
   };
 
-  return { value, handleIncrement, handleDecrement };
+  const valueToString: string =
+    typeof value === 'string' ? value : value.toString();
+
+  return {
+    valueToString,
+    handleIncrement,
+    handleDecrement,
+    isTextANumber,
+  };
 };
 
-export const adjustAlignmentByDigitCount = (value: number): number => {
+export const adjustAlignmentByDigitCount = (
+  value: string | MustBeANumberError
+): number => {
+  const valueToNumber = Number(value);
+
+  if (isNaN(valueToNumber)) {
+    return 20;
+  }
+
   const pixelsToMove = 20;
 
-  return value > 9 && value < 100
+  return valueToNumber > 9 && valueToNumber < 100
     ? pixelsToMove + 8
-    : value > 99
+    : valueToNumber > 99
       ? pixelsToMove + 16
       : pixelsToMove;
 };

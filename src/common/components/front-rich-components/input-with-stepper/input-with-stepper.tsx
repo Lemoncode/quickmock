@@ -28,7 +28,7 @@ const shapeType: ShapeType = 'inputWithStepper';
 export const InputWithStepperShape = forwardRef<any, ShapeProps>(
   (props, ref) => {
     const { x, y, width, height, id, text, otherProps, ...shapeProps } = props;
-    console.log(text);
+
     const { width: restrictedWidth, height: restrictedHeight } =
       fitSizeToShapeSizeRestrictions(
         inputWithStepperSizeRestrictions,
@@ -38,13 +38,12 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
 
     const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
-    const { value, handleIncrement, handleDecrement } =
-      useHandleCounterInputWithStepper(text);
-
-    const value2 = useMemo(
-      () => (text !== '0' ? text : value.toString()),
-      [value, text]
-    );
+    const {
+      valueToString: value,
+      handleIncrement,
+      handleDecrement,
+      isTextANumber,
+    } = useHandleCounterInputWithStepper(text);
 
     const stroke = useMemo(
       () => otherProps?.stroke ?? INPUT_SHAPE.DEFAULT_STROKE_COLOR,
@@ -98,7 +97,7 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
         <Text
           x={inputWidth / 2 - adjustAlignmentByDigits} // Alinear a la derecha dependiendo de la cantidad de dígitos
           y={restrictedHeight / 2 - 6} // Centrar verticalmente
-          text={value2}
+          text={isTextANumber ? value.toString() : ''}
           fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE + 2}
           fill={textColor}
@@ -148,6 +147,18 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
             fill={textColor}
           />
         </Group>
+        {!isTextANumber && (
+          <Group x={0} y={40}>
+            <Text
+              x={0}
+              y={0}
+              text={value.toString()}
+              fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
+              fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
+              fill="gray"
+            />
+          </Group>
+        )}
       </Group>
     );
   }
