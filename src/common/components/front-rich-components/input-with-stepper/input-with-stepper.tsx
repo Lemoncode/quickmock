@@ -5,10 +5,7 @@ import { ShapeType } from '../../../../core/model/index';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
 import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 import { ShapeProps } from '../../front-components/shape.model';
-import {
-  adjustAlignmentByDigitCount,
-  useHandleCounterInputWithStepper,
-} from './input-with-stepper.business';
+import { useHandleCounterInputWithStepper } from './input-with-stepper.business';
 import { INPUT_SHAPE } from '../../front-components/shape.const';
 
 const inputWithStepperSizeRestrictions: ShapeSizeRestrictions = {
@@ -65,11 +62,9 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
       [otherProps?.strokeStyle]
     );
 
-    const inputWidth = restrictedWidth - 30; // Reservar espacio para el stepper
+    const inputWidth = restrictedWidth * 0.8; // Reservar espacio para el stepper
     const buttonWidth = restrictedWidth * 0.2;
     const buttonHeight = restrictedHeight / 2;
-
-    const adjustAlignmentByDigits = adjustAlignmentByDigitCount(value);
 
     return (
       <Group
@@ -85,7 +80,7 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
         <Rect
           x={0}
           y={0}
-          width={inputWidth / 2} // Reducir ancho a la mitad
+          width={inputWidth} // Reducir ancho a la mitad
           height={restrictedHeight}
           fill={fill}
           stroke={stroke}
@@ -95,17 +90,18 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
 
         {/* Texto del input */}
         <Text
-          x={inputWidth / 2 - adjustAlignmentByDigits} // Alinear a la derecha dependiendo de la cantidad de dígitos
+          width={inputWidth - 8}
+          x={0} // Alinear a la derecha dependiendo de la cantidad de dígitos
           y={restrictedHeight / 2 - 6} // Centrar verticalmente
           text={isTextANumber ? value : ''}
           fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE + 2}
           fill={textColor}
-          align="center"
+          align="right"
         />
 
         {/* Botón de incremento (flecha arriba) */}
-        <Group x={inputWidth / 2} y={0} onClick={handleIncrement}>
+        <Group x={inputWidth} y={0} onClick={handleIncrement}>
           <Rect
             x={0}
             y={0}
@@ -127,7 +123,7 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
         </Group>
 
         {/* Botón de decremento (flecha abajo) */}
-        <Group x={inputWidth / 2} y={buttonHeight} onClick={handleDecrement}>
+        <Group x={inputWidth} y={buttonHeight} onClick={handleDecrement}>
           <Rect
             x={0}
             y={0}

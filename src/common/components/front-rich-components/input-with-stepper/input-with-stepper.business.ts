@@ -51,21 +51,3 @@ export const useHandleCounterInputWithStepper = (
     isTextANumber,
   };
 };
-
-export const adjustAlignmentByDigitCount = (
-  value: string | MustBeANumberError
-): number => {
-  const valueToNumber = parseInt(value);
-
-  const pixelsToMove = 20;
-
-  if (isNaN(valueToNumber)) {
-    return pixelsToMove;
-  }
-
-  return valueToNumber > 9 && valueToNumber < 100
-    ? pixelsToMove + 8
-    : valueToNumber > 99
-      ? pixelsToMove + 16
-      : pixelsToMove;
-};
