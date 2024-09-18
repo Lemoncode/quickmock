@@ -1,10 +1,11 @@
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../front-components/shape.model';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../shapes/use-shape-props.hook';
 
 const AppBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 155,
@@ -39,26 +40,6 @@ export const AppBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const iconWidth = 30;
   const iconPadding = 10;
 
-  const textColor = useMemo(
-    () => otherProps?.textColor ?? '#ffffff',
-    [otherProps?.textColor]
-  );
-
-  const fill = useMemo(
-    () => otherProps?.backgroundColor ?? 'lightgrey',
-    [otherProps?.backgroundColor]
-  );
-
-  const stroke = useMemo(
-    () => otherProps?.stroke ?? BASIC_SHAPE.DEFAULT_STROKE_COLOR,
-    [otherProps?.stroke]
-  );
-
-  const strokeStyle = useMemo(
-    () => otherProps?.strokeStyle ?? BASIC_SHAPE.DEFAULT_STROKE_STYLE,
-    [otherProps?.strokeStyle]
-  );
-
   const padding = 10;
   const textStartX = iconPadding + iconWidth + padding;
   const textWidth = restrictedWidth - textStartX - padding;
@@ -68,6 +49,11 @@ export const AppBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const totalIconHeight = 3 * barHeight + 2 * barSpacing; // Total height including spacing
 
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+  const { stroke, strokeStyle, fill, textColor } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
 
   return (
     <Group

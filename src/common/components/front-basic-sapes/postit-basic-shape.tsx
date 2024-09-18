@@ -1,10 +1,11 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
-import { INPUT_SHAPE } from '../front-components/shape.const';
+import { POSTIT_SHAPE } from '../front-components/shape.const';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
+import { useShapeProps } from '../shapes/use-shape-props.hook';
 
 const postItShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 80,
@@ -47,30 +48,10 @@ export const PostItShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const tapeRotation = -10;
 
-  const stroke = useMemo(
-    () => otherProps?.stroke ?? 'black',
-    [otherProps?.stroke]
+  const { stroke, fill, textColor, strokeStyle, borderRadius } = useShapeProps(
+    otherProps,
+    POSTIT_SHAPE
   );
-
-  const fill = useMemo(
-    () => otherProps?.backgroundColor ?? '#FFFF99',
-    [otherProps?.backgroundColor]
-  );
-
-  const textColor = useMemo(
-    () => otherProps?.textColor ?? 'black',
-    [otherProps?.textColor]
-  );
-
-  const strokeStyle = useMemo(
-    () => otherProps?.strokeStyle ?? [],
-    [otherProps?.strokeStyle]
-  );
-
-  const borderRadius = useMemo(() => {
-    const radius = Number(otherProps?.borderRadius);
-    return isNaN(radius) ? INPUT_SHAPE.DEFAULT_CORNER_RADIUS : radius;
-  }, [otherProps?.borderRadius]);
 
   return (
     <Group

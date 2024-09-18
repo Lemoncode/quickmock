@@ -3,7 +3,10 @@ import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeProps } from '../../front-components/shape.model';
-import { parseCSVHeader, splitCSVIntoRows } from './tabsbar.utils';
+import {
+  extractCSVHeaders,
+  splitCSVContentIntoRows,
+} from '@/common/utils/active-element-selector.utils';
 import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 
 const tabsBarShapeSizeRestrictions: ShapeSizeRestrictions = {
@@ -35,8 +38,8 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } =
     fitSizeToShapeSizeRestrictions(tabsBarShapeSizeRestrictions, width, height);
 
-  const csvData = splitCSVIntoRows(text);
-  const headers = parseCSVHeader(csvData[0]);
+  const csvData = splitCSVContentIntoRows(text);
+  const headers = extractCSVHeaders(csvData[0]);
   const tabLabels = headers.map(header => header.text);
 
   // Calculate tab dimensions and margin
@@ -48,7 +51,7 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
-  const activeTab = otherProps?.activeTab ?? 0;
+  const activeTab = otherProps?.activeElement ?? 0;
 
   return (
     <Group

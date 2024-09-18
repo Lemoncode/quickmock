@@ -1,12 +1,9 @@
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
-// TODO:
-// This blow away the application :)
-// I think it's missing to uplaod some font or something?
-//import '@fontsource/balsamiq-sans/400.css';
-//import '@fontsource/balsamiq-sans/700.css';
-//import '@fontsource/balsamiq-sans/400-italic.css';
-//import '@fontsource/balsamiq-sans/700-italic.css';
+import '@fontsource/balsamiq-sans/400.css';
+import '@fontsource/balsamiq-sans/700.css';
+import '@fontsource/balsamiq-sans/400-italic.css';
+import '@fontsource/balsamiq-sans/700-italic.css';
 import './normalize.css';
 import './reset.css';
 import './main.css';

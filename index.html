@@ -1,6 +1,20 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-MC701CZYZ3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-MC701CZYZ3');
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quickmock</title>
@@ -136,17 +150,13 @@
         align-items: center;
         margin: 0 auto;
         border-radius: 10px;
-        /*Remove aspect-ratio when iframe uncomment*/
-        aspect-ratio: 16 / 9;
-        background-image: url(./quickmock-frame.png);
-        background-size: 100%;
-        background-repeat: no-repeat;
         border: 1px solid black;
       }
+
       iframe {
         width: 100%;
-        aspect-ratio: 14.35 / 9;
-        border-radius: 10px;
+        aspect-ratio: 16 / 9;
+        border-radius: 9px;
       }
       .content {
         display: grid;
@@ -242,7 +252,7 @@
         .title {
           top: 2vw;
           width: 60%;
-          max-width: 1000px;
+          max-width: 900px;
           margin-right: auto;
           padding-left: 1.5vw;
         }
@@ -306,11 +316,13 @@
           </div>
           <div>
             <div class="video">
-              <!-- <iframe
-                src="https://www.youtube.com/embed/87ZZbDZLido?si=fanae_ZvATEOIkHZ"
+              <iframe
+                src="https://www.youtube.com/embed/NqswxUvXm4c?si=CouwMULhG-OBGlZT"
+                title="YouTube video player"
                 frameborder="0"
+                referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen
-              ></iframe> -->
+              ></iframe>
             </div>
           </div>
           <div class="right">
@@ -322,7 +334,7 @@
             </p>
           </div>
         </div>
-        <a href="./editor.html" class="link hide-mobile">START DESIGN</a>
+        <a href="editor.html" class="link hide-mobile">START DESIGN</a>
         <p class="mobile-text mobile-only">Now, only available on desktop.</p>
       </div>
     </main>
