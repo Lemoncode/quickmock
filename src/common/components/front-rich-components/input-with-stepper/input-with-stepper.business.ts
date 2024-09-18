@@ -51,3 +51,13 @@ export const useHandleCounterInputWithStepper = (
     isTextANumber,
   };
 };
+
+export const handleButtonWidth = (restrictedWidth: number): number => {
+  const buttonWidth = restrictedWidth * 0.3;
+  const minButtonWidth = 30;
+  const maxButtonWidth = 70;
+
+  if (buttonWidth < minButtonWidth) return minButtonWidth;
+  if (buttonWidth > maxButtonWidth) return maxButtonWidth;
+  return buttonWidth;
+};

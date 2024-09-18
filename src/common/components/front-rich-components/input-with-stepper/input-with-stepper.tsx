@@ -5,16 +5,20 @@ import { ShapeType } from '../../../../core/model/index';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
 import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 import { ShapeProps } from '../../front-components/shape.model';
-import { useHandleCounterInputWithStepper } from './input-with-stepper.business';
+import {
+  handleButtonWidth,
+  useHandleCounterInputWithStepper,
+} from './input-with-stepper.business';
 import { INPUT_SHAPE } from '../../front-components/shape.const';
+import { KonvaEventObject } from 'konva/lib/Node';
 
 const inputWithStepperSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 70,
-  minHeight: 30,
+  minWidth: 60,
+  minHeight: 35,
   maxWidth: 500,
-  maxHeight: 30,
-  defaultWidth: 150,
-  defaultHeight: 30,
+  maxHeight: 35,
+  defaultWidth: 100,
+  defaultHeight: 35,
 };
 
 export const getInputWithStepperSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -34,6 +38,9 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
       );
 
     const { handleSelection } = useShapeComponentSelection(props, shapeType);
+
+    const handleDoubleClickInButtons = (e: KonvaEventObject<MouseEvent>) =>
+      (e.cancelBubble = true);
 
     const {
       valueToString: value,
@@ -62,8 +69,8 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
       [otherProps?.strokeStyle]
     );
 
-    const inputWidth = restrictedWidth * 0.8; // Reservar espacio para el stepper
-    const buttonWidth = restrictedWidth * 0.2;
+    // Reservar espacio para el stepper
+    const buttonWidth = handleButtonWidth(restrictedWidth);
     const buttonHeight = restrictedHeight / 2;
 
     return (
@@ -80,7 +87,7 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
         <Rect
           x={0}
           y={0}
-          width={inputWidth} // Reducir ancho a la mitad
+          width={restrictedWidth - buttonWidth}
           height={restrictedHeight}
           fill={fill}
           stroke={stroke}
@@ -90,7 +97,7 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
 
         {/* Texto del input */}
         <Text
-          width={inputWidth - 8}
+          width={restrictedWidth - buttonWidth - 8}
           x={0} // Alinear a la derecha dependiendo de la cantidad de dígitos
           y={restrictedHeight / 2 - 6} // Centrar verticalmente
           text={isTextANumber ? value : ''}
@@ -101,7 +108,12 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
         />
 
         {/* Botón de incremento (flecha arriba) */}
-        <Group x={inputWidth} y={0} onClick={handleIncrement}>
+        <Group
+          x={restrictedWidth - buttonWidth}
+          y={0}
+          onClick={handleIncrement}
+          onDblClick={handleDoubleClickInButtons}
+        >
           <Rect
             x={0}
             y={0}
@@ -119,11 +131,17 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
             fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
             fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
             fill={textColor}
+            align="center"
           />
         </Group>
 
         {/* Botón de decremento (flecha abajo) */}
-        <Group x={inputWidth} y={buttonHeight} onClick={handleDecrement}>
+        <Group
+          x={restrictedWidth - buttonWidth}
+          y={buttonHeight}
+          onClick={handleDecrement}
+          onDblClick={handleDoubleClickInButtons}
+        >
           <Rect
             x={0}
             y={0}
@@ -141,6 +159,7 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
             fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
             fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
             fill={textColor}
+            align="center"
           />
         </Group>
         {!isTextANumber && (
