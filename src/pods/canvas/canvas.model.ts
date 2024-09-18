@@ -298,8 +298,6 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
 
 const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
   switch (shapeType) {
-    case 'inputWithStepper':
-      return '0';
     case 'input':
       return 'Placeholder';
     case 'label':
@@ -350,6 +348,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Button 1, Button 2, Button 3';
     case 'tabsBar':
       return 'Tab 1, Tab 2, Tab 3';
+    case 'inputWithStepper':
+      return '0';
     default:
       return undefined;
   }

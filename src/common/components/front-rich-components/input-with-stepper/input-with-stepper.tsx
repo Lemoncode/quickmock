@@ -14,7 +14,7 @@ import { INPUT_SHAPE } from '../../front-components/shape.const';
 const inputWithStepperSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 70,
   minHeight: 30,
-  maxWidth: 250,
+  maxWidth: 500,
   maxHeight: 30,
   defaultWidth: 150,
   defaultHeight: 30,
@@ -65,7 +65,7 @@ export const InputWithStepperShape = forwardRef<any, ShapeProps>(
       [otherProps?.strokeStyle]
     );
 
-    const inputWidth = restrictedWidth * 0.8; // Reservar espacio para el stepper
+    const inputWidth = restrictedWidth - 30; // Reservar espacio para el stepper
     const buttonWidth = restrictedWidth * 0.2;
     const buttonHeight = restrictedHeight / 2;
 
