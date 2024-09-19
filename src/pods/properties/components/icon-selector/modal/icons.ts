@@ -1178,4 +1178,34 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['store', 'shop', 'buy', 'purchase'],
     categories: ['Ecommerce'],
   },
+  {
+    name: 'Chat dots',
+    filename: 'chatdots.svg',
+    searchTerms: ['chat', 'message', 'conversation', 'chatting'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Chat',
+    filename: 'chat.svg',
+    searchTerms: ['chat', 'message', 'conversation', 'chatting'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Chat slash',
+    filename: 'chatslash.svg',
+    searchTerms: ['chat', 'message', 'conversation', 'chatting', 'mute'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cloud download',
+    filename: 'clouddownload.svg',
+    searchTerms: ['cloud', 'download', 'transfer', 'unload'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cloud upload',
+    filename: 'cloudupload.svg',
+    searchTerms: ['cloud', 'upload', 'transfer', 'load'],
+    categories: ['IT'],
+  },
 ];
