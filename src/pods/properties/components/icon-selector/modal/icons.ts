@@ -1208,4 +1208,34 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['cloud', 'upload', 'transfer', 'load'],
     categories: ['IT'],
   },
+  {
+    name: 'Cloud check',
+    filename: 'cloudcheck.svg',
+    searchTerms: ['cloud', 'check', 'validate', 'confirmation'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cloud slash',
+    filename: 'cloudslash.svg',
+    searchTerms: ['cloud', 'slash', 'disconnected', 'lost conection'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cloud warning',
+    filename: 'cloudwarning.svg',
+    searchTerms: ['cloud', 'warning', 'alert', 'attention'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cloud error',
+    filename: 'clouderror.svg',
+    searchTerms: ['cloud', 'error', 'failure', 'issue'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Arrow down left',
+    filename: 'arrowdownleft.svg',
+    searchTerms: ['arrow', 'down', 'left', 'move', 'go'],
+    categories: ['IT'],
+  },
 ];
