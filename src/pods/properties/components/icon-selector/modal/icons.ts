@@ -1148,4 +1148,34 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['network', 'connectivity', 'connect', 'linked'],
     categories: ['IT'],
   },
+  {
+    name: 'Folder',
+    filename: 'folder.svg',
+    searchTerms: ['folder', 'directory', 'binder', 'portfolio'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Folder User',
+    filename: 'folderuser.svg',
+    searchTerms: ['folder', 'directory', 'binder', 'portfolio', 'user'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Folder lock',
+    filename: 'folderlock.svg',
+    searchTerms: ['folder', 'directory', 'binder', 'portfolio', 'lock'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Bag',
+    filename: 'bag.svg',
+    searchTerms: ['bag', 'shopping', 'purchase', 'buy'],
+    categories: ['Ecommerce'],
+  },
+  {
+    name: 'Shop',
+    filename: 'store.svg',
+    searchTerms: ['store', 'shop', 'buy', 'purchase'],
+    categories: ['Ecommerce'],
+  },
 ];
