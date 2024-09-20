@@ -101,8 +101,6 @@ export const CanvasPod = () => {
       updateShapePosition(id, { x, y });
     };
 
-  // TODO: Temporary disabled, conflicts with inline edition
-  // and likely keboard shortcuts
   useKeyboardDisplacement();
 
   {

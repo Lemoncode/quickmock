@@ -3,6 +3,7 @@ import { Group } from 'react-konva';
 import { Coord, EditType, Size } from '@/core/model';
 import { HtmlEditWidget } from './components';
 import { useSubmitCancelHook, usePositionHook } from './hooks';
+import { useCanvasContext } from '@/core/providers';
 
 interface Props {
   coords: Coord;
@@ -30,6 +31,7 @@ export const EditableComponent: React.FC<Props> = props => {
   } = props;
   const [editText, setEditText] = useState(text);
   const isInputInitiallyFocused = useRef(false);
+  const { setIsInlineEditing } = useCanvasContext();
 
   const { inputRef, textAreaRef, divRef, isEditing, setIsEditing } =
     useSubmitCancelHook(
@@ -45,6 +47,7 @@ export const EditableComponent: React.FC<Props> = props => {
   const handleDoubleClick = () => {
     if (isEditable) {
       setIsEditing(true);
+      setIsInlineEditing(true);
     }
   };
 
@@ -90,6 +93,7 @@ export const EditableComponent: React.FC<Props> = props => {
   const handleImageSrcSubmit = (src: string) => {
     onImageSrcSubmit(src);
     setIsEditing(false);
+    setIsInlineEditing(false);
   };
 
   return (
