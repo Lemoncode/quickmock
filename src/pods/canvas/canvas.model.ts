@@ -316,7 +316,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'listbox':
       return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
     case 'horizontal-menu':
-      return '[*]Home, About, Services, Contact';
+      return 'Home, About, Services, Contact';
     case 'vertical-menu':
       return 'Option 1\nOption 2\n----\nOption 3\nOption 4';
     case 'heading1':
@@ -396,6 +396,14 @@ export const generateDefaultOtherProps = (
     case 'listbox':
     case 'vertical-menu':
     case 'horizontal-menu':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+        borderRadius: `${BASIC_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        activeElement: 0,
+      };
     case 'datepickerinput':
     case 'timepickerinput':
       return {
