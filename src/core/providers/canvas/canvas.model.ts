@@ -67,6 +67,8 @@ export interface CanvasContextModel {
   copyShapeToClipboard: () => void;
   pasteShapeFromClipboard: () => void;
   loadDocument: (document: DocumentModel) => void;
+  isInlineEditing: boolean;
+  setIsInlineEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface DocumentModel {

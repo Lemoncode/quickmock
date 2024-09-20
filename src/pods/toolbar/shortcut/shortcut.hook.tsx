@@ -1,4 +1,5 @@
 import { isMacOS } from '@/common/helpers/platform.helpers';
+import { useCanvasContext } from '@/core/providers';
 import { useEffect } from 'react';
 
 export interface ShortcutHookProps {
@@ -7,7 +8,11 @@ export interface ShortcutHookProps {
 }
 
 export const useShortcut = ({ targetKey, callback }: ShortcutHookProps) => {
+  const { isInlineEditing } = useCanvasContext();
   const handleKeyPress = (event: KeyboardEvent) => {
+    if (isInlineEditing) {
+      return;
+    }
     // TODO: later on this needs discussio about shortcut keys
     // Right now enable CTRL+C, CTRL+V for windows, linux and mac
     //const isAltKeyPressed = event.getModifierState('Alt');
