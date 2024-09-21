@@ -53,6 +53,7 @@ export const RectangleShape = forwardRef<any, ShapeProps>((props, ref) => {
       height={restrictedHeight}
       {...shapeProps}
       onClick={handleSelection}
+      data-id={id}
     >
       <Rect
         x={0}
