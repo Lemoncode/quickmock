@@ -4,13 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "postinstall": "npm run install:e2e-browsers",
+    "install:e2e-browsers": "npx playwright install",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "test": "vitest",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "prepare": "husky install",
-    "tsc-check": "tsc --noEmit"
+    "prepare": "husky || \"No need to install husky\"",
+    "tsc-check": "tsc --noEmit",
+    "e2e": "playwright test --ui",
+    "ci:e2e": "playwright test"
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^1.2.1",
@@ -29,7 +33,9 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.47.2",
     "@types/jest": "^29.5.12",
+    "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/uuid": "^10.0.0",
