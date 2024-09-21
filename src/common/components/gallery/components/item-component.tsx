@@ -65,6 +65,7 @@ export const ItemComponent: React.FC<Props> = props => {
     >
       <div className={classes.image} ref={dragRef}>
         <img
+          alt={ShapeDisplayName[item.type as ShapeType]}
           src={props.item.thumbnailSrc}
           title={ShapeDisplayName[item.type as ShapeType]}
         />
