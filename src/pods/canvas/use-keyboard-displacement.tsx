@@ -2,6 +2,15 @@ import { useEffect } from 'react';
 import { useCanvasContext } from '@/core/providers';
 import { Coord } from '@/core/model';
 
+const arrowKeys = {
+  arrowUp: 'ArrowUp',
+  arrowDown: 'ArrowDown',
+  arrowLeft: 'ArrowLeft',
+  arrowRight: 'ArrowRight',
+};
+
+const isArrowKey = (key: string) => Object.values(arrowKeys).includes(key);
+
 export const useKeyboardDisplacement = () => {
   const { selectionInfo, updateShapePosition, isInlineEditing } =
     useCanvasContext();
@@ -32,7 +41,9 @@ export const useKeyboardDisplacement = () => {
         return;
       }
 
-      event.preventDefault();
+      if (isArrowKey(event.key)) {
+        event.preventDefault();
+      }
 
       if (selectionInfo.selectedShapesIds.length === 0) {
         return;
@@ -40,25 +51,25 @@ export const useKeyboardDisplacement = () => {
 
       const step = event.shiftKey ? 25 : 2; // If shift is pressed, move faster
       switch (event.key) {
-        case 'ArrowUp':
+        case arrowKeys.arrowUp:
           updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
             x: 0,
             y: -step,
           });
           break;
-        case 'ArrowDown':
+        case arrowKeys.arrowDown:
           updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
             x: 0,
             y: step,
           });
           break;
-        case 'ArrowLeft':
+        case arrowKeys.arrowLeft:
           updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
             x: -step,
             y: 0,
           });
           break;
-        case 'ArrowRight':
+        case arrowKeys.arrowRight:
           updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
             x: step,
             y: 0,
