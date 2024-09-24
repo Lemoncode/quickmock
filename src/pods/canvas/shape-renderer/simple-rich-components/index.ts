@@ -13,3 +13,4 @@ export * from './modal.renderer';
 export * from './appBar.renderer';
 export * from './button-bar.renderer';
 export * from './tabsbar.renderer';
+export * from './input-with-stepper.renderer';

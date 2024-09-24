@@ -61,6 +61,7 @@ import {
   getAppBarShapeSizeRestrictions,
   getButtonBarShapeSizeRestrictions,
   getTabsBarShapeSizeRestrictions,
+  getInputWithStepperSizeRestrictions,
 } from '@/common/components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -181,6 +182,8 @@ export const getSizeRestrictionFromShape = (
       return getTooltipShapeSizeRestrictions();
     case 'slider':
       return getSliderShapeSizeRestrictions();
+    case 'inputWithStepper':
+      return getInputWithStepperSizeRestrictions();
     default:
       console.warn(
         `** Shape ${shapeType} has not defined default size, check getDefaultSizeFromShape helper function`
@@ -238,6 +241,7 @@ const doesShapeAllowInlineEdition = (shapeType: ShapeType): boolean => {
     case 'buttonBar':
     case 'tabsBar':
     case 'tooltip':
+    case 'inputWithStepper':
       return true;
     default:
       return false;
@@ -269,6 +273,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'appBar':
     case 'buttonBar':
     case 'slider':
+    case 'inputWithStepper':
       return ['middle-left', 'middle-right'];
     case 'verticalScrollBar':
       return ['top-center', 'bottom-center'];
@@ -343,6 +348,8 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
       return 'Button 1, Button 2, Button 3';
     case 'tabsBar':
       return 'Tab 1, Tab 2, Tab 3';
+    case 'inputWithStepper':
+      return '0';
     default:
       return undefined;
   }
@@ -376,6 +383,13 @@ export const generateDefaultOtherProps = (
   shapeType: ShapeType
 ): OtherProps | undefined => {
   switch (shapeType) {
+    case 'inputWithStepper':
+      return {
+        stroke: INPUT_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+      };
     case 'input':
       return {
         stroke: INPUT_SHAPE.DEFAULT_STROKE_COLOR,

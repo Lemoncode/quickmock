@@ -16,6 +16,10 @@ export const mockRichComponentsCollection: ItemInfo[] = [
   { thumbnailSrc: '/rich-components/breadcrumb.svg', type: 'breadcrumb' },
   { thumbnailSrc: '/rich-components/modal.svg', type: 'modal' },
   { thumbnailSrc: '/rich-components/tabsbar.svg', type: 'tabsBar' },
+  {
+    thumbnailSrc: '/rich-components/input-with-stepper.svg',
+    type: 'inputWithStepper',
+  },
   { thumbnailSrc: '/rich-components/calendar.svg', type: 'calendar' },
   { thumbnailSrc: '/rich-components/videoPlayer.svg', type: 'videoPlayer' },
   { thumbnailSrc: '/rich-components/pie.svg', type: 'pie' },

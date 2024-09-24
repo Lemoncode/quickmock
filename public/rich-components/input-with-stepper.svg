@@ -1,0 +1,15 @@
+<svg width="120" height="50" xmlns="http://www.w3.org/2000/svg">
+  <!-- Caja del input -->
+  <rect x="10" y="10" width="60" height="30" style="fill:white;stroke:black;stroke-width:2"/>
+
+  <!-- Texto del input -->
+  <text x="60" y="30" font-family="Arial" font-size="16" fill="black" text-anchor="end">0</text>
+
+  <!-- Botón de incremento (flecha arriba) -->
+  <rect x="70" y="10" width="20" height="15" style="fill:lightgray;stroke:black;stroke-width:2"/>
+  <text x="77" y="22" font-family="Arial" font-size="14" fill="black">▲</text>
+
+  <!-- Botón de decremento (flecha abajo) -->
+  <rect x="70" y="25" width="20" height="15" style="fill:lightgray;stroke:black;stroke-width:2"/>
+  <text x="77" y="37" font-family="Arial" font-size="14" fill="black">▼</text>
+</svg>

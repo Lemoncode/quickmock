@@ -40,6 +40,7 @@ import {
   renderModal,
   renderButtonBar,
   renderTabsBar,
+  renderInputWithStepper,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -170,6 +171,8 @@ export const renderShapeComponent = (
       return renderTooltip(shape, shapeRenderedProps);
     case 'slider':
       return renderSlider(shape, shapeRenderedProps);
+    case 'inputWithStepper':
+      return renderInputWithStepper(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
