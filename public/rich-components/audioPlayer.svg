@@ -1,21 +1,21 @@
-<svg width="600" height="100" xmlns="http://www.w3.org/2000/svg">
+<svg width="280" height="50" xmlns="http://www.w3.org/2000/svg">
   <!-- Botón de retroceso -->
-  <polygon points="55,40 45,50 55,60" style="fill:black;stroke:black;stroke-width:2"/>
-  <line x1="65" y1="40" x2="65" y2="60" style="stroke:black;stroke-width:2"/>
+  <polygon points="26,20 21,25 26,30" style="fill:black;stroke:black;stroke-width:1"/>
+  <line x1="30" y1="20" x2="30" y2="30" style="stroke:black;stroke-width:1"/>
 
   <!-- Botón de play -->
-  <polygon points="135,40 155,50 135,60" style="fill:black;stroke:black;stroke-width:2"/>
+  <polygon points="63,20 72,25 63,30" style="fill:black;stroke:black;stroke-width:1"/>
 
   <!-- Botón de avance -->
-  <polygon points="215,40 225,50 215,60" style="fill:black;stroke:black;stroke-width:2"/>
-  <line x1="205" y1="40" x2="205" y2="60" style="stroke:black;stroke-width:2"/>
+  <polygon points="100,20 105,25 100,30" style="fill:black;stroke:black;stroke-width:1"/>
+  <line x1="95" y1="20" x2="95" y2="30" style="stroke:black;stroke-width:1"/>
 
   <!-- Barra de progreso -->
-  <rect x="270" y="45" width="200" height="10" style="fill:none;stroke:black;stroke-width:2"/>
-  <rect x="270" y="45" width="100" height="10" style="fill:black;stroke:none"/>
+  <rect x="126" y="22.5" width="93" height="5" style="fill:none;stroke:black;stroke-width:1"/>
+  <rect x="126" y="22.5" width="47" height="5" style="fill:black;stroke:none"/>
 
   <!-- Control de volumen mejorado -->
-  <path d="M500,45 L510,45 L520,35 L520,65 L510,55 L500,55 Z" style="fill:black;stroke:black;stroke-width:2"/>
-  <path d="M530,40 Q540,50 530,60" style="fill:none;stroke:black;stroke-width:2"/>
-  <path d="M545,35 Q560,50 545,65" style="fill:none;stroke:black;stroke-width:2"/>
+  <path d="M233,22.5 L238,22.5 L243,17.5 L243,32.5 L238,27.5 L233,27.5 Z" style="fill:black;stroke:black;stroke-width:1"/>
+  <path d="M248,20 Q253,25 248,30" style="fill:none;stroke:black;stroke-width:1"/>
+  <path d="M255,17.5 Q262,25 255,32.5" style="fill:none;stroke:black;stroke-width:1"/>
 </svg>
