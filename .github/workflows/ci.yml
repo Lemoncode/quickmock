@@ -9,10 +9,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js 18.13.0
+      - name: Use Node.js 20.17.0
         uses: actions/setup-node@v4
         with:
-          node-version: '18.13.0'
+          node-version: '20.17.0'
           cache: 'npm'
 
       - name: Install dependencies
@@ -33,14 +33,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js 18.13.0
+      - name: Use Node.js 20.17.0
         uses: actions/setup-node@v4
         with:
-          node-version: '18.13.0'
+          node-version: '20.17.0'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
 
       - name: Build
         run: npm run build
