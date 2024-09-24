@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { Group } from 'konva/lib/Group';
 import { dragAndDrop, getByShapeType, getLocatorPosition } from './helpers';
 
 test('has Basic Shapes group', async ({ page }) => {
@@ -25,7 +26,7 @@ test('can add rectangle component to canvas', async ({ page }) => {
     y: position.y - 240,
   });
 
-  const rectangle = await getByShapeType(page, 'rectangle');
+  const rectangle = (await getByShapeType(page, 'rectangle')) as Group;
   expect(rectangle).toBeDefined();
   expect(rectangle.attrs.width).toEqual(160);
   expect(rectangle.attrs.height).toEqual(160);
