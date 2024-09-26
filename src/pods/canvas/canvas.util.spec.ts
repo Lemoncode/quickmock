@@ -1,6 +1,6 @@
 import { isDropImageFile } from './canvas.util';
 
-describe('', () => {
+describe('isDropImageFile', () => {
   it('should return True when there is an image in the item when dropped', () => {
     //Arrange
     const mockImagefile = {
@@ -9,7 +9,7 @@ describe('', () => {
     };
 
     const mockDatatransfer = {
-      DataTransfer: {
+      dataTransfer: {
         items: [mockImagefile],
       },
     } as unknown as React.DragEvent<HTMLDivElement>;
@@ -29,7 +29,7 @@ describe('', () => {
     };
 
     const mockDatatransfer = {
-      DataTransfer: {
+      dataTransfer: {
         items: [mockImagefile],
       },
     } as unknown as React.DragEvent<HTMLDivElement>;
@@ -49,7 +49,7 @@ describe('', () => {
     };
 
     const mockDatatransfer = {
-      DataTransfer: {
+      dataTransfer: {
         items: [mockImagefile],
       },
     } as unknown as React.DragEvent<HTMLDivElement>;
@@ -64,7 +64,7 @@ describe('', () => {
   it('should return False when no items are dropped', () => {
     //Arrange
     const mockDatatransfer = {
-      DataTransfer: {
+      dataTransfer: {
         items: [],
       },
     } as unknown as React.DragEvent<HTMLDivElement>;
