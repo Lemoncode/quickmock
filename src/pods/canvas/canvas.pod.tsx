@@ -1,4 +1,4 @@
-import { createRef, useMemo, useState } from 'react';
+import { createRef, useMemo, useRef, useState } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
 import { Layer, Line, Rect, Stage, Transformer } from 'react-konva';
@@ -103,6 +103,11 @@ export const CanvasPod = () => {
 
   useKeyboardDisplacement();
 
+  const layerRef = useRef<Konva.Layer>(null);
+  if (typeof window !== 'undefined') {
+    (window as any).KONVA_LAYER = layerRef.current;
+  }
+
   {
     /* TODO: add other animation for isDraggerOver */
   }
@@ -127,7 +132,7 @@ export const CanvasPod = () => {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
       >
-        <Layer>
+        <Layer ref={layerRef}>
           {
             /* TODO compentize and simplify this */
             shapes.map(shape => {
