@@ -3,9 +3,9 @@ import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Circle, Group } from 'react-konva';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const circleShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
@@ -24,25 +24,27 @@ const shapeType: ShapeType = 'circle';
 export const CircleShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
     props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(circleShapeRestrictions, width, height);
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    circleShapeRestrictions,
+    width,
+    height
+  );
+
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const radius = Math.min(restrictedWidth, restrictedHeight) / 2;
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
-
   const { stroke, fill, strokeStyle } = useShapeProps(otherProps, BASIC_SHAPE);
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       <Circle
         x={restrictedWidth / 2}
         y={restrictedHeight / 2}

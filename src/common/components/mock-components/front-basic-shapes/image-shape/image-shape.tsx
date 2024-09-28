@@ -6,7 +6,7 @@ import { Group, Image as KonvaImage } from 'react-konva';
 import { NoImageSelected } from './components/no-image.component';
 import useImage from 'use-image';
 import Konva from 'konva';
-import { useShapeComponentSelection } from '../../../shapes/use-shape-selection.hook';
+import { useGroupShapeProps } from '../../mock-components.utils';
 
 const imageShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
@@ -25,12 +25,16 @@ export const getImageShapeSizeRestrictions = (): ShapeSizeRestrictions =>
 export const ImageShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
     props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(imageShapeRestrictions, width, height);
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    imageShapeRestrictions,
+    width,
+    height
+  );
+
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const [image] = useImage(otherProps?.imageSrc ?? '');
   const imageRef = useRef<Konva.Image>(null);
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
   useEffect(() => {
     if (imageRef.current && otherProps?.imageBlackAndWhite) {
@@ -49,16 +53,15 @@ export const ImageShape = forwardRef<any, ShapeProps>((props, ref) => {
     restrictedHeight,
   ]);
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       {otherProps?.imageSrc ? (
         <KonvaImage
           x={0}

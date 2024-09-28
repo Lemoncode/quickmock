@@ -81,9 +81,7 @@ export const useSelection = (
     type: ShapeType,
     isUserDoingMultipleSelection: boolean
   ) => {
-    console.log('** handleSelected **');
-    console.trace();
-    // I want to kniw if the ids is string or array
+    // I want to know if the ids is string or array
     const arrayIds = typeof ids === 'string' ? [ids] : ids;
 
     if (!isUserDoingMultipleSelection) {
