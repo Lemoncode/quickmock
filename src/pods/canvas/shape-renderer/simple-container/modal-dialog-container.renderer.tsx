@@ -1,4 +1,4 @@
-import { ModalDialogContainer } from '@/common/components/front-containers';
+import { ModalDialogContainer } from '@/common/components/mock-components/front-containers';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

@@ -1,6 +1,6 @@
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
-import LabelShape from '@/common/components/front-components/label-shape';
+import LabelShape from '@/common/components/mock-components/front-components/label-shape';
 
 export const renderLabel = (
   shape: ShapeModel,

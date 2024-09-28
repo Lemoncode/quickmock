@@ -1,4 +1,4 @@
-import { TimepickerInputShape } from '@/common/components/front-components';
+import { TimepickerInputShape } from '@/common/components/mock-components/front-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 
