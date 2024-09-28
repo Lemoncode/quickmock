@@ -1,8 +1,6 @@
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeSizeRestrictions } from '@/core/model';
 
-// TODO: Add unit tests #169
-
 interface SizeInfo {
   width: number;
   height: number;
@@ -42,13 +40,6 @@ interface SectionsInfo {
   selectedSectionIndex: number;
 }
 
-// TODO: Add Unit tests
-// case 1 if text is empty just show default sections
-// case 2 if text has 1 section, then show 1 section and selectedSectionIndex = 0
-// case 3 if text has 2 sections, and section to starts with [*] then show 2 sections and selectedSectionIndex = 1, and section with removed [*]
-// case 4 if text has 2 sections, and no section to starts with [*] then show 2 sections and selectedSectionIndex = 0, and section with removed [*]
-// ...
-// If there are more than one section selected, pick the first one and remove the [*] from all of them
 export const mapTextToSections = (text: string): SectionsInfo => {
   if (!text) {
     return {
