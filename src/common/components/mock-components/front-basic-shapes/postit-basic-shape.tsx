@@ -4,8 +4,8 @@ import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
 import { POSTIT_SHAPE } from '../front-components/shape.const';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const postItShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 80,
@@ -33,10 +33,12 @@ export const PostItShape = forwardRef<any, ShapeProps>((props, ref) => {
     otherProps,
     ...shapeProps
   } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(postItShapeRestrictions, width, height);
-
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    postItShapeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const postItWidth = restrictedWidth;
   const postItHeight = restrictedHeight;
@@ -53,16 +55,15 @@ export const PostItShape = forwardRef<any, ShapeProps>((props, ref) => {
     POSTIT_SHAPE
   );
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       {/* Post-it frame */}
       <Rect
         x={0}
