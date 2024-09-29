@@ -14,13 +14,14 @@ import { ZIndexButton } from './zindex-button.component';
 interface LayerOption {
   position: ZIndexAction;
   Icon: React.ComponentType;
+  label: string;
 }
 
 const layersOptions: LayerOption[] = [
-  { position: 'top', Icon: BringToFrontIcon },
-  { position: 'up', Icon: BringForwardIcon },
-  { position: 'down', Icon: SendBackwardIcon },
-  { position: 'bottom', Icon: SendToBackIcon },
+  { position: 'top', Icon: BringToFrontIcon, label: 'Bring to front' },
+  { position: 'up', Icon: BringForwardIcon, label: 'Bring forward' },
+  { position: 'down', Icon: SendBackwardIcon, label: 'Send backward' },
+  { position: 'bottom', Icon: SendToBackIcon, label: 'Send to back' },
 ];
 
 interface Props {
@@ -37,11 +38,12 @@ export const ZIndexOptions: React.FC<Props> = props => {
   return (
     <div className={classes.container}>
       <p>Layering</p>
-      {layersOptions.map(({ position, Icon }) => (
+      {layersOptions.map(({ position, Icon, label }) => (
         <ZIndexButton
           key={position}
           onClick={() => handleZIndexChange(position)}
           Icon={Icon}
+          label={label}
         />
       ))}
     </div>
