@@ -85,6 +85,12 @@ export const useMultipleSelectionShapeHook = (
   const handleMouseDown = (
     e: Konva.KonvaEventObject<MouseEvent> | Konva.KonvaEventObject<TouchEvent>
   ) => {
+    // If user is holding ctrl or cmd key let's abort drag and drop multiple selection
+    // He is trying to multiselect shape by using the keyboard
+    if (isUserDoingMultipleSelectionUsingCtrlOrCmdKey(e)) {
+      return;
+    }
+
     let mousePointerStageBasedCoord = e.target
       ?.getStage()
       ?.getPointerPosition() ?? {

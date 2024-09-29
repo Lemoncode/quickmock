@@ -1,4 +1,4 @@
-import { CheckBoxShape } from '@/common/components/front-components/checkbox-shape';
+import { CheckBoxShape } from '@/common/components/mock-components/front-components/checkbox-shape';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

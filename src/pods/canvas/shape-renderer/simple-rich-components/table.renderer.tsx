@@ -1,4 +1,4 @@
-import { Table } from '@/common/components/front-rich-components';
+import { Table } from '@/common/components/mock-components/front-rich-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

@@ -1,4 +1,4 @@
-import { ListBoxShape } from '@/common/components/front-components';
+import { ListBoxShape } from '@/common/components/mock-components/front-components';
 import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
 
