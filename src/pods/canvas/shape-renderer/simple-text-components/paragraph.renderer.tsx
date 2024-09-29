@@ -1,4 +1,4 @@
-import { ParagraphShape } from '@/common/components/front-text-components';
+import { ParagraphShape } from '@/common/components/mock-components/front-text-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

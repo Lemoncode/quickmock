@@ -52,12 +52,36 @@ export const useSelection = (
     }
   }, [document.shapes, selectedShapesIds]);
 
+  const isDeselectSingleItem = (arrayIds: string[]) => {
+    return (
+      arrayIds.length === 1 &&
+      selectedShapesRefs.current.find(
+        item => item.attrs['data-id'].toString() === arrayIds[0]
+      ) !== undefined
+    );
+  };
+
+  const deselectSingleItemOnMultipleSelection = (
+    formerShapeIds: string[],
+    unselectId: string
+  ) => {
+    if (selectedShapesRefs.current) {
+      const trimmedShapeIds = formerShapeIds.filter(id => id !== unselectId);
+
+      selectedShapesRefs.current = trimmedShapeIds.map(
+        id => shapeRefs.current[id].current
+      );
+
+      setSelectedShapesIds(trimmedShapeIds);
+    }
+  };
+
   const handleSelected = (
     ids: string[] | string,
     type: ShapeType,
     isUserDoingMultipleSelection: boolean
   ) => {
-    // I want to kniw if the ids is string or array
+    // I want to know if the ids is string or array
     const arrayIds = typeof ids === 'string' ? [ids] : ids;
 
     if (!isUserDoingMultipleSelection) {
@@ -67,15 +91,23 @@ export const useSelection = (
       );
       setSelectedShapesIds(arrayIds);
     } else {
-      // Multiple selection, just push what is selected to the current selection
-      selectedShapesRefs.current = selectedShapesRefs.current.concat(
-        arrayIds.map(id => shapeRefs.current[id].current)
-      );
+      if (isDeselectSingleItem(arrayIds)) {
+        deselectSingleItemOnMultipleSelection(selectedShapesIds, arrayIds[0]);
+      } else {
+        // Multiple selection, just push what is selected to the current selection
+        selectedShapesRefs.current = selectedShapesRefs.current.concat(
+          arrayIds.map(id => shapeRefs.current[id].current)
+        );
 
-      setSelectedShapesIds(formerShapeIds => [...formerShapeIds, ...arrayIds]);
+        setSelectedShapesIds(formerShapeIds => [
+          ...formerShapeIds,
+          ...arrayIds,
+        ]);
+      }
     }
 
     transformerRef?.current?.nodes(selectedShapesRefs.current);
+
     //transformerRef?.current?.nodes([shapeRefs.current[id].current]);
     // Todo set type only if single selection
     setSelectedShapeType(type);

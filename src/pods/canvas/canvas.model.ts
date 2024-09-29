@@ -27,13 +27,13 @@ import {
   getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
   getSliderShapeSizeRestrictions,
-} from '@/common/components/front-components';
+} from '@/common/components/mock-components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
   getMobilePhoneShapeSizeRestrictions,
   getModalDialogShapeSizeRestrictions,
   getTabletShapeSizeRestrictions,
-} from '@/common/components/front-containers';
+} from '@/common/components/mock-components/front-containers';
 import {
   getTriangleShapeSizeRestrictions,
   getCircleShapeSizeRestrictions,
@@ -44,7 +44,7 @@ import {
   getStarShapeSizeRestrictions,
   getLargeArrowShapeSizeRestrictions,
   getImageShapeSizeRestrictions,
-} from '@/common/components/front-basic-sapes';
+} from '@/common/components/mock-components/front-basic-shapes';
 import {
   getAccordionShapeSizeRestrictions,
   getBreadcrumbShapeSizeRestrictions,
@@ -61,7 +61,7 @@ import {
   getAppBarShapeSizeRestrictions,
   getButtonBarShapeSizeRestrictions,
   getTabsBarShapeSizeRestrictions,
-} from '@/common/components/front-rich-components';
+} from '@/common/components/mock-components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
   getHeading2SizeRestrictions,
@@ -69,11 +69,11 @@ import {
   getNormaltextSizeRestrictions,
   getParagraphSizeRestrictions,
   getSmalltextSizeRestrictions,
-} from '@/common/components/front-text-components';
+} from '@/common/components/mock-components/front-text-components';
 import {
   BASIC_SHAPE,
   INPUT_SHAPE,
-} from '@/common/components/front-components/shape.const';
+} from '@/common/components/mock-components/front-components/shape.const';
 
 export const getSizeRestrictionFromShape = (
   shapeType: ShapeType

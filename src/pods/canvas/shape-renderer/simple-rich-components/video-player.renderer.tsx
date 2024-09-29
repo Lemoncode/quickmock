@@ -1,4 +1,4 @@
-import { VideoPlayerShape } from '@/common/components/front-rich-components/video-player';
+import { VideoPlayerShape } from '@/common/components/mock-components/front-rich-components/video-player';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

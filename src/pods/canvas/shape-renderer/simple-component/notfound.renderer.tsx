@@ -1,7 +1,7 @@
 import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
 import { Group, Text } from 'react-konva';
-import { BASIC_SHAPE } from '@/common/components/front-components/shape.const';
+import { BASIC_SHAPE } from '@/common/components/mock-components/front-components/shape.const';
 
 export const renderNotFound = (
   shape: ShapeModel,

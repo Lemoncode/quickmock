@@ -1,4 +1,4 @@
-import { BrowserWindowShape } from '@/common/components/front-containers';
+import { BrowserWindowShape } from '@/common/components/mock-components/front-containers';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

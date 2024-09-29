@@ -1,6 +1,6 @@
 import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
-import { ImageShape } from '@/common/components/front-basic-sapes/image-shape/image-shape';
+import { ImageShape } from '@/common/components/mock-components/front-basic-shapes/image-shape/image-shape';
 
 export const renderImage = (
   shape: ShapeModel,

@@ -1,4 +1,4 @@
-import { MobilePhoneShape } from '@/common/components/front-containers';
+import { MobilePhoneShape } from '@/common/components/mock-components/front-containers';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

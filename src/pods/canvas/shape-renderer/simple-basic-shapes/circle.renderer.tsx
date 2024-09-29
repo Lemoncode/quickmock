@@ -1,6 +1,6 @@
 import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
-import { CircleShape } from '@/common/components/front-basic-sapes';
+import { CircleShape } from '@/common/components/mock-components/front-basic-shapes';
 
 export const renderCircle = (
   shape: ShapeModel,
