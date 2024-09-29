@@ -12,7 +12,7 @@ import { ShapeProps } from './shape.model';
 import { useModalDialogContext } from '@/core/providers/model-dialog-providers/model-dialog.provider';
 import { IconModal } from '@/pods/properties/components/icon-selector/modal';
 import { useCanvasContext } from '@/core/providers';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const iconShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 25,
@@ -42,7 +42,6 @@ export const SvgIcon = forwardRef<any, ShapeProps>((props, ref) => {
   } = props;
   const { openModal } = useModalDialogContext();
   const { selectionInfo } = useCanvasContext();
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
   const { updateOtherPropsOnSelected } = selectionInfo;
   const handleDoubleClick = () => {
     openModal(
@@ -74,24 +73,23 @@ export const SvgIcon = forwardRef<any, ShapeProps>((props, ref) => {
 
   const [iconWidth, iconHeight] = returnIconSize(iconSize);
 
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(
-      iconShapeRestrictions,
-      iconWidth,
-      iconHeight
-    );
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    iconShapeRestrictions,
+    iconWidth,
+    iconHeight
+  );
+
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
+
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
 
   return (
-    <Group
-      x={x}
-      y={y}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      ref={ref}
-      {...shapeProps}
-      onClick={handleSelection}
-      onDblClick={handleDoubleClick}
-    >
+    <Group {...commonGroupProps} {...shapeProps} onDblClick={handleDoubleClick}>
       <Image
         image={image}
         x={0}

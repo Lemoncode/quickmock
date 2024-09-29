@@ -3,9 +3,9 @@ import { forwardRef } from 'react';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Line, Text } from 'react-konva';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from './shape.const';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const CHECKBOX_DEFAULT_HEIGHT = 20;
 
@@ -40,23 +40,25 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
     otherProps,
     ...shapeProps
   } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(checkBoxShapeRestrictions, width, height);
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    checkBoxShapeRestrictions,
+    width,
+    height
+  );
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const { isOn, textColor } = useShapeProps(otherProps, BASIC_SHAPE);
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       <Rect
         x={0}
         y={0}

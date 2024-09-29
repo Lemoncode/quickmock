@@ -4,8 +4,8 @@ import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
 import { BASIC_SHAPE } from './shape.const';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const textAreaShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 80,
@@ -33,26 +33,27 @@ export const TextAreaShape = forwardRef<any, ShapeProps>((props, ref) => {
     otherProps,
     ...shapeProps
   } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(textAreaShapeRestrictions, width, height);
-
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    textAreaShapeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const { stroke, strokeStyle, fill, textColor, borderRadius } = useShapeProps(
     otherProps,
     BASIC_SHAPE
   );
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      ref={ref}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       <Rect
         x={0}
         y={0}

@@ -1,10 +1,11 @@
 import { forwardRef, useMemo } from 'react';
 import { Group, Line, Circle } from 'react-konva';
 import { ShapeProps } from './shape.model';
-import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from './shape.const';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const sliderShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -18,53 +19,59 @@ const sliderShapeRestrictions: ShapeSizeRestrictions = {
 export const getSliderShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   sliderShapeRestrictions;
 
-export const SliderShape = forwardRef<any, ShapeProps>(
-  ({ x, y, width, height, id, onSelected, otherProps, ...shapeProps }, ref) => {
-    const { width: restrictedWidth, height: restrictedHeight } =
-      fitSizeToShapeSizeRestrictions(sliderShapeRestrictions, width, height);
+const shapeType: ShapeType = 'slider';
 
-    const sliderHeight = 4;
-    const thumbRadius = 10;
-    const sliderStart = thumbRadius;
-    const sliderEnd = width - thumbRadius;
+export const SliderShape = forwardRef<any, ShapeProps>((props, ref) => {
+  const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
+    props;
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    sliderShapeRestrictions,
+    width,
+    height
+  );
 
-    const { fill, progress } = useShapeProps(otherProps, BASIC_SHAPE);
+  const { width: restrictedWidth } = restrictedSize;
 
-    const progressWidth = useMemo(
-      () => (progress / 100) * restrictedWidth,
-      [progress, restrictedWidth]
-    );
+  const sliderHeight = 4;
+  const thumbRadius = 10;
+  const sliderStart = thumbRadius;
+  const sliderEnd = width - thumbRadius;
 
-    return (
-      <Group
-        x={x}
-        y={y}
-        ref={ref}
-        height={restrictedHeight}
-        width={restrictedWidth}
-        {...shapeProps}
-        onClick={() => onSelected(id, 'slider', true)}
-      >
-        {/* Línea del slider */}
-        <Line
-          points={[sliderStart, height / 2, sliderEnd, height / 2]}
-          stroke="lightgrey"
-          strokeWidth={sliderHeight}
-          lineCap="round"
-        />
+  const { fill, progress } = useShapeProps(otherProps, BASIC_SHAPE);
 
-        {/* Thumb del slider */}
-        <Circle
-          x={progressWidth}
-          y={height / 2}
-          radius={thumbRadius}
-          fill={fill}
-          stroke="black"
-          strokeWidth={1}
-        />
-      </Group>
-    );
-  }
-);
+  const progressWidth = useMemo(
+    () => (progress / 100) * restrictedWidth,
+    [progress, restrictedWidth]
+  );
+
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
+  return (
+    <Group {...commonGroupProps} {...shapeProps}>
+      {/* Slider middle line */}
+      <Line
+        points={[sliderStart, height / 2, sliderEnd, height / 2]}
+        stroke="lightgrey"
+        strokeWidth={sliderHeight}
+        lineCap="round"
+      />
+
+      {/* Slider thumb */}
+      <Circle
+        x={progressWidth}
+        y={height / 2}
+        radius={thumbRadius}
+        fill={fill}
+        stroke="black"
+        strokeWidth={1}
+      />
+    </Group>
+  );
+});
 
 export default SliderShape;

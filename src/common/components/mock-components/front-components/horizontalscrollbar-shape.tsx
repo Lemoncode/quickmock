@@ -3,7 +3,7 @@ import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const HorizontalScrollBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -22,30 +22,27 @@ const shapeType: ShapeType = 'horizontalScrollBar';
 export const HorizontalScrollBarShape = forwardRef<any, ShapeProps>(
   (props, ref) => {
     const { x, y, width, height, id, onSelected, ...shapeProps } = props;
-    const { width: restrictedWidth, height: restrictedHeight } =
-      fitSizeToShapeSizeRestrictions(
-        HorizontalScrollBarShapeSizeRestrictions,
-        width,
-        height
-      );
+    const restrictedSize = fitSizeToShapeSizeRestrictions(
+      HorizontalScrollBarShapeSizeRestrictions,
+      width,
+      height
+    );
+    const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
     const arrowWidth = 20;
     const thumbWidth = restrictedWidth * 0.3; // Ajuste del ancho del thumb al 30% de la barra
     const thumbX =
       arrowWidth + (restrictedWidth - thumbWidth - arrowWidth * 2) / 2; // Centrar el thumb dentro del área disponible
 
-    const { handleSelection } = useShapeComponentSelection(props, shapeType);
+    const commonGroupProps = useGroupShapeProps(
+      props,
+      restrictedSize,
+      shapeType,
+      ref
+    );
 
     return (
-      <Group
-        x={x}
-        y={y}
-        ref={ref}
-        width={restrictedWidth}
-        height={restrictedHeight}
-        {...shapeProps}
-        onClick={handleSelection}
-      >
+      <Group {...commonGroupProps} {...shapeProps}>
         {/* Fondo de la barra de scroll */}
         <Rect
           x={arrowWidth}

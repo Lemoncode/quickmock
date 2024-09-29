@@ -4,8 +4,8 @@ import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Text, Group, Rect, Line } from 'react-konva';
 import { BASIC_SHAPE } from './shape.const';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const tooltipShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 80,
@@ -37,10 +37,12 @@ export const TooltipShape = forwardRef<any, ShapeProps>((props, ref) => {
   const pointerHeight = 25;
   const pointerWidth = 45;
 
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(tooltipShapeRestrictions, width, height);
-
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    tooltipShapeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const { stroke, strokeStyle, fill, textColor } = useShapeProps(
     otherProps,
@@ -57,16 +59,15 @@ export const TooltipShape = forwardRef<any, ShapeProps>((props, ref) => {
     restrictedHeight + pointerHeight, // y3
   ];
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      ref={ref}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       {/* Caja del tooltip */}
       <Rect
         x={0}

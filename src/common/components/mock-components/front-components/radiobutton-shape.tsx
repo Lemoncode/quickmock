@@ -3,9 +3,9 @@ import { forwardRef } from 'react';
 import { Group, Circle, Text } from 'react-konva';
 import { ShapeProps } from './shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from './shape.const';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const RADIO_BUTTON_DEFAULT_HEIGHT = 18;
 
@@ -35,26 +35,28 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
     otherProps,
     ...shapeProps
   } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(radioButtonShapeRestrictions, width, height);
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    radioButtonShapeRestrictions,
+    width,
+    height
+  );
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const radius = restrictedHeight / 2;
 
   const { isOn, textColor } = useShapeProps(otherProps, BASIC_SHAPE);
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
-      {/* Círculo exterior del radio button */}
+    <Group {...commonGroupProps} {...shapeProps}>
+      {/* Outer circle radio button */}
       <Circle
         x={radius}
         y={radius}
@@ -63,7 +65,7 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
         strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
       />
 
-      {/* Círculo interior del radio button (checked) */}
+      {/* Inner circle radio button (checked) */}
       <Circle
         x={radius}
         y={radius}
@@ -71,7 +73,7 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
         fill={isOn ? 'black' : 'white'}
       />
 
-      {/* Texto */}
+      {/* Text */}
       <Text
         x={radius * 2 + BASIC_SHAPE.DEFAULT_PADDING}
         y={2}
