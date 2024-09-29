@@ -7,7 +7,7 @@ import {
   extractCSVHeaders,
   splitCSVContentIntoRows,
 } from '@/common/utils/active-element-selector.utils';
-import { useShapeComponentSelection } from '../../../shapes/use-shape-selection.hook';
+import { useGroupShapeProps } from '../../mock-components.utils';
 
 const tabsBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 450,
@@ -35,8 +35,12 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
     otherProps,
     ...shapeProps
   } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(tabsBarShapeSizeRestrictions, width, height);
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    tabsBarShapeSizeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const csvData = splitCSVContentIntoRows(text);
   const headers = extractCSVHeaders(csvData[0]);
@@ -49,20 +53,17 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const bodyHeight = restrictedHeight - tabHeight - 10; // Height of the tabs bar body
   const totalTabsWidth = tabLabels.length * (tabWidth + tabMargin) + tabWidth; // Total width required plus one additional tab
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
-
   const activeTab = otherProps?.activeElement ?? 0;
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      width={Math.max(restrictedWidth, totalTabsWidth)} // Ensures that the total width is sufficient
-      height={restrictedHeight}
-      ref={ref}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       {/* Background of the tab bar body */}
       <Rect
         x={0}

@@ -4,12 +4,12 @@ import { ShapeProps } from '../../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
-import { useShapeComponentSelection } from '../../../shapes/use-shape-selection.hook';
 import { forwardRef } from 'react';
 import {
   extractCSVHeaders,
   splitCSVContentIntoRows,
 } from '@/common/utils/active-element-selector.utils';
+import { useGroupShapeProps } from '../../mock-components.utils';
 
 const buttonBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
@@ -38,20 +38,19 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>((props, ref) => {
     ...shapeProps
   } = props;
 
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(
-      buttonBarShapeSizeRestrictions,
-      width,
-      height
-    );
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    buttonBarShapeSizeRestrictions,
+    width,
+    height
+  );
+
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const csvData = splitCSVContentIntoRows(text);
   const headers = extractCSVHeaders(csvData[0]);
   const tabLabels = headers.map(header => header.text);
 
   const dynamicTabWidth = restrictedWidth / tabLabels.length;
-
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
   const { stroke, strokeStyle, fill, textColor } = useShapeProps(
     otherProps,
@@ -60,16 +59,15 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const activeTab = otherProps?.activeElement ?? 0;
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      ref={ref}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       {tabLabels.map((header, index) => (
         <Group key={index} x={index * dynamicTabWidth}>
           <Rect

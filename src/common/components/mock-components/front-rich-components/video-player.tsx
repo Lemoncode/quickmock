@@ -3,7 +3,7 @@ import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const videoPlayerShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
@@ -21,28 +21,25 @@ const shapeType: ShapeType = 'videoPlayer';
 
 export const VideoPlayerShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { x, y, width, height, id, onSelected, ...shapeProps } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(
-      videoPlayerShapeSizeRestrictions,
-      width,
-      height
-    );
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    videoPlayerShapeSizeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const margin = 10;
   const controlBarHeight = 30;
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
 
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       {/* videoplayer frame */}
       <Rect
         x={margin}

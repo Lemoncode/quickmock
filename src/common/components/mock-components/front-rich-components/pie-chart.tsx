@@ -3,7 +3,7 @@ import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const PieChartShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -24,12 +24,12 @@ const shapeType: ShapeType = 'pie';
 
 export const PieChartShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { x, y, width, height, id, onSelected, ...shapeProps } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(
-      PieChartShapeSizeRestrictions,
-      width,
-      height
-    );
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    PieChartShapeSizeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const scaleX = useMemo(() => {
     return restrictedWidth / PIE_FIX_WIDTH;
@@ -39,25 +39,22 @@ export const PieChartShape = forwardRef<any, ShapeProps>((props, ref) => {
     return restrictedHeight / PIE_FIX_HEIGHT;
   }, [restrictedHeight]);
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
 
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       <Group
         width={PIE_FIX_WIDTH}
         height={PIE_FIX_HEIGHT}
         scaleX={scaleX}
         scaleY={scaleY}
       >
-        {/* Círculo exterior */}
+        {/* Outer Circle */}
         <Circle
           x={100}
           y={100}
@@ -67,7 +64,7 @@ export const PieChartShape = forwardRef<any, ShapeProps>((props, ref) => {
           fill="none"
         />
 
-        {/* Secciones del gráfico */}
+        {/* Pie Slices */}
         <Path
           data="M 20 100 L 100 20 A 80 80 0 0 1 100 180 Z"
           fill="darkgray"

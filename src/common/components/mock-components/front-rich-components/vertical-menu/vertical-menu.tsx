@@ -7,8 +7,8 @@ import {
   mapTextToOptions,
 } from './vertical-menu.business';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
-import { useShapeComponentSelection } from '../../../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
+import { useGroupShapeProps } from '../../mock-components.utils';
 
 const verticalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 220,
@@ -59,29 +59,29 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
       }
     }, [text]);
 
-    const { width: restrictedWidth, height: restrictedHeight } =
-      calculateDynamicContentSizeRestriction(verticalMenuItems, {
+    const restrictedSize = calculateDynamicContentSizeRestriction(
+      verticalMenuItems,
+      {
         width,
         height,
         singleHeaderHeight,
         verticalMenuShapeSizeRestrictions,
-      });
-
-    const { handleSelection } = useShapeComponentSelection(props, shapeType);
+      }
+    );
+    const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
     const { stroke, strokeStyle, fill, textColor, borderRadius } =
       useShapeProps(otherProps, BASIC_SHAPE);
 
+    const commonGroupProps = useGroupShapeProps(
+      props,
+      restrictedSize,
+      shapeType,
+      ref
+    );
+
     return (
-      <Group
-        x={x}
-        y={y}
-        width={restrictedWidth}
-        height={restrictedHeight}
-        ref={ref}
-        {...shapeProps}
-        onClick={handleSelection}
-      >
+      <Group {...commonGroupProps} {...shapeProps}>
         <Rect
           x={-10}
           y={-10}

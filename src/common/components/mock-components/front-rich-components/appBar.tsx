@@ -4,8 +4,8 @@ import { ShapeProps } from '../front-components/shape.model';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const AppBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 155,
@@ -34,8 +34,12 @@ export const AppBarShape = forwardRef<any, ShapeProps>((props, ref) => {
     onSelected,
     ...shapeProps
   } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(AppBarShapeSizeRestrictions, width, height);
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    AppBarShapeSizeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const iconWidth = 30;
   const iconPadding = 10;
@@ -48,23 +52,20 @@ export const AppBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const barSpacing = 2; // Space between bars
   const totalIconHeight = 3 * barHeight + 2 * barSpacing; // Total height including spacing
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
-
   const { stroke, strokeStyle, fill, textColor } = useShapeProps(
     otherProps,
     BASIC_SHAPE
   );
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       {/* AppBar background */}
       <Rect
         x={0}

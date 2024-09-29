@@ -4,12 +4,12 @@ import { forwardRef } from 'react';
 import { ShapeProps } from '../../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
-import { useShapeComponentSelection } from '../../../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import {
   extractCSVHeaders,
   splitCSVContentIntoRows,
 } from '@/common/utils/active-element-selector.utils';
+import { useGroupShapeProps } from '../../mock-components.utils';
 
 const horizontalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
@@ -45,16 +45,14 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
   const numberOfItems = itemLabels.length;
   const itemSpacing = 10;
 
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(
-      horizontalMenuShapeSizeRestrictions,
-      width,
-      height
-    );
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    horizontalMenuShapeSizeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
   const totalMargins = restrictedWidth - itemSpacing * (numberOfItems + 1);
   const itemWidth = totalMargins / numberOfItems;
-
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
   const { stroke, strokeStyle, fill, textColor, borderRadius } = useShapeProps(
     otherProps,
@@ -65,16 +63,15 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
 
   const activeSelected = otherProps?.activeElement ?? 0;
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      ref={ref}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       <Rect
         x={0}
         y={0}

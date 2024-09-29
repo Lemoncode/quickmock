@@ -12,7 +12,7 @@ import {
 } from './table.utils';
 import { calculateCellWidths } from './table-col-width.utils';
 import { Triangle } from './components/filter-triangle';
-import { useShapeComponentSelection } from '../../../shapes/use-shape-selection.hook';
+import { useGroupShapeProps } from '../../mock-components.utils';
 
 const tableSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 1,
@@ -31,8 +31,12 @@ const shapeType: ShapeType = 'table';
 export const Table = forwardRef<any, ShapeProps>((props, ref) => {
   const { x, y, width, height, id, onSelected, text, ...shapeProps } = props;
 
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(tableSizeRestrictions, width, height);
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    tableSizeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const rows = parseCSVRowsIntoArray(text);
   const headerInfo = extractHeaderRow(rows[0]);
@@ -48,18 +52,15 @@ export const Table = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const cellHeight = restrictedHeight / (dataRows.length + 1);
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
 
   return (
-    <Group
-      x={x}
-      y={y}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      ref={ref}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       {/* Draw header cells */}
       {headerRow.map((header, colIdx) => {
         const accumulatedWidth = cellWidths

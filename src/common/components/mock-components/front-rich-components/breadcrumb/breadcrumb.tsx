@@ -3,9 +3,9 @@ import { Group, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { ShapeProps } from '../../front-components/shape.model';
 import { calculatePositions, mapTextToSections } from './breadcrumb.business';
-import { useShapeComponentSelection } from '../../../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
+import { useGroupShapeProps } from '../../mock-components.utils';
 
 export const breadcrumbShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 600,
@@ -51,20 +51,17 @@ export const BreadcrumbShape = forwardRef<any, ShapeProps>((props, ref) => {
     setGroupWidth(newGroupWidth);
   }, [sections]);
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
-
   const { textColor } = useShapeProps(otherProps, BASIC_SHAPE);
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    { width: groupWidth, height: GROUP_HEIGHT },
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={groupWidth}
-      height={GROUP_HEIGHT}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       {sections.map((section, index) => {
         const posX = positions[index] || 0;
         return (

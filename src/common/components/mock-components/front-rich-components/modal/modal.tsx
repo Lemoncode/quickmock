@@ -4,9 +4,9 @@ import { forwardRef } from 'react';
 import { ShapeProps } from '../../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { darkenColor, getModalPartsText } from './modal.utils';
-import { useShapeComponentSelection } from '../../../shapes/use-shape-selection.hook';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
+import { useGroupShapeProps } from '../../mock-components.utils';
 
 const modalShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 235,
@@ -34,8 +34,13 @@ export const Modal = forwardRef<any, ShapeProps>((props, ref) => {
     otherProps,
     ...shapeProps
   } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(modalShapeSizeRestrictions, width, height);
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    modalShapeSizeRestrictions,
+    width,
+    height
+  );
+
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const headerHeight = 50;
   const buttonHeight = 30;
@@ -48,8 +53,6 @@ export const Modal = forwardRef<any, ShapeProps>((props, ref) => {
   const buttonWidth =
     (restrictedWidth - (buttons.length + 1) * buttonSpacing) / buttons.length;
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
-
   const { stroke, strokeStyle, fill, textColor } = useShapeProps(
     otherProps,
     BASIC_SHAPE
@@ -58,16 +61,15 @@ export const Modal = forwardRef<any, ShapeProps>((props, ref) => {
   const darkHeaderColor = darkenColor(fill, 40);
   const darkButtonColor = darkenColor(fill, 60);
 
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
   return (
-    <Group
-      x={x}
-      y={y}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      ref={ref}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       {/* Background */}
       <Rect
         x={0}

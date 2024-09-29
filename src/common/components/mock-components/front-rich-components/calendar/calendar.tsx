@@ -8,8 +8,8 @@ import {
   calculatePreviousMonth,
   getCurrentMonthDays,
 } from './calendar.business';
-import { useShapeComponentSelection } from '../../../shapes/use-shape-selection.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
+import { useGroupShapeProps } from '../../mock-components.utils';
 
 const calendarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 350,
@@ -27,12 +27,12 @@ const shapeType: ShapeType = 'calendar';
 
 export const CalendarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { x, y, width, height, id, onSelected, ...shapeProps } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(
-      calendarShapeSizeRestrictions,
-      width,
-      height
-    );
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    calendarShapeSizeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth } = restrictedSize;
 
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -51,19 +51,16 @@ export const CalendarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const dayBoxWidth = (restrictedWidth - margin * 2) / 7;
   const dayBoxHeight = (height - headerHeight) / days.length;
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
 
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
-      {/* Encabezado del calendario */}
+    <Group {...commonGroupProps} {...shapeProps}>
+      {/* Calendar heading */}
       <Rect
         x={0}
         y={0}

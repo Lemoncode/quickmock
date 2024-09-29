@@ -8,7 +8,7 @@ import {
   calculateSelectedAccordionHeight,
   mapTextToSections,
 } from './accordion.business';
-import { useShapeComponentSelection } from '../../../shapes/use-shape-selection.hook';
+import { useGroupShapeProps } from '../../mock-components.utils';
 
 const accordionShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 315,
@@ -53,28 +53,24 @@ export const AccordionShape = forwardRef<any, ShapeProps>((props, ref) => {
     });
   }, [sections, height]);
 
-  const { width: restrictedWidth, height: restrictedHeight } =
-    calculateDynamicContentSizeRestriction(sections, {
-      width,
-      height,
-      singleHeaderHeight,
-      accordionShapeSizeRestrictions,
-      accordionSelectedBodyHeight,
-    });
+  const restrictedSize = calculateDynamicContentSizeRestriction(sections, {
+    width,
+    height,
+    singleHeaderHeight,
+    accordionShapeSizeRestrictions,
+    accordionSelectedBodyHeight,
+  });
+  const { width: restrictedWidth } = restrictedSize;
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
 
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      {...shapeProps}
-      onClick={handleSelection}
-      fill="black"
-    >
+    <Group {...commonGroupProps} {...shapeProps} fill="black">
       <AccordionAllParts
         width={restrictedWidth}
         singleHeaderHeight={singleHeaderHeight}
