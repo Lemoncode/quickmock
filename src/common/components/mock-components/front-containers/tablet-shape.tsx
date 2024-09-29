@@ -3,7 +3,7 @@ import { Group, Rect, Circle } from 'react-konva';
 import { ShapeProps } from '../front-components/shape.model';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const tabletShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
@@ -21,25 +21,27 @@ const shapeType: ShapeType = 'tablet';
 
 export const TabletShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { x, y, width, height, id, onSelected, ...shapeProps } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(tabletShapeSizeRestrictions, width, height);
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    tabletShapeSizeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
+
   const margin = 20;
   const screenMargin = 15;
   const cameraRadius = 3;
   const buttonRadius = 5;
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
 
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       {/* Marco de la tablet */}
       <Rect
         x={0}

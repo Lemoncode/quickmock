@@ -3,8 +3,8 @@ import { forwardRef } from 'react';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Circle, Text } from 'react-konva';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const browserWindowShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
@@ -22,29 +22,27 @@ const shapeType: ShapeType = 'browser';
 
 export const BrowserWindowShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { x, y, width, height, id, onSelected, ...shapeProps } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(
-      browserWindowShapeSizeRestrictions,
-      width,
-      height
-    );
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    browserWindowShapeSizeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
+
   const margin = 10;
   const titleBarHeight = 30;
   const buttonRadius = 6;
   const urlBarHeight = 20;
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
 
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       {/* Window frame */}
       <Rect
         x={0}

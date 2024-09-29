@@ -3,7 +3,7 @@ import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const modalDialogShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 250,
@@ -22,27 +22,24 @@ const shapeType: ShapeType = 'modalDialog';
 export const ModalDialogContainer = forwardRef<any, ShapeProps>(
   (props, ref) => {
     const { x, y, width, height, id, onSelected, ...shapeProps } = props;
-    const { width: restrictedWidth, height: restrictedHeight } =
-      fitSizeToShapeSizeRestrictions(
-        modalDialogShapeSizeRestrictions,
-        width,
-        height
-      );
+    const restrictedSize = fitSizeToShapeSizeRestrictions(
+      modalDialogShapeSizeRestrictions,
+      width,
+      height
+    );
+    const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
     const titleBarHeight = 50;
 
-    const { handleSelection } = useShapeComponentSelection(props, shapeType);
+    const commonGroupProps = useGroupShapeProps(
+      props,
+      restrictedSize,
+      shapeType,
+      ref
+    );
 
     return (
-      <Group
-        x={x}
-        y={y}
-        width={restrictedWidth}
-        height={restrictedHeight}
-        ref={ref}
-        {...shapeProps}
-        onClick={handleSelection}
-      >
+      <Group {...commonGroupProps} {...shapeProps}>
         {/* Background */}
         <Rect
           x={0}

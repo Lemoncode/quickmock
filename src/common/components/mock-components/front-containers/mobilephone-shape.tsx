@@ -3,7 +3,7 @@ import { Group, Rect, Circle } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { ShapeProps } from '../front-components/shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { useShapeComponentSelection } from '../../shapes/use-shape-selection.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const mobilePhoneShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 150,
@@ -21,12 +21,12 @@ const shapeType: ShapeType = 'mobilePhone';
 
 export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { x, y, width, height, id, onSelected, ...shapeProps } = props;
-  const { width: restrictedWidth, height: restrictedHeight } =
-    fitSizeToShapeSizeRestrictions(
-      mobilePhoneShapeSizeRestrictions,
-      width,
-      height
-    );
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    mobilePhoneShapeSizeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const margin = 5;
   const screenMargin = 10;
@@ -37,19 +37,16 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
   const speakerRadius = 2;
   const buttonRadius = 9;
 
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
 
   return (
-    <Group
-      x={x}
-      y={y}
-      width={restrictedWidth}
-      height={restrictedHeight}
-      ref={ref}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
-      {/* Marco del móvil */}
+    <Group {...commonGroupProps} {...shapeProps}>
+      {/* Mobile Frame */}
       <Rect
         x={0}
         y={0}
@@ -61,7 +58,7 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
         fill="white"
       />
 
-      {/* Pantalla del móvil */}
+      {/* Mobile Screen */}
       <Rect
         x={margin + screenMargin}
         y={screenMargin * 3}
@@ -73,7 +70,7 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
         fill="white"
       />
 
-      {/* Altavoz */}
+      {/* LoudSpeaker */}
       <Rect
         x={(restrictedWidth - speakerWidth) / 2}
         y={speakerPadding}
@@ -85,7 +82,7 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
         fill="white"
       />
 
-      {/* Botón de inicio */}
+      {/* Init button */}
       <Circle
         x={restrictedWidth / 2}
         y={restrictedHeight - margin - buttonPadding}
