@@ -21,6 +21,7 @@ export const useGroupShapeProps = (
           width,
           height,
         },
+        shapeType,
         ref,
         handleSelection
       ),
@@ -33,6 +34,7 @@ export const useGroupShapeProps = (
 export const generateShapeGroupCommonProps = (
   props: ShapeProps,
   restrictedSize: Size,
+  shapeType: ShapeType,
   ref: React.ForwardedRef<any>,
   handleSelection: (e: KonvaEventObject<MouseEvent>) => void
 ) => {
@@ -46,5 +48,6 @@ export const generateShapeGroupCommonProps = (
     'data-id': id,
     onClick: handleSelection,
     ref,
+    shapeType,
   };
 };
