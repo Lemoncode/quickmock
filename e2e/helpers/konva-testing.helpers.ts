@@ -5,8 +5,7 @@ import { Group } from 'konva/lib/Group';
 
 const getLayer = async (page: Page): Promise<Layer> =>
   await page.evaluate(() => {
-    const layer = (window as any).KONVA_LAYER;
-    return layer;
+    return window.__TESTING_KONVA_LAYER__;
   });
 
 const getChildren = async (page: Page): Promise<(Group | Shape)[]> => {
