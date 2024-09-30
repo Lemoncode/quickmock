@@ -15,9 +15,6 @@ export const useDropImageFromDesktop = (
   const { addNewShape, updateShapeSizeAndPosition, stageRef } =
     useCanvasContext();
 
-  // TODO: #231  move this to utils / business
-  // https://github.com/Lemoncode/quickmock/issues/231
-
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     if (isDropImageFile(e)) {
       e.preventDefault();

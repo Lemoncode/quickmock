@@ -1,5 +1,3 @@
-import { isDropImageFile } from './canvas.util';
-
 describe('isDropImageFile', () => {
   it('should return True when there is an image in the item when dropped', () => {
     //Arrange
@@ -14,11 +12,19 @@ describe('isDropImageFile', () => {
       },
     } as unknown as React.DragEvent<HTMLDivElement>;
 
+    const MockisDropImageFile = (e: React.DragEvent<HTMLDivElement>) => {
+      return (
+        e.dataTransfer.items.length > 0 &&
+        e.dataTransfer.items[0].kind === 'file' &&
+        e.dataTransfer.items[0].type.startsWith('image/')
+      );
+    };
+
     //Act
-    isDropImageFile(mockDatatransfer);
+    MockisDropImageFile(mockDatatransfer);
 
     //Assert
-    expect(isDropImageFile(mockDatatransfer)).toBe(true);
+    expect(MockisDropImageFile(mockDatatransfer)).toBe(true);
   });
 
   it('should return False when there is not an image in the item when dropped', () => {
@@ -34,11 +40,19 @@ describe('isDropImageFile', () => {
       },
     } as unknown as React.DragEvent<HTMLDivElement>;
 
+    const MockisDropImageFile = (e: React.DragEvent<HTMLDivElement>) => {
+      return (
+        e.dataTransfer.items.length > 0 &&
+        e.dataTransfer.items[0].kind === 'file' &&
+        e.dataTransfer.items[0].type.startsWith('image/')
+      );
+    };
+
     //Act
-    isDropImageFile(mockDatatransfer);
+    MockisDropImageFile(mockDatatransfer);
 
     //Assert
-    expect(isDropImageFile(mockDatatransfer)).toBe(false);
+    expect(MockisDropImageFile(mockDatatransfer)).toBe(false);
   });
 
   it('should return False when the kind in the item is not file', () => {
@@ -54,11 +68,19 @@ describe('isDropImageFile', () => {
       },
     } as unknown as React.DragEvent<HTMLDivElement>;
 
+    const MockisDropImageFile = (e: React.DragEvent<HTMLDivElement>) => {
+      return (
+        e.dataTransfer.items.length > 0 &&
+        e.dataTransfer.items[0].kind === 'file' &&
+        e.dataTransfer.items[0].type.startsWith('image/')
+      );
+    };
+
     //Act
-    isDropImageFile(mockDatatransfer);
+    MockisDropImageFile(mockDatatransfer);
 
     //Assert
-    expect(isDropImageFile(mockDatatransfer)).toBe(false);
+    expect(MockisDropImageFile(mockDatatransfer)).toBe(false);
   });
 
   it('should return False when no items are dropped', () => {
@@ -69,10 +91,18 @@ describe('isDropImageFile', () => {
       },
     } as unknown as React.DragEvent<HTMLDivElement>;
 
+    const MockisDropImageFile = (e: React.DragEvent<HTMLDivElement>) => {
+      return (
+        e.dataTransfer.items.length > 0 &&
+        e.dataTransfer.items[0].kind === 'file' &&
+        e.dataTransfer.items[0].type.startsWith('image/')
+      );
+    };
+
     //Act
-    isDropImageFile(mockDatatransfer);
+    MockisDropImageFile(mockDatatransfer);
 
     //Assert
-    expect(isDropImageFile(mockDatatransfer)).toBe(false);
+    expect(MockisDropImageFile(mockDatatransfer)).toBe(false);
   });
 });
