@@ -47,3 +47,11 @@ export const getByShapeType = async (
     return undefined;
   }
 };
+
+export const getTransformer = async (page: Page): Promise<any> => {
+  const layer = await getLayer(page);
+  const transformer = layer?.children.find((child: any) => {
+    return child.attrs?.enabledAnchors !== undefined;
+  });
+  return transformer;
+};
