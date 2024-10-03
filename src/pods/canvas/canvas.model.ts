@@ -27,13 +27,13 @@ import {
   getTooltipShapeSizeRestrictions,
   getLabelSizeRestrictions,
   getSliderShapeSizeRestrictions,
-} from '@/common/components/front-components';
+} from '@/common/components/mock-components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
   getMobilePhoneShapeSizeRestrictions,
   getModalDialogShapeSizeRestrictions,
   getTabletShapeSizeRestrictions,
-} from '@/common/components/front-containers';
+} from '@/common/components/mock-components/front-containers';
 import {
   getTriangleShapeSizeRestrictions,
   getCircleShapeSizeRestrictions,
@@ -44,7 +44,7 @@ import {
   getStarShapeSizeRestrictions,
   getLargeArrowShapeSizeRestrictions,
   getImageShapeSizeRestrictions,
-} from '@/common/components/front-basic-sapes';
+} from '@/common/components/mock-components/front-basic-shapes';
 import {
   getAccordionShapeSizeRestrictions,
   getBreadcrumbShapeSizeRestrictions,
@@ -62,7 +62,7 @@ import {
   getButtonBarShapeSizeRestrictions,
   getTabsBarShapeSizeRestrictions,
   getAudioPlayerShapeSizeRestrictions,
-} from '@/common/components/front-rich-components';
+} from '@/common/components/mock-components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
   getHeading2SizeRestrictions,
@@ -70,11 +70,11 @@ import {
   getNormaltextSizeRestrictions,
   getParagraphSizeRestrictions,
   getSmalltextSizeRestrictions,
-} from '@/common/components/front-text-components';
+} from '@/common/components/mock-components/front-text-components';
 import {
   BASIC_SHAPE,
   INPUT_SHAPE,
-} from '@/common/components/front-components/shape.const';
+} from '@/common/components/mock-components/front-components/shape.const';
 
 export const getSizeRestrictionFromShape = (
   shapeType: ShapeType
@@ -320,7 +320,7 @@ const generateDefaultTextValue = (shapeType: ShapeType): string | undefined => {
     case 'listbox':
       return '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6';
     case 'horizontal-menu':
-      return '[*]Home, About, Services, Contact';
+      return 'Home, About, Services, Contact';
     case 'vertical-menu':
       return 'Option 1\nOption 2\n----\nOption 3\nOption 4';
     case 'heading1':
@@ -400,6 +400,14 @@ export const generateDefaultOtherProps = (
     case 'listbox':
     case 'vertical-menu':
     case 'horizontal-menu':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+        borderRadius: `${BASIC_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        activeElement: 0,
+      };
     case 'datepickerinput':
     case 'timepickerinput':
       return {

@@ -1,6 +1,6 @@
 import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
-import { VerticalScrollBarShape } from '@/common/components/front-components';
+import { VerticalScrollBarShape } from '@/common/components/mock-components/front-components';
 
 export const renderVerticalScrollBar = (
   shape: ShapeModel,

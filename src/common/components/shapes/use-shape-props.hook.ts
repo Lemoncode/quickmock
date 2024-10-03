@@ -1,6 +1,6 @@
 import { OtherProps } from '@/core/model';
 import { useMemo } from 'react';
-import { DefaultStyleShape } from '../front-components/shape.const';
+import { DefaultStyleShape } from '../mock-components/front-components/shape.const';
 
 export const useShapeProps = (
   otherProps: OtherProps | undefined,

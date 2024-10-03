@@ -1,4 +1,4 @@
-import { BASIC_SHAPE } from '@/common/components/front-components/shape.const';
+import { BASIC_SHAPE } from '@/common/components/mock-components/front-components/shape.const';
 import classes from './border-radius.module.css';
 
 interface Props {

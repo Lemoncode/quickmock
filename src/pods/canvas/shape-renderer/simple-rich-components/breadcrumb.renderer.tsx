@@ -1,4 +1,4 @@
-import { BreadcrumbShape } from '@/common/components/front-rich-components';
+import { BreadcrumbShape } from '@/common/components/mock-components/front-rich-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 
