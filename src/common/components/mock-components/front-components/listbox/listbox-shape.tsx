@@ -1,7 +1,7 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
-import { ShapeProps } from '../shape.model';
+import { ShapeProps } from '../../shape.model';
 import {
   calculateDynamicContentSizeRestriction,
   mapListboxTextToItems,

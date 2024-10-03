@@ -1,5 +1,5 @@
 import { ShapeType, Size } from '@/core/model';
-import { ShapeProps } from './front-components/shape.model';
+import { ShapeProps } from './shape.model';
 import { useMemo } from 'react';
 import { useShapeComponentSelection } from '../shapes/use-shape-selection.hook';
 import { KonvaEventObject } from 'konva/lib/Node';

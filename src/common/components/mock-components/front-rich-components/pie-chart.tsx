@@ -1,7 +1,7 @@
 import { Group, Circle, Path } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef, useMemo } from 'react';
-import { ShapeProps } from '../front-components/shape.model';
+import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
 

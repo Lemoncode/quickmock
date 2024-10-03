@@ -1,7 +1,7 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef, useEffect, useState } from 'react';
 import { Group, Line, Rect, Text } from 'react-konva';
-import { ShapeProps } from '../../front-components/shape.model';
+import { ShapeProps } from '../../shape.model';
 import {
   calculateDynamicContentSizeRestriction,
   mapTextToOptions,
