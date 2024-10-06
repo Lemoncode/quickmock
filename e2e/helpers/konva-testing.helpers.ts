@@ -51,7 +51,11 @@ export const getByShapeType = async (
 export const getTransformer = async (page: Page): Promise<any> => {
   const layer = await getLayer(page);
   const transformer = layer?.children.find((child: any) => {
-    return child.attrs?.enabledAnchors !== undefined;
+    // Ensure that canvas has an element dropped, selected or not
+    return (
+      child._nodes?.length > 0 ||
+      (child._nodes?.length === 0 && child.index > 0)
+    );
   });
   return transformer;
 };
