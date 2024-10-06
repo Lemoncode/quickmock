@@ -18,6 +18,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     restoreMocks: true,
+    include: ['./src/**/*.spec.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     exclude: [...configDefaults.exclude, 'e2e/*'],
   },
   resolve: {

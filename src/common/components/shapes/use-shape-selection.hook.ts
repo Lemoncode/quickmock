@@ -1,6 +1,6 @@
 import { ShapeType } from '@/core/model';
 import { KonvaEventObject } from 'konva/lib/Node';
-import { ShapeProps } from '../mock-components/front-components/shape.model';
+import { ShapeProps } from '../mock-components/shape.model';
 import { isUserDoingMultipleSelectionUsingCtrlOrCmdKey } from '@/common/utils/shapes';
 
 // In the future we will refactor and include below this folder all the shapes (front, container, ...)

@@ -13,8 +13,8 @@
     "preview": "vite preview",
     "prepare": "husky || \"No need to install husky\"",
     "tsc-check": "tsc --noEmit",
-    "e2e": "dotenvx run -f .env.test -- playwright test --ui",
-    "ci:e2e": "dotenvx run -f .env.test -- playwright test"
+    "e2e": "playwright test --ui",
+    "ci:e2e": "playwright test"
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^1.2.1",

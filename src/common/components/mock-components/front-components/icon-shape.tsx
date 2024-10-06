@@ -8,7 +8,7 @@ import {
 import { forwardRef } from 'react';
 import { Group, Image } from 'react-konva';
 import useImage from 'use-image';
-import { ShapeProps } from './shape.model';
+import { ShapeProps } from '../shape.model';
 import { useModalDialogContext } from '@/core/providers/model-dialog-providers/model-dialog.provider';
 import { IconModal } from '@/pods/properties/components/icon-selector/modal';
 import { useCanvasContext } from '@/core/providers';

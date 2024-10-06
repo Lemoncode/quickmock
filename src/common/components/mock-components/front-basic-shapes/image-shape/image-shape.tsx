@@ -1,6 +1,6 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef, useEffect, useRef } from 'react';
-import { ShapeProps } from '../../front-components/shape.model';
+import { ShapeProps } from '../../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Image as KonvaImage } from 'react-konva';
 import { NoImageSelected } from './components/no-image.component';
