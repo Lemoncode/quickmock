@@ -4,7 +4,7 @@ import {
   getByShapeType,
   getLocatorPosition,
   getTransformer,
-} from './helpers';
+} from '../helpers';
 import { Group } from 'konva/lib/Group';
 
 test('no shapes on canvas, transformer not defined', async ({ page }) => {
