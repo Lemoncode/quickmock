@@ -2,6 +2,8 @@ import { Page } from '@playwright/test';
 import { Layer } from 'konva/lib/Layer';
 import { Shape } from 'konva/lib/Shape';
 import { Group } from 'konva/lib/Group';
+import { Transformer } from 'konva/lib/shapes/Transformer';
+import { Node } from 'konva/lib/Node';
 
 const getLayer = async (page: Page): Promise<Layer> =>
   await page.evaluate(() => {
@@ -46,4 +48,14 @@ export const getByShapeType = async (
   } else {
     return undefined;
   }
+};
+
+export const getCanvasSelectedComponentList = async (
+  page: Page
+): Promise<Node[]> => {
+  const layer = await getLayer(page);
+  //TODO: find a better way to access Transformer>Nodes.
+  const transformer = layer?.children?.at(-2) as Transformer;
+  if (!transformer?._nodes) throw new Error('No transformer selection found');
+  return transformer._nodes;
 };
