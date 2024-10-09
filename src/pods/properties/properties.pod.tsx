@@ -148,6 +148,15 @@ export const PropertiesPod = () => {
           }
         />
       )}
+      {selectedShapeData?.otherProps?.selectedBackgroundColor != undefined && (
+        <ColorPicker
+          label="Selected Background"
+          color={selectedShapeData.otherProps.selectedBackgroundColor}
+          onChange={color =>
+            updateOtherPropsOnSelected('selectedBackgroundColor', color)
+          }
+        />
+      )}
     </div>
   );
 };
