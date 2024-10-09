@@ -89,3 +89,11 @@ export const getScrollFromDiv = (
 
   return { scrollLeft, scrollTop };
 };
+
+export const isDropImageFile = (e: React.DragEvent<HTMLDivElement>) => {
+  return (
+    e.dataTransfer.items.length > 0 &&
+    e.dataTransfer.items[0].kind === 'file' &&
+    e.dataTransfer.items[0].type.startsWith('image/')
+  );
+};
