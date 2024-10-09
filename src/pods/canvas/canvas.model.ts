@@ -393,7 +393,6 @@ export const generateDefaultOtherProps = (
       };
     case 'button':
     case 'textarea':
-    case 'listbox':
     case 'vertical-menu':
     case 'horizontal-menu':
       return {
@@ -443,6 +442,13 @@ export const generateDefaultOtherProps = (
         textColor: '#000000',
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
+      };
+    case 'listbox':
+      return {
+        stroke: '#000000',
+        backgroundColor: '#ffffff',
+        textColor: '#000000',
+        selectedBackgroundColor: '#add8e6',
       };
 
     case 'circle':
