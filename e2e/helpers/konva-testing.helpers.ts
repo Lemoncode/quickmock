@@ -50,12 +50,10 @@ export const getByShapeType = async (
   }
 };
 
-export const getCanvasSelectedComponentList = async (
-  page: Page
-): Promise<Node[]> => {
-  const layer = await getLayer(page);
-  //TODO: find a better way to access Transformer>Nodes.
-  const transformer = layer?.children?.at(-2) as Transformer;
-  if (!transformer?._nodes) throw new Error('No transformer selection found');
-  return transformer._nodes;
-};
+export const getTransformerNodes = async (page: Page): Promise<Node[]> =>
+  await page.evaluate(() => {
+    const layer = window.__TESTING_KONVA_LAYER__.getLayer();
+    const transformer: Transformer | undefined = layer?.findOne('Transformer');
+    if (!transformer) throw new Error('Konva transformer not found');
+    return transformer?.getNodes();
+  });

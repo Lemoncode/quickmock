@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import {
   dragAndDrop,
-  getCanvasSelectedComponentList,
+  getTransformerNodes,
   addComponentsToCanvas,
 } from './helpers';
 
@@ -22,6 +22,6 @@ test('Should perform multiple selection when dragging and dropping over multiple
   await dragAndDrop(page, { x: 260, y: 130 }, { x: 1000, y: 550 });
 
   //Assert
-  const selectedItems = await getCanvasSelectedComponentList(page);
-  expect(selectedItems.length).toBeGreaterThan(componentsAtCanvas.length - 2);
+  const selectedItems = await getTransformerNodes(page);
+  expect(selectedItems.length).toEqual(3);
 });
