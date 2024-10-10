@@ -29,6 +29,7 @@ export type ShapeType =
   | 'rectangle'
   | 'postit'
   | 'videoPlayer'
+  | 'audioPlayer'
   | 'diamond'
   | 'icon'
   | 'line'
@@ -86,6 +87,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   radiobutton: 'Radio Button',
   rectangle: 'Rectangle',
   videoPlayer: 'Video Player',
+  audioPlayer: 'Audio Player',
   diamond: 'Diamond',
   line: 'Line',
   accordion: 'Accordion',

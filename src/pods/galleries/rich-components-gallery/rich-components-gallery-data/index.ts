@@ -1,6 +1,8 @@
 import { ItemInfo } from '@/common/components/gallery/components/model';
 
 export const mockRichComponentsCollection: ItemInfo[] = [
+  { thumbnailSrc: '/rich-components/videoPlayer.svg', type: 'videoPlayer' },
+  { thumbnailSrc: '/rich-components/audioPlayer.svg', type: 'audioPlayer' },
   { thumbnailSrc: '/rich-components/table.svg', type: 'table' },
   { thumbnailSrc: '/rich-components/accordion.svg', type: 'accordion' },
   {

@@ -61,6 +61,7 @@ import {
   getAppBarShapeSizeRestrictions,
   getButtonBarShapeSizeRestrictions,
   getTabsBarShapeSizeRestrictions,
+  getAudioPlayerShapeSizeRestrictions,
 } from '@/common/components/mock-components/front-rich-components';
 import {
   getHeading1SizeRestrictions,
@@ -177,6 +178,8 @@ export const getSizeRestrictionFromShape = (
       return getAppBarShapeSizeRestrictions();
     case 'buttonBar':
       return getButtonBarShapeSizeRestrictions();
+    case 'audioPlayer':
+      return getAudioPlayerShapeSizeRestrictions();
     case 'tooltip':
       return getTooltipShapeSizeRestrictions();
     case 'slider':
@@ -266,6 +269,7 @@ const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'normaltext':
     case 'smalltext':
     case 'horizontalScrollBar':
+    case 'audioPlayer':
     case 'appBar':
     case 'buttonBar':
     case 'slider':
