@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { ShapeProps } from '../../front-components/shape.model';
+import { ShapeProps } from '../../shape.model';
 import { calculatePositions, mapTextToSections } from './breadcrumb.business';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';

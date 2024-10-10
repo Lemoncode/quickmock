@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { TriangleSelector } from './triangle-selector.component';
-import { ShapeProps } from '@/common/components/mock-components/front-components/shape.model';
+import { ShapeProps } from '@/common/components/mock-components/shape.model';
 
 interface Props extends ShapeProps {
   isSelected: boolean;

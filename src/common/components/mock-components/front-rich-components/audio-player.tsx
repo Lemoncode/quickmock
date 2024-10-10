@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { Line, Rect, Path, Group } from 'react-konva';
-import { ShapeProps } from '../front-components/shape.model';
+import { ShapeProps } from '../shape.model';
 import { useShapeComponentSelection } from '@/common/components/shapes/use-shape-selection.hook';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';

@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { Group, Line, Rect } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { ShapeProps } from '../front-components/shape.model';
+import { ShapeProps } from '../shape.model';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
