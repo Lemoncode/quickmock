@@ -161,6 +161,7 @@ export interface OtherProps {
   progress?: string;
   borderRadius?: string;
   activeElement?: number;
+  selectedBackgroundColor?: string;
 }
 
 export const BASE_ICONS_URL = '/icons/';
