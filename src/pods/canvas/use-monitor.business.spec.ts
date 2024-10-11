@@ -2,7 +2,7 @@ import { ShapeType } from '@/core/model';
 import { vi, describe, it, expect } from 'vitest';
 import { calculateShapeOffsetToXDropCoordinate } from './use-monitor.business';
 
-vi.mock('@/pods/canvas/canvas.model', () => ({
+vi.mock('@/pods/canvas/model/shape-size.utils', () => ({
   getDefaultSizeFromShape: (shapeType: ShapeType) => {
     if (shapeType === 'input') {
       return {
