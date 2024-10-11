@@ -80,9 +80,17 @@ export const AudioPlayerShape = forwardRef<any, ShapeProps>((props, ref) => {
     ref
   );
 
+  const tapeRotation = 1;
+
   return (
     <Group {...commonGroupProps} {...shapeProps}>
-      <Rect x={0} y={0} width={restrictedWidth} height={restrictedHeight} />
+      <Rect
+        x={0}
+        y={0}
+        width={restrictedWidth}
+        height={restrictedHeight}
+        rotation={tapeRotation}
+      />
 
       {/* Back Button */}
       <Line
