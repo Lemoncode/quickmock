@@ -2,7 +2,7 @@ import { ShapeModel, ShapeRefs, Coord } from '@/core/model';
 import { SelectionInfo } from '@/core/providers/canvas/canvas.model';
 import Konva from 'konva';
 import { useState } from 'react';
-import { SelectionRect } from './canvas.model';
+import { SelectionRect } from './model';
 import {
   findFirstShapeInCoords,
   getSelectedShapesFromSelectionRect,
