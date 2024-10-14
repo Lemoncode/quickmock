@@ -2,7 +2,7 @@ import { Box } from 'konva/lib/shapes/Transformer';
 import { Coord, Size } from '@/core/model';
 import { useEffect } from 'react';
 import { useCanvasContext } from '@/core/providers';
-import { getMinSizeFromShape } from './canvas.model';
+import { getMinSizeFromShape } from './model';
 import { KonvaEventObject, NodeConfig, Node } from 'konva/lib/Node';
 
 export const useTransform = (

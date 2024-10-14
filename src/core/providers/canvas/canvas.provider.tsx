@@ -2,7 +2,7 @@ import React from 'react';
 import { Coord, OtherProps, ShapeModel, ShapeType, Size } from '@/core/model';
 import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
-import { createShape } from '@/pods/canvas/canvas.model';
+import { createShape } from '@/pods/canvas/model';
 import { useHistoryManager } from '@/common/undo-redo';
 import { useStateWithInterceptor } from './canvas.hook';
 import { createDefaultDocumentModel, DocumentModel } from './canvas.model';

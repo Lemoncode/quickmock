@@ -1,5 +1,5 @@
 import { ShapeType } from '@/core/model';
-import { getDefaultSizeFromShape } from './canvas.model';
+import { getDefaultSizeFromShape } from './model';
 
 // TODO: #156 Add unit tests to this funcion
 export const calculateShapeOffsetToXDropCoordinate = (
