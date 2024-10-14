@@ -151,6 +151,7 @@ export const generateDefaultOtherProps = (
     case 'progressbar':
       return {
         progress: '50',
+        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'slider':
       return {
