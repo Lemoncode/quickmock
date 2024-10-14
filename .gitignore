@@ -1,3 +1,7 @@
+# Playwright
+playwright-report/
+test-results/
+
 # Logs
 logs
 *.log
@@ -24,3 +28,7 @@ dist-ssr
 *.sw?
 
 .vite
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

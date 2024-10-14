@@ -1,6 +1,6 @@
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
-import { TooltipShape } from '@/common/components/front-components/tooltip-shape';
+import { TooltipShape } from '@/common/components/mock-components/front-components/tooltip-shape';
 
 export const renderTooltip = (
   shape: ShapeModel,

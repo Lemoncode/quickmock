@@ -1,6 +1,6 @@
 import { OtherProps } from '@/core/model';
 import { useMemo } from 'react';
-import { DefaultStyleShape } from '../front-components/shape.const';
+import { DefaultStyleShape } from '../mock-components/front-components/shape.const';
 
 export const useShapeProps = (
   otherProps: OtherProps | undefined,
@@ -42,6 +42,11 @@ export const useShapeProps = (
     return typeof prog === 'string' ? parseFloat(prog) : prog;
   }, [otherProps?.progress]);
 
+  const selectedBackgroundColor = useMemo(
+    () => otherProps?.selectedBackgroundColor ?? '#add8e6',
+    [otherProps?.selectedBackgroundColor]
+  );
+
   return {
     stroke,
     fill,
@@ -50,5 +55,6 @@ export const useShapeProps = (
     borderRadius,
     isOn,
     progress,
+    selectedBackgroundColor,
   };
 };

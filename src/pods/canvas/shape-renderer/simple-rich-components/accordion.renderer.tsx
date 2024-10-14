@@ -1,4 +1,4 @@
-import { AccordionShape } from '@/common/components/front-rich-components';
+import { AccordionShape } from '@/common/components/mock-components/front-rich-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

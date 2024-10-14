@@ -1,5 +1,5 @@
 import { Coord, ShapeModel, ShapeRefs } from '@/core/model';
-import { SelectionRect } from './canvas.model';
+import { SelectionRect } from './model';
 
 const isShapeInsideSelectionRect = (
   shapeRect: SelectionRect,

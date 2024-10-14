@@ -5,7 +5,7 @@ import {
   SnapLineSubset,
   ClosestSnapLines,
   SNAP_THRESHOLD,
-} from './canvas.model';
+} from './model';
 
 const getAllSnapLinesSingleDirection = (
   singleDirectionPossibleSnapLines: number[],

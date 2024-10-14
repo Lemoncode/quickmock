@@ -5,7 +5,7 @@ import {
   getScrollFromDiv,
 } from './canvas.util';
 import { calculateShapeOffsetToXDropCoordinate } from './use-monitor.business';
-import { getImageShapeSizeRestrictions } from '@/common/components/front-basic-sapes';
+import { getImageShapeSizeRestrictions } from '@/common/components/mock-components/front-basic-shapes';
 import { adjustSizeKeepingAspectRatio } from '@/common/utils/image.utils';
 import { isDropImageFile } from './canvas.util';
 
