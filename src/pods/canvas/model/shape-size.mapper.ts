@@ -42,6 +42,7 @@ import {
 import {
   getAccordionShapeSizeRestrictions,
   getAppBarShapeSizeRestrictions,
+  getAudioPlayerShapeSizeRestrictions,
   getBarChartShapeSizeRestrictions,
   getBreadcrumbShapeSizeRestrictions,
   getButtonBarShapeSizeRestrictions,
@@ -130,6 +131,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   buttonBar: getButtonBarShapeSizeRestrictions,
   tooltip: getTooltipShapeSizeRestrictions,
   slider: getSliderShapeSizeRestrictions,
+  audioPlayer: getAudioPlayerShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;
