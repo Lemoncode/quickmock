@@ -33,6 +33,7 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@dotenvx/dotenvx": "^1.14.2",
     "@playwright/test": "^1.47.2",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.5.5",

@@ -10,6 +10,7 @@ import classes from './canvas.pod.module.css';
 import { EditableComponent } from '@/common/components/inline-edit';
 import { useSnapIn } from './use-snapin.hook';
 import { ShapeType } from '@/core/model';
+import { ENV } from '@/core/constants';
 import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
 import { useKeyboardDisplacement } from './use-keyboard-displacement';
 import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
@@ -104,8 +105,8 @@ export const CanvasPod = () => {
   useKeyboardDisplacement();
 
   const layerRef = useRef<Konva.Layer>(null);
-  if (typeof window !== 'undefined') {
-    (window as any).KONVA_LAYER = layerRef.current;
+  if (typeof window !== 'undefined' && ENV.IS_TEST_ENV && layerRef.current) {
+    window.__TESTING_KONVA_LAYER__ = layerRef.current;
   }
 
   {

@@ -1,7 +1,7 @@
 import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';
 import invariant from 'tiny-invariant';
-import { ClosestSnapLines, SnapEdges, SnapLines } from './canvas.model';
+import { ClosestSnapLines, SnapEdges, SnapLines } from './model';
 import { getClosestSnapLines } from './snap.utils';
 import { useState } from 'react';
 import { useCanvasContext } from '@/core/providers';

@@ -5,8 +5,7 @@ import { Group } from 'konva/lib/Group';
 
 const getLayer = async (page: Page): Promise<Layer> =>
   await page.evaluate(() => {
-    const layer = (window as any).KONVA_LAYER;
-    return layer;
+    return window.__TESTING_KONVA_LAYER__;
   });
 
 const getChildren = async (page: Page): Promise<(Group | Shape)[]> => {
@@ -47,4 +46,16 @@ export const getByShapeType = async (
   } else {
     return undefined;
   }
+};
+
+export const getTransformer = async (page: Page): Promise<any> => {
+  const layer = await getLayer(page);
+  const transformer = layer?.children.find((child: any) => {
+    // Ensure that canvas has an element dropped, selected or not
+    return (
+      child._nodes?.length > 0 ||
+      (child._nodes?.length === 0 && child.index > 0)
+    );
+  });
+  return transformer;
 };

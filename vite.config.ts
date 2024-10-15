@@ -1,10 +1,7 @@
 import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 import react from '@vitejs/plugin-react';
-import {
-  type UserConfig as VitestUserConfigInterface,
-  configDefaults,
-} from 'vitest/config';
+import { configDefaults } from 'vitest/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -21,6 +18,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     restoreMocks: true,
+    include: ['./src/**/*.spec.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     exclude: [...configDefaults.exclude, 'e2e/*'],
   },
   resolve: {

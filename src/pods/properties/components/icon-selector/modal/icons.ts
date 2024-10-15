@@ -1125,7 +1125,7 @@ export const iconCollection: IconInfo[] = [
     categories: ['IT'],
   },
   {
-    name: 'Disconected wifi',
+    name: 'Disconnected wifi',
     filename: 'nowifi.svg',
     searchTerms: ['disconnected', 'wifi', 'disconnection', 'network'],
     categories: ['IT'],
@@ -1215,9 +1215,9 @@ export const iconCollection: IconInfo[] = [
     categories: ['IT'],
   },
   {
-    name: 'Cloud slash',
+    name: 'Disconnected cloud',
     filename: 'cloudslash.svg',
-    searchTerms: ['cloud', 'slash', 'disconnected', 'lost conection'],
+    searchTerms: ['cloud', 'slash', 'disconnected', 'lost connection'],
     categories: ['IT'],
   },
   {
@@ -1235,7 +1235,91 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Arrow down left',
     filename: 'arrowdownleft.svg',
-    searchTerms: ['arrow', 'down', 'left', 'move', 'go'],
+    searchTerms: ['arrow', 'down', 'left', 'move'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Arrow down right',
+    filename: 'arrowrightdown.svg',
+    searchTerms: ['arrow', 'down', 'right', 'move'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Arrow up left',
+    filename: 'arrowupleft.svg',
+    searchTerms: ['arrow', 'up', 'left', 'move'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Arrow up right',
+    filename: 'arrowupright.svg',
+    searchTerms: ['arrow', 'up', 'right', 'move'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Arrow out',
+    filename: 'arrowout.svg',
+    searchTerms: ['arrow', 'out', 'spread', 'expand'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Bluetooth',
+    filename: 'bluetooth.svg',
+    searchTerms: ['bluetooth', 'connection', 'wireless', 'technology'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Disconnected bluetooth',
+    filename: 'bluetoothslash.svg',
+    searchTerms: ['bluetooth', 'off', 'disconnected', 'lost connection'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Hands clapping',
+    filename: 'handsclapping.svg',
+    searchTerms: ['hand', 'clapping', 'applause', 'celebration'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Mouse',
+    filename: 'mouse.svg',
+    searchTerms: ['mouse', 'device', 'computer', 'click'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Filter',
+    filename: 'filter.svg',
+    searchTerms: ['filter', 'seep', 'select', 'find'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Sort ascending',
+    filename: 'sortascending.svg',
+    searchTerms: ['sort', 'ascending', 'order', 'arrange'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Sort descending',
+    filename: 'sortdescending.svg',
+    searchTerms: ['sort', 'descending', 'order', 'arrange'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Cog wheel',
+    filename: 'cogwheel.svg',
+    searchTerms: ['settings', 'configuration', 'options', 'preferences'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Rocket',
+    filename: 'rocket.svg',
+    searchTerms: ['rocket', 'launch', 'space', 'fly'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Pencil',
+    filename: 'pencil.svg',
+    searchTerms: ['pencil', 'edit', 'editing', 'edition'],
     categories: ['IT'],
   },
 ];

@@ -1,6 +1,6 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef } from 'react';
-import { ShapeProps } from '../front-components/shape.model';
+import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Star } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';

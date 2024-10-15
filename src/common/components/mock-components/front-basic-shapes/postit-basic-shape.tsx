@@ -1,6 +1,6 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef } from 'react';
-import { ShapeProps } from '../front-components/shape.model';
+import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
 import { POSTIT_SHAPE } from '../front-components/shape.const';

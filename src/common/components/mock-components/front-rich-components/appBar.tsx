@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
-import { ShapeProps } from '../front-components/shape.model';
+import { ShapeProps } from '../shape.model';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';

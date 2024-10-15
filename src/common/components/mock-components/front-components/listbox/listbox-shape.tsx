@@ -1,7 +1,7 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
-import { ShapeProps } from '../shape.model';
+import { ShapeProps } from '../../shape.model';
 import {
   calculateDynamicContentSizeRestriction,
   mapListboxTextToItems,
@@ -69,10 +69,14 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { stroke, strokeStyle, fill, borderRadius, textColor } = useShapeProps(
-    otherProps,
-    BASIC_SHAPE
-  );
+  const {
+    stroke,
+    strokeStyle,
+    fill,
+    borderRadius,
+    textColor,
+    selectedBackgroundColor,
+  } = useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -106,8 +110,10 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>((props, ref) => {
               y={0 + index * singleHeaderHeight}
               width={restrictedWidth}
               height={singleHeaderHeight}
-              fill={selectedItem === index ? 'lightblue' : fill}
-              stroke={selectedItem === index ? 'skyblue' : 'transparent'}
+              fill={selectedItem === index ? selectedBackgroundColor : fill}
+              stroke={
+                selectedItem === index ? selectedBackgroundColor : 'transparent'
+              }
               strokeWidth={selectedItem === index ? 1 : 0}
             />
             <Text

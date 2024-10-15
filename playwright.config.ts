@@ -1,3 +1,8 @@
+import { config } from '@dotenvx/dotenvx';
+config({
+  path: '.env.test',
+});
+
 import { defineConfig, devices } from '@playwright/test';
 
 const BASE_URL = 'http://localhost:5173/editor.html';

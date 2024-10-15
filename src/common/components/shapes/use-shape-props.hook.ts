@@ -42,6 +42,11 @@ export const useShapeProps = (
     return typeof prog === 'string' ? parseFloat(prog) : prog;
   }, [otherProps?.progress]);
 
+  const selectedBackgroundColor = useMemo(
+    () => otherProps?.selectedBackgroundColor ?? '#add8e6',
+    [otherProps?.selectedBackgroundColor]
+  );
+
   return {
     stroke,
     fill,
@@ -50,5 +55,6 @@ export const useShapeProps = (
     borderRadius,
     isOn,
     progress,
+    selectedBackgroundColor,
   };
 };
