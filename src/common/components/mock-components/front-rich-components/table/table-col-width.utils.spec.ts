@@ -73,12 +73,16 @@ describe('calculateCellWidths', () => {
     ]);
   });
 
-  it('If the values sum to 100%, any column with a * will not be displayed.', () => {
+  it('If the values sum to 100%, any columng with a * will not be displayed.', () => {
     // Arrange
     const restrictedWidth = 100;
     const columnCount = 3;
     const widthRow = '{50,50,*}';
-    const extractedWidthRows: string[] | false = extractWidthRow(widthRow); // ['50', '50', '*']
+    const rows = [''];
+    const extractedWidthRows: string[] | false = extractWidthRow(
+      widthRow,
+      rows
+    ); // ['50', '50', '*']
 
     // Act
     const result = calculateCellWidths(
@@ -102,7 +106,11 @@ describe('calculateCellWidths', () => {
     const restrictedWidth = 100;
     const columnCount = 3;
     const widthRow = '{70,50,*}';
-    const extractedWidthRows: string[] | false = extractWidthRow(widthRow); // ['50', '50', '*']
+    const rows = [''];
+    const extractedWidthRows: string[] | false = extractWidthRow(
+      widthRow,
+      rows
+    ); // ['50', '50', '*']
     let totalWidth = 0;
     if (extractedWidthRows) {
       totalWidth = calculateTotalWidth(extractedWidthRows);
@@ -130,7 +138,11 @@ describe('calculateCellWidths', () => {
     const restrictedWidth = 100;
     const columnCount = 5;
     const widthRow = '{50,20,10,*,*}';
-    const extractedWidthRows: string[] | false = extractWidthRow(widthRow); // ['50', '20', '10', '*', '*']
+    const rows = [''];
+    const extractedWidthRows: string[] | false = extractWidthRow(
+      widthRow,
+      rows
+    ); // ['50', '20', '10', '*', '*']
     let remainWidthCol = 0;
     if (extractedWidthRows) {
       const remainingWidth = 100 - calculateTotalWidth(extractedWidthRows); // 50 + 20 + 10 = 80, 100 - 80 = 20
