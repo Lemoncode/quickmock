@@ -1,10 +1,11 @@
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { BASIC_SHAPE } from '../front-components/shape.const';
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { useShapeComponentSelection } from '@/common/components/shapes/use-shape-selection.hook';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
 
 const BadgeLabelShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 40,
@@ -32,57 +33,34 @@ export const BadgeLabelShape = forwardRef<any, ShapeProps>((props, ref) => {
     otherProps,
     ...shapeProps
   } = props;
-  const { width: restrictedWidth, height: restrictedHeigth } =
-    fitSizeToShapeSizeRestrictions(
-      BadgeLabelShapeSizeRestrictions,
-      width,
-      height
-    );
-
-  const textColor = useMemo(
-    () => otherProps?.textColor ?? 'black',
-    [otherProps?.textColor]
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    BadgeLabelShapeSizeRestrictions,
+    width,
+    height
   );
 
-  const backgroundColor = useMemo(
-    () => otherProps?.backgroundColor ?? 'lightgray',
-    [otherProps?.backgroundColor]
+  const { width: restrictedWidth, height: restrictedHeigth } = restrictedSize;
+  const { stroke, strokeStyle, borderRadius, fill, textColor } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
   );
 
-  const strokeColor = useMemo(
-    () => otherProps?.stroke ?? 'gray',
-    [otherProps?.stroke]
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
   );
-
-  const strokeStyle = useMemo(
-    () => otherProps?.strokeStyle ?? [],
-    [otherProps?.strokeStyle]
-  );
-
-  const borderRadius = useMemo(() => {
-    const radius = Number(otherProps?.borderRadius);
-    return isNaN(radius) ? BASIC_SHAPE.DEFAULT_CORNER_RADIUS : radius;
-  }, [otherProps?.borderRadius]);
-
-  const { handleSelection } = useShapeComponentSelection(props, shapeType);
 
   return (
-    <Group
-      x={x}
-      y={y}
-      ref={ref}
-      width={restrictedWidth}
-      height={restrictedHeigth}
-      {...shapeProps}
-      onClick={handleSelection}
-    >
+    <Group {...commonGroupProps} {...shapeProps}>
       <Rect
         x={0}
         y={0}
         width={restrictedWidth}
         height={restrictedHeigth}
-        fill={backgroundColor}
-        stroke={strokeColor}
+        fill={fill}
+        stroke={stroke}
         dash={strokeStyle}
         strokeWidth={2}
         cornerRadius={borderRadius}

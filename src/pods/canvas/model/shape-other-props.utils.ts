@@ -162,6 +162,14 @@ export const generateDefaultOtherProps = (
       return {
         activeElement: 0,
       };
+    case 'badgelabel':
+      return {
+        stroke: '#939393',
+        backgroundColor: '#D3D3D3',
+        textColor: '#000000',
+        strokeStyle: [],
+        borderRadius: '12',
+      };
     default:
       return undefined;
   }
