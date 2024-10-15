@@ -1,5 +1,36 @@
+export const knowMaxColumns = (rows: string[]): number => {
+  return rows.reduce((maxColumns, row) => {
+    const columns = row.split(',').length;
+    return columns > maxColumns ? columns : maxColumns;
+  }, 0);
+};
+
 export const parseCSVRowsIntoArray = (csvContent: string): string[] => {
-  return csvContent.trim().split('\n');
+  let arrayRows = csvContent.trim().split('\n');
+  const maxColumns = knowMaxColumns(arrayRows);
+
+  arrayRows = arrayRows.map(row => {
+    const currentColumnCount = row.split(',').length;
+
+    // If a row is empty, return a string of commas
+    if (currentColumnCount === 0) {
+      return ','.repeat(maxColumns - 1);
+    }
+
+    // If a width row is added {}, ignore it
+    if (row.startsWith('{') && row.endsWith('}')) {
+      return row;
+    }
+
+    // If a row has less columns than maxColumns, add commas at the end
+    if (currentColumnCount < maxColumns) {
+      return row + ','.repeat(maxColumns - currentColumnCount); // Añadir comas al final
+    }
+
+    return row;
+  });
+
+  return arrayRows;
 };
 
 export interface Header {
@@ -46,17 +77,30 @@ export const extractDataRows = (
         .map(row => row.split(',').map(cell => cell.trim()));
 };
 
-export const extractWidthRow = (lastRow: string): string[] | false => {
-  return lastRow.startsWith('{') && lastRow.endsWith('}')
-    ? lastRow
-        .slice(1, -1)
-        .split(',')
-        .map(width => {
-          const trimmedWidth = width.trim();
-          const widthMatch = trimmedWidth.match(/(\d+)/);
-          return widthMatch ? widthMatch[0] : '0'; // Si hay un match, devuelve el porcentaje; si no, '0'
-        })
-    : false;
+export const extractWidthRow = (
+  lastRow: string,
+  allRows: string[]
+): string[] | false => {
+  // If the last row doesn't start and end with '{}', return
+  if (!lastRow.startsWith('{') || !lastRow.endsWith('}')) {
+    return false;
+  }
+
+  const maxColumns = knowMaxColumns(allRows);
+  let widths = lastRow
+    .slice(1, -1)
+    .split(',')
+    .map(width => width.trim());
+  const neededCommas = maxColumns - widths.length;
+
+  if (neededCommas > 0) {
+    widths = [...widths, ...Array(neededCommas).fill('')];
+  }
+
+  return widths.map(width => {
+    const widthMatch = width.match(/(\d+)/);
+    return widthMatch ? widthMatch[0] : '0'; // Return '0' if no number is found
+  });
 };
 
 type ALIGNMENT = 'left' | 'center' | 'right';
