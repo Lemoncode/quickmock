@@ -27,3 +27,29 @@ export const dragAndDrop = async (
   await page.mouse.move(bPosition.x, bPosition.y);
   await page.mouse.up();
 };
+
+export const addComponentsToCanvas = async (
+  page: Page,
+  components: string[]
+) => {
+  const canvasPosition = await page.locator('canvas').boundingBox();
+  if (!canvasPosition) throw new Error('No canvas found');
+
+  for await (const [index, c] of components.entries()) {
+    const component = page.getByAltText(c, { exact: true });
+    const position = await getLocatorPosition(component);
+
+    const targetPosition = (
+      displacementQty: number,
+      multiplyFactor: number
+    ) => {
+      const positionDisplacement = displacementQty * (multiplyFactor + 1);
+      return {
+        x: canvasPosition.x + displacementQty + positionDisplacement,
+        y: canvasPosition.y + positionDisplacement,
+      };
+    };
+
+    await dragAndDrop(page, position, targetPosition(120, index));
+  }
+};
