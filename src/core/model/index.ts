@@ -29,6 +29,7 @@ export type ShapeType =
   | 'rectangle'
   | 'postit'
   | 'videoPlayer'
+  | 'audioPlayer'
   | 'diamond'
   | 'icon'
   | 'line'
@@ -87,6 +88,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   radiobutton: 'Radio Button',
   rectangle: 'Rectangle',
   videoPlayer: 'Video Player',
+  audioPlayer: 'Audio Player',
   diamond: 'Diamond',
   line: 'Line',
   accordion: 'Accordion',
@@ -163,6 +165,7 @@ export interface OtherProps {
   progress?: string;
   borderRadius?: string;
   activeElement?: number;
+  selectedBackgroundColor?: string;
 }
 
 export const BASE_ICONS_URL = '/icons/';

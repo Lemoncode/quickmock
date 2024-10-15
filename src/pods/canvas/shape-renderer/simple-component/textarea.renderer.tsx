@@ -1,4 +1,4 @@
-import { TextAreaShape } from '@/common/components/front-components/textarea-shape';
+import { TextAreaShape } from '@/common/components/mock-components/front-components/textarea-shape';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

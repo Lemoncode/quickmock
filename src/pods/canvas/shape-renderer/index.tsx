@@ -37,6 +37,7 @@ import {
   renderLineChart,
   renderVerticalMenuShape,
   renderTable,
+  renderAudioPlayer,
   renderModal,
   renderButtonBar,
   renderBadgeLabel,
@@ -107,6 +108,8 @@ export const renderShapeComponent = (
       return renderPostit(shape, shapeRenderedProps);
     case 'videoPlayer':
       return renderVideoPlayer(shape, shapeRenderedProps);
+    case 'audioPlayer':
+      return renderAudioPlayer(shape, shapeRenderedProps);
     case 'pie':
       return renderPieChart(shape, shapeRenderedProps);
     case 'map':

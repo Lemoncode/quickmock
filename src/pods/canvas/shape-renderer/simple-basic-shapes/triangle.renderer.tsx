@@ -1,4 +1,4 @@
-import { TriangleShape } from '@/common/components/front-basic-sapes';
+import { TriangleShape } from '@/common/components/mock-components/front-basic-shapes';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

@@ -1,4 +1,4 @@
-import { TabletShape } from '@/common/components/front-containers';
+import { TabletShape } from '@/common/components/mock-components/front-containers';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

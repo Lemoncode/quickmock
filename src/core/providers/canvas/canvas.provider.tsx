@@ -2,7 +2,7 @@ import React from 'react';
 import { Coord, OtherProps, ShapeModel, ShapeType, Size } from '@/core/model';
 import { CanvasContext } from './canvas.context';
 import { useSelection } from './use-selection.hook';
-import { createShape } from '@/pods/canvas/canvas.model';
+import { createShape } from '@/pods/canvas/model';
 import { useHistoryManager } from '@/common/undo-redo';
 import { useStateWithInterceptor } from './canvas.hook';
 import { createDefaultDocumentModel, DocumentModel } from './canvas.model';
@@ -20,6 +20,7 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const [scale, setScale] = React.useState(1);
   const stageRef = React.useRef<Konva.Stage>(null);
+  const [isInlineEditing, setIsInlineEditing] = React.useState(false);
 
   const {
     addSnapshot,
@@ -181,6 +182,8 @@ export const CanvasProvider: React.FC<Props> = props => {
         stageRef,
         deleteSelectedShapes,
         loadDocument,
+        isInlineEditing,
+        setIsInlineEditing,
       }}
     >
       {children}

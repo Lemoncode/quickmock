@@ -5,24 +5,15 @@ import {
   getScrollFromDiv,
 } from './canvas.util';
 import { calculateShapeOffsetToXDropCoordinate } from './use-monitor.business';
-import { getImageShapeSizeRestrictions } from '@/common/components/front-basic-sapes';
+import { getImageShapeSizeRestrictions } from '@/common/components/mock-components/front-basic-shapes';
 import { adjustSizeKeepingAspectRatio } from '@/common/utils/image.utils';
+import { isDropImageFile } from './canvas.util';
 
 export const useDropImageFromDesktop = (
   dropRef: React.MutableRefObject<HTMLDivElement>
 ) => {
   const { addNewShape, updateShapeSizeAndPosition, stageRef } =
     useCanvasContext();
-
-  // TODO: #231  move this to utils / business
-  // https://github.com/Lemoncode/quickmock/issues/231
-  const isDropImageFile = (e: React.DragEvent<HTMLDivElement>) => {
-    return (
-      e.dataTransfer.items.length > 0 &&
-      e.dataTransfer.items[0].kind === 'file' &&
-      e.dataTransfer.items[0].type.startsWith('image/')
-    );
-  };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     if (isDropImageFile(e)) {

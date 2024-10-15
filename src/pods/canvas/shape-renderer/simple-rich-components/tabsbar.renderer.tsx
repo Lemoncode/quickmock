@@ -1,6 +1,6 @@
 import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
-import { TabsBarShape } from '@/common/components/front-rich-components/tabsbar';
+import { TabsBarShape } from '@/common/components/mock-components/front-rich-components/tabsbar';
 
 export const renderTabsBar = (
   shape: ShapeModel,

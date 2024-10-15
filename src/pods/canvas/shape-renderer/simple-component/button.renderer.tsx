@@ -1,6 +1,6 @@
 import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
-import { ButtonShape } from '@/common/components/front-components/button-shape';
+import { ButtonShape } from '@/common/components/mock-components/front-components/button-shape';
 
 export const renderButton = (
   shape: ShapeModel,

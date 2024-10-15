@@ -1,4 +1,4 @@
-import { BarChartShape } from '@/common/components/front-rich-components';
+import { BarChartShape } from '@/common/components/mock-components/front-rich-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

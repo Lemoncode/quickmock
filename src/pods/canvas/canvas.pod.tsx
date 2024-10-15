@@ -1,4 +1,4 @@
-import { createRef, useMemo, useState } from 'react';
+import { createRef, useMemo, useRef, useState } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
 import { Layer, Line, Rect, Stage, Transformer } from 'react-konva';
@@ -10,6 +10,7 @@ import classes from './canvas.pod.module.css';
 import { EditableComponent } from '@/common/components/inline-edit';
 import { useSnapIn } from './use-snapin.hook';
 import { ShapeType } from '@/core/model';
+import { ENV } from '@/core/constants';
 import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
 import { useKeyboardDisplacement } from './use-keyboard-displacement';
 import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
@@ -101,9 +102,12 @@ export const CanvasPod = () => {
       updateShapePosition(id, { x, y });
     };
 
-  // TODO: Temporary disabled, conflicts with inline edition
-  // and likely keboard shortcuts
   useKeyboardDisplacement();
+
+  const layerRef = useRef<Konva.Layer>(null);
+  if (typeof window !== 'undefined' && ENV.IS_TEST_ENV && layerRef.current) {
+    window.__TESTING_KONVA_LAYER__ = layerRef.current;
+  }
 
   {
     /* TODO: add other animation for isDraggerOver */
@@ -129,7 +133,7 @@ export const CanvasPod = () => {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
       >
-        <Layer>
+        <Layer ref={layerRef}>
           {
             /* TODO compentize and simplify this */
             shapes.map(shape => {
