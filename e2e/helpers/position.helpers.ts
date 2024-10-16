@@ -37,6 +37,7 @@ export const addComponentsToCanvas = async (
 
   for await (const [index, c] of components.entries()) {
     const component = page.getByAltText(c, { exact: true });
+    await component.scrollIntoViewIfNeeded();
     const position = await getLocatorPosition(component);
 
     const targetPosition = (

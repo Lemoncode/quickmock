@@ -1,5 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { dragAndDrop, addComponentsToCanvas, getTransformer } from '../helpers';
+import {
+  dragAndDrop,
+  addComponentsToCanvas,
+  getTransformer,
+  getWithinCanvasItemList,
+  ctrlClickOverCanvasItems,
+} from '../helpers';
 
 test('Should perform multiple selection when dragging and dropping over multiple components in the canvas', async ({
   page,
@@ -45,4 +51,27 @@ test('Should deselect all previously selected items when clicking on an empty po
   //Assert
   const updatedSelectedItems = await getTransformer(page);
   expect(updatedSelectedItems._nodes.length).toEqual(0);
+});
+
+test('Should add some in-canvas-items to the current selection, by clicking on them, while pressing the CTRL / CMD keyboard.', async ({
+  page,
+}) => {
+  await page.goto('');
+
+  //Drag and drop component to canvas
+  const componentsAtCanvas = ['Input', 'Button', 'Textarea', 'Combobox'];
+  await addComponentsToCanvas(page, componentsAtCanvas);
+  const insideCanvasItemList = await getWithinCanvasItemList(page);
+
+  //Assert no elements at current selection
+  const selectedItems = await getTransformer(page);
+  expect(selectedItems._nodes.length).toEqual(1);
+
+  // Add 2 canvas items to current selection
+  const itemsToBeSelected = insideCanvasItemList.slice(1, 3);
+  await ctrlClickOverCanvasItems(page, itemsToBeSelected);
+
+  //Assert the quantity of selected-items
+  const currentSelection = await getTransformer(page);
+  expect(currentSelection._nodes.length).toEqual(3);
 });
