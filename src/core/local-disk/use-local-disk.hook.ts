@@ -38,12 +38,11 @@ export const useLocalDisk = () => {
       },
       content
     );
-    console.log('saveFilename', savedFilename);
+    setFileName(savedFilename);
   };
 
   const handleSave = () => {
     const filename = fileName !== '' ? fileName : DEFAULT_FILE_NAME;
-    setFileName(filename);
     const content = serializeShapes();
     if ((window as any).showDirectoryPicker === undefined) {
       OldBrowsersDownloadFile(filename, content);
