@@ -11,7 +11,7 @@ const buttonShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 50,
   minHeight: 35,
   maxWidth: -1,
-  maxHeight: 35,
+  maxHeight: 100,
   defaultWidth: 100,
   defaultHeight: 35,
 };
@@ -68,9 +68,9 @@ export const ButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
       />
       <Text
         x={0}
-        y={10}
-        width={width}
-        height={height - 10}
+        y={restrictedHeight / 2 - 5}
+        width={restrictedWidth}
+        height={restrictedHeight - restrictedHeight / 2 - 5}
         text={text}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={15}
