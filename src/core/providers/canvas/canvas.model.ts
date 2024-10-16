@@ -69,6 +69,8 @@ export interface CanvasContextModel {
   loadDocument: (document: DocumentModel) => void;
   isInlineEditing: boolean;
   setIsInlineEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  fileName: string;
+  setFileName: (fileName: string) => void;
 }
 
 export interface DocumentModel {
