@@ -22,16 +22,14 @@ export const FontVariant: React.FC<Props> = props => {
   return (
     <div className={classes.container}>
       <p>{label}</p>
-      <div className={classes.buttonsContainer}>
-        <input
-          type="checkbox"
-          onClick={handleToggle}
-          className={classes.button}
-          style={{
-            fontStyle: fontVariant === FONT_VARIANT_BOLD ? 'bold' : 'normal',
-          }}
-        />
-      </div>
+      <input
+        type="checkbox"
+        onClick={handleToggle}
+        className={classes.checkbox}
+        style={{
+          fontStyle: fontVariant === FONT_VARIANT_BOLD ? 'bold' : 'normal',
+        }}
+      />
     </div>
   );
 };

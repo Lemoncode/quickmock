@@ -22,19 +22,15 @@ export const TextDecoration: React.FC<Props> = props => {
   return (
     <div className={classes.container}>
       <p>{label}</p>
-      <div className={classes.buttonsContainer}>
-        <input
-          type="checkbox"
-          onClick={handleToggle}
-          className={classes.checkbox}
-          style={{
-            fontStyle:
-              textDecoration === TEXT_DECORATION_UNDERLINE
-                ? 'underline'
-                : 'none',
-          }}
-        />
-      </div>
+      <input
+        type="checkbox"
+        onClick={handleToggle}
+        className={classes.checkbox}
+        style={{
+          fontStyle:
+            textDecoration === TEXT_DECORATION_UNDERLINE ? 'underline' : 'none',
+        }}
+      />
     </div>
   );
 };

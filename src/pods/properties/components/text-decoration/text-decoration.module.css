@@ -6,11 +6,8 @@
   border-bottom: 1px solid var(--primary-300);
 }
 
-.buttonsContainer {
-  display: flex;
-  gap: 1em;
-  align-items: center;
-  margin-left: auto;
+.container :first-child {
+  flex: 1;
 }
 
 .checkbox {
