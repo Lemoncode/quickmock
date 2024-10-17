@@ -51,7 +51,6 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'checkbox':
     case 'toggleswitch':
     case 'progressbar':
-    case 'datepickerinput':
     case 'timepickerinput':
     case 'radiobutton':
     case 'horizontal-menu':
