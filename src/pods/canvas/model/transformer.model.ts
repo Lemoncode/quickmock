@@ -46,7 +46,7 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'label':
     case 'input':
     case 'combobox':
-    case 'line':
+    case 'horizontalLine':
     case 'listbox':
     case 'checkbox':
     case 'toggleswitch':
