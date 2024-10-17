@@ -24,7 +24,12 @@ export const TextDecoration: React.FC<Props> = props => {
       <p>{label}</p>
       <input
         type="checkbox"
-        onClick={handleToggle}
+        checked={
+          textDecoration === 'none' || textDecoration === undefined
+            ? false
+            : true
+        }
+        onChange={handleToggle}
         className={classes.checkbox}
         style={{
           fontStyle:
