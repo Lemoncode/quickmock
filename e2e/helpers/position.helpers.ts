@@ -59,3 +59,11 @@ export const addComponentsToCanvas = async (
 export const getShapePosition = async (shape: Group): Promise<Position> => {
   return { x: shape?.attrs.x, y: shape?.attrs.y };
 };
+
+export const moveSelected = (
+  page: Page,
+  direction: string,
+  numShifts: number
+) => {
+  for (let i: number = 0; i < numShifts; i++) page.keyboard.down(direction);
+};
