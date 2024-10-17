@@ -4,6 +4,7 @@ import Konva from 'konva';
 import { useState } from 'react';
 import { SelectionRect } from './model';
 import {
+  areCoordsInsideRect,
   findFirstShapeInCoords,
   getSelectedShapesFromSelectionRect,
 } from './use-multiple-selection.business';
@@ -11,6 +12,7 @@ import { getTransformerBoxAndCoords } from './transformer.utils';
 import { calculateScaledCoordsFromCanvasDivCoordinatesNoScroll } from './canvas.util';
 import { Stage } from 'konva/lib/Stage';
 import { isUserDoingMultipleSelectionUsingCtrlOrCmdKey } from '@/common/utils/shapes';
+import { KonvaEventObject } from 'konva/lib/Node';
 
 // There's a bug here: if you make a multiple selectin and start dragging
 // inside the selection but on a blank area it won't drag the selection
@@ -82,9 +84,39 @@ export const useMultipleSelectionShapeHook = (
     );
   };
 
+  const isUserClickingOnTransformer = (
+    e: KonvaEventObject<MouseEvent> | KonvaEventObject<TouchEvent>
+  ) => {
+    const transformerRect = transformerRef.current?.getClientRect();
+    console.log(transformerRect);
+    const mousePosition = e.target?.getStage()?.getPointerPosition() ?? {
+      x: 0,
+      y: 0,
+    };
+
+    return (
+      transformerRect &&
+      areCoordsInsideRect(
+        mousePosition.x,
+        mousePosition.y,
+        transformerRect.x,
+        transformerRect.y,
+        transformerRect.width,
+        transformerRect.height
+      )
+    );
+  };
+
   const handleMouseDown = (
     e: Konva.KonvaEventObject<MouseEvent> | Konva.KonvaEventObject<TouchEvent>
   ) => {
+    // Edge case if you drag on one of the transformer rectangle
+    // resize small boxes but you are on the outer part of the shape
+    // it will first select the shape that is behind (e.g. a windows or phone container)
+    // then the transformer (odd behavior, see: )
+    if (isUserClickingOnTransformer(e)) {
+      return;
+    }
     // If user is holding ctrl or cmd key let's abort drag and drop multiple selection
     // He is trying to multiselect shape by using the keyboard
     if (isUserDoingMultipleSelectionUsingCtrlOrCmdKey(e)) {
