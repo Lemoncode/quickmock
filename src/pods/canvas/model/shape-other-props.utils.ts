@@ -99,7 +99,12 @@ export const generateDefaultOtherProps = (
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
-    case 'line':
+    case 'horizontalLine':
+      return {
+        stroke: '#000000',
+        strokeStyle: [],
+      };
+    case 'verticalLine':
       return {
         stroke: '#000000',
         strokeStyle: [],
