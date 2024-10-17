@@ -8,7 +8,7 @@ import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const smalltextSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 150,
+  minWidth: 40,
   minHeight: 20,
   maxWidth: -1,
   maxHeight: -1,
