@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test';
+import { Group } from 'konva/lib/Group';
 
 interface Position {
   x: number;
@@ -53,4 +54,8 @@ export const addComponentsToCanvas = async (
 
     await dragAndDrop(page, position, targetPosition(120, index));
   }
+};
+
+export const getShapePosition = async (shape: Group): Promise<Position> => {
+  return { x: shape?.attrs.x, y: shape?.attrs.y };
 };
