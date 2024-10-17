@@ -9,6 +9,9 @@ import { ImageSrc } from './components/image-src/image-selector.component';
 import { ImageBlackAndWhite } from './components/image-black-and-white/image-black-and-white-selector.component';
 import { Progress } from './components/progress/progress.component';
 import { ActiveElementSelector } from './components/active-element-selector/active-element-selector.component';
+import { FontStyle } from './components/font-style';
+import { FontVariant } from './components/font-variant/font-variant';
+import { TextDecoration } from './components/text-decoration/text-decoration';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -132,6 +135,33 @@ export const PropertiesPod = () => {
               borderRadius={selectedShapeData?.otherProps?.borderRadius}
               onChange={borderRadius =>
                 updateOtherPropsOnSelected('borderRadius', borderRadius)
+              }
+            />
+          )}
+          {selectedShapeData?.otherProps?.fontStyle && (
+            <FontStyle
+              label="Italic"
+              fontStyle={selectedShapeData?.otherProps?.fontStyle}
+              onChange={fontstyle =>
+                updateOtherPropsOnSelected('fontStyle', fontstyle)
+              }
+            />
+          )}
+          {selectedShapeData?.otherProps?.fontVariant && (
+            <FontVariant
+              label="Bold"
+              fontVariant={selectedShapeData?.otherProps?.fontVariant}
+              onChange={fontvariant =>
+                updateOtherPropsOnSelected('fontVariant', fontvariant)
+              }
+            />
+          )}
+          {selectedShapeData?.otherProps?.textDecoration && (
+            <TextDecoration
+              label="Underline"
+              textDecoration={selectedShapeData?.otherProps?.textDecoration}
+              onChange={textdecoration =>
+                updateOtherPropsOnSelected('textDecoration', textdecoration)
               }
             />
           )}

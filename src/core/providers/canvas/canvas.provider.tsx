@@ -21,6 +21,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   const [scale, setScale] = React.useState(1);
   const stageRef = React.useRef<Konva.Stage>(null);
   const [isInlineEditing, setIsInlineEditing] = React.useState(false);
+  const [fileName, setFileName] = React.useState<string>('');
 
   const {
     addSnapshot,
@@ -184,6 +185,8 @@ export const CanvasProvider: React.FC<Props> = props => {
         loadDocument,
         isInlineEditing,
         setIsInlineEditing,
+        fileName,
+        setFileName,
       }}
     >
       {children}

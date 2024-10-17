@@ -12,6 +12,9 @@ const DEFAULT_FILL_TEXT_INPUT = '#8c8c8c';
 const DEFAULT_FONT_SIZE_INPUT = 15;
 const DEFAULT_TEXT_WIDTH = 165;
 const DEFAULT_TEXT_HEIGHT = 38;
+const DEFAULT_FONT_VARIANT = 'normal';
+const DEFAULT_FONT_STYLE = 'normal';
+const DEFAULT_TEXT_DECORATION = 'none';
 
 export interface DefaultStyleShape {
   DEFAULT_CORNER_RADIUS: number;
@@ -26,6 +29,9 @@ export interface DefaultStyleShape {
   DEFAULT_TEXT_WIDTH: number;
   DEFAULT_TEXT_HEIGHT: number;
   DEFAULT_STROKE_STYLE: number[];
+  DEFAULT_FONT_VARIANT: string;
+  DEFAULT_FONT_STYLE: string;
+  DEFAULT_TEXT_DECORATION: string;
 }
 
 export const BASIC_SHAPE: DefaultStyleShape = {
@@ -41,6 +47,9 @@ export const BASIC_SHAPE: DefaultStyleShape = {
   DEFAULT_TEXT_WIDTH,
   DEFAULT_TEXT_HEIGHT,
   DEFAULT_STROKE_STYLE,
+  DEFAULT_FONT_VARIANT,
+  DEFAULT_FONT_STYLE,
+  DEFAULT_TEXT_DECORATION,
 };
 
 export const INPUT_SHAPE: DefaultStyleShape = {
@@ -56,6 +65,9 @@ export const INPUT_SHAPE: DefaultStyleShape = {
   DEFAULT_TEXT_WIDTH,
   DEFAULT_TEXT_HEIGHT,
   DEFAULT_STROKE_STYLE,
+  DEFAULT_FONT_VARIANT,
+  DEFAULT_FONT_STYLE,
+  DEFAULT_TEXT_DECORATION,
 };
 
 //! maybe a function to calc max height base on the text
@@ -72,4 +84,7 @@ export const POSTIT_SHAPE: DefaultStyleShape = {
   DEFAULT_TEXT_WIDTH,
   DEFAULT_TEXT_HEIGHT,
   DEFAULT_STROKE_STYLE,
+  DEFAULT_FONT_VARIANT,
+  DEFAULT_FONT_STYLE,
+  DEFAULT_TEXT_DECORATION,
 };

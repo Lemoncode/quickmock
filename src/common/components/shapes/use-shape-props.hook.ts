@@ -22,6 +22,22 @@ export const useShapeProps = (
     [otherProps?.textColor]
   );
 
+  const fontVariant = useMemo(
+    () => otherProps?.fontVariant ?? defaultStyleShape.DEFAULT_FONT_VARIANT,
+    [otherProps?.fontVariant]
+  );
+
+  const fontStyle = useMemo(
+    () => otherProps?.fontStyle ?? defaultStyleShape.DEFAULT_FONT_STYLE,
+    [otherProps?.fontStyle]
+  );
+
+  const textDecoration = useMemo(
+    () =>
+      otherProps?.textDecoration ?? defaultStyleShape.DEFAULT_TEXT_DECORATION,
+    [otherProps?.textDecoration]
+  );
+
   const strokeStyle = useMemo(
     () => otherProps?.strokeStyle ?? [],
     [otherProps?.strokeStyle]
@@ -56,5 +72,8 @@ export const useShapeProps = (
     isOn,
     progress,
     selectedBackgroundColor,
+    fontVariant,
+    fontStyle,
+    textDecoration,
   };
 };
