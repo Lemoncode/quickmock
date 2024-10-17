@@ -9,5 +9,6 @@ export const mockBasicShapesCollection: ItemInfo[] = [
   { thumbnailSrc: '/shapes/diamond.svg', type: 'diamond' },
   { thumbnailSrc: '/shapes/star.svg', type: 'star' },
   { thumbnailSrc: '/shapes/horizontalLine.svg', type: 'horizontalLine' },
+  { thumbnailSrc: '/shapes/verticalLine.svg', type: 'verticalLine' },
   { thumbnailSrc: '/shapes/largeArrow.svg', type: 'largeArrow' },
 ];

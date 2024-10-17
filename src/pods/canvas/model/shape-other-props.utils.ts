@@ -104,6 +104,11 @@ export const generateDefaultOtherProps = (
         stroke: '#000000',
         strokeStyle: [],
       };
+    case 'verticalLine':
+      return {
+        stroke: '#000000',
+        strokeStyle: [],
+      };
     case 'breadcrumb':
     case 'heading1':
       return {

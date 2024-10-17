@@ -33,6 +33,7 @@ export type ShapeType =
   | 'diamond'
   | 'icon'
   | 'horizontalLine'
+  | 'verticalLine'
   | 'accordion'
   | 'pie'
   | 'horizontal-menu'
@@ -90,6 +91,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   audioPlayer: 'Audio Player',
   diamond: 'Diamond',
   horizontalLine: 'Horizontal Line',
+  verticalLine: 'Vertical Line',
   accordion: 'Accordion',
   pie: 'Pie',
   breadcrumb: 'Breadcrumb',

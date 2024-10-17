@@ -47,6 +47,7 @@ import {
   renderTriangle,
   renderRectangle,
   renderHorizontalLine,
+  renderVerticalLine,
   renderCircle,
   renderStar,
   renderPostit,
@@ -121,6 +122,8 @@ export const renderShapeComponent = (
       return renderDiamond(shape, shapeRenderedProps);
     case 'horizontalLine':
       return renderHorizontalLine(shape, shapeRenderedProps);
+    case 'verticalLine':
+      return renderVerticalLine(shape, shapeRenderedProps);
     case 'accordion':
       return renderAccordion(shape, shapeRenderedProps);
     case 'triangle':
