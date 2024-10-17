@@ -155,6 +155,9 @@ export interface OtherProps {
   strokeStyle?: number[];
   backgroundColor?: string;
   textColor?: string;
+  fontVariant?: string;
+  fontStyle?: string;
+  textDecoration?: string;
   checked?: boolean;
   icon?: IconInfo;
   iconSize?: IconSize;
