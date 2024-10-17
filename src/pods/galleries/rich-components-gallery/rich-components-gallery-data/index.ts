@@ -14,6 +14,8 @@ export const mockRichComponentsCollection: ItemInfo[] = [
     type: 'vertical-menu',
   },
   { thumbnailSrc: '/rich-components/appBar.svg', type: 'appBar' },
+  { thumbnailSrc: '/rich-components/button-bar-group.svg', type: 'buttonBar' },
+  { thumbnailSrc: '/rich-components/badgelabel.svg', type: 'badgelabel' },
   { thumbnailSrc: '/rich-components/breadcrumb.svg', type: 'breadcrumb' },
   { thumbnailSrc: '/rich-components/modal.svg', type: 'modal' },
   { thumbnailSrc: '/rich-components/tabsbar.svg', type: 'tabsBar' },

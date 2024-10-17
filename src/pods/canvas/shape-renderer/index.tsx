@@ -40,6 +40,7 @@ import {
   renderAudioPlayer,
   renderModal,
   renderButtonBar,
+  renderBadgeLabel,
   renderTabsBar,
 } from './simple-rich-components';
 import {
@@ -173,6 +174,8 @@ export const renderShapeComponent = (
       return renderTooltip(shape, shapeRenderedProps);
     case 'slider':
       return renderSlider(shape, shapeRenderedProps);
+    case 'badgelabel':
+      return renderBadgeLabel(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
