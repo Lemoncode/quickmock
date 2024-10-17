@@ -3,11 +3,11 @@ import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text, Image } from 'react-konva';
-import { BASIC_SHAPE } from './shape.const';
+import { INPUT_SHAPE } from './shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
-import calendarIconSrc from '/icons/calendar-icon.svg';
+import calendarIconSrc from '/icons/calendar.svg';
 
 const datepickerInputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -25,8 +25,17 @@ export const getDatepickerInputShapeSizeRestrictions =
 
 export const DatepickerInputShape = forwardRef<any, ShapeProps>(
   (props, ref) => {
-    const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
-      props;
+    const {
+      x,
+      y,
+      width,
+      height,
+      id,
+      onSelected,
+      text,
+      otherProps,
+      ...shapeProps
+    } = props;
     const restrictedSize = fitSizeToShapeSizeRestrictions(
       datepickerInputShapeRestrictions,
       width,
@@ -35,10 +44,8 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
 
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-    const { stroke, fill, borderRadius } = useShapeProps(
-      otherProps,
-      BASIC_SHAPE
-    );
+    const { stroke, fill, textColor, strokeStyle, borderRadius } =
+      useShapeProps(otherProps, INPUT_SHAPE);
 
     const commonGroupProps = useGroupShapeProps(
       props,
@@ -69,6 +76,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           height={restrictedHeight}
           cornerRadius={borderRadius}
           stroke={stroke}
+          dash={strokeStyle}
           strokeWidth={2}
           fill={fill}
         />
@@ -77,7 +85,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           x={10}
           y={-5}
           width={labelFontSize + 20}
-          height={labelFontSize + 5}
+          height={labelFontSize}
           cornerRadius={borderRadius}
           fill="white"
         />
@@ -89,15 +97,19 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           fontSize={labelFontSize}
           fill={stroke}
           align="center"
+          color={stroke}
         />
         {/* Main Text */}
         <Text
-          text="03/06/2023"
+          text={text}
+          fill={textColor}
           x={10}
           y={(restrictedHeight - fontSize) / 2 + 2}
+          width={availableWidth}
           fontSize={fontSize}
-          fill={stroke}
           align="left"
+          ellipsis={true}
+          wrap="none"
         />
         {/* Calendar Icon */}
         <Image

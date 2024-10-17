@@ -1322,4 +1322,10 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['pencil', 'edit', 'editing', 'edition'],
     categories: ['IT'],
   },
+  {
+    name: 'Calendar',
+    filename: 'calendar.svg',
+    searchTerms: ['calendar', 'days', 'date', 'hours', 'time', 'schedule'],
+    categories: ['IT'],
+  },
 ];
