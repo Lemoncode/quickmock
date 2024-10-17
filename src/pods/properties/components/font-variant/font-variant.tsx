@@ -24,9 +24,7 @@ export const FontVariant: React.FC<Props> = props => {
       <p>{label}</p>
       <input
         type="checkbox"
-        checked={
-          fontVariant === 'normal' || fontVariant === undefined ? false : true
-        }
+        checked={fontVariant === 'bold' ? true : false}
         onChange={handleToggle}
         className={classes.checkbox}
         style={{
