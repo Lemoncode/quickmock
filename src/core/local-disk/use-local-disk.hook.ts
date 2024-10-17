@@ -12,7 +12,7 @@ const DEFAULT_FILE_EXTENSION = 'qm';
 const DEFAULT_EXTENSION_DESCRIPTION = 'quick mock';
 
 export const useLocalDisk = () => {
-  const { shapes, loadDocument } = useCanvasContext();
+  const { shapes, loadDocument, fileName, setFileName } = useCanvasContext();
 
   const serializeShapes = (): string => {
     const quickMockDocument = mapFromShapesArrayToQuickMockFileDocument(shapes);
@@ -38,11 +38,11 @@ export const useLocalDisk = () => {
       },
       content
     );
-    console.log('saveFilename', savedFilename);
+    setFileName(savedFilename);
   };
 
   const handleSave = () => {
-    const filename = DEFAULT_FILE_NAME;
+    const filename = fileName !== '' ? fileName : DEFAULT_FILE_NAME;
     const content = serializeShapes();
     if ((window as any).showDirectoryPicker === undefined) {
       OldBrowsersDownloadFile(filename, content);
