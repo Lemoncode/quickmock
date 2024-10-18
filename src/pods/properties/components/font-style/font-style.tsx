@@ -21,29 +21,15 @@ export const FontStyle: React.FC<Props> = props => {
     <div className={classes.container}>
       <p>{label}</p>
       <div className={classes.buttonsContainer}>
-        <button
-          onClick={handleToggle}
+        <input
+          type="checkbox"
+          onChange={handleToggle}
+          checked={fontStyle === 'italic' ? true : false}
           className={`${classes.button} ${fontStyle === FONT_STYLE_ITALIC ? classes.active : ''}`}
           style={{
             fontStyle: fontStyle === FONT_STYLE_ITALIC ? 'italic' : 'normal',
           }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1em"
-            height="1em"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 20V5a1 1 0 0 1 1-1h15"
-            />
-          </svg>
-        </button>
+        />
       </div>
     </div>
   );
