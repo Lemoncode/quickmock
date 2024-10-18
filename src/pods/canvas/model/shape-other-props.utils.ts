@@ -25,6 +25,13 @@ export const generateDefaultOtherProps = (
       };
     case 'button':
     case 'textarea':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+        borderRadius: `${BASIC_SHAPE.DEFAULT_CORNER_RADIUS}`,
+      };
     case 'vertical-menu':
     case 'horizontal-menu':
       return {
