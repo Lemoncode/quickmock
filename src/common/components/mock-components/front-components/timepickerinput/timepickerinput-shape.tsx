@@ -47,8 +47,8 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
     const time = setTime(csvData2);
 
     const separatorPadding = 3; // Extra padding for spacers
-    const separator1X = restrictedWidth / 3;
-    const separator2X = (2 * restrictedWidth) / 3;
+    // const separator1X = restrictedWidth / 3;
+    // const separator2X = (2 * restrictedWidth) / 3;
 
     const { stroke, strokeStyle, fill, borderRadius } = useShapeProps(
       otherProps,
