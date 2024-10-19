@@ -1,11 +1,12 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef } from 'react';
-import { ShapeProps } from '../shape.model';
+import { ShapeProps } from '../../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
-import { BASIC_SHAPE } from './shape.const';
-import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import { useGroupShapeProps } from '../mock-components.utils';
+import { BASIC_SHAPE } from '../shape.const';
+import { useShapeProps } from '../../../shapes/use-shape-props.hook';
+import { useGroupShapeProps } from '../../mock-components.utils';
+import { splitCSVContent, setTime } from './timepickerinput-shape.business';
 
 const timepickerInputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -23,14 +24,27 @@ export const getTimepickerInputShapeSizeRestrictions =
 
 export const TimepickerInputShape = forwardRef<any, ShapeProps>(
   (props, ref) => {
-    const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
-      props;
+    const {
+      x,
+      y,
+      width,
+      height,
+      id,
+      text,
+      onSelected,
+      otherProps,
+      ...shapeProps
+    } = props;
+
     const restrictedSize = fitSizeToShapeSizeRestrictions(
       timepickerInputShapeRestrictions,
       width,
       height
     );
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
+
+    const csvData2 = splitCSVContent(text);
+    const time = setTime(csvData2);
 
     const separatorPadding = 3; // Extra padding for spacers
     const separator1X = restrictedWidth / 3;
@@ -48,6 +62,8 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
       ref
     );
 
+    const dynamicTabWidth = restrictedWidth / time.length;
+
     return (
       <Group {...commonGroupProps} {...shapeProps}>
         {/* input frame */}
@@ -63,23 +79,36 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           fill={fill}
         />
 
-        {/* Separators : */}
-        <Text
-          x={separator1X - 10}
-          y={restrictedHeight / separatorPadding}
-          text=":"
-          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
-          fontSize={20}
-          fill={stroke}
-        />
-        <Text
-          x={separator2X - 10}
-          y={restrictedHeight / separatorPadding}
-          text=":"
-          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
-          fontSize={20}
-          fill={stroke}
-        />
+        {time.map((time, index) => (
+          <Group>
+            <Text
+              key={index}
+              x={index * dynamicTabWidth}
+              y={18}
+              width={dynamicTabWidth}
+              height={restrictedHeight - 20}
+              ellipsis={true}
+              wrap="none"
+              text={time} // Use the header text
+              fontFamily="Arial"
+              fontSize={16}
+              align="center"
+            />
+            {index < time.length - 1 && (
+              <Text
+                x={(index + 1) * dynamicTabWidth - 4}
+                y={restrictedHeight / separatorPadding}
+                width={8}
+                height={restrictedHeight - 20}
+                text=":"
+                fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
+                fontSize={20}
+                fill={stroke}
+                align="center"
+              />
+            )}
+          </Group>
+        ))}
       </Group>
     );
   }
