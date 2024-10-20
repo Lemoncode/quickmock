@@ -3,6 +3,8 @@ import Konva from 'konva';
 import { OtherProps, ShapeModel, ShapeRefs, ShapeType } from '@/core/model';
 import { DocumentModel, SelectionInfo, ZIndexAction } from './canvas.model';
 import { performZIndexAction } from './zindex.util';
+import { getActivePageShapes, isPageIndexValid } from './canvas.business';
+import { produce } from 'immer';
 
 export const useSelection = (
   document: DocumentModel,
@@ -28,7 +30,11 @@ export const useSelection = (
 
   // Remove unused shapes and reset selectedShapeId if it no longer exists
   useEffect(() => {
-    const shapes = document.shapes;
+    if (!isPageIndexValid(document)) {
+      return;
+    }
+
+    const shapes = getActivePageShapes(document);
     const currentIds = shapes.map(shape => shape.id);
 
     // 1. First cleanup Refs, let's get the list of shape and if there are any
@@ -50,7 +56,7 @@ export const useSelection = (
         setSelectedShapeType(null);
       }
     }
-  }, [document.shapes, selectedShapesIds]);
+  }, [document.pages, selectedShapesIds]);
 
   const isDeselectSingleItem = (arrayIds: string[]) => {
     return (
@@ -81,11 +87,17 @@ export const useSelection = (
     type: ShapeType,
     isUserDoingMultipleSelection: boolean
   ) => {
+    // TODO: remove this, it's a temporary hack
+    // element should be in the list already
+    //if (selectedShapesRefs.current?.length === 0) {
+    //  return;
+    // }
+
     // I want to know if the ids is string or array
     const arrayIds = typeof ids === 'string' ? [ids] : ids;
 
     if (!isUserDoingMultipleSelection) {
-      // No multiple selectio, just replace selection with current selected item(s)
+      // No multiple selection, just replace selection with current selected item(s)
       selectedShapesRefs.current = arrayIds.map(
         id => shapeRefs.current[id].current
       );
@@ -127,27 +139,37 @@ export const useSelection = (
   };
 
   const setZIndexOnSelected = (action: ZIndexAction) => {
-    setDocument(prevDocument => ({
-      shapes: performZIndexAction(
-        selectedShapesIds,
-        action,
-        prevDocument.shapes
-      ),
-    }));
+    if (!isPageIndexValid(document)) return;
+
+    setDocument(prevDocument =>
+      produce(prevDocument, draft => {
+        draft.pages[prevDocument.activePageIndex].shapes = performZIndexAction(
+          selectedShapesIds,
+          action,
+          getActivePageShapes(prevDocument)
+        );
+      })
+    );
   };
 
   const updateTextOnSelected = (text: string) => {
+    if (!isPageIndexValid(document)) return;
+
     // Only when selection is one
     if (selectedShapesIds.length !== 1) {
       return;
     }
 
     const selectedShapeId = selectedShapesIds[0];
-    setDocument(prevDocument => ({
-      shapes: prevDocument.shapes.map(shape =>
-        shape.id === selectedShapeId ? { ...shape, text } : shape
-      ),
-    }));
+    setDocument(prevDocument =>
+      produce(prevDocument, draft => {
+        draft.pages[prevDocument.activePageIndex].shapes = draft.pages[
+          prevDocument.activePageIndex
+        ].shapes.map(shape =>
+          shape.id === selectedShapeId ? { ...shape, text } : shape
+        );
+      })
+    );
   };
 
   // TODO: Rather implement this using immmer
@@ -156,6 +178,8 @@ export const useSelection = (
     key: K,
     value: OtherProps[K]
   ) => {
+    if (!isPageIndexValid(document)) return;
+
     // TODO: Right now applying this only to single selection
     // in the future we could apply to all selected shapes
     // BUT, we have to show only common shapes (pain in the neck)
@@ -165,13 +189,18 @@ export const useSelection = (
     }
 
     const selectedShapeId = selectedShapesIds[0];
-    setDocument(prevDocument => ({
-      shapes: prevDocument.shapes.map(shape =>
-        shape.id === selectedShapeId
-          ? { ...shape, otherProps: { ...shape.otherProps, [key]: value } }
-          : shape
-      ),
-    }));
+
+    setDocument(prevDocument =>
+      produce(prevDocument, draft => {
+        draft.pages[prevDocument.activePageIndex].shapes = draft.pages[
+          prevDocument.activePageIndex
+        ].shapes.map(shape =>
+          shape.id === selectedShapeId
+            ? { ...shape, otherProps: { ...shape.otherProps, [key]: value } }
+            : shape
+        );
+      })
+    );
   };
 
   // Added index, right now we got multiple selection
@@ -187,7 +216,9 @@ export const useSelection = (
 
     const selectedShapeId = selectedShapesIds[index];
 
-    return document.shapes.find(shape => shape.id === selectedShapeId);
+    return getActivePageShapes(document).find(
+      shape => shape.id === selectedShapeId
+    );
   };
 
   return {

@@ -8,8 +8,9 @@ import { useStateWithInterceptor } from './canvas.hook';
 import { createDefaultDocumentModel, DocumentModel } from './canvas.model';
 import { v4 as uuidv4 } from 'uuid';
 import Konva from 'konva';
-import { removeShapesFromList } from './canvas.business';
+import { isPageIndexValid, removeShapesFromList } from './canvas.business';
 import { useClipboard } from './use-clipboard.hook';
+import { produce } from 'immer';
 
 interface Props {
   children: React.ReactNode;
@@ -46,10 +47,13 @@ export const CanvasProvider: React.FC<Props> = props => {
       return shape;
     });
 
-    setDocument(prevDocument => ({
-      ...prevDocument,
-      shapes: [...prevDocument.shapes, ...newShapes],
-    }));
+    if (isPageIndexValid(document)) {
+      setDocument(lastDocument =>
+        produce(lastDocument, draft => {
+          draft.pages[lastDocument.activePageIndex].shapes.push(...newShapes);
+        })
+      );
+    }
 
     // Just select the new pasted shapes
     // need to wait for the shapes to be rendered (previous set document is async)
@@ -71,20 +75,28 @@ export const CanvasProvider: React.FC<Props> = props => {
   };
 
   const { copyShapeToClipboard, pasteShapeFromClipboard, canCopy, canPaste } =
-    useClipboard(pasteShapes, document.shapes, selectionInfo);
+    useClipboard(
+      pasteShapes,
+      document.pages[document.activePageIndex].shapes,
+      selectionInfo
+    );
 
-  const clearCanvas = () => {
-    setDocument({ shapes: [] });
+  const createNewFullDocument = () => {
+    setDocument(createDefaultDocumentModel());
   };
 
   const deleteSelectedShapes = () => {
-    setDocument(prevDocument => ({
-      ...prevDocument,
-      shapes: removeShapesFromList(
-        selectionInfo.selectedShapesIds,
-        prevDocument.shapes
-      ),
-    }));
+    if (isPageIndexValid(document)) {
+      setDocument(lastDocument =>
+        produce(lastDocument, draft => {
+          draft.pages[lastDocument.activePageIndex].shapes =
+            removeShapesFromList(
+              selectionInfo.selectedShapesIds,
+              draft.pages[lastDocument.activePageIndex].shapes
+            );
+        })
+      );
+    }
   };
 
   // TODO: instenad of x,y use Coord and reduce the number of arguments
@@ -94,14 +106,17 @@ export const CanvasProvider: React.FC<Props> = props => {
     y: number,
     otherProps?: OtherProps
   ) => {
+    if (!isPageIndexValid(document)) {
+      return '';
+    }
+
     const newShape = createShape({ x, y }, type, otherProps);
 
-    setDocument(({ shapes }) => {
-      const newShapes = [...shapes, newShape];
-      return {
-        shapes: newShapes,
-      };
-    });
+    setDocument(lastDocument =>
+      produce(lastDocument, draft => {
+        draft.pages[document.activePageIndex].shapes.push(newShape);
+      })
+    );
 
     return newShape.id;
   };
@@ -112,27 +127,43 @@ export const CanvasProvider: React.FC<Props> = props => {
     size: Size,
     skipHistory: boolean = false
   ) => {
+    if (!isPageIndexValid(document)) {
+      return;
+    }
+
     if (skipHistory) {
-      setShapesSkipHistory(({ shapes }) => ({
-        shapes: shapes.map(shape =>
-          shape.id === id ? { ...shape, ...position, ...size } : shape
-        ),
-      }));
+      setShapesSkipHistory(fullDocument => {
+        return produce(fullDocument, draft => {
+          draft.pages[document.activePageIndex].shapes = draft.pages[
+            document.activePageIndex
+          ].shapes.map(shape =>
+            shape.id === id ? { ...shape, ...position, ...size } : shape
+          );
+        });
+      });
     } else {
-      setDocument(({ shapes }) => ({
-        shapes: shapes.map(shape =>
-          shape.id === id ? { ...shape, ...position, ...size } : shape
-        ),
-      }));
+      setDocument(fullDocument => {
+        return produce(fullDocument, draft => {
+          draft.pages[document.activePageIndex].shapes = draft.pages[
+            document.activePageIndex
+          ].shapes.map(shape =>
+            shape.id === id ? { ...shape, ...position, ...size } : shape
+          );
+        });
+      });
     }
   };
 
   const updateShapePosition = (id: string, { x, y }: Coord) => {
-    setDocument(({ shapes }) => ({
-      shapes: shapes.map(shape =>
-        shape.id === id ? { ...shape, x, y } : shape
-      ),
-    }));
+    if (isPageIndexValid(document)) {
+      setDocument(fullDocument => {
+        return produce(fullDocument, draft => {
+          draft.pages[document.activePageIndex].shapes = draft.pages[
+            document.activePageIndex
+          ].shapes.map(shape => (shape.id === id ? { ...shape, x, y } : shape));
+        });
+      });
+    }
   };
 
   const doUndo = () => {
@@ -164,10 +195,10 @@ export const CanvasProvider: React.FC<Props> = props => {
   return (
     <CanvasContext.Provider
       value={{
-        shapes: document.shapes,
+        shapes: document.pages[document.activePageIndex].shapes ?? [],
         scale,
         setScale,
-        clearCanvas,
+        createNewFullDocument,
         selectionInfo,
         addNewShape,
         updateShapeSizeAndPosition,
@@ -187,6 +218,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         setIsInlineEditing,
         fileName,
         setFileName,
+        fullDocument: document,
       }}
     >
       {children}

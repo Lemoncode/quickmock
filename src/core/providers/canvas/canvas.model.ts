@@ -11,6 +11,28 @@ import { Node, NodeConfig } from 'konva/lib/Node';
 
 export type ZIndexAction = 'top' | 'bottom' | 'up' | 'down';
 
+export interface Page {
+  id: string;
+  name: string;
+  shapes: ShapeModel[];
+}
+
+export interface DocumentModel {
+  pages: Page[];
+  activePageIndex: number;
+}
+
+export const createDefaultDocumentModel = (): DocumentModel => ({
+  activePageIndex: 0,
+  pages: [
+    {
+      id: '1',
+      name: 'Page 1',
+      shapes: [],
+    },
+  ],
+});
+
 export interface SelectionInfo {
   transformerRef: React.RefObject<Konva.Transformer>;
   shapeRefs: React.MutableRefObject<ShapeRefs>;
@@ -40,7 +62,7 @@ export interface SelectionInfo {
 export interface CanvasContextModel {
   shapes: ShapeModel[];
   scale: number;
-  clearCanvas: () => void;
+  createNewFullDocument: () => void;
   setScale: React.Dispatch<React.SetStateAction<number>>;
   addNewShape: (
     type: ShapeType,
@@ -71,12 +93,5 @@ export interface CanvasContextModel {
   setIsInlineEditing: React.Dispatch<React.SetStateAction<boolean>>;
   fileName: string;
   setFileName: (fileName: string) => void;
+  fullDocument: DocumentModel;
 }
-
-export interface DocumentModel {
-  shapes: ShapeModel[];
-}
-
-export const createDefaultDocumentModel = (): DocumentModel => ({
-  shapes: [],
-});

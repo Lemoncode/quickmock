@@ -4,7 +4,7 @@ import { useCanvasContext } from '@/core/providers';
 import { ToolbarButton } from '../toolbar-button';
 
 export const NewButton = () => {
-  const { clearCanvas } = useCanvasContext();
+  const { createNewFullDocument: clearCanvas } = useCanvasContext();
 
   const handleClick = () => {
     clearCanvas();
