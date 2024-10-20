@@ -25,6 +25,8 @@ export const renderTimepickerinput = (
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      isEditable={shape.allowsInlineEdition}
+      text={shape.text}
       otherProps={shape.otherProps}
     />
   );
