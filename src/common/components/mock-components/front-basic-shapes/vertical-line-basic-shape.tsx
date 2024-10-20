@@ -7,21 +7,21 @@ import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 
-const lineShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 50,
-  minHeight: 10,
-  maxWidth: -1,
-  maxHeight: 10,
-  defaultWidth: 200,
-  defaultHeight: 10,
+const verticalLineShapeRestrictions: ShapeSizeRestrictions = {
+  minWidth: 10,
+  minHeight: 50,
+  maxWidth: 10,
+  maxHeight: -1,
+  defaultWidth: 10,
+  defaultHeight: 200,
 };
 
-export const getlineShapeRestrictions = (): ShapeSizeRestrictions =>
-  lineShapeRestrictions;
+export const getVerticalLineShapeRestrictions = (): ShapeSizeRestrictions =>
+  verticalLineShapeRestrictions;
 
-const shapeType: ShapeType = 'line';
+const shapeType: ShapeType = 'verticalLine';
 
-export const LineShape = forwardRef<any, ShapeProps>((props, ref) => {
+export const VerticalLineShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
     x,
     y,
@@ -34,7 +34,7 @@ export const LineShape = forwardRef<any, ShapeProps>((props, ref) => {
     ...shapeProps
   } = props;
   const restrictedSize = fitSizeToShapeSizeRestrictions(
-    lineShapeRestrictions,
+    verticalLineShapeRestrictions,
     width,
     height
   );
@@ -60,9 +60,9 @@ export const LineShape = forwardRef<any, ShapeProps>((props, ref) => {
       />
 
       <Line
-        x={0}
-        y={restrictedHeight / 2}
-        points={[0, 0, restrictedWidth, 0]}
+        x={restrictedWidth / 2} //TODO: alber delete. solo referencia de line x={0}
+        y={0} //TODO:alber delete. solo referencia de line y={restrictedHeight / 2}
+        points={[0, 0, 0, restrictedHeight]} //TODO:alber delete. ??? seguramente necesita modificar: points={[0, 0, restrictedWidth, 0]}
         stroke={stroke}
         strokeWidth={2}
         dash={strokeStyle}

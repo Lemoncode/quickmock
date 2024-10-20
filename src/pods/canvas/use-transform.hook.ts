@@ -33,6 +33,7 @@ export const useTransform = (
       transformerRef.current.enabledAnchors(
         selectedShape.attrs.typeOfTransformer
       );
+      transformerRef.current.rotateEnabled(false);
     }
   };
 

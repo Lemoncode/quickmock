@@ -46,12 +46,11 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'label':
     case 'input':
     case 'combobox':
-    case 'line':
+    case 'horizontalLine':
     case 'listbox':
     case 'checkbox':
     case 'toggleswitch':
     case 'progressbar':
-    case 'datepickerinput':
     case 'timepickerinput':
     case 'radiobutton':
     case 'horizontal-menu':
@@ -66,6 +65,7 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'buttonBar':
     case 'slider':
       return ['middle-left', 'middle-right'];
+    case 'verticalLine':
     case 'verticalScrollBar':
       return ['top-center', 'bottom-center'];
     case 'icon':
