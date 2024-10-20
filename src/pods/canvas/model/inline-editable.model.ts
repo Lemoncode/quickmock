@@ -99,7 +99,7 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   appBar: 'AppBar',
   buttonBar: 'Button 1, Button 2, Button 3',
   tabsBar: 'Tab 1, Tab 2, Tab 3',
-  timepickerinput: 'hh, mm',
+  timepickerinput: 'hh:mm',
   datepickerinput: new Date().toLocaleDateString(),
 };
 
