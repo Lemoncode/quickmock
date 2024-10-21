@@ -75,3 +75,41 @@ test('Should add some in-canvas-items to the current selection, by clicking on t
   const currentSelection = await getTransformer(page);
   expect(currentSelection._nodes.length).toEqual(3);
 });
+
+test('Should selected multiple items when we doing drag and drop event and then CMD/CTRL+Click then check that we have 4 elements selected', async ({
+  page,
+}) => {
+  await page.goto('');
+
+  const componentsAtCanvas = [
+    'Input',
+    'Button',
+    'Textarea',
+    'Combobox',
+    'Icon',
+    'Label',
+  ];
+  await addComponentsToCanvas(page, componentsAtCanvas);
+  const insideCanvasItemList = await getWithinCanvasItemList(page);
+
+  //Click Away
+  await page.mouse.click(800, 130);
+
+  //Perform items selection by drag and drop
+  await dragAndDrop(page, { x: 260, y: 130 }, { x: 1000, y: 550 });
+
+  //Assert
+  const selectedItems = await getTransformer(page);
+  expect(selectedItems._nodes.length).toEqual(3);
+
+  // Add 2 canvas items to current selection
+  const itemsToBeSelected = insideCanvasItemList.slice(1, 3);
+  await ctrlClickOverCanvasItems(page, itemsToBeSelected);
+
+  //Assert the quantity of selected-items
+  const currentSelection = await getTransformer(page);
+  const totalItems =
+    selectedItems._nodes.length + currentSelection._nodes.length;
+  expect(currentSelection._nodes.length).toEqual(1);
+  expect(totalItems).toEqual(4);
+});
