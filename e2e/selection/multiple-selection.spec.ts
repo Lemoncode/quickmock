@@ -103,13 +103,10 @@ test('Should selected multiple items when we doing drag and drop event and then 
   expect(selectedItems._nodes.length).toEqual(3);
 
   // Add 2 canvas items to current selection
-  const itemsToBeSelected = insideCanvasItemList.slice(1, 3);
+  const itemsToBeSelected = insideCanvasItemList.slice(3, 4);
   await ctrlClickOverCanvasItems(page, itemsToBeSelected);
 
   //Assert the quantity of selected-items
   const currentSelection = await getTransformer(page);
-  const totalItems =
-    selectedItems._nodes.length + currentSelection._nodes.length;
-  expect(currentSelection._nodes.length).toEqual(1);
-  expect(totalItems).toEqual(4);
+  expect(currentSelection._nodes.length).toEqual(4);
 });
