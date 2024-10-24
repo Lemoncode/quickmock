@@ -12,5 +12,6 @@ export * from './table/table';
 export * from './modal/modal';
 export * from './appBar';
 export * from './buttonBar/buttonBar';
+export * from './badge-label';
 export * from './tabsbar';
 export * from './audio-player';
