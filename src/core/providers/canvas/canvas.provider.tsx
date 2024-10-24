@@ -41,6 +41,31 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const selectionInfo = useSelection(document, setDocument);
 
+  const addNewPage = () => {
+    setDocument(lastDocument =>
+      produce(lastDocument, draft => {
+        draft.pages.push({
+          id: uuidv4(),
+          name: `Page ${draft.pages.length + 1}`,
+          shapes: [],
+        });
+      })
+    );
+  };
+
+  const setActivePage = (pageId: string) => {
+    selectionInfo.clearSelection();
+    selectionInfo.shapeRefs.current = {};
+    setDocument(lastDocument =>
+      produce(lastDocument, draft => {
+        draft.activePageIndex = draft.pages.findIndex(
+          page => page.id === pageId
+        );
+        console.log(draft.activePageIndex);
+      })
+    );
+  };
+
   const pasteShapes = (shapes: ShapeModel[]) => {
     const newShapes: ShapeModel[] = shapes.map(shape => {
       shape.id = uuidv4();
@@ -114,7 +139,7 @@ export const CanvasProvider: React.FC<Props> = props => {
 
     setDocument(lastDocument =>
       produce(lastDocument, draft => {
-        draft.pages[document.activePageIndex].shapes.push(newShape);
+        draft.pages[lastDocument.activePageIndex].shapes.push(newShape);
       })
     );
 
@@ -219,6 +244,8 @@ export const CanvasProvider: React.FC<Props> = props => {
         fileName,
         setFileName,
         fullDocument: document,
+        addNewPage,
+        setActivePage,
       }}
     >
       {children}

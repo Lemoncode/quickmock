@@ -8,10 +8,11 @@ import { Layer, Stage } from 'react-konva';
 
 interface Props {
   pageIndex: number;
+  onSetActivePage: (pageId: string) => void;
 }
 
 export const ThumbPage: React.FunctionComponent<Props> = props => {
-  const { pageIndex } = props;
+  const { pageIndex, onSetActivePage } = props;
 
   const { fullDocument } = useCanvasContext();
 
@@ -29,12 +30,11 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
   const scaleFactorY = 180 / canvasSize.height;
   const finalScale = Math.min(scaleFactorX, scaleFactorY);
 
-  console.log('canvasSize', canvasSize);
-  console.log('scaleFactorX', scaleFactorX);
-  console.log('scaleFactorY', scaleFactorY);
-
   return (
-    <div style={{ width: '250px', height: '180px', border: '1px solid red' }}>
+    <div
+      style={{ width: '250px', height: '180px', border: '1px solid red' }}
+      onClick={() => onSetActivePage(page.id)}
+    >
       <Stage width={250} height={180} scaleX={finalScale} scaleY={finalScale}>
         <Layer>
           {shapes.map(shape => {

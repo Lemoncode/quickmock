@@ -46,6 +46,7 @@ export interface SelectionInfo {
       | Konva.KonvaEventObject<MouseEvent>
       | Konva.KonvaEventObject<TouchEvent>
   ) => void;
+  clearSelection: () => void;
   selectedShapesRefs: React.MutableRefObject<Node<NodeConfig>[] | null>;
   selectedShapesIds: string[];
   selectedShapeType: ShapeType | null;
@@ -94,4 +95,6 @@ export interface CanvasContextModel {
   fileName: string;
   setFileName: (fileName: string) => void;
   fullDocument: DocumentModel;
+  addNewPage: () => void;
+  setActivePage: (pageId: string) => void;
 }

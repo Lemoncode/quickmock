@@ -87,11 +87,11 @@ export const useSelection = (
     type: ShapeType,
     isUserDoingMultipleSelection: boolean
   ) => {
-    // TODO: remove this, it's a temporary hack
-    // element should be in the list already
-    //if (selectedShapesRefs.current?.length === 0) {
-    //  return;
-    // }
+    // When chaging active pages, the refs are not yet updated
+    // check if this is something temporary or final solution
+    if (Object.keys(shapeRefs.current).length === 0) {
+      return;
+    }
 
     // I want to know if the ids is string or array
     const arrayIds = typeof ids === 'string' ? [ids] : ids;
@@ -125,16 +125,20 @@ export const useSelection = (
     setSelectedShapeType(type);
   };
 
+  const clearSelection = () => {
+    transformerRef.current?.nodes([]);
+    selectedShapesRefs.current = [];
+    setSelectedShapesIds([]);
+    setSelectedShapeType(null);
+  };
+
   const handleClearSelection = (
     mouseEvent?:
       | Konva.KonvaEventObject<MouseEvent>
       | Konva.KonvaEventObject<TouchEvent>
   ) => {
     if (!mouseEvent || mouseEvent.target === mouseEvent.target.getStage()) {
-      transformerRef.current?.nodes([]);
-      selectedShapesRefs.current = [];
-      setSelectedShapesIds([]);
-      setSelectedShapeType(null);
+      clearSelection();
     }
   };
 
@@ -226,6 +230,7 @@ export const useSelection = (
     shapeRefs,
     handleSelected,
     handleClearSelection,
+    clearSelection,
     selectedShapesRefs,
     selectedShapesIds,
     selectedShapeType,
