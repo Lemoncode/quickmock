@@ -1,13 +1,25 @@
-<svg width="300" height="100" xmlns="http://www.w3.org/2000/svg">
-  <!-- Marco del input -->
-  <rect x="10" y="30" width="280" height="40" rx="10" ry="10"
-        style="fill:none;stroke:black;stroke-width:2"/>
-
-  <!-- Separadores -->
-  <text x="120" y="60" font-family="Comic Sans MS, Balsamiq Sans, cursive" font-size="20" fill="black">
-    :
-  </text>
-  <text x="220" y="60" font-family="Comic Sans MS, Balsamiq Sans, cursive" font-size="20" fill="black">
-    :
-  </text>
+<svg width="100%" height="100%" viewBox="0 0 159 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(0.75,0,0,0.75,0,0)">
+        <g transform="matrix(1,0,0,1,-52,-22)">
+            <g transform="matrix(16,0,0,16,100.861,34.8713)">
+            </g>
+            <text x="65.9px" y="34.871px" style="font-family:'ArialMT', 'Arial';font-size:16px;">T<tspan x="75.08px 78.634px " y="34.871px 34.871px ">im</tspan>e</text>
+        </g>
+        <g transform="matrix(1.42538,0,0,1.42538,-79.5774,-1.96158)">
+            <g transform="matrix(16,0,0,16,114.798,34.8713)">
+            </g>
+            <text x="65.9px" y="34.871px" style="font-family:'ArialMT', 'Arial';font-size:16px;">hh:mm</text>
+        </g>
+        <g id="access_time.svg" transform="matrix(0.916667,0,0,0.916667,185.7,40.0713)">
+            <g transform="matrix(1,0,0,1,-12,-12)">
+                <rect x="0" y="0" width="24" height="24" style="fill:none;fill-rule:nonzero;"/>
+                <path d="M11.99,2C6.47,2 2,6.48 2,12C2,17.52 6.47,22 11.99,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 11.99,2ZM12,20C7.58,20 4,16.42 4,12C4,7.58 7.58,4 12,4C16.42,4 20,7.58 20,12C20,16.42 16.42,20 12,20Z" style="fill-rule:nonzero;"/>
+                <path d="M12.5,7L11,7L11,13L16.25,16.15L17,14.92L12.5,12.25L12.5,7Z" style="fill-rule:nonzero;"/>
+            </g>
+        </g>
+        <use xlink:href="#_Image1" x="0" y="4.548" width="212px" height="62px" transform="matrix(1.33333,0,0,1.31915,0,0)"/>
+    </g>
+    <defs>
+        <image id="_Image1" width="159px" height="47px" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJ8AAAAvCAYAAAD90RiVAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABm0lEQVR4nO3dLU4DQQBH8deWBNGgMJUEErAcgcBFMByBI2D4SCUCw1FwyPoqZNGFGqCLmC2wpbLpP9D3SyabrNlJ+rI7W7HToqkFdPjtA6gWnF+FDmVe+vsaHW3UxxawDxwBOzR/7DHQByYrmV5TGzihzKsduL6WpwKegAdgyI8ID4BHSmDV3HgGdlc7zy+bwA3wvmBejr83JpTO9uH7zncMHAL3wBXwyrcKeCHjDbgALkPX1/J0gXPglPI0G0IJ8JoSWeoOp/WwR+nsGtiYraNma7zUHU7rYVwfW+AiXkHGpxjjU8wsvtQfyFpj8y8c0sr42FWM8SnG+BRjfIoxPsUYn2KMTzHGpxjjU4zxKcb4FGN8ijE+xRifYoxPMcanGONTjPEpxvgUY3yKMT7FGJ9ijE8xxqcY41OM8SnG+BRjfIoxPsUYn2KMTwkVGJ8yGh8En9bH7cxctCZmfU2h7MHxDgwo2yD0gTuam8BIy9AFzijbIQwo3QHQA26BEfktkhz/d4wonfWg+S3mrfpkD9eCWr4pJb4R9WYwnwiwPvVn+bYXAAAAAElFTkSuQmCC"/>
+    </defs>
 </svg>
