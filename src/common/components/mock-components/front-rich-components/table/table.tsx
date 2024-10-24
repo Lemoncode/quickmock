@@ -42,7 +42,10 @@ export const Table = forwardRef<any, ShapeProps>((props, ref) => {
   const headerInfo = extractHeaderRow(rows[0]);
   const headerRow = headerInfo.map(header => header.text);
   const filterHeaderRow = headerInfo.map(header => header.filter);
-  const widthRow: string[] | false = extractWidthRow(rows[rows.length - 1]);
+  const widthRow: string[] | false = extractWidthRow(
+    rows[rows.length - 1],
+    rows
+  );
   const alignments = extractAlignments(rows[rows.length - 1]);
   const dataRows = extractDataRows(rows, widthRow);
   const cellWidths = calculateCellWidths(

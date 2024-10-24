@@ -8,12 +8,12 @@ import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const paragraphSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 300,
-  minHeight: 100,
+  minWidth: 200,
+  minHeight: 70,
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 420,
-  defaultHeight: 125,
+  defaultHeight: 130,
 };
 
 export const getParagraphSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -61,9 +61,7 @@ export const ParagraphShape = forwardRef<any, ShapeProps>((props, ref) => {
         fontSize={14}
         fill={textColor}
         align="left"
-        verticalAlign="middle"
         ellipsis={true}
-        wrap="none"
       />
     </Group>
   );

@@ -25,6 +25,13 @@ export const generateDefaultOtherProps = (
       };
     case 'button':
     case 'textarea':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+        borderRadius: `${BASIC_SHAPE.DEFAULT_CORNER_RADIUS}`,
+      };
     case 'vertical-menu':
     case 'horizontal-menu':
       return {
@@ -99,17 +106,53 @@ export const generateDefaultOtherProps = (
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
-    case 'line':
+    case 'horizontalLine':
+      return {
+        stroke: '#000000',
+        strokeStyle: [],
+      };
+    case 'verticalLine':
       return {
         stroke: '#000000',
         strokeStyle: [],
       };
     case 'breadcrumb':
     case 'heading1':
+      return {
+        textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
+        fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
+        fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
+        textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+      };
+
     case 'heading2':
+      return {
+        textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
+        fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
+        fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
+        textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+      };
     case 'heading3':
+      return {
+        textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
+        fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
+        fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
+        textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+      };
     case 'normaltext':
+      return {
+        textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
+        fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
+        fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
+        textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+      };
     case 'smalltext':
+      return {
+        textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
+        fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
+        fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
+        textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+      };
     case 'paragraph':
     case 'label':
       return {

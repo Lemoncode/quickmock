@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  padding: var(--space-xs) var(--space-md);
+  border-bottom: 1px solid var(--primary-300);
+}
+
+.container :first-child {
+  flex: 1;
+}
+
+.checkbox {
+  width: var(--space-md);
+  height: var(--space-md);
+  cursor: pointer;
+}

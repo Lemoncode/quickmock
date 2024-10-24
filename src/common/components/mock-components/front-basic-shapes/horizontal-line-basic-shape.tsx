@@ -7,7 +7,7 @@ import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 
-const lineShapeRestrictions: ShapeSizeRestrictions = {
+const horizontalLineShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 50,
   minHeight: 10,
   maxWidth: -1,
@@ -16,12 +16,12 @@ const lineShapeRestrictions: ShapeSizeRestrictions = {
   defaultHeight: 10,
 };
 
-export const getlineShapeRestrictions = (): ShapeSizeRestrictions =>
-  lineShapeRestrictions;
+export const getHorizontalLineShapeRestrictions = (): ShapeSizeRestrictions =>
+  horizontalLineShapeRestrictions;
 
-const shapeType: ShapeType = 'line';
+const shapeType: ShapeType = 'horizontalLine';
 
-export const LineShape = forwardRef<any, ShapeProps>((props, ref) => {
+export const HorizontalLineShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
     x,
     y,
@@ -34,7 +34,7 @@ export const LineShape = forwardRef<any, ShapeProps>((props, ref) => {
     ...shapeProps
   } = props;
   const restrictedSize = fitSizeToShapeSizeRestrictions(
-    lineShapeRestrictions,
+    horizontalLineShapeRestrictions,
     width,
     height
   );
