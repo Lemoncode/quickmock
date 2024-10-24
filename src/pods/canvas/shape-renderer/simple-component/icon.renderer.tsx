@@ -27,6 +27,7 @@ export const renderIcon = (
       onTransformEnd={handleTransform}
       iconInfo={shape.otherProps?.icon}
       iconSize={shape.otherProps?.iconSize}
+      stroke={shape.otherProps?.stroke}
     />
   );
 };
