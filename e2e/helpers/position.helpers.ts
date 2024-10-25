@@ -20,7 +20,9 @@ export const getLocatorPosition = async (
 };
 
 export const getCanvasBoundingBox = async (page: Page) => {
-  const canvasWindowPos = await page.locator('canvas').boundingBox();
+  const canvasWindowPos = await page
+    .locator('#konva-stage canvas')
+    .boundingBox();
   if (canvasWindowPos) {
     return canvasWindowPos;
   } else {
@@ -43,7 +45,9 @@ export const addComponentsToCanvas = async (
   page: Page,
   components: string[]
 ) => {
-  const canvasPosition = await getCanvasBoundingBox(page);
+  const stageCanvas = await page.locator('#konva-stage canvas').first();
+  const canvasPosition = await stageCanvas.boundingBox();
+  if (!canvasPosition) throw new Error('No canvas found');
 
   for await (const [index, c] of components.entries()) {
     const component = page.getByAltText(c, { exact: true });

@@ -12,10 +12,12 @@ const DEFAULT_FILE_EXTENSION = 'qm';
 const DEFAULT_EXTENSION_DESCRIPTION = 'quick mock';
 
 export const useLocalDisk = () => {
-  const { shapes, loadDocument, fileName, setFileName } = useCanvasContext();
+  const { fullDocument, loadDocument, fileName, setFileName } =
+    useCanvasContext();
 
   const serializeShapes = (): string => {
-    const quickMockDocument = mapFromShapesArrayToQuickMockFileDocument(shapes);
+    const quickMockDocument =
+      mapFromShapesArrayToQuickMockFileDocument(fullDocument);
     return JSON.stringify(quickMockDocument);
   };
 

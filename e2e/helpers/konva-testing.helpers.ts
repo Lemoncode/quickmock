@@ -78,7 +78,9 @@ export const clickOnCanvasItem = async (
   item: E2E_CanvasItemKeyAttrs
 ) => {
   const { x, y } = item;
-  const canvasWindowPos = await getCanvasBoundingBox(page);
+  const stageCanvas = await page.locator('#konva-stage canvas').first();
+  const canvasWindowPos = await stageCanvas.boundingBox();
+  if (!canvasWindowPos) throw new Error('Canvas is not loaded on ui');
   await page.mouse.move(
     canvasWindowPos?.x + x + 20,
     canvasWindowPos?.y + y + 20
