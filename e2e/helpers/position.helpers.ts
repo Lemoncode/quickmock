@@ -19,6 +19,17 @@ export const getLocatorPosition = async (
   return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
 };
 
+export const getCanvasBoundingBox = async (page: Page) => {
+  const canvasWindowPos = await page
+    .locator('#konva-stage canvas')
+    .boundingBox();
+  if (canvasWindowPos) {
+    return canvasWindowPos;
+  } else {
+    throw new Error('Canvas is not loaded on ui');
+  }
+};
+
 export const dragAndDrop = async (
   page: Page,
   aPosition: Position,
