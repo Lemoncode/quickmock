@@ -34,7 +34,8 @@ export const addComponentsToCanvas = async (
   page: Page,
   components: string[]
 ) => {
-  const canvasPosition = await page.locator('canvas').boundingBox();
+  const stageCanvas = await page.locator('#konva-stage canvas').first();
+  const canvasPosition = await stageCanvas.boundingBox();
   if (!canvasPosition) throw new Error('No canvas found');
 
   for await (const [index, c] of components.entries()) {

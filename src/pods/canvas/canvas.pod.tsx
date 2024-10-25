@@ -132,6 +132,7 @@ export const CanvasPod = () => {
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
+        id="konva-stage" // data-id did not work for some reason
       >
         <Layer ref={layerRef}>
           {
