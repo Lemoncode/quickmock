@@ -19,6 +19,15 @@ export const getLocatorPosition = async (
   return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
 };
 
+export const getCanvasBoundingBox = async (page: Page) => {
+  const canvasWindowPos = await page.locator('canvas').boundingBox();
+  if (canvasWindowPos) {
+    return canvasWindowPos;
+  } else {
+    throw new Error('Canvas is not loaded on ui');
+  }
+};
+
 export const dragAndDrop = async (
   page: Page,
   aPosition: Position,
@@ -34,8 +43,7 @@ export const addComponentsToCanvas = async (
   page: Page,
   components: string[]
 ) => {
-  const canvasPosition = await page.locator('canvas').boundingBox();
-  if (!canvasPosition) throw new Error('No canvas found');
+  const canvasPosition = await getCanvasBoundingBox(page);
 
   for await (const [index, c] of components.entries()) {
     const component = page.getByAltText(c, { exact: true });
