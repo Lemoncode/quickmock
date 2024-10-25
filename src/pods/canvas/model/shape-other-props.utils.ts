@@ -185,6 +185,7 @@ export const generateDefaultOtherProps = (
           categories: ['IT'],
         },
         iconSize: 'M',
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
       };
     case 'image':
       return {
