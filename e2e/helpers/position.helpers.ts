@@ -9,6 +9,7 @@ interface Position {
 export const getLocatorPosition = async (
   locator: Locator
 ): Promise<Position> => {
+  await locator.scrollIntoViewIfNeeded();
   const box = (await locator.boundingBox()) || {
     x: 0,
     y: 0,
