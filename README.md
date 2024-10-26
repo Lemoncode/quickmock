@@ -83,7 +83,7 @@ For more information and to request a quote, feel free to contact us at: info@le
 
 ## 👥 Team
 
-Team members participating in this project
+Team members participating in this project.
 
 <p align="left">
   <a href="https://github.com/LourdesRsdp">
