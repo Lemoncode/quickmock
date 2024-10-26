@@ -82,3 +82,33 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
     </Group>
   );
 });
+
+/*
+    <Group {...commonGroupProps} {...shapeProps}>
+      <Rect
+        x={0}
+        y={0}
+        width={restrictedWidth}
+        height={restrictedHeight}
+        cornerRadius={borderRadius}
+        stroke={stroke}
+        dash={strokeStyle}
+        strokeWidth={INPUT_SHAPE.DEFAULT_STROKE_WIDTH}
+        fill={fill}
+      />
+      <Text
+        x={INPUT_SHAPE.DEFAULT_PADDING}
+        y={INPUT_SHAPE.DEFAULT_PADDING + 1}
+        width={width - INPUT_SHAPE.DEFAULT_PADDING * 2}
+        text={text}
+        fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
+        fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
+        lineHeight={INPUT_SHAPE.DEFAULT_LINE_HEIGHT}
+        fill={textColor}
+        align="left"
+        ellipsis={true}
+        wrap="none"
+      />
+    </Group>
+
+*/
