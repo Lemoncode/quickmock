@@ -8,20 +8,6 @@ import { DocumentModel } from '../providers/canvas/canvas.model';
 
 describe('shapes to document mapper', () => {
   describe('mapFromShapesArrayToQuickMockFileDocument', () => {
-    it('Should return a ShapeModel with empty pages', () => {
-      // Arrange
-      const shapes: ShapeModel[] = [];
-      const expectedResult: QuickMockFileContract = {
-        version: '0.1',
-        pages: [],
-      };
-      // Act
-      const result = mapFromShapesArrayToQuickMockFileDocument(shapes);
-
-      // Assert
-      expect(result).toEqual(expectedResult);
-    });
-
     it('Should return a ShapeModel with one pages and shapes', () => {
       // Arrange
       const shapes: ShapeModel[] = [
@@ -36,29 +22,30 @@ describe('shapes to document mapper', () => {
           typeOfTransformer: ['rotate'],
         },
       ];
+
+      const document: DocumentModel = {
+        activePageIndex: 0,
+        pages: [
+          {
+            id: '1',
+            name: 'default',
+            shapes: shapes,
+          },
+        ],
+      };
+
       const expectedResult: QuickMockFileContract = {
         version: '0.1',
         pages: [
           {
             id: '1',
             name: 'default',
-            shapes: [
-              {
-                id: '1',
-                x: 0,
-                y: 0,
-                width: 100,
-                height: 100,
-                type: 'rectangle',
-                allowsInlineEdition: false,
-                typeOfTransformer: ['rotate'],
-              },
-            ],
+            shapes: shapes,
           },
         ],
       };
       // Act
-      const result = mapFromShapesArrayToQuickMockFileDocument(shapes);
+      const result = mapFromShapesArrayToQuickMockFileDocument(document);
 
       // Assert
       expect(result).toEqual(expectedResult);
@@ -88,45 +75,31 @@ describe('shapes to document mapper', () => {
           typeOfTransformer: ['rotate'],
         },
       ];
+
+      const document: DocumentModel = {
+        activePageIndex: 0,
+        pages: [
+          {
+            id: '1',
+            name: 'default',
+            shapes: shapes,
+          },
+        ],
+      };
+
       const expectedResult: QuickMockFileContract = {
         version: '0.1',
         pages: [
           {
             id: '1',
             name: 'default',
-            shapes: [
-              {
-                id: '1',
-                x: 0,
-                y: 0,
-                width: 100,
-                height: 100,
-                type: 'rectangle',
-                allowsInlineEdition: false,
-                typeOfTransformer: ['rotate'],
-              },
-            ],
-          },
-          {
-            id: '1',
-            name: 'default',
-            shapes: [
-              {
-                id: '2',
-                x: 0,
-                y: 0,
-                width: 100,
-                height: 100,
-                type: 'circle',
-                allowsInlineEdition: true,
-                typeOfTransformer: ['rotate'],
-              },
-            ],
+            shapes: shapes,
           },
         ],
       };
+
       // Act
-      const result = mapFromShapesArrayToQuickMockFileDocument(shapes);
+      const result = mapFromShapesArrayToQuickMockFileDocument(document);
 
       // Assert
       expect(result).toEqual(expectedResult);
@@ -138,10 +111,24 @@ describe('shapes to document mapper', () => {
       //arrange
       const fileDocument: QuickMockFileContract = {
         version: '0.1',
-        pages: [],
+        pages: [
+          {
+            id: '1',
+            name: 'default',
+            shapes: [],
+          },
+        ],
       };
+
       const expectedResult: DocumentModel = {
-        shapes: [],
+        activePageIndex: 0,
+        pages: [
+          {
+            id: '1',
+            name: 'default',
+            shapes: [],
+          },
+        ],
       };
       //act
       const result =
@@ -162,9 +149,18 @@ describe('shapes to document mapper', () => {
           },
         ],
       };
+
       const expectedResult: DocumentModel = {
-        shapes: [],
+        activePageIndex: 0,
+        pages: [
+          {
+            id: '1',
+            name: 'default',
+            shapes: [],
+          },
+        ],
       };
+
       //act
       const result =
         mapFromQuickMockFileDocumentToApplicationDocument(fileDocument);
@@ -195,31 +191,9 @@ describe('shapes to document mapper', () => {
           },
         ],
       };
-      const expectedResult: DocumentModel = {
-        shapes: [
-          {
-            id: '1',
-            type: 'rectangle',
-            x: 0,
-            y: 0,
-            width: 100,
-            height: 100,
-            allowsInlineEdition: false,
-            typeOfTransformer: ['rotate'],
-          },
-        ],
-      };
-      //act
-      const result =
-        mapFromQuickMockFileDocumentToApplicationDocument(fileDocument);
-      //assert
-      expect(result).toEqual(expectedResult);
-    });
 
-    it('Should return a document model with shapes when we feed a file document with two pages and shapes', () => {
-      //arrange
-      const fileDocument: QuickMockFileContract = {
-        version: '0.1',
+      const expectedResult: DocumentModel = {
+        activePageIndex: 0,
         pages: [
           {
             id: '1',
@@ -237,48 +211,76 @@ describe('shapes to document mapper', () => {
               },
             ],
           },
+        ],
+      };
+
+      //act
+      const result =
+        mapFromQuickMockFileDocumentToApplicationDocument(fileDocument);
+      //assert
+      expect(result).toEqual(expectedResult);
+    });
+
+    it('Should return a document model with shapes when we feed a file document with two pages and shapes', () => {
+      //arrange
+      const shapespageA: ShapeModel[] = [
+        {
+          id: '1',
+          type: 'rectangle',
+          x: 0,
+          y: 0,
+          width: 100,
+          height: 100,
+          allowsInlineEdition: false,
+          typeOfTransformer: ['rotate'],
+        },
+      ];
+
+      const shapesPageB: ShapeModel[] = [
+        {
+          id: '3',
+          type: 'browser',
+          x: 0,
+          y: 0,
+          width: 100,
+          height: 100,
+          allowsInlineEdition: true,
+          typeOfTransformer: [' rotate'],
+        },
+      ];
+
+      const fileDocument: QuickMockFileContract = {
+        version: '0.1',
+        pages: [
+          {
+            id: '1',
+            name: 'default',
+            shapes: shapespageA,
+          },
           {
             id: '2',
             name: 'default',
-            shapes: [
-              {
-                id: '3',
-                type: 'browser',
-                x: 0,
-                y: 0,
-                width: 100,
-                height: 100,
-                allowsInlineEdition: true,
-                typeOfTransformer: [' rotate'],
-              },
-            ],
+            shapes: shapesPageB,
           },
         ],
       };
+
       const expectedResult: DocumentModel = {
-        shapes: [
+        activePageIndex: 0,
+        pages: [
           {
             id: '1',
-            type: 'rectangle',
-            x: 0,
-            y: 0,
-            width: 100,
-            height: 100,
-            allowsInlineEdition: false,
-            typeOfTransformer: ['rotate'],
+            name: 'default',
+            shapes: shapespageA,
           },
           {
-            id: '3',
-            type: 'browser',
-            x: 0,
-            y: 0,
-            width: 100,
-            height: 100,
-            allowsInlineEdition: true,
-            typeOfTransformer: [' rotate'],
+            id: '2',
+            name: 'default',
+            shapes: shapesPageB,
           },
         ],
       };
+
       //act
       const result =
         mapFromQuickMockFileDocumentToApplicationDocument(fileDocument);
