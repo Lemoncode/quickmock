@@ -1,3 +1,9 @@
+const MAX_DIGITS = 2;
+const MAX_HOURS = '23';
+const MAX_MINUTES = '59';
+const HOUR_MASK = 'hh';
+const MINUTES_MASK = 'mm';
+
 export const splitCSVContent = (csvContent: string): string[] => {
   const splitedCsvContent = csvContent
     .trim()
@@ -7,19 +13,19 @@ export const splitCSVContent = (csvContent: string): string[] => {
 };
 
 export const setTime = (csvData: string[]) => {
-  let [hora, minutos] = csvData;
+  let [hour, minutes] = csvData;
   if (csvData.length < 2) {
     return true;
   }
-  if (csvData[0] !== 'hh' || csvData[1] !== 'mm') {
+  if (csvData[0] !== HOUR_MASK || csvData[1] !== MINUTES_MASK) {
     if (
-      csvData.length > 2 ||
-      hora.length !== 2 ||
-      hora === '' ||
-      hora > '23' ||
-      minutos.length !== 2 ||
-      minutos === '' ||
-      minutos > '59'
+      csvData.length > MAX_DIGITS ||
+      hour.length !== MAX_DIGITS ||
+      hour === '' ||
+      hour > MAX_HOURS ||
+      minutes.length !== MAX_DIGITS ||
+      minutes === '' ||
+      minutes > MAX_MINUTES
     ) {
       return true;
     }

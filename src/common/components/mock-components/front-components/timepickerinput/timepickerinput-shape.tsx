@@ -83,24 +83,26 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           cornerRadius={borderRadius}
           stroke={stroke}
           dash={strokeStyle}
-          strokeWidth={2}
+          strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
           fill={fill}
         />
-        {/* Background of Date Label */}
+        {/* Background of Time Label */}
         <Rect
           x={10}
           y={-5}
           width={labelFontSize + 20}
           height={labelFontSize}
           cornerRadius={borderRadius}
+          strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
           fill="white"
         />
-        {/* Label "Date" */}
+        {/* Label "Time" */}
         <Text
           text="Time"
           x={13}
           y={-5}
-          fontSize={labelFontSize}
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
+          fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE - 4}
           fill={stroke}
           align="center"
           color={stroke}
@@ -108,20 +110,23 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
         {/* Main Text */}
         <Text
           text={text}
-          // fill={black}
           x={10}
           y={(restrictedHeight - fontSize) / 2 + 2}
           width={availableWidth}
-          fontSize={fontSize}
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
+          fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE}
+          lineHeight={BASIC_SHAPE.DEFAULT_LINE_HEIGHT}
           align="left"
           ellipsis={true}
           wrap="none"
         />
+        {/* Error Text */}
         {isError && (
           <Text
             text="Error, valid format hh:mm"
             x={10}
             y={35}
+            fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
             fontSize={10}
             fill="red"
             align="center"
@@ -129,7 +134,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           />
         )}
 
-        {/* Calendar Icon */}
+        {/* Clock Icon */}
         <Image
           image={clockIcon}
           x={restrictedWidth - iconWidth - 5}
