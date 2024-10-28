@@ -3,6 +3,7 @@ import { Layer } from 'konva/lib/Layer';
 import { Shape } from 'konva/lib/Shape';
 import { Group } from 'konva/lib/Group';
 import { E2E_CanvasItemKeyAttrs } from './types/e2e-types';
+import { getCanvasBoundingBox } from './position.helpers';
 
 const getLayer = async (page: Page): Promise<Layer> =>
   await page.evaluate(() => {
@@ -77,7 +78,8 @@ export const clickOnCanvasItem = async (
   item: E2E_CanvasItemKeyAttrs
 ) => {
   const { x, y } = item;
-  const canvasWindowPos = await page.locator('canvas').boundingBox();
+  const stageCanvas = await page.locator('#konva-stage canvas').first();
+  const canvasWindowPos = await stageCanvas.boundingBox();
   if (!canvasWindowPos) throw new Error('Canvas is not loaded on ui');
   await page.mouse.move(
     canvasWindowPos?.x + x + 20,
@@ -87,6 +89,19 @@ export const clickOnCanvasItem = async (
   await page.mouse.down();
   await page.mouse.up();
 
+  return item;
+};
+
+export const dbClickOnCanvasItem = async (
+  page: Page,
+  item: E2E_CanvasItemKeyAttrs
+) => {
+  const { x, y } = item;
+  const canvasWindowPos = await getCanvasBoundingBox(page);
+  await page.mouse.dblclick(
+    canvasWindowPos?.x + x + 20,
+    canvasWindowPos?.y + y + 20
+  );
   return item;
 };
 
