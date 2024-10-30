@@ -13,8 +13,12 @@ export const ThumbPageContextMenu: React.FunctionComponent<
   ThumbPageContextMenuProps
 > = props => {
   const { contextMenuRef, setShowContextMenu, pageIndex } = props;
-  const { setIsThumbnailContextMenuVisible, duplicatePage, fullDocument } =
-    useCanvasContext();
+  const {
+    setIsThumbnailContextMenuVisible,
+    fullDocument,
+    duplicatePage,
+    deletePage,
+  } = useCanvasContext();
 
   enum ContextButtonType {
     'Duplicate',
@@ -22,7 +26,11 @@ export const ThumbPageContextMenu: React.FunctionComponent<
     'Delete',
   }
 
-  const handleClickOnContextButton = (buttonClicked: ContextButtonType) => {
+  const handleClickOnContextButton = (
+    event: React.MouseEvent,
+    buttonClicked: ContextButtonType
+  ) => {
+    event.stopPropagation();
     switch (buttonClicked) {
       case ContextButtonType.Duplicate:
         duplicatePage(pageIndex);
@@ -31,7 +39,7 @@ export const ThumbPageContextMenu: React.FunctionComponent<
         console.log('Rename');
         break;
       case ContextButtonType.Delete:
-        console.log('Delete');
+        deletePage(pageIndex);
         break;
     }
     setShowContextMenu(false);
@@ -41,21 +49,18 @@ export const ThumbPageContextMenu: React.FunctionComponent<
   return (
     <div ref={contextMenuRef} className={classes['context-menu']}>
       <div
-        onClick={() => handleClickOnContextButton(ContextButtonType.Duplicate)}
+        onClick={event =>
+          handleClickOnContextButton(event, ContextButtonType.Duplicate)
+        }
         className={classes.container}
       >
         <p>Duplicate</p>
         <CopyIcon />
       </div>
-      {/*<div
-        onClick={() => handleClickOnContextButton(ContextButtonType.Rename)}
-        className={classes.container}
-      >
-        <p>Rename</p>
-        <PencilIcon />
-      </div>*/}
       <div
-        onClick={() => handleClickOnContextButton(ContextButtonType.Delete)}
+        onClick={event =>
+          handleClickOnContextButton(event, ContextButtonType.Delete)
+        }
         className={
           fullDocument.pages.length === 1
             ? `${classes.container} ${classes.disabled}`

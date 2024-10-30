@@ -16,7 +16,6 @@ interface Props {
 export const ThumbPage: React.FunctionComponent<Props> = props => {
   const { pageIndex, onSetActivePage } = props;
   const { fullDocument } = useCanvasContext();
-
   const page = fullDocument.pages[pageIndex];
   const shapes = page.shapes;
   const fakeShapeRefs = useRef<ShapeRefs>({});

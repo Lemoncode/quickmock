@@ -66,24 +66,44 @@ export const CanvasProvider: React.FC<Props> = props => {
 
     setDocument(lastDocument =>
       produce(lastDocument, draft => {
-        draft.pages.push({
+        const newPage = {
           id: uuidv4(),
           name: `Page ${draft.pages.length + 1}`,
           shapes: newShapes,
-        });
+        };
+        draft.pages.push(newPage);
+        setActivePage(newPage.id);
       })
     );
+  };
+
+  const deletePage = (pageIndex: number) => {
+    const newActivePageId =
+      pageIndex < document.pages.length - 1
+        ? document.pages[pageIndex + 1].id // If it's not the last page, select the next one
+        : document.pages[pageIndex - 1].id; // Otherwise, select the previous one
+
+    setDocument(lastDocument =>
+      produce(lastDocument, draft => {
+        draft.pages = draft.pages.filter(
+          currentPage => document.pages[pageIndex].id !== currentPage.id
+        );
+      })
+    );
+
+    setActivePage(newActivePageId);
   };
 
   const setActivePage = (pageId: string) => {
     selectionInfo.clearSelection();
     selectionInfo.shapeRefs.current = {};
+
     setDocument(lastDocument =>
       produce(lastDocument, draft => {
-        draft.activePageIndex = draft.pages.findIndex(
-          page => page.id === pageId
-        );
-        console.log(draft.activePageIndex);
+        const pageIndex = draft.pages.findIndex(page => page.id === pageId);
+        if (pageIndex !== -1) {
+          draft.activePageIndex = pageIndex;
+        }
       })
     );
   };
@@ -269,6 +289,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         addNewPage,
         duplicatePage,
         setActivePage,
+        deletePage,
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
       }}
