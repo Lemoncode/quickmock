@@ -5,6 +5,7 @@ import { calculateCanvasBounds } from '@/pods/toolbar/components/export-button/e
 import { KonvaEventObject } from 'konva/lib/Node';
 import { createRef, useRef } from 'react';
 import { Layer, Stage } from 'react-konva';
+import { calculateScaleBasedOnBounds } from './thumb-page.business';
 
 interface Props {
   pageIndex: number;
@@ -22,13 +23,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
 
   const bounds = calculateCanvasBounds(shapes);
 
-  const canvasSize = {
-    width: bounds.x + bounds.width,
-    height: bounds.y + bounds.height,
-  };
-  const scaleFactorX = 250 / canvasSize.width;
-  const scaleFactorY = 180 / canvasSize.height;
-  const finalScale = Math.min(scaleFactorX, scaleFactorY);
+  const finalScale = calculateScaleBasedOnBounds(bounds);
 
   return (
     <div
