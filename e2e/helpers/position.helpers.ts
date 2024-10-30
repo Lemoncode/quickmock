@@ -33,7 +33,8 @@ export const addComponentsToCanvas = async (
   page: Page,
   components: string[]
 ) => {
-  const canvasPosition = await page.locator('canvas').boundingBox();
+  const canvas = await page.locator('canvas');
+  const canvasPosition = await canvas.boundingBox();
   if (!canvasPosition) throw new Error('No canvas found');
 
   for await (const [index, c] of components.entries()) {
@@ -51,8 +52,16 @@ export const addComponentsToCanvas = async (
         y: canvasPosition.y + positionDisplacement,
       };
     };
+    const currentComponent = targetPosition(120, index);
+    console.log(currentComponent);
 
-    await dragAndDrop(page, position, targetPosition(120, index));
+    // if (canvasPosition.width < currentComponent.x || canvasPosition.height < currentComponent.y) {
+    //   console.log('he pasado el límite');
+    // } else {
+    //   console.log('no he pasado el límite');
+    // }
+
+    await dragAndDrop(page, position, currentComponent);
   }
 };
 

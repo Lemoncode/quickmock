@@ -91,6 +91,7 @@ test('Should selected multiple items when we doing drag and drop event and then 
   ];
   await addComponentsToCanvas(page, componentsAtCanvas);
   const insideCanvasItemList = await getWithinCanvasItemList(page);
+  //expect(insideCanvasItemList).toHaveLength(6);
 
   //Click Away
   await page.mouse.click(800, 130);
