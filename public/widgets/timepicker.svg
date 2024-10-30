@@ -1,13 +1,24 @@
-<svg width="300" height="100" xmlns="http://www.w3.org/2000/svg">
-  <!-- Marco del input -->
-  <rect x="10" y="30" width="280" height="40" rx="10" ry="10"
-        style="fill:none;stroke:black;stroke-width:2"/>
-
-  <!-- Separadores -->
-  <text x="120" y="60" font-family="Comic Sans MS, Balsamiq Sans, cursive" font-size="20" fill="black">
-    :
-  </text>
-  <text x="220" y="60" font-family="Comic Sans MS, Balsamiq Sans, cursive" font-size="20" fill="black">
-    :
-  </text>
+<svg width="100%" height="100%" viewBox="0 0 159 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(0.75,0,0,0.75,0,0)">
+        <g transform="matrix(1,0,0,1,13.2725,12.871)">
+            <g>
+                <text x="0px" y="0px" style="font-family:'Comic Sans MS', 'Balsamiq Sans', 'cursive';font-size:16px;">T<tspan x="8.992px " y="0px ">i</tspan>me</text>
+            </g>
+        </g>
+        <g transform="matrix(1.42538,0,0,1.42538,14.3551,47.7428)">
+            <text x="0px" y="0px" style="font-family:'Comic Sans MS', 'Balsamiq Sans', 'cursive';font-size:16px;">hh:mm</text>
+        </g>
+        <g transform="matrix(0.916667,0,0,0.916667,174.7,29.0713)">
+            <g id="access_time.svg">
+                <g>
+                    <rect x="0" y="0" width="24" height="24" style="fill:none;"/>
+                    <path d="M11.99,2C6.47,2 2,6.48 2,12C2,17.52 6.47,22 11.99,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 11.99,2ZM12,20C7.58,20 4,16.42 4,12C4,7.58 7.58,4 12,4C16.42,4 20,7.58 20,12C20,16.42 16.42,20 12,20Z" style="fill-rule:nonzero;"/>
+                    <path d="M12.5,7L11,7L11,13L16.25,16.15L17,14.92L12.5,12.25L12.5,7Z" style="fill-rule:nonzero;"/>
+                </g>
+            </g>
+        </g>
+        <g transform="matrix(1.37166,0,0,1.43452,-3.29753,-1.12255)">
+            <path d="M40.939,6.313L152.227,6.313C154.015,6.313 155.466,7.701 155.466,9.41L155.466,43.849C155.466,45.558 154.015,46.945 152.227,46.945L7.24,46.945C5.453,46.945 4.002,45.558 4.002,43.849L4.002,9.41C4.002,7.701 5.453,6.313 7.24,6.313L11.095,6.313" style="fill:none;stroke:black;stroke-width:1px;"/>
+        </g>
+    </g>
 </svg>

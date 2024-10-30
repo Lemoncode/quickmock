@@ -1,29 +1,30 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef } from 'react';
-import { ShapeProps } from '../shape.model';
+import { ShapeProps } from '../../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text, Image } from 'react-konva';
-import { INPUT_SHAPE } from './shape.const';
-import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import { useGroupShapeProps } from '../mock-components.utils';
+import { BASIC_SHAPE } from '../shape.const';
+import { useShapeProps } from '../../../shapes/use-shape-props.hook';
+import { useGroupShapeProps } from '../../mock-components.utils';
+import { splitCSVContent, setTime } from './timepickerinput-shape.business';
 
-import calendarIconSrc from '/icons/calendar.svg';
+import clockIconSrc from '/icons/clock.svg';
 
-const datepickerInputShapeRestrictions: ShapeSizeRestrictions = {
+const timepickerInputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
-  minHeight: 30,
+  minHeight: 50,
   maxWidth: -1,
   maxHeight: 50,
-  defaultWidth: 180,
+  defaultWidth: 220,
   defaultHeight: 50,
 };
 
-const shapeType: ShapeType = 'datepickerinput';
+const shapeType: ShapeType = 'timepickerinput';
 
-export const getDatepickerInputShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => datepickerInputShapeRestrictions;
+export const getTimepickerInputShapeSizeRestrictions =
+  (): ShapeSizeRestrictions => timepickerInputShapeRestrictions;
 
-export const DatepickerInputShape = forwardRef<any, ShapeProps>(
+export const TimepickerInputShape = forwardRef<any, ShapeProps>(
   (props, ref) => {
     const {
       x,
@@ -31,21 +32,23 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
       width,
       height,
       id,
-      onSelected,
       text,
+      onSelected,
       otherProps,
       ...shapeProps
     } = props;
+
     const restrictedSize = fitSizeToShapeSizeRestrictions(
-      datepickerInputShapeRestrictions,
+      timepickerInputShapeRestrictions,
       width,
       height
     );
-
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-    const { stroke, fill, textColor, strokeStyle, borderRadius } =
-      useShapeProps(otherProps, INPUT_SHAPE);
+    const { stroke, strokeStyle, fill, borderRadius } = useShapeProps(
+      otherProps,
+      BASIC_SHAPE
+    );
 
     const commonGroupProps = useGroupShapeProps(
       props,
@@ -53,6 +56,9 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
       shapeType,
       ref
     );
+
+    const csvData = splitCSVContent(text);
+    let isError = setTime(csvData);
 
     const iconWidth = 25;
     const availableWidth = restrictedWidth - iconWidth - 20;
@@ -63,8 +69,8 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
     );
     const labelFontSize = Math.min(restrictedHeight * 0.3, 12);
 
-    const calendarIcon = new window.Image();
-    calendarIcon.src = calendarIconSrc;
+    const clockIcon = new window.Image();
+    clockIcon.src = clockIconSrc;
 
     return (
       <Group {...commonGroupProps} {...shapeProps}>
@@ -77,24 +83,26 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           cornerRadius={borderRadius}
           stroke={stroke}
           dash={strokeStyle}
-          strokeWidth={2}
+          strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
           fill={fill}
         />
-        {/* Background of Date Label */}
+        {/* Background of Time Label */}
         <Rect
           x={10}
           y={-5}
           width={labelFontSize + 20}
           height={labelFontSize}
           cornerRadius={borderRadius}
+          strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
           fill="white"
         />
-        {/* Label "Date" */}
+        {/* Label "Time" */}
         <Text
-          text="Date"
+          text="Time"
           x={13}
           y={-5}
-          fontSize={labelFontSize}
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
+          fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE - 4}
           fill={stroke}
           align="center"
           color={stroke}
@@ -102,28 +110,33 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
         {/* Main Text */}
         <Text
           text={text}
-          fill={textColor}
           x={10}
           y={(restrictedHeight - fontSize) / 2 + 2}
           width={availableWidth}
-          fontSize={fontSize}
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
+          fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE}
+          lineHeight={BASIC_SHAPE.DEFAULT_LINE_HEIGHT}
           align="left"
           ellipsis={true}
           wrap="none"
         />
+        {/* Error Text */}
+        {isError && (
+          <Text
+            text="Error, valid format hh:mm"
+            x={10}
+            y={35}
+            fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
+            fontSize={10}
+            fill="red"
+            align="center"
+            color={stroke}
+          />
+        )}
 
-        <Text
-          text="Date"
-          x={13}
-          y={20}
-          fontSize={10}
-          fill="red"
-          align="center"
-          color={stroke}
-        />
-        {/* Calendar Icon */}
+        {/* Clock Icon */}
         <Image
-          image={calendarIcon}
+          image={clockIcon}
           x={restrictedWidth - iconWidth - 5}
           y={(restrictedHeight - 20) / 2}
           width={20}
