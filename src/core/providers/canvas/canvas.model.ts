@@ -97,4 +97,8 @@ export interface CanvasContextModel {
   fullDocument: DocumentModel;
   addNewPage: () => void;
   setActivePage: (pageId: string) => void;
+  isThumbnailContextMenuVisible: boolean;
+  setIsThumbnailContextMenuVisible: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
 }

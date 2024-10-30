@@ -23,6 +23,8 @@ export const CanvasProvider: React.FC<Props> = props => {
   const stageRef = React.useRef<Konva.Stage>(null);
   const [isInlineEditing, setIsInlineEditing] = React.useState(false);
   const [fileName, setFileName] = React.useState<string>('');
+  const [isThumbnailContextMenuVisible, setIsThumbnailContextMenuVisible] =
+    React.useState(false);
 
   const {
     addSnapshot,
@@ -246,6 +248,8 @@ export const CanvasProvider: React.FC<Props> = props => {
         fullDocument: document,
         addNewPage,
         setActivePage,
+        isThumbnailContextMenuVisible,
+        setIsThumbnailContextMenuVisible,
       }}
     >
       {children}
