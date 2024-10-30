@@ -1,18 +1,20 @@
 import React from 'react';
 import { useCanvasContext } from '@/core/providers';
 import classes from './context-menu.component.module.css';
-import { CopyIcon, DeleteIcon, PencilIcon } from '@/common/components/icons';
+import { CopyIcon, DeleteIcon } from '@/common/components/icons';
 
 interface ThumbPageContextMenuProps {
   contextMenuRef: React.RefObject<HTMLDivElement>;
   setShowContextMenu: (show: boolean) => void;
+  pageIndex: number;
 }
 
 export const ThumbPageContextMenu: React.FunctionComponent<
   ThumbPageContextMenuProps
 > = props => {
-  const { contextMenuRef, setShowContextMenu } = props;
-  const { setIsThumbnailContextMenuVisible } = useCanvasContext();
+  const { contextMenuRef, setShowContextMenu, pageIndex } = props;
+  const { setIsThumbnailContextMenuVisible, duplicatePage, fullDocument } =
+    useCanvasContext();
 
   enum ContextButtonType {
     'Duplicate',
@@ -23,7 +25,7 @@ export const ThumbPageContextMenu: React.FunctionComponent<
   const handleClickOnContextButton = (buttonClicked: ContextButtonType) => {
     switch (buttonClicked) {
       case ContextButtonType.Duplicate:
-        console.log('Duplicate');
+        duplicatePage(pageIndex);
         break;
       case ContextButtonType.Rename:
         console.log('Rename');
@@ -45,16 +47,20 @@ export const ThumbPageContextMenu: React.FunctionComponent<
         <p>Duplicate</p>
         <CopyIcon />
       </div>
-      <div
+      {/*<div
         onClick={() => handleClickOnContextButton(ContextButtonType.Rename)}
         className={classes.container}
       >
         <p>Rename</p>
         <PencilIcon />
-      </div>
+      </div>*/}
       <div
         onClick={() => handleClickOnContextButton(ContextButtonType.Delete)}
-        className={classes.container}
+        className={
+          fullDocument.pages.length === 1
+            ? `${classes.container} ${classes.disabled}`
+            : `${classes.container}`
+        }
       >
         <p>Delete</p>
         <DeleteIcon />

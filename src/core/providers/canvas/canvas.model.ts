@@ -96,6 +96,7 @@ export interface CanvasContextModel {
   setFileName: (fileName: string) => void;
   fullDocument: DocumentModel;
   addNewPage: () => void;
+  duplicatePage: (pageIndex: number) => void;
   setActivePage: (pageId: string) => void;
   isThumbnailContextMenuVisible: boolean;
   setIsThumbnailContextMenuVisible: React.Dispatch<

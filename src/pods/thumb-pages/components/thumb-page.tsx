@@ -69,6 +69,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
           <ThumbPageContextMenu
             contextMenuRef={contextMenuRef}
             setShowContextMenu={setShowContextMenu}
+            pageIndex={pageIndex}
           />
         )}
       </div>

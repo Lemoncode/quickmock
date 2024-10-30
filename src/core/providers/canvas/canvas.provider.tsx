@@ -55,6 +55,26 @@ export const CanvasProvider: React.FC<Props> = props => {
     );
   };
 
+  const duplicatePage = (pageIndex: number) => {
+    const newShapes: ShapeModel[] = document.pages[pageIndex].shapes.map(
+      shape => {
+        const newShape: ShapeModel = { ...shape };
+        newShape.id = uuidv4();
+        return newShape;
+      }
+    );
+
+    setDocument(lastDocument =>
+      produce(lastDocument, draft => {
+        draft.pages.push({
+          id: uuidv4(),
+          name: `Page ${draft.pages.length + 1}`,
+          shapes: newShapes,
+        });
+      })
+    );
+  };
+
   const setActivePage = (pageId: string) => {
     selectionInfo.clearSelection();
     selectionInfo.shapeRefs.current = {};
@@ -247,6 +267,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         setFileName,
         fullDocument: document,
         addNewPage,
+        duplicatePage,
         setActivePage,
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
