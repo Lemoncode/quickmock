@@ -49,6 +49,7 @@ import {
   renderHorizontalLine,
   renderVerticalLine,
   renderCircle,
+  renderModalCover,
   renderStar,
   renderPostit,
   renderLargeArrowShape,
@@ -166,6 +167,8 @@ export const renderShapeComponent = (
       return renderVerticalScrollBar(shape, shapeRenderedProps);
     case 'modal':
       return renderModal(shape, shapeRenderedProps);
+    case 'modalCover':
+      return renderModalCover(shape, shapeRenderedProps);
     case 'tabsBar':
       return renderTabsBar(shape, shapeRenderedProps);
     case 'appBar':
