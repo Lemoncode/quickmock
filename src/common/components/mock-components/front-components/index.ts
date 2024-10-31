@@ -7,7 +7,7 @@ export * from './progressbar-shape';
 export * from './listbox';
 export * from './datepickerinput-shape';
 export * from './button-shape';
-export * from './timepickerinput-shape';
+export * from './timepickerinput/timepickerinput-shape';
 export * from './radiobutton-shape';
 export * from './icon';
 export * from './verticalscrollbar-shape';
