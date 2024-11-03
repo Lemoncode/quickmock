@@ -68,7 +68,7 @@ export const CanvasProvider: React.FC<Props> = props => {
       produce(lastDocument, draft => {
         const newPage = {
           id: uuidv4(),
-          name: `Page ${draft.pages.length + 1}`,
+          name: `${document.pages[pageIndex].name} - copy`,
           shapes: newShapes,
         };
         draft.pages.push(newPage);
@@ -104,6 +104,14 @@ export const CanvasProvider: React.FC<Props> = props => {
         if (pageIndex !== -1) {
           draft.activePageIndex = pageIndex;
         }
+      })
+    );
+  };
+
+  const editPageTitle = (pageIndex: number, newName: string) => {
+    setDocument(lastDocument =>
+      produce(lastDocument, draft => {
+        draft.pages[pageIndex].name = newName;
       })
     );
   };
@@ -290,6 +298,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         duplicatePage,
         setActivePage,
         deletePage,
+        editPageTitle,
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
       }}

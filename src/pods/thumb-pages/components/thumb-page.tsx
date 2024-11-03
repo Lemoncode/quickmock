@@ -5,16 +5,17 @@ import { calculateCanvasBounds } from '@/pods/toolbar/components/export-button/e
 import { KonvaEventObject } from 'konva/lib/Node';
 import { createRef, useRef } from 'react';
 import { Layer, Stage } from 'react-konva';
-import { ThumbPageContextMenu } from './context-menu/context-menu.component';
+import { ThumbPageContextMenu } from './context-menu';
 import { useContextMenu } from '../use-context-menu-thumb.hook';
 
 interface Props {
   pageIndex: number;
   onSetActivePage: (pageId: string) => void;
+  setPageTitleBeingEdited: (index: number) => void;
 }
 
 export const ThumbPage: React.FunctionComponent<Props> = props => {
-  const { pageIndex, onSetActivePage } = props;
+  const { pageIndex, onSetActivePage, setPageTitleBeingEdited } = props;
   const { fullDocument } = useCanvasContext();
   const page = fullDocument.pages[pageIndex];
   const shapes = page.shapes;
@@ -69,6 +70,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
             contextMenuRef={contextMenuRef}
             setShowContextMenu={setShowContextMenu}
             pageIndex={pageIndex}
+            setPageTitleBeingEdited={setPageTitleBeingEdited}
           />
         )}
       </div>
