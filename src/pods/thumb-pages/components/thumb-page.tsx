@@ -27,7 +27,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
     width: bounds.x + bounds.width,
     height: bounds.y + bounds.height,
   };
-  const scaleFactorX = 250 / canvasSize.width;
+  const scaleFactorX = 200 / canvasSize.width;
   const scaleFactorY = 180 / canvasSize.height;
   const finalScale = Math.min(scaleFactorX, scaleFactorY);
 
@@ -45,7 +45,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
         onClick={() => onSetActivePage(page.id)}
         onContextMenu={handleShowContextMenu}
       >
-        <Stage width={250} height={180} scaleX={finalScale} scaleY={finalScale}>
+        <Stage width={200} height={180} scaleX={finalScale} scaleY={finalScale}>
           <Layer>
             {shapes.map(shape => {
               if (!fakeShapeRefs.current[shape.id]) {

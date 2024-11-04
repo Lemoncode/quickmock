@@ -11,3 +11,7 @@
 .activeThumb {
   background-color: rgb(41, 41, 235);
 }
+
+.activeText {
+  color: white;
+}

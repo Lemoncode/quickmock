@@ -39,7 +39,10 @@ export const ThumbPagesPod: React.FC = () => {
                 setPageTitleBeingEdited={setPageTitleBeingEdited}
               />
             ) : (
-              <div onDoubleClick={() => setPageTitleBeingEdited(index)}>
+              <div
+                onDoubleClick={() => setPageTitleBeingEdited(index)}
+                className={page.id === activePageId ? classes.activeText : ''}
+              >
                 {page.name}
               </div>
             )}
