@@ -7,6 +7,7 @@ import { createRef, useRef } from 'react';
 import { Layer, Stage } from 'react-konva';
 import { ThumbPageContextMenu } from './context-menu';
 import { useContextMenu } from '../use-context-menu-thumb.hook';
+import classes from './thumb-page.module.css';
 
 interface Props {
   pageIndex: number;
@@ -26,7 +27,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
     width: bounds.x + bounds.width,
     height: bounds.y + bounds.height,
   };
-  const scaleFactorX = 250 / canvasSize.width;
+  const scaleFactorX = 200 / canvasSize.width;
   const scaleFactorY = 180 / canvasSize.height;
   const finalScale = Math.min(scaleFactorX, scaleFactorY);
 
@@ -40,16 +41,11 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
   return (
     <>
       <div
-        style={{
-          width: '250px',
-          height: '180px',
-          border: '1px solid red',
-          position: 'relative',
-        }}
+        className={classes.container}
         onClick={() => onSetActivePage(page.id)}
         onContextMenu={handleShowContextMenu}
       >
-        <Stage width={250} height={180} scaleX={finalScale} scaleY={finalScale}>
+        <Stage width={200} height={180} scaleX={finalScale} scaleY={finalScale}>
           <Layer>
             {shapes.map(shape => {
               if (!fakeShapeRefs.current[shape.id]) {
