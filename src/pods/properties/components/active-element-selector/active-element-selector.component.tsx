@@ -27,7 +27,7 @@ export const ActiveElementSelector: React.FC<Props> = ({
 
   // Checking whether the type is tabsBar and parsing the text
   const isElementTypeSupported =
-    type === 'tabsBar' || 'buttonBar' || 'horizontal-menu';
+    type === 'tabsBar' || 'buttonBar' || 'horizontal-menu' || 'timepickerinput';
   const elementNames =
     isElementTypeSupported && text ? extractElementNames(text) : [];
 
