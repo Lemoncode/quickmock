@@ -11,7 +11,7 @@
   padding-bottom: 0px;
 }
 
-.container svg {
+.container > svg {
   position: absolute;
   bottom: 8px;
   right: 8px;
