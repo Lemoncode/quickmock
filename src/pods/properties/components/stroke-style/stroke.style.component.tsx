@@ -31,6 +31,7 @@ export const StrokeStyle: React.FC<Props> = props => {
         <option value="10,10">- - - -</option>
         <option value="10,5,2,5">-.-.-.-</option>
         <option value="2,5">........</option>
+        <option value="0,1">None</option>
       </select>
     </div>
   );
