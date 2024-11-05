@@ -3,10 +3,16 @@ import { CanvasBounds } from '@/pods/toolbar/components/export-button/export-but
 export const calculateScaleBasedOnBounds = (
   canvasBounds: CanvasBounds
 ): number => {
-  const newCanvasBounds = {
-    width: canvasBounds.width > 800 ? canvasBounds.width : 800,
-    height: canvasBounds.height > 600 ? canvasBounds.height : 600,
+  let canvasSize = {
+    width: canvasBounds.x + canvasBounds.width,
+    height: canvasBounds.y + canvasBounds.height,
   };
+
+  const newCanvasBounds = {
+    width: canvasSize.width > 800 ? canvasSize.width : 800,
+    height: canvasSize.height > 600 ? canvasSize.height : 600,
+  };
+
   const scaleFactorX = 250 / newCanvasBounds.width;
   const scaleFactorY = 180 / newCanvasBounds.height;
   return Math.min(scaleFactorX, scaleFactorY);
