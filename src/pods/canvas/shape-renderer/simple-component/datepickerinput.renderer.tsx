@@ -26,6 +26,7 @@ export const renderDatepickerinput = (
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
       otherProps={shape.otherProps}
+      text={shape.text}
     />
   );
 };

@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test';
+import { Group } from 'konva/lib/Group';
 
 interface Position {
   x: number;
@@ -8,6 +9,7 @@ interface Position {
 export const getLocatorPosition = async (
   locator: Locator
 ): Promise<Position> => {
+  await locator.scrollIntoViewIfNeeded();
   const box = (await locator.boundingBox()) || {
     x: 0,
     y: 0,
@@ -15,6 +17,17 @@ export const getLocatorPosition = async (
     height: 0,
   };
   return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+};
+
+export const getCanvasBoundingBox = async (page: Page) => {
+  const canvasWindowPos = await page
+    .locator('#konva-stage canvas')
+    .boundingBox();
+  if (canvasWindowPos) {
+    return canvasWindowPos;
+  } else {
+    throw new Error('Canvas is not loaded on ui');
+  }
 };
 
 export const dragAndDrop = async (
@@ -32,11 +45,13 @@ export const addComponentsToCanvas = async (
   page: Page,
   components: string[]
 ) => {
-  const canvasPosition = await page.locator('canvas').boundingBox();
+  const stageCanvas = await page.locator('#konva-stage canvas').first();
+  const canvasPosition = await stageCanvas.boundingBox();
   if (!canvasPosition) throw new Error('No canvas found');
 
   for await (const [index, c] of components.entries()) {
     const component = page.getByAltText(c, { exact: true });
+    await component.scrollIntoViewIfNeeded();
     const position = await getLocatorPosition(component);
 
     const targetPosition = (
@@ -52,4 +67,16 @@ export const addComponentsToCanvas = async (
 
     await dragAndDrop(page, position, targetPosition(120, index));
   }
+};
+
+export const getShapePosition = async (shape: Group): Promise<Position> => {
+  return { x: shape?.attrs.x, y: shape?.attrs.y };
+};
+
+export const moveSelected = (
+  page: Page,
+  direction: string,
+  numShifts: number
+) => {
+  for (let i: number = 0; i < numShifts; i++) page.keyboard.down(direction);
 };

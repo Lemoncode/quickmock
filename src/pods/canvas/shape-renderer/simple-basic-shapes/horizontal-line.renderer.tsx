@@ -1,8 +1,8 @@
-import { LineShape } from '@/common/components/mock-components/front-basic-shapes';
+import { HorizontalLineShape } from '@/common/components/mock-components/front-basic-shapes';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 
-export const renderLine = (
+export const renderHorizontalLine = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
@@ -10,7 +10,7 @@ export const renderLine = (
     shapeRenderedProps;
 
   return (
-    <LineShape
+    <HorizontalLineShape
       id={shape.id}
       key={shape.id}
       ref={shapeRefs.current[shape.id]}

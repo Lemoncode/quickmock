@@ -2,17 +2,19 @@ import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { Group, Rect, Line } from 'react-konva';
-import { BASIC_SHAPE } from './shape.const';
+import { Group, Rect, Text, Image } from 'react-konva';
+import { INPUT_SHAPE } from './shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
+import calendarIconSrc from '/icons/calendar.svg';
+
 const datepickerInputShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 80,
-  minHeight: 50,
+  minWidth: 100,
+  minHeight: 30,
   maxWidth: -1,
   maxHeight: 50,
-  defaultWidth: 220,
+  defaultWidth: 180,
   defaultHeight: 50,
 };
 
@@ -23,8 +25,17 @@ export const getDatepickerInputShapeSizeRestrictions =
 
 export const DatepickerInputShape = forwardRef<any, ShapeProps>(
   (props, ref) => {
-    const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
-      props;
+    const {
+      x,
+      y,
+      width,
+      height,
+      id,
+      onSelected,
+      text,
+      otherProps,
+      ...shapeProps
+    } = props;
     const restrictedSize = fitSizeToShapeSizeRestrictions(
       datepickerInputShapeRestrictions,
       width,
@@ -33,14 +44,8 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
 
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-    const separatorPadding = 12;
-    const separator1X = restrictedWidth / 3;
-    const separator2X = (2 * restrictedWidth) / 3;
-
-    const { stroke, strokeStyle, fill, borderRadius } = useShapeProps(
-      otherProps,
-      BASIC_SHAPE
-    );
+    const { stroke, fill, textColor, strokeStyle, borderRadius } =
+      useShapeProps(otherProps, INPUT_SHAPE);
 
     const commonGroupProps = useGroupShapeProps(
       props,
@@ -49,40 +54,80 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
       ref
     );
 
+    const iconWidth = 25;
+    const availableWidth = restrictedWidth - iconWidth - 20;
+    const fontSize = Math.min(
+      availableWidth * 0.2,
+      restrictedHeight * 0.35,
+      20
+    );
+    const labelFontSize = Math.min(restrictedHeight * 0.3, 12);
+
+    const calendarIcon = new window.Image();
+    calendarIcon.src = calendarIconSrc;
+
     return (
       <Group {...commonGroupProps} {...shapeProps}>
-        {/* input frame */}
+        {/* External Rectangle */}
         <Rect
           x={0}
           y={0}
           width={restrictedWidth}
-          height={restrictedHeight + 4}
+          height={restrictedHeight}
           cornerRadius={borderRadius}
           stroke={stroke}
-          strokeWidth={2}
           dash={strokeStyle}
+          strokeWidth={2}
           fill={fill}
         />
-        {/* Inverted diagonal spacers */}
-        <Line
-          points={[
-            separator1X + separatorPadding,
-            separatorPadding - 4,
-            separator1X - separatorPadding,
-            10 + restrictedHeight - separatorPadding,
-          ]}
-          stroke={stroke}
-          strokeWidth={2}
+        {/* Background of Date Label */}
+        <Rect
+          x={10}
+          y={-5}
+          width={labelFontSize + 20}
+          height={labelFontSize}
+          cornerRadius={borderRadius}
+          fill="white"
         />
-        <Line
-          points={[
-            separator2X + separatorPadding,
-            separatorPadding - 4,
-            separator2X - separatorPadding,
-            10 + restrictedHeight - separatorPadding,
-          ]}
-          stroke={stroke}
-          strokeWidth={2}
+        {/* Label "Date" */}
+        <Text
+          text="Date"
+          x={13}
+          y={-5}
+          fontSize={labelFontSize}
+          fill={stroke}
+          align="center"
+          color={stroke}
+        />
+        {/* Main Text */}
+        <Text
+          text={text}
+          fill={textColor}
+          x={10}
+          y={(restrictedHeight - fontSize) / 2 + 2}
+          width={availableWidth}
+          fontSize={fontSize}
+          align="left"
+          ellipsis={true}
+          wrap="none"
+        />
+
+        <Text
+          text="Date"
+          x={13}
+          y={20}
+          fontSize={10}
+          fill="red"
+          align="center"
+          color={stroke}
+        />
+        {/* Calendar Icon */}
+        <Image
+          image={calendarIcon}
+          x={restrictedWidth - iconWidth - 5}
+          y={(restrictedHeight - 20) / 2}
+          width={20}
+          height={20}
         />
       </Group>
     );
