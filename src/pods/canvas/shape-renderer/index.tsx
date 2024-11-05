@@ -56,6 +56,7 @@ import {
   renderHeading1,
   renderHeading2,
   renderHeading3,
+  renderLink,
   renderNormaltext,
 } from './simple-text-components';
 import { renderSmalltext } from './simple-text-components/smalltext.renderer';
@@ -147,6 +148,8 @@ export const renderShapeComponent = (
       return renderSmalltext(shape, shapeRenderedProps);
     case 'paragraph':
       return renderParagraph(shape, shapeRenderedProps);
+    case 'link':
+      return renderLink(shape, shapeRenderedProps);
     case 'largeArrow':
       return renderLargeArrowShape(shape, shapeRenderedProps);
     case 'icon':

@@ -62,6 +62,7 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'heading3':
     case 'normaltext':
     case 'smalltext':
+    case 'link':
     case 'horizontalScrollBar':
     case 'appBar':
     case 'buttonBar':
