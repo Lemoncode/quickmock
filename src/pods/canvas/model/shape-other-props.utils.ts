@@ -129,8 +129,8 @@ export const generateDefaultOtherProps = (
       };
     case 'link':
       return {
-        textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
-        textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        textColor: 'blue',
+        textDecoration: 'underline',
       };
     case 'normaltext':
       return {

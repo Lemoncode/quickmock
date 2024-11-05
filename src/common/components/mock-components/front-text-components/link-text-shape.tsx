@@ -41,7 +41,7 @@ export const LinkShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const {} = useShapeProps(otherProps, BASIC_SHAPE);
+  const { textColor, textDecoration } = useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -60,12 +60,12 @@ export const LinkShape = forwardRef<any, ShapeProps>((props, ref) => {
         text={text}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={20}
-        fill={'blue'}
+        fill={textColor}
         align="center"
         verticalAlign="middle"
         ellipsis={true}
         wrap="none"
-        textDecoration={'underline'}
+        textDecoration={textDecoration}
       />
     </Group>
   );
