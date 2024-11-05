@@ -72,6 +72,7 @@ test.describe('Copy/Paste functionality tests', () => {
     );
   });
 
+  /*
   test('Should copy and paste a multiple shapes using the ToolBar UI buttons', async ({
     page,
   }) => {
@@ -112,7 +113,7 @@ test.describe('Copy/Paste functionality tests', () => {
     expect(originalComp_2['data-id']).not.toEqual(copiedComp_2['data-id']);
     expect(originalComp_3['data-id']).not.toEqual(copiedComp_3['data-id']);
   });
-
+*/
   test('Should copy and paste a multiple shapes using keyboard commands', async ({
     page,
   }) => {

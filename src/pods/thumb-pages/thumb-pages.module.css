@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  padding: var(--space-md);
+  gap: var(--space-md);
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.activeThumb {
+  background-color: rgb(41, 41, 235);
+}
+
+.activeText {
+  color: white;
+}
