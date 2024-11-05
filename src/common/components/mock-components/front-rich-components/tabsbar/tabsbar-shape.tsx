@@ -8,6 +8,7 @@ import {
   splitCSVContentIntoRows,
 } from '@/common/utils/active-element-selector.utils';
 import { useGroupShapeProps } from '../../mock-components.utils';
+import { adjustTabWidths } from './business/tabsbar.business';
 
 const tabsBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 450,
@@ -47,11 +48,21 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const tabLabels = headers.map(header => header.text);
 
   // Calculate tab dimensions and margin
-  const tabWidth = 106; // Width of each tab
+  const minTabWidth = 40; // Min-width of each tab, without xPadding
   const tabHeight = 30; // Tab height
   const tabMargin = 10; // Horizontal margin between tabs
+  const tabXPadding = 20;
+  const tabFont = { fontSize: 14, fontFamily: 'Arial' };
   const bodyHeight = restrictedHeight - tabHeight - 10; // Height of the tabs bar body
-  const totalTabsWidth = tabLabels.length * (tabWidth + tabMargin) + tabWidth; // Total width required plus one additional tab
+
+  const tabAdjustedWidths = adjustTabWidths({
+    tabs: tabLabels,
+    containerWidth: restrictedWidth - tabMargin * 2, //left and right tabList margin
+    minTabWidth,
+    tabXPadding,
+    tabsGap: tabMargin,
+    font: tabFont,
+  });
 
   const activeTab = otherProps?.activeElement ?? 0;
 
@@ -68,36 +79,41 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
       <Rect
         x={0}
         y={tabHeight + 10}
-        width={Math.max(restrictedWidth, totalTabsWidth)} // Adjusts the width of the background to include an additional tab
+        width={restrictedWidth}
         height={bodyHeight}
         stroke="black"
         strokeWidth={1}
         fill="white"
       />
       {/* Map through headerRow to create tabs */}
-      {tabLabels.map((header, index) => (
-        <Group key={index} x={10 + index * (tabWidth + tabMargin)} y={10}>
-          <Rect
-            width={tabWidth}
-            height={tabHeight}
-            fill={index === activeTab ? 'white' : '#E0E0E0'}
-            stroke="black"
-            strokeWidth={1}
-          />
-          <Text
-            x={20}
-            y={8}
-            width={tabWidth - 20}
-            height={tabHeight}
-            ellipsis={true}
-            wrap="none"
-            text={header} // Use the header text
-            fontFamily="Arial"
-            fontSize={14}
-            fill="black"
-          />
-        </Group>
-      ))}
+      {tabLabels.map((header, index) => {
+        const { widthList: newWidthList, relativeTabPosition: xPosList } =
+          tabAdjustedWidths;
+
+        return (
+          <Group key={index} x={10 + xPosList[index]} y={10}>
+            <Rect
+              width={newWidthList[index]}
+              height={tabHeight}
+              fill={index === activeTab ? 'white' : '#E0E0E0'}
+              stroke="black"
+              strokeWidth={1}
+            />
+            <Text
+              x={tabXPadding}
+              y={8}
+              width={newWidthList[index] - tabXPadding * 2}
+              height={tabHeight}
+              ellipsis={true}
+              wrap="none"
+              text={header} // Use the header text
+              fontFamily={tabFont.fontFamily}
+              fontSize={tabFont.fontSize}
+              fill="black"
+            />
+          </Group>
+        );
+      })}
     </Group>
   );
 });

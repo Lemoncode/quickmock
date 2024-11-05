@@ -16,7 +16,7 @@ export const balanceSpacePerItem = (
 
     const lastItemSize: number = index > 0 ? newList[index - 1] : 0;
 
-    // Once the maximum possible size of the item is reached, apply this size directly.
+    // A) Once the maximum possible size of the item is reached, apply this size directly.
     if (maxItemSize.value) {
       totalSpaceUsed.add(maxItemSize.value);
       return [...newList, lastItemSize];
@@ -27,7 +27,7 @@ export const balanceSpacePerItem = (
     const timesToApply = arr.length - index;
     const virtualTotalsSum = totalSpaceUsed.value + current * timesToApply;
 
-    /** First "Bigger" tab behaviour: If the virtual-sum of next items using this size
+    /** B) First "Bigger" tab behaviour: If the virtual-sum of next items using this size
      * doesn't fit within available space, calc maxItemSize */
     if (virtualTotalsSum >= availableSpace) {
       const remainder =
@@ -40,7 +40,7 @@ export const balanceSpacePerItem = (
       return [...newList, maxItemSize.value];
     }
 
-    //"Normal" behaviour: Apply this new size to current
+    // C) "Normal" behaviour: Apply proposed new size to current
     totalSpaceUsed.add(current);
     return [...newList, current];
   }, []);

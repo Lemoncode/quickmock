@@ -19,9 +19,9 @@ export const adjustTabWidths = (args: {
   const containerWidthWithoutTabGaps =
     containerWidth - (tabs.length - 1) * tabsGap;
 
-  //Create info Object with originalPositions and desired width
+  //Create info List with originalPositions and desired width
   interface OriginalTabInfo {
-    initialTabPosition: number;
+    originalTabPosition: number;
     desiredWidth: number;
   }
   const arrangeTabsInfo = tabs.reduce(
@@ -32,7 +32,7 @@ export const adjustTabWidths = (args: {
       return [
         ...acc,
         {
-          initialTabPosition: index,
+          originalTabPosition: index,
           desiredWidth,
         },
       ];
@@ -40,7 +40,7 @@ export const adjustTabWidths = (args: {
     []
   );
 
-  // This order is neccessary to build layer by layer the new sizes
+  // This order is necessary to build layer by layer the new sizes
   const ascendentTabList = arrangeTabsInfo.sort(
     (a, b) => a.desiredWidth - b.desiredWidth
   );
@@ -56,18 +56,18 @@ export const adjustTabWidths = (args: {
   const reassembledData = ascendentTabList.reduce(
     (accList: number[], current, index) => {
       const newList = [...accList];
-      newList[current.initialTabPosition] = adjustedSizeList[index];
+      newList[current.originalTabPosition] = adjustedSizeList[index];
       return newList;
     },
     []
   );
 
-  // Calc item offset position
+  // Calc item offset position (mixed with external variable to avoid adding to reducer() extra complexity)
   let sumOfXposition = 0;
   const relativeTabPosition = reassembledData.reduce(
-    (acc: number[], el, index) => {
+    (acc: number[], currentTab, index) => {
       const currentElementXPos = index ? sumOfXposition : 0;
-      sumOfXposition += el + tabsGap;
+      sumOfXposition += currentTab + tabsGap;
       return [...acc, currentElementXPos];
     },
     []
