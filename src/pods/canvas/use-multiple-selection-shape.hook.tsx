@@ -13,6 +13,7 @@ import { calculateScaledCoordsFromCanvasDivCoordinatesNoScroll } from './canvas.
 import { Stage } from 'konva/lib/Stage';
 import { isUserDoingMultipleSelectionUsingCtrlOrCmdKey } from '@/common/utils/shapes';
 import { KonvaEventObject } from 'konva/lib/Node';
+import { useCanvasContext } from '@/core/providers';
 
 // There's a bug here: if you make a multiple selectin and start dragging
 // inside the selection but on a blank area it won't drag the selection
@@ -48,6 +49,8 @@ export const useMultipleSelectionShapeHook = (
     height: 0,
     visible: false,
   });
+
+  const { setIsThumbnailContextMenuVisible } = useCanvasContext();
 
   const isDraggingSelection = (mouseCoords: Coord) => {
     if (!transformerRef.current) {
@@ -166,6 +169,8 @@ export const useMultipleSelectionShapeHook = (
       height: 0,
       visible: true,
     });
+
+    setIsThumbnailContextMenuVisible(false);
   };
 
   const handleMouseMove = (e: any) => {

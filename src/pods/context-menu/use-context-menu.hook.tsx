@@ -26,7 +26,11 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ dropRef }) => {
 
     const handleRightClick = (event: MouseEvent) => {
       event.preventDefault();
-      if (selectionInfo.getSelectedShapeData()) {
+      if (
+        selectionInfo.getSelectedShapeData() &&
+        stageRef.current &&
+        stageRef.current.container().contains(event.target as Node)
+      ) {
         setShowContextMenu(true);
         setContextMenuPosition({ x: event.clientX, y: event.clientY });
       }
