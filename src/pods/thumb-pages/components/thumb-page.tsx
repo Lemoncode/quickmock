@@ -5,6 +5,7 @@ import { calculateCanvasBounds } from '@/pods/toolbar/components/export-button/e
 import { KonvaEventObject } from 'konva/lib/Node';
 import { createRef, useRef } from 'react';
 import { Layer, Stage } from 'react-konva';
+import { calculateScaleBasedOnBounds } from './thumb-page.business';
 import { ThumbPageContextMenu } from './context-menu';
 import { useContextMenu } from '../use-context-menu-thumb.hook';
 import { CaretDown } from '@/common/components/icons';
@@ -24,13 +25,8 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
   const fakeShapeRefs = useRef<ShapeRefs>({});
 
   const bounds = calculateCanvasBounds(shapes);
-  const canvasSize = {
-    width: bounds.x + bounds.width,
-    height: bounds.y + bounds.height,
-  };
-  const scaleFactorX = 200 / canvasSize.width;
-  const scaleFactorY = 180 / canvasSize.height;
-  const finalScale = Math.min(scaleFactorX, scaleFactorY);
+
+  const finalScale = calculateScaleBasedOnBounds(bounds);
 
   const {
     showContextMenu,
