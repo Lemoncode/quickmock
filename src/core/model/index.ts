@@ -61,6 +61,7 @@ export type ShapeType =
   | 'verticalScrollBar'
   | 'horizontalScrollBar'
   | 'modal'
+  | 'modalCover'
   | 'tabsBar'
   | 'appBar'
   | 'appBar'
@@ -118,6 +119,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   calendar: 'Calendar',
   verticalScrollBar: 'Vertical Scroll Bar',
   modal: 'Modal',
+  modalCover: 'Modal Cover',
   tabsBar: 'Tabs Bar',
   appBar: 'AppBar',
   buttonBar: 'Button Bar',

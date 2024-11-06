@@ -1,0 +1,11 @@
+.container {
+  width: '200px';
+  height: '180px';
+  border: 3px solid;
+  border-color: black;
+  border-radius: 5px;
+  position: 'relative';
+  background-color: white;
+  margin-top: 10px;
+  padding: 5px;
+}

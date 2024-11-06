@@ -3,6 +3,7 @@ import { useCanvasContext } from '../providers';
 import {
   mapFromShapesArrayToQuickMockFileDocument,
   mapFromQuickMockFileDocumentToApplicationDocument,
+  mapFromQuickMockFileDocumentToApplicationDocumentV0_1,
 } from './shapes-to-document.mapper';
 import { fileInput, OnFileSelectedCallback } from '@/common/file-input';
 import { QuickMockFileContract } from './local-disk.model';
@@ -57,9 +58,18 @@ export const useLocalDisk = () => {
     reader.onload = () => {
       const content = reader.result as string;
       const parseData: QuickMockFileContract = JSON.parse(content);
-      const appDocument =
-        mapFromQuickMockFileDocumentToApplicationDocument(parseData);
-      loadDocument(appDocument);
+
+      if (parseData.version === '0.1') {
+        // Handle version 0.1 parsing
+        const appDocument =
+          mapFromQuickMockFileDocumentToApplicationDocumentV0_1(parseData);
+        loadDocument(appDocument);
+      } else {
+        // Handle other versions
+        const appDocument =
+          mapFromQuickMockFileDocumentToApplicationDocument(parseData);
+        loadDocument(appDocument);
+      }
     };
     reader.readAsText(file);
   };
