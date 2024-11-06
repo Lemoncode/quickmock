@@ -7,6 +7,7 @@ import { createRef, useRef } from 'react';
 import { Layer, Stage } from 'react-konva';
 import { ThumbPageContextMenu } from './context-menu';
 import { useContextMenu } from '../use-context-menu-thumb.hook';
+import { CaretDown } from '@/common/components/icons';
 import classes from './thumb-page.module.css';
 
 interface Props {
@@ -61,6 +62,12 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
             })}
           </Layer>
         </Stage>
+        <span
+          onClick={handleShowContextMenu}
+          className={classes['icon-container']}
+        >
+          <CaretDown />
+        </span>
         {showContextMenu && (
           <ThumbPageContextMenu
             contextMenuRef={contextMenuRef}
