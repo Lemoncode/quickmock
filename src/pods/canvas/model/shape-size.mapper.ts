@@ -58,6 +58,7 @@ import {
   getTabsBarShapeSizeRestrictions,
   getVerticalMenuShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
+  getBadgeLabelShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-rich-components';
 import {
@@ -136,6 +137,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   tooltip: getTooltipShapeSizeRestrictions,
   slider: getSliderShapeSizeRestrictions,
   audioPlayer: getAudioPlayerShapeSizeRestrictions,
+  badgelabel: getBadgeLabelShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;

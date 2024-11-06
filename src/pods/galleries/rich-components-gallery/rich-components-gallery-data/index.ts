@@ -12,12 +12,16 @@ export const mockRichComponentsCollection: ItemInfo[] = [
     thumbnailSrc: '/rich-components/horizontal-menu.svg',
     type: 'horizontal-menu',
   },
+  {
+    thumbnailSrc: '/rich-components/vertical-menu.svg',
+    type: 'vertical-menu',
+  },
+  { thumbnailSrc: '/rich-components/badgelabel.svg', type: 'badgelabel' },
+  { thumbnailSrc: '/rich-components/modal.svg', type: 'modal' },
   { thumbnailSrc: '/rich-components/line-chart.svg', type: 'linechart' },
   { thumbnailSrc: '/rich-components/map.svg', type: 'map' },
-  { thumbnailSrc: '/rich-components/modal.svg', type: 'modal' },
   { thumbnailSrc: '/rich-components/pie.svg', type: 'pie' },
   { thumbnailSrc: '/rich-components/table.svg', type: 'table' },
   { thumbnailSrc: '/rich-components/tabsbar.svg', type: 'tabsBar' },
-  { thumbnailSrc: '/rich-components/vertical-menu.svg', type: 'vertical-menu' },
   { thumbnailSrc: '/rich-components/videoPlayer.svg', type: 'videoPlayer' },
 ];
