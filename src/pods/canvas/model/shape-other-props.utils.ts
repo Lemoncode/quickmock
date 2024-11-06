@@ -139,6 +139,11 @@ export const generateDefaultOtherProps = (
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
       };
+    case 'link':
+      return {
+        textColor: 'blue',
+        textDecoration: 'underline',
+      };
     case 'normaltext':
       return {
         textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
