@@ -38,6 +38,7 @@ import {
   getPostItShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
   getStarShapeSizeRestrictions,
+  getModalCoverShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-basic-shapes';
 import {
@@ -128,6 +129,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   calendar: getCalendarShapeSizeRestrictions,
   verticalScrollBar: getVerticalScrollBarShapeSizeRestrictions,
   modal: getModalShapeSizeRestrictions,
+  modalCover: getModalCoverShapeSizeRestrictions,
   tabsBar: getTabsBarShapeSizeRestrictions,
   appBar: getAppBarShapeSizeRestrictions,
   buttonBar: getButtonBarShapeSizeRestrictions,
