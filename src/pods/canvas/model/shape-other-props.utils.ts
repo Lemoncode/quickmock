@@ -123,6 +123,7 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: INPUT_SHAPE.DEFAULT_FONT_SIZE,
       };
 
     case 'heading2':
@@ -131,6 +132,7 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: INPUT_SHAPE.DEFAULT_FONT_SIZE,
       };
     case 'heading3':
       return {
@@ -138,6 +140,7 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: INPUT_SHAPE.DEFAULT_FONT_SIZE,
       };
     case 'normaltext':
       return {
@@ -145,6 +148,7 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: INPUT_SHAPE.DEFAULT_FONT_SIZE,
       };
     case 'smalltext':
       return {
@@ -152,8 +156,12 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: INPUT_SHAPE.DEFAULT_FONT_SIZE,
       };
     case 'paragraph':
+      return {
+        fontSize: INPUT_SHAPE.DEFAULT_FONT_SIZE,
+      };
     case 'label':
       return {
         textColor: '#000000',

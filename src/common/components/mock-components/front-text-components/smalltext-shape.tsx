@@ -40,10 +40,8 @@ export const SmalltextShape = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { textColor, fontVariant, fontStyle, textDecoration } = useShapeProps(
-    otherProps,
-    BASIC_SHAPE
-  );
+  const { textColor, fontVariant, fontStyle, textDecoration, fontSize } =
+    useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -61,7 +59,7 @@ export const SmalltextShape = forwardRef<any, ShapeProps>((props, ref) => {
         height={restrictedHeight}
         text={text}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
-        fontSize={14}
+        fontSize={fontSize}
         fill={textColor}
         align="center"
         verticalAlign="middle"

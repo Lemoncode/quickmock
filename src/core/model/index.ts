@@ -159,6 +159,7 @@ export interface OtherProps {
   textColor?: string;
   fontVariant?: string;
   fontStyle?: string;
+  fontSize?: number;
   textDecoration?: string;
   checked?: boolean;
   icon?: IconInfo;
