@@ -1,7 +1,6 @@
 import { ShapeRefs } from '@/core/model';
 import { useCanvasContext } from '@/core/providers';
 import { renderShapeComponent } from '@/pods/canvas/shape-renderer';
-import { calculateCanvasBounds } from '@/pods/toolbar/components/export-button/export-button.utils';
 import { KonvaEventObject } from 'konva/lib/Node';
 import { createRef, useRef } from 'react';
 import { Layer, Stage } from 'react-konva';
@@ -24,9 +23,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
   const shapes = page.shapes;
   const fakeShapeRefs = useRef<ShapeRefs>({});
 
-  const bounds = calculateCanvasBounds(shapes);
-
-  const finalScale = calculateScaleBasedOnBounds(bounds);
+  const finalScale = calculateScaleBasedOnBounds(shapes);
 
   const {
     showContextMenu,
