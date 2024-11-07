@@ -147,6 +147,7 @@ export const generateDefaultOtherProps = (
       return {
         textColor: 'blue',
         textDecoration: 'underline',
+        fontSize: FONT_SIZE_VALUES.link,
       };
     case 'normaltext':
       return {

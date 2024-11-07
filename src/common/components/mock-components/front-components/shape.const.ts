@@ -89,20 +89,22 @@ export const POSTIT_SHAPE: DefaultStyleShape = {
   DEFAULT_TEXT_DECORATION,
 };
 
-interface fontValues {
+interface FontValues {
   heading1: number;
   heading2: number;
   heading3: number;
   normaltext: number;
   smalltext: number;
   paragraph: number;
+  link: number;
 }
 
-export const FONT_SIZE_VALUES: fontValues = {
+export const FONT_SIZE_VALUES: FontValues = {
   heading1: 28,
   heading2: 24,
   heading3: 18,
   normaltext: 18,
   smalltext: 14,
   paragraph: 14,
+  link: 20,
 };
