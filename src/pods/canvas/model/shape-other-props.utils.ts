@@ -1,6 +1,7 @@
 import {
   INPUT_SHAPE,
   BASIC_SHAPE,
+  LINK_SHAPE,
 } from '@/common/components/mock-components/front-components/shape.const';
 import { ShapeType, OtherProps } from '@/core/model';
 
@@ -138,6 +139,11 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+      };
+    case 'link':
+      return {
+        textColor: `${LINK_SHAPE.DEFAULT_FILL_TEXT}`,
+        textDecoration: 'underline',
       };
     case 'normaltext':
       return {
