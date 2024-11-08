@@ -16,7 +16,7 @@ const tabsBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 450,
-  defaultHeight: 150,
+  defaultHeight: 250,
 };
 
 export const getTabsBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
