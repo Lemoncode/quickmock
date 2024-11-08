@@ -97,6 +97,7 @@ export interface CanvasContextModel {
   fullDocument: DocumentModel;
   addNewPage: () => void;
   duplicatePage: (pageIndex: number) => void;
+  getActivePage: () => Page;
   setActivePage: (pageId: string) => void;
   deletePage: (pageIndex: number) => void;
   editPageTitle: (pageIndex: number, newName: string) => void;
