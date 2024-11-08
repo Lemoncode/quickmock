@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './thumb-pages.module.css';
 import { useCanvasContext } from '@/core/providers';
 import { PageTitleInlineEdit, ThumbPage } from './components';
+import { PlusIcon } from '@/common/components/icons';
 
 export const ThumbPagesPod: React.FC = () => {
   const { fullDocument, addNewPage, setActivePage } = useCanvasContext();
@@ -25,7 +26,7 @@ export const ThumbPagesPod: React.FC = () => {
         <React.Fragment key={page.id}>
           <div
             className={`${classes.container} ${
-              page.id === activePageId ? classes.activeThumb : ''
+              page.id === activePageId ? classes.activeThumb : classes.thumb
             }`}
           >
             <ThumbPage
@@ -49,7 +50,14 @@ export const ThumbPagesPod: React.FC = () => {
           </div>
         </React.Fragment>
       ))}
-      <button onClick={handleAddNewPage}>Add new page</button>
+      <button
+        className={classes.addButton}
+        onClick={handleAddNewPage}
+        title="add new page"
+        aria-label="add new page"
+      >
+        <PlusIcon />
+      </button>
     </div>
   );
 };
