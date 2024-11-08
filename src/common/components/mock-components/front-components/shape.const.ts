@@ -88,3 +88,8 @@ export const POSTIT_SHAPE: DefaultStyleShape = {
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_DECORATION,
 };
+
+export const LINK_SHAPE: DefaultStyleShape = {
+  ...BASIC_SHAPE,
+  DEFAULT_FILL_TEXT: '#0000FF',
+};
