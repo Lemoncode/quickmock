@@ -100,6 +100,7 @@ export interface CanvasContextModel {
   setActivePage: (pageId: string) => void;
   deletePage: (pageIndex: number) => void;
   editPageTitle: (pageIndex: number, newName: string) => void;
+  swapPages: (id1: string, id2: string) => void;
   isThumbnailContextMenuVisible: boolean;
   setIsThumbnailContextMenuVisible: React.Dispatch<
     React.SetStateAction<boolean>
