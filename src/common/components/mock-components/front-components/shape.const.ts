@@ -90,21 +90,21 @@ export const POSTIT_SHAPE: DefaultStyleShape = {
 };
 
 interface FontValues {
-  heading1: number;
-  heading2: number;
-  heading3: number;
-  normaltext: number;
-  smalltext: number;
-  paragraph: number;
-  link: number;
+  HEADING1: number;
+  HEADING2: number;
+  HEADING3: number;
+  NORMALTEXT: number;
+  SMALLTEXT: number;
+  PARAGRAPH: number;
+  LINK: number;
 }
 
 export const FONT_SIZE_VALUES: FontValues = {
-  heading1: 28,
-  heading2: 24,
-  heading3: 18,
-  normaltext: 18,
-  smalltext: 14,
-  paragraph: 14,
-  link: 20,
+  HEADING1: 28,
+  HEADING2: 24,
+  HEADING3: 18,
+  NORMALTEXT: 18,
+  SMALLTEXT: 14,
+  PARAGRAPH: 14,
+  LINK: 20,
 };
