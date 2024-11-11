@@ -5,11 +5,11 @@ import { PageTitleInlineEdit, ThumbPage } from './components';
 import { PlusIcon } from '@/common/components/icons';
 
 export const ThumbPagesPod: React.FC = () => {
-  const { fullDocument, addNewPage, setActivePage } = useCanvasContext();
+  const { fullDocument, addNewPage, setActivePage, getActivePage } =
+    useCanvasContext();
   const [pageTitleBeingEdited, setPageTitleBeingEdited] = React.useState<
     number | null
   >(null);
-  const [activePageId, setActivePageId] = React.useState<string | null>(null);
 
   const handleAddNewPage = () => {
     addNewPage();
@@ -17,7 +17,6 @@ export const ThumbPagesPod: React.FC = () => {
 
   const handleSetActivePage = (pageId: string) => {
     setActivePage(pageId);
-    setActivePageId(pageId);
   };
 
   return (
@@ -26,7 +25,9 @@ export const ThumbPagesPod: React.FC = () => {
         <React.Fragment key={page.id}>
           <div
             className={`${classes.container} ${
-              page.id === activePageId ? classes.activeThumb : classes.thumb
+              page.id === getActivePage().id
+                ? classes.activeThumb
+                : classes.thumb
             }`}
           >
             <ThumbPage
@@ -42,7 +43,9 @@ export const ThumbPagesPod: React.FC = () => {
             ) : (
               <div
                 onDoubleClick={() => setPageTitleBeingEdited(index)}
-                className={page.id === activePageId ? classes.activeText : ''}
+                className={
+                  page.id === getActivePage().id ? classes.activeText : ''
+                }
               >
                 {page.name}
               </div>
