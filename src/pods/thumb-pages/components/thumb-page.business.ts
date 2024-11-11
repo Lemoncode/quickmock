@@ -1,7 +1,10 @@
-import { ShapeModel } from '@/core/model';
+import { ShapeModel, Size } from '@/core/model';
 import { calculateCanvasBounds } from '@/pods/toolbar/components/export-button/export-button.utils';
 
-export const calculateScaleBasedOnBounds = (shapes: ShapeModel[]) => {
+export const calculateScaleBasedOnBounds = (
+  shapes: ShapeModel[],
+  divSize: Size
+) => {
   const bounds = calculateCanvasBounds(shapes);
   const canvasSizeRough = {
     width: bounds.x + bounds.width,
@@ -13,8 +16,8 @@ export const calculateScaleBasedOnBounds = (shapes: ShapeModel[]) => {
     height: canvasSizeRough.height > 600 ? canvasSizeRough.height : 600,
   };
 
-  const scaleFactorX = 200 / canvasSize.width;
-  const scaleFactorY = 180 / canvasSize.height;
+  const scaleFactorX = divSize.width / canvasSize.width;
+  const scaleFactorY = divSize.height / canvasSize.height;
   return Math.min(scaleFactorX, scaleFactorY);
 };
 

@@ -16,6 +16,7 @@
 
 .container {
   overflow-y: auto;
+  position: relative;
 }
 .container[open] {
   flex: 1;
