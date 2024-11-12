@@ -31,6 +31,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
   });
 
   const divRef = useRef<HTMLDivElement>(null);
+  const [key, setKey] = React.useState(0);
 
   React.useEffect(() => {
     const newCanvaSize = {
@@ -47,6 +48,8 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
 
     setCanvasSize(newCanvaSize);
     setFinalScale(calculateScaleBasedOnBounds(shapes, newCanvaSize));
+
+    setKey(key => key + 1);
 
     return () => {
       window.removeEventListener('resize', () => {
@@ -72,6 +75,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
         className={classes.container}
         onClick={() => onSetActivePage(page.id)}
         onContextMenu={handleShowContextMenu}
+        key={key}
       >
         <Stage
           width={canvasSize.width}
