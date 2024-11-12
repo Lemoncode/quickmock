@@ -3,12 +3,8 @@ import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeProps } from '../../shape.model';
-import {
-  extractCSVHeaders,
-  splitCSVContentIntoRows,
-} from '@/common/utils/active-element-selector.utils';
 import { useGroupShapeProps } from '../../mock-components.utils';
-import { adjustTabWidths } from './business/tabsbar.business';
+import { useTabList } from './tab-list.hook';
 
 const tabsBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 450,
@@ -43,24 +39,19 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const csvData = splitCSVContentIntoRows(text);
-  const headers = extractCSVHeaders(csvData[0]);
-  const tabLabels = headers.map(header => header.text);
-
-  // Calculate tab dimensions and margin
-  const minTabWidth = 40; // Min-width of each tab, without xPadding
+  // Tab dimensions and margin
   const tabHeight = 30; // Tab height
-  const tabMargin = 10; // Horizontal margin between tabs
+  const tabsGap = 10; // Horizontal margin between tabs
   const tabXPadding = 20;
   const tabFont = { fontSize: 14, fontFamily: 'Arial' };
   const bodyHeight = restrictedHeight - tabHeight - 10; // Height of the tabs bar body
 
-  const tabAdjustedWidths = adjustTabWidths({
-    tabs: tabLabels,
-    containerWidth: restrictedWidth - tabMargin * 2, //left and right tabList margin
-    minTabWidth,
+  const tabList = useTabList({
+    text,
+    containerWidth: restrictedWidth - tabsGap * 2, //left and right tabList margin
+    minTabWidth: 40, // Min-width of each tab, without xPadding
     tabXPadding,
-    tabsGap: tabMargin,
+    tabsGap,
     font: tabFont,
   });
 
@@ -86,14 +77,11 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
         fill="white"
       />
       {/* Map through headerRow to create tabs */}
-      {tabLabels.map((header, index) => {
-        const { widthList: newWidthList, relativeTabPosition: xPosList } =
-          tabAdjustedWidths;
-
+      {tabList.map(({ tab, width, xPos }, index) => {
         return (
-          <Group key={index} x={10 + xPosList[index]} y={10}>
+          <Group key={index} x={10 + xPos} y={10}>
             <Rect
-              width={newWidthList[index]}
+              width={width}
               height={tabHeight}
               fill={index === activeTab ? 'white' : '#E0E0E0'}
               stroke="black"
@@ -102,11 +90,11 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
             <Text
               x={tabXPadding}
               y={8}
-              width={newWidthList[index] - tabXPadding * 2}
+              width={width - tabXPadding * 2}
               height={tabHeight}
               ellipsis={true}
               wrap="none"
-              text={header} // Use the header text
+              text={tab}
               fontFamily={tabFont.fontFamily}
               fontSize={tabFont.fontSize}
               fill="black"
