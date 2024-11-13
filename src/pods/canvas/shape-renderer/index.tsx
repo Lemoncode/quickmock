@@ -111,7 +111,7 @@ export const renderShapeComponent = (
       return renderPostit(shape, shapeRenderedProps);
     case 'videoPlayer':
       return renderVideoPlayer(shape, shapeRenderedProps);
-    case 'videoconference':
+    case 'videoConference':
       return renderVideoConference(shape, shapeRenderedProps);
     case 'audioPlayer':
       return renderAudioPlayer(shape, shapeRenderedProps);

@@ -10,7 +10,7 @@ const inlineEditableShapes = new Set<ShapeType>([
   'button',
   'textarea',
   'accordion',
-  'videoconference',
+  'videoConference',
   'checkbox',
   'radiobutton',
   'postit',

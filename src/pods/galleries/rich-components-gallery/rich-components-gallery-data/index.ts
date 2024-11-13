@@ -21,7 +21,7 @@ export const mockRichComponentsCollection: ItemInfo[] = [
   { thumbnailSrc: '/rich-components/vertical-menu.svg', type: 'vertical-menu' },
   { thumbnailSrc: '/rich-components/videoPlayer.svg', type: 'videoPlayer' },
   {
-    thumbnailSrc: '/rich-components/videoconference.svg',
-    type: 'videoconference',
+    thumbnailSrc: '/rich-components/videoConference.svg',
+    type: 'videoConference',
   },
 ];

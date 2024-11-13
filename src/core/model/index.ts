@@ -35,7 +35,7 @@ export type ShapeType =
   | 'horizontalLine'
   | 'verticalLine'
   | 'accordion'
-  | 'videoconference'
+  | 'videoConference'
   | 'pie'
   | 'horizontal-menu'
   | 'breadcrumb'
@@ -96,7 +96,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   horizontalLine: 'Horizontal Line',
   verticalLine: 'Vertical Line',
   accordion: 'Accordion',
-  videoconference: 'Video Conference',
+  videoConference: 'Video Conference',
   pie: 'Pie',
   breadcrumb: 'Breadcrumb',
   map: 'Map',

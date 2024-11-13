@@ -104,7 +104,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   horizontalLine: getHorizontalLineShapeRestrictions,
   verticalLine: getVerticalLineShapeRestrictions,
   accordion: getAccordionShapeSizeRestrictions,
-  videoconference: getVideoconferenceShapeSizeRestrictions,
+  videoConference: getVideoconferenceShapeSizeRestrictions,
   triangle: getTriangleShapeSizeRestrictions,
   postit: getPostItShapeSizeRestrictions,
   pie: getPieChartShapeSizeRestrictions,
