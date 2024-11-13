@@ -20,4 +20,8 @@ export const mockRichComponentsCollection: ItemInfo[] = [
   { thumbnailSrc: '/rich-components/tabsbar.svg', type: 'tabsBar' },
   { thumbnailSrc: '/rich-components/vertical-menu.svg', type: 'vertical-menu' },
   { thumbnailSrc: '/rich-components/videoPlayer.svg', type: 'videoPlayer' },
+  {
+    thumbnailSrc: '/rich-components/videoconference.svg',
+    type: 'videoconference',
+  },
 ];

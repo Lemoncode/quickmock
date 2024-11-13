@@ -41,6 +41,7 @@ import {
   renderModal,
   renderButtonBar,
   renderTabsBar,
+  renderVideoConference,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -110,6 +111,8 @@ export const renderShapeComponent = (
       return renderPostit(shape, shapeRenderedProps);
     case 'videoPlayer':
       return renderVideoPlayer(shape, shapeRenderedProps);
+    case 'videoconference':
+      return renderVideoConference(shape, shapeRenderedProps);
     case 'audioPlayer':
       return renderAudioPlayer(shape, shapeRenderedProps);
     case 'pie':

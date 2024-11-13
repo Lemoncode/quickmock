@@ -1,0 +1,27 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pantalla de videoconferencia -->
+  <rect x="20" y="20" width="560" height="300" style="fill:lightgray;stroke:black;stroke-width:2"/>
+
+  <!-- Persona en la pantalla de videoconferencia -->
+  <circle cx="150" cy="130" r="40" style="fill:white;stroke:black;stroke-width:2"/> <!-- Cabeza -->
+  <rect x="110" y="170" width="80" height="100" rx="20" ry="20" style="fill:white;stroke:black;stroke-width:2"/> <!-- Cuerpo redondeado -->
+
+  <!-- Video de la persona que habla -->
+  <rect x="440" y="240" width="120" height="80" style="fill:darkgray;stroke:black;stroke-width:2"/>
+
+  <!-- Persona en la ventana pequeña de video -->
+  <circle cx="500" cy="260" r="20" style="fill:white;stroke:black;stroke-width:2"/> <!-- Cabeza -->
+  <rect x="485" y="280" width="30" height="40" rx="10" ry="10" style="fill:white;stroke:black;stroke-width:2"/> <!-- Cuerpo redondeado -->
+
+  <!-- Botón de silenciar -->
+  <circle cx="200" cy="350" r="20" style="fill:gray;stroke:black;stroke-width:2"/>
+  <text x="192" y="355" font-family="Arial" font-size="16" fill="white">🔇</text>
+
+  <!-- Botón de cámara -->
+  <circle cx="300" cy="350" r="20" style="fill:gray;stroke:black;stroke-width:2"/>
+  <text x="292" y="355" font-family="Arial" font-size="16" fill="white">📷</text>
+
+  <!-- Botón de colgar -->
+  <circle cx="400" cy="350" r="20" style="fill:red;stroke:black;stroke-width:2"/>
+  <text x="392" y="355" font-family="Arial" font-size="16" fill="white">📞</text>
+</svg>

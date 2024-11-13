@@ -43,6 +43,7 @@ import {
 } from '@/common/components/mock-components/front-basic-shapes';
 import {
   getAccordionShapeSizeRestrictions,
+  getVideoconferenceShapeSizeRestrictions,
   getAppBarShapeSizeRestrictions,
   getAudioPlayerShapeSizeRestrictions,
   getBarChartShapeSizeRestrictions,
@@ -103,6 +104,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   horizontalLine: getHorizontalLineShapeRestrictions,
   verticalLine: getVerticalLineShapeRestrictions,
   accordion: getAccordionShapeSizeRestrictions,
+  videoconference: getVideoconferenceShapeSizeRestrictions,
   triangle: getTriangleShapeSizeRestrictions,
   postit: getPostItShapeSizeRestrictions,
   pie: getPieChartShapeSizeRestrictions,
