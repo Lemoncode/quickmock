@@ -40,10 +40,10 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   // Tab dimensions and margin
-  const tabHeight = 30; // Tab height
-  const tabsGap = 10; // Horizontal margin between tabs
+  const tabHeight = 30;
+  const tabsGap = 10;
   const tabXPadding = 20;
-  const tabFont = { fontSize: 14, fontFamily: 'Arial' };
+  const tabFont = { fontSize: 14, fontFamily: 'Arial, sans-serif' };
   const bodyHeight = restrictedHeight - tabHeight - 10; // Height of the tabs bar body
 
   const tabList = useTabList({
@@ -79,7 +79,8 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
       {/* Map through headerRow to create tabs */}
       {tabList.map(({ tab, width, xPos }, index) => {
         return (
-          <Group key={index} x={10 + xPos} y={10}>
+          <Group key={index} x={10 + xPos || 0} y={10}>
+            {/* || 0 Workaround to avoid thumbpage NaN issue with konva */}
             <Rect
               width={width}
               height={tabHeight}
@@ -90,7 +91,9 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
             <Text
               x={tabXPadding}
               y={8}
-              width={width - tabXPadding * 2}
+              width={
+                width - tabXPadding * 2 || 0
+              } /* || 0 Workaround to avoid thumbpage NaN issue with konva */
               height={tabHeight}
               ellipsis={true}
               wrap="none"

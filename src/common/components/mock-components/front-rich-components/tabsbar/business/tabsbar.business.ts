@@ -1,3 +1,4 @@
+import { Layer } from 'konva/lib/Layer';
 import { balanceSpacePerItem } from './balance-space';
 import { calcTextWidth } from './calc-text-width';
 
@@ -11,9 +12,17 @@ export const adjustTabWidths = (args: {
     fontSize: number;
     fontFamily: string;
   };
+  konvaLayer?: Layer;
 }) => {
-  const { tabs, containerWidth, minTabWidth, tabXPadding, tabsGap, font } =
-    args;
+  const {
+    tabs,
+    containerWidth,
+    minTabWidth,
+    tabXPadding,
+    tabsGap,
+    font,
+    konvaLayer,
+  } = args;
   const totalInnerXPadding = tabXPadding * 2;
   const totalMinTabSpace = minTabWidth + totalInnerXPadding;
   const containerWidthWithoutTabGaps =
@@ -27,7 +36,8 @@ export const adjustTabWidths = (args: {
   const arrangeTabsInfo = tabs.reduce(
     (acc: OriginalTabInfo[], tab, index): OriginalTabInfo[] => {
       const tabFullTextWidth =
-        calcTextWidth(tab, font.fontSize, font.fontFamily) + totalInnerXPadding;
+        calcTextWidth(tab, font.fontSize, font.fontFamily, konvaLayer) +
+        totalInnerXPadding;
       const desiredWidth = Math.max(totalMinTabSpace, tabFullTextWidth);
       return [
         ...acc,

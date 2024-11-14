@@ -4,6 +4,7 @@ import {
   extractCSVHeaders,
   splitCSVContentIntoRows,
 } from '@/common/utils/active-element-selector.utils';
+import { useCanvasContext } from '@/core/providers';
 
 interface TabListConfig {
   text: string;
@@ -28,6 +29,8 @@ export const useTabList = (tabsConfig: TabListConfig) => {
 
   const tabLabels = _extractTabLabelTexts(text);
 
+  const konvaLayer = useCanvasContext().stageRef.current?.getLayers()[0];
+
   useEffect(() => {
     setTabWidthList(
       adjustTabWidths({
@@ -40,6 +43,7 @@ export const useTabList = (tabsConfig: TabListConfig) => {
           fontSize: font.fontSize,
           fontFamily: font.fontFamily,
         },
+        konvaLayer,
       })
     );
   }, [text, containerWidth]);
