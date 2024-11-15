@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  padding: var(--space-s);
+  gap: var(--space-s);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.thumb {
+  width: 100%;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: cubic-bezier(1, 0, 0, 1) 0.3s 1 normal thumb;
+}
+.activeThumb {
+  width: 100%;
+  height: 240px;
+  background-color: var(--primary-100);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: ease 0.3s 1 normal thumb;
+}
+
+/* .activeText {
+  color: white;
+} */
+
+.addButton {
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-md);
+  border: 1px solid var(--primary-700);
+  background-color: transparent;
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  font-size: var(--fs-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.addButton:hover {
+  background-color: var(--primary-700);
+  color: white;
+}
+
+@keyframes thumb {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    width: 100%;
+    height: 240px;
+  }
+}

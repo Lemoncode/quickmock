@@ -12,12 +12,17 @@ import {
 } from '@/pods';
 import { PropertiesPod } from '@/pods/properties';
 import { FooterPod } from '@/pods/footer/footer.pod';
+import { ThumbPagesPod } from '@/pods/thumb-pages';
 
 export const MainScene = () => {
   return (
     <MainLayout>
       <ToolbarPod />
       <div className={classes.leftTools}>
+        <details className={classes.container} name="toolsLeft">
+          <summary className={classes.title}>Pages</summary>
+          <ThumbPagesPod />
+        </details>
         <details className={classes.container} name="toolsLeft">
           <summary className={classes.title}>Devices</summary>
           <ContainerGalleryPod />

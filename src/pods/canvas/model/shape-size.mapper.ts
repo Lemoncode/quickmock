@@ -38,6 +38,7 @@ import {
   getPostItShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
   getStarShapeSizeRestrictions,
+  getModalCoverShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-basic-shapes';
 import {
@@ -63,6 +64,7 @@ import {
   getHeading1SizeRestrictions,
   getHeading2SizeRestrictions,
   getHeading3SizeRestrictions,
+  getLinkSizeRestrictions,
   getNormaltextSizeRestrictions,
   getParagraphSizeRestrictions,
   getSmalltextSizeRestrictions,
@@ -117,6 +119,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   normaltext: getNormaltextSizeRestrictions,
   smalltext: getSmalltextSizeRestrictions,
   paragraph: getParagraphSizeRestrictions,
+  link: getLinkSizeRestrictions,
   largeArrow: getLargeArrowShapeSizeRestrictions,
   radiobutton: getRadioButtonShapeSizeRestrictions,
   checkbox: getCheckboxShapeSizeRestrictions,
@@ -128,6 +131,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   calendar: getCalendarShapeSizeRestrictions,
   verticalScrollBar: getVerticalScrollBarShapeSizeRestrictions,
   modal: getModalShapeSizeRestrictions,
+  modalCover: getModalCoverShapeSizeRestrictions,
   tabsBar: getTabsBarShapeSizeRestrictions,
   appBar: getAppBarShapeSizeRestrictions,
   buttonBar: getButtonBarShapeSizeRestrictions,

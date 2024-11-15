@@ -1,18 +1,13 @@
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import {
-  BASE_ICONS_URL,
-  IconSize,
-  ShapeSizeRestrictions,
-  ShapeType,
-} from '@/core/model';
-import { forwardRef } from 'react';
+import { BASE_ICONS_URL, ShapeSizeRestrictions, ShapeType } from '@/core/model';
+import { forwardRef, useRef, useState, useEffect } from 'react';
 import { Group, Image } from 'react-konva';
-import useImage from 'use-image';
-import { ShapeProps } from '../shape.model';
+import { ShapeProps } from '../../shape.model';
 import { useModalDialogContext } from '@/core/providers/model-dialog-providers/model-dialog.provider';
 import { IconModal } from '@/pods/properties/components/icon-selector/modal';
 import { useCanvasContext } from '@/core/providers';
-import { useGroupShapeProps } from '../mock-components.utils';
+import { useGroupShapeProps } from '../../mock-components.utils';
+import { loadSvgWithFill, returnIconSize } from './icon-shape.business';
 
 const iconShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 25,
@@ -38,11 +33,13 @@ export const SvgIcon = forwardRef<any, ShapeProps>((props, ref) => {
     onSelected,
     iconInfo,
     iconSize,
+    stroke,
     ...shapeProps
   } = props;
   const { openModal } = useModalDialogContext();
   const { selectionInfo } = useCanvasContext();
   const { updateOtherPropsOnSelected } = selectionInfo;
+
   const handleDoubleClick = () => {
     openModal(
       <IconModal
@@ -51,24 +48,6 @@ export const SvgIcon = forwardRef<any, ShapeProps>((props, ref) => {
       />,
       'Choose Icon'
     );
-  };
-  const [image] = useImage(`${BASE_ICONS_URL}${iconInfo.filename}`);
-
-  const returnIconSize = (iconSize: IconSize): number[] => {
-    switch (iconSize) {
-      case 'XS':
-        return [25, 25];
-      case 'S':
-        return [50, 50];
-      case 'M':
-        return [100, 100];
-      case 'L':
-        return [125, 125];
-      case 'XL':
-        return [150, 150];
-      default:
-        return [50, 50];
-    }
   };
 
   const [iconWidth, iconHeight] = returnIconSize(iconSize);
@@ -88,15 +67,32 @@ export const SvgIcon = forwardRef<any, ShapeProps>((props, ref) => {
     ref
   );
 
+  const [image, setImage] = useState<HTMLImageElement | null>(null);
+  const imageRef = useRef(null);
+
+  useEffect(() => {
+    if (iconInfo?.filename) {
+      loadSvgWithFill(
+        `${BASE_ICONS_URL}${iconInfo.filename}`,
+        `${stroke}`
+      ).then(img => {
+        setImage(img);
+      });
+    }
+  }, [iconInfo?.filename, stroke]);
+
   return (
     <Group {...commonGroupProps} {...shapeProps} onDblClick={handleDoubleClick}>
-      <Image
-        image={image}
-        x={0}
-        y={0}
-        width={restrictedWidth}
-        height={restrictedHeight}
-      />
+      {image && (
+        <Image
+          image={image}
+          x={0}
+          y={0}
+          width={restrictedWidth}
+          height={restrictedHeight}
+          ref={imageRef}
+        />
+      )}
     </Group>
   );
 });

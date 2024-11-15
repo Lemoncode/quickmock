@@ -19,6 +19,7 @@ const inlineEditableShapes = new Set<ShapeType>([
   'heading1',
   'heading2',
   'heading3',
+  'link',
   'normaltext',
   'smalltext',
   'paragraph',
@@ -30,7 +31,9 @@ const inlineEditableShapes = new Set<ShapeType>([
   'buttonBar',
   'tabsBar',
   'tooltip',
+  'timepickerinput',
   'datepickerinput',
+  'browser',
 ]);
 
 // Check if a shape type allows inline editing
@@ -65,7 +68,10 @@ const shapeTypesWithDefaultText = new Set<ShapeType>([
   'appBar',
   'buttonBar',
   'tabsBar',
+  'link',
+  'timepickerinput',
   'datepickerinput',
+  'browser',
 ]);
 
 // Map of ShapeTypes to their default text values
@@ -97,7 +103,10 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   appBar: 'AppBar',
   buttonBar: 'Button 1, Button 2, Button 3',
   tabsBar: 'Tab 1, Tab 2, Tab 3',
+  link: 'Link',
+  timepickerinput: 'hh:mm',
   datepickerinput: new Date().toLocaleDateString(),
+  browser: 'https://example.com',
 };
 
 export const generateDefaultTextValue = (
