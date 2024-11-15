@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 import { Group } from 'konva/lib/Group';
 
-interface Position {
+export interface Position {
   x: number;
   y: number;
 }
@@ -32,7 +32,8 @@ export const dragAndDrop = async (
 
 export const addComponentsToCanvas = async (
   page: Page,
-  components: string[]
+  components: string[],
+  displacementQty: number = 120
 ) => {
   const canvasPosition = await page.locator('canvas').boundingBox();
   if (!canvasPosition) throw new Error('No canvas found');
@@ -53,7 +54,7 @@ export const addComponentsToCanvas = async (
       };
     };
 
-    await dragAndDrop(page, position, targetPosition(120, index));
+    await dragAndDrop(page, position, targetPosition(displacementQty, index));
   }
 };
 
