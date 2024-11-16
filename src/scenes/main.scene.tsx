@@ -13,15 +13,41 @@ import {
 import { PropertiesPod } from '@/pods/properties';
 import { FooterPod } from '@/pods/footer/footer.pod';
 import { ThumbPagesPod } from '@/pods/thumb-pages';
+import { useEffect, useRef, useState } from 'react';
 
 export const MainScene = () => {
+  const [isThumbPagesPodOpen, setIsThumbPagesPodOpen] = useState(false);
+  const thumbPagesPodRef = useRef<HTMLDetailsElement>(null);
+
+  useEffect(() => {
+    const handleToggle = () => {
+      setIsThumbPagesPodOpen(thumbPagesPodRef.current?.open ?? false);
+    };
+
+    const detailsElement = thumbPagesPodRef.current;
+    if (detailsElement) {
+      detailsElement.addEventListener('toggle', handleToggle);
+    }
+
+    // Cleanup event listener on component unmount
+    return () => {
+      if (detailsElement) {
+        detailsElement.removeEventListener('toggle', handleToggle);
+      }
+    };
+  }, []);
+
   return (
     <MainLayout>
       <ToolbarPod />
       <div className={classes.leftTools}>
-        <details className={classes.container} name="toolsLeft">
+        <details
+          className={classes.container}
+          name="toolsLeft"
+          ref={thumbPagesPodRef}
+        >
           <summary className={classes.title}>Pages</summary>
-          <ThumbPagesPod />
+          <ThumbPagesPod isVisible={isThumbPagesPodOpen} />
         </details>
         <details className={classes.container} name="toolsLeft">
           <summary className={classes.title}>Devices</summary>

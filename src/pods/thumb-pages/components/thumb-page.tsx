@@ -13,12 +13,14 @@ import React from 'react';
 
 interface Props {
   pageIndex: number;
+  isVisible: boolean;
   onSetActivePage: (pageId: string) => void;
   setPageTitleBeingEdited: (index: number) => void;
 }
 
 export const ThumbPage: React.FunctionComponent<Props> = props => {
-  const { pageIndex, onSetActivePage, setPageTitleBeingEdited } = props;
+  const { pageIndex, onSetActivePage, setPageTitleBeingEdited, isVisible } =
+    props;
   const { fullDocument } = useCanvasContext();
   const page = fullDocument.pages[pageIndex];
   const shapes = page.shapes;
@@ -48,6 +50,11 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
   React.useLayoutEffect(() => {
     handleResize();
   }, []);
+
+  React.useEffect(() => {
+    if (!isVisible) return;
+    handleResize();
+  }, [isVisible]);
 
   React.useEffect(() => {
     handleResize();
