@@ -33,33 +33,33 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
   const divRef = useRef<HTMLDivElement>(null);
   const [key, setKey] = React.useState(0);
 
-  React.useEffect(() => {
+  const handleResize = () => {
     const newCanvaSize = {
       width: divRef.current?.clientWidth || 1,
       height: divRef.current?.clientHeight || 1,
     };
 
-    window.addEventListener('resize', () => {
-      setCanvasSize({
-        width: divRef.current?.clientWidth || 1,
-        height: divRef.current?.clientHeight || 1,
-      });
-    });
-
     setCanvasSize(newCanvaSize);
     setFinalScale(calculateScaleBasedOnBounds(shapes, newCanvaSize));
 
     setKey(key => key + 1);
+  };
+
+  React.useLayoutEffect(() => {
+    handleResize();
+  }, []);
+
+  React.useEffect(() => {
+    handleResize();
+  }, [shapes]);
+
+  React.useEffect(() => {
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', () => {
-        setCanvasSize({
-          width: divRef.current?.clientWidth || 1,
-          height: divRef.current?.clientHeight || 1,
-        });
-      });
+      window.removeEventListener('resize', handleResize);
     };
-  }, [divRef.current, shapes]);
+  }, [divRef.current]);
 
   const {
     showContextMenu,
