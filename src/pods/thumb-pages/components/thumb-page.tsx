@@ -87,41 +87,43 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
         onContextMenu={handleShowContextMenu}
         key={key}
       >
-        <Stage
-          width={canvasSize.width}
-          height={canvasSize.height}
-          scaleX={finalScale}
-          scaleY={finalScale}
-        >
-          <Layer>
-            {shapes.map(shape => {
-              if (!fakeShapeRefs.current[shape.id]) {
-                fakeShapeRefs.current[shape.id] = createRef();
-              }
-              return renderShapeComponent(shape, {
-                handleSelected: () => {},
-                shapeRefs: fakeShapeRefs,
-                handleDragEnd:
-                  (_: string) => (_: KonvaEventObject<DragEvent>) => {},
-                handleTransform: () => {},
-              });
-            })}
-          </Layer>
-        </Stage>
-        <span
-          onClick={handleShowContextMenu}
-          className={classes['icon-container']}
-        >
-          <CaretDown />
-        </span>
-        {showContextMenu && (
-          <ThumbPageContextMenu
-            contextMenuRef={contextMenuRef}
-            setShowContextMenu={setShowContextMenu}
-            pageIndex={pageIndex}
-            setPageTitleBeingEdited={setPageTitleBeingEdited}
-          />
-        )}
+        <div className={classes.noclick}>
+          <Stage
+            width={canvasSize.width}
+            height={canvasSize.height}
+            scaleX={finalScale}
+            scaleY={finalScale}
+          >
+            <Layer>
+              {shapes.map(shape => {
+                if (!fakeShapeRefs.current[shape.id]) {
+                  fakeShapeRefs.current[shape.id] = createRef();
+                }
+                return renderShapeComponent(shape, {
+                  handleSelected: () => {},
+                  shapeRefs: fakeShapeRefs,
+                  handleDragEnd:
+                    (_: string) => (_: KonvaEventObject<DragEvent>) => {},
+                  handleTransform: () => {},
+                });
+              })}
+            </Layer>
+          </Stage>
+          <span
+            onClick={handleShowContextMenu}
+            className={classes['icon-container']}
+          >
+            <CaretDown />
+          </span>
+          {showContextMenu && (
+            <ThumbPageContextMenu
+              contextMenuRef={contextMenuRef}
+              setShowContextMenu={setShowContextMenu}
+              pageIndex={pageIndex}
+              setPageTitleBeingEdited={setPageTitleBeingEdited}
+            />
+          )}
+        </div>
       </div>
     </>
   );

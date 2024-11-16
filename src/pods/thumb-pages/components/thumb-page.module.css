@@ -24,3 +24,10 @@
 .icon-container > svg:hover {
   background-color: var(--primary-100);
 }
+
+.noclick {
+  pointer-events: none;
+  background-color: lightgray; /* Opcional, para destacar el área */
+  padding: 20px;
+  border: 1px solid #ccc;
+}
