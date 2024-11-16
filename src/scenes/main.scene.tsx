@@ -13,29 +13,11 @@ import {
 import { PropertiesPod } from '@/pods/properties';
 import { FooterPod } from '@/pods/footer/footer.pod';
 import { ThumbPagesPod } from '@/pods/thumb-pages';
-import { useEffect, useRef, useState } from 'react';
+import { useAccordionSectionVisibility } from './accordion-section-visibility.hook';
 
 export const MainScene = () => {
-  const [isThumbPagesPodOpen, setIsThumbPagesPodOpen] = useState(false);
-  const thumbPagesPodRef = useRef<HTMLDetailsElement>(null);
-
-  useEffect(() => {
-    const handleToggle = () => {
-      setIsThumbPagesPodOpen(thumbPagesPodRef.current?.open ?? false);
-    };
-
-    const detailsElement = thumbPagesPodRef.current;
-    if (detailsElement) {
-      detailsElement.addEventListener('toggle', handleToggle);
-    }
-
-    // Cleanup event listener on component unmount
-    return () => {
-      if (detailsElement) {
-        detailsElement.removeEventListener('toggle', handleToggle);
-      }
-    };
-  }, []);
+  const { isThumbPagesPodOpen, thumbPagesPodRef } =
+    useAccordionSectionVisibility();
 
   return (
     <MainLayout>
