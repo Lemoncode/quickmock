@@ -13,13 +13,15 @@ import React from 'react';
 
 interface Props {
   pageIndex: number;
+  isVisible: boolean;
   onSetActivePage: (pageId: string) => void;
   setPageTitleBeingEdited: (index: number) => void;
 }
 
 export const ThumbPage: React.FunctionComponent<Props> = props => {
-  const { pageIndex, onSetActivePage, setPageTitleBeingEdited } = props;
-  const { fullDocument } = useCanvasContext();
+  const { pageIndex, onSetActivePage, setPageTitleBeingEdited, isVisible } =
+    props;
+  const { fullDocument, activePageIndex } = useCanvasContext();
   const page = fullDocument.pages[pageIndex];
   const shapes = page.shapes;
   const fakeShapeRefs = useRef<ShapeRefs>({});
@@ -33,33 +35,41 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
   const divRef = useRef<HTMLDivElement>(null);
   const [key, setKey] = React.useState(0);
 
-  React.useEffect(() => {
+  const handleResizeAndForceRedraw = () => {
     const newCanvaSize = {
       width: divRef.current?.clientWidth || 1,
       height: divRef.current?.clientHeight || 1,
     };
 
-    window.addEventListener('resize', () => {
-      setCanvasSize({
-        width: divRef.current?.clientWidth || 1,
-        height: divRef.current?.clientHeight || 1,
-      });
-    });
-
     setCanvasSize(newCanvaSize);
     setFinalScale(calculateScaleBasedOnBounds(shapes, newCanvaSize));
+    setTimeout(() => {
+      setKey(key => key + 1);
+    }, 100);
+  };
 
-    setKey(key => key + 1);
+  React.useLayoutEffect(() => {
+    handleResizeAndForceRedraw();
+  }, []);
+
+  React.useEffect(() => {
+    if (!isVisible) return;
+    handleResizeAndForceRedraw();
+  }, [isVisible]);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      handleResizeAndForceRedraw();
+    }, 100);
+  }, [shapes, activePageIndex]);
+
+  React.useEffect(() => {
+    window.addEventListener('resize', handleResizeAndForceRedraw);
 
     return () => {
-      window.removeEventListener('resize', () => {
-        setCanvasSize({
-          width: divRef.current?.clientWidth || 1,
-          height: divRef.current?.clientHeight || 1,
-        });
-      });
+      window.removeEventListener('resize', handleResizeAndForceRedraw);
     };
-  }, [divRef.current, shapes]);
+  }, [divRef.current]);
 
   const {
     showContextMenu,
