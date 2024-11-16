@@ -21,7 +21,7 @@ interface Props {
 export const ThumbPage: React.FunctionComponent<Props> = props => {
   const { pageIndex, onSetActivePage, setPageTitleBeingEdited, isVisible } =
     props;
-  const { fullDocument } = useCanvasContext();
+  const { fullDocument, activePageIndex } = useCanvasContext();
   const page = fullDocument.pages[pageIndex];
   const shapes = page.shapes;
   const fakeShapeRefs = useRef<ShapeRefs>({});
@@ -58,8 +58,10 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
   }, [isVisible]);
 
   React.useEffect(() => {
-    handleResizeAndForceRedraw();
-  }, [shapes, fullDocument]);
+    setTimeout(() => {
+      handleResizeAndForceRedraw();
+    }, 100);
+  }, [shapes, activePageIndex]);
 
   React.useEffect(() => {
     window.addEventListener('resize', handleResizeAndForceRedraw);
