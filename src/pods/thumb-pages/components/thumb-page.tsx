@@ -35,7 +35,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
   const divRef = useRef<HTMLDivElement>(null);
   const [key, setKey] = React.useState(0);
 
-  const handleResize = () => {
+  const handleResizeAndForceRedraw = () => {
     const newCanvaSize = {
       width: divRef.current?.clientWidth || 1,
       height: divRef.current?.clientHeight || 1,
@@ -43,28 +43,29 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
 
     setCanvasSize(newCanvaSize);
     setFinalScale(calculateScaleBasedOnBounds(shapes, newCanvaSize));
-
-    setKey(key => key + 1);
+    setTimeout(() => {
+      setKey(key => key + 1);
+    }, 100);
   };
 
   React.useLayoutEffect(() => {
-    handleResize();
+    handleResizeAndForceRedraw();
   }, []);
 
   React.useEffect(() => {
     if (!isVisible) return;
-    handleResize();
+    handleResizeAndForceRedraw();
   }, [isVisible]);
 
   React.useEffect(() => {
-    handleResize();
-  }, [shapes]);
+    handleResizeAndForceRedraw();
+  }, [shapes, fullDocument]);
 
   React.useEffect(() => {
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResizeAndForceRedraw);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', handleResizeAndForceRedraw);
     };
   }, [divRef.current]);
 
