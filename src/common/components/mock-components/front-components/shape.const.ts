@@ -108,3 +108,8 @@ export const FONT_SIZE_VALUES: FontValues = {
   PARAGRAPH: 14,
   LINK: 20,
 };
+
+export const LINK_SHAPE: DefaultStyleShape = {
+  ...BASIC_SHAPE,
+  DEFAULT_FILL_TEXT: '#0000FF',
+};

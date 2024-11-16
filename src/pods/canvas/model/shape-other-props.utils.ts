@@ -2,6 +2,7 @@ import {
   INPUT_SHAPE,
   BASIC_SHAPE,
   FONT_SIZE_VALUES,
+  LINK_SHAPE,
 } from '@/common/components/mock-components/front-components/shape.const';
 import { ShapeType, OtherProps } from '@/core/model';
 
@@ -145,7 +146,7 @@ export const generateDefaultOtherProps = (
       };
     case 'link':
       return {
-        textColor: 'blue',
+        textColor: `${LINK_SHAPE.DEFAULT_FILL_TEXT}`,
         textDecoration: 'underline',
         fontSize: FONT_SIZE_VALUES.LINK,
       };
