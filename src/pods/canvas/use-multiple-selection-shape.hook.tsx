@@ -91,7 +91,6 @@ export const useMultipleSelectionShapeHook = (
     e: KonvaEventObject<MouseEvent> | KonvaEventObject<TouchEvent>
   ) => {
     const transformerRect = transformerRef.current?.getClientRect();
-    console.log(transformerRect);
     const mousePosition = e.target?.getStage()?.getPointerPosition() ?? {
       x: 0,
       y: 0,

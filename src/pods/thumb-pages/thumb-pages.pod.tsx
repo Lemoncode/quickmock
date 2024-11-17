@@ -3,6 +3,7 @@ import classes from './thumb-pages.module.css';
 import { useCanvasContext } from '@/core/providers';
 import { PageTitleInlineEdit, ThumbPage } from './components';
 import { PlusIcon } from '@/common/components/icons';
+import { useMonitorDropThumb } from './monitor-drop-thumb.hook';
 
 interface Props {
   isVisible: boolean;
@@ -23,6 +24,8 @@ export const ThumbPagesPod: React.FC<Props> = props => {
   const handleSetActivePage = (pageId: string) => {
     setActivePage(pageId);
   };
+
+  useMonitorDropThumb();
 
   return (
     <div className={classes.container}>

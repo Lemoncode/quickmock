@@ -9,7 +9,9 @@ import { ThumbPageContextMenu } from './context-menu';
 import { useContextMenu } from '../use-context-menu-thumb.hook';
 import { CaretDown } from '@/common/components/icons';
 import classes from './thumb-page.module.css';
+
 import React from 'react';
+import { useDragDropThumb } from './drag-drop-thumb.hook';
 
 interface Props {
   pageIndex: number;
@@ -19,9 +21,9 @@ interface Props {
 }
 
 export const ThumbPage: React.FunctionComponent<Props> = props => {
+  const { fullDocument, activePageIndex } = useCanvasContext();
   const { pageIndex, onSetActivePage, setPageTitleBeingEdited, isVisible } =
     props;
-  const { fullDocument, activePageIndex } = useCanvasContext();
   const page = fullDocument.pages[pageIndex];
   const shapes = page.shapes;
   const fakeShapeRefs = useRef<ShapeRefs>({});
@@ -34,6 +36,8 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
 
   const divRef = useRef<HTMLDivElement>(null);
   const [key, setKey] = React.useState(0);
+
+  const { dragging, isDraggedOver } = useDragDropThumb(divRef, pageIndex);
 
   const handleResizeAndForceRedraw = () => {
     const newCanvaSize = {
@@ -85,6 +89,10 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
         className={classes.container}
         onClick={() => onSetActivePage(page.id)}
         onContextMenu={handleShowContextMenu}
+        style={{
+          opacity: dragging ? 0.4 : 1,
+          background: isDraggedOver ? 'lightblue' : 'white',
+        }}
         key={key}
       >
         <div className={classes.noclick}>
