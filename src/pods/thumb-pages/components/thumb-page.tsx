@@ -156,33 +156,36 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
         }}
         key={key}
       >
-        <Stage
-          width={canvasSize.width}
-          height={canvasSize.height}
-          scaleX={finalScale}
-          scaleY={finalScale}
-        >
-          <Layer>
-            {shapes.map(shape => {
-              if (!fakeShapeRefs.current[shape.id]) {
-                fakeShapeRefs.current[shape.id] = createRef();
-              }
-              return renderShapeComponent(shape, {
-                handleSelected: () => {},
-                shapeRefs: fakeShapeRefs,
-                handleDragEnd:
-                  (_: string) => (_: KonvaEventObject<DragEvent>) => {},
-                handleTransform: () => {},
-              });
-            })}
-          </Layer>
-        </Stage>
+        <div className={classes.noclick}>
+          <Stage
+            width={canvasSize.width}
+            height={canvasSize.height}
+            scaleX={finalScale}
+            scaleY={finalScale}
+          >
+            <Layer>
+              {shapes.map(shape => {
+                if (!fakeShapeRefs.current[shape.id]) {
+                  fakeShapeRefs.current[shape.id] = createRef();
+                }
+                return renderShapeComponent(shape, {
+                  handleSelected: () => {},
+                  shapeRefs: fakeShapeRefs,
+                  handleDragEnd:
+                    (_: string) => (_: KonvaEventObject<DragEvent>) => {},
+                  handleTransform: () => {},
+                });
+              })}
+            </Layer>
+          </Stage>
+        </div>
         <span
           onClick={handleShowContextMenu}
           className={classes['icon-container']}
         >
           <CaretDown />
         </span>
+
         {showContextMenu && (
           <ThumbPageContextMenu
             contextMenuRef={contextMenuRef}
