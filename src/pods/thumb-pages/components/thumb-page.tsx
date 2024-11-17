@@ -96,10 +96,13 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
         pageIndex: fullDocument.pages[pageIndex].id,
         type: 'thumbPage',
       }),
-      onDragStart: () => setDragging(true),
+      onDragStart: () => {
+        console.log('Dragging page:', pageIndex);
+        setDragging(true);
+      },
       onDrop: () => setDragging(false),
     });
-  }, [pageIndex, fullDocument.pages]);
+  }, [divRef.current, pageIndex, fullDocument.pages]);
 
   useEffect(() => {
     const el = divRef.current;
@@ -137,7 +140,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
         }
       },
     });
-  }, [swapPages, fullDocument.pages]);
+  }, [divRef.current, swapPages, fullDocument.pages]);
 
   useEffect(() => {
     console.log('Updated pages:', fullDocument.pages);
