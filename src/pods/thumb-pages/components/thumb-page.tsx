@@ -115,15 +115,15 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
           >
             <CaretDown />
           </span>
-          {showContextMenu && (
-            <ThumbPageContextMenu
-              contextMenuRef={contextMenuRef}
-              setShowContextMenu={setShowContextMenu}
-              pageIndex={pageIndex}
-              setPageTitleBeingEdited={setPageTitleBeingEdited}
-            />
-          )}
         </div>
+        {showContextMenu && (
+          <ThumbPageContextMenu
+            contextMenuRef={contextMenuRef}
+            setShowContextMenu={setShowContextMenu}
+            pageIndex={pageIndex}
+            setPageTitleBeingEdited={setPageTitleBeingEdited}
+          />
+        )}
       </div>
     </>
   );
