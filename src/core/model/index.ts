@@ -67,7 +67,8 @@ export type ShapeType =
   | 'appBar'
   | 'buttonBar'
   | 'tooltip'
-  | 'slider';
+  | 'slider'
+  | 'link';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -107,6 +108,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   normaltext: 'Normal text',
   smalltext: 'Small text',
   paragraph: 'Paragraph',
+  link: 'Link',
   triangle: 'Triangle',
   'horizontal-menu': 'Horizontal Menu',
   largeArrow: 'Large Arrow',
@@ -161,6 +163,7 @@ export interface OtherProps {
   textColor?: string;
   fontVariant?: string;
   fontStyle?: string;
+  fontSize?: number;
   textDecoration?: string;
   checked?: boolean;
   icon?: IconInfo;

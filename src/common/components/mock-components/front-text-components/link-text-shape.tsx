@@ -3,11 +3,11 @@ import { Group, Text } from 'react-konva';
 import { ShapeProps } from '../shape.model';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
-const heading2SizeRestrictions: ShapeSizeRestrictions = {
+const linkSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 40,
   minHeight: 20,
   maxWidth: -1,
@@ -16,12 +16,12 @@ const heading2SizeRestrictions: ShapeSizeRestrictions = {
   defaultHeight: 25,
 };
 
-export const getHeading2SizeRestrictions = (): ShapeSizeRestrictions =>
-  heading2SizeRestrictions;
+export const getLinkSizeRestrictions = (): ShapeSizeRestrictions =>
+  linkSizeRestrictions;
 
-const shapeType: ShapeType = 'heading2';
+const shapeType: ShapeType = 'link';
 
-export const Heading2Shape = forwardRef<any, ShapeProps>((props, ref) => {
+export const LinkShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
     x,
     y,
@@ -34,14 +34,17 @@ export const Heading2Shape = forwardRef<any, ShapeProps>((props, ref) => {
     ...shapeProps
   } = props;
   const restrictedSize = fitSizeToShapeSizeRestrictions(
-    heading2SizeRestrictions,
+    linkSizeRestrictions,
     width,
     height
   );
+
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { textColor, fontVariant, fontStyle, textDecoration, fontSize } =
-    useShapeProps(otherProps, BASIC_SHAPE);
+  const { textColor, textDecoration, fontSize } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -65,12 +68,10 @@ export const Heading2Shape = forwardRef<any, ShapeProps>((props, ref) => {
         verticalAlign="middle"
         ellipsis={true}
         wrap="none"
-        fontVariant={fontVariant}
-        fontStyle={fontStyle}
         textDecoration={textDecoration}
       />
     </Group>
   );
 });
 
-export default Heading2Shape;
+export default LinkShape;
