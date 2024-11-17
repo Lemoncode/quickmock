@@ -2,7 +2,7 @@ import { ShapeRefs, Size } from '@/core/model';
 import { useCanvasContext } from '@/core/providers';
 import { renderShapeComponent } from '@/pods/canvas/shape-renderer';
 import { KonvaEventObject } from 'konva/lib/Node';
-import { createRef, useRef, useEffect } from 'react';
+import { createRef, useRef } from 'react';
 import { Layer, Stage } from 'react-konva';
 import { calculateScaleBasedOnBounds } from './thumb-page.business';
 import { ThumbPageContextMenu } from './context-menu';
