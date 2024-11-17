@@ -24,3 +24,7 @@
 .icon-container > svg:hover {
   background-color: var(--primary-100);
 }
+
+.noclick {
+  pointer-events: none;
+}
