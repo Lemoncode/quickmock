@@ -89,6 +89,26 @@ export const POSTIT_SHAPE: DefaultStyleShape = {
   DEFAULT_TEXT_DECORATION,
 };
 
+interface FontValues {
+  HEADING1: number;
+  HEADING2: number;
+  HEADING3: number;
+  NORMALTEXT: number;
+  SMALLTEXT: number;
+  PARAGRAPH: number;
+  LINK: number;
+}
+
+export const FONT_SIZE_VALUES: FontValues = {
+  HEADING1: 28,
+  HEADING2: 24,
+  HEADING3: 18,
+  NORMALTEXT: 18,
+  SMALLTEXT: 14,
+  PARAGRAPH: 14,
+  LINK: 20,
+};
+
 export const LINK_SHAPE: DefaultStyleShape = {
   ...BASIC_SHAPE,
   DEFAULT_FILL_TEXT: '#0000FF',

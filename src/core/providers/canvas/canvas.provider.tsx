@@ -307,6 +307,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         setActivePage,
         deletePage,
         editPageTitle,
+        activePageIndex: document.activePageIndex,
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
       }}

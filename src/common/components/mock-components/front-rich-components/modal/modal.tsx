@@ -53,7 +53,7 @@ export const Modal = forwardRef<any, ShapeProps>((props, ref) => {
   const buttonWidth =
     (restrictedWidth - (buttons.length + 1) * buttonSpacing) / buttons.length;
 
-  const { stroke, strokeStyle, fill, textColor } = useShapeProps(
+  const { stroke, strokeStyle, fill, textColor, fontSize } = useShapeProps(
     otherProps,
     BASIC_SHAPE
   );
@@ -99,7 +99,7 @@ export const Modal = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth - 60}
         text={modalTitle}
         fontFamily="Arial"
-        fontSize={18}
+        fontSize={fontSize}
         fill="white"
         wrap="none"
         ellipsis={true}

@@ -40,7 +40,7 @@ export const ParagraphShape = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { textColor } = useShapeProps(otherProps, BASIC_SHAPE);
+  const { textColor, fontSize } = useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -58,7 +58,7 @@ export const ParagraphShape = forwardRef<any, ShapeProps>((props, ref) => {
         height={restrictedHeight}
         text={text}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
-        fontSize={14}
+        fontSize={fontSize}
         fill={textColor}
         align="left"
         ellipsis={true}

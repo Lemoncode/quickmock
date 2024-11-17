@@ -4,7 +4,12 @@ import { useCanvasContext } from '@/core/providers';
 import { PageTitleInlineEdit, ThumbPage } from './components';
 import { PlusIcon } from '@/common/components/icons';
 
-export const ThumbPagesPod: React.FC = () => {
+interface Props {
+  isVisible: boolean;
+}
+
+export const ThumbPagesPod: React.FC<Props> = props => {
+  const { isVisible } = props;
   const { fullDocument, addNewPage, setActivePage, getActivePage } =
     useCanvasContext();
   const [pageTitleBeingEdited, setPageTitleBeingEdited] = React.useState<
@@ -34,6 +39,7 @@ export const ThumbPagesPod: React.FC = () => {
               pageIndex={index}
               onSetActivePage={handleSetActivePage}
               setPageTitleBeingEdited={setPageTitleBeingEdited}
+              isVisible={isVisible}
             />
             {pageTitleBeingEdited === index ? (
               <PageTitleInlineEdit
