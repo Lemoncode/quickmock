@@ -46,11 +46,13 @@ export const CanvasProvider: React.FC<Props> = props => {
   const addNewPage = () => {
     setDocument(lastDocument =>
       produce(lastDocument, draft => {
+        const newActiveIndex = draft.pages.length;
         draft.pages.push({
           id: uuidv4(),
-          name: `Page ${draft.pages.length + 1}`,
+          name: `Page ${newActiveIndex + 1}`,
           shapes: [],
         });
+        draft.activePageIndex = newActiveIndex;
       })
     );
   };
@@ -71,8 +73,9 @@ export const CanvasProvider: React.FC<Props> = props => {
           name: `${document.pages[pageIndex].name} - copy`,
           shapes: newShapes,
         };
-        draft.pages.push(newPage);
-        setActivePage(newPage.id);
+        const newIndex = draft.activePageIndex + 1;
+        draft.pages.splice(newIndex, 0, newPage);
+        draft.activePageIndex = newIndex;
       })
     );
   };
@@ -92,6 +95,10 @@ export const CanvasProvider: React.FC<Props> = props => {
     );
 
     setActivePage(newActivePageId);
+  };
+
+  const getActivePage = () => {
+    return document.pages[document.activePageIndex];
   };
 
   const setActivePage = (pageId: string) => {
@@ -296,9 +303,11 @@ export const CanvasProvider: React.FC<Props> = props => {
         fullDocument: document,
         addNewPage,
         duplicatePage,
+        getActivePage,
         setActivePage,
         deletePage,
         editPageTitle,
+        activePageIndex: document.activePageIndex,
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
       }}

@@ -125,6 +125,17 @@ Team members participating in this project
   <a href="https://github.com/Pableras90">
     <kbd><img src="https://github.com/Pableras90.png" alt="Pablo Reinaldo" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
+
+  <a href="https://github.com/Alber-Writer">
+    <kbd><img src="https://github.com/Alber-Writer.png" alt="Alberto Escribano" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>
+  <a href="https://github.com/El-Mito-de-Giralda">
+    <kbd><img src="https://github.com/El-Mito-de-Giralda.png" alt="Jorge Miranda de la quintana" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>
+  <a href="https://github.com/josemitoribio">
+    <kbd><img src="https://github.com/josemitoribio.png" alt="Josemi Toribio" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>
+  
   <a href="https://github.com/IonutGabi">
     <kbd><img src="https://github.com/IonutGabi.png" alt="Gabi Birsan" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>  
