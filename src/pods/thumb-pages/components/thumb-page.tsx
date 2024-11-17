@@ -93,11 +93,11 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
     return draggable({
       element: el,
       getInitialData: () => ({
-        pageIndex: fullDocument.pages[pageIndex].id,
+        pageId: page.id, //fullDocument.pages[pageIndex].id,
         type: 'thumbPage',
       }),
       onDragStart: () => {
-        console.log('Dragging page:', pageIndex);
+        console.log('Dragging page:', page.id);
         setDragging(true);
       },
       onDrop: () => setDragging(false),
@@ -111,14 +111,14 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
     return dropTargetForElements({
       element: el,
       getData: () => ({
-        pageIndex: fullDocument.pages[pageIndex].id,
+        pageId: page.id, //fullDocument.pages[pageIndex].id,
         type: 'thumbPage',
       }),
       onDragEnter: () => setIsDraggedOver(true),
       onDragLeave: () => setIsDraggedOver(false),
       onDrop: () => setIsDraggedOver(false),
     });
-  }, [pageIndex, fullDocument.pages]);
+  }, [divRef.current, pageIndex, fullDocument.pages]);
 
   useEffect(() => {
     return monitorForElements({
@@ -130,12 +130,12 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
         if (destination.data.type === 'thumbPage') {
           console.log(
             'Swapping pages:',
-            source.data.pageIndex,
-            destination.data.pageIndex
+            source.data.pageId,
+            destination.data.pageId
           );
           swapPages(
-            String(source.data.pageIndex),
-            String(destination.data.pageIndex)
+            String(source.data.pageId),
+            String(destination.data.pageId)
           );
         }
       },
