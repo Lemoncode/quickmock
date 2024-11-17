@@ -109,13 +109,14 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
               })}
             </Layer>
           </Stage>
-          <span
-            onClick={handleShowContextMenu}
-            className={classes['icon-container']}
-          >
-            <CaretDown />
-          </span>
         </div>
+        <span
+          onClick={handleShowContextMenu}
+          className={classes['icon-container']}
+        >
+          <CaretDown />
+        </span>
+
         {showContextMenu && (
           <ThumbPageContextMenu
             contextMenuRef={contextMenuRef}
