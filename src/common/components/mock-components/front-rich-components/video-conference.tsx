@@ -1,12 +1,13 @@
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
-import { ShapeSizeRestrictions } from '@/core/model';
+import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Circle, Text } from 'react-konva';
+import { useGroupShapeProps } from '../mock-components.utils';
 
-const videoconferenceShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 200,
-  minHeight: 150,
+const videoConferenceShapeSizeRestrictions: ShapeSizeRestrictions = {
+  minWidth: 300,
+  minHeight: 200,
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 600,
@@ -14,7 +15,7 @@ const videoconferenceShapeSizeRestrictions: ShapeSizeRestrictions = {
 };
 
 export const getVideoconferenceShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => videoconferenceShapeSizeRestrictions;
+  (): ShapeSizeRestrictions => videoConferenceShapeSizeRestrictions;
 
 export const VideoConferenceShape = forwardRef<any, ShapeProps>(
   (props, ref) => {
@@ -24,22 +25,32 @@ export const VideoConferenceShape = forwardRef<any, ShapeProps>(
     const smallVideoWidth = 120;
     const smallVideoHeight = 80;
     const controlRadius = 20;
-    const controlsY = videoHeight + 50;
+    const controlsY = videoHeight + 7;
+    const shapeType: ShapeType = 'videoConference';
 
-    fitSizeToShapeSizeRestrictions(
-      videoconferenceShapeSizeRestrictions,
+    const restrictedSize = fitSizeToShapeSizeRestrictions(
+      videoConferenceShapeSizeRestrictions,
       width,
       height
     );
+    const margin = 10;
+    const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
+
+    const commonGroupProps = useGroupShapeProps(
+      props,
+      restrictedSize,
+      shapeType,
+      ref
+    );
 
     return (
-      <Group x={x} y={y} ref={ref} {...shapeProps}>
+      <Group {...commonGroupProps} {...shapeProps}>
         {/* Pantalla de videoconferencia */}
         <Rect
           x={0}
-          y={0}
-          width={videoWidth}
-          height={videoHeight}
+          y={-100}
+          width={restrictedWidth - 2 * margin}
+          height={restrictedHeight - 2 * margin}
           fill="lightgray"
           stroke="black"
           strokeWidth={2}
@@ -49,13 +60,14 @@ export const VideoConferenceShape = forwardRef<any, ShapeProps>(
         <Circle
           cx={150}
           cy={130}
+          x={100}
           radius={40}
           fill="white"
           stroke="black"
           strokeWidth={2}
         />
         <Rect
-          x={110}
+          x={margin}
           y={170}
           width={80}
           height={100}
@@ -80,6 +92,7 @@ export const VideoConferenceShape = forwardRef<any, ShapeProps>(
         <Circle
           cx={videoWidth - smallVideoWidth / 2 - 20}
           cy={260}
+          x={160}
           radius={20}
           fill="white"
           stroke="black"
