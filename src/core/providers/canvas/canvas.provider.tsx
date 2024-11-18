@@ -123,6 +123,20 @@ export const CanvasProvider: React.FC<Props> = props => {
     );
   };
 
+  const swapPages = (id1: string, id2: string) => {
+    setDocument(lastDocument =>
+      produce(lastDocument, draft => {
+        const index1 = draft.pages.findIndex(page => page.id === id1);
+        const index2 = draft.pages.findIndex(page => page.id === id2);
+        if (index1 !== -1 && index2 !== -1) {
+          const temp = draft.pages[index1];
+          draft.pages[index1] = draft.pages[index2];
+          draft.pages[index2] = temp;
+        }
+      })
+    );
+  };
+
   const pasteShapes = (shapes: ShapeModel[]) => {
     const newShapes: ShapeModel[] = shapes.map(shape => {
       shape.id = uuidv4();
@@ -307,6 +321,8 @@ export const CanvasProvider: React.FC<Props> = props => {
         setActivePage,
         deletePage,
         editPageTitle,
+        swapPages,
+        activePageIndex: document.activePageIndex,
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
       }}

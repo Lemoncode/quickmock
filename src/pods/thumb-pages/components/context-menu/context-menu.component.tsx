@@ -42,7 +42,6 @@ export const ThumbPageContextMenu: React.FunctionComponent<
         duplicatePage(pageIndex);
         break;
       case ContextButtonType.Rename:
-        console.log('Rename');
         setPageTitleBeingEdited(pageIndex);
         break;
       case ContextButtonType.Delete:
