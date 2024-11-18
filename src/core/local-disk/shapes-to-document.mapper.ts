@@ -32,6 +32,54 @@ const mapTextElementFromV0_1ToV0_2 = (shape: ShapeModel): ShapeModel => {
           fontSize: FONT_SIZE_VALUES.HEADING1,
         },
       };
+    case 'heading2':
+      return {
+        ...shape,
+        otherProps: {
+          ...shape,
+          fontSize: FONT_SIZE_VALUES.HEADING2,
+        },
+      };
+    case 'heading3':
+      return {
+        ...shape,
+        otherProps: {
+          ...shape,
+          fontSize: FONT_SIZE_VALUES.HEADING3,
+        },
+      };
+    case 'link':
+      return {
+        ...shape,
+        otherProps: {
+          ...shape,
+          fontSize: FONT_SIZE_VALUES.LINK,
+        },
+      };
+    case 'normaltext':
+      return {
+        ...shape,
+        otherProps: {
+          ...shape,
+          fontSize: FONT_SIZE_VALUES.NORMALTEXT,
+        },
+      };
+    case 'smalltext':
+      return {
+        ...shape,
+        otherProps: {
+          ...shape,
+          fontSize: FONT_SIZE_VALUES.SMALLTEXT,
+        },
+      };
+    case 'paragraph':
+      return {
+        ...shape,
+        otherProps: {
+          ...shape,
+          fontSize: FONT_SIZE_VALUES.PARAGRAPH,
+        },
+      };
     default:
       return shape;
   }
