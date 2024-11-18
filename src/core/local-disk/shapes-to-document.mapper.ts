@@ -1,3 +1,4 @@
+import { FONT_SIZE_VALUES } from '@/common/components/mock-components/front-components/shape.const';
 import { ShapeModel } from '../model';
 import { DocumentModel } from '../providers/canvas/canvas.model';
 import { QuickMockFileContract } from './local-disk.model';
@@ -21,17 +22,40 @@ export const mapFromQuickMockFileDocumentToApplicationDocument = (
   };
 };
 
+const mapTextElementFromV0_1ToV0_2 = (shape: ShapeModel): ShapeModel => {
+  switch (shape.type) {
+    case 'heading1':
+      return {
+        ...shape,
+        otherProps: {
+          ...shape,
+          fontSize: FONT_SIZE_VALUES.HEADING1,
+        },
+      };
+    default:
+      return shape;
+  }
+};
+
+const setTextElementsDefaultFontSizeV0_1 = (
+  shapes: ShapeModel[]
+): ShapeModel[] => {
+  return shapes.map(mapTextElementFromV0_1ToV0_2);
+};
+
 // Example function to handle version 0.1 parsing
 export const mapFromQuickMockFileDocumentToApplicationDocumentV0_1 = (
   fileDocument: QuickMockFileContract
 ): DocumentModel => {
   // Combine all shapes into a single page
-  const combinedShapes: ShapeModel[] = fileDocument.pages.reduce<ShapeModel[]>(
+  let combinedShapes: ShapeModel[] = fileDocument.pages.reduce<ShapeModel[]>(
     (acc: ShapeModel[], page) => {
       return acc.concat(page.shapes);
     },
     []
   );
+
+  combinedShapes = setTextElementsDefaultFontSizeV0_1(combinedShapes);
 
   return {
     activePageIndex: 0,
