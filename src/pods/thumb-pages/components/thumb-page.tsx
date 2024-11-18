@@ -58,13 +58,15 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
 
   React.useEffect(() => {
     if (!isVisible) return;
-    handleResizeAndForceRedraw();
+    setTimeout(() => {
+      handleResizeAndForceRedraw();
+    }, 100);
   }, [isVisible]);
 
   React.useEffect(() => {
     setTimeout(() => {
       handleResizeAndForceRedraw();
-    }, 100);
+    }, 200);
   }, [shapes, activePageIndex]);
 
   React.useEffect(() => {
