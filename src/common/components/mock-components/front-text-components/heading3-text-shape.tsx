@@ -8,7 +8,7 @@ import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const heading3SizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 150,
+  minWidth: 40,
   minHeight: 20,
   maxWidth: -1,
   maxHeight: -1,
@@ -41,10 +41,8 @@ export const Heading3Shape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { textColor, fontVariant, fontStyle, textDecoration } = useShapeProps(
-    otherProps,
-    BASIC_SHAPE
-  );
+  const { textColor, fontVariant, fontStyle, textDecoration, fontSize } =
+    useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -62,7 +60,7 @@ export const Heading3Shape = forwardRef<any, ShapeProps>((props, ref) => {
         height={restrictedHeight}
         text={text}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
-        fontSize={20}
+        fontSize={fontSize}
         fill={textColor}
         align="center"
         verticalAlign="middle"

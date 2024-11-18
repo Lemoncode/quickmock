@@ -1,6 +1,8 @@
 import {
   INPUT_SHAPE,
   BASIC_SHAPE,
+  FONT_SIZE_VALUES,
+  LINK_SHAPE,
 } from '@/common/components/mock-components/front-components/shape.const';
 import { ShapeType, OtherProps } from '@/core/model';
 
@@ -123,6 +125,7 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: FONT_SIZE_VALUES.HEADING1,
       };
 
     case 'heading2':
@@ -131,6 +134,7 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: FONT_SIZE_VALUES.HEADING2,
       };
     case 'heading3':
       return {
@@ -138,6 +142,13 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: FONT_SIZE_VALUES.HEADING3,
+      };
+    case 'link':
+      return {
+        textColor: `${LINK_SHAPE.DEFAULT_FILL_TEXT}`,
+        textDecoration: 'underline',
+        fontSize: FONT_SIZE_VALUES.LINK,
       };
     case 'normaltext':
       return {
@@ -145,6 +156,7 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: FONT_SIZE_VALUES.NORMALTEXT,
       };
     case 'smalltext':
       return {
@@ -152,8 +164,12 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: FONT_SIZE_VALUES.SMALLTEXT,
       };
     case 'paragraph':
+      return {
+        fontSize: FONT_SIZE_VALUES.PARAGRAPH,
+      };
     case 'label':
       return {
         textColor: '#000000',
@@ -185,6 +201,7 @@ export const generateDefaultOtherProps = (
           categories: ['IT'],
         },
         iconSize: 'M',
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
       };
     case 'image':
       return {

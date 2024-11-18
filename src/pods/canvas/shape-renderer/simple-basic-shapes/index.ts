@@ -7,3 +7,4 @@ export * from './vertical-line.renderer';
 export * from './circle.renderer';
 export * from './star.renderer';
 export * from './large-arrow.renderer';
+export * from './modal-cover.rerender';

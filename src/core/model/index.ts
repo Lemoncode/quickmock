@@ -61,12 +61,14 @@ export type ShapeType =
   | 'verticalScrollBar'
   | 'horizontalScrollBar'
   | 'modal'
+  | 'modalCover'
   | 'tabsBar'
   | 'appBar'
   | 'appBar'
   | 'buttonBar'
   | 'tooltip'
-  | 'slider';
+  | 'slider'
+  | 'link';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -106,6 +108,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   normaltext: 'Normal text',
   smalltext: 'Small text',
   paragraph: 'Paragraph',
+  link: 'Link',
   triangle: 'Triangle',
   'horizontal-menu': 'Horizontal Menu',
   largeArrow: 'Large Arrow',
@@ -118,6 +121,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   calendar: 'Calendar',
   verticalScrollBar: 'Vertical Scroll Bar',
   modal: 'Modal',
+  modalCover: 'Modal Cover',
   tabsBar: 'Tabs Bar',
   appBar: 'AppBar',
   buttonBar: 'Button Bar',
@@ -159,6 +163,7 @@ export interface OtherProps {
   textColor?: string;
   fontVariant?: string;
   fontStyle?: string;
+  fontSize?: number;
   textDecoration?: string;
   checked?: boolean;
   icon?: IconInfo;

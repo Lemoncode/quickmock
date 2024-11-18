@@ -21,7 +21,7 @@ export const getBrowserWindowShapeSizeRestrictions =
 const shapeType: ShapeType = 'browser';
 
 export const BrowserWindowShape = forwardRef<any, ShapeProps>((props, ref) => {
-  const { x, y, width, height, id, onSelected, ...shapeProps } = props;
+  const { x, y, width, height, id, onSelected, text, ...shapeProps } = props;
   const restrictedSize = fitSizeToShapeSizeRestrictions(
     browserWindowShapeSizeRestrictions,
     width,
@@ -114,9 +114,9 @@ export const BrowserWindowShape = forwardRef<any, ShapeProps>((props, ref) => {
       <Text
         x={margin * 4}
         y={margin * 3.5 + titleBarHeight}
-        width={restrictedWidth - 50}
-        height={restrictedHeight - 50}
-        text="https://example.com"
+        width={restrictedWidth - margin * 7}
+        height={urlBarHeight}
+        text={text}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={12}
         fill="black"

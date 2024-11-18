@@ -60,9 +60,9 @@ export const VerticalLineShape = forwardRef<any, ShapeProps>((props, ref) => {
       />
 
       <Line
-        x={restrictedWidth / 2} //TODO: alber delete. solo referencia de line x={0}
-        y={0} //TODO:alber delete. solo referencia de line y={restrictedHeight / 2}
-        points={[0, 0, 0, restrictedHeight]} //TODO:alber delete. ??? seguramente necesita modificar: points={[0, 0, restrictedWidth, 0]}
+        x={restrictedWidth / 2}
+        y={0}
+        points={[0, 0, 0, restrictedHeight]}
         stroke={stroke}
         strokeWidth={2}
         dash={strokeStyle}

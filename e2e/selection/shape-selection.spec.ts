@@ -46,7 +46,8 @@ test('drop shape in canvas, click on canvas, drop diselected', async ({
   const inputShape = (await getByShapeType(page, 'input')) as Group;
   expect(inputShape).toBeDefined();
 
-  await page.click('canvas');
+  //Click Away
+  await page.mouse.click(800, 130);
 
   const transformer = await getTransformer(page);
   expect(transformer).toBeDefined();
