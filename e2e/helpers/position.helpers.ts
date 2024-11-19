@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 import { Group } from 'konva/lib/Group';
 
-interface Position {
+export interface Position {
   x: number;
   y: number;
 }
@@ -43,7 +43,8 @@ export const dragAndDrop = async (
 
 export const addComponentsToCanvas = async (
   page: Page,
-  components: string[]
+  components: string[],
+  displacementQty: number = 120
 ) => {
   const stageCanvas = await page.locator('#konva-stage canvas').first();
   const canvasPosition = await stageCanvas.boundingBox();
@@ -65,7 +66,7 @@ export const addComponentsToCanvas = async (
       };
     };
 
-    await dragAndDrop(page, position, targetPosition(120, index));
+    await dragAndDrop(page, position, targetPosition(displacementQty, index));
   }
 };
 
