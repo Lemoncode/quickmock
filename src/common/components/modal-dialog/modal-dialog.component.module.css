@@ -6,6 +6,7 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: var(--primary-900-50-opacity);
@@ -15,10 +16,15 @@
   position: relative;
   z-index: 3;
   width: 90%;
-  background-color: var(--primary-900-50-opacity);
   max-width: 1280px;
   height: 80%;
   overflow: auto;
+  border-radius: var(--border-radius-m);
+}
+
+.dialogContent {
+  overflow: auto;
+  flex: 1;
 }
 
 .dialogHeader {

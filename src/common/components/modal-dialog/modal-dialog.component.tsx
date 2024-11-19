@@ -27,7 +27,7 @@ export const ModalDialogComponent: React.FC = () => {
               <XIconComponent />
             </button>
           </div>
-          <div>{selectedComponent}</div>
+          <div className={classes.dialogContent}>{selectedComponent}</div>
         </div>
       </div>
     )
