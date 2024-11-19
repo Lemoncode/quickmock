@@ -40,8 +40,14 @@ export const Heading1Shape = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { textColor, textDecoration, fontStyle, fontVariant, fontSize } =
-    useShapeProps(otherProps, BASIC_SHAPE);
+  const {
+    textColor,
+    textDecoration,
+    fontStyle,
+    fontVariant,
+    fontSize,
+    textAlignment,
+  } = useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -61,7 +67,7 @@ export const Heading1Shape = forwardRef<any, ShapeProps>((props, ref) => {
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={fontSize}
         fill={textColor}
-        align="center"
+        align={textAlignment}
         verticalAlign="middle"
         ellipsis={true}
         wrap="none"
