@@ -62,6 +62,15 @@ export const getTransformer = async (page: Page): Promise<any> => {
   return transformer;
 };
 
+export const getIndexFromCanvasShape = async (
+  page: Page,
+  shapeId: number
+): Promise<number> => {
+  const children = await getChildren(page);
+  const index = children.findIndex(child => child._id === shapeId);
+  return index;
+};
+
 export const getWithinCanvasItemList = async (
   page: Page
 ): Promise<Group['attrs'][]> => {
