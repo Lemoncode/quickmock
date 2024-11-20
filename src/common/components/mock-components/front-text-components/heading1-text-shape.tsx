@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
 import { Group, Text } from 'react-konva';
 import { ShapeProps } from '../shape.model';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
@@ -6,6 +6,8 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { calcTextDimensions } from '@/common/utils/calc-text-dimensions';
+import { useCanvasContext } from '@/core/providers';
 
 const heading1SizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 40,
@@ -43,12 +45,35 @@ export const Heading1Shape = forwardRef<any, ShapeProps>((props, ref) => {
   const { textColor, textDecoration, fontStyle, fontVariant, fontSize } =
     useShapeProps(otherProps, BASIC_SHAPE);
 
+  const previousFontSize = useRef(fontSize);
+
   const commonGroupProps = useGroupShapeProps(
     props,
     restrictedSize,
     shapeType,
     ref
   );
+
+  const { updateShapeSizeAndPosition, stageRef } = useCanvasContext();
+  const konvaLayer = stageRef.current?.getLayers()[0];
+
+  useEffect(() => {
+    if (previousFontSize.current != fontSize) {
+      previousFontSize.current = fontSize;
+      const { width, height } = calcTextDimensions(
+        text,
+        fontSize,
+        fontVariant,
+        konvaLayer
+      );
+      updateShapeSizeAndPosition(
+        id,
+        { x, y },
+        { width: width * 1.1, height },
+        false
+      );
+    }
+  }, [fontSize]);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
