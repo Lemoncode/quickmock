@@ -13,4 +13,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-md) var(--space-xxl);
+  align-items: start;
+  justify-content: center;
 }
