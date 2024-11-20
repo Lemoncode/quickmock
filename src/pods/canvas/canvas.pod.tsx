@@ -15,6 +15,7 @@ import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
 import { useKeyboardDisplacement } from './use-keyboard-displacement';
 import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
 import { ContextMenu } from '../context-menu/use-context-menu.hook';
+import React from 'react';
 
 export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
@@ -34,7 +35,6 @@ export const CanvasPod = () => {
     shapeRefs,
     transformerRef,
     handleSelected,
-    handleClearSelection,
     selectedShapesRefs,
     updateTextOnSelected,
     updateOtherPropsOnSelected,
@@ -109,6 +109,16 @@ export const CanvasPod = () => {
     window.__TESTING_KONVA_LAYER__ = layerRef.current;
   }
 
+  React.useEffect(() => {
+    const stage = stageRef.current;
+    const pixelRatio = window.devicePixelRatio;
+    if (stage) {
+      stage.width(3000 / pixelRatio);
+      stage.height(3000 / pixelRatio);
+      stage.scale({ x: pixelRatio, y: pixelRatio });
+    }
+  }, []);
+
   {
     /* TODO: add other animation for isDraggerOver */
   }
@@ -126,7 +136,11 @@ export const CanvasPod = () => {
       <Stage
         width={3000}
         height={3000}
-        onTouchStart={handleClearSelection}
+        // pixelRatio={window.devicePixelRatio}
+        forceUpdate={true}
+        onTouchStart={handleMouseDown}
+        onTouchMove={handleMouseMove}
+        onTouchEnd={handleMouseUp}
         ref={stageRef}
         scale={{ x: scale, y: scale }}
         onMouseDown={handleMouseDown}

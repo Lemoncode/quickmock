@@ -98,7 +98,9 @@ export const EditableComponent: React.FC<Props> = props => {
 
   return (
     <>
-      <Group onDblClick={handleDoubleClick}>{children}</Group>
+      <Group onDblClick={handleDoubleClick} onDblTap={handleDoubleClick}>
+        {children}
+      </Group>
       {isEditing ? (
         <HtmlEditWidget
           divProps={{

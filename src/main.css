@@ -73,4 +73,5 @@
 
 body {
   overflow: hidden;
+  position: fixed;
 }
