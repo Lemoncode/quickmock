@@ -13,15 +13,23 @@ import {
 import { PropertiesPod } from '@/pods/properties';
 import { FooterPod } from '@/pods/footer/footer.pod';
 import { ThumbPagesPod } from '@/pods/thumb-pages';
+import { useAccordionSectionVisibility } from './accordion-section-visibility.hook';
 
 export const MainScene = () => {
+  const { isThumbPagesPodOpen, thumbPagesPodRef } =
+    useAccordionSectionVisibility();
+
   return (
     <MainLayout>
       <ToolbarPod />
       <div className={classes.leftTools}>
-        <details className={classes.container} name="toolsLeft">
+        <details
+          className={classes.container}
+          name="toolsLeft"
+          ref={thumbPagesPodRef}
+        >
           <summary className={classes.title}>Pages</summary>
-          <ThumbPagesPod />
+          <ThumbPagesPod isVisible={isThumbPagesPodOpen} />
         </details>
         <details className={classes.container} name="toolsLeft">
           <summary className={classes.title}>Devices</summary>

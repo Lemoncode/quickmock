@@ -24,38 +24,40 @@ export const useMonitorShape = (
         if (!destination) return;
         invariant(destination);
 
-        const type = source.data.type as ShapeType;
+        if (source.data.type !== 'thumbPage') {
+          const type = source.data.type as ShapeType;
 
-        const screenPosition =
-          extractScreenCoordinatesFromPragmaticLocation(location);
+          const screenPosition =
+            extractScreenCoordinatesFromPragmaticLocation(location);
 
-        let positionX = 0;
-        let positionY = 0;
-        if (screenPosition) {
-          invariant(dropRef.current);
-          const { x: divRelativeX, y: divRelativeY } =
-            portScreenPositionToDivCoordinates(
-              dropRef.current as HTMLDivElement,
-              screenPosition
+          let positionX = 0;
+          let positionY = 0;
+          if (screenPosition) {
+            invariant(dropRef.current);
+            const { x: divRelativeX, y: divRelativeY } =
+              portScreenPositionToDivCoordinates(
+                dropRef.current as HTMLDivElement,
+                screenPosition
+              );
+
+            invariant(stageRef.current);
+            const stage = stageRef.current;
+            const { scrollLeft, scrollTop } = getScrollFromDiv(
+              dropRef as unknown as React.MutableRefObject<HTMLDivElement>
             );
+            const konvaCoord = convertFromDivElementCoordsToKonvaCoords(stage, {
+              screenPosition,
+              relativeDivPosition: { x: divRelativeX, y: divRelativeY },
+              scroll: { x: scrollLeft, y: scrollTop },
+            });
 
-          invariant(stageRef.current);
-          const stage = stageRef.current;
-          const { scrollLeft, scrollTop } = getScrollFromDiv(
-            dropRef as unknown as React.MutableRefObject<HTMLDivElement>
-          );
-          const konvaCoord = convertFromDivElementCoordsToKonvaCoords(stage, {
-            screenPosition,
-            relativeDivPosition: { x: divRelativeX, y: divRelativeY },
-            scroll: { x: scrollLeft, y: scrollTop },
-          });
-
-          positionX =
-            konvaCoord.x -
-            calculateShapeOffsetToXDropCoordinate(konvaCoord.x, type);
-          positionY = konvaCoord.y;
+            positionX =
+              konvaCoord.x -
+              calculateShapeOffsetToXDropCoordinate(konvaCoord.x, type);
+            positionY = konvaCoord.y;
+          }
+          addNewShape(type, positionX, positionY);
         }
-        addNewShape(type, positionX, positionY);
       },
     });
   }, []);

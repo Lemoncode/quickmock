@@ -68,7 +68,7 @@ export const ButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
       />
       <Text
         x={0}
-        y={restrictedHeight / 2 - 5}
+        y={(restrictedHeight - 15) / 2}
         width={restrictedWidth}
         height={restrictedHeight - restrictedHeight / 2 - 5}
         text={text}
