@@ -1,26 +1,43 @@
 .container {
   z-index: 2;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   background-color: var(--primary-900-50-opacity);
 }
 
+.dialog {
+  position: relative;
+  z-index: 3;
+  width: 90%;
+  max-width: 1280px;
+  height: 80%;
+  overflow: auto;
+  border-radius: var(--border-radius-l);
+}
+
+.dialogContent {
+  overflow: auto;
+  flex: 1;
+}
+
 .dialogHeader {
+  position: sticky;
+  top: 0;
+  z-index: 4;
   background-color: var(--primary-500);
-  width: 70vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: var(--space-s) var(--space-md);
-  border-top-left-radius: var(--border-radius-m);
-  border-top-right-radius: var(--border-radius-m);
+  border-top-left-radius: var(--border-radius-l);
+  border-top-right-radius: var(--border-radius-l);
 }
 
 .dialogTitle {
@@ -40,4 +57,11 @@
 
 .dialogButton:hover {
   cursor: pointer;
+}
+
+@media screen and (max-device-width: 780px) {
+  .dialog {
+    width: 92%;
+    height: 82%;
+  }
 }
