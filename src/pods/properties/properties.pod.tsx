@@ -13,6 +13,7 @@ import { FontStyle } from './components/font-style';
 import { FontVariant } from './components/font-variant/font-variant';
 import { TextDecoration } from './components/text-decoration/text-decoration';
 import { FontSize } from './components/font-size';
+import { TextAlignment } from './components/text-alignment';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -136,6 +137,15 @@ export const PropertiesPod = () => {
               borderRadius={selectedShapeData?.otherProps?.borderRadius}
               onChange={borderRadius =>
                 updateOtherPropsOnSelected('borderRadius', borderRadius)
+              }
+            />
+          )}
+          {selectedShapeData?.otherProps?.textAlignment && (
+            <TextAlignment
+              label="Alignment"
+              textAlignment={selectedShapeData?.otherProps?.textAlignment}
+              onChange={textAlignment =>
+                updateOtherPropsOnSelected('textAlignment', textAlignment)
               }
             />
           )}

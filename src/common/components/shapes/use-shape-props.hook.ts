@@ -43,6 +43,11 @@ export const useShapeProps = (
     [otherProps?.textDecoration]
   );
 
+  const textAlignment = useMemo(
+    () => otherProps?.textAlignment ?? defaultStyleShape.DEFAULT_TEXT_ALIGNMENT,
+    [otherProps?.textAlignment]
+  );
+
   const strokeStyle = useMemo(
     () => otherProps?.strokeStyle ?? [],
     [otherProps?.strokeStyle]
@@ -81,5 +86,6 @@ export const useShapeProps = (
     fontStyle,
     fontSize,
     textDecoration,
+    textAlignment,
   };
 };
