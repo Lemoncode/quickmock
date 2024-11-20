@@ -19,7 +19,7 @@
   max-width: 1280px;
   height: 80%;
   overflow: auto;
-  border-radius: var(--border-radius-m);
+  border-radius: var(--border-radius-l);
 }
 
 .dialogContent {
@@ -36,8 +36,8 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--space-s) var(--space-md);
-  border-top-left-radius: var(--border-radius-m);
-  border-top-right-radius: var(--border-radius-m);
+  border-top-left-radius: var(--border-radius-l);
+  border-top-right-radius: var(--border-radius-l);
 }
 
 .dialogTitle {
