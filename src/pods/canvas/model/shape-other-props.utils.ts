@@ -126,6 +126,7 @@ export const generateDefaultOtherProps = (
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
         fontSize: FONT_SIZE_VALUES.HEADING1,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
 
     case 'heading2':
@@ -135,6 +136,7 @@ export const generateDefaultOtherProps = (
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
         fontSize: FONT_SIZE_VALUES.HEADING2,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
     case 'heading3':
       return {
@@ -143,12 +145,14 @@ export const generateDefaultOtherProps = (
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
         fontSize: FONT_SIZE_VALUES.HEADING3,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
     case 'link':
       return {
         textColor: `${LINK_SHAPE.DEFAULT_FILL_TEXT}`,
         textDecoration: 'underline',
         fontSize: FONT_SIZE_VALUES.LINK,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
     case 'normaltext':
       return {
@@ -157,6 +161,7 @@ export const generateDefaultOtherProps = (
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
         fontSize: FONT_SIZE_VALUES.NORMALTEXT,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
     case 'smalltext':
       return {
@@ -165,10 +170,12 @@ export const generateDefaultOtherProps = (
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
         fontSize: FONT_SIZE_VALUES.SMALLTEXT,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
     case 'paragraph':
       return {
         fontSize: FONT_SIZE_VALUES.PARAGRAPH,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
     case 'label':
       return {
