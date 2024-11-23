@@ -101,6 +101,10 @@ export const CanvasProvider: React.FC<Props> = props => {
     return document.pages[document.activePageIndex];
   };
 
+  const getActivePageName = () => {
+    return document.pages[document.activePageIndex].name;
+  };
+
   const setActivePage = (pageId: string) => {
     selectionInfo.clearSelection();
     selectionInfo.shapeRefs.current = {};
@@ -318,6 +322,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         addNewPage,
         duplicatePage,
         getActivePage,
+        getActivePageName,
         setActivePage,
         deletePage,
         editPageTitle,
