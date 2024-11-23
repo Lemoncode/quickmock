@@ -6,6 +6,7 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { useResizeOnFontSizeChange } from './front-text-hooks/resize-fontsize-change.hook';
 
 const heading3SizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 40,
@@ -50,6 +51,8 @@ export const Heading3Shape = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
+
+  useResizeOnFontSizeChange(id, { x, y }, text, fontSize, fontVariant);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
