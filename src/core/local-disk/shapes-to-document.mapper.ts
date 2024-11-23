@@ -30,6 +30,7 @@ const mapTextElementFromV0_1ToV0_2 = (shape: ShapeModel): ShapeModel => {
         otherProps: {
           ...shape,
           fontSize: FONT_SIZE_VALUES.HEADING1,
+          textAlignment: 'center',
         },
       };
     case 'heading2':
@@ -38,6 +39,7 @@ const mapTextElementFromV0_1ToV0_2 = (shape: ShapeModel): ShapeModel => {
         otherProps: {
           ...shape,
           fontSize: FONT_SIZE_VALUES.HEADING2,
+          textAlignment: 'center',
         },
       };
     case 'heading3':
@@ -46,6 +48,7 @@ const mapTextElementFromV0_1ToV0_2 = (shape: ShapeModel): ShapeModel => {
         otherProps: {
           ...shape,
           fontSize: FONT_SIZE_VALUES.HEADING3,
+          textAlignment: 'center',
         },
       };
     case 'link':
@@ -54,6 +57,7 @@ const mapTextElementFromV0_1ToV0_2 = (shape: ShapeModel): ShapeModel => {
         otherProps: {
           ...shape,
           fontSize: FONT_SIZE_VALUES.LINK,
+          textAlignment: 'center',
         },
       };
     case 'normaltext':
@@ -62,6 +66,7 @@ const mapTextElementFromV0_1ToV0_2 = (shape: ShapeModel): ShapeModel => {
         otherProps: {
           ...shape,
           fontSize: FONT_SIZE_VALUES.NORMALTEXT,
+          textAlignment: 'center',
         },
       };
     case 'smalltext':
@@ -70,6 +75,7 @@ const mapTextElementFromV0_1ToV0_2 = (shape: ShapeModel): ShapeModel => {
         otherProps: {
           ...shape,
           fontSize: FONT_SIZE_VALUES.SMALLTEXT,
+          textAlignment: 'center',
         },
       };
     case 'paragraph':
@@ -78,6 +84,7 @@ const mapTextElementFromV0_1ToV0_2 = (shape: ShapeModel): ShapeModel => {
         otherProps: {
           ...shape,
           fontSize: FONT_SIZE_VALUES.PARAGRAPH,
+          textAlignment: 'center',
         },
       };
     default:

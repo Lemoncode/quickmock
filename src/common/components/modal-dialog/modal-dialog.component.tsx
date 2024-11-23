@@ -16,17 +16,19 @@ export const ModalDialogComponent: React.FC = () => {
   return (
     isOpen && (
       <div className={classes.container}>
-        <div className={classes.dialogHeader}>
-          <h2 className={classes.dialogTitle}>{title}</h2>
-          <button
-            className={classes.dialogButton}
-            onClick={handleClick}
-            aria-label="close modal dialog"
-          >
-            <XIconComponent />
-          </button>
+        <div className={classes.dialog}>
+          <div className={classes.dialogHeader}>
+            <h2 className={classes.dialogTitle}>{title}</h2>
+            <button
+              className={classes.dialogButton}
+              onClick={handleClick}
+              aria-label="close modal dialog"
+            >
+              <XIconComponent />
+            </button>
+          </div>
+          <div className={classes.dialogContent}>{selectedComponent}</div>
         </div>
-        <div>{selectedComponent}</div>
       </div>
     )
   );
