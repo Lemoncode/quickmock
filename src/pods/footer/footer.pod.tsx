@@ -3,13 +3,14 @@ import classes from './footer.pod.module.css';
 import { ZoomInButton, ZoomOutButton } from './components';
 
 export const FooterPod = () => {
-  const { scale, setScale, getActivePageName } = useCanvasContext();
+  const { scale, setScale, getActivePageName, fileName } = useCanvasContext();
 
   return (
     <footer className={classes.container}>
       <div className={classes.left}>
         <p>
-          <strong>📄 {getActivePageName()}</strong>
+          <strong>📄 {fileName == '' ? 'New' : fileName}</strong> -{' '}
+          {getActivePageName()}
         </p>
       </div>
       <div className={classes.center}>
