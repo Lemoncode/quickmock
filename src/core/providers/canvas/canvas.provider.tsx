@@ -183,6 +183,7 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const createNewFullDocument = () => {
     setDocument(createDefaultDocumentModel());
+    setFileName('');
   };
 
   const deleteSelectedShapes = () => {
