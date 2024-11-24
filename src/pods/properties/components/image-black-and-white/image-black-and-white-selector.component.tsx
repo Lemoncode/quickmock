@@ -14,6 +14,7 @@ export const ImageBlackAndWhite: React.FC<Props> = props => {
       <p>{label}</p>
       <input
         type="checkbox"
+        checked={imageBlackAndWhite}
         onChange={() => onChange(!imageBlackAndWhite)}
         className={classes.checkbox}
       />
