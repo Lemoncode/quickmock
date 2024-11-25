@@ -5,13 +5,11 @@
   padding: var(--space-xs) var(--space-md);
   border-bottom: 1px solid var(--primary-300);
 }
-
 .container :first-child {
   flex: 1;
 }
-
 .button {
-  border: none;
+  border: 1px solid var(--primary-100);
   color: var(--text-color);
   background-color: inherit;
   width: var(--space-lg);
@@ -29,4 +27,17 @@
 
 .button:hover {
   background-color: var(--primary-100);
+}
+
+.popover {
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+}
+.cover {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
