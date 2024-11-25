@@ -15,10 +15,10 @@ test('rename-thumb-page-through-direct-edit-and-context-menu', async ({
   const newTextContent = 'Change the name';
   await input.fill(newTextContent);
   await page.keyboard.press('Enter');
-  const renamedPage = page.getByText(newTextContent);
+  const renamedPage = page.getByText(newTextContent, { exact: true });
   await expect(renamedPage).toBeVisible();
 
-  const siblingElement = page.getByText('Change the name');
+  const siblingElement = page.getByText('Change the name', { exact: true });
   const divThumb = siblingElement.locator('..');
   await divThumb.click({ button: 'right' });
   await page.getByText('Rename').click();
@@ -27,6 +27,8 @@ test('rename-thumb-page-through-direct-edit-and-context-menu', async ({
   await expect(input).toBeVisible();
   await input.fill(secondNewTextContent);
   await page.keyboard.press('Enter');
-  const secondRenamedPage = page.getByText(secondNewTextContent);
+  const secondRenamedPage = page.getByText(secondNewTextContent, {
+    exact: true,
+  });
   await expect(secondRenamedPage).toBeVisible();
 });
