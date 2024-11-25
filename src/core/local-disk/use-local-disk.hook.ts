@@ -58,6 +58,7 @@ export const useLocalDisk = () => {
     reader.onload = () => {
       const content = reader.result as string;
       const parseData: QuickMockFileContract = JSON.parse(content);
+      setFileName(file.name);
       if (parseData.version === '0.1') {
         // Handle version 0.1 parsing
         const appDocument =
