@@ -6,7 +6,7 @@ test('rename-thumb-page-through-direct-edit-and-context-menu', async ({
   await page.goto('');
 
   await page.getByText('Pages').click();
-  const thumb = page.getByText('Page 1');
+  const thumb = page.getByText('Page 1', { exact: true });
   await expect(thumb).toBeVisible();
   await expect(thumb).toHaveText('Page 1');
 
