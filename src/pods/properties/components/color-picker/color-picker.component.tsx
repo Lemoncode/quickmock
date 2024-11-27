@@ -16,7 +16,7 @@ export const ColorPicker: React.FC<Props> = props => {
   const [picker, setPicker] = useState(false);
   const [hsva, setHsva] = useState(() => hexToHsva(color));
 
-  const togglePicker = () => (picker ? setPicker(false) : setPicker(true));
+  const togglePicker = () => setPicker(!picker);
 
   const handlePresetColors = (newColor: string) => {
     const hsvaColor = hexToHsva(newColor);
