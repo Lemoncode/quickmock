@@ -32,7 +32,7 @@ export const useResizeOnFontSizeChange = (
         id,
         coords,
         {
-          width: width * 1.15,
+          width: width * 1.25,
           height: multiline
             ? _calcParagraphTotalHeight(height, 0.8, paragraphLines.length)
             : height,
