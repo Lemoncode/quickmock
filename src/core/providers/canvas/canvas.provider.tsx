@@ -101,6 +101,10 @@ export const CanvasProvider: React.FC<Props> = props => {
     return document.pages[document.activePageIndex];
   };
 
+  const getActivePageName = () => {
+    return document.pages[document.activePageIndex].name;
+  };
+
   const setActivePage = (pageId: string) => {
     selectionInfo.clearSelection();
     selectionInfo.shapeRefs.current = {};
@@ -119,6 +123,20 @@ export const CanvasProvider: React.FC<Props> = props => {
     setDocument(lastDocument =>
       produce(lastDocument, draft => {
         draft.pages[pageIndex].name = newName;
+      })
+    );
+  };
+
+  const swapPages = (id1: string, id2: string) => {
+    setDocument(lastDocument =>
+      produce(lastDocument, draft => {
+        const index1 = draft.pages.findIndex(page => page.id === id1);
+        const index2 = draft.pages.findIndex(page => page.id === id2);
+        if (index1 !== -1 && index2 !== -1) {
+          const temp = draft.pages[index1];
+          draft.pages[index1] = draft.pages[index2];
+          draft.pages[index2] = temp;
+        }
       })
     );
   };
@@ -165,6 +183,7 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const createNewFullDocument = () => {
     setDocument(createDefaultDocumentModel());
+    setFileName('');
   };
 
   const deleteSelectedShapes = () => {
@@ -304,9 +323,12 @@ export const CanvasProvider: React.FC<Props> = props => {
         addNewPage,
         duplicatePage,
         getActivePage,
+        getActivePageName,
         setActivePage,
         deletePage,
         editPageTitle,
+        swapPages,
+        activePageIndex: document.activePageIndex,
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
       }}

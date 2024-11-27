@@ -163,6 +163,7 @@ export interface OtherProps {
   textColor?: string;
   fontVariant?: string;
   fontStyle?: string;
+  fontSize?: number;
   textDecoration?: string;
   checked?: boolean;
   icon?: IconInfo;
@@ -173,6 +174,7 @@ export interface OtherProps {
   borderRadius?: string;
   activeElement?: number;
   selectedBackgroundColor?: string;
+  textAlignment?: 'left' | 'center' | 'right';
 }
 
 export const BASE_ICONS_URL = '/icons/';

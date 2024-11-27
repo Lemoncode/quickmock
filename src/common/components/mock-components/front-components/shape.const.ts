@@ -15,6 +15,7 @@ const DEFAULT_TEXT_HEIGHT = 38;
 const DEFAULT_FONT_VARIANT = 'normal';
 const DEFAULT_FONT_STYLE = 'normal';
 const DEFAULT_TEXT_DECORATION = 'none';
+const DEFAULT_TEXT_ALIGNMENT = 'left';
 
 export interface DefaultStyleShape {
   DEFAULT_CORNER_RADIUS: number;
@@ -32,6 +33,7 @@ export interface DefaultStyleShape {
   DEFAULT_FONT_VARIANT: string;
   DEFAULT_FONT_STYLE: string;
   DEFAULT_TEXT_DECORATION: string;
+  DEFAULT_TEXT_ALIGNMENT: 'left' | 'center' | 'right';
 }
 
 export const BASIC_SHAPE: DefaultStyleShape = {
@@ -50,6 +52,7 @@ export const BASIC_SHAPE: DefaultStyleShape = {
   DEFAULT_FONT_VARIANT,
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_DECORATION,
+  DEFAULT_TEXT_ALIGNMENT,
 };
 
 export const INPUT_SHAPE: DefaultStyleShape = {
@@ -68,6 +71,7 @@ export const INPUT_SHAPE: DefaultStyleShape = {
   DEFAULT_FONT_VARIANT,
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_DECORATION,
+  DEFAULT_TEXT_ALIGNMENT,
 };
 
 //! maybe a function to calc max height base on the text
@@ -87,6 +91,27 @@ export const POSTIT_SHAPE: DefaultStyleShape = {
   DEFAULT_FONT_VARIANT,
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_DECORATION,
+  DEFAULT_TEXT_ALIGNMENT,
+};
+
+interface FontValues {
+  HEADING1: number;
+  HEADING2: number;
+  HEADING3: number;
+  NORMALTEXT: number;
+  SMALLTEXT: number;
+  PARAGRAPH: number;
+  LINK: number;
+}
+
+export const FONT_SIZE_VALUES: FontValues = {
+  HEADING1: 28,
+  HEADING2: 24,
+  HEADING3: 18,
+  NORMALTEXT: 18,
+  SMALLTEXT: 14,
+  PARAGRAPH: 14,
+  LINK: 20,
 };
 
 export const LINK_SHAPE: DefaultStyleShape = {

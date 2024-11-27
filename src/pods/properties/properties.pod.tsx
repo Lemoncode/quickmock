@@ -12,6 +12,8 @@ import { ActiveElementSelector } from './components/active-element-selector/acti
 import { FontStyle } from './components/font-style';
 import { FontVariant } from './components/font-variant/font-variant';
 import { TextDecoration } from './components/text-decoration/text-decoration';
+import { FontSize } from './components/font-size';
+import { TextAlignment } from './components/text-alignment';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -138,6 +140,15 @@ export const PropertiesPod = () => {
               }
             />
           )}
+          {selectedShapeData?.otherProps?.textAlignment && (
+            <TextAlignment
+              label="Alignment"
+              textAlignment={selectedShapeData?.otherProps?.textAlignment}
+              onChange={textAlignment =>
+                updateOtherPropsOnSelected('textAlignment', textAlignment)
+              }
+            />
+          )}
           {selectedShapeData?.otherProps?.fontStyle && (
             <FontStyle
               label="Italic"
@@ -162,6 +173,15 @@ export const PropertiesPod = () => {
               textDecoration={selectedShapeData?.otherProps?.textDecoration}
               onChange={textdecoration =>
                 updateOtherPropsOnSelected('textDecoration', textdecoration)
+              }
+            />
+          )}
+          {selectedShapeData?.otherProps?.fontSize && (
+            <FontSize
+              label="Font Size"
+              fontSize={selectedShapeData?.otherProps?.fontSize}
+              onChange={fontSize =>
+                updateOtherPropsOnSelected('fontSize', fontSize)
               }
             />
           )}

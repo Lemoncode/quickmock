@@ -6,6 +6,7 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { useResizeOnFontSizeChange } from './front-text-hooks/resize-fontsize-change.hook';
 
 const heading2SizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 40,
@@ -40,10 +41,14 @@ export const Heading2Shape = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { textColor, fontVariant, fontStyle, textDecoration } = useShapeProps(
-    otherProps,
-    BASIC_SHAPE
-  );
+  const {
+    textColor,
+    fontVariant,
+    fontStyle,
+    textDecoration,
+    fontSize,
+    textAlignment,
+  } = useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -51,6 +56,8 @@ export const Heading2Shape = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
+
+  useResizeOnFontSizeChange(id, { x, y }, text, fontSize, fontVariant);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
@@ -61,9 +68,9 @@ export const Heading2Shape = forwardRef<any, ShapeProps>((props, ref) => {
         height={restrictedHeight}
         text={text}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
-        fontSize={25}
+        fontSize={fontSize}
         fill={textColor}
-        align="center"
+        align={textAlignment}
         verticalAlign="middle"
         ellipsis={true}
         wrap="none"
