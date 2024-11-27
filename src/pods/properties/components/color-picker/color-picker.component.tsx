@@ -1,32 +1,16 @@
 import { useState } from 'react';
-import classes from './color-picker.component.module.css';
 import Chrome from '@uiw/react-color-chrome';
 import { hexToHsva } from '@uiw/color-convert';
 import { GithubPlacement } from '@uiw/react-color-github';
+import { PRESET_COLORS } from './color-picker.const';
+import classes from './color-picker.component.module.css';
 
 interface Props {
   label: string;
   color: string;
   onChange: (color: string) => void;
 }
-const presetColors = [
-  '#00000000',
-  '#DD0000',
-  '#0022BB',
-  '#0088FF',
-  '#55EEFF',
-  '#006400',
-  '#00BB00',
-  '#99FF66',
-  '#FFFF00',
-  '#FF9900',
-  '#CC55FF',
-  '#FF88AA',
-  '#994400',
-  '#000000',
-  '#999999',
-  '#FFFFFF',
-];
+
 export const ColorPicker: React.FC<Props> = props => {
   const { label, color, onChange } = props;
   const [picker, setPicker] = useState(false);
@@ -39,11 +23,13 @@ export const ColorPicker: React.FC<Props> = props => {
     setHsva(hsvaColor);
     onChange(newColor);
   };
+
   return (
     <>
       <div className={classes.container}>
         <p>{label}</p>
         <button
+          data-color={hexToHsva(color).a === 0 ? 'noColor' : ''}
           className={classes.button}
           style={{ backgroundColor: color }}
           onClick={togglePicker}
@@ -63,7 +49,7 @@ export const ColorPicker: React.FC<Props> = props => {
               }}
             />
             <div className={classes.colorPalette}>
-              {presetColors.map(presetColor => (
+              {PRESET_COLORS.map(presetColor => (
                 <div
                   key={presetColor}
                   className={classes.colorBox}
