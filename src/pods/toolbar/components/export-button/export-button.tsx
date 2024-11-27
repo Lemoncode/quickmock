@@ -5,10 +5,9 @@ import {
   calculateCanvasBounds,
   buildExportFileName,
   createDownloadLink,
-  resetScale,
-  applyFiltersToImages,
 } from './export-button.utils';
 import { ToolbarButton } from '../toolbar-button';
+import Konva from 'konva';
 
 export const ExportButton = () => {
   const { stageRef, shapes, fileName, getActivePageName } = useCanvasContext();
@@ -34,6 +33,24 @@ export const ExportButton = () => {
       const exportFileName = buildExportFileName(fileName, getActivePageName());
       createDownloadLink(dataURL, exportFileName);
     }
+  };
+
+  const resetScale = (stage: Konva.Stage) => {
+    stage.scale({ x: 1, y: 1 });
+  };
+
+  const applyFiltersToImages = (stage: Konva.Stage) => {
+    stage.find('Image').forEach(node => {
+      if (node.filters()?.includes(Konva.Filters.Grayscale)) {
+        node.cache({
+          x: 0,
+          y: 0,
+          width: node.width(),
+          height: node.height(),
+          pixelRatio: 2,
+        });
+      }
+    });
   };
 
   return (

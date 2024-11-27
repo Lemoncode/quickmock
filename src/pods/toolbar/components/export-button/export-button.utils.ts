@@ -1,5 +1,4 @@
 import { ShapeModel } from '@/core/model';
-import Konva from 'konva';
 
 export interface CanvasBounds {
   x: number;
@@ -80,22 +79,4 @@ export const createDownloadLink = (dataURL: string, fileName: string) => {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-};
-
-export const resetScale = (stage: Konva.Stage) => {
-  stage.scale({ x: 1, y: 1 });
-};
-
-export const applyFiltersToImages = (stage: Konva.Stage) => {
-  stage.find('Image').forEach(node => {
-    if (node.filters()?.includes(Konva.Filters.Grayscale)) {
-      node.cache({
-        x: 0,
-        y: 0,
-        width: node.width(),
-        height: node.height(),
-        pixelRatio: 2,
-      });
-    }
-  });
 };
