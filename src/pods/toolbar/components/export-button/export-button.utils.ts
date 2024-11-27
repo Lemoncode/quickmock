@@ -1,4 +1,5 @@
 import { ShapeModel } from '@/core/model';
+import Konva from 'konva';
 
 export interface CanvasBounds {
   x: number;
@@ -50,4 +51,51 @@ export const calculateCanvasBounds = (shapes: ShapeModel[]): CanvasBounds => {
   canvasBounds.height = canvasBounds.height - canvasBounds.y + MARGIN;
 
   return canvasBounds;
+};
+
+export const buildExportFileName = (
+  fileName: string,
+  activePageName: string
+): string => {
+  // Remove extension and replace spaces with dashes from file name
+  let baseFileName =
+    fileName === ''
+      ? 'new-document'
+      : fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
+  baseFileName = baseFileName.trim().replace(/\s+/g, '-');
+
+  // Get the active page name and replace spaces with dashes
+  const pageName = activePageName
+    .toLocaleLowerCase()
+    .trim()
+    .replace(/\s+/g, '-');
+
+  return `${baseFileName}-${pageName}.png`; // Add extension jpg also available
+};
+
+export const createDownloadLink = (dataURL: string, fileName: string) => {
+  const link = document.createElement('a');
+  link.href = dataURL;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+export const resetScale = (stage: Konva.Stage) => {
+  stage.scale({ x: 1, y: 1 });
+};
+
+export const applyFiltersToImages = (stage: Konva.Stage) => {
+  stage.find('Image').forEach(node => {
+    if (node.filters()?.includes(Konva.Filters.Grayscale)) {
+      node.cache({
+        x: 0,
+        y: 0,
+        width: node.width(),
+        height: node.height(),
+        pixelRatio: 2,
+      });
+    }
+  });
 };
