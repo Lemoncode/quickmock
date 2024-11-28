@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Chrome from '@uiw/react-color-chrome';
-import { hexToHsva } from '@uiw/color-convert';
+import { hexToHsva, HsvaColor } from '@uiw/color-convert';
 import { GithubPlacement } from '@uiw/react-color-github';
 import { PRESET_COLORS } from './color-picker.const';
 import classes from './color-picker.component.module.css';
@@ -11,12 +11,20 @@ interface Props {
   onChange: (color: string) => void;
 }
 
+interface ColorProps {
+  hsva: HsvaColor;
+  hexa: string;
+}
+
 export const ColorPicker: React.FC<Props> = props => {
   const { label, color, onChange } = props;
-  const [picker, setPicker] = useState(false);
-  const [hsva, setHsva] = useState(() => hexToHsva(color));
+  const [picker, setPicker] = useState<boolean>(false);
+  const [hsva, setHsva] = useState<HsvaColor>(() => hexToHsva(color));
 
-  const togglePicker = () => setPicker(!picker);
+  const togglePicker = () => {
+    setPicker(!picker);
+    setHsva(hexToHsva(color));
+  };
 
   const handlePresetColors = (newColor: string) => {
     const hsvaColor = hexToHsva(newColor);
@@ -24,12 +32,17 @@ export const ColorPicker: React.FC<Props> = props => {
     onChange(newColor);
   };
 
+  const handleChange = (color: ColorProps) => {
+    setHsva(color.hsva);
+    onChange(color.hexa);
+  };
+
   return (
     <>
       <div className={classes.container}>
         <p>{label}</p>
         <button
-          data-color={hexToHsva(color).a === 0 ? 'noColor' : ''}
+          data-color={hsva.a === 0 ? 'noColor' : ''}
           className={classes.button}
           style={{ backgroundColor: color }}
           onClick={togglePicker}
@@ -43,10 +56,7 @@ export const ColorPicker: React.FC<Props> = props => {
               style={{ boxShadow: 'none', border: 'none' }}
               placement={GithubPlacement.TopRight}
               color={hsva}
-              onChange={color => {
-                setHsva(color.hsva);
-                onChange(color.hexa);
-              }}
+              onChange={handleChange}
             />
             <div className={classes.colorPalette}>
               {PRESET_COLORS.map(presetColor => (
