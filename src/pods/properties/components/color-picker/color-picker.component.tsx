@@ -26,15 +26,15 @@ export const ColorPicker: React.FC<Props> = props => {
     setHsva(hexToHsva(color));
   };
 
+  const handleChange = (color: ColorProps) => {
+    setHsva(color.hsva);
+    onChange(color.hexa);
+  };
+
   const handlePresetColors = (newColor: string) => {
     const hsvaColor = hexToHsva(newColor);
     setHsva(hsvaColor);
     onChange(newColor);
-  };
-
-  const handleChange = (color: ColorProps) => {
-    setHsva(color.hsva);
-    onChange(color.hexa);
   };
 
   return (
@@ -42,7 +42,7 @@ export const ColorPicker: React.FC<Props> = props => {
       <div className={classes.container}>
         <p>{label}</p>
         <button
-          data-color={hsva.a === 0 ? 'noColor' : ''}
+          data-color={hexToHsva(color).a === 0 ? 'noColor' : ''}
           className={classes.button}
           style={{ backgroundColor: color }}
           onClick={togglePicker}
