@@ -8,7 +8,7 @@ import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const LargeArrowShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 50,
+  minWidth: 30,
   minHeight: 50,
   maxWidth: -1,
   maxHeight: -1,

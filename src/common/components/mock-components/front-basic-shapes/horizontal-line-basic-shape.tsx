@@ -8,7 +8,7 @@ import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const horizontalLineShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 50,
+  minWidth: 30,
   minHeight: 10,
   maxWidth: -1,
   maxHeight: 10,

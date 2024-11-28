@@ -6,6 +6,7 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { useResizeOnFontSizeChange } from './front-text-hooks/resize-fontsize-change.hook';
 
 const linkSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 40,
@@ -41,10 +42,8 @@ export const LinkShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { textColor, textDecoration, fontSize, textAlignment } = useShapeProps(
-    otherProps,
-    BASIC_SHAPE
-  );
+  const { textColor, textDecoration, fontSize, textAlignment, fontVariant } =
+    useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -52,6 +51,8 @@ export const LinkShape = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
+
+  useResizeOnFontSizeChange(id, { x, y }, text, fontSize, fontVariant);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
