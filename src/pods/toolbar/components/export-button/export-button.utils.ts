@@ -51,3 +51,32 @@ export const calculateCanvasBounds = (shapes: ShapeModel[]): CanvasBounds => {
 
   return canvasBounds;
 };
+
+export const buildExportFileName = (
+  fileName: string,
+  activePageName: string
+): string => {
+  // Remove extension and replace spaces with dashes from file name
+  let baseFileName =
+    fileName === ''
+      ? 'new-document'
+      : fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
+  baseFileName = baseFileName.trim().replace(/\s+/g, '-');
+
+  // Get the active page name and replace spaces with dashes
+  const pageName = activePageName
+    .toLocaleLowerCase()
+    .trim()
+    .replace(/\s+/g, '-');
+
+  return `${baseFileName}-${pageName}.png`; // Add extension jpg also available
+};
+
+export const createDownloadLink = (dataURL: string, fileName: string) => {
+  const link = document.createElement('a');
+  link.href = dataURL;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
