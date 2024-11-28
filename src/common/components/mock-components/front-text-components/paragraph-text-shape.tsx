@@ -10,7 +10,7 @@ import { useResizeOnFontSizeChange } from './front-text-hooks/resize-fontsize-ch
 
 const paragraphSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
-  minHeight: 70,
+  minHeight: 20,
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 420,
