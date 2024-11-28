@@ -6,6 +6,7 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { useResizeOnFontSizeChange } from './front-text-hooks/resize-fontsize-change.hook';
 
 const smalltextSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 40,
@@ -55,6 +56,8 @@ export const SmalltextShape = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
+
+  useResizeOnFontSizeChange(id, { x, y }, text, fontSize, fontVariant);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
