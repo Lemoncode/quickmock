@@ -38,9 +38,13 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
     ...shapeProps
   } = props;
 
+  console.log('text' + text);
   const csvData = splitCSVContentIntoRows(text);
+  console.log('csvData ' + csvData);
   const headers = extractCSVHeaders(csvData[0]);
+  console.log('headers ' + headers);
   const itemLabels = headers.map(header => header.text);
+  console.log('itemLabels ' + itemLabels);
 
   const numberOfItems = itemLabels.length;
   const itemSpacing = 10;
@@ -69,6 +73,8 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
+
+  console.log(text);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
