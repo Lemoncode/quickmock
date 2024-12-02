@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef } from 'react';
 import { Group, Line, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../../shape.model';
 import { joinTextContent } from './vertical-menu.business';
