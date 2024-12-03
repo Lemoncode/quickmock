@@ -88,7 +88,7 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   postit: '',
   listbox: '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6',
   'horizontal-menu': 'Home, About, Services, Contact',
-  'vertical-menu': 'Option 1\nOption 2\n----\nOption 3\nOption 4',
+  'vertical-menu': 'Option 1, Option 2, ----, Option 3, Option 4',
   heading1: 'Heading 1',
   heading2: 'Heading 2',
   heading3: 'Heading 3',

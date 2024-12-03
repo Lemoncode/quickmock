@@ -1,11 +1,9 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef } from 'react';
 import { Group, Line, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../../shape.model';
-import {
-  calculateDynamicContentSizeRestriction,
-  mapTextToOptions,
-} from './vertical-menu.business';
+import { joinTextContent } from './vertical-menu.business';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../../mock-components.utils';
@@ -46,32 +44,20 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
       otherProps,
       ...shapeProps
     } = props;
-    const [verticalMenuItems, setVerticalMenuItems] = useState<string[]>([
-      'Option 1\nOption 2\n----\nOption 3\nOption 4',
-    ]);
 
-    useEffect(() => {
-      if (text) {
-        const { options } = mapTextToOptions(text);
-        setVerticalMenuItems(options);
-      } else {
-        setVerticalMenuItems([]);
-      }
-    }, [text]);
+    const csvData = joinTextContent(text);
 
-    const restrictedSize = calculateDynamicContentSizeRestriction(
-      verticalMenuItems,
-      {
-        width,
-        height,
-        singleHeaderHeight,
-        verticalMenuShapeSizeRestrictions,
-      }
+    const restrictedSize = fitSizeToShapeSizeRestrictions(
+      verticalMenuShapeSizeRestrictions,
+      width,
+      height
     );
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
     const { stroke, strokeStyle, fill, textColor, borderRadius } =
       useShapeProps(otherProps, BASIC_SHAPE);
+
+    const activeSelected = otherProps?.activeElement ?? 0;
 
     const commonGroupProps = useGroupShapeProps(
       props,
@@ -93,7 +79,7 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
           dash={strokeStyle}
           cornerRadius={borderRadius}
         />
-        {verticalMenuItems.map((option, index) => (
+        {csvData.map((option, index) => (
           <Group key={index}>
             {option === '----' ? (
               <Line
@@ -104,18 +90,27 @@ export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
                 strokeWidth={2}
               />
             ) : (
-              <Text
-                x={0}
-                y={0 + index * singleHeaderHeight}
-                text={option}
-                width={restrictedWidth}
-                height={singleHeaderHeight}
-                fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
-                fontSize={15}
-                fill={textColor}
-                wrap="none"
-                ellipsis={true}
-              />
+              <>
+                <Rect
+                  x={-3}
+                  y={-6 + index * singleHeaderHeight}
+                  width={restrictedWidth + 7}
+                  height={singleHeaderHeight}
+                  fill={index === activeSelected ? 'lightblue' : fill}
+                />
+                <Text
+                  x={4}
+                  y={5 + index * singleHeaderHeight}
+                  text={option}
+                  width={restrictedWidth}
+                  height={singleHeaderHeight}
+                  fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
+                  fontSize={15}
+                  fill={textColor}
+                  wrap="none"
+                  ellipsis={true}
+                />
+              </>
             )}
           </Group>
         ))}
