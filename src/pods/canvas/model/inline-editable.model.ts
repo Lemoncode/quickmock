@@ -23,6 +23,7 @@ const inlineEditableShapes = new Set<ShapeType>([
   'normaltext',
   'smalltext',
   'paragraph',
+  'richTextParagraph',
   'listbox',
   'image',
   'table',
@@ -63,6 +64,7 @@ const shapeTypesWithDefaultText = new Set<ShapeType>([
   'normaltext',
   'smalltext',
   'paragraph',
+  'richTextParagraph',
   'table',
   'modal',
   'appBar',
@@ -96,6 +98,7 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   normaltext: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   smalltext: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   paragraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nSed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+  richTextParagraph: `*This is a bold text* that is quite long to demonstrate word wrapping.\n_And this is italic text that is also quite long to demonstrate wrapping across multiple lines._\nNormal text can also be multiline.`,
   table:
     'Name ^, Age ^v, Country v\nJohn Doe, 30, USA\nJane Smith, 25, UK\nLuis Gomez, 35, Argentina\n{*L,20R,30C}',
   modal:

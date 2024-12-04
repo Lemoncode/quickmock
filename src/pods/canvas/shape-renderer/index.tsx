@@ -60,6 +60,7 @@ import {
   renderHeading3,
   renderLink,
   renderNormaltext,
+  renderRichTextParagraph,
 } from './simple-text-components';
 import { renderSmalltext } from './simple-text-components/smalltext.renderer';
 import { renderParagraph } from './simple-text-components/paragraph.renderer';
@@ -152,6 +153,8 @@ export const renderShapeComponent = (
       return renderSmalltext(shape, shapeRenderedProps);
     case 'paragraph':
       return renderParagraph(shape, shapeRenderedProps);
+    case 'richTextParagraph':
+      return renderRichTextParagraph(shape, shapeRenderedProps);
     case 'link':
       return renderLink(shape, shapeRenderedProps);
     case 'largeArrow':

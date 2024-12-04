@@ -5,3 +5,4 @@ export * from './normaltext-shape';
 export * from './smalltext-shape';
 export * from './paragraph-text-shape';
 export * from './link-text-shape';
+export * from './rich-text-paragraph';

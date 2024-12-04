@@ -48,6 +48,7 @@ export type ShapeType =
   | 'normaltext'
   | 'smalltext'
   | 'paragraph'
+  | 'richTextParagraph'
   | 'largeArrow'
   | 'bar'
   | 'triangle'
@@ -108,6 +109,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   normaltext: 'Normal text',
   smalltext: 'Small text',
   paragraph: 'Paragraph',
+  richTextParagraph: 'Rich Text Paragraph',
   link: 'Link',
   triangle: 'Triangle',
   'horizontal-menu': 'Horizontal Menu',

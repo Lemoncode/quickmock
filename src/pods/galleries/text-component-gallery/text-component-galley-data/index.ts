@@ -8,4 +8,5 @@ export const mockTextCollection: ItemInfo[] = [
   { thumbnailSrc: '/text/normaltext.svg', type: 'normaltext' },
   { thumbnailSrc: '/text/smalltext.svg', type: 'smalltext' },
   { thumbnailSrc: '/text/paragraph.svg', type: 'paragraph' },
+  { thumbnailSrc: '/text/richtextparagraph.svg', type: 'richTextParagraph' },
 ];

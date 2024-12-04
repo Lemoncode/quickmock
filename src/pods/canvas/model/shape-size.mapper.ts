@@ -67,6 +67,7 @@ import {
   getLinkSizeRestrictions,
   getNormaltextSizeRestrictions,
   getParagraphSizeRestrictions,
+  getRichTextParagraphSizeRestrictions,
   getSmalltextSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-text-components';
@@ -119,6 +120,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   normaltext: getNormaltextSizeRestrictions,
   smalltext: getSmalltextSizeRestrictions,
   paragraph: getParagraphSizeRestrictions,
+  richTextParagraph: getRichTextParagraphSizeRestrictions,
   link: getLinkSizeRestrictions,
   largeArrow: getLargeArrowShapeSizeRestrictions,
   radiobutton: getRadioButtonShapeSizeRestrictions,

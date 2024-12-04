@@ -160,6 +160,7 @@ export const generateDefaultOtherProps = (
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
       };
     case 'paragraph':
+    case 'richTextParagraph':
     case 'label':
       return {
         textColor: '#000000',
