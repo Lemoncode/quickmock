@@ -115,7 +115,6 @@ export const CanvasPod = () => {
     if (isTransfomerBeingDragged || !transformer) return;
 
     if (selectedShapes && selectedShapes.length === 1) {
-      console.log('transformend');
       transformer.nodes([]);
       transformer.getLayer()?.batchDraw();
       setTimeout(() => {
