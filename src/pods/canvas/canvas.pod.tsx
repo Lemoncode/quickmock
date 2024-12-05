@@ -109,6 +109,22 @@ export const CanvasPod = () => {
     window.__TESTING_KONVA_LAYER__ = layerRef.current;
   }
 
+  transformerRef.current?.on('transformend', () => {
+    const transformer = transformerRef.current;
+    const selectedShapes = selectedShapesRefs.current;
+    if (isTransfomerBeingDragged || !transformer) return;
+
+    if (selectedShapes && selectedShapes.length === 1) {
+      console.log('transformend');
+      transformer.nodes([]);
+      transformer.getLayer()?.batchDraw();
+      setTimeout(() => {
+        transformer.nodes(selectedShapes); // Vuelve a asignar los nodos
+        transformer.getLayer()?.batchDraw(); // Redibuja la capa nuevamente
+      }, 0);
+    }
+  });
+
   {
     /* TODO: add other animation for isDraggerOver */
   }
