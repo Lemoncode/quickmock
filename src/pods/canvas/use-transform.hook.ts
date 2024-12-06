@@ -18,6 +18,7 @@ export const useTransform = (
     selectedShapesRefs,
     transformerRef,
     selectedShapeType,
+    getSelectedShapeData,
   } = useCanvasContext().selectionInfo;
 
   const setTransfomerSingleSelection = () => {
@@ -46,14 +47,56 @@ export const useTransform = (
     }
   }, [selectedShapesIds]);
 
+  const isDraggingFromTopAnchor = () => {
+    const transformer = transformerRef.current;
+    if (!transformer) {
+      return false;
+    }
+
+    return (
+      transformer?.getActiveAnchor() === 'top-left' ||
+      transformer?.getActiveAnchor() === 'top-center' ||
+      transformer?.getActiveAnchor() === 'top-right'
+    );
+  };
+
+  const isDraggingFromLeftAnchor = () => {
+    const transformer = transformerRef.current;
+    if (!transformer) {
+      return false;
+    }
+
+    console.log(transformer?.getActiveAnchor());
+
+    return (
+      transformer?.getActiveAnchor() === 'top-left' ||
+      transformer?.getActiveAnchor() === 'middle-left' ||
+      transformer?.getActiveAnchor() === 'bottom-left'
+    );
+  };
+
   const updateSingleItem = (node: Node<NodeConfig>, skipHistory: boolean) => {
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();
     const position = { x: node.x(), y: node.y() };
     const selectedShapeId = selectedShapesIds[0];
 
-    const newWidth = node.width() * scaleX;
-    const newHeight = node.height() * scaleY;
+    let newWidth = node.width() * scaleX;
+    let newHeight = node.height() * scaleY;
+
+    if (isDraggingFromTopAnchor()) {
+      const oldShapedata = getSelectedShapeData();
+      const oldHeight = oldShapedata?.height ?? 0;
+
+      newHeight = oldHeight + (oldShapedata?.y ?? 0) - position.y;
+    }
+
+    if (isDraggingFromLeftAnchor()) {
+      const oldShapedata = getSelectedShapeData();
+      const oldWidth = oldShapedata?.width ?? 0;
+
+      newWidth = oldWidth + (oldShapedata?.x ?? 0) - position.x;
+    }
 
     updateShapeSizeAndPosition(
       selectedShapeId,
