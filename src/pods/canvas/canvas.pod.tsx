@@ -1,4 +1,4 @@
-import { createRef, useMemo, useRef, useState } from 'react';
+import { createRef, useEffect, useMemo, useRef, useState } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
 import { Layer, Line, Rect, Stage, Transformer } from 'react-konva';
@@ -108,6 +108,35 @@ export const CanvasPod = () => {
   if (typeof window !== 'undefined' && ENV.IS_TEST_ENV && layerRef.current) {
     window.__TESTING_KONVA_LAYER__ = layerRef.current;
   }
+
+  // We need this trick, if the user plays hard with the transfoermer,
+  // resizing quite fast it mabe get out of sync wit the shape
+  // so once the transformer ends, we reassign the nodes to the transformer
+  // and redraw the layer
+  useEffect(() => {
+    const transformer = transformerRef.current;
+    if (!transformer) return;
+
+    const handleTransformEnd = () => {
+      const selectedShapes = selectedShapesRefs.current;
+      if (isTransfomerBeingDragged || !transformer) return;
+
+      if (selectedShapes && selectedShapes.length === 1) {
+        transformer.nodes([]);
+        transformer.getLayer()?.batchDraw();
+        setTimeout(() => {
+          transformer.nodes(selectedShapes); // Vuelve a asignar los nodos
+          transformer.getLayer()?.batchDraw(); // Redibuja la capa nuevamente
+        }, 0);
+      }
+    };
+
+    transformer.on('transformend', handleTransformEnd);
+
+    return () => {
+      transformer.off('transformend', handleTransformEnd);
+    };
+  }, [transformerRef.current]);
 
   {
     /* TODO: add other animation for isDraggerOver */
