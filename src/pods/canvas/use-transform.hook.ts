@@ -47,6 +47,9 @@ export const useTransform = (
     }
   }, [selectedShapesIds]);
 
+  // If the user isDragging from the top or left anchot we need to treat
+  // it as an special case, since the X,Y top position change and it may
+  // impact the size of the transformer (see where this is being used)
   const isDraggingFromTopAnchor = () => {
     const transformer = transformerRef.current;
     if (!transformer) {
@@ -66,8 +69,6 @@ export const useTransform = (
       return false;
     }
 
-    console.log(transformer?.getActiveAnchor());
-
     return (
       transformer?.getActiveAnchor() === 'top-left' ||
       transformer?.getActiveAnchor() === 'middle-left' ||
@@ -84,6 +85,10 @@ export const useTransform = (
     let newWidth = node.width() * scaleX;
     let newHeight = node.height() * scaleY;
 
+    // Top and Left anchor, for this cases we need to do an extra calc
+    // to balance top of X,Y coordinates (origin) and transformer size
+    // if we don't to this adjustements in this case the shape may be
+    // up or down instead of resizing
     if (isDraggingFromTopAnchor()) {
       const oldShapedata = getSelectedShapeData();
       const oldHeight = oldShapedata?.height ?? 0;
