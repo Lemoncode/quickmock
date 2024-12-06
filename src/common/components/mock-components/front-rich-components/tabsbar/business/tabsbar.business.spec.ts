@@ -28,11 +28,7 @@ describe('tabsbar.business tests', () => {
       font: { fontSize: 14, fontFamily: 'Arial' },
     });
 
-    console.log({ tabs }, { containerWidth }, { minTabWidth });
-    console.log({ result });
-
     const totalSum = _sum(result.widthList) + (tabs.length - 1) * tabsGap;
-    console.log('totalSum: ', totalSum);
 
     // Assert
     expect(result.widthList[0]).not.toBe(0);
