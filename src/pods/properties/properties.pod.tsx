@@ -17,6 +17,7 @@ import { TextAlignment } from './components/text-alignment';
 import { useMemo } from 'react';
 import { extractMultiplePropsInCommon } from './properties.business';
 import { ShowProp } from './components/show-prop';
+import { iconCollection } from './components/icon-selector/modal/icons';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
@@ -42,6 +43,9 @@ export const PropertiesPod = () => {
     selectionInfo?.selectedShapesRefs.current &&
     selectionInfo.selectedShapesRefs.current.length > 0;
 
+  const isSingleSelection =
+    selectionInfo?.selectedShapesRefs?.current?.length === 1;
+
   const multipleSelectionShapeData = useMemo(
     () => getAllSelectedShapesData(),
     [selectionInfo.selectedShapesIds]
@@ -66,153 +70,207 @@ export const PropertiesPod = () => {
         <p>Properties</p>
       </div>
       {hasSelectedShapes && <ZIndexOptions selectionInfo={selectionInfo} />}
-      {
-        <>
-          <ShowProp
-            singleSelection={!hasSelectedShapes}
-            multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
-            propKey="stroke"
-            propValue={selectedShapeData?.otherProps?.stroke}
-          >
-            <ColorPicker
-              label="Stroke"
-              color={selectedShapeData?.otherProps?.stroke || ''}
-              onChange={color => updateOtherPropsOnSelected('stroke', color)}
-            />
-          </ShowProp>
-          <ShowProp
-            singleSelection={!hasSelectedShapes}
-            multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
-            propKey="strokeStyle"
-            propValue={selectedShapeData?.otherProps?.strokeStyle}
-          >
-            <StrokeStyle
-              label="Stroke style"
-              strokeStyle={selectedShapeData?.otherProps?.strokeStyle ?? [0]}
-              onChange={strokeStyle =>
-                updateOtherPropsOnSelected('strokeStyle', strokeStyle)
-              }
-            />
-          </ShowProp>
+      <>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="stroke"
+          propValue={selectedShapeData?.otherProps?.stroke}
+        >
+          <ColorPicker
+            label="Stroke"
+            color={selectedShapeData?.otherProps?.stroke || ''}
+            onChange={color => updateOtherPropsOnSelected('stroke', color)}
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="strokeStyle"
+          propValue={selectedShapeData?.otherProps?.strokeStyle}
+        >
+          <StrokeStyle
+            label="Stroke style"
+            strokeStyle={selectedShapeData?.otherProps?.strokeStyle ?? [0]}
+            onChange={strokeStyle =>
+              updateOtherPropsOnSelected('strokeStyle', strokeStyle)
+            }
+          />
+        </ShowProp>
 
-          <ShowProp
-            singleSelection={!hasSelectedShapes}
-            multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
-            propKey="backgroundColor"
-            propValue={selectedShapeData?.otherProps?.backgroundColor}
-          >
-            <ColorPicker
-              label="Background"
-              color={selectedShapeData?.otherProps?.backgroundColor ?? ''}
-              onChange={color =>
-                updateOtherPropsOnSelected('backgroundColor', color)
-              }
-            />
-          </ShowProp>
-          <ShowProp
-            singleSelection={!hasSelectedShapes}
-            multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
-            propKey="iconSize"
-            propValue={selectedShapeData?.otherProps?.iconSize}
-          >
-            <SelectSize
-              label="Size"
-              iconSize={selectedShapeData?.otherProps?.iconSize ?? ''}
-              onChange={iconSize =>
-                updateOtherPropsOnSelected('iconSize', iconSize)
-              }
-            />
-          </ShowProp>
-          {selectedShapeData?.otherProps?.icon && (
-            <SelectIcon
-              label="Icon"
-              icon={selectedShapeData.otherProps.icon}
-              onChange={icon => updateOtherPropsOnSelected('icon', icon)}
-            />
-          )}
-          {selectedShapeData?.otherProps?.textColor && (
-            <ColorPicker
-              label="TextColor"
-              color={selectedShapeData.otherProps.textColor}
-              onChange={color => updateOtherPropsOnSelected('textColor', color)}
-            />
-          )}
-          {selectedShapeData?.otherProps?.checked != undefined && (
-            <Checked
-              label="Checked"
-              checked={selectedShapeData?.otherProps?.checked}
-              onChange={checked =>
-                updateOtherPropsOnSelected('checked', checked)
-              }
-            />
-          )}
-          {selectedShapeData?.otherProps?.imageSrc != undefined && (
-            <ImageSrc
-              label="Image Source"
-              onChange={imageSrc =>
-                updateOtherPropsOnSelected('imageSrc', imageSrc)
-              }
-            />
-          )}
-          {selectedShapeData?.otherProps?.imageBlackAndWhite != undefined && (
-            <ImageBlackAndWhite
-              label="B/W filter"
-              imageBlackAndWhite={
-                selectedShapeData?.otherProps?.imageBlackAndWhite
-              }
-              onChange={imageBlackAndWhite =>
-                updateOtherPropsOnSelected(
-                  'imageBlackAndWhite',
-                  imageBlackAndWhite
-                )
-              }
-            />
-          )}
-          {selectedShapeData?.otherProps?.progress && (
-            <Progress
-              label="Progress"
-              progress={selectedShapeData?.otherProps?.progress}
-              onChange={progress =>
-                updateOtherPropsOnSelected('progress', progress)
-              }
-            />
-          )}
-          {selectedShapeData?.otherProps?.borderRadius && (
-            <BorderRadius
-              label="Border-radius"
-              borderRadius={selectedShapeData?.otherProps?.borderRadius}
-              onChange={borderRadius =>
-                updateOtherPropsOnSelected('borderRadius', borderRadius)
-              }
-            />
-          )}
-          {selectedShapeData?.otherProps?.textAlignment && (
-            <TextAlignment
-              label="Alignment"
-              textAlignment={selectedShapeData?.otherProps?.textAlignment}
-              onChange={textAlignment =>
-                updateOtherPropsOnSelected('textAlignment', textAlignment)
-              }
-            />
-          )}
-          {selectedShapeData?.otherProps?.fontStyle && (
-            <FontStyle
-              label="Italic"
-              fontStyle={selectedShapeData?.otherProps?.fontStyle}
-              onChange={fontstyle =>
-                updateOtherPropsOnSelected('fontStyle', fontstyle)
-              }
-            />
-          )}
-          {selectedShapeData?.otherProps?.fontVariant && (
-            <FontVariant
-              label="Bold"
-              fontVariant={selectedShapeData?.otherProps?.fontVariant}
-              onChange={fontvariant =>
-                updateOtherPropsOnSelected('fontVariant', fontvariant)
-              }
-            />
-          )}
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="backgroundColor"
+          propValue={selectedShapeData?.otherProps?.backgroundColor}
+        >
+          <ColorPicker
+            label="Background"
+            color={selectedShapeData?.otherProps?.backgroundColor ?? ''}
+            onChange={color =>
+              updateOtherPropsOnSelected('backgroundColor', color)
+            }
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="iconSize"
+          propValue={selectedShapeData?.otherProps?.iconSize}
+        >
+          <SelectSize
+            label="Size"
+            iconSize={selectedShapeData?.otherProps?.iconSize ?? ''}
+            onChange={iconSize =>
+              updateOtherPropsOnSelected('iconSize', iconSize)
+            }
+          />
+        </ShowProp>
+
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="icon"
+          propValue={selectedShapeData?.otherProps?.icon}
+        >
+          <SelectIcon
+            label="Icon"
+            icon={selectedShapeData?.otherProps?.icon ?? iconCollection[0]}
+            onChange={icon => updateOtherPropsOnSelected('icon', icon)}
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="textColor"
+          propValue={selectedShapeData?.otherProps?.textColor}
+        >
+          <ColorPicker
+            label="TextColor"
+            color={selectedShapeData?.otherProps?.textColor ?? ''}
+            onChange={color => updateOtherPropsOnSelected('textColor', color)}
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="checked"
+          propValue={selectedShapeData?.otherProps?.checked}
+        >
+          <Checked
+            label="Checked"
+            checked={selectedShapeData?.otherProps?.checked ?? false}
+            onChange={checked => updateOtherPropsOnSelected('checked', checked)}
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="imageSrc"
+          propValue={selectedShapeData?.otherProps?.imageSrc}
+        >
+          <ImageSrc
+            label="Image Source"
+            onChange={imageSrc =>
+              updateOtherPropsOnSelected('imageSrc', imageSrc)
+            }
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="imageBlackAndWhite"
+          propValue={selectedShapeData?.otherProps?.imageBlackAndWhite}
+        >
+          <ImageBlackAndWhite
+            label="B/W filter"
+            imageBlackAndWhite={
+              selectedShapeData?.otherProps?.imageBlackAndWhite ?? false
+            }
+            onChange={imageBlackAndWhite =>
+              updateOtherPropsOnSelected(
+                'imageBlackAndWhite',
+                imageBlackAndWhite
+              )
+            }
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="progress"
+          propValue={selectedShapeData?.otherProps?.progress}
+        >
+          <Progress
+            label="Progress"
+            progress={selectedShapeData?.otherProps?.progress ?? ''}
+            onChange={progress =>
+              updateOtherPropsOnSelected('progress', progress)
+            }
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="borderRadius"
+          propValue={selectedShapeData?.otherProps?.borderRadius}
+        >
+          <BorderRadius
+            label="Border-radius"
+            borderRadius={selectedShapeData?.otherProps?.borderRadius}
+            onChange={borderRadius =>
+              updateOtherPropsOnSelected('borderRadius', borderRadius)
+            }
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="textAlignment"
+          propValue={selectedShapeData?.otherProps?.textAlignment}
+        >
+          <TextAlignment
+            label="Alignment"
+            textAlignment={selectedShapeData?.otherProps?.textAlignment}
+            onChange={textAlignment =>
+              updateOtherPropsOnSelected('textAlignment', textAlignment)
+            }
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="fontStyle"
+          propValue={selectedShapeData?.otherProps?.fontStyle}
+        >
+          <FontStyle
+            label="Italic"
+            fontStyle={selectedShapeData?.otherProps?.fontStyle}
+            onChange={fontstyle =>
+              updateOtherPropsOnSelected('fontStyle', fontstyle)
+            }
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="fontVariant"
+          propValue={selectedShapeData?.otherProps?.fontVariant}
+        >
+          <FontVariant
+            label="Bold"
+            fontVariant={selectedShapeData?.otherProps?.fontVariant}
+            onChange={fontvariant =>
+              updateOtherPropsOnSelected('fontVariant', fontvariant)
+            }
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="textDecoration"
+          propValue={selectedShapeData?.otherProps?.textDecoration}
+        >
           {selectedShapeData?.otherProps?.textDecoration && (
             <TextDecoration
               label="Underline"
@@ -222,37 +280,52 @@ export const PropertiesPod = () => {
               }
             />
           )}
-          {selectedShapeData?.otherProps?.fontSize && (
-            <FontSize
-              label="Font Size"
-              fontSize={selectedShapeData?.otherProps?.fontSize}
-              onChange={fontSize =>
-                updateOtherPropsOnSelected('fontSize', fontSize)
-              }
-            />
-          )}
-        </>
-      }
-      {selectedShapeData?.otherProps?.activeElement !== undefined && (
-        <ActiveElementSelector
-          label="Active Element"
-          text={selectedShapeData?.text}
-          type={selectedShapeData?.type}
-          activeElement={selectedShapeData?.otherProps?.activeElement ?? 0}
-          onChange={activeElement =>
-            updateOtherPropsOnSelected('activeElement', activeElement)
-          }
-        />
-      )}
-      {selectedShapeData?.otherProps?.selectedBackgroundColor != undefined && (
-        <ColorPicker
-          label="Selected Background"
-          color={selectedShapeData.otherProps.selectedBackgroundColor}
-          onChange={color =>
-            updateOtherPropsOnSelected('selectedBackgroundColor', color)
-          }
-        />
-      )}
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="fontSize"
+          propValue={selectedShapeData?.otherProps?.fontSize}
+        >
+          <FontSize
+            label="Font Size"
+            fontSize={selectedShapeData?.otherProps?.fontSize}
+            onChange={fontSize =>
+              updateOtherPropsOnSelected('fontSize', fontSize)
+            }
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="activeElement"
+          propValue={selectedShapeData?.otherProps?.activeElement}
+        >
+          <ActiveElementSelector
+            label="Active Element"
+            text={selectedShapeData?.text}
+            type={selectedShapeData?.type}
+            activeElement={selectedShapeData?.otherProps?.activeElement ?? 0}
+            onChange={activeElement =>
+              updateOtherPropsOnSelected('activeElement', activeElement)
+            }
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="selectedBackgroundColor"
+          propValue={selectedShapeData?.otherProps?.selectedBackgroundColor}
+        >
+          <ColorPicker
+            label="Selected Background"
+            color={selectedShapeData?.otherProps?.selectedBackgroundColor ?? ''}
+            onChange={color =>
+              updateOtherPropsOnSelected('selectedBackgroundColor', color)
+            }
+          />
+        </ShowProp>
+      </>
     </div>
   );
 };
