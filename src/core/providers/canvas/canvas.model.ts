@@ -51,6 +51,7 @@ export interface SelectionInfo {
   selectedShapesIds: string[];
   selectedShapeType: ShapeType | null;
   getSelectedShapeData: (index?: number) => ShapeModel | undefined;
+  getAllSelectedShapesData: () => ShapeModel[];
   setZIndexOnSelected: (action: ZIndexAction) => void;
   updateTextOnSelected: (text: string) => void;
   // TODO: Update, A. KeyOf B. Move To useSelectionInfo

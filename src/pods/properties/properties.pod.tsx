@@ -14,26 +14,51 @@ import { FontVariant } from './components/font-variant/font-variant';
 import { TextDecoration } from './components/text-decoration/text-decoration';
 import { FontSize } from './components/font-size';
 import { TextAlignment } from './components/text-alignment';
+import { useMemo } from 'react';
+import { extractMultiplePropsInCommon } from './properties.business';
+import { ShowProp } from './components/show-prop';
 
 export const PropertiesPod = () => {
   const { selectionInfo } = useCanvasContext();
-  const { getSelectedShapeData, updateOtherPropsOnSelected } = selectionInfo;
+  const {
+    getSelectedShapeData,
+    getAllSelectedShapesData,
+    updateOtherPropsOnSelected,
+  } = selectionInfo;
 
   // TODO: Right now we will enable properties when we have single selection
   // if we have multiple selection only zindex will be enabled
   // in the future we can just merge common props etc... but that's not straight forward
+  /*
   const selectedShapeRef =
     selectionInfo?.selectedShapesRefs.current &&
     selectionInfo?.selectedShapesRefs.current.length === 1
       ? selectionInfo.selectedShapesRefs.current[0]
       : null;
+  */
 
   // Check if there are any shapes selected
   const hasSelectedShapes =
     selectionInfo?.selectedShapesRefs.current &&
     selectionInfo.selectedShapesRefs.current.length > 0;
 
-  const selectedShapeData = getSelectedShapeData();
+  const multipleSelectionShapeData = useMemo(
+    () => getAllSelectedShapesData(),
+    [selectionInfo.selectedShapesIds]
+  );
+
+  const multipleSelectionPropsInCommon = useMemo(
+    () => extractMultiplePropsInCommon(multipleSelectionShapeData),
+    [multipleSelectionShapeData]
+  );
+
+  console.log(multipleSelectionPropsInCommon);
+
+  // TODO: This could be simplified, just use all selection index 0
+  const selectedShapeData = useMemo(
+    () => getSelectedShapeData(),
+    [selectionInfo.selectedShapesIds]
+  );
 
   return (
     <div>
@@ -41,42 +66,63 @@ export const PropertiesPod = () => {
         <p>Properties</p>
       </div>
       {hasSelectedShapes && <ZIndexOptions selectionInfo={selectionInfo} />}
-      {selectedShapeRef && (
+      {
         <>
-          {selectedShapeData?.otherProps?.stroke && (
+          <ShowProp
+            singleSelection={!hasSelectedShapes}
+            multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+            propKey="stroke"
+            propValue={selectedShapeData?.otherProps?.stroke}
+          >
             <ColorPicker
               label="Stroke"
-              color={selectedShapeData.otherProps.stroke}
+              color={selectedShapeData?.otherProps?.stroke || ''}
               onChange={color => updateOtherPropsOnSelected('stroke', color)}
             />
-          )}
-          {selectedShapeData?.otherProps?.strokeStyle && (
+          </ShowProp>
+          <ShowProp
+            singleSelection={!hasSelectedShapes}
+            multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+            propKey="strokeStyle"
+            propValue={selectedShapeData?.otherProps?.strokeStyle}
+          >
             <StrokeStyle
               label="Stroke style"
-              strokeStyle={selectedShapeData.otherProps?.strokeStyle}
+              strokeStyle={selectedShapeData?.otherProps?.strokeStyle ?? [0]}
               onChange={strokeStyle =>
                 updateOtherPropsOnSelected('strokeStyle', strokeStyle)
               }
             />
-          )}
-          {selectedShapeData?.otherProps?.backgroundColor && (
+          </ShowProp>
+
+          <ShowProp
+            singleSelection={!hasSelectedShapes}
+            multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+            propKey="backgroundColor"
+            propValue={selectedShapeData?.otherProps?.backgroundColor}
+          >
             <ColorPicker
               label="Background"
-              color={selectedShapeData.otherProps.backgroundColor}
+              color={selectedShapeData?.otherProps?.backgroundColor ?? ''}
               onChange={color =>
                 updateOtherPropsOnSelected('backgroundColor', color)
               }
             />
-          )}
-          {selectedShapeData?.otherProps?.iconSize && (
+          </ShowProp>
+          <ShowProp
+            singleSelection={!hasSelectedShapes}
+            multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+            propKey="iconSize"
+            propValue={selectedShapeData?.otherProps?.iconSize}
+          >
             <SelectSize
               label="Size"
-              iconSize={selectedShapeData.otherProps.iconSize}
+              iconSize={selectedShapeData?.otherProps?.iconSize ?? ''}
               onChange={iconSize =>
                 updateOtherPropsOnSelected('iconSize', iconSize)
               }
             />
-          )}
+          </ShowProp>
           {selectedShapeData?.otherProps?.icon && (
             <SelectIcon
               label="Icon"
@@ -186,7 +232,7 @@ export const PropertiesPod = () => {
             />
           )}
         </>
-      )}
+      }
       {selectedShapeData?.otherProps?.activeElement !== undefined && (
         <ActiveElementSelector
           label="Active Element"

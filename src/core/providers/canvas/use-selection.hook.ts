@@ -178,22 +178,11 @@ export const useSelection = (
 
   // TODO: Rather implement this using immmer
 
-  const updateOtherPropsOnSelected = <K extends keyof OtherProps>(
+  const updateOtherPropsOnSelectedSingleShape = <K extends keyof OtherProps>(
+    selectedShapeId: string,
     key: K,
     value: OtherProps[K]
   ) => {
-    if (!isPageIndexValid(document)) return;
-
-    // TODO: Right now applying this only to single selection
-    // in the future we could apply to all selected shapes
-    // BUT, we have to show only common shapes (pain in the neck)
-    // Only when selection is one
-    if (selectedShapesIds.length !== 1) {
-      return;
-    }
-
-    const selectedShapeId = selectedShapesIds[0];
-
     setDocument(prevDocument =>
       produce(prevDocument, draft => {
         draft.pages[prevDocument.activePageIndex].shapes = draft.pages[
@@ -205,6 +194,42 @@ export const useSelection = (
         );
       })
     );
+  };
+
+  const updateOtherPropsOnSelected = <K extends keyof OtherProps>(
+    key: K,
+    value: OtherProps[K],
+    multipleSelection: boolean = false
+  ) => {
+    if (!isPageIndexValid(document) || selectedShapesIds.length === 0) return;
+
+    // TODO: Right now applying this only to single selection
+    // in the future we could apply to all selected shapes
+    // BUT, we have to show only common shapes (pain in the neck)
+    // Only when selection is one
+    if (selectedShapesIds.length === 1) {
+      const selectedShapeId = selectedShapesIds[0];
+      updateOtherPropsOnSelectedSingleShape(selectedShapeId, key, value);
+
+      return;
+    }
+
+    if (multipleSelection) {
+      setDocument(prevDocument =>
+        produce(prevDocument, draft => {
+          draft.pages[prevDocument.activePageIndex].shapes = draft.pages[
+            prevDocument.activePageIndex
+          ].shapes.map(shape =>
+            selectedShapesIds.includes(shape.id)
+              ? {
+                  ...shape,
+                  otherProps: { ...shape.otherProps, [key]: value },
+                }
+              : shape
+          );
+        })
+      );
+    }
   };
 
   // Added index, right now we got multiple selection
@@ -225,6 +250,12 @@ export const useSelection = (
     );
   };
 
+  const getAllSelectedShapesData = (): ShapeModel[] => {
+    return getActivePageShapes(document).filter(shape =>
+      selectedShapesIds.includes(shape.id)
+    );
+  };
+
   return {
     transformerRef,
     shapeRefs,
@@ -235,6 +266,7 @@ export const useSelection = (
     selectedShapesIds,
     selectedShapeType,
     getSelectedShapeData,
+    getAllSelectedShapesData,
     setZIndexOnSelected,
     updateTextOnSelected,
     updateOtherPropsOnSelected,
