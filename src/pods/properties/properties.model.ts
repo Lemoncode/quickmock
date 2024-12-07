@@ -5,6 +5,21 @@ export const multiSelectEnabledProperties: (keyof OtherProps)[] = [
   'backgroundColor',
   'textColor',
   'selectedBackgroundColor',
+  'strokeStyle',
+  'fontVariant',
+  'fontStyle',
+  'fontSize',
+  'textDecoration',
+  'checked',
+  'icon',
+  'iconSize',
+  'imageSrc',
+  'imageBlackAndWhite',
+  'progress',
+  'borderRadius',
+  'activeElement',
+  'selectedBackgroundColor',
+  'textAlignment',
 ];
 
 export type PropsValueTypes =

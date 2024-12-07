@@ -42,7 +42,7 @@ export const ColorPicker: React.FC<Props> = props => {
       <div className={classes.container}>
         <p>{label}</p>
         <button
-          data-color={hexToHsva(color).a === 0 ? 'noColor' : ''}
+          data-color={!color || hexToHsva(color).a === 0 ? 'noColor' : ''}
           className={classes.button}
           style={{ backgroundColor: color }}
           onClick={togglePicker}

@@ -20,7 +20,7 @@ import { ShowProp } from './components/show-prop';
 import { iconCollection } from './components/icon-selector/modal/icons';
 
 export const PropertiesPod = () => {
-  const { selectionInfo } = useCanvasContext();
+  const { selectionInfo, fullDocument } = useCanvasContext();
   const {
     getSelectedShapeData,
     getAllSelectedShapesData,
@@ -46,6 +46,9 @@ export const PropertiesPod = () => {
   const isSingleSelection =
     selectionInfo?.selectedShapesRefs?.current?.length === 1;
 
+  const isMultipleSelection =
+    (selectionInfo?.selectedShapesRefs?.current?.length ?? 0) > 1;
+
   const multipleSelectionShapeData = useMemo(
     () => getAllSelectedShapesData(),
     [selectionInfo.selectedShapesIds]
@@ -61,7 +64,7 @@ export const PropertiesPod = () => {
   // TODO: This could be simplified, just use all selection index 0
   const selectedShapeData = useMemo(
     () => getSelectedShapeData(),
-    [selectionInfo.selectedShapesIds]
+    [selectionInfo.selectedShapesIds, fullDocument]
   );
 
   return (
@@ -80,7 +83,9 @@ export const PropertiesPod = () => {
           <ColorPicker
             label="Stroke"
             color={selectedShapeData?.otherProps?.stroke || ''}
-            onChange={color => updateOtherPropsOnSelected('stroke', color)}
+            onChange={color =>
+              updateOtherPropsOnSelected('stroke', color, isMultipleSelection)
+            }
           />
         </ShowProp>
         <ShowProp
@@ -91,9 +96,13 @@ export const PropertiesPod = () => {
         >
           <StrokeStyle
             label="Stroke style"
-            strokeStyle={selectedShapeData?.otherProps?.strokeStyle ?? [0]}
+            strokeStyle={selectedShapeData?.otherProps?.strokeStyle ?? []}
             onChange={strokeStyle =>
-              updateOtherPropsOnSelected('strokeStyle', strokeStyle)
+              updateOtherPropsOnSelected(
+                'strokeStyle',
+                strokeStyle,
+                isMultipleSelection
+              )
             }
           />
         </ShowProp>
@@ -108,7 +117,11 @@ export const PropertiesPod = () => {
             label="Background"
             color={selectedShapeData?.otherProps?.backgroundColor ?? ''}
             onChange={color =>
-              updateOtherPropsOnSelected('backgroundColor', color)
+              updateOtherPropsOnSelected(
+                'backgroundColor',
+                color,
+                isMultipleSelection
+              )
             }
           />
         </ShowProp>
@@ -122,7 +135,11 @@ export const PropertiesPod = () => {
             label="Size"
             iconSize={selectedShapeData?.otherProps?.iconSize ?? ''}
             onChange={iconSize =>
-              updateOtherPropsOnSelected('iconSize', iconSize)
+              updateOtherPropsOnSelected(
+                'iconSize',
+                iconSize,
+                isMultipleSelection
+              )
             }
           />
         </ShowProp>
@@ -136,7 +153,9 @@ export const PropertiesPod = () => {
           <SelectIcon
             label="Icon"
             icon={selectedShapeData?.otherProps?.icon ?? iconCollection[0]}
-            onChange={icon => updateOtherPropsOnSelected('icon', icon)}
+            onChange={icon =>
+              updateOtherPropsOnSelected('icon', icon, isMultipleSelection)
+            }
           />
         </ShowProp>
         <ShowProp
@@ -148,7 +167,13 @@ export const PropertiesPod = () => {
           <ColorPicker
             label="TextColor"
             color={selectedShapeData?.otherProps?.textColor ?? ''}
-            onChange={color => updateOtherPropsOnSelected('textColor', color)}
+            onChange={color =>
+              updateOtherPropsOnSelected(
+                'textColor',
+                color,
+                isMultipleSelection
+              )
+            }
           />
         </ShowProp>
         <ShowProp
@@ -160,7 +185,13 @@ export const PropertiesPod = () => {
           <Checked
             label="Checked"
             checked={selectedShapeData?.otherProps?.checked ?? false}
-            onChange={checked => updateOtherPropsOnSelected('checked', checked)}
+            onChange={checked =>
+              updateOtherPropsOnSelected(
+                'checked',
+                checked,
+                isMultipleSelection
+              )
+            }
           />
         </ShowProp>
         <ShowProp
@@ -190,7 +221,8 @@ export const PropertiesPod = () => {
             onChange={imageBlackAndWhite =>
               updateOtherPropsOnSelected(
                 'imageBlackAndWhite',
-                imageBlackAndWhite
+                imageBlackAndWhite,
+                isMultipleSelection
               )
             }
           />
@@ -205,7 +237,11 @@ export const PropertiesPod = () => {
             label="Progress"
             progress={selectedShapeData?.otherProps?.progress ?? ''}
             onChange={progress =>
-              updateOtherPropsOnSelected('progress', progress)
+              updateOtherPropsOnSelected(
+                'progress',
+                progress,
+                isMultipleSelection
+              )
             }
           />
         </ShowProp>
@@ -219,7 +255,11 @@ export const PropertiesPod = () => {
             label="Border-radius"
             borderRadius={selectedShapeData?.otherProps?.borderRadius}
             onChange={borderRadius =>
-              updateOtherPropsOnSelected('borderRadius', borderRadius)
+              updateOtherPropsOnSelected(
+                'borderRadius',
+                borderRadius,
+                isMultipleSelection
+              )
             }
           />
         </ShowProp>
@@ -233,7 +273,11 @@ export const PropertiesPod = () => {
             label="Alignment"
             textAlignment={selectedShapeData?.otherProps?.textAlignment}
             onChange={textAlignment =>
-              updateOtherPropsOnSelected('textAlignment', textAlignment)
+              updateOtherPropsOnSelected(
+                'textAlignment',
+                textAlignment,
+                isMultipleSelection
+              )
             }
           />
         </ShowProp>
@@ -247,7 +291,11 @@ export const PropertiesPod = () => {
             label="Italic"
             fontStyle={selectedShapeData?.otherProps?.fontStyle}
             onChange={fontstyle =>
-              updateOtherPropsOnSelected('fontStyle', fontstyle)
+              updateOtherPropsOnSelected(
+                'fontStyle',
+                fontstyle,
+                isMultipleSelection
+              )
             }
           />
         </ShowProp>
@@ -261,7 +309,11 @@ export const PropertiesPod = () => {
             label="Bold"
             fontVariant={selectedShapeData?.otherProps?.fontVariant}
             onChange={fontvariant =>
-              updateOtherPropsOnSelected('fontVariant', fontvariant)
+              updateOtherPropsOnSelected(
+                'fontVariant',
+                fontvariant,
+                isMultipleSelection
+              )
             }
           />
         </ShowProp>
@@ -276,7 +328,11 @@ export const PropertiesPod = () => {
               label="Underline"
               textDecoration={selectedShapeData?.otherProps?.textDecoration}
               onChange={textdecoration =>
-                updateOtherPropsOnSelected('textDecoration', textdecoration)
+                updateOtherPropsOnSelected(
+                  'textDecoration',
+                  textdecoration,
+                  isMultipleSelection
+                )
               }
             />
           )}
@@ -291,7 +347,11 @@ export const PropertiesPod = () => {
             label="Font Size"
             fontSize={selectedShapeData?.otherProps?.fontSize}
             onChange={fontSize =>
-              updateOtherPropsOnSelected('fontSize', fontSize)
+              updateOtherPropsOnSelected(
+                'fontSize',
+                fontSize,
+                isMultipleSelection
+              )
             }
           />
         </ShowProp>
@@ -307,7 +367,11 @@ export const PropertiesPod = () => {
             type={selectedShapeData?.type}
             activeElement={selectedShapeData?.otherProps?.activeElement ?? 0}
             onChange={activeElement =>
-              updateOtherPropsOnSelected('activeElement', activeElement)
+              updateOtherPropsOnSelected(
+                'activeElement',
+                activeElement,
+                isMultipleSelection
+              )
             }
           />
         </ShowProp>
@@ -321,7 +385,11 @@ export const PropertiesPod = () => {
             label="Selected Background"
             color={selectedShapeData?.otherProps?.selectedBackgroundColor ?? ''}
             onChange={color =>
-              updateOtherPropsOnSelected('selectedBackgroundColor', color)
+              updateOtherPropsOnSelected(
+                'selectedBackgroundColor',
+                color,
+                isMultipleSelection
+              )
             }
           />
         </ShowProp>

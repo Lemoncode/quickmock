@@ -239,15 +239,19 @@ export const useSelection = (
     // check if it can be applied to multiple data
     // This is is used to lock temporarily the multiple selection properties
     // (right side panel) edit, it only will work when there is a single selection
-    if (index === undefined && selectedShapesIds.length !== 1) {
+    if (index === undefined || selectedShapesIds.length === 0) {
       return;
     }
 
     const selectedShapeId = selectedShapesIds[index];
 
-    return getActivePageShapes(document).find(
+    const activeShape = getActivePageShapes(document).find(
       shape => shape.id === selectedShapeId
     );
+
+    console.log('Active Shape', activeShape);
+
+    return activeShape;
   };
 
   const getAllSelectedShapesData = (): ShapeModel[] => {

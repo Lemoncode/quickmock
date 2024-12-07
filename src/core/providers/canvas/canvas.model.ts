@@ -57,7 +57,8 @@ export interface SelectionInfo {
   // TODO: Update, A. KeyOf B. Move To useSelectionInfo
   updateOtherPropsOnSelected: <K extends keyof OtherProps>(
     key: K,
-    value: OtherProps[K]
+    value: OtherProps[K],
+    multipleSelection?: boolean
   ) => void;
 }
 
