@@ -251,8 +251,6 @@ export const useSelection = (
       shape => shape.id === selectedShapeId
     );
 
-    console.log('Active Shape', activeShape);
-
     return activeShape;
   };
 

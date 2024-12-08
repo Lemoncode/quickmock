@@ -26,13 +26,5 @@ export const ShowProp: React.FC<Props> = props => {
     [multipleSelectionPropsInCommon, propKey, propValue]
   );
 
-  if (propKey === 'strokeStyle') {
-    console.log('Key', propKey);
-    console.log('showProp', showProp);
-    console.log(
-      'multipleSelection propkey',
-      multipleSelectionPropsInCommon[propKey]
-    );
-  }
   return <>{showProp ? children : null}</>;
 };
