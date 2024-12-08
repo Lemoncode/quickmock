@@ -194,6 +194,26 @@ export const useSelection = (
     );
   };
 
+  const updateOtherPropsOnSelectedMutlipleShapes = <K extends keyof OtherProps>(
+    key: K,
+    value: OtherProps[K]
+  ) => {
+    setDocument(prevDocument =>
+      produce(prevDocument, draft => {
+        draft.pages[prevDocument.activePageIndex].shapes = draft.pages[
+          prevDocument.activePageIndex
+        ].shapes.map(shape =>
+          selectedShapesIds.includes(shape.id)
+            ? {
+                ...shape,
+                otherProps: { ...shape.otherProps, [key]: value },
+              }
+            : shape
+        );
+      })
+    );
+  };
+
   const updateOtherPropsOnSelected = <K extends keyof OtherProps>(
     key: K,
     value: OtherProps[K],
@@ -201,10 +221,7 @@ export const useSelection = (
   ) => {
     if (!isPageIndexValid(document) || selectedShapesIds.length === 0) return;
 
-    // TODO: Right now applying this only to single selection
-    // in the future we could apply to all selected shapes
-    // BUT, we have to show only common shapes (pain in the neck)
-    // Only when selection is one
+    // Single selection case
     if (selectedShapesIds.length === 1) {
       const selectedShapeId = selectedShapesIds[0];
       updateOtherPropsOnSelectedSingleShape(selectedShapeId, key, value);
@@ -212,21 +229,9 @@ export const useSelection = (
       return;
     }
 
+    // Multiple selection case
     if (multipleSelection) {
-      setDocument(prevDocument =>
-        produce(prevDocument, draft => {
-          draft.pages[prevDocument.activePageIndex].shapes = draft.pages[
-            prevDocument.activePageIndex
-          ].shapes.map(shape =>
-            selectedShapesIds.includes(shape.id)
-              ? {
-                  ...shape,
-                  otherProps: { ...shape.otherProps, [key]: value },
-                }
-              : shape
-          );
-        })
-      );
+      updateOtherPropsOnSelectedMutlipleShapes(key, value);
     }
   };
 
