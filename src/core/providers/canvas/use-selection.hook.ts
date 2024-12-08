@@ -176,24 +176,11 @@ export const useSelection = (
     );
   };
 
-  // TODO: Rather implement this using immmer
-
-  const updateOtherPropsOnSelected = <K extends keyof OtherProps>(
+  const updateOtherPropsOnSelectedSingleShape = <K extends keyof OtherProps>(
+    selectedShapeId: string,
     key: K,
     value: OtherProps[K]
   ) => {
-    if (!isPageIndexValid(document)) return;
-
-    // TODO: Right now applying this only to single selection
-    // in the future we could apply to all selected shapes
-    // BUT, we have to show only common shapes (pain in the neck)
-    // Only when selection is one
-    if (selectedShapesIds.length !== 1) {
-      return;
-    }
-
-    const selectedShapeId = selectedShapesIds[0];
-
     setDocument(prevDocument =>
       produce(prevDocument, draft => {
         draft.pages[prevDocument.activePageIndex].shapes = draft.pages[
@@ -207,21 +194,69 @@ export const useSelection = (
     );
   };
 
+  const updateOtherPropsOnSelectedMutlipleShapes = <K extends keyof OtherProps>(
+    key: K,
+    value: OtherProps[K]
+  ) => {
+    setDocument(prevDocument =>
+      produce(prevDocument, draft => {
+        draft.pages[prevDocument.activePageIndex].shapes = draft.pages[
+          prevDocument.activePageIndex
+        ].shapes.map(shape =>
+          selectedShapesIds.includes(shape.id)
+            ? {
+                ...shape,
+                otherProps: { ...shape.otherProps, [key]: value },
+              }
+            : shape
+        );
+      })
+    );
+  };
+
+  const updateOtherPropsOnSelected = <K extends keyof OtherProps>(
+    key: K,
+    value: OtherProps[K],
+    multipleSelection: boolean = false
+  ) => {
+    if (!isPageIndexValid(document) || selectedShapesIds.length === 0) return;
+
+    // Single selection case
+    if (selectedShapesIds.length === 1) {
+      const selectedShapeId = selectedShapesIds[0];
+      updateOtherPropsOnSelectedSingleShape(selectedShapeId, key, value);
+
+      return;
+    }
+
+    // Multiple selection case
+    if (multipleSelection) {
+      updateOtherPropsOnSelectedMutlipleShapes(key, value);
+    }
+  };
+
   // Added index, right now we got multiple selection
   // if not returning just 0 (first element)
   const getSelectedShapeData = (index: number = 0): ShapeModel | undefined => {
-    // TODO: we will only allow this when there is a single selection
-    // check if it can be applied to multiple data
-    // This is is used to lock temporarily the multiple selection properties
-    // (right side panel) edit, it only will work when there is a single selection
-    if (index === undefined && selectedShapesIds.length !== 1) {
+    // If there is one selected will return that item
+    // If there are multiple selected will return the first
+    // In case no selection will return undefined
+    if (index === undefined || selectedShapesIds.length === 0) {
       return;
     }
 
     const selectedShapeId = selectedShapesIds[index];
 
-    return getActivePageShapes(document).find(
+    const activeShape = getActivePageShapes(document).find(
       shape => shape.id === selectedShapeId
+    );
+
+    return activeShape;
+  };
+
+  const getAllSelectedShapesData = (): ShapeModel[] => {
+    return getActivePageShapes(document).filter(shape =>
+      selectedShapesIds.includes(shape.id)
     );
   };
 
@@ -235,6 +270,7 @@ export const useSelection = (
     selectedShapesIds,
     selectedShapeType,
     getSelectedShapeData,
+    getAllSelectedShapesData,
     setZIndexOnSelected,
     updateTextOnSelected,
     updateOtherPropsOnSelected,
