@@ -16,7 +16,6 @@ export const multiSelectEnabledProperties: (keyof OtherProps)[] = [
   'imageBlackAndWhite',
   'progress',
   'borderRadius',
-  'activeElement',
   'selectedBackgroundColor',
   'textAlignment',
 ];
