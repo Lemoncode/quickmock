@@ -176,8 +176,6 @@ export const useSelection = (
     );
   };
 
-  // TODO: Rather implement this using immmer
-
   const updateOtherPropsOnSelectedSingleShape = <K extends keyof OtherProps>(
     selectedShapeId: string,
     key: K,
