@@ -59,9 +59,6 @@ export const PropertiesPod = () => {
     [multipleSelectionShapeData]
   );
 
-  console.log(multipleSelectionPropsInCommon);
-
-  // TODO: This could be simplified, just use all selection index 0
   const selectedShapeData = useMemo(
     () => getSelectedShapeData(),
     [selectionInfo.selectedShapesIds, fullDocument]
