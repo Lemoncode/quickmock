@@ -235,10 +235,9 @@ export const useSelection = (
   // Added index, right now we got multiple selection
   // if not returning just 0 (first element)
   const getSelectedShapeData = (index: number = 0): ShapeModel | undefined => {
-    // TODO: we will only allow this when there is a single selection
-    // check if it can be applied to multiple data
-    // This is is used to lock temporarily the multiple selection properties
-    // (right side panel) edit, it only will work when there is a single selection
+    // If there is one selected will return that item
+    // If there are multiple selected will return the first
+    // In case no selection will return undefined
     if (index === undefined || selectedShapesIds.length === 0) {
       return;
     }
