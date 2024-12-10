@@ -2,13 +2,20 @@ import React from 'react';
 import classes from './thumb-pages.module.css';
 import { useCanvasContext } from '@/core/providers';
 import { PageTitleInlineEdit, ThumbPage } from './components';
+import { PlusIcon } from '@/common/components/icons';
+import { useMonitorDropThumb } from './monitor-drop-thumb.hook';
 
-export const ThumbPagesPod: React.FC = () => {
-  const { fullDocument, addNewPage, setActivePage } = useCanvasContext();
+interface Props {
+  isVisible: boolean;
+}
+
+export const ThumbPagesPod: React.FC<Props> = props => {
+  const { isVisible } = props;
+  const { fullDocument, addNewPage, setActivePage, getActivePage } =
+    useCanvasContext();
   const [pageTitleBeingEdited, setPageTitleBeingEdited] = React.useState<
     number | null
   >(null);
-  const [activePageId, setActivePageId] = React.useState<string | null>(null);
 
   const handleAddNewPage = () => {
     addNewPage();
@@ -16,8 +23,9 @@ export const ThumbPagesPod: React.FC = () => {
 
   const handleSetActivePage = (pageId: string) => {
     setActivePage(pageId);
-    setActivePageId(pageId);
   };
+
+  useMonitorDropThumb();
 
   return (
     <div className={classes.container}>
@@ -25,13 +33,16 @@ export const ThumbPagesPod: React.FC = () => {
         <React.Fragment key={page.id}>
           <div
             className={`${classes.container} ${
-              page.id === activePageId ? classes.activeThumb : ''
+              page.id === getActivePage().id
+                ? classes.activeThumb
+                : classes.thumb
             }`}
           >
             <ThumbPage
               pageIndex={index}
               onSetActivePage={handleSetActivePage}
               setPageTitleBeingEdited={setPageTitleBeingEdited}
+              isVisible={isVisible}
             />
             {pageTitleBeingEdited === index ? (
               <PageTitleInlineEdit
@@ -41,7 +52,9 @@ export const ThumbPagesPod: React.FC = () => {
             ) : (
               <div
                 onDoubleClick={() => setPageTitleBeingEdited(index)}
-                className={page.id === activePageId ? classes.activeText : ''}
+                className={
+                  page.id === getActivePage().id ? classes.activeText : ''
+                }
               >
                 {page.name}
               </div>
@@ -49,7 +62,14 @@ export const ThumbPagesPod: React.FC = () => {
           </div>
         </React.Fragment>
       ))}
-      <button onClick={handleAddNewPage}>Add new page</button>
+      <button
+        className={classes.addButton}
+        onClick={handleAddNewPage}
+        title="add new page"
+        aria-label="add new page"
+      >
+        <PlusIcon />
+      </button>
     </div>
   );
 };

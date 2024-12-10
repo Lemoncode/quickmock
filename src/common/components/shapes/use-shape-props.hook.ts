@@ -32,10 +32,20 @@ export const useShapeProps = (
     [otherProps?.fontStyle]
   );
 
+  const fontSize = useMemo(
+    () => otherProps?.fontSize ?? defaultStyleShape.DEFAULT_FONT_SIZE,
+    [otherProps?.fontSize]
+  );
+
   const textDecoration = useMemo(
     () =>
       otherProps?.textDecoration ?? defaultStyleShape.DEFAULT_TEXT_DECORATION,
     [otherProps?.textDecoration]
+  );
+
+  const textAlignment = useMemo(
+    () => otherProps?.textAlignment ?? defaultStyleShape.DEFAULT_TEXT_ALIGNMENT,
+    [otherProps?.textAlignment]
   );
 
   const strokeStyle = useMemo(
@@ -74,6 +84,8 @@ export const useShapeProps = (
     selectedBackgroundColor,
     fontVariant,
     fontStyle,
+    fontSize,
     textDecoration,
+    textAlignment,
   };
 };

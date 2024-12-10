@@ -9,7 +9,7 @@ import { useGroupShapeProps } from '../mock-components.utils';
 
 const verticalLineShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
-  minHeight: 50,
+  minHeight: 30,
   maxWidth: 10,
   maxHeight: -1,
   defaultWidth: 10,

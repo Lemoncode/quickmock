@@ -51,12 +51,14 @@ export interface SelectionInfo {
   selectedShapesIds: string[];
   selectedShapeType: ShapeType | null;
   getSelectedShapeData: (index?: number) => ShapeModel | undefined;
+  getAllSelectedShapesData: () => ShapeModel[];
   setZIndexOnSelected: (action: ZIndexAction) => void;
   updateTextOnSelected: (text: string) => void;
   // TODO: Update, A. KeyOf B. Move To useSelectionInfo
   updateOtherPropsOnSelected: <K extends keyof OtherProps>(
     key: K,
-    value: OtherProps[K]
+    value: OtherProps[K],
+    multipleSelection?: boolean
   ) => void;
 }
 
@@ -97,9 +99,13 @@ export interface CanvasContextModel {
   fullDocument: DocumentModel;
   addNewPage: () => void;
   duplicatePage: (pageIndex: number) => void;
+  getActivePage: () => Page;
+  getActivePageName: () => string;
   setActivePage: (pageId: string) => void;
   deletePage: (pageIndex: number) => void;
   editPageTitle: (pageIndex: number, newName: string) => void;
+  swapPages: (id1: string, id2: string) => void;
+  activePageIndex: number;
   isThumbnailContextMenuVisible: boolean;
   setIsThumbnailContextMenuVisible: React.Dispatch<
     React.SetStateAction<boolean>

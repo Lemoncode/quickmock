@@ -6,10 +6,11 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { useResizeOnFontSizeChange } from './front-text-hooks/resize-fontsize-change.hook';
 
 const paragraphSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
-  minHeight: 70,
+  minHeight: 20,
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 420,
@@ -40,7 +41,10 @@ export const ParagraphShape = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { textColor } = useShapeProps(otherProps, BASIC_SHAPE);
+  const { textColor, fontSize, textAlignment, fontVariant } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -48,6 +52,8 @@ export const ParagraphShape = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
+
+  useResizeOnFontSizeChange(id, { x, y }, text, fontSize, fontVariant, true);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
@@ -58,9 +64,9 @@ export const ParagraphShape = forwardRef<any, ShapeProps>((props, ref) => {
         height={restrictedHeight}
         text={text}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
-        fontSize={14}
+        fontSize={fontSize}
         fill={textColor}
-        align="left"
+        align={textAlignment}
         ellipsis={true}
       />
     </Group>

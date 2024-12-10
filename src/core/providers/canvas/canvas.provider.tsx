@@ -46,11 +46,13 @@ export const CanvasProvider: React.FC<Props> = props => {
   const addNewPage = () => {
     setDocument(lastDocument =>
       produce(lastDocument, draft => {
+        const newActiveIndex = draft.pages.length;
         draft.pages.push({
           id: uuidv4(),
-          name: `Page ${draft.pages.length + 1}`,
+          name: `Page ${newActiveIndex + 1}`,
           shapes: [],
         });
+        draft.activePageIndex = newActiveIndex;
       })
     );
   };
@@ -71,8 +73,9 @@ export const CanvasProvider: React.FC<Props> = props => {
           name: `${document.pages[pageIndex].name} - copy`,
           shapes: newShapes,
         };
-        draft.pages.push(newPage);
-        setActivePage(newPage.id);
+        const newIndex = draft.activePageIndex + 1;
+        draft.pages.splice(newIndex, 0, newPage);
+        draft.activePageIndex = newIndex;
       })
     );
   };
@@ -94,6 +97,14 @@ export const CanvasProvider: React.FC<Props> = props => {
     setActivePage(newActivePageId);
   };
 
+  const getActivePage = () => {
+    return document.pages[document.activePageIndex];
+  };
+
+  const getActivePageName = () => {
+    return document.pages[document.activePageIndex].name;
+  };
+
   const setActivePage = (pageId: string) => {
     selectionInfo.clearSelection();
     selectionInfo.shapeRefs.current = {};
@@ -112,6 +123,20 @@ export const CanvasProvider: React.FC<Props> = props => {
     setDocument(lastDocument =>
       produce(lastDocument, draft => {
         draft.pages[pageIndex].name = newName;
+      })
+    );
+  };
+
+  const swapPages = (id1: string, id2: string) => {
+    setDocument(lastDocument =>
+      produce(lastDocument, draft => {
+        const index1 = draft.pages.findIndex(page => page.id === id1);
+        const index2 = draft.pages.findIndex(page => page.id === id2);
+        if (index1 !== -1 && index2 !== -1) {
+          const temp = draft.pages[index1];
+          draft.pages[index1] = draft.pages[index2];
+          draft.pages[index2] = temp;
+        }
       })
     );
   };
@@ -158,6 +183,7 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const createNewFullDocument = () => {
     setDocument(createDefaultDocumentModel());
+    setFileName('');
   };
 
   const deleteSelectedShapes = () => {
@@ -296,9 +322,13 @@ export const CanvasProvider: React.FC<Props> = props => {
         fullDocument: document,
         addNewPage,
         duplicatePage,
+        getActivePage,
+        getActivePageName,
         setActivePage,
         deletePage,
         editPageTitle,
+        swapPages,
+        activePageIndex: document.activePageIndex,
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
       }}
