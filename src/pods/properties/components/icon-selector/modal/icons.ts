@@ -1535,7 +1535,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Warning',
     filename: 'warning.svg',
-    searchTerms: ['warning', 'alert', 'caution', 'attention'],
+    searchTerms: ['warning', 'alert', 'caution', 'stop', 'attention'],
     categories: ['IT'],
   },
   {
@@ -2005,6 +2005,54 @@ export const iconCollection: IconInfo[] = [
     name: 'Tag',
     filename: 'tag.svg',
     searchTerms: ['tag', 'label', 'mark', 'identify'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Wallet',
+    filename: 'wallet.svg',
+    searchTerms: ['wallet', 'money', 'cash', 'pay'],
+    categories: ['Ecommerce'],
+  },
+  {
+    name: 'Orders',
+    filename: 'files.svg',
+    searchTerms: ['orders', 'files', 'documents', 'invoices'],
+    categories: ['Ecommerce'],
+  },
+  {
+    name: 'Potted plant',
+    filename: 'pottedplant.svg',
+    searchTerms: ['potted', 'plant', 'nature', 'flower'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Tulip',
+    filename: 'flowertulip.svg',
+    searchTerms: ['tulip', 'flower', 'nature', 'plant'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Chart line up',
+    filename: 'chartlineup.svg',
+    searchTerms: ['trade', 'chart', 'graph', 'business', 'benefits'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Database',
+    filename: 'database.svg',
+    searchTerms: ['database', 'data', 'storage', 'information'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Info',
+    filename: 'info.svg',
+    searchTerms: ['info', 'details', 'help', 'support'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Siren',
+    filename: 'siren.svg',
+    searchTerms: ['siren', 'alarm', 'warning', 'alert', 'attention'],
     categories: ['IT'],
   },
 ];
