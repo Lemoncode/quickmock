@@ -2169,4 +2169,10 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['moped', 'scooter', 'motorcycle', 'bike'],
     categories: ['IT'],
   },
+  {
+    name: 'AWS S3 storage',
+    filename: 'awss3.svg',
+    searchTerms: ['aws', 's3', 'cloud', 'storage', 'amazon'],
+    categories: ['IT'],
+  },
 ];
