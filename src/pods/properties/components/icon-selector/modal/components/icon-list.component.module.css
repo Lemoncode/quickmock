@@ -5,7 +5,7 @@
   padding: var(--space-md);
   overflow-y: auto;
   max-height: 60vh; /* Use a percentage of the viewport height for dynamic adjustment */
-  width: 80%;
+  width: 87%;
   gap: var(--space-s);
   border-radius: var(--border-radius-m);
 }
