@@ -3,9 +3,35 @@
   flex-wrap: wrap;
   background-color: white;
   padding: var(--space-md);
+  overflow-y: auto;
+  max-height: 60vh; /* Use a percentage of the viewport height for dynamic adjustment */
   width: 80%;
   gap: var(--space-s);
   border-radius: var(--border-radius-m);
+}
+
+@media (max-width: 1200px) {
+  .iconWrapper {
+    max-height: 50vh;
+  }
+}
+
+@media (max-width: 992px) {
+  .iconWrapper {
+    max-height: 40vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .iconWrapper {
+    max-height: 30vh;
+  }
+}
+
+@media (max-width: 576px) {
+  .iconWrapper {
+    max-height: 20vh;
+  }
 }
 
 .icon {
