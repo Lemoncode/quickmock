@@ -1,6 +1,5 @@
 import { Locator, Page } from '@playwright/test';
 import { Group } from 'konva/lib/Group';
-
 export interface Position {
   x: number;
   y: number;
@@ -20,13 +19,17 @@ export const getLocatorPosition = async (
 };
 
 export const getCanvasBoundingBox = async (page: Page) => {
-  const canvasWindowPos = await page
-    .locator('#konva-stage canvas')
-    .boundingBox();
+  const locator = page.locator('#konva-stage canvas').nth(1);
+
+  // Ensure that the canvas is visible before continuie
+  await locator.waitFor({ state: 'visible' });
+
+  const canvasWindowPos = await locator.boundingBox();
+
   if (canvasWindowPos) {
     return canvasWindowPos;
   } else {
-    throw new Error('Canvas is not loaded on ui');
+    throw new Error('Canvas is not loaded on UI');
   }
 };
 
