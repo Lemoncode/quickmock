@@ -166,7 +166,7 @@ export const CanvasPod = () => {
         onMouseUp={handleMouseUp}
         id="konva-stage" // data-id did not work for some reason
       >
-        <CanvasGridLayer scale={scale} canvasSize={canvasSize} />
+        <CanvasGridLayer canvasSize={canvasSize} />
         <Layer ref={layerRef}>
           {
             /* TODO compentize and simplify this */

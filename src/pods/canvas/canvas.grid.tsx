@@ -1,10 +1,9 @@
-import { Size } from '@/core/model';
 import React, { useMemo } from 'react';
 import { Layer, Line } from 'react-konva';
+import { Size } from '@/core/model';
 
-const gridSize = 40;
+const gridSize = 40; // Default grid size (no scaling)
 
-// Memoized component for a grid line
 const GridLine = React.memo(
   ({ points }: { points: number[] }) => (
     <Line points={points} stroke="rgba(0, 0, 0, 0.1)" strokeWidth={1} />
@@ -13,13 +12,12 @@ const GridLine = React.memo(
 );
 
 interface Props {
-  scale: number;
+  // scale: number;
   canvasSize: Size;
 }
 
-export const CanvasGridLayer: React.FC<Props> = props => {
-  const { scale, canvasSize } = props;
-  const gridSpacing = gridSize * scale;
+export const CanvasGridLayer: React.FC<Props> = ({ canvasSize }) => {
+  const gridSpacing = gridSize; // Use the original grid size, let Konva handle scaling
   const width = canvasSize.width;
   const height = canvasSize.height;
 
@@ -51,3 +49,5 @@ export const CanvasGridLayer: React.FC<Props> = props => {
     </Layer>
   );
 };
+
+export default CanvasGridLayer;
