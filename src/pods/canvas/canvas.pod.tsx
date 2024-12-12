@@ -1,4 +1,4 @@
-import { createRef, useEffect, useMemo, useRef, useState } from 'react';
+import React, { createRef, useEffect, useMemo, useRef, useState } from 'react';
 import Konva from 'konva';
 import { useCanvasContext } from '@/core/providers';
 import { Layer, Line, Rect, Stage, Transformer } from 'react-konva';
@@ -15,11 +15,13 @@ import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
 import { useKeyboardDisplacement } from './use-keyboard-displacement';
 import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
 import { ContextMenu } from '../context-menu/use-context-menu.hook';
-import CanvasGrid from './canvas.grid';
+import { CanvasGridLayer } from './canvas.grid';
 
 export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
     useState(false);
+
+  const canvasSize = React.useMemo(() => ({ width: 3000, height: 3000 }), []);
 
   const {
     shapes,
@@ -154,8 +156,8 @@ export const CanvasPod = () => {
       {/*TODO: move size to canvas provider?*/}
       {/*         onMouseDown={handleClearSelection}*/}
       <Stage
-        width={3000}
-        height={3000}
+        width={canvasSize.width}
+        height={canvasSize.height}
         onTouchStart={handleClearSelection}
         ref={stageRef}
         scale={{ x: scale, y: scale }}
@@ -164,7 +166,7 @@ export const CanvasPod = () => {
         onMouseUp={handleMouseUp}
         id="konva-stage" // data-id did not work for some reason
       >
-        <CanvasGrid scale={scale} stageRef={stageRef} />
+        <CanvasGridLayer scale={scale} canvasSize={canvasSize} />
         <Layer ref={layerRef}>
           {
             /* TODO compentize and simplify this */
