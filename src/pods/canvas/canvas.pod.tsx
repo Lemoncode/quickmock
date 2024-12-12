@@ -15,7 +15,7 @@ import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
 import { useKeyboardDisplacement } from './use-keyboard-displacement';
 import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
 import { ContextMenu } from '../context-menu/use-context-menu.hook';
-// import { CanvasGridLayer } from './canvas.grid';
+import { CanvasGridLayer } from './canvas.grid';
 
 export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
@@ -112,49 +112,6 @@ export const CanvasPod = () => {
     window.__TESTING_KONVA_LAYER__ = layerRef.current;
   }
 
-  // Function to draw the grid inside the Layer
-  const drawGrid = (layer: Konva.Layer) => {
-    const gridSize = 40; // Default grid size (no scaling)
-    const gridSpacing = gridSize; // Adjust grid spacing based on scale
-    const width = stageRef.current?.width() ?? 0;
-    const height = stageRef.current?.height() ?? 0;
-
-    // Clear any previous grid lines
-    layer.find('.grid-line').forEach(line => line.destroy());
-
-    // Vertical lines
-    for (let x = 0; x < width; x += gridSpacing) {
-      layer.add(
-        new Konva.Line({
-          name: 'grid-line',
-          points: [x, 0, x, height],
-          stroke: 'rgba(0, 0, 0, 0.1)',
-          strokeWidth: 1,
-        })
-      );
-    }
-
-    // Horizontal lines
-    for (let y = 0; y < height; y += gridSpacing) {
-      layer.add(
-        new Konva.Line({
-          name: 'grid-line',
-          points: [0, y, width, y],
-          stroke: 'rgba(0, 0, 0, 0.1)',
-          strokeWidth: 1,
-        })
-      );
-    }
-
-    layer.batchDraw();
-  };
-
-  useEffect(() => {
-    if (layerRef.current) {
-      drawGrid(layerRef.current); // Draw grid directly inside the existing layer
-    }
-  }, [scale, stageRef]);
-
   // We need this trick, if the user plays hard with the transfoermer,
   // resizing quite fast it mabe get out of sync wit the shape
   // so once the transformer ends, we reassign the nodes to the transformer
@@ -209,7 +166,7 @@ export const CanvasPod = () => {
         onMouseUp={handleMouseUp}
         id="konva-stage" // data-id did not work for some reason
       >
-        {/* <CanvasGridLayer canvasSize={canvasSize} /> */}
+        <CanvasGridLayer canvasSize={canvasSize} />
         <Layer ref={layerRef}>
           {
             /* TODO compentize and simplify this */
