@@ -15,6 +15,7 @@ import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
 import { useKeyboardDisplacement } from './use-keyboard-displacement';
 import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
 import { ContextMenu } from '../context-menu/use-context-menu.hook';
+import CanvasGrid from './canvas.grid';
 
 export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
@@ -163,6 +164,7 @@ export const CanvasPod = () => {
         onMouseUp={handleMouseUp}
         id="konva-stage" // data-id did not work for some reason
       >
+        <CanvasGrid scale={scale} stageRef={stageRef} />
         <Layer ref={layerRef}>
           {
             /* TODO compentize and simplify this */
