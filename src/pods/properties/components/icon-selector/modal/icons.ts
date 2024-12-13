@@ -2272,4 +2272,10 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['wall', 'brick', 'construction', 'building'],
     categories: ['IT'],
   },
+  {
+    name: 'Watch',
+    filename: 'watch.svg',
+    searchTerms: ['watch', 'time', 'clock', 'wrist'],
+    categories: ['IT'],
+  },
 ];
