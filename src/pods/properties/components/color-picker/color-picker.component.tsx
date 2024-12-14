@@ -20,6 +20,7 @@ export const ColorPicker: React.FC<Props> = props => {
   const { label, color, onChange } = props;
   const [picker, setPicker] = useState<boolean>(false);
   const [hsva, setHsva] = useState<HsvaColor>(() => hexToHsva(color));
+  const [personalizedColors, setPersonalizedColors] = useState<string[]>([]);
 
   const togglePicker = () => {
     setPicker(!picker);
@@ -32,6 +33,18 @@ export const ColorPicker: React.FC<Props> = props => {
   };
 
   const handlePresetColors = (newColor: string) => {
+    const hsvaColor = hexToHsva(newColor);
+    setHsva(hsvaColor);
+    onChange(newColor);
+  };
+
+  const addPersonalizedColor = () => {
+    if (!personalizedColors.includes(color)) {
+      setPersonalizedColors([...personalizedColors, color]);
+    }
+  };
+
+  const handlePersonalizedColors = (newColor: string) => {
     const hsvaColor = hexToHsva(newColor);
     setHsva(hsvaColor);
     onChange(newColor);
@@ -67,6 +80,24 @@ export const ColorPicker: React.FC<Props> = props => {
                   onClick={() => handlePresetColors(presetColor)}
                 ></div>
               ))}
+            </div>
+            <div className={classes.colorPalette}>
+              {personalizedColors.map(personalizedColor => (
+                <div
+                  key={personalizedColor}
+                  className={classes.personalizedColorBox}
+                  style={{ backgroundColor: personalizedColor }}
+                  onClick={() => handlePersonalizedColors(personalizedColor)}
+                ></div>
+              ))}
+              <div className={classes.colorPalette}>
+                <button
+                  className={classes.addButton}
+                  onClick={addPersonalizedColor}
+                >
+                  Add Current Color
+                </button>
+              </div>
             </div>
           </div>
         </div>
