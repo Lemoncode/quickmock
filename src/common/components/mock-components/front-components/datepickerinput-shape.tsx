@@ -111,16 +111,6 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           ellipsis={true}
           wrap="none"
         />
-
-        {/* <Text
-          text="Date"
-          x={13}
-          y={20}
-          fontSize={10}
-          fill="red"
-          align="center"
-          color={stroke}
-        /> */}
         {/* Calendar Icon */}
         <Image
           image={calendarIcon}
