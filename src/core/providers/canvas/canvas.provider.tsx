@@ -25,6 +25,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   const [fileName, setFileName] = React.useState<string>('');
   const [isThumbnailContextMenuVisible, setIsThumbnailContextMenuVisible] =
     React.useState(false);
+  const [isFileLoaded, setIsFileLoaded] = React.useState(false);
 
   const {
     addSnapshot,
@@ -331,6 +332,8 @@ export const CanvasProvider: React.FC<Props> = props => {
         activePageIndex: document.activePageIndex,
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
+        isFileLoaded,
+        setIsFileLoaded,
       }}
     >
       {children}

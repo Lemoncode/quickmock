@@ -14,10 +14,14 @@ import { PropertiesPod } from '@/pods/properties';
 import { FooterPod } from '@/pods/footer/footer.pod';
 import { ThumbPagesPod } from '@/pods/thumb-pages';
 import { useAccordionSectionVisibility } from './accordion-section-visibility.hook';
+import { useCanvasContext } from '@/core/providers';
 
 export const MainScene = () => {
   const { isThumbPagesPodOpen, thumbPagesPodRef } =
     useAccordionSectionVisibility();
+
+  const { isFileLoaded } = useCanvasContext();
+  const forceOpenThumbsPages = isFileLoaded && { open: true };
 
   return (
     <MainLayout>
@@ -27,6 +31,7 @@ export const MainScene = () => {
           className={classes.container}
           name="toolsLeft"
           ref={thumbPagesPodRef}
+          {...forceOpenThumbsPages}
         >
           <summary className={classes.title}>Pages</summary>
           <ThumbPagesPod isVisible={isThumbPagesPodOpen} />
