@@ -110,4 +110,6 @@ export interface CanvasContextModel {
   setIsThumbnailContextMenuVisible: React.Dispatch<
     React.SetStateAction<boolean>
   >;
+  isFileLoaded: boolean;
+  setIsFileLoaded: React.Dispatch<React.SetStateAction<boolean>>;
 }

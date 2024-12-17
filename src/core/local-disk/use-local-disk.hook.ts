@@ -13,7 +13,7 @@ const DEFAULT_FILE_EXTENSION = 'qm';
 const DEFAULT_EXTENSION_DESCRIPTION = 'quick mock';
 
 export const useLocalDisk = () => {
-  const { fullDocument, loadDocument, fileName, setFileName } =
+  const { fullDocument, loadDocument, fileName, setFileName, setIsFileLoaded } =
     useCanvasContext();
 
   const serializeShapes = (): string => {
@@ -72,6 +72,7 @@ export const useLocalDisk = () => {
       }
     };
     reader.readAsText(file);
+    setIsFileLoaded(true);
   };
 
   const handleLoad = () => {
