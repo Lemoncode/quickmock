@@ -2278,4 +2278,28 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['watch', 'time', 'clock', 'wrist'],
     categories: ['IT'],
   },
+  {
+    name: 'Horizontal paper clip',
+    filename: 'horizontalpaperclip.svg',
+    searchTerms: ['paperclip', 'clip', 'horizontal', 'attach', 'fasten'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Clip',
+    filename: 'clip.svg',
+    searchTerms: ['clip', 'attach', 'fix', 'hold', 'fasten'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Speedometer',
+    filename: 'speedometer.svg',
+    searchTerms: ['speedometer', 'speed', 'gauge', 'velocity', 'metrics'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Rocket launch',
+    filename: 'rocketlaunch.svg',
+    searchTerms: ['rocket', 'launch', 'space', 'fly'],
+    categories: ['IT'],
+  },
 ];
