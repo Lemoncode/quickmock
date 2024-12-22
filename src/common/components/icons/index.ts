@@ -12,3 +12,4 @@ export * from './delete-icon.component';
 export * from './pencil-icon.component';
 export * from './caret-down-icon.component';
 export * from './plus-icon.component';
+export * from './settings-icon.component';
