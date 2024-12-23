@@ -17,6 +17,7 @@ export const generateDefaultOtherProps = (
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        disabled: INPUT_SHAPE.DEFAULT_DISABLED,
       };
     case 'tooltip':
       return {
@@ -33,6 +34,7 @@ export const generateDefaultOtherProps = (
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         borderRadius: `${BASIC_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
     case 'vertical-menu':
     case 'horizontal-menu':
@@ -52,6 +54,7 @@ export const generateDefaultOtherProps = (
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
     case 'combobox':
       return {
@@ -60,6 +63,7 @@ export const generateDefaultOtherProps = (
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
     case 'modal':
     case 'buttonBar':
@@ -190,6 +194,7 @@ export const generateDefaultOtherProps = (
       return {
         checked: true,
         textColor: '#000000',
+        disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
 
     case 'appBar':
