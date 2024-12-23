@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
-import { BASIC_SHAPE } from './shape.const';
+import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from './shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
@@ -40,10 +40,8 @@ export const TextAreaShape = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { stroke, strokeStyle, fill, textColor, borderRadius } = useShapeProps(
-    otherProps,
-    BASIC_SHAPE
-  );
+  const { stroke, strokeStyle, fill, textColor, borderRadius, disabled } =
+    useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -60,9 +58,9 @@ export const TextAreaShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth}
         height={restrictedHeight}
         cornerRadius={borderRadius}
-        stroke={stroke}
+        stroke={disabled ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR : stroke}
         strokeWidth={2}
-        fill={fill}
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR : fill}
         dash={strokeStyle}
       />
       <Text
@@ -73,7 +71,7 @@ export const TextAreaShape = forwardRef<any, ShapeProps>((props, ref) => {
         text={text}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={15}
-        fill={textColor}
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : textColor}
         align="left"
         ellipsis={true}
       />
