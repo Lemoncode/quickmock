@@ -16,6 +16,7 @@ const DEFAULT_FONT_VARIANT = 'normal';
 const DEFAULT_FONT_STYLE = 'normal';
 const DEFAULT_TEXT_DECORATION = 'none';
 const DEFAULT_TEXT_ALIGNMENT = 'left';
+const DEFAULT_DISABLED = false;
 
 export interface DefaultStyleShape {
   DEFAULT_CORNER_RADIUS: number;
@@ -34,6 +35,7 @@ export interface DefaultStyleShape {
   DEFAULT_FONT_STYLE: string;
   DEFAULT_TEXT_DECORATION: string;
   DEFAULT_TEXT_ALIGNMENT: 'left' | 'center' | 'right';
+  DEFAULT_DISABLED: boolean;
 }
 
 export const BASIC_SHAPE: DefaultStyleShape = {
@@ -53,6 +55,7 @@ export const BASIC_SHAPE: DefaultStyleShape = {
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_DECORATION,
   DEFAULT_TEXT_ALIGNMENT,
+  DEFAULT_DISABLED,
 };
 
 export const INPUT_SHAPE: DefaultStyleShape = {
@@ -72,6 +75,7 @@ export const INPUT_SHAPE: DefaultStyleShape = {
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_DECORATION,
   DEFAULT_TEXT_ALIGNMENT,
+  DEFAULT_DISABLED,
 };
 
 //! maybe a function to calc max height base on the text
@@ -92,6 +96,7 @@ export const POSTIT_SHAPE: DefaultStyleShape = {
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_DECORATION,
   DEFAULT_TEXT_ALIGNMENT,
+  DEFAULT_DISABLED,
 };
 
 interface FontValues {
@@ -112,6 +117,18 @@ export const FONT_SIZE_VALUES: FontValues = {
   SMALLTEXT: 14,
   PARAGRAPH: 14,
   LINK: 20,
+};
+
+interface DisabledValues {
+  DEFAULT_STROKE_COLOR: string;
+  DEFAULT_BACKGROUND_COLOR: string;
+  DEFAULT_TEXT_COLOR: string;
+}
+
+export const DISABLED_COLOR_VALUES: DisabledValues = {
+  DEFAULT_STROKE_COLOR: '#D9D9D9',
+  DEFAULT_BACKGROUND_COLOR: '#F5F5F5',
+  DEFAULT_TEXT_COLOR: '#B0B0B0',
 };
 
 export const LINK_SHAPE: DefaultStyleShape = {
