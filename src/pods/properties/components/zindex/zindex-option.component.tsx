@@ -10,7 +10,7 @@ import {
   SendToBackIcon,
 } from '@/common/components/icons';
 import { ZIndexButton } from './zindex-button.component';
-import { Tooltip } from '@/pods';
+import { Tooltip } from '@/common/components/tooltip';
 
 interface LayerOption {
   position: ZIndexAction;
