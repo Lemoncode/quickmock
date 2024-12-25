@@ -175,6 +175,7 @@ export interface OtherProps {
   activeElement?: number;
   selectedBackgroundColor?: string;
   textAlignment?: 'left' | 'center' | 'right';
+  disabled?: boolean;
 }
 
 export const BASE_ICONS_URL = '/icons/';

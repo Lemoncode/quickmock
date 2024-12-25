@@ -6,6 +6,7 @@ import { Group, Rect, Text } from 'react-konva';
 import { BASIC_SHAPE } from './shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { DISABLED_COLOR_VALUES } from '@/common/components/mock-components/front-components/shape.const';
 
 const buttonShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 50,
@@ -41,10 +42,8 @@ export const ButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { stroke, strokeStyle, fill, textColor, borderRadius } = useShapeProps(
-    otherProps,
-    BASIC_SHAPE
-  );
+  const { stroke, strokeStyle, fill, textColor, borderRadius, disabled } =
+    useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -61,10 +60,10 @@ export const ButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth}
         height={restrictedHeight}
         cornerRadius={borderRadius}
-        stroke={stroke}
+        stroke={disabled ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR : stroke}
         dash={strokeStyle}
         strokeWidth={1.5}
-        fill={fill}
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR : fill}
       />
       <Text
         x={0}
@@ -75,7 +74,7 @@ export const ButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={15}
         lineHeight={1.25}
-        fill={textColor}
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : textColor}
         align="center"
         ellipsis={true}
         wrap="none"

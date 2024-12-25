@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { ShapeProps } from '../../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text, Image } from 'react-konva';
-import { BASIC_SHAPE } from '../shape.const';
+import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from '../shape.const';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../../mock-components.utils';
 import { splitCSVContent, setTime } from './timepickerinput-shape.business';
@@ -45,10 +45,8 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
     );
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-    const { stroke, strokeStyle, fill, borderRadius } = useShapeProps(
-      otherProps,
-      BASIC_SHAPE
-    );
+    const { stroke, strokeStyle, fill, borderRadius, disabled, textColor } =
+      useShapeProps(otherProps, BASIC_SHAPE);
 
     const commonGroupProps = useGroupShapeProps(
       props,
@@ -81,10 +79,14 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           width={restrictedWidth}
           height={restrictedHeight}
           cornerRadius={borderRadius}
-          stroke={stroke}
+          stroke={
+            disabled ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR : stroke
+          }
           dash={strokeStyle}
           strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
-          fill={fill}
+          fill={
+            disabled ? DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR : fill
+          }
         />
         {/* Background of Time Label */}
         <Rect
@@ -103,7 +105,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           y={-5}
           fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE - 4}
-          fill={stroke}
+          fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : stroke}
           align="center"
           color={stroke}
         />
@@ -119,6 +121,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
           align="left"
           ellipsis={true}
           wrap="none"
+          fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : textColor}
         />
         {/* Error Text */}
         {isError && (
