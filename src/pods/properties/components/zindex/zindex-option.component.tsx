@@ -10,6 +10,7 @@ import {
   SendToBackIcon,
 } from '@/common/components/icons';
 import { ZIndexButton } from './zindex-button.component';
+import { Tooltip } from '@/common/components/tooltip';
 
 interface LayerOption {
   position: ZIndexAction;
@@ -39,12 +40,18 @@ export const ZIndexOptions: React.FC<Props> = props => {
     <div className={classes.container}>
       <p>Layering</p>
       {layersOptions.map(({ position, Icon, label }) => (
-        <ZIndexButton
+        <Tooltip
           key={position}
-          onClick={() => handleZIndexChange(position)}
-          Icon={Icon}
           label={label}
-        />
+          leftPosition="-50%"
+          bottomPosition="-120%"
+        >
+          <ZIndexButton
+            onClick={() => handleZIndexChange(position)}
+            Icon={Icon}
+            label={label}
+          />
+        </Tooltip>
       ))}
     </div>
   );
