@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text, Image } from 'react-konva';
-import { INPUT_SHAPE } from './shape.const';
+import { DISABLED_COLOR_VALUES, INPUT_SHAPE } from './shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
@@ -44,7 +44,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
 
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-    const { stroke, fill, textColor, strokeStyle, borderRadius } =
+    const { stroke, fill, textColor, strokeStyle, borderRadius, disabled } =
       useShapeProps(otherProps, INPUT_SHAPE);
 
     const commonGroupProps = useGroupShapeProps(
@@ -75,10 +75,14 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           width={restrictedWidth}
           height={restrictedHeight}
           cornerRadius={borderRadius}
-          stroke={stroke}
+          stroke={
+            disabled ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR : stroke
+          }
           dash={strokeStyle}
           strokeWidth={2}
-          fill={fill}
+          fill={
+            disabled ? DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR : fill
+          }
         />
         {/* Background of Date Label */}
         <Rect
@@ -95,14 +99,14 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           x={13}
           y={-5}
           fontSize={labelFontSize}
-          fill={stroke}
+          fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : stroke}
           align="center"
           color={stroke}
         />
         {/* Main Text */}
         <Text
           text={text}
-          fill={textColor}
+          fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : textColor}
           x={10}
           y={(restrictedHeight - fontSize) / 2 + 2}
           width={availableWidth}

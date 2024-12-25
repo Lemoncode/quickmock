@@ -4,7 +4,7 @@ import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Line, Text } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import { BASIC_SHAPE } from './shape.const';
+import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from './shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const CHECKBOX_DEFAULT_HEIGHT = 20;
@@ -48,7 +48,7 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { isOn, textColor } = useShapeProps(otherProps, BASIC_SHAPE);
+  const { isOn, textColor, disabled } = useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -65,9 +65,15 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={boxTickWidth}
         height={restrictedHeight}
         cornerRadius={BASIC_SHAPE.DEFAULT_CORNER_RADIUS}
-        stroke={BASIC_SHAPE.DEFAULT_STROKE_COLOR}
+        stroke={
+          disabled
+            ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR
+            : BASIC_SHAPE.DEFAULT_STROKE_COLOR
+        }
         strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
-        fill="white"
+        fill={
+          disabled ? DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR : 'white'
+        }
       />
       {isOn && (
         <Line
@@ -81,7 +87,11 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
             tickWidth - marginTick,
             marginTick,
           ]}
-          stroke={BASIC_SHAPE.DEFAULT_STROKE_COLOR}
+          stroke={
+            disabled
+              ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR
+              : BASIC_SHAPE.DEFAULT_STROKE_COLOR
+          }
           strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
           lineCap="round"
           lineJoin="round"
@@ -95,7 +105,7 @@ export const CheckBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
         text={text}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={15}
-        fill={textColor}
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : textColor}
         align="left"
         verticalAlign="middle"
         ellipsis={true}
