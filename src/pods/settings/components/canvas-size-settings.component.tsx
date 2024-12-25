@@ -16,7 +16,7 @@ export const CanvasSizeSettings: React.FC<CanvasSizeSettingsProps> = props => {
       <div className={classes.canvasSizeSettings}>
         <p> Width (px):</p>
         <input
-          type="text"
+          type="number"
           value={String(newCanvasSize.width)}
           onChange={e =>
             setNewCanvasSize({
@@ -31,7 +31,7 @@ export const CanvasSizeSettings: React.FC<CanvasSizeSettingsProps> = props => {
       <div className={classes.canvasSizeSettings}>
         <p>Height (px):</p>
         <input
-          type="text"
+          type="number"
           value={String(newCanvasSize.height)}
           onChange={e =>
             setNewCanvasSize({
