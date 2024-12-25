@@ -94,6 +94,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#ffffff',
         textColor: '#000000',
         selectedBackgroundColor: '#add8e6',
+        disabled: false,
       };
 
     case 'circle':
