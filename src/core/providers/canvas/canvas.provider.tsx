@@ -5,7 +5,11 @@ import { useSelection } from './use-selection.hook';
 import { createShape } from '@/pods/canvas/model';
 import { useHistoryManager } from '@/common/undo-redo';
 import { useStateWithInterceptor } from './canvas.hook';
-import { createDefaultDocumentModel, DocumentModel } from './canvas.model';
+import {
+  CanvasSize,
+  createDefaultDocumentModel,
+  DocumentModel,
+} from './canvas.model';
 import { v4 as uuidv4 } from 'uuid';
 import Konva from 'konva';
 import { isPageIndexValid, removeShapesFromList } from './canvas.business';
@@ -25,6 +29,10 @@ export const CanvasProvider: React.FC<Props> = props => {
   const [fileName, setFileName] = React.useState<string>('');
   const [isThumbnailContextMenuVisible, setIsThumbnailContextMenuVisible] =
     React.useState(false);
+  const [canvasSize, setCanvasSize] = React.useState<CanvasSize>({
+    width: 3000,
+    height: 3000,
+  });
 
   const {
     addSnapshot,
@@ -331,6 +339,8 @@ export const CanvasProvider: React.FC<Props> = props => {
         activePageIndex: document.activePageIndex,
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
+        canvasSize: canvasSize,
+        setCanvasSize: setCanvasSize,
       }}
     >
       {children}

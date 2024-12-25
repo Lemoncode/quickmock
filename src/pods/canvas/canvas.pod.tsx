@@ -21,8 +21,6 @@ export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
     useState(false);
 
-  const canvasSize = React.useMemo(() => ({ width: 3000, height: 3000 }), []);
-
   const {
     shapes,
     scale,
@@ -31,6 +29,7 @@ export const CanvasPod = () => {
     updateShapeSizeAndPosition,
     updateShapePosition,
     stageRef,
+    canvasSize,
   } = useCanvasContext();
 
   const {
@@ -153,7 +152,6 @@ export const CanvasPod = () => {
       style={{ opacity: isDraggedOver ? 0.5 : 1 }}
     >
       <ContextMenu dropRef={dropRef} />
-      {/*TODO: move size to canvas provider?*/}
       {/*         onMouseDown={handleClearSelection}*/}
       <Stage
         width={canvasSize.width}

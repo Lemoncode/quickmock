@@ -12,6 +12,7 @@ import {
   AboutButton,
 } from './components/index';
 import classes from './toolbar.pod.module.css';
+import { SettingsButton } from './components/settings-button';
 
 export const ToolbarPod: React.FC = () => {
   return (
@@ -53,6 +54,9 @@ export const ToolbarPod: React.FC = () => {
         </li>
       </ul>
       <ul className={classes.buttonGroup}>
+        <li>
+          <SettingsButton />
+        </li>
         <li>
           <AboutButton />
         </li>

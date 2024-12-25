@@ -50,6 +50,7 @@ export const HtmlEditWidget = forwardRef<any, Props>(
             value={value}
             onChange={handleTextChange}
             data-is-inline-edition-on="true"
+            data-testid="textareaedit"
           />
         )}
         {editType === 'imageupload' && (
