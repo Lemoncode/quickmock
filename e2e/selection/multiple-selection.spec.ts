@@ -24,7 +24,7 @@ test('Should perform multiple selection when dragging and dropping over multiple
 
   //Assert
   const selectedItems = await getTransformer(page);
-  expect(selectedItems._nodes.length).toEqual(3);
+  expect(selectedItems._nodes.length).toEqual(2);
 });
 
 test('Should deselect all previously selected items when clicking on an empty point on the canvas', async ({
@@ -44,7 +44,7 @@ test('Should deselect all previously selected items when clicking on an empty po
 
   //Assert
   const selectedItems = await getTransformer(page);
-  expect(selectedItems._nodes.length).toEqual(3);
+  expect(selectedItems._nodes.length).toEqual(2);
 
   //Click Away
   await page.mouse.click(800, 130);

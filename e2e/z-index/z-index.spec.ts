@@ -23,7 +23,7 @@ test('drop three shapes in canvas, select one, try all z-index levels', async ({
   expect(inputShapes.length).toBe(3);
 
   // Get Canvas position
-  const stageCanvas = await page.locator('#konva-stage canvas').first();
+  const stageCanvas = await page.locator('#konva-stage canvas').nth(1);
   expect(stageCanvas).toBeDefined();
   const canvasPosition = await stageCanvas.boundingBox();
   if (!canvasPosition) throw new Error('No canvas found');
