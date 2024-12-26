@@ -16,11 +16,14 @@
   opacity: 0;
   visibility: hidden;
   transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
+    opacity 0.5s ease,
+    visibility 0s linear 0.5s,
+    transform 0.5s ease;
 }
 
-.tooltipContainer:hover .tooltip {
+.tooltip.visible {
   opacity: 1;
   visibility: visible;
+  transform: translateX(-50%) translateY(-2px);
+  transition-delay: 1s;
 }
