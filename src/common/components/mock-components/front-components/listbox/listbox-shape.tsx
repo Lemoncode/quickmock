@@ -109,7 +109,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>((props, ref) => {
         height={restrictedHeight + 20}
         ref={rectRef}
         cornerRadius={borderRadius}
-        stroke={stroke}
+        stroke={disabled ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR : stroke}
         strokeWidth={2}
         dash={strokeStyle}
         fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR : fill}
@@ -136,7 +136,9 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>((props, ref) => {
               height={singleHeaderHeight - 12}
               fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
               fontSize={15}
-              fill={textColor}
+              fill={
+                disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : textColor
+              }
               wrap="none"
               ellipsis={true}
             />
