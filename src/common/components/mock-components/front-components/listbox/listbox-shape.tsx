@@ -6,7 +6,7 @@ import {
   calculateDynamicContentSizeRestriction,
   mapListboxTextToItems,
 } from './listbox-shape.business';
-import { BASIC_SHAPE } from '../shape.const';
+import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from '../shape.const';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../../mock-components.utils';
 
@@ -76,6 +76,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>((props, ref) => {
     borderRadius,
     textColor,
     selectedBackgroundColor,
+    disabled,
   } = useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
@@ -84,6 +85,19 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>((props, ref) => {
     shapeType,
     ref
   );
+
+  const calculateItemBackground = (index: number) => {
+    if (disabled) return DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR;
+
+    return selectedItem === index ? selectedBackgroundColor : fill;
+  };
+
+  const calculateItemStroke = (index: number) => {
+    if (disabled && selectedItem === index)
+      return DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR;
+
+    return selectedItem === index ? selectedBackgroundColor : 'transparent';
+  };
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
@@ -95,10 +109,10 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>((props, ref) => {
         height={restrictedHeight + 20}
         ref={rectRef}
         cornerRadius={borderRadius}
-        stroke={stroke}
+        stroke={disabled ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR : stroke}
         strokeWidth={2}
         dash={strokeStyle}
-        fill={fill}
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR : fill}
       />
 
       {/* Listbox Items */}
@@ -110,10 +124,8 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>((props, ref) => {
               y={0 + index * singleHeaderHeight}
               width={restrictedWidth}
               height={singleHeaderHeight}
-              fill={selectedItem === index ? selectedBackgroundColor : fill}
-              stroke={
-                selectedItem === index ? selectedBackgroundColor : 'transparent'
-              }
+              fill={calculateItemBackground(index)}
+              stroke={calculateItemStroke(index)}
               strokeWidth={selectedItem === index ? 1 : 0}
             />
             <Text
@@ -124,7 +136,9 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>((props, ref) => {
               height={singleHeaderHeight - 12}
               fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
               fontSize={15}
-              fill={textColor}
+              fill={
+                disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : textColor
+              }
               wrap="none"
               ellipsis={true}
             />

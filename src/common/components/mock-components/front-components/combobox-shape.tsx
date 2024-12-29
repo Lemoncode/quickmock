@@ -4,7 +4,7 @@ import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Text, Rect, Line } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import { BASIC_SHAPE } from './shape.const';
+import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from './shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const comboBoxShapeRestrictions: ShapeSizeRestrictions = {
@@ -40,10 +40,8 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { stroke, strokeStyle, fill, textColor, borderRadius } = useShapeProps(
-    otherProps,
-    BASIC_SHAPE
-  );
+  const { stroke, strokeStyle, fill, textColor, borderRadius, disabled } =
+    useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -60,10 +58,10 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth}
         height={restrictedHeight}
         cornerRadius={borderRadius}
-        stroke={stroke}
+        stroke={disabled ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR : stroke}
         dash={strokeStyle}
         strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
-        fill={fill}
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR : fill}
       />
       <Text
         x={BASIC_SHAPE.DEFAULT_PADDING}
@@ -73,7 +71,7 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={15}
         lineHeight={BASIC_SHAPE.DEFAULT_LINE_HEIGHT}
-        fill={textColor}
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : textColor}
         align="left"
         ellipsis={true}
         wrap="none"
@@ -89,7 +87,7 @@ export const ComboBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
           restrictedWidth - 15,
           0,
         ]}
-        fill="black"
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : 'black'}
         closed={true}
       />
     </Group>

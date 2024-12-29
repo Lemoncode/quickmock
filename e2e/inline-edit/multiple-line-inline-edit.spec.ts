@@ -46,7 +46,7 @@ test('cancels textarea edit on Escape and verifies original shape text', async (
   };
   await dragAndDrop(page, position, targetPosition);
   await page.mouse.dblclick(targetPosition.x, targetPosition.y + 40);
-  const textarea = page.getByRole('textbox').first();
+  const textarea = page.getByTestId('textareaedit');
 
   const textContent = 'Hello';
   await textarea.fill(textContent);
