@@ -19,14 +19,12 @@ export const Tooltip: React.FC<TooltipProps> = props => {
       onMouseLeave={() => setVisible(false)}
     >
       {children}
-      {visible && (
-        <div
-          className={classes.tooltip}
-          style={{ left: `${leftPosition}`, bottom: `${bottomPosition}` }}
-        >
-          {label}
-        </div>
-      )}
+      <div
+        className={`${classes.tooltip} ${visible ? classes.visible : ''}`}
+        style={{ left: leftPosition, bottom: bottomPosition }}
+      >
+        {label}
+      </div>
     </div>
   );
 };

@@ -37,7 +37,7 @@ export const CanvasGridLayer: React.FC<Props> = ({ canvasSize }) => {
   }, [width, height, gridSpacing]);
 
   return (
-    <Layer>
+    <Layer name="grid">
       {/* Render vertical lines */}
       {verticalLines.map((points, index) => (
         <GridLine key={`v-line-${index}`} points={points} />
