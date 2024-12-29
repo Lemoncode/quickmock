@@ -1,6 +1,7 @@
+//import { isMacOS } from '@/common/helpers/platform.helpers';
 import { useShortcut } from '../../shortcut/shortcut.hook';
-/* import { isMacOS } from '@/common/helpers/platform.helpers'; */
 import { ShortcutOptions } from '../../shortcut/shortcut.model';
+import { Tooltip } from '@/common/components/tooltip';
 
 interface Props {
   onClick?: () => void;
@@ -20,10 +21,10 @@ export const ToolbarButton: React.FC<Props> = props => {
     shortcutOptions,
   } = props;
 
-  /* const shortcutCommand = isMacOS() ? 'Ctrl' : 'Alt';
+  //const shortcutCommand = isMacOS() ? 'Cmd' : 'Ctrl';
   const showTooltip = shortcutOptions && !disabled;
-  const tooltipText = `(${shortcutCommand} + ${shortcutOptions?.targetKeyLabel})`; */
-
+  //const tooltipText = `(${shortcutCommand} + ${shortcutOptions?.targetKeyLabel})`;
+  const tooltipText = `(${shortcutOptions?.targetKeyLabel})`;
   useShortcut({
     ...shortcutOptions,
     targetKey: shortcutOptions?.targetKey || [],
@@ -31,19 +32,30 @@ export const ToolbarButton: React.FC<Props> = props => {
   });
 
   return (
-    <button
-      onClick={onClick}
-      className={className}
-      disabled={disabled}
-      aria-describedby={shortcutOptions?.id}
-    >
-      <span aria-hidden={true}>{icon}</span>
-      <span>{label}</span>
-      {/* {showTooltip && (
-        <span role="tooltip" id={shortcutOptions?.id}>
-          {tooltipText}
-        </span>
-      )} */}
-    </button>
+    <>
+      {showTooltip ? (
+        <Tooltip label={tooltipText} leftPosition="50%" bottomPosition="-60%">
+          <button
+            onClick={onClick}
+            className={className}
+            disabled={disabled}
+            aria-describedby={shortcutOptions?.id}
+          >
+            <span aria-hidden={true}>{icon}</span>
+            <span>{label}</span>
+          </button>
+        </Tooltip>
+      ) : (
+        <button
+          onClick={onClick}
+          className={className}
+          disabled={disabled}
+          aria-describedby={shortcutOptions?.id}
+        >
+          <span aria-hidden={true}>{icon}</span>
+          <span>{label}</span>
+        </button>
+      )}
+    </>
   );
 };
