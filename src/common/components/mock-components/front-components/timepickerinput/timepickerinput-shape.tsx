@@ -9,6 +9,7 @@ import { useGroupShapeProps } from '../../mock-components.utils';
 import { splitCSVContent, setTime } from './timepickerinput-shape.business';
 
 import clockIconSrc from '/icons/clock.svg';
+import disabledClockIconSrc from '/icons/clock-disabled.svg';
 
 const timepickerInputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -68,7 +69,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
     const labelFontSize = Math.min(restrictedHeight * 0.3, 12);
 
     const clockIcon = new window.Image();
-    clockIcon.src = clockIconSrc;
+    clockIcon.src = disabled ? disabledClockIconSrc : clockIconSrc;
 
     return (
       <Group {...commonGroupProps} {...shapeProps}>
