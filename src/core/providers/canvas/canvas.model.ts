@@ -9,6 +9,11 @@ import {
 import Konva from 'konva';
 import { Node, NodeConfig } from 'konva/lib/Node';
 
+export interface CanvasSize {
+  width: number;
+  height: number;
+}
+
 export type ZIndexAction = 'top' | 'bottom' | 'up' | 'down';
 
 export interface Page {
@@ -111,4 +116,6 @@ export interface CanvasContextModel {
     React.SetStateAction<boolean>
   >;
   howManyLoadedDocuments: number;
+  canvasSize: CanvasSize;
+  setCanvasSize: (canvasDimensions: CanvasSize) => void;
 }

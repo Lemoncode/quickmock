@@ -4,7 +4,7 @@ import { Group, Circle, Text } from 'react-konva';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import { BASIC_SHAPE } from './shape.const';
+import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from './shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const RADIO_BUTTON_DEFAULT_HEIGHT = 18;
@@ -45,7 +45,7 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const radius = restrictedHeight / 2;
 
-  const { isOn, textColor } = useShapeProps(otherProps, BASIC_SHAPE);
+  const { isOn, textColor, disabled } = useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -61,7 +61,11 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
         x={radius}
         y={radius}
         radius={radius}
-        stroke={BASIC_SHAPE.DEFAULT_STROKE_COLOR}
+        stroke={
+          disabled
+            ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR
+            : BASIC_SHAPE.DEFAULT_STROKE_COLOR
+        }
         strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
       />
 
@@ -70,7 +74,13 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
         x={radius}
         y={radius}
         radius={radius * 0.6}
-        fill={isOn ? 'black' : 'white'}
+        fill={
+          isOn
+            ? disabled
+              ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR
+              : 'black'
+            : 'white'
+        }
       />
 
       {/* Text */}
@@ -82,7 +92,7 @@ export const RadioButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
         height={restrictedHeight}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={15}
-        fill={textColor}
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : textColor}
         align="left"
         verticalAlign="middle"
         ellipsis={true}

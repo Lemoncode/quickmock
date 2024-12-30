@@ -31,7 +31,10 @@ export const ProgressBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { progress, borderRadius } = useShapeProps(otherProps, BASIC_SHAPE);
+  const { progress, borderRadius, fill, stroke } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
 
   const progressWidth = useMemo(
     () => (progress / 100) * restrictedWidth,
@@ -54,7 +57,7 @@ export const ProgressBarShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth}
         height={restrictedHeight}
         cornerRadius={borderRadius}
-        stroke="black"
+        stroke={stroke}
         strokeWidth={2}
         fill="white"
       />
@@ -66,9 +69,9 @@ export const ProgressBarShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={progressWidth}
         height={restrictedHeight}
         cornerRadius={borderRadius}
-        stroke="black"
+        stroke={stroke}
         strokeWidth={2}
-        fill="lightgrey"
+        fill={fill}
       />
     </Group>
   );

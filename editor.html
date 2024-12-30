@@ -34,5 +34,10 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      window.onbeforeunload = function () {
+        return 'You are about to leave this page. All progress in QuickMock will be lost. Are you sure you want to proceed?';
+      };
+    </script>
   </body>
 </html>

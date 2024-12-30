@@ -73,6 +73,11 @@ export const useShapeProps = (
     [otherProps?.selectedBackgroundColor]
   );
 
+  const disabled = useMemo(
+    () => otherProps?.disabled ?? defaultStyleShape.DEFAULT_DISABLED,
+    [otherProps?.disabled]
+  );
+
   return {
     stroke,
     fill,
@@ -87,5 +92,6 @@ export const useShapeProps = (
     fontSize,
     textDecoration,
     textAlignment,
+    disabled,
   };
 };

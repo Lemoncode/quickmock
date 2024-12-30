@@ -17,6 +17,7 @@ export const ExportButton = () => {
       const originalStage = stageRef.current;
       const clonedStage = originalStage.clone();
 
+      removeGridLayer(clonedStage);
       applyFiltersToImages(clonedStage);
       resetScale(clonedStage);
 
@@ -51,6 +52,10 @@ export const ExportButton = () => {
         });
       }
     });
+  };
+
+  const removeGridLayer = (stage: Konva.Stage) => {
+    stage.findOne((node: Konva.Node) => node.name() === 'grid')?.visible(false);
   };
 
   return (
