@@ -6,7 +6,6 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-rest
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
-import { useResizeOnFontSizeChange } from './front-text-hooks/resize-fontsize-change.hook';
 
 const paragraphSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
@@ -41,7 +40,7 @@ export const ParagraphShape = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { textColor, fontSize, textAlignment, fontVariant } = useShapeProps(
+  const { textColor, fontSize, textAlignment } = useShapeProps(
     otherProps,
     BASIC_SHAPE
   );
@@ -52,8 +51,6 @@ export const ParagraphShape = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
-
-  useResizeOnFontSizeChange(id, { x, y }, text, fontSize, fontVariant, true);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
