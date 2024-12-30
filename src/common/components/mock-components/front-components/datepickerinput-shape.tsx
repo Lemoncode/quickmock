@@ -3,11 +3,12 @@ import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text, Image } from 'react-konva';
-import { DISABLED_COLOR_VALUES, INPUT_SHAPE } from './shape.const';
+import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from './shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 import calendarIconSrc from '/icons/calendar.svg';
+import disabledCalendarIconSrc from '/icons/calendar-disabled.svg';
 
 const datepickerInputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
@@ -45,7 +46,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
     const { stroke, fill, textColor, strokeStyle, borderRadius, disabled } =
-      useShapeProps(otherProps, INPUT_SHAPE);
+      useShapeProps(otherProps, BASIC_SHAPE);
 
     const commonGroupProps = useGroupShapeProps(
       props,
@@ -64,7 +65,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
     const labelFontSize = Math.min(restrictedHeight * 0.3, 12);
 
     const calendarIcon = new window.Image();
-    calendarIcon.src = calendarIconSrc;
+    calendarIcon.src = disabled ? disabledCalendarIconSrc : calendarIconSrc;
 
     return (
       <Group {...commonGroupProps} {...shapeProps}>
@@ -79,7 +80,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
             disabled ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR : stroke
           }
           dash={strokeStyle}
-          strokeWidth={2}
+          strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
           fill={
             disabled ? DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR : fill
           }
@@ -91,6 +92,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           width={labelFontSize + 20}
           height={labelFontSize}
           cornerRadius={borderRadius}
+          strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
           fill="white"
         />
         {/* Label "Date" */}
@@ -98,7 +100,8 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           text="Date"
           x={13}
           y={-5}
-          fontSize={labelFontSize}
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
+          fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE - 4}
           fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : stroke}
           align="center"
           color={stroke}
@@ -110,7 +113,7 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           x={10}
           y={(restrictedHeight - fontSize) / 2 + 2}
           width={availableWidth}
-          fontSize={fontSize}
+          fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE}
           align="left"
           ellipsis={true}
           wrap="none"
