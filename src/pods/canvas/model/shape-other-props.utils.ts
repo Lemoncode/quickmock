@@ -223,6 +223,8 @@ export const generateDefaultOtherProps = (
       };
     case 'progressbar':
       return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
         progress: '50',
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
