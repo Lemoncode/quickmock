@@ -180,9 +180,6 @@ export const generateDefaultOtherProps = (
     case 'paragraph':
       return {
         textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
-        fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
-        fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
-        textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
         fontSize: FONT_SIZE_VALUES.PARAGRAPH,
         textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };

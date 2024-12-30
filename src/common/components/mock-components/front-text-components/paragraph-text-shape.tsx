@@ -40,14 +40,10 @@ export const ParagraphShape = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const {
-    textColor,
-    fontSize,
-    textAlignment,
-    fontVariant,
-    fontStyle,
-    textDecoration,
-  } = useShapeProps(otherProps, BASIC_SHAPE);
+  const { textColor, fontSize, textAlignment } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -69,9 +65,6 @@ export const ParagraphShape = forwardRef<any, ShapeProps>((props, ref) => {
         fill={textColor}
         align={textAlignment}
         ellipsis={true}
-        fontVariant={fontVariant}
-        fontStyle={fontStyle}
-        textDecoration={textDecoration}
       />
     </Group>
   );
