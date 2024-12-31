@@ -4,10 +4,9 @@ import { ShapeProps } from '../../shape.model';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../../mock-components.utils';
-import html2canvas from 'html2canvas';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
-import { parseTextWithFormatting } from './rich-text.utils';
+import { getImage } from './image-cache';
 
 const richTextSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
@@ -58,6 +57,7 @@ export const RichTextShape = forwardRef<any, ShapeProps>((props, ref) => {
   const [imageData, setImageData] = useState<HTMLImageElement | null>(null);
   const imageRef = useRef<any>(null);
 
+  /*
   const generateImage = (text: string, width: number, height: number) => {
     const domElement = document.createElement('div');
     domElement.style.width = `${width}px`;
@@ -83,7 +83,29 @@ export const RichTextShape = forwardRef<any, ShapeProps>((props, ref) => {
       document.body.removeChild(domElement);
     });
   };
+  */
 
+  useEffect(() => {
+    getImage(id, {
+      text,
+      textColor,
+      fontSize,
+      textAlignment,
+      restrictedWidth,
+      restrictedHeight,
+    }).then(image => {
+      setImageData(image);
+    });
+  }, [
+    text,
+    textColor,
+    fontSize,
+    textAlignment,
+    restrictedWidth,
+    restrictedHeight,
+  ]); // TODO: Since all is redrawn when something changes, maybe we only need []
+
+  /*
   const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   useEffect(() => {
     if (debounceTimeoutRef.current) {
@@ -106,7 +128,7 @@ export const RichTextShape = forwardRef<any, ShapeProps>((props, ref) => {
     textColor,
     fontSize,
     textAlignment,
-  ]);
+  ]);*/
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
