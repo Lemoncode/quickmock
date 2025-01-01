@@ -115,6 +115,7 @@ export interface CanvasContextModel {
   setIsThumbnailContextMenuVisible: React.Dispatch<
     React.SetStateAction<boolean>
   >;
+  howManyLoadedDocuments: number;
   canvasSize: CanvasSize;
   setCanvasSize: (canvasDimensions: CanvasSize) => void;
 }

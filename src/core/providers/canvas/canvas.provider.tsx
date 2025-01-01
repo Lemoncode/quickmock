@@ -29,6 +29,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   const [fileName, setFileName] = React.useState<string>('');
   const [isThumbnailContextMenuVisible, setIsThumbnailContextMenuVisible] =
     React.useState(false);
+  const [howManyLoadedDocuments, setHowManyLoadedDocuments] = React.useState(0);
   const [canvasSize, setCanvasSize] = React.useState<CanvasSize>({
     width: 3000,
     height: 3000,
@@ -299,6 +300,7 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const loadDocument = (document: DocumentModel) => {
     setDocument(document);
+    setHowManyLoadedDocuments(numberOfDocuments => numberOfDocuments + 1);
   };
 
   return (
@@ -339,6 +341,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         activePageIndex: document.activePageIndex,
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
+        howManyLoadedDocuments,
         canvasSize: canvasSize,
         setCanvasSize: setCanvasSize,
       }}
