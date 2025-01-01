@@ -57,34 +57,6 @@ export const RichTextShape = forwardRef<any, ShapeProps>((props, ref) => {
   const [imageData, setImageData] = useState<HTMLImageElement | null>(null);
   const imageRef = useRef<any>(null);
 
-  /*
-  const generateImage = (text: string, width: number, height: number) => {
-    const domElement = document.createElement('div');
-    domElement.style.width = `${width}px`;
-    domElement.style.height = `${height}px`;
-    domElement.style.fontSize = `${fontSize}px`;
-    domElement.style.color = textColor;
-    domElement.style.textAlign = textAlignment;
-    domElement.style.textWrap = 'wrap';
-    domElement.style.fontFamily = BASIC_SHAPE.DEFAULT_FONT_FAMILY;
-    domElement.innerHTML = parseTextWithFormatting(text);
-    document.body.appendChild(domElement);
-
-    html2canvas(domElement, {
-      backgroundColor: 'rgba(0,0,0,0)',
-    }).then(canvas => {
-      const image = new window.Image();
-      image.src = canvas.toDataURL();
-
-      image.onload = () => {
-        setImageData(image);
-      };
-
-      document.body.removeChild(domElement);
-    });
-  };
-  */
-
   useEffect(() => {
     getImage(id, {
       text,
@@ -103,32 +75,7 @@ export const RichTextShape = forwardRef<any, ShapeProps>((props, ref) => {
     textAlignment,
     restrictedWidth,
     restrictedHeight,
-  ]); // TODO: Since all is redrawn when something changes, maybe we only need []
-
-  /*
-  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  useEffect(() => {
-    if (debounceTimeoutRef.current) {
-      clearTimeout(debounceTimeoutRef.current);
-    }
-
-    debounceTimeoutRef.current = setTimeout(() => {
-      generateImage(text, restrictedWidth, restrictedHeight);
-    }, 250);
-
-    return () => {
-      if (debounceTimeoutRef.current) {
-        clearTimeout(debounceTimeoutRef.current);
-      }
-    };
-  }, [
-    text,
-    restrictedWidth,
-    restrictedHeight,
-    textColor,
-    fontSize,
-    textAlignment,
-  ]);*/
+  ]);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>

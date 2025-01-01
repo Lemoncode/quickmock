@@ -97,6 +97,4 @@ export async function getImage(
       return image;
     }
   }
-
-  return null;
 }
