@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
-import { INPUT_SHAPE } from './shape.const';
+import { DISABLED_COLOR_VALUES, INPUT_SHAPE } from './shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
@@ -41,10 +41,8 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { stroke, fill, textColor, strokeStyle, borderRadius } = useShapeProps(
-    otherProps,
-    INPUT_SHAPE
-  );
+  const { stroke, fill, textColor, strokeStyle, borderRadius, disabled } =
+    useShapeProps(otherProps, INPUT_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -61,10 +59,10 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth}
         height={restrictedHeight}
         cornerRadius={borderRadius}
-        stroke={stroke}
+        stroke={disabled ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR : stroke}
         dash={strokeStyle}
         strokeWidth={INPUT_SHAPE.DEFAULT_STROKE_WIDTH}
-        fill={fill}
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR : fill}
       />
       <Text
         x={INPUT_SHAPE.DEFAULT_PADDING}
@@ -74,7 +72,7 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
         fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
         lineHeight={INPUT_SHAPE.DEFAULT_LINE_HEIGHT}
-        fill={textColor}
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : textColor}
         align="left"
         ellipsis={true}
         wrap="none"

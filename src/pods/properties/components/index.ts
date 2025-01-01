@@ -4,3 +4,4 @@ export * from './color-picker';
 export * from './icon-selector';
 export * from './progress';
 export * from './border-radius';
+export * from './disabled';

@@ -17,6 +17,7 @@ export const generateDefaultOtherProps = (
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        disabled: INPUT_SHAPE.DEFAULT_DISABLED,
       };
     case 'tooltip':
       return {
@@ -33,6 +34,7 @@ export const generateDefaultOtherProps = (
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         borderRadius: `${BASIC_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
     case 'vertical-menu':
     case 'horizontal-menu':
@@ -52,6 +54,7 @@ export const generateDefaultOtherProps = (
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
     case 'combobox':
       return {
@@ -60,6 +63,7 @@ export const generateDefaultOtherProps = (
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
     case 'modal':
     case 'buttonBar':
@@ -90,6 +94,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#ffffff',
         textColor: '#000000',
         selectedBackgroundColor: '#add8e6',
+        disabled: false,
       };
 
     case 'circle':
@@ -174,6 +179,7 @@ export const generateDefaultOtherProps = (
       };
     case 'paragraph':
       return {
+        textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
         fontSize: FONT_SIZE_VALUES.PARAGRAPH,
         textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
@@ -190,6 +196,7 @@ export const generateDefaultOtherProps = (
       return {
         checked: true,
         textColor: '#000000',
+        disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
 
     case 'appBar':
@@ -217,6 +224,8 @@ export const generateDefaultOtherProps = (
       };
     case 'progressbar':
       return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: '#A9A9A9',
         progress: '50',
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
