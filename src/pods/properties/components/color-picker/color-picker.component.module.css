@@ -1,6 +1,5 @@
 .container {
   display: flex;
-  gap: 0.5em;
   align-items: center;
   padding: var(--space-xs) var(--space-md);
   border-bottom: 1px solid var(--primary-300);
@@ -10,8 +9,7 @@
   flex: 1;
 }
 
-.button,
-.colorBox {
+.button {
   border: 1px solid var(--primary-100);
   color: var(--text-color);
   background-color: inherit;
@@ -29,10 +27,39 @@
   padding: 0;
 }
 
-.button:hover,
+.colorBox {
+  width: var(--space-lg);
+  height: var(--space-lg);
+  border: 1px solid var(--primary-100);
+  border-radius: var(--border-radius-s);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.colorPalette .colorSlot {
+  width: var(--space-lg);
+  height: var(--space-lg);
+  border: 1px solid var(--primary-100);
+  border-radius: var(--border-radius-s);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: var(--primary-100);
+  border-color: var(--primary-600);
+}
+
 .colorBox:hover {
   background-color: var(--primary-100);
   border-color: var(--primary-600);
+  transform: scale(1.1);
+}
+
+.colorPalette .colorSlot:hover {
+  background-color: var(--primary-100);
+  border-color: var(--primary-600);
+  transform: scale(1.1);
 }
 
 .popover {
@@ -90,35 +117,4 @@
     red 10%,
     transparent 53%
   );
-}
-
-.personalizedColorBox {
-  border: 1px solid var(--primary-100);
-  color: var(--text-color);
-  background-color: inherit;
-  width: var(--space-lg);
-  height: var(--space-lg);
-  border-radius: var(--border-radius-s);
-  font-size: var(--fs-xs);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-s);
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-  padding: 0;
-}
-
-.addButton {
-  padding: 4px 8px;
-  font-size: 14px;
-  border: black;
-  background-color: #8f8f8f;
-  color: black;
-  cursor: pointer;
-}
-
-.addButton:hover {
-  background-color: #ababab;
 }

@@ -4,6 +4,7 @@ import { hexToHsva, HsvaColor } from '@uiw/color-convert';
 import { GithubPlacement } from '@uiw/react-color-github';
 import { PRESET_COLORS } from './color-picker.const';
 import classes from './color-picker.component.module.css';
+import { useCanvasContext } from '../../../../core/providers/canvas/canvas.provider';
 
 interface Props {
   label: string;
@@ -18,9 +19,9 @@ interface ColorProps {
 
 export const ColorPicker: React.FC<Props> = props => {
   const { label, color, onChange } = props;
+  const { customColors, updateColorSlot } = useCanvasContext();
   const [picker, setPicker] = useState<boolean>(false);
   const [hsva, setHsva] = useState<HsvaColor>(() => hexToHsva(color));
-  const [personalizedColors, setPersonalizedColors] = useState<string[]>([]);
 
   const togglePicker = () => {
     setPicker(!picker);
@@ -38,16 +39,22 @@ export const ColorPicker: React.FC<Props> = props => {
     onChange(newColor);
   };
 
-  const addPersonalizedColor = () => {
-    if (!personalizedColors.includes(color)) {
-      setPersonalizedColors([...personalizedColors, color]);
+  const handleSlotClick = (index: number) => {
+    const slotColor = customColors[index];
+    if (slotColor === null) {
+      // Save current color to empty slot
+      updateColorSlot(color, index);
+    } else {
+      // Use color from filled slot
+      const hsvaColor = hexToHsva(slotColor);
+      setHsva(hsvaColor);
+      onChange(slotColor);
     }
   };
 
-  const handlePersonalizedColors = (newColor: string) => {
-    const hsvaColor = hexToHsva(newColor);
-    setHsva(hsvaColor);
-    onChange(newColor);
+  const handleSlotRightClick = (e: React.MouseEvent, index: number) => {
+    e.preventDefault(); // Prevent default context menu
+    updateColorSlot(color, index);
   };
 
   return (
@@ -82,22 +89,24 @@ export const ColorPicker: React.FC<Props> = props => {
               ))}
             </div>
             <div className={classes.colorPalette}>
-              {personalizedColors.map(personalizedColor => (
+              {customColors.map((slotColor, index) => (
                 <div
-                  key={personalizedColor}
-                  className={classes.personalizedColorBox}
-                  style={{ backgroundColor: personalizedColor }}
-                  onClick={() => handlePersonalizedColors(personalizedColor)}
-                ></div>
+                  key={index}
+                  className={classes.colorSlot}
+                  style={{
+                    backgroundColor: slotColor || '#ffffff',
+                    border: slotColor ? '1px solid #ccc' : '1px dashed #ccc',
+                    cursor: slotColor ? 'pointer' : 'copy',
+                  }}
+                  onClick={() => handleSlotClick(index)}
+                  onContextMenu={e => handleSlotRightClick(e, index)}
+                  title={
+                    slotColor
+                      ? 'Right-click to override'
+                      : 'Click to save color'
+                  }
+                />
               ))}
-              <div className={classes.colorPalette}>
-                <button
-                  className={classes.addButton}
-                  onClick={addPersonalizedColor}
-                >
-                  Add Current Color
-                </button>
-              </div>
             </div>
           </div>
         </div>

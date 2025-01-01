@@ -118,4 +118,6 @@ export interface CanvasContextModel {
   howManyLoadedDocuments: number;
   canvasSize: CanvasSize;
   setCanvasSize: (canvasDimensions: CanvasSize) => void;
+  customColors: (string | null)[];
+  updateColorSlot: (color: string, index: number) => void;
 }
