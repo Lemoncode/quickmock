@@ -5,32 +5,42 @@ import { useCanvasContext } from '@/core/providers';
 export interface ShortcutHookProps {
   targetKey: string[];
   callback: () => void;
+  isDeleteShortcut?: boolean;
 }
 
-export const useShortcut = ({ targetKey, callback }: ShortcutHookProps) => {
+export const useShortcut = ({
+  targetKey,
+  callback,
+  isDeleteShortcut,
+}: ShortcutHookProps) => {
   const { isInlineEditing } = useCanvasContext();
 
   const handleKeyPress = (event: KeyboardEvent) => {
-    if (isInlineEditing) {
-      return;
-    }
-
-    const isCtrlOrCmdPressed = event.ctrlKey || event.metaKey;
-    const isAltPressed = event.altKey;
+    if (isInlineEditing) return;
     const pressedKey = event.key.toLowerCase();
-    const ctrlKey = isMacOS() ? 'Meta' : 'Ctrl';
 
-    const pressedCombination = [
-      isCtrlOrCmdPressed ? ctrlKey : '',
-      isAltPressed ? 'Alt' : '',
-      pressedKey,
-    ]
-      .filter(Boolean)
-      .join('+');
+    if (isDeleteShortcut) {
+      if (pressedKey === 'backspace' || pressedKey === 'delete') {
+        event.preventDefault();
+        callback();
+      }
+    } else {
+      const isCtrlOrCmdPressed = event.ctrlKey || event.metaKey;
+      const isAltPressed = event.altKey;
+      const ctrlKey = isMacOS() ? 'Meta' : 'Ctrl';
 
-    if (targetKey.includes(pressedCombination)) {
-      event.preventDefault();
-      callback();
+      const pressedCombination = [
+        isCtrlOrCmdPressed ? ctrlKey : '',
+        isAltPressed ? 'Alt' : '',
+        pressedKey,
+      ]
+        .filter(Boolean)
+        .join('+');
+
+      if (targetKey.includes(pressedCombination)) {
+        event.preventDefault();
+        callback();
+      }
     }
   };
 
@@ -41,5 +51,5 @@ export const useShortcut = ({ targetKey, callback }: ShortcutHookProps) => {
     return () => {
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [targetKey, callback]);
+  }, [targetKey, callback, isDeleteShortcut]);
 };
