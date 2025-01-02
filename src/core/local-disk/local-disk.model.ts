@@ -9,4 +9,5 @@ export interface Page {
 export interface QuickMockFileContract {
   version: string;
   pages: Page[];
+  customColors: (string | null)[];
 }

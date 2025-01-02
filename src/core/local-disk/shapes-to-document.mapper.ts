@@ -10,6 +10,7 @@ export const mapFromShapesArrayToQuickMockFileDocument = (
   return {
     version: '0.2',
     pages: fullDocument.pages,
+    customColors: fullDocument.customColors,
   };
 };
 
@@ -19,6 +20,7 @@ export const mapFromQuickMockFileDocumentToApplicationDocument = (
   return {
     activePageIndex: 0,
     pages: fileDocument.pages,
+    customColors: fileDocument.customColors || new Array(5).fill(null),
   };
 };
 
@@ -121,5 +123,6 @@ export const mapFromQuickMockFileDocumentToApplicationDocumentV0_1 = (
         shapes: combinedShapes,
       },
     ],
+    customColors: fileDocument.customColors || new Array(16).fill(null),
   };
 };

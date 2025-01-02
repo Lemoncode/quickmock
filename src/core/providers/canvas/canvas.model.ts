@@ -25,6 +25,7 @@ export interface Page {
 export interface DocumentModel {
   pages: Page[];
   activePageIndex: number;
+  customColors: (string | null)[];
 }
 
 export const createDefaultDocumentModel = (): DocumentModel => ({
@@ -36,6 +37,7 @@ export const createDefaultDocumentModel = (): DocumentModel => ({
       shapes: [],
     },
   ],
+  customColors: new Array(16).fill(null),
 });
 
 export interface SelectionInfo {
@@ -118,4 +120,6 @@ export interface CanvasContextModel {
   howManyLoadedDocuments: number;
   canvasSize: CanvasSize;
   setCanvasSize: (canvasDimensions: CanvasSize) => void;
+  customColors: (string | null)[];
+  updateColorSlot: (color: string, index: number) => void;
 }

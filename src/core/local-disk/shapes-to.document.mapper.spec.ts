@@ -33,6 +33,7 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
+        customColors: new Array(16).fill(null),
       };
 
       const expectedResult: QuickMockFileContract = {
@@ -44,6 +45,7 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
+        customColors: new Array(16).fill(null),
       };
       // Act
       const result = mapFromShapesArrayToQuickMockFileDocument(document);
@@ -86,6 +88,7 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
+        customColors: new Array(16).fill(null),
       };
 
       const expectedResult: QuickMockFileContract = {
@@ -97,6 +100,7 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
+        customColors: new Array(16).fill(null),
       };
 
       // Act
@@ -119,6 +123,7 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
+        customColors: new Array(16).fill(null),
       };
 
       const expectedResult: DocumentModel = {
@@ -130,6 +135,7 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
+        customColors: new Array(16).fill(null),
       };
       //act
       const result =
@@ -149,6 +155,7 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
+        customColors: new Array(16).fill(null),
       };
 
       const expectedResult: DocumentModel = {
@@ -160,6 +167,7 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
+        customColors: new Array(16).fill(null),
       };
 
       //act
@@ -191,6 +199,7 @@ describe('shapes to document mapper', () => {
             ],
           },
         ],
+        customColors: new Array(16).fill(null),
       };
 
       const expectedResult: DocumentModel = {
@@ -213,6 +222,7 @@ describe('shapes to document mapper', () => {
             ],
           },
         ],
+        customColors: new Array(16).fill(null),
       };
 
       //act
@@ -264,6 +274,7 @@ describe('shapes to document mapper', () => {
             shapes: shapesPageB,
           },
         ],
+        customColors: new Array(16).fill(null),
       };
 
       const expectedResult: DocumentModel = {
@@ -280,6 +291,7 @@ describe('shapes to document mapper', () => {
             shapes: shapesPageB,
           },
         ],
+        customColors: new Array(16).fill(null),
       };
 
       //act
@@ -331,6 +343,7 @@ describe('shapes to document mapper', () => {
             shapes: shapesPageB,
           },
         ],
+        customColors: new Array(16).fill(null),
       };
 
       const expectedResult: DocumentModel = {
@@ -342,6 +355,7 @@ describe('shapes to document mapper', () => {
             shapes: shapespageA.concat(shapesPageB),
           },
         ],
+        customColors: new Array(16).fill(null),
       };
 
       //act

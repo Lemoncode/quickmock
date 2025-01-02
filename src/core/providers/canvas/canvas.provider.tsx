@@ -301,6 +301,19 @@ export const CanvasProvider: React.FC<Props> = props => {
   const loadDocument = (document: DocumentModel) => {
     setDocument(document);
     setHowManyLoadedDocuments(numberOfDocuments => numberOfDocuments + 1);
+    setCustomColors(document.customColors);
+  };
+
+  const [customColors, setCustomColors] = React.useState<(string | null)[]>(
+    new Array(16).fill(null)
+  );
+
+  const updateColorSlot = (color: string, index: number) => {
+    setCustomColors(prev => {
+      const newColors = [...prev];
+      newColors[index] = color;
+      return newColors;
+    });
   };
 
   return (
@@ -329,7 +342,10 @@ export const CanvasProvider: React.FC<Props> = props => {
         setIsInlineEditing,
         fileName,
         setFileName,
-        fullDocument: document,
+        fullDocument: {
+          ...document,
+          customColors,
+        },
         addNewPage,
         duplicatePage,
         getActivePage,
@@ -344,6 +360,8 @@ export const CanvasProvider: React.FC<Props> = props => {
         howManyLoadedDocuments,
         canvasSize: canvasSize,
         setCanvasSize: setCanvasSize,
+        customColors,
+        updateColorSlot,
       }}
     >
       {children}
