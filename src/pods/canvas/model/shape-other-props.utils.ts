@@ -183,6 +183,12 @@ export const generateDefaultOtherProps = (
         fontSize: FONT_SIZE_VALUES.PARAGRAPH,
         textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
+    case 'richtext':
+      return {
+        textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
+        fontSize: FONT_SIZE_VALUES.PARAGRAPH,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
+      };
     case 'label':
       return {
         textColor: '#000000',

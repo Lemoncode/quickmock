@@ -68,7 +68,8 @@ export type ShapeType =
   | 'buttonBar'
   | 'tooltip'
   | 'slider'
-  | 'link';
+  | 'link'
+  | 'richtext';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -127,6 +128,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   buttonBar: 'Button Bar',
   tooltip: 'Tooltip',
   slider: 'Slider',
+  richtext: 'Rich Text',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
