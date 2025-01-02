@@ -3,4 +3,5 @@ export interface ShortcutOptions {
   targetKey: string[];
   targetKeyLabel: string;
   description: string;
+  isDeleteShortcut?: boolean;
 }

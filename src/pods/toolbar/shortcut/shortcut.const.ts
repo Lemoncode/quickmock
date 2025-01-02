@@ -9,7 +9,8 @@ export const SHORTCUTS: Shortcut = {
     description: 'Delete',
     id: 'delete-button-shortcut',
     targetKey: ['backspace', 'delete'],
-    targetKeyLabel: 'Backspace',
+    targetKeyLabel: 'Backspace / Delete',
+    isDeleteShortcut: true,
   },
   copy: {
     description: 'Copy',
@@ -34,5 +35,47 @@ export const SHORTCUTS: Shortcut = {
     id: 'red-button-shortcut',
     targetKey: ['Ctrl+y', 'Meta+y'],
     targetKeyLabel: 'Ctrl + Y',
+  },
+  new: {
+    description: 'New',
+    id: 'new-button-shortcut',
+    targetKey: ['Alt+n', 'Meta+n'],
+    targetKeyLabel: 'Alt + N',
+  },
+  open: {
+    description: 'Open',
+    id: 'open-button-shortcut',
+    targetKey: ['Ctrl+o', 'Meta+o'],
+    targetKeyLabel: 'Ctrl + O',
+  },
+  save: {
+    description: 'Save',
+    id: 'save-button-shortcut',
+    targetKey: ['Ctrl+s', 'Meta+s'],
+    targetKeyLabel: 'Ctrl + S',
+  },
+  export: {
+    description: 'Export',
+    id: 'export-button-shortcut',
+    targetKey: ['Ctrl+e', 'Meta+e'],
+    targetKeyLabel: 'Ctrl + E',
+  },
+  zoomin: {
+    description: 'Zoom in',
+    id: 'zoomin-button-shortcut',
+    targetKey: ['Alt++', 'Meta++'],
+    targetKeyLabel: 'Alt + "+"',
+  },
+  zoomout: {
+    description: 'Zoom out',
+    id: 'zoomout-button-shortcut',
+    targetKey: ['Alt+-', 'Meta+-'],
+    targetKeyLabel: 'Alt + "-"',
+  },
+  settings: {
+    description: 'Settings',
+    id: 'settings-button-shortcut',
+    targetKey: ['Ctrl+,', 'Meta+,'],
+    targetKeyLabel: 'Ctrl + ","',
   },
 };
