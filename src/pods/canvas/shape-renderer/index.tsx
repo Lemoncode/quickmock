@@ -60,9 +60,10 @@ import {
   renderHeading3,
   renderLink,
   renderNormaltext,
+  renderParagraph,
+  renderRichTextParagraph,
 } from './simple-text-components';
 import { renderSmalltext } from './simple-text-components/smalltext.renderer';
-import { renderParagraph } from './simple-text-components/paragraph.renderer';
 import { renderImage } from './simple-basic-shapes/image.renderer';
 import { renderCalendar } from './simple-rich-components/calendar.renderer';
 import { renderAppBar } from './simple-rich-components/appBar.renderer';
@@ -152,6 +153,8 @@ export const renderShapeComponent = (
       return renderSmalltext(shape, shapeRenderedProps);
     case 'paragraph':
       return renderParagraph(shape, shapeRenderedProps);
+    case 'richtext':
+      return renderRichTextParagraph(shape, shapeRenderedProps);
     case 'link':
       return renderLink(shape, shapeRenderedProps);
     case 'largeArrow':

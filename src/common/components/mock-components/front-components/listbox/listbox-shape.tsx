@@ -87,7 +87,11 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>((props, ref) => {
   );
 
   const calculateItemBackground = (index: number) => {
-    if (disabled) return DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR;
+    if (disabled) {
+      return selectedItem === index
+        ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR
+        : DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR;
+    }
 
     return selectedItem === index ? selectedBackgroundColor : fill;
   };
@@ -127,6 +131,7 @@ export const ListBoxShape = forwardRef<any, ListBoxShapeProps>((props, ref) => {
               fill={calculateItemBackground(index)}
               stroke={calculateItemStroke(index)}
               strokeWidth={selectedItem === index ? 1 : 0}
+              cornerRadius={borderRadius}
             />
             <Text
               x={10}

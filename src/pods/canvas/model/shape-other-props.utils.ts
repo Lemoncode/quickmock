@@ -179,6 +179,13 @@ export const generateDefaultOtherProps = (
       };
     case 'paragraph':
       return {
+        textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
+        fontSize: FONT_SIZE_VALUES.PARAGRAPH,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
+      };
+    case 'richtext':
+      return {
+        textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
         fontSize: FONT_SIZE_VALUES.PARAGRAPH,
         textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
@@ -223,6 +230,8 @@ export const generateDefaultOtherProps = (
       };
     case 'progressbar':
       return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: '#A9A9A9',
         progress: '50',
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
