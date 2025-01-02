@@ -52,6 +52,8 @@ const generateImage = (
     domElement.style.fontSize = `${fontSize}px`;
     domElement.style.color = textColor;
     domElement.style.textAlign = textAlignment;
+    domElement.style.lineHeight = '1';
+    domElement.style.fontWeight = 'normal';
     domElement.style.textWrap = 'wrap';
     domElement.style.fontFamily = BASIC_SHAPE.DEFAULT_FONT_FAMILY;
     domElement.innerHTML = parseTextWithFormatting(text);
@@ -59,6 +61,7 @@ const generateImage = (
 
     html2canvas(domElement, {
       backgroundColor: 'rgba(0,0,0,0)',
+      scale: 2,
     }).then(canvas => {
       const image = new window.Image();
       image.src = canvas.toDataURL();

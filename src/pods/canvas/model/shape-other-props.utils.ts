@@ -186,7 +186,7 @@ export const generateDefaultOtherProps = (
     case 'richtext':
       return {
         textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
-        fontSize: 16,
+        fontSize: FONT_SIZE_VALUES.PARAGRAPH,
         textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
     case 'label':
