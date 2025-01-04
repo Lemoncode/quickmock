@@ -138,6 +138,9 @@ Team members participating in this project
   <a href="https://github.com/sergioelmoreno">
     <kbd><img src="https://github.com/sergioelmoreno.png" alt="Sergio (El Moreno) del campo" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>  
+  <a href="https://github.com/rojasadrian012">
+    <kbd><img src="https://github.com/rojasadrian012.png" alt="Adrian Rojas" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>  
   <a href="https://github.com/IonutGabi">
     <kbd><img src="https://github.com/IonutGabi.png" alt="Gabi Birsan" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>  
