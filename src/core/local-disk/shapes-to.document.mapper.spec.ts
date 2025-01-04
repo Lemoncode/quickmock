@@ -6,6 +6,7 @@ import {
 import { ShapeModel } from '../model';
 import { QuickMockFileContract } from './local-disk.model';
 import { DocumentModel } from '../providers/canvas/canvas.model';
+import { APP_CONSTANTS } from '../providers/canvas/canvas.model';
 
 describe('shapes to document mapper', () => {
   describe('mapFromShapesArrayToQuickMockFileDocument', () => {
@@ -33,6 +34,7 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
 
       const expectedResult: QuickMockFileContract = {
@@ -44,6 +46,7 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
       // Act
       const result = mapFromShapesArrayToQuickMockFileDocument(document);
@@ -86,6 +89,7 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
 
       const expectedResult: QuickMockFileContract = {
@@ -97,6 +101,7 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
 
       // Act
@@ -119,6 +124,7 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
 
       const expectedResult: DocumentModel = {
@@ -130,6 +136,7 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
       //act
       const result =
@@ -149,6 +156,7 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
 
       const expectedResult: DocumentModel = {
@@ -160,6 +168,7 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
 
       //act
@@ -191,6 +200,7 @@ describe('shapes to document mapper', () => {
             ],
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
 
       const expectedResult: DocumentModel = {
@@ -213,6 +223,7 @@ describe('shapes to document mapper', () => {
             ],
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
 
       //act
@@ -264,6 +275,7 @@ describe('shapes to document mapper', () => {
             shapes: shapesPageB,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
 
       const expectedResult: DocumentModel = {
@@ -280,6 +292,7 @@ describe('shapes to document mapper', () => {
             shapes: shapesPageB,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
 
       //act
@@ -331,6 +344,7 @@ describe('shapes to document mapper', () => {
             shapes: shapesPageB,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
 
       const expectedResult: DocumentModel = {
@@ -342,6 +356,7 @@ describe('shapes to document mapper', () => {
             shapes: shapespageA.concat(shapesPageB),
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
       };
 
       //act
