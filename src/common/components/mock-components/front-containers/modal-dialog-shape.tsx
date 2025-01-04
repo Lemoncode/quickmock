@@ -4,6 +4,7 @@ import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { BASIC_SHAPE } from '../front-components/shape.const';
 
 const modalDialogShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 250,
@@ -21,14 +22,14 @@ const shapeType: ShapeType = 'modalDialog';
 
 export const ModalDialogContainer = forwardRef<any, ShapeProps>(
   (props, ref) => {
-    const { x, y, width, height, id, onSelected, ...shapeProps } = props;
+    const { x, y, width, height, id, onSelected, text, ...shapeProps } = props;
     const restrictedSize = fitSizeToShapeSizeRestrictions(
       modalDialogShapeSizeRestrictions,
       width,
       height
     );
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
-
+    const margin = 10;
     const titleBarHeight = 50;
 
     const commonGroupProps = useGroupShapeProps(
@@ -60,6 +61,17 @@ export const ModalDialogContainer = forwardRef<any, ShapeProps>(
           stroke="black"
           strokeWidth={2}
           fill="lightgray"
+        />
+        <Text
+          x={margin * 3}
+          y={margin * 2}
+          text={text}
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
+          fontSize={12}
+          fill="black"
+          ellipsis={true}
+          wrap="none"
+          width={restrictedWidth - margin * 6 - 40}
         />
 
         {/* (X) */}
