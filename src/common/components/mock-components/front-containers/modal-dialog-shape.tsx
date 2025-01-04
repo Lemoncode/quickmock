@@ -71,6 +71,7 @@ export const ModalDialogContainer = forwardRef<any, ShapeProps>(
           fill="black"
           ellipsis={true}
           wrap="none"
+          width={restrictedWidth - margin * 6 - 40}
         />
 
         {/* (X) */}
