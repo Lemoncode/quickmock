@@ -37,7 +37,7 @@ export const createDefaultDocumentModel = (): DocumentModel => ({
       shapes: [],
     },
   ],
-  customColors: new Array(16).fill(null),
+  customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
 });
 
 export interface SelectionInfo {
@@ -123,3 +123,7 @@ export interface CanvasContextModel {
   customColors: (string | null)[];
   updateColorSlot: (color: string, index: number) => void;
 }
+
+export const APP_CONSTANTS = {
+  COLOR_SLOTS: 16,
+} as const;

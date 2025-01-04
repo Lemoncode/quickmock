@@ -15,7 +15,7 @@ import Konva from 'konva';
 import { isPageIndexValid, removeShapesFromList } from './canvas.business';
 import { useClipboard } from './use-clipboard.hook';
 import { produce } from 'immer';
-
+import { APP_CONSTANTS } from './canvas.model';
 interface Props {
   children: React.ReactNode;
 }
@@ -305,7 +305,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   };
 
   const [customColors, setCustomColors] = React.useState<(string | null)[]>(
-    new Array(16).fill(null)
+    new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null)
   );
 
   const updateColorSlot = (color: string, index: number) => {
