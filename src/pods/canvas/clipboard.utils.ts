@@ -1,6 +1,12 @@
 import cloneDeep from 'lodash.clonedeep';
 import { ShapeModel } from '@/core/model';
 import invariant from 'tiny-invariant';
+import { getScrollFromDiv } from './canvas.util';
+
+interface PositionScroll {
+  x: number;
+  y: number;
+}
 
 export const findShapesById = (
   shapeIds: string[],
@@ -17,12 +23,26 @@ export const cloneShape = (shape: ShapeModel): ShapeModel => {
   return cloneDeep(shape);
 };
 
-export const adjustShapesPosition = (shapes: ShapeModel[], copyCount: number) =>
-  shapes.map(shape => adjustShapePosition(shape, copyCount));
+export const adjustShapesPosition = (
+  shapes: ShapeModel[],
+  copyCount: number,
+  dropRef: React.MutableRefObject<HTMLDivElement | null>
+) => {
+  const { scrollLeft, scrollTop } = getScrollFromDiv(
+    dropRef as unknown as React.MutableRefObject<HTMLDivElement>
+  );
+  shapes.map(shape =>
+    adjustShapePosition(shape, copyCount, { x: scrollLeft, y: scrollTop })
+  );
+};
 
-export const adjustShapePosition = (shape: ShapeModel, copyCount: number) => {
-  shape.x += 20 * copyCount;
-  shape.y += 20 * copyCount;
+export const adjustShapePosition = (
+  shape: ShapeModel,
+  copyCount: number,
+  position: PositionScroll
+) => {
+  shape.x += 20 * copyCount + position.x;
+  shape.y += 20 * copyCount + position.y;
 };
 
 export const validateShapes = (shapes: ShapeModel[]) => {

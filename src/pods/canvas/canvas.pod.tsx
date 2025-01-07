@@ -30,6 +30,7 @@ export const CanvasPod = () => {
     updateShapePosition,
     stageRef,
     canvasSize,
+    setDropRef,
   } = useCanvasContext();
 
   const {
@@ -52,6 +53,9 @@ export const CanvasPod = () => {
 
   const { isDraggedOver, dropRef } = useDropShape();
   useMonitorShape(dropRef, addNewShapeAndSetSelected);
+  useEffect(() => {
+    if (dropRef.current) setDropRef(dropRef);
+  }, [dropRef, setDropRef]);
 
   const getSelectedShapeKonvaId = (): string[] => {
     let result: string[] = [];
