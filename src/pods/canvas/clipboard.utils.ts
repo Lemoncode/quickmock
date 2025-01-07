@@ -41,8 +41,8 @@ export const adjustShapePosition = (
   copyCount: number,
   position: PositionScroll
 ) => {
-  shape.x += 20 * copyCount + position.x;
-  shape.y += 20 * copyCount + position.y;
+  shape.x = 20 * copyCount + position.x;
+  shape.y = 20 * copyCount + position.y;
 };
 
 export const validateShapes = (shapes: ShapeModel[]) => {
