@@ -3,6 +3,7 @@ import { useModalDialogContext } from '@/core/providers/model-dialog-providers/m
 import { SettingsPod } from '@/pods';
 import { ToolbarButton } from '@/pods/toolbar/components/toolbar-button/toolbar-button';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
+import { SHORTCUTS } from '../../shortcut/shortcut.const';
 
 export const SettingsButton = () => {
   const { openModal } = useModalDialogContext();
@@ -17,6 +18,7 @@ export const SettingsButton = () => {
       className={classes.button}
       icon={<SettingsIcon />}
       label="Settings"
+      shortcutOptions={SHORTCUTS.settings}
     />
   );
 };

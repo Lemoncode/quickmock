@@ -29,6 +29,7 @@ export const ToolbarButton: React.FC<Props> = props => {
     ...shortcutOptions,
     targetKey: shortcutOptions?.targetKey || [],
     callback: onClick,
+    isDeleteShortcut: shortcutOptions?.isDeleteShortcut,
   });
 
   return (
