@@ -7,6 +7,11 @@
   padding: var(--space-xs) var(--space-md);
 }
 
+@media screen and (max-device-width: 1090px) {
+  .container {
+    flex-direction: column;
+  }
+}
 .left,
 .center,
 .right {

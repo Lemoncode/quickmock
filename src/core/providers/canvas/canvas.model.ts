@@ -122,6 +122,8 @@ export interface CanvasContextModel {
   setCanvasSize: (canvasDimensions: CanvasSize) => void;
   customColors: (string | null)[];
   updateColorSlot: (color: string, index: number) => void;
+  loadSampleDocument: boolean;
+  setLoadSampleDocument: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const APP_CONSTANTS = {

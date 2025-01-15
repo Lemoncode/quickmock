@@ -16,7 +16,7 @@ export const FooterPod = () => {
       <div className={classes.center}>
         <p>Quickmock - © Lemoncode</p>
       </div>
-      <div className={classes.right}>
+      <div className={`${classes.right} hide-mobile`}>
         <div className={classes.zoomContainer}>
           <ZoomOutButton
             scale={scale}
