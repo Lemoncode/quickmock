@@ -2302,4 +2302,52 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['rocket', 'launch', 'space', 'fly'],
     categories: ['IT'],
   },
+  {
+    name: 'Books',
+    filename: 'books.svg',
+    searchTerms: ['books', 'library', 'knowledge', 'read'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Chalkboard',
+    filename: 'chalkboard.svg',
+    searchTerms: ['chalkboard', 'blackboard', 'school', 'teach', 'learn'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Book',
+    filename: 'book.svg',
+    searchTerms: ['book', 'library', 'knowledge', 'read'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Book open',
+    filename: 'bookopen.svg',
+    searchTerms: ['book', 'open', 'library', 'knowledge', 'read'],
+    categories: ['IT'],
+  },
+  {
+    name: 'User list',
+    filename: 'userlist.svg',
+    searchTerms: ['user', 'list', 'people', 'group', 'team'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Person',
+    filename: 'person.svg',
+    searchTerms: ['person', 'user', 'human', 'profile', 'individual'],
+    categories: ['IT'],
+  },
+  {
+    name: 'User focus',
+    filename: 'userfocus.svg',
+    searchTerms: ['user', 'focus', 'human', 'profile', 'emphasis'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Clock user',
+    filename: 'clockuser.svg',
+    searchTerms: ['clock', 'user', 'human', 'timetable', 'schedule'],
+    categories: ['IT'],
+  },
 ];
