@@ -2350,4 +2350,22 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['clock', 'user', 'human', 'timetable', 'schedule'],
     categories: ['IT'],
   },
+  {
+    name: 'Plus circle',
+    filename: 'pluscircle.svg',
+    searchTerms: ['plus', 'circle', 'add', 'create', 'new', 'more'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Minus circle',
+    filename: 'minuscircle.svg',
+    searchTerms: ['minus', 'circle', 'remove', 'delete', 'less'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Calendar plus',
+    filename: 'calendarplus.svg',
+    searchTerms: ['calendar', 'plus', 'add', 'create', 'new'],
+    categories: ['IT'],
+  },
 ];
