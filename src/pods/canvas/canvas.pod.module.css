@@ -3,6 +3,10 @@
   width: 100%;
   overflow: auto;
   position: relative;
+  font-family:
+    Balsamiq Sans,
+    Comic Sans MS,
+    cursive;
 }
 
 .load {
