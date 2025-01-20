@@ -224,14 +224,16 @@ export const CanvasPod = () => {
               );
             })
           }
-          <Transformer
-            ref={transformerRef}
-            flipEnabled={false}
-            boundBoxFunc={handleTransformerBoundBoxFunc}
-            onDragStart={() => setIsTransfomerBeingDragged(true)}
-            onDragMove={handleTransformerDragMove}
-            onDragEnd={() => setIsTransfomerBeingDragged(false)}
-          />
+          {!isViewMode && (
+            <Transformer
+              ref={transformerRef}
+              flipEnabled={false}
+              boundBoxFunc={handleTransformerBoundBoxFunc}
+              onDragStart={() => setIsTransfomerBeingDragged(true)}
+              onDragMove={handleTransformerDragMove}
+              onDragEnd={() => setIsTransfomerBeingDragged(false)}
+            />
+          )}
           {isTransfomerBeingDragged && showSnapInHorizontalLine && (
             <Line
               points={[
