@@ -1,7 +1,7 @@
 import { DocumentModel } from '@/core/providers/canvas/canvas.model';
 
 export const sampleDocument: DocumentModel = {
-  activePageIndex: 2,
+  activePageIndex: 0,
   pages: [
     {
       id: '1',
