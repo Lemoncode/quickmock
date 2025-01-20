@@ -34,6 +34,7 @@ export const CanvasPod = () => {
     loadDocument,
     loadSampleDocument,
     setLoadSampleDocument,
+    setDropRef,
   } = useCanvasContext();
 
   const { interactionMode } = useInteractionModeContext();
@@ -57,6 +58,9 @@ export const CanvasPod = () => {
 
   const { isDraggedOver, dropRef } = useDropShape();
   useMonitorShape(dropRef, addNewShapeAndSetSelected);
+  useEffect(() => {
+    if (dropRef.current) setDropRef(dropRef);
+  }, [dropRef, setDropRef]);
 
   const getSelectedShapeKonvaId = (): string[] => {
     let result: string[] = [];

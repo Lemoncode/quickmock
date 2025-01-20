@@ -122,6 +122,8 @@ export interface CanvasContextModel {
   setCanvasSize: (canvasDimensions: CanvasSize) => void;
   customColors: (string | null)[];
   updateColorSlot: (color: string, index: number) => void;
+  dropRef: React.MutableRefObject<HTMLDivElement | null>;
+  setDropRef: (dropRef: React.MutableRefObject<HTMLDivElement | null>) => void;
   loadSampleDocument: boolean;
   setLoadSampleDocument: React.Dispatch<React.SetStateAction<boolean>>;
 }

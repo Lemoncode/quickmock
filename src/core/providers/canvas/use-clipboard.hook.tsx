@@ -10,7 +10,8 @@ import {
 export const useClipboard = (
   pasteShapes: (shapes: ShapeModel[]) => void,
   shapes: ShapeModel[],
-  selectionInfo: { selectedShapesIds: string[] | null }
+  selectionInfo: { selectedShapesIds: string[] | null },
+  dropRef: React.MutableRefObject<HTMLDivElement | null>
 ) => {
   const [clipboardShape, setClipboardShape] = useState<ShapeModel[] | null>(
     null
@@ -30,11 +31,21 @@ export const useClipboard = (
     }
   };
 
+  const updateClipboardShapes = (shapes: ShapeModel[]) => {
+    copyCount.current = 0;
+    clipboardShapesRef.current = [...shapes];
+  };
+
   const pasteShapeFromClipboard = () => {
     if (clipboardShapesRef.current) {
       const newShapes: ShapeModel[] = cloneShapes(clipboardShapesRef.current);
       validateShapes(newShapes);
-      adjustShapesPosition(newShapes, copyCount.current);
+      adjustShapesPosition(
+        newShapes,
+        copyCount.current,
+        dropRef,
+        updateClipboardShapes
+      );
       pasteShapes(newShapes);
       copyCount.current++;
     }

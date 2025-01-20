@@ -185,11 +185,16 @@ export const CanvasProvider: React.FC<Props> = props => {
     });
   };
 
+  const [dropRef, setDropRef] = React.useState<
+    React.MutableRefObject<HTMLDivElement | null>
+  >(React.useRef<HTMLDivElement>(null));
+
   const { copyShapeToClipboard, pasteShapeFromClipboard, canCopy, canPaste } =
     useClipboard(
       pasteShapes,
       document.pages[document.activePageIndex].shapes,
-      selectionInfo
+      selectionInfo,
+      dropRef
     );
 
   const createNewFullDocument = () => {
@@ -366,6 +371,8 @@ export const CanvasProvider: React.FC<Props> = props => {
         setCanvasSize: setCanvasSize,
         customColors,
         updateColorSlot,
+        dropRef,
+        setDropRef,
         loadSampleDocument,
         setLoadSampleDocument,
       }}
