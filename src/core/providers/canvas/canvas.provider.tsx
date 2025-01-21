@@ -34,6 +34,7 @@ export const CanvasProvider: React.FC<Props> = props => {
     width: 3000,
     height: 3000,
   });
+  const [loadSampleDocument, setLoadSampleDocument] = React.useState(true);
 
   const {
     addSnapshot,
@@ -151,6 +152,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   };
 
   const pasteShapes = (shapes: ShapeModel[]) => {
+    loadSampleDocument && setLoadSampleDocument(false);
     const newShapes: ShapeModel[] = shapes.map(shape => {
       shape.id = uuidv4();
       return shape;
@@ -221,6 +223,7 @@ export const CanvasProvider: React.FC<Props> = props => {
     y: number,
     otherProps?: OtherProps
   ) => {
+    loadSampleDocument && setLoadSampleDocument(false);
     if (!isPageIndexValid(document)) {
       return '';
     }
@@ -304,6 +307,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   };
 
   const loadDocument = (document: DocumentModel) => {
+    loadSampleDocument && setLoadSampleDocument(false);
     setDocument(document);
     setHowManyLoadedDocuments(numberOfDocuments => numberOfDocuments + 1);
     setCustomColors(document.customColors);
@@ -369,6 +373,8 @@ export const CanvasProvider: React.FC<Props> = props => {
         updateColorSlot,
         dropRef,
         setDropRef,
+        loadSampleDocument,
+        setLoadSampleDocument,
       }}
     >
       {children}
