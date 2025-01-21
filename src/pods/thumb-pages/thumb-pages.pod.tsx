@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './thumb-pages.module.css';
-import { useCanvasContext } from '@/core/providers';
+import { useCanvasContext, useInteractionModeContext } from '@/core/providers';
 import { PageTitleInlineEdit, ThumbPage } from './components';
 import { PlusIcon } from '@/common/components/icons';
 import { useMonitorDropThumb } from './monitor-drop-thumb.hook';
@@ -13,6 +13,7 @@ export const ThumbPagesPod: React.FC<Props> = props => {
   const { isVisible } = props;
   const { fullDocument, addNewPage, setActivePage, getActivePage } =
     useCanvasContext();
+  const { interactionMode } = useInteractionModeContext();
   const [pageTitleBeingEdited, setPageTitleBeingEdited] = React.useState<
     number | null
   >(null);
@@ -28,11 +29,11 @@ export const ThumbPagesPod: React.FC<Props> = props => {
   useMonitorDropThumb();
 
   return (
-    <div className={classes.container}>
+    <div className={classes.root}>
       {fullDocument.pages.map((page, index) => (
         <React.Fragment key={page.id}>
           <div
-            className={`${classes.container} ${
+            className={`${classes.thumbContainer} ${
               page.id === getActivePage().id
                 ? classes.activeThumb
                 : classes.thumb
@@ -44,14 +45,17 @@ export const ThumbPagesPod: React.FC<Props> = props => {
               setPageTitleBeingEdited={setPageTitleBeingEdited}
               isVisible={isVisible}
             />
-            {pageTitleBeingEdited === index ? (
+
+            {pageTitleBeingEdited === index && interactionMode === 'edit' ? (
               <PageTitleInlineEdit
                 pageIndex={index}
                 setPageTitleBeingEdited={setPageTitleBeingEdited}
               />
             ) : (
               <div
-                onDoubleClick={() => setPageTitleBeingEdited(index)}
+                onDoubleClick={() => {
+                  interactionMode === 'edit' && setPageTitleBeingEdited(index);
+                }}
                 className={
                   page.id === getActivePage().id ? classes.activeText : ''
                 }
@@ -62,14 +66,17 @@ export const ThumbPagesPod: React.FC<Props> = props => {
           </div>
         </React.Fragment>
       ))}
-      <button
-        className={classes.addButton}
-        onClick={handleAddNewPage}
-        title="add new page"
-        aria-label="add new page"
-      >
-        <PlusIcon />
-      </button>
+
+      {interactionMode === 'edit' && (
+        <button
+          className={`${classes.addButton}`}
+          onClick={handleAddNewPage}
+          title="add new page"
+          aria-label="add new page"
+        >
+          <PlusIcon />
+        </button>
+      )}
     </div>
   );
 };
