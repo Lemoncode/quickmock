@@ -124,6 +124,7 @@ export interface CanvasContextModel {
   updateColorSlot: (color: string, index: number) => void;
   dropRef: React.MutableRefObject<HTMLDivElement | null>;
   setDropRef: (dropRef: React.MutableRefObject<HTMLDivElement | null>) => void;
+  setIsDirty: (dirty: boolean) => void;
 }
 
 export const APP_CONSTANTS = {
