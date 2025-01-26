@@ -8,7 +8,8 @@ import { produce } from 'immer';
 
 export const useSelection = (
   document: DocumentModel,
-  setDocument: React.Dispatch<React.SetStateAction<DocumentModel>>
+  setDocument: React.Dispatch<React.SetStateAction<DocumentModel>>,
+  markAsDirtyDocument?: (dirty: boolean) => void
 ): SelectionInfo => {
   const transformerRef = useRef<Konva.Transformer>(null);
   const shapeRefs = useRef<ShapeRefs>({});
@@ -225,13 +226,14 @@ export const useSelection = (
     if (selectedShapesIds.length === 1) {
       const selectedShapeId = selectedShapesIds[0];
       updateOtherPropsOnSelectedSingleShape(selectedShapeId, key, value);
-
+      markAsDirtyDocument?.(true);
       return;
     }
 
     // Multiple selection case
     if (multipleSelection) {
       updateOtherPropsOnSelectedMutlipleShapes(key, value);
+      markAsDirtyDocument?.(true);
     }
   };
 

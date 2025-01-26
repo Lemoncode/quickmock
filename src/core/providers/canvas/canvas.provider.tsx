@@ -50,9 +50,9 @@ export const CanvasProvider: React.FC<Props> = props => {
       addSnapshot
     );
 
-  const selectionInfo = useSelection(document, setDocument);
-
   const [isDirty, setIsDirty] = React.useState(false);
+
+  const selectionInfo = useSelection(document, setDocument, setIsDirty);
 
   React.useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
