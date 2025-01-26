@@ -1,5 +1,5 @@
 import { ShapeRefs, Size } from '@/core/model';
-import { useCanvasContext } from '@/core/providers';
+import { useCanvasContext, useInteractionModeContext } from '@/core/providers';
 import { renderShapeComponent } from '@/pods/canvas/shape-renderer';
 import { KonvaEventObject } from 'konva/lib/Node';
 import { createRef, useRef } from 'react';
@@ -83,6 +83,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
     setShowContextMenu,
     handleShowContextMenu,
   } = useContextMenu();
+  const { interactionMode } = useInteractionModeContext();
 
   return (
     <>
@@ -120,13 +121,14 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
             </Layer>
           </Stage>
         </div>
-        <span
-          onClick={handleShowContextMenu}
-          className={classes['icon-container']}
-        >
-          <CaretDown />
-        </span>
-
+        {interactionMode === 'edit' && (
+          <span
+            onClick={handleShowContextMenu}
+            className={classes['icon-container']}
+          >
+            <CaretDown />
+          </span>
+        )}
         {showContextMenu && (
           <ThumbPageContextMenu
             contextMenuRef={contextMenuRef}

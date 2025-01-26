@@ -125,6 +125,8 @@ export interface CanvasContextModel {
   dropRef: React.MutableRefObject<HTMLDivElement | null>;
   setDropRef: (dropRef: React.MutableRefObject<HTMLDivElement | null>) => void;
   setIsDirty: (dirty: boolean) => void;
+  loadSampleDocument: boolean;
+  setLoadSampleDocument: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const APP_CONSTANTS = {
