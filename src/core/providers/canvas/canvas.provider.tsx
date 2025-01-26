@@ -53,7 +53,19 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const [isDirty, setIsDirty] = React.useState(false);
 
-  const selectionInfo = useSelection(document, setDocument, setIsDirty);
+  const setDocumentAndMarkDirtyState = (
+    updater: DocumentModel | ((prev: DocumentModel) => DocumentModel),
+    isDirty = true
+  ) => {
+    setDocument(updater);
+    setIsDirty(isDirty);
+  };
+
+  const selectionInfo = useSelection(
+    document,
+    setDocument,
+    setDocumentAndMarkDirtyState
+  );
 
   React.useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -64,14 +76,6 @@ export const CanvasProvider: React.FC<Props> = props => {
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [isDirty]);
-
-  const setDocumentAndMarkDirtyState = (
-    updater: DocumentModel | ((prev: DocumentModel) => DocumentModel),
-    isDirty = true
-  ) => {
-    setDocument(updater);
-    setIsDirty(isDirty);
-  };
 
   const addNewPage = () => {
     setDocumentAndMarkDirtyState(lastDocument =>
