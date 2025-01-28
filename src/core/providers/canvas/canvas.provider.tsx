@@ -6,7 +6,7 @@ import { createShape } from '@/pods/canvas/model';
 import { useHistoryManager } from '@/common/undo-redo';
 import { useStateWithInterceptor } from './canvas.hook';
 import {
-  CanvasSize,
+  createDefaultCanvasSize,
   createDefaultDocumentModel,
   DocumentModel,
 } from './canvas.model';
@@ -30,10 +30,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   const [isThumbnailContextMenuVisible, setIsThumbnailContextMenuVisible] =
     React.useState(false);
   const [howManyLoadedDocuments, setHowManyLoadedDocuments] = React.useState(0);
-  const [canvasSize, setCanvasSize] = React.useState<CanvasSize>({
-    width: 3000,
-    height: 3000,
-  });
+  const [canvasSize, setCanvasSize] = React.useState(createDefaultCanvasSize());
   const [loadSampleDocument, setLoadSampleDocument] = React.useState(true);
 
   const {
@@ -311,6 +308,7 @@ export const CanvasProvider: React.FC<Props> = props => {
     setDocument(document);
     setHowManyLoadedDocuments(numberOfDocuments => numberOfDocuments + 1);
     setCustomColors(document.customColors);
+    setCanvasSize(document.size);
   };
 
   const [customColors, setCustomColors] = React.useState<(string | null)[]>(
@@ -354,6 +352,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         fullDocument: {
           ...document,
           customColors,
+          size: canvasSize,
         },
         addNewPage,
         duplicatePage,
@@ -367,8 +366,8 @@ export const CanvasProvider: React.FC<Props> = props => {
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
         howManyLoadedDocuments,
-        canvasSize: canvasSize,
-        setCanvasSize: setCanvasSize,
+        canvasSize,
+        setCanvasSize,
         customColors,
         updateColorSlot,
         dropRef,

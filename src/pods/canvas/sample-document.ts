@@ -1,4 +1,7 @@
-import { DocumentModel } from '@/core/providers/canvas/canvas.model';
+import {
+  createDefaultCanvasSize,
+  DocumentModel,
+} from '@/core/providers/canvas/canvas.model';
 
 export const sampleDocument: DocumentModel = {
   activePageIndex: 0,
@@ -680,4 +683,5 @@ export const sampleDocument: DocumentModel = {
     null,
     null,
   ],
+  size: createDefaultCanvasSize(),
 };
