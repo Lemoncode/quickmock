@@ -53,6 +53,7 @@ import {
   renderStar,
   renderPostit,
   renderLargeArrowShape,
+  renderCilinder,
 } from './simple-basic-shapes';
 import {
   renderHeading1,
@@ -185,6 +186,8 @@ export const renderShapeComponent = (
       return renderTooltip(shape, shapeRenderedProps);
     case 'slider':
       return renderSlider(shape, shapeRenderedProps);
+    case 'cilinder':
+      return renderCilinder(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
