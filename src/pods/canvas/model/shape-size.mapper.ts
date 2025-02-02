@@ -39,6 +39,7 @@ import {
   getRectangleShapeSizeRestrictions,
   getStarShapeSizeRestrictions,
   getModalCoverShapeSizeRestrictions,
+  getCilinderShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-basic-shapes';
 import {
@@ -140,6 +141,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   tooltip: getTooltipShapeSizeRestrictions,
   slider: getSliderShapeSizeRestrictions,
   audioPlayer: getAudioPlayerShapeSizeRestrictions,
+  cilinder: getCilinderShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;
