@@ -70,6 +70,7 @@ export type ShapeType =
   | 'slider'
   | 'link'
   | 'cilinder'
+  | 'videoconference'
   | 'richtext';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
@@ -131,6 +132,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   slider: 'Slider',
   richtext: 'Rich Text',
   cilinder: 'Cilinder',
+  videoconference: 'Videoconference',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';

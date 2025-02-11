@@ -59,6 +59,7 @@ import {
   getTabsBarShapeSizeRestrictions,
   getVerticalMenuShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
+  getVideoconferenceShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-rich-components';
 import {
@@ -142,6 +143,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   slider: getSliderShapeSizeRestrictions,
   audioPlayer: getAudioPlayerShapeSizeRestrictions,
   cilinder: getCilinderShapeSizeRestrictions,
+  videoconference: getVideoconferenceShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;

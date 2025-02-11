@@ -41,6 +41,7 @@ import {
   renderModal,
   renderButtonBar,
   renderTabsBar,
+  renderVideoconference,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -188,6 +189,8 @@ export const renderShapeComponent = (
       return renderSlider(shape, shapeRenderedProps);
     case 'cilinder':
       return renderCilinder(shape, shapeRenderedProps);
+    case 'videoconference':
+      return renderVideoconference(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
