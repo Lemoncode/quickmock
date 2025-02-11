@@ -8,7 +8,7 @@ import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const inputShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 60,
+  minWidth: 38,
   minHeight: 38,
   maxWidth: -1,
   maxHeight: 38,
