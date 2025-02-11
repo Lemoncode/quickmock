@@ -69,6 +69,7 @@ export type ShapeType =
   | 'tooltip'
   | 'slider'
   | 'link'
+  | 'cilinder'
   | 'richtext';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
@@ -129,6 +130,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   tooltip: 'Tooltip',
   slider: 'Slider',
   richtext: 'Rich Text',
+  cilinder: 'Cilinder',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
