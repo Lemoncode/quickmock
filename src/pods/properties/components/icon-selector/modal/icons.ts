@@ -2368,4 +2368,40 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['calendar', 'plus', 'add', 'create', 'new'],
     categories: ['IT'],
   },
+  {
+    name: 'Paper plane',
+    filename: 'paperplane.svg',
+    searchTerms: ['paper', 'plane', 'send', 'message'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Close circle',
+    filename: 'xcircle.svg',
+    searchTerms: ['close', 'cross', 'dialog', 'delete'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Close',
+    filename: 'close.svg',
+    searchTerms: ['close', 'cross', 'dialog', 'delete'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Close square',
+    filename: 'xclosesquare.svg',
+    searchTerms: ['close', 'cross', 'dialog', 'delete'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Plus',
+    filename: 'plus.svg',
+    searchTerms: ['plus', 'add', 'create', 'new', 'more'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Translate',
+    filename: 'translate.svg',
+    searchTerms: ['translate', 'multilanguage', 'language', 'translator'],
+    categories: ['IT'],
+  },
 ];
