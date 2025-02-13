@@ -153,4 +153,12 @@ export const memberList: Member[] = [
     urlLinkedin: 'https://www.linkedin.com/in/brauliodiez/',
     image: './assets/braulio-diez.jpeg',
   },
+
+  {
+    id: '20',
+    name: 'Marcos',
+    surname: 'Giannini',
+    urlLinkedin: 'https://www.linkedin.com/in/marcosgiannini-dev/',
+    image: './assets/marcos-giannini.jpeg',
+  },
 ];

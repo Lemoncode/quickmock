@@ -223,6 +223,25 @@ export const CanvasProvider: React.FC<Props> = props => {
     setCanvasSize(createDefaultCanvasSize());
     setDocumentAndMarkDirtyState(createDefaultDocumentModel(), false);
     setFileName('');
+
+    // 🔹 Resetear el scroll de manera más precisa
+    setTimeout(() => {
+      requestAnimationFrame(() => {
+        const canvasContainer = window.document.querySelector(
+          "[data-drop-target-for-element='true']"
+        ) as HTMLElement;
+        if (canvasContainer) {
+          console.log('✅ Reseteando scroll del canvas:', canvasContainer);
+
+          // 🔹 Forzamos el scroll varias veces
+          canvasContainer.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          setTimeout(() => canvasContainer.scrollTo(0, 0), 10);
+          requestAnimationFrame(() => canvasContainer.scrollTo(0, 0));
+        } else {
+          console.log('⚠️ No se encontró el contenedor de scroll.');
+        }
+      });
+    }, 200);
   };
 
   const deleteSelectedShapes = () => {
