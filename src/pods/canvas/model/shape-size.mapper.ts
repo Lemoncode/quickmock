@@ -17,6 +17,7 @@ import {
   getTextAreaSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
+  getToggleLightDarkShapeSizeRestrictions,
   getTooltipShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
 } from '@/common/components/mock-components/front-components';
@@ -90,6 +91,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   combobox: getComboBoxShapeSizeRestrictions,
   input: getInputShapeSizeRestrictions,
   toggleswitch: getToggleSwitchShapeSizeRestrictions,
+  toggleLightDark: getToggleLightDarkShapeSizeRestrictions,
   textarea: getTextAreaSizeRestrictions,
   datepickerinput: getDatepickerInputShapeSizeRestrictions,
   button: getButtonShapeSizeRestrictions,
