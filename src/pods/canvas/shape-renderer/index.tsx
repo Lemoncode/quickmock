@@ -7,6 +7,7 @@ import {
   renderNotFound,
   renderButton,
   renderToggleSwitch,
+  renderToggleLightDark,
   renderCheckbox,
   renderProgressbar,
   renderListbox,
@@ -87,6 +88,8 @@ export const renderShapeComponent = (
       return renderTextArea(shape, shapeRenderedProps);
     case 'toggleswitch':
       return renderToggleSwitch(shape, shapeRenderedProps);
+    case 'toggleLightDark':
+      return renderToggleLightDark(shape, shapeRenderedProps);
     case 'progressbar':
       return renderProgressbar(shape, shapeRenderedProps);
     case 'listbox':

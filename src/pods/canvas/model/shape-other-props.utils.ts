@@ -194,6 +194,7 @@ export const generateDefaultOtherProps = (
         textColor: '#000000',
       };
     case 'toggleswitch':
+    case 'toggleLightDark':
       return {
         checked: true,
       };
