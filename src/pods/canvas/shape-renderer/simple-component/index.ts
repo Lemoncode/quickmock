@@ -3,7 +3,6 @@ export * from './input.renderer';
 export * from './checkbox.renderer';
 export * from './textarea.renderer';
 export * from './toggleswitch.renderer';
-export * from './togglelightdark.renderer';
 export * from './notfound.renderer';
 export * from './button.renderer';
 export * from './progressbar.renderer';

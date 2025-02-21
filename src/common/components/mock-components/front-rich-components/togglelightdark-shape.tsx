@@ -4,7 +4,7 @@ import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Circle, Group, Rect, Image } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import { BASIC_SHAPE } from './shape.const';
+import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 import sunIconUrl from '/icons/sun.svg';
 import moonIconUrl from '/icons/moonalt.svg';

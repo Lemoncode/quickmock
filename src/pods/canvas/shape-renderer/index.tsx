@@ -7,7 +7,6 @@ import {
   renderNotFound,
   renderButton,
   renderToggleSwitch,
-  renderToggleLightDark,
   renderCheckbox,
   renderProgressbar,
   renderListbox,
@@ -42,6 +41,7 @@ import {
   renderModal,
   renderButtonBar,
   renderTabsBar,
+  renderToggleLightDark,
   renderVideoconference,
 } from './simple-rich-components';
 import {

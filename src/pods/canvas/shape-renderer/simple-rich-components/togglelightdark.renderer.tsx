@@ -1,6 +1,6 @@
 import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
-import { ToggleLightDark } from '@/common/components/mock-components/front-components/togglelightdark-shape';
+import { ToggleLightDark } from '@/common/components/mock-components/front-rich-components/togglelightdark-shape';
 export const renderToggleLightDark = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps

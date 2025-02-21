@@ -19,7 +19,6 @@ export const mockWidgetCollection: ItemInfo[] = [
   { thumbnailSrc: '/widgets/textarea.svg', type: 'textarea' },
   { thumbnailSrc: '/widgets/timepicker.svg', type: 'timepickerinput' },
   { thumbnailSrc: '/widgets/toggleswitch.svg', type: 'toggleswitch' },
-  { thumbnailSrc: '/widgets/togglelightdark.svg', type: 'toggleLightDark' },
   { thumbnailSrc: '/widgets/tooltip.svg', type: 'tooltip' },
   { thumbnailSrc: '/widgets/verticalscrollbar.svg', type: 'verticalScrollBar' },
 ];

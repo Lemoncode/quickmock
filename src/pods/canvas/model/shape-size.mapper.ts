@@ -17,7 +17,6 @@ import {
   getTextAreaSizeRestrictions,
   getTimepickerInputShapeSizeRestrictions,
   getToggleSwitchShapeSizeRestrictions,
-  getToggleLightDarkShapeSizeRestrictions,
   getTooltipShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
 } from '@/common/components/mock-components/front-components';
@@ -58,6 +57,7 @@ import {
   getPieChartShapeSizeRestrictions,
   getTableSizeRestrictions,
   getTabsBarShapeSizeRestrictions,
+  getToggleLightDarkShapeSizeRestrictions,
   getVerticalMenuShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
   getVideoconferenceShapeSizeRestrictions,
