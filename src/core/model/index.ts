@@ -70,7 +70,8 @@ export type ShapeType =
   | 'slider'
   | 'link'
   | 'cilinder'
-  | 'richtext';
+  | 'richtext'
+  | 'loading-indicator';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -131,6 +132,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   slider: 'Slider',
   richtext: 'Rich Text',
   cilinder: 'Cilinder',
+  'loading-indicator': 'Loading',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';

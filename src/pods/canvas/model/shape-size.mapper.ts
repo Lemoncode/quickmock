@@ -52,6 +52,7 @@ import {
   getCalendarShapeSizeRestrictions,
   getHorizontalMenuShapeSizeRestrictions,
   getLineChartShapeSizeRestrictions,
+  getLoadIndicatorSizeRestrictions,
   getMapChartShapeSizeRestrictions,
   getModalShapeSizeRestrictions,
   getPieChartShapeSizeRestrictions,
@@ -142,6 +143,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   slider: getSliderShapeSizeRestrictions,
   audioPlayer: getAudioPlayerShapeSizeRestrictions,
   cilinder: getCilinderShapeSizeRestrictions,
+  'loading-indicator': getLoadIndicatorSizeRestrictions,
 };
 
 export default shapeSizeMap;

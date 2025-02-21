@@ -13,6 +13,10 @@ export const mockRichComponentsCollection: ItemInfo[] = [
     type: 'horizontal-menu',
   },
   { thumbnailSrc: '/rich-components/line-chart.svg', type: 'linechart' },
+  {
+    thumbnailSrc: '/rich-components/loading-indicator.svg',
+    type: 'loading-indicator',
+  },
   { thumbnailSrc: '/rich-components/map.svg', type: 'map' },
   { thumbnailSrc: '/rich-components/modal.svg', type: 'modal' },
   { thumbnailSrc: '/rich-components/pie.svg', type: 'pie' },

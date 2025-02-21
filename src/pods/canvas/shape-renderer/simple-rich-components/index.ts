@@ -14,3 +14,4 @@ export * from './appBar.renderer';
 export * from './button-bar.renderer';
 export * from './tabsbar.renderer';
 export * from './audio-player.renderer';
+export * from './loading-indicator.renderer';

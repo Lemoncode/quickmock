@@ -68,6 +68,7 @@ import { renderSmalltext } from './simple-text-components/smalltext.renderer';
 import { renderImage } from './simple-basic-shapes/image.renderer';
 import { renderCalendar } from './simple-rich-components/calendar.renderer';
 import { renderAppBar } from './simple-rich-components/appBar.renderer';
+import { renderLoadingIndicator } from './simple-rich-components/loading-indicator.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -188,6 +189,8 @@ export const renderShapeComponent = (
       return renderSlider(shape, shapeRenderedProps);
     case 'cilinder':
       return renderCilinder(shape, shapeRenderedProps);
+    case 'loading-indicator':
+      return renderLoadingIndicator(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
