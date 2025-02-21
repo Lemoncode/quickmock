@@ -15,3 +15,4 @@ export * from './buttonBar/buttonBar';
 export * from './tabsbar';
 export * from './audio-player';
 export * from './videoconference';
+export * from './togglelightdark-shape';

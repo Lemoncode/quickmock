@@ -9,6 +9,7 @@ export * from './line-chart.renderer';
 export * from './vertical-menu.renderer';
 export * from './calendar.renderer';
 export * from './table.renderer';
+export * from './togglelightdark.renderer';
 export * from './modal.renderer';
 export * from './appBar.renderer';
 export * from './button-bar.renderer';
