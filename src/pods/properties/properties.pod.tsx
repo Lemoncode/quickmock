@@ -18,6 +18,7 @@ import { useMemo } from 'react';
 import { extractMultiplePropsInCommon } from './properties.business';
 import { ShowProp } from './components/show-prop';
 import { iconCollection } from './components/icon-selector/modal/icons';
+import { Placeholder } from './components/placeholder';
 
 export const PropertiesPod = () => {
   const { selectionInfo, fullDocument } = useCanvasContext();
@@ -186,6 +187,26 @@ export const PropertiesPod = () => {
               updateOtherPropsOnSelected(
                 'checked',
                 checked,
+                isMultipleSelection
+              )
+            }
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="isPlaceholder"
+          propValue={selectedShapeData?.otherProps?.isPlaceholder}
+        >
+          <Placeholder
+            label="Placeholder"
+            isPlaceholder={
+              selectedShapeData?.otherProps?.isPlaceholder ?? false
+            }
+            onChange={isPlaceholder =>
+              updateOtherPropsOnSelected(
+                'isPlaceholder',
+                isPlaceholder,
                 isMultipleSelection
               )
             }

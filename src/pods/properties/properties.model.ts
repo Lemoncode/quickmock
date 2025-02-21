@@ -19,6 +19,7 @@ export const multiSelectEnabledProperties: (keyof OtherProps)[] = [
   'selectedBackgroundColor',
   'textAlignment',
   'disabled',
+  'isPlaceholder',
 ];
 
 export type PropsValueTypes =
