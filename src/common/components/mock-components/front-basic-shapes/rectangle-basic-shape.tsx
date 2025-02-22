@@ -2,7 +2,7 @@ import { ShapeSizeRestrictions } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { Group, Rect } from 'react-konva';
+import { Group, Line, Rect } from 'react-konva';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
@@ -54,8 +54,33 @@ export const RectangleShape = forwardRef<any, ShapeProps>((props, ref) => {
     ref
   );
 
+  // const borders = [true, true, false, false];
+
+  const lines = [
+    [0, 0, restrictedWidth, 0],
+    [restrictedWidth, 0, restrictedWidth, restrictedHeight],
+    [restrictedWidth, restrictedHeight, 0, restrictedHeight],
+    [0, 0, 0, restrictedHeight],
+  ];
+
   return (
     <Group {...commonGroupProps} {...shapeProps}>
+      {/* {borders.map((border, index) => {
+        if (border) {
+          return (
+            <Line
+              key={index}
+              points={lines[index]}
+              stroke="red"
+              strokeWidth={5}
+              closed={true}
+              lineJoin="round"
+            />
+          );
+          return null;
+        }
+      })} */}
+
       <Rect
         x={0}
         y={0}
@@ -66,6 +91,14 @@ export const RectangleShape = forwardRef<any, ShapeProps>((props, ref) => {
         fill={fill}
         dash={strokeStyle}
         cornerRadius={borderRadius}
+      />
+
+      <Line
+        points={lines[0]}
+        stroke="fill"
+        strokeWidth={2}
+        closed={true}
+        lineJoin="round"
       />
     </Group>
   );
