@@ -41,8 +41,15 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { stroke, fill, textColor, strokeStyle, borderRadius, disabled } =
-    useShapeProps(otherProps, INPUT_SHAPE);
+  const {
+    stroke,
+    fill,
+    textColor,
+    strokeStyle,
+    borderRadius,
+    disabled,
+    isPlaceholder,
+  } = useShapeProps(otherProps, INPUT_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -72,7 +79,13 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
         fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
         lineHeight={INPUT_SHAPE.DEFAULT_LINE_HEIGHT}
-        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR : textColor}
+        fill={
+          disabled
+            ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR
+            : isPlaceholder
+              ? '#8c8c8c'
+              : textColor
+        }
         align="left"
         ellipsis={true}
         wrap="none"

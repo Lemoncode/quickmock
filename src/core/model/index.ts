@@ -184,6 +184,7 @@ export interface OtherProps {
   selectedBackgroundColor?: string;
   textAlignment?: 'left' | 'center' | 'right';
   disabled?: boolean;
+  isPlaceholder?: boolean;
 }
 
 export const BASE_ICONS_URL = '/icons/';
