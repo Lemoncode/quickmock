@@ -83,7 +83,7 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
           disabled
             ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR
             : isPlaceholder
-              ? INPUT_SHAPE.DEFAULT_FILL_TEXT
+              ? '#8c8c8c'
               : textColor
         }
         align="left"
