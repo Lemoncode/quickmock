@@ -41,6 +41,7 @@ import {
   renderModal,
   renderButtonBar,
   renderTabsBar,
+  renderToggleLightDark,
   renderVideoconference,
 } from './simple-rich-components';
 import {
@@ -87,6 +88,8 @@ export const renderShapeComponent = (
       return renderTextArea(shape, shapeRenderedProps);
     case 'toggleswitch':
       return renderToggleSwitch(shape, shapeRenderedProps);
+    case 'toggleLightDark':
+      return renderToggleLightDark(shape, shapeRenderedProps);
     case 'progressbar':
       return renderProgressbar(shape, shapeRenderedProps);
     case 'listbox':
