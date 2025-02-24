@@ -144,6 +144,9 @@ Team members participating in this project
   <a href="https://github.com/omarlm">
     <kbd><img src="https://github.com/omarlm.png" alt="Omar Lorenzo" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>  
+  <a href="https://github.com/iria-carballo">
+    <kbd><img src="https://github.com/iria-carballo.png" alt="Iria Carballo" width="50" height="50" style="border-radius: 50%;"></kbd>
+  </a>  
   <a href="https://github.com/marcosgiannini">
     <kbd><img src="https://github.com/marcosgiannini.png" alt="Marcos Giannini" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>  
