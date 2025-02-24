@@ -4,7 +4,7 @@ import {
   createDefaultCanvasSize,
   DocumentModel,
 } from '../providers/canvas/canvas.model';
-import { QuickMockFileContract } from './local-disk.model';
+import { Page, QuickMockFileContract } from './local-disk.model';
 import { APP_CONSTANTS } from '../providers/canvas/canvas.model';
 
 export const mapFromShapesArrayToQuickMockFileDocument = (
@@ -24,12 +24,48 @@ export const mapFromQuickMockFileDocumentToApplicationDocument = (
 ): DocumentModel => {
   return {
     activePageIndex: 0,
-    pages: fileDocument.pages,
+    pages: AdaptMinor_0_2_Updates(fileDocument.pages),
     customColors:
       fileDocument.customColors ||
       new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
     size: fileDocument.size ?? createDefaultCanvasSize(),
   };
+};
+
+const AdaptMinor_0_2_Updates = (pages: Page[]): Page[] => {
+  return pages.map(page => {
+    return {
+      ...page,
+      shapes: page.shapes.map(
+        AddDefaultValuesForInputPropsPlaceHolderAndPassword
+      ),
+    };
+  });
+};
+
+const AddDefaultValuesForInputPropsPlaceHolderAndPassword = (
+  shape: ShapeModel
+) => {
+  switch (shape.type) {
+    case 'input':
+      return {
+        ...shape,
+        otherProps: {
+          ...shape.otherProps,
+          isPlaceholder:
+            shape.otherProps?.isPlaceholder !== undefined
+              ? shape.otherProps?.isPlaceholder
+              : true,
+          textColor:
+            shape.otherProps?.isPlaceholder === undefined &&
+            shape.otherProps?.textColor === '#8c8c8c'
+              ? '#000000'
+              : shape.otherProps?.textColor,
+        },
+      };
+    default:
+      return shape;
+  }
 };
 
 const mapTextElementFromV0_1ToV0_2 = (shape: ShapeModel): ShapeModel => {
