@@ -136,9 +136,15 @@ export const memberList: Member[] = [
     urlLinkedin: 'https://www.linkedin.com/in/sergioelmoreno/',
     image: './assets/sergio-del-campo.jpg',
   },
-
   {
     id: '18',
+    name: 'Iria',
+    surname: 'Carballo',
+    urlLinkedin: 'https://www.linkedin.com/in/iria-carballo/',
+    image: './assets/iria-carballo.jpeg',
+  },
+  {
+    id: '19',
     name: 'Gabriel',
     surname: 'Ionut',
     urlLinkedin: 'https://www.linkedin.com/in/gabriel-ionut-birsan-b14816307/',
@@ -146,7 +152,7 @@ export const memberList: Member[] = [
   },
 
   {
-    id: '19',
+    id: '20',
     name: 'Antonio',
     surname: 'Contreras',
     urlLinkedin:
@@ -155,7 +161,7 @@ export const memberList: Member[] = [
   },
 
   {
-    id: '20',
+    id: '21',
     name: 'Braulio',
     surname: 'Diez',
     urlLinkedin: 'https://www.linkedin.com/in/brauliodiez/',
