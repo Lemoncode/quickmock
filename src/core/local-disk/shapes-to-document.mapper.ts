@@ -53,10 +53,16 @@ const AddDefaultValuesForInputPropsPlaceHolderAndPassword = (
         otherProps: {
           ...shape.otherProps,
           isPlaceholder:
+            // Small update no need to go for 0_3, but input placeHolder needs to have default value
+            // if undefined
             shape.otherProps?.isPlaceholder !== undefined
               ? shape.otherProps?.isPlaceholder
               : true,
           textColor:
+            // Small update, no need to go for 0_3,
+            // but input textColor needs to have default value
+            // if undefined, and textColor was placeholder gray color
+            // in this case change it to black
             shape.otherProps?.isPlaceholder === undefined &&
             shape.otherProps?.textColor === '#8c8c8c'
               ? '#000000'
