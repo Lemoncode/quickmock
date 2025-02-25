@@ -34,10 +34,7 @@ export const LoadIndicator = forwardRef<any, ShapeProps>((props, ref) => {
   const colors = ['#666', '#888', '#aaa', '#ccc'];
   const circlesRef = useRef<Array<Konva.Circle | null>>([]);
 
-  const { stroke, strokeStyle, fill, textColor } = useShapeProps(
-    otherProps,
-    BASIC_SHAPE
-  );
+  const { textColor } = useShapeProps(otherProps, BASIC_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -57,9 +54,6 @@ export const LoadIndicator = forwardRef<any, ShapeProps>((props, ref) => {
         y={0}
         width={restrictedWidth}
         height={restrictedHeight}
-        fill={fill}
-        stroke={stroke}
-        dash={strokeStyle}
         strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
       />
 
@@ -82,7 +76,7 @@ export const LoadIndicator = forwardRef<any, ShapeProps>((props, ref) => {
         x={0}
         y={restrictedHeight - 25}
         width={restrictedWidth}
-        text="Loading..."
+        text={props.text || 'Loading...'}
         fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE}
         fill={textColor}
