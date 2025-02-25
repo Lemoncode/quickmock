@@ -36,6 +36,7 @@ const inlineEditableShapes = new Set<ShapeType>([
   'datepickerinput',
   'browser',
   'modalDialog',
+  'loading-indicator',
 ]);
 
 // Check if a shape type allows inline editing
@@ -76,6 +77,7 @@ const shapeTypesWithDefaultText = new Set<ShapeType>([
   'datepickerinput',
   'browser',
   'modalDialog',
+  'loading-indicator',
 ]);
 
 // Map of ShapeTypes to their default text values
@@ -141,6 +143,7 @@ export const getShapeEditInlineType = (
     case 'modal':
     case 'appBar':
     case 'tabsBar':
+    case 'loading-indicator':
     case 'tooltip':
       return 'textarea';
       break;
