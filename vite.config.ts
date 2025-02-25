@@ -26,4 +26,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    port: 5173, // Usa el mismo puerto que te muestra la terminal
+    open: true, // Esto abrirá el navegador automáticamente
+  },
 });

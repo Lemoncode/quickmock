@@ -39,6 +39,7 @@ import {
   getRectangleShapeSizeRestrictions,
   getStarShapeSizeRestrictions,
   getModalCoverShapeSizeRestrictions,
+  getCilinderShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-basic-shapes';
 import {
@@ -56,9 +57,11 @@ import {
   getPieChartShapeSizeRestrictions,
   getTableSizeRestrictions,
   getTabsBarShapeSizeRestrictions,
+  getToggleLightDarkShapeSizeRestrictions,
   getVerticalMenuShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
   getProgressIndicatorShapeSizeRestrictions,
+  getVideoconferenceShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-rich-components';
 import {
@@ -89,6 +92,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   combobox: getComboBoxShapeSizeRestrictions,
   input: getInputShapeSizeRestrictions,
   toggleswitch: getToggleSwitchShapeSizeRestrictions,
+  toggleLightDark: getToggleLightDarkShapeSizeRestrictions,
   textarea: getTextAreaSizeRestrictions,
   datepickerinput: getDatepickerInputShapeSizeRestrictions,
   button: getButtonShapeSizeRestrictions,
@@ -142,6 +146,8 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   slider: getSliderShapeSizeRestrictions,
   audioPlayer: getAudioPlayerShapeSizeRestrictions,
   progressIndicator: getProgressIndicatorShapeSizeRestrictions,
+  cilinder: getCilinderShapeSizeRestrictions,
+  videoconference: getVideoconferenceShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;

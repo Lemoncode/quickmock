@@ -3,8 +3,9 @@ import Konva from 'konva';
 export const isUserDoingMultipleSelectionUsingCtrlOrCmdKey = (
   e: Konva.KonvaEventObject<MouseEvent> | Konva.KonvaEventObject<TouchEvent>
 ) => {
-  // Ctrl in Windows o Cmd en Mac
-  const isCtrlOrCmdPressed = e.evt.ctrlKey || e.evt.metaKey;
+  // Check if Ctrl (Windows), Cmd (Mac), or Shift is pressed
+  const isCtrlOrCmdOrShiftPressed =
+    e.evt.ctrlKey || e.evt.metaKey || e.evt.shiftKey;
 
-  return isCtrlOrCmdPressed;
+  return isCtrlOrCmdOrShiftPressed;
 };

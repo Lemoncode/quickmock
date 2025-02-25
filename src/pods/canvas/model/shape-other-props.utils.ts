@@ -15,6 +15,7 @@ export const generateDefaultOtherProps = (
         stroke: INPUT_SHAPE.DEFAULT_STROKE_COLOR,
         backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
+        isPlaceholder: true,
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
         disabled: INPUT_SHAPE.DEFAULT_DISABLED,
@@ -201,6 +202,7 @@ export const generateDefaultOtherProps = (
         textColor: '#000000',
       };
     case 'toggleswitch':
+    case 'toggleLightDark':
       return {
         checked: true,
       };

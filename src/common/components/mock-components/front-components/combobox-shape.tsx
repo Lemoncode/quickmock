@@ -8,7 +8,7 @@ import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from './shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const comboBoxShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
+  minWidth: 85,
   minHeight: BASIC_SHAPE.DEFAULT_TEXT_HEIGHT,
   maxWidth: -1,
   maxHeight: BASIC_SHAPE.DEFAULT_TEXT_HEIGHT,

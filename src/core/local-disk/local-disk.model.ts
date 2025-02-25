@@ -1,4 +1,5 @@
 import { ShapeModel } from '../model';
+import { CanvasSize } from '../providers/canvas/canvas.model';
 
 export interface Page {
   id: string;
@@ -10,4 +11,5 @@ export interface QuickMockFileContract {
   version: string;
   pages: Page[];
   customColors: (string | null)[];
+  size: CanvasSize;
 }

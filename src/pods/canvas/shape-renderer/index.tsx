@@ -42,6 +42,8 @@ import {
   renderButtonBar,
   renderTabsBar,
   renderProgressIndicator,
+  renderToggleLightDark,
+  renderVideoconference,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -54,6 +56,7 @@ import {
   renderStar,
   renderPostit,
   renderLargeArrowShape,
+  renderCilinder,
 } from './simple-basic-shapes';
 import {
   renderHeading1,
@@ -86,6 +89,8 @@ export const renderShapeComponent = (
       return renderTextArea(shape, shapeRenderedProps);
     case 'toggleswitch':
       return renderToggleSwitch(shape, shapeRenderedProps);
+    case 'toggleLightDark':
+      return renderToggleLightDark(shape, shapeRenderedProps);
     case 'progressbar':
       return renderProgressbar(shape, shapeRenderedProps);
     case 'listbox':
@@ -188,6 +193,10 @@ export const renderShapeComponent = (
       return renderSlider(shape, shapeRenderedProps);
     case 'progressIndicator':
       return renderProgressIndicator(shape, shapeRenderedProps);
+    case 'cilinder':
+      return renderCilinder(shape, shapeRenderedProps);
+    case 'videoconference':
+      return renderVideoconference(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
