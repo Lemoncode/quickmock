@@ -41,6 +41,7 @@ import {
   renderModal,
   renderButtonBar,
   renderTabsBar,
+  renderProgressIndicator,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -185,6 +186,8 @@ export const renderShapeComponent = (
       return renderTooltip(shape, shapeRenderedProps);
     case 'slider':
       return renderSlider(shape, shapeRenderedProps);
+    case 'progressIndicator':
+      return renderProgressIndicator(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

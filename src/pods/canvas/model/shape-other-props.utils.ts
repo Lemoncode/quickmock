@@ -66,6 +66,13 @@ export const generateDefaultOtherProps = (
         disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
     case 'modal':
+    case 'progressIndicator':
+      return {
+        backgroundColor: '#d3d3d3',
+        stroke: '#808080',
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+      };
     case 'buttonBar':
       return {
         stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
