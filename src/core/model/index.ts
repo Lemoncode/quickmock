@@ -70,7 +70,7 @@ export type ShapeType =
   | 'tooltip'
   | 'slider'
   | 'link'
-  | 'progressIndicator';
+  | 'progressIndicator'
   | 'cilinder'
   | 'videoconference'
   | 'richtext';
