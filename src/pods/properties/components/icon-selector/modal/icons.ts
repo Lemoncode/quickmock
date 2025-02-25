@@ -1877,15 +1877,15 @@ export const iconCollection: IconInfo[] = [
     categories: ['IT'],
   },
   {
-    name: 'Spinner',
-    filename: 'spinner.svg',
-    searchTerms: ['spinner', 'loading', 'wait', 'progress'],
+    name: 'ProgressIndicator',
+    filename: 'progressIndicator.svg',
+    searchTerms: ['progressIndicator', 'loading', 'wait', 'progress'],
     categories: ['IT'],
   },
   {
-    name: 'Spinner gap',
-    filename: 'spinnergap.svg',
-    searchTerms: ['spinner', 'loading', 'wait', 'progress'],
+    name: 'ProgressIndicator gap',
+    filename: 'progressIndicatorgap.svg',
+    searchTerms: ['progressIndicator', 'loading', 'wait', 'progress'],
     categories: ['IT'],
   },
   {
