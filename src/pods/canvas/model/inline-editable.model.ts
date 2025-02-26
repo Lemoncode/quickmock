@@ -36,6 +36,7 @@ const inlineEditableShapes = new Set<ShapeType>([
   'datepickerinput',
   'browser',
   'modalDialog',
+  'loading-indicator',
 ]);
 
 // Check if a shape type allows inline editing
@@ -76,6 +77,7 @@ const shapeTypesWithDefaultText = new Set<ShapeType>([
   'datepickerinput',
   'browser',
   'modalDialog',
+  'loading-indicator',
 ]);
 
 // Map of ShapeTypes to their default text values
@@ -113,6 +115,7 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   datepickerinput: new Date().toLocaleDateString(),
   browser: 'https://example.com',
   modalDialog: 'Title here...',
+  'loading-indicator': 'Loading...',
 };
 
 export const generateDefaultTextValue = (

@@ -71,6 +71,8 @@ export type ShapeType =
   | 'slider'
   | 'link'
   | 'cilinder'
+  | 'richtext'
+  | 'loading-indicator'
   | 'videoconference'
   | 'richtext';
 
@@ -134,6 +136,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   slider: 'Slider',
   richtext: 'Rich Text',
   cilinder: 'Cilinder',
+  'loading-indicator': 'Loading',
   videoconference: 'Videoconference',
 };
 
