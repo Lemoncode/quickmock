@@ -144,7 +144,6 @@ export const getShapeEditInlineType = (
     case 'modal':
     case 'appBar':
     case 'tabsBar':
-    case 'loading-indicator':
     case 'tooltip':
       return 'textarea';
       break;
