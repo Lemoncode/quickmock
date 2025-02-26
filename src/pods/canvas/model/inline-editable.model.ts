@@ -115,6 +115,7 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   datepickerinput: new Date().toLocaleDateString(),
   browser: 'https://example.com',
   modalDialog: 'Title here...',
+  'loading-indicator': 'Loading...',
 };
 
 export const generateDefaultTextValue = (
