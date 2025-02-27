@@ -49,6 +49,7 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
     borderRadius,
     disabled,
     isPlaceholder,
+    isPassword,
   } = useShapeProps(otherProps, INPUT_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
@@ -57,6 +58,11 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
+
+  const maskPassword = (text: string) => {
+    const maskSymbol = '•';
+    return maskSymbol.repeat(text.length);
+  };
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
@@ -75,7 +81,7 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
         x={INPUT_SHAPE.DEFAULT_PADDING}
         y={INPUT_SHAPE.DEFAULT_PADDING + 1}
         width={width - INPUT_SHAPE.DEFAULT_PADDING * 2}
-        text={text}
+        text={isPassword ? maskPassword(text) : text}
         fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
         lineHeight={INPUT_SHAPE.DEFAULT_LINE_HEIGHT}
