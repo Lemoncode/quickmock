@@ -52,6 +52,10 @@ const AddDefaultValuesForInputPropsPlaceHolderAndPassword = (
         ...shape,
         otherProps: {
           ...shape.otherProps,
+          isPassword:
+            shape.otherProps?.isPassword !== undefined
+              ? shape.otherProps?.isPassword
+              : false,
           isPlaceholder:
             // Small update no need to go for 0_3, but input placeHolder needs to have default value
             // if undefined
