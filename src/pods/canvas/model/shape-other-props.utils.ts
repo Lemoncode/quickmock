@@ -16,6 +16,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
         isPlaceholder: true,
+        isPassword: false,
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
         disabled: INPUT_SHAPE.DEFAULT_DISABLED,
