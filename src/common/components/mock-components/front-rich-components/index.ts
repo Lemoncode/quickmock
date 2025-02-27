@@ -14,6 +14,7 @@ export * from './appBar';
 export * from './buttonBar/buttonBar';
 export * from './tabsbar';
 export * from './audio-player';
+export * from './loading-indicator';
 export * from './videoconference';
 export * from './togglelightdark-shape';
 export * from './gauge/gauge';
