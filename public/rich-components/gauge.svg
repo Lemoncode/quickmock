@@ -16,7 +16,7 @@
     stroke="#808080" 
     stroke-width="10"
     stroke-dasharray="283"
-    stroke-dashoffset="48"
+    stroke-dashoffset="255"
     transform="rotate(-90 50 50)"
   />
   
@@ -28,5 +28,5 @@
     font-size="24" 
     font-family="Arial, sans-serif"
     font-weight="bold"
-  >83%</text>
+  >10%</text>
 </svg>
