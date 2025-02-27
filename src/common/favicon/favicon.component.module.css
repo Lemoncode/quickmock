@@ -1,0 +1,12 @@
+.container {
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: 'pointer';
+  transition: transform 0.2s ease-in-out;
+}
+
+.container:active {
+  transform: scale(0.95);
+}
