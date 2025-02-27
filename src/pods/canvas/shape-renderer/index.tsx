@@ -41,9 +41,9 @@ import {
   renderModal,
   renderButtonBar,
   renderTabsBar,
-  renderProgressIndicator,
   renderToggleLightDark,
   renderVideoconference,
+  renderGauge,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -191,12 +191,13 @@ export const renderShapeComponent = (
       return renderTooltip(shape, shapeRenderedProps);
     case 'slider':
       return renderSlider(shape, shapeRenderedProps);
-    case 'progressIndicator':
-      return renderProgressIndicator(shape, shapeRenderedProps);
     case 'cilinder':
       return renderCilinder(shape, shapeRenderedProps);
     case 'videoconference':
       return renderVideoconference(shape, shapeRenderedProps);
+    case 'gauge':
+      return renderGauge(shape, shapeRenderedProps);
+
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

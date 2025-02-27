@@ -1,8 +1,8 @@
-import { ProgressIndicator } from '@/common/components/mock-components/front-rich-components';
+import { Gauge } from '@/common/components/mock-components/front-rich-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 
-export const renderProgressIndicator = (
+export const renderGauge = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
@@ -10,7 +10,7 @@ export const renderProgressIndicator = (
     shapeRenderedProps;
 
   return (
-    <ProgressIndicator
+    <Gauge
       id={shape.id}
       key={shape.id}
       ref={shapeRefs.current[shape.id]}

@@ -36,7 +36,7 @@ const inlineEditableShapes = new Set<ShapeType>([
   'datepickerinput',
   'browser',
   'modalDialog',
-  'progressIndicator',
+  'gauge',
 ]);
 
 // Check if a shape type allows inline editing
@@ -107,7 +107,7 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   modal:
     'Alert\nWarning: The action you are about to perform may affect existing data. Are you sure you want to proceed? Once confirmed, this action cannot be undone.\nConfirm,Cancel',
   appBar: 'AppBar',
-  progressIndicator: '83%',
+  gauge: '10%',
   buttonBar: 'Button 1, Button 2, Button 3',
   tabsBar: 'Tab 1, Tab 2, Tab 3',
   link: 'Link',
@@ -141,7 +141,7 @@ export const getShapeEditInlineType = (
     case 'vertical-menu':
     case 'table':
     case 'modal':
-    case 'progressIndicator':
+    case 'gauge':
     case 'appBar':
     case 'tabsBar':
     case 'tooltip':

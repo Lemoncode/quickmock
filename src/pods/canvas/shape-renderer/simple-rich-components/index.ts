@@ -12,7 +12,7 @@ export * from './table.renderer';
 export * from './togglelightdark.renderer';
 export * from './modal.renderer';
 export * from './pie-chart.renderer';
-export * from './progressIndicator.renderer';
+export * from './gauge.renderer';
 export * from './table.renderer';
 export * from './tabsbar.renderer';
 export * from './vertical-menu.renderer';

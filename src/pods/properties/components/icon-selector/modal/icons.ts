@@ -1877,15 +1877,15 @@ export const iconCollection: IconInfo[] = [
     categories: ['IT'],
   },
   {
-    name: 'ProgressIndicator',
-    filename: 'progressIndicator.svg',
-    searchTerms: ['progressIndicator', 'loading', 'wait', 'progress'],
+    name: 'Gauge',
+    filename: 'gauge.svg',
+    searchTerms: ['gauge', 'loading', 'wait', 'progress'],
     categories: ['IT'],
   },
   {
-    name: 'ProgressIndicator gap',
-    filename: 'progressIndicatorgap.svg',
-    searchTerms: ['progressIndicator', 'loading', 'wait', 'progress'],
+    name: 'Gauge gap',
+    filename: 'gaugegap.svg',
+    searchTerms: ['gauge', 'loading', 'wait', 'progress'],
     categories: ['IT'],
   },
   {

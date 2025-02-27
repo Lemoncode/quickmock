@@ -60,8 +60,8 @@ import {
   getToggleLightDarkShapeSizeRestrictions,
   getVerticalMenuShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
-  getProgressIndicatorShapeSizeRestrictions,
   getVideoconferenceShapeSizeRestrictions,
+  getGaugeShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-rich-components';
 import {
@@ -145,9 +145,9 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   tooltip: getTooltipShapeSizeRestrictions,
   slider: getSliderShapeSizeRestrictions,
   audioPlayer: getAudioPlayerShapeSizeRestrictions,
-  progressIndicator: getProgressIndicatorShapeSizeRestrictions,
   cilinder: getCilinderShapeSizeRestrictions,
   videoconference: getVideoconferenceShapeSizeRestrictions,
+  gauge: getGaugeShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;

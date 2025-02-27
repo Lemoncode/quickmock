@@ -67,12 +67,11 @@ export const generateDefaultOtherProps = (
         disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
     case 'modal':
-    case 'progressIndicator':
+    case 'gauge':
       return {
         backgroundColor: '#d3d3d3',
         stroke: '#808080',
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
-        strokeStyle: [],
       };
     case 'buttonBar':
       return {

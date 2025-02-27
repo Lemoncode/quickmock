@@ -70,11 +70,10 @@ export type ShapeType =
   | 'tooltip'
   | 'slider'
   | 'link'
-  | 'progressIndicator'
   | 'cilinder'
   | 'videoconference'
-  | 'richtext';
-
+  | 'richtext'
+  | 'gauge';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -135,9 +134,9 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   tooltip: 'Tooltip',
   slider: 'Slider',
   richtext: 'Rich Text',
-  progressIndicator: 'ProgressIndicator',
   cilinder: 'Cilinder',
   videoconference: 'Videoconference',
+  gauge: 'Gauge',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
