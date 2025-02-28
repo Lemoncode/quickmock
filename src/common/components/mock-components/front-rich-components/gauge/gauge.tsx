@@ -7,7 +7,10 @@ import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 
 import { BASIC_SHAPE } from '@/common/components/mock-components/front-components/shape.const';
 import { useGroupShapeProps } from '../../mock-components.utils';
-import { getGaugePartsText } from './gauge.utils';
+import {
+  endsWhithPercentageSymbol,
+  extractNumbersAsTwoDigitString,
+} from './gauge.utils';
 
 const gaugeShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 70,
@@ -42,7 +45,6 @@ export const Gauge = forwardRef<any, ShapeProps>((props, ref) => {
   );
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
-  const { gaugeValue } = getGaugePartsText(text);
   const { fontSize } = useShapeProps(otherProps, BASIC_SHAPE);
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -52,11 +54,12 @@ export const Gauge = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { stroke, fill, textColor } = useShapeProps(otherProps, BASIC_SHAPE);
 
-  const parsedValue = gaugeValue?.trim().endsWith('%')
-    ? gaugeValue.slice(0, -1)
-    : gaugeValue;
-  const progress = Number(parsedValue) || 10;
-  const showPercentage = gaugeValue?.trim().endsWith('%');
+  const numericPart = extractNumbersAsTwoDigitString(text);
+
+  const progress = Number(numericPart);
+  const displayValue = endsWhithPercentageSymbol(text)
+    ? `${numericPart}%`
+    : numericPart;
 
   const size = Math.min(restrictedWidth, restrictedHeight);
   const strokeWidth = Math.min(restrictedWidth, restrictedHeight) / 10;
@@ -64,7 +67,6 @@ export const Gauge = forwardRef<any, ShapeProps>((props, ref) => {
   const center = size / 2;
   const angle = (progress / 100.01) * 360;
   const fontSizeScaled = fontSize * (size / 80);
-  console.log(radius, center, angle, fontSizeScaled);
   const arcPath = () => {
     const startAngle = -90;
     const endAngle = startAngle + angle;
@@ -95,15 +97,12 @@ export const Gauge = forwardRef<any, ShapeProps>((props, ref) => {
         x={center - 10 - radius / 2}
         y={center - fontSizeScaled / 2}
         width={center + 10}
-        text={(parsedValue || '10%') + (showPercentage ? '%' : '')}
+        text={displayValue}
         fontFamily="Arial, sans-serif"
         fontSize={fontSizeScaled}
         align="center"
         fill={textColor}
         fontStyle="bold"
-        letterSpacing={1}
-        wrap="none"
-        ellipsis={true}
       />
     </Group>
   );

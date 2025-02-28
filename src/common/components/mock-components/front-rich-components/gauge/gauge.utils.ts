@@ -1,8 +1,8 @@
-interface GaugePartsText {
-  gaugeValue: string;
-}
-export const getGaugePartsText = (text: string): GaugePartsText => {
-  let gaugeValue = text ? text.replace(/\r?\n|\r/g, '').trim() : '';
+export const extractNumbersAsTwoDigitString = (text: string): string => {
+  const numbersAsString = text.replace(/\D/g, '');
+  return numbersAsString === '100' ? '100' : numbersAsString.slice(0, 2) || '0';
+};
 
-  return { gaugeValue };
+export const endsWhithPercentageSymbol = (text: string): boolean => {
+  return text.trim().endsWith('%');
 };

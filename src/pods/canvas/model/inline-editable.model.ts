@@ -79,6 +79,7 @@ const shapeTypesWithDefaultText = new Set<ShapeType>([
   'browser',
   'modalDialog',
   'loading-indicator',
+  'gauge',
 ]);
 
 // Map of ShapeTypes to their default text values
@@ -144,7 +145,6 @@ export const getShapeEditInlineType = (
     case 'vertical-menu':
     case 'table':
     case 'modal':
-    case 'gauge':
     case 'appBar':
     case 'tabsBar':
     case 'tooltip':
