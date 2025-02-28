@@ -19,6 +19,7 @@ import { extractMultiplePropsInCommon } from './properties.business';
 import { ShowProp } from './components/show-prop';
 import { iconCollection } from './components/icon-selector/modal/icons';
 import { Placeholder } from './components/placeholder';
+import { Password } from './components/password';
 
 export const PropertiesPod = () => {
   const { selectionInfo, fullDocument } = useCanvasContext();
@@ -207,6 +208,24 @@ export const PropertiesPod = () => {
               updateOtherPropsOnSelected(
                 'isPlaceholder',
                 isPlaceholder,
+                isMultipleSelection
+              )
+            }
+          />
+        </ShowProp>
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="isPassword"
+          propValue={selectedShapeData?.otherProps?.isPassword}
+        >
+          <Password
+            label="Password"
+            isPassword={selectedShapeData?.otherProps?.isPassword ?? false}
+            onChange={isPassword =>
+              updateOtherPropsOnSelected(
+                'isPassword',
+                isPassword,
                 isMultipleSelection
               )
             }
