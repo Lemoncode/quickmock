@@ -145,6 +145,13 @@ export const memberList: Member[] = [
   },
   {
     id: '19',
+    name: 'Omar',
+    surname: 'Lorenzo',
+    urlLinkedin: 'https://www.linkedin.com/in/omar-lorenzo-montelongo/',
+    image: './assets/omar-lorenzo.jpeg',
+  },
+  {
+    id: '20',
     name: 'Gabriel',
     surname: 'Ionut',
     urlLinkedin: 'https://www.linkedin.com/in/gabriel-ionut-birsan-b14816307/',
@@ -152,7 +159,7 @@ export const memberList: Member[] = [
   },
 
   {
-    id: '20',
+    id: '21',
     name: 'Antonio',
     surname: 'Contreras',
     urlLinkedin:
@@ -161,17 +168,10 @@ export const memberList: Member[] = [
   },
 
   {
-    id: '21',
+    id: '22',
     name: 'Braulio',
     surname: 'Diez',
     urlLinkedin: 'https://www.linkedin.com/in/brauliodiez/',
     image: './assets/braulio-diez.jpeg',
-  },
-  {
-    id: '22',
-    name: 'Omar',
-    surname: 'Lorenzo',
-    urlLinkedin: 'https://www.linkedin.com/in/omar-lorenzo-montelongo/',
-    image: './assets/omar-lorenzo.jpeg',
   },
 ];
