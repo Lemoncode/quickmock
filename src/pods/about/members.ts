@@ -167,4 +167,11 @@ export const memberList: Member[] = [
     urlLinkedin: 'https://www.linkedin.com/in/brauliodiez/',
     image: './assets/braulio-diez.jpeg',
   },
+  {
+    id: '22',
+    name: 'Omar',
+    surname: 'Lorenzo',
+    urlLinkedin: 'https://www.linkedin.com/in/omar-lorenzo-montelongo/',
+    image: './assets/omar-lorenzo.jpeg',
+  },
 ];
