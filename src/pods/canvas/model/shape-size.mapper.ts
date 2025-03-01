@@ -62,6 +62,7 @@ import {
   getVerticalMenuShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
   getVideoconferenceShapeSizeRestrictions,
+  getGaugeShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-rich-components';
 import {
@@ -148,6 +149,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   cilinder: getCilinderShapeSizeRestrictions,
   'loading-indicator': getLoadIndicatorSizeRestrictions,
   videoconference: getVideoconferenceShapeSizeRestrictions,
+  gauge: getGaugeShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;

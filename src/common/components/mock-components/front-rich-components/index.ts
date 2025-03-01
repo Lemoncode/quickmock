@@ -17,3 +17,4 @@ export * from './audio-player';
 export * from './loading-indicator';
 export * from './videoconference';
 export * from './togglelightdark-shape';
+export * from './gauge/gauge';

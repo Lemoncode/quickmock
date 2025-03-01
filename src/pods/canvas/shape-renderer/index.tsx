@@ -43,6 +43,7 @@ import {
   renderTabsBar,
   renderToggleLightDark,
   renderVideoconference,
+  renderGauge,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -197,6 +198,9 @@ export const renderShapeComponent = (
       return renderLoadingIndicator(shape, shapeRenderedProps);
     case 'videoconference':
       return renderVideoconference(shape, shapeRenderedProps);
+    case 'gauge':
+      return renderGauge(shape, shapeRenderedProps);
+
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

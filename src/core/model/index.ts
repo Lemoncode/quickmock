@@ -74,7 +74,8 @@ export type ShapeType =
   | 'richtext'
   | 'loading-indicator'
   | 'videoconference'
-  | 'richtext';
+  | 'richtext'
+  | 'gauge';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -138,6 +139,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   cilinder: 'Cilinder',
   'loading-indicator': 'Loading',
   videoconference: 'Videoconference',
+  gauge: 'Gauge',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
