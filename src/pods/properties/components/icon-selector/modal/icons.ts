@@ -1278,7 +1278,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Filter',
     filename: 'filter.svg',
-    searchTerms: ['filter', 'seep', 'select', 'find'],
+    searchTerms: ['filter', 'seep', 'select', 'find', 'funnel', 'lookup'],
     categories: ['IT'],
   },
   {
@@ -1877,18 +1877,6 @@ export const iconCollection: IconInfo[] = [
     categories: ['IT'],
   },
   {
-    name: 'Gauge',
-    filename: 'gauge.svg',
-    searchTerms: ['gauge', 'loading', 'wait', 'progress'],
-    categories: ['IT'],
-  },
-  {
-    name: 'Gauge gap',
-    filename: 'gaugegap.svg',
-    searchTerms: ['gauge', 'loading', 'wait', 'progress'],
-    categories: ['IT'],
-  },
-  {
     name: 'Subtitles',
     filename: 'subtitles.svg',
     searchTerms: ['subtitles', 'caption', 'language', 'translate'],
@@ -2402,6 +2390,12 @@ export const iconCollection: IconInfo[] = [
     name: 'Translate',
     filename: 'translate.svg',
     searchTerms: ['translate', 'multilanguage', 'language', 'translator'],
+    categories: ['IT'],
+  },
+  {
+    name: 'No filter',
+    filename: 'nonfilter.svg',
+    searchTerms: ['filter', 'query', 'search', 'find', 'lookup', 'funnel'],
     categories: ['IT'],
   },
 ];
