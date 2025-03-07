@@ -350,6 +350,34 @@ export const CanvasProvider: React.FC<Props> = props => {
     });
   };
 
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Skip if inline editing is active
+      if (isInlineEditing) return;
+
+      // Handle Select All (Cmd+A / Ctrl+A)
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        if (isPageIndexValid(document)) {
+          const currentPageShapes =
+            document.pages[document.activePageIndex].shapes;
+          const allShapeIds = currentPageShapes.map(shape => shape.id);
+
+          if (allShapeIds.length > 0) {
+            selectionInfo.handleSelected(
+              allShapeIds,
+              allShapeIds.length === 1 ? currentPageShapes[0].type : 'multiple',
+              false
+            );
+          }
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [document, selectionInfo, isInlineEditing]);
+
   return (
     <CanvasContext.Provider
       value={{
