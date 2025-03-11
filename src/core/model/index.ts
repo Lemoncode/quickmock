@@ -190,6 +190,7 @@ export interface OtherProps {
   textAlignment?: 'left' | 'center' | 'right';
   disabled?: boolean;
   isPlaceholder?: boolean;
+  isPassword?: boolean;
 }
 
 export const BASE_ICONS_URL = '/icons/';

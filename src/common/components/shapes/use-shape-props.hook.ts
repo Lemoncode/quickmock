@@ -27,6 +27,11 @@ export const useShapeProps = (
     [otherProps?.isPlaceholder]
   );
 
+  const isPassword = useMemo(
+    () => otherProps?.isPassword ?? true,
+    [otherProps?.isPassword]
+  );
+
   const fontVariant = useMemo(
     () => otherProps?.fontVariant ?? defaultStyleShape.DEFAULT_FONT_VARIANT,
     [otherProps?.fontVariant]
@@ -99,5 +104,6 @@ export const useShapeProps = (
     textAlignment,
     disabled,
     isPlaceholder,
+    isPassword,
   };
 };
