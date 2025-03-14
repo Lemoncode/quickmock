@@ -42,8 +42,22 @@ export const PostItShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const postItWidth = restrictedWidth;
   const postItHeight = restrictedHeight;
-  const tapeWidth = postItWidth * 0.4;
-  const tapeHeight = postItHeight * 0.18;
+
+  const fixedTapeWidth = 90;
+  const fixedTapeHeight = 40;
+
+  const minPostItWidthForFixedTape = 120;
+  const minPostItHeightForFixedTape = 120;
+
+  const tapeWidth =
+    postItWidth >= minPostItWidthForFixedTape
+      ? fixedTapeWidth
+      : (postItWidth / minPostItWidthForFixedTape) * fixedTapeWidth;
+
+  const tapeHeight =
+    postItHeight >= minPostItHeightForFixedTape
+      ? fixedTapeHeight
+      : (postItHeight / minPostItHeightForFixedTape) * fixedTapeHeight;
 
   const tapeX = (width - tapeWidth) / 2;
   const tapeY = 0;
