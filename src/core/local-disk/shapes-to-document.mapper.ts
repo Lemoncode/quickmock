@@ -1,7 +1,11 @@
 import { FONT_SIZE_VALUES } from '@/common/components/mock-components/front-components/shape.const';
 import { ShapeModel } from '../model';
-import { DocumentModel } from '../providers/canvas/canvas.model';
-import { QuickMockFileContract } from './local-disk.model';
+import {
+  createDefaultCanvasSize,
+  DocumentModel,
+} from '../providers/canvas/canvas.model';
+import { Page, QuickMockFileContract } from './local-disk.model';
+import { APP_CONSTANTS } from '../providers/canvas/canvas.model';
 
 export const mapFromShapesArrayToQuickMockFileDocument = (
   fullDocument: DocumentModel
@@ -10,6 +14,8 @@ export const mapFromShapesArrayToQuickMockFileDocument = (
   return {
     version: '0.2',
     pages: fullDocument.pages,
+    customColors: fullDocument.customColors,
+    size: fullDocument.size,
   };
 };
 
@@ -18,8 +24,58 @@ export const mapFromQuickMockFileDocumentToApplicationDocument = (
 ): DocumentModel => {
   return {
     activePageIndex: 0,
-    pages: fileDocument.pages,
+    pages: AdaptMinor_0_2_Updates(fileDocument.pages),
+    customColors:
+      fileDocument.customColors ||
+      new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+    size: fileDocument.size ?? createDefaultCanvasSize(),
   };
+};
+
+const AdaptMinor_0_2_Updates = (pages: Page[]): Page[] => {
+  return pages.map(page => {
+    return {
+      ...page,
+      shapes: page.shapes.map(
+        AddDefaultValuesForInputPropsPlaceHolderAndPassword
+      ),
+    };
+  });
+};
+
+const AddDefaultValuesForInputPropsPlaceHolderAndPassword = (
+  shape: ShapeModel
+) => {
+  switch (shape.type) {
+    case 'input':
+      return {
+        ...shape,
+        otherProps: {
+          ...shape.otherProps,
+          isPassword:
+            shape.otherProps?.isPassword !== undefined
+              ? shape.otherProps?.isPassword
+              : false,
+          isPlaceholder:
+            // Small update no need to go for 0_3, but input placeHolder needs to have default value
+            // if undefined
+            shape.otherProps?.isPlaceholder !== undefined
+              ? shape.otherProps?.isPlaceholder
+              : true,
+          textColor:
+            // Small update, no need to go for 0_3,
+            // but input textColor needs to have default value
+            // if undefined, and textColor was placeholder gray color
+            // in this case change it to black
+            shape.otherProps?.isPlaceholder === undefined &&
+            shape.otherProps?.textColor === '#8c8c8c'
+              ? '#000000'
+              : shape.otherProps?.textColor,
+        },
+      };
+    default:
+      return shape;
+  }
 };
 
 const mapTextElementFromV0_1ToV0_2 = (shape: ShapeModel): ShapeModel => {
@@ -121,5 +177,9 @@ export const mapFromQuickMockFileDocumentToApplicationDocumentV0_1 = (
         shapes: combinedShapes,
       },
     ],
+    customColors:
+      fileDocument.customColors ||
+      new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+    size: fileDocument.size,
   };
 };

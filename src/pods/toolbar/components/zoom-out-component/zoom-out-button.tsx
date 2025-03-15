@@ -1,17 +1,26 @@
 import { ZoomOutIcon } from '@/common/components/icons/zoom-out.component';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
-import { useCanvasContext } from '@/core/providers';
+import { useCanvasContext, useInteractionModeContext } from '@/core/providers';
 import { ToolbarButton } from '../toolbar-button';
 import { SHORTCUTS } from '../../shortcut/shortcut.const';
 
 export const ZoomOutButton = () => {
   const { scale, setScale } = useCanvasContext();
+  const { minScale, interactionMode } = useInteractionModeContext();
 
   const handleClick = () => {
-    setScale(prevScale => Number(Math.max(0.5, prevScale - 0.1).toFixed(1)));
+    setScale(prevScale =>
+      Number(
+        Math.max(
+          interactionMode === 'view' ? minScale : 0.5,
+          prevScale - 0.1
+        ).toFixed(1)
+      )
+    );
   };
 
-  const isDisabled = scale <= 0.5;
+  const isDisabled =
+    interactionMode === 'view' ? scale <= minScale : scale <= 0.5;
 
   return (
     <ToolbarButton

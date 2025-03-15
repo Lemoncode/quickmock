@@ -25,7 +25,17 @@ export interface Page {
 export interface DocumentModel {
   pages: Page[];
   activePageIndex: number;
+  customColors: (string | null)[];
+  size: {
+    width: number;
+    height: number;
+  };
 }
+
+export const createDefaultCanvasSize = (): CanvasSize => ({
+  width: 3000,
+  height: 3000,
+});
 
 export const createDefaultDocumentModel = (): DocumentModel => ({
   activePageIndex: 0,
@@ -36,6 +46,8 @@ export const createDefaultDocumentModel = (): DocumentModel => ({
       shapes: [],
     },
   ],
+  customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+  size: createDefaultCanvasSize(),
 });
 
 export interface SelectionInfo {
@@ -118,4 +130,15 @@ export interface CanvasContextModel {
   howManyLoadedDocuments: number;
   canvasSize: CanvasSize;
   setCanvasSize: (canvasDimensions: CanvasSize) => void;
+  customColors: (string | null)[];
+  updateColorSlot: (color: string, index: number) => void;
+  dropRef: React.MutableRefObject<HTMLDivElement | null>;
+  setDropRef: (dropRef: React.MutableRefObject<HTMLDivElement | null>) => void;
+  setIsDirty: (dirty: boolean) => void;
+  loadSampleDocument: boolean;
+  setLoadSampleDocument: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+export const APP_CONSTANTS = {
+  COLOR_SLOTS: 16,
+} as const;

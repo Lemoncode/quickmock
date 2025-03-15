@@ -6,7 +6,7 @@ import { createShape } from '@/pods/canvas/model';
 import { useHistoryManager } from '@/common/undo-redo';
 import { useStateWithInterceptor } from './canvas.hook';
 import {
-  CanvasSize,
+  createDefaultCanvasSize,
   createDefaultDocumentModel,
   DocumentModel,
 } from './canvas.model';
@@ -15,7 +15,7 @@ import Konva from 'konva';
 import { isPageIndexValid, removeShapesFromList } from './canvas.business';
 import { useClipboard } from './use-clipboard.hook';
 import { produce } from 'immer';
-
+import { APP_CONSTANTS } from './canvas.model';
 interface Props {
   children: React.ReactNode;
 }
@@ -30,10 +30,8 @@ export const CanvasProvider: React.FC<Props> = props => {
   const [isThumbnailContextMenuVisible, setIsThumbnailContextMenuVisible] =
     React.useState(false);
   const [howManyLoadedDocuments, setHowManyLoadedDocuments] = React.useState(0);
-  const [canvasSize, setCanvasSize] = React.useState<CanvasSize>({
-    width: 3000,
-    height: 3000,
-  });
+  const [canvasSize, setCanvasSize] = React.useState(createDefaultCanvasSize());
+  const [loadSampleDocument, setLoadSampleDocument] = React.useState(true);
 
   const {
     addSnapshot,
@@ -50,10 +48,34 @@ export const CanvasProvider: React.FC<Props> = props => {
       addSnapshot
     );
 
-  const selectionInfo = useSelection(document, setDocument);
+  const [isDirty, setIsDirty] = React.useState(false);
+
+  const setDocumentAndMarkDirtyState = (
+    updater: DocumentModel | ((prev: DocumentModel) => DocumentModel),
+    isDirty = true
+  ) => {
+    setDocument(updater);
+    setIsDirty(isDirty);
+  };
+
+  const selectionInfo = useSelection(
+    document,
+    setDocument,
+    setDocumentAndMarkDirtyState
+  );
+
+  React.useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (isDirty) {
+        e.preventDefault();
+      }
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [isDirty]);
 
   const addNewPage = () => {
-    setDocument(lastDocument =>
+    setDocumentAndMarkDirtyState(lastDocument =>
       produce(lastDocument, draft => {
         const newActiveIndex = draft.pages.length;
         draft.pages.push({
@@ -75,7 +97,7 @@ export const CanvasProvider: React.FC<Props> = props => {
       }
     );
 
-    setDocument(lastDocument =>
+    setDocumentAndMarkDirtyState(lastDocument =>
       produce(lastDocument, draft => {
         const newPage = {
           id: uuidv4(),
@@ -95,7 +117,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         ? document.pages[pageIndex + 1].id // If it's not the last page, select the next one
         : document.pages[pageIndex - 1].id; // Otherwise, select the previous one
 
-    setDocument(lastDocument =>
+    setDocumentAndMarkDirtyState(lastDocument =>
       produce(lastDocument, draft => {
         draft.pages = draft.pages.filter(
           currentPage => document.pages[pageIndex].id !== currentPage.id
@@ -118,7 +140,7 @@ export const CanvasProvider: React.FC<Props> = props => {
     selectionInfo.clearSelection();
     selectionInfo.shapeRefs.current = {};
 
-    setDocument(lastDocument =>
+    setDocumentAndMarkDirtyState(lastDocument =>
       produce(lastDocument, draft => {
         const pageIndex = draft.pages.findIndex(page => page.id === pageId);
         if (pageIndex !== -1) {
@@ -129,7 +151,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   };
 
   const editPageTitle = (pageIndex: number, newName: string) => {
-    setDocument(lastDocument =>
+    setDocumentAndMarkDirtyState(lastDocument =>
       produce(lastDocument, draft => {
         draft.pages[pageIndex].name = newName;
       })
@@ -137,7 +159,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   };
 
   const swapPages = (id1: string, id2: string) => {
-    setDocument(lastDocument =>
+    setDocumentAndMarkDirtyState(lastDocument =>
       produce(lastDocument, draft => {
         const index1 = draft.pages.findIndex(page => page.id === id1);
         const index2 = draft.pages.findIndex(page => page.id === id2);
@@ -151,13 +173,14 @@ export const CanvasProvider: React.FC<Props> = props => {
   };
 
   const pasteShapes = (shapes: ShapeModel[]) => {
+    loadSampleDocument && setLoadSampleDocument(false);
     const newShapes: ShapeModel[] = shapes.map(shape => {
       shape.id = uuidv4();
       return shape;
     });
 
     if (isPageIndexValid(document)) {
-      setDocument(lastDocument =>
+      setDocumentAndMarkDirtyState(lastDocument =>
         produce(lastDocument, draft => {
           draft.pages[lastDocument.activePageIndex].shapes.push(...newShapes);
         })
@@ -183,21 +206,28 @@ export const CanvasProvider: React.FC<Props> = props => {
     });
   };
 
+  const [dropRef, setDropRef] = React.useState<
+    React.MutableRefObject<HTMLDivElement | null>
+  >(React.useRef<HTMLDivElement>(null));
+
   const { copyShapeToClipboard, pasteShapeFromClipboard, canCopy, canPaste } =
     useClipboard(
       pasteShapes,
       document.pages[document.activePageIndex].shapes,
-      selectionInfo
+      selectionInfo,
+      dropRef
     );
 
   const createNewFullDocument = () => {
     setDocument(createDefaultDocumentModel());
+    setCanvasSize(createDefaultCanvasSize());
+    setDocumentAndMarkDirtyState(createDefaultDocumentModel(), false);
     setFileName('');
   };
 
   const deleteSelectedShapes = () => {
     if (isPageIndexValid(document)) {
-      setDocument(lastDocument =>
+      setDocumentAndMarkDirtyState(lastDocument =>
         produce(lastDocument, draft => {
           draft.pages[lastDocument.activePageIndex].shapes =
             removeShapesFromList(
@@ -216,13 +246,14 @@ export const CanvasProvider: React.FC<Props> = props => {
     y: number,
     otherProps?: OtherProps
   ) => {
+    loadSampleDocument && setLoadSampleDocument(false);
     if (!isPageIndexValid(document)) {
       return '';
     }
 
     const newShape = createShape({ x, y }, type, otherProps);
 
-    setDocument(lastDocument =>
+    setDocumentAndMarkDirtyState(lastDocument =>
       produce(lastDocument, draft => {
         draft.pages[lastDocument.activePageIndex].shapes.push(newShape);
       })
@@ -252,7 +283,7 @@ export const CanvasProvider: React.FC<Props> = props => {
         });
       });
     } else {
-      setDocument(fullDocument => {
+      setDocumentAndMarkDirtyState(fullDocument => {
         return produce(fullDocument, draft => {
           draft.pages[document.activePageIndex].shapes = draft.pages[
             document.activePageIndex
@@ -266,7 +297,7 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const updateShapePosition = (id: string, { x, y }: Coord) => {
     if (isPageIndexValid(document)) {
-      setDocument(fullDocument => {
+      setDocumentAndMarkDirtyState(fullDocument => {
         return produce(fullDocument, draft => {
           draft.pages[document.activePageIndex].shapes = draft.pages[
             document.activePageIndex
@@ -299,8 +330,24 @@ export const CanvasProvider: React.FC<Props> = props => {
   };
 
   const loadDocument = (document: DocumentModel) => {
+    setDocumentAndMarkDirtyState(document, false);
+    loadSampleDocument && setLoadSampleDocument(false);
     setDocument(document);
     setHowManyLoadedDocuments(numberOfDocuments => numberOfDocuments + 1);
+    setCustomColors(document.customColors);
+    setCanvasSize(document.size);
+  };
+
+  const [customColors, setCustomColors] = React.useState<(string | null)[]>(
+    new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null)
+  );
+
+  const updateColorSlot = (color: string, index: number) => {
+    setCustomColors(prev => {
+      const newColors = [...prev];
+      newColors[index] = color;
+      return newColors;
+    });
   };
 
   return (
@@ -329,7 +376,11 @@ export const CanvasProvider: React.FC<Props> = props => {
         setIsInlineEditing,
         fileName,
         setFileName,
-        fullDocument: document,
+        fullDocument: {
+          ...document,
+          customColors,
+          size: canvasSize,
+        },
         addNewPage,
         duplicatePage,
         getActivePage,
@@ -342,8 +393,15 @@ export const CanvasProvider: React.FC<Props> = props => {
         isThumbnailContextMenuVisible,
         setIsThumbnailContextMenuVisible,
         howManyLoadedDocuments,
-        canvasSize: canvasSize,
-        setCanvasSize: setCanvasSize,
+        canvasSize,
+        setCanvasSize,
+        customColors,
+        updateColorSlot,
+        dropRef,
+        setDropRef,
+        setIsDirty,
+        loadSampleDocument,
+        setLoadSampleDocument,
       }}
     >
       {children}

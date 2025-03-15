@@ -3,13 +3,20 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { ToolbarButton } from '../toolbar-button';
 import { useLocalDisk } from '@/core/local-disk';
 import { SHORTCUTS } from '../../shortcut/shortcut.const';
+import { useCanvasContext } from '@/core/providers';
 
 export const SaveButton: React.FC = () => {
   const { handleSave } = useLocalDisk();
+  const { setIsDirty } = useCanvasContext();
+
+  const handleSaveLocal = () => {
+    handleSave();
+    setIsDirty(false);
+  };
 
   return (
     <ToolbarButton
-      onClick={handleSave}
+      onClick={handleSaveLocal}
       className={classes.button}
       icon={<SaveIcon />}
       label="Save"

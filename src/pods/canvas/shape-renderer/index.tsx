@@ -41,6 +41,9 @@ import {
   renderModal,
   renderButtonBar,
   renderTabsBar,
+  renderToggleLightDark,
+  renderVideoconference,
+  renderGauge,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -53,6 +56,7 @@ import {
   renderStar,
   renderPostit,
   renderLargeArrowShape,
+  renderCilinder,
 } from './simple-basic-shapes';
 import {
   renderHeading1,
@@ -67,6 +71,7 @@ import { renderSmalltext } from './simple-text-components/smalltext.renderer';
 import { renderImage } from './simple-basic-shapes/image.renderer';
 import { renderCalendar } from './simple-rich-components/calendar.renderer';
 import { renderAppBar } from './simple-rich-components/appBar.renderer';
+import { renderLoadingIndicator } from './simple-rich-components/loading-indicator.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -85,6 +90,8 @@ export const renderShapeComponent = (
       return renderTextArea(shape, shapeRenderedProps);
     case 'toggleswitch':
       return renderToggleSwitch(shape, shapeRenderedProps);
+    case 'toggleLightDark':
+      return renderToggleLightDark(shape, shapeRenderedProps);
     case 'progressbar':
       return renderProgressbar(shape, shapeRenderedProps);
     case 'listbox':
@@ -185,6 +192,15 @@ export const renderShapeComponent = (
       return renderTooltip(shape, shapeRenderedProps);
     case 'slider':
       return renderSlider(shape, shapeRenderedProps);
+    case 'cilinder':
+      return renderCilinder(shape, shapeRenderedProps);
+    case 'loading-indicator':
+      return renderLoadingIndicator(shape, shapeRenderedProps);
+    case 'videoconference':
+      return renderVideoconference(shape, shapeRenderedProps);
+    case 'gauge':
+      return renderGauge(shape, shapeRenderedProps);
+
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

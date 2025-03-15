@@ -1,17 +1,26 @@
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { ZoomInIcon } from '@/common/components/icons/zoom-in.component';
-import { useCanvasContext } from '@/core/providers';
+import { useCanvasContext, useInteractionModeContext } from '@/core/providers';
 import { ToolbarButton } from '../toolbar-button';
 import { SHORTCUTS } from '../../shortcut/shortcut.const';
 
 export const ZoomInButton = () => {
   const { scale, setScale } = useCanvasContext();
+  const { maxScale, interactionMode } = useInteractionModeContext();
 
   const handleClick = () => {
-    setScale(prevScale => Number(Math.min(1.5, prevScale + 0.1).toFixed(1)));
+    setScale(prevScale =>
+      Number(
+        Math.min(
+          interactionMode === 'view' ? maxScale : 1.5,
+          prevScale + 0.1
+        ).toFixed(1)
+      )
+    );
   };
 
-  const isDisabled = scale >= 1.5;
+  const isDisabled =
+    interactionMode === 'view' ? scale >= maxScale : scale >= 1.5;
 
   return (
     <ToolbarButton

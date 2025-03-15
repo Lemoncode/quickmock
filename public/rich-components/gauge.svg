@@ -1,0 +1,31 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle 
+    cx="50" 
+    cy="50" 
+    r="50" 
+    fill="#d3d3d3"
+
+  />
+  
+  <circle 
+    cx="50" 
+    cy="50" 
+    r="45"
+    fill="none" 
+    stroke="#808080" 
+    stroke-width="10"
+    stroke-dasharray="283"
+    stroke-dashoffset="255"
+    transform="rotate(-90 50 50)"
+  />
+  
+  <text 
+    x="50" 
+    y="52" 
+    text-anchor="middle" 
+    dominant-baseline="middle" 
+    font-size="20" 
+    font-family="Comic Sans MS, Balsamiq Sans, cursive"
+    font-weight="bold"
+  >10%</text>
+</svg>

@@ -39,6 +39,7 @@ import {
   getRectangleShapeSizeRestrictions,
   getStarShapeSizeRestrictions,
   getModalCoverShapeSizeRestrictions,
+  getCilinderShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-basic-shapes';
 import {
@@ -51,13 +52,17 @@ import {
   getCalendarShapeSizeRestrictions,
   getHorizontalMenuShapeSizeRestrictions,
   getLineChartShapeSizeRestrictions,
+  getLoadIndicatorSizeRestrictions,
   getMapChartShapeSizeRestrictions,
   getModalShapeSizeRestrictions,
   getPieChartShapeSizeRestrictions,
   getTableSizeRestrictions,
   getTabsBarShapeSizeRestrictions,
+  getToggleLightDarkShapeSizeRestrictions,
   getVerticalMenuShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
+  getVideoconferenceShapeSizeRestrictions,
+  getGaugeShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-rich-components';
 import {
@@ -88,6 +93,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   combobox: getComboBoxShapeSizeRestrictions,
   input: getInputShapeSizeRestrictions,
   toggleswitch: getToggleSwitchShapeSizeRestrictions,
+  toggleLightDark: getToggleLightDarkShapeSizeRestrictions,
   textarea: getTextAreaSizeRestrictions,
   datepickerinput: getDatepickerInputShapeSizeRestrictions,
   button: getButtonShapeSizeRestrictions,
@@ -140,6 +146,10 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   tooltip: getTooltipShapeSizeRestrictions,
   slider: getSliderShapeSizeRestrictions,
   audioPlayer: getAudioPlayerShapeSizeRestrictions,
+  cilinder: getCilinderShapeSizeRestrictions,
+  'loading-indicator': getLoadIndicatorSizeRestrictions,
+  videoconference: getVideoconferenceShapeSizeRestrictions,
+  gauge: getGaugeShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;

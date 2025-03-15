@@ -79,3 +79,9 @@ body {
 body {
   overflow: hidden;
 }
+
+@media screen and (max-device-width: 1090px) {
+  .hide-mobile {
+    display: none;
+  }
+}

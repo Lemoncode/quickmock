@@ -1,6 +1,6 @@
 import React, { createRef, useEffect, useMemo, useRef, useState } from 'react';
 import Konva from 'konva';
-import { useCanvasContext } from '@/core/providers';
+import { useCanvasContext, useInteractionModeContext } from '@/core/providers';
 import { Layer, Line, Rect, Stage, Transformer } from 'react-konva';
 import { useTransform } from './use-transform.hook';
 import { renderShapeComponent } from './shape-renderer';
@@ -16,6 +16,7 @@ import { useKeyboardDisplacement } from './use-keyboard-displacement';
 import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
 import { ContextMenu } from '../context-menu/use-context-menu.hook';
 import { CanvasGridLayer } from './canvas.grid';
+import { sampleDocument } from './sample-document';
 
 export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
@@ -30,8 +31,13 @@ export const CanvasPod = () => {
     updateShapePosition,
     stageRef,
     canvasSize,
+    loadDocument,
+    loadSampleDocument,
+    setLoadSampleDocument,
+    setDropRef,
   } = useCanvasContext();
 
+  const { interactionMode } = useInteractionModeContext();
   const {
     shapeRefs,
     transformerRef,
@@ -52,6 +58,9 @@ export const CanvasPod = () => {
 
   const { isDraggedOver, dropRef } = useDropShape();
   useMonitorShape(dropRef, addNewShapeAndSetSelected);
+  useEffect(() => {
+    if (dropRef.current) setDropRef(dropRef);
+  }, [dropRef, setDropRef]);
 
   const getSelectedShapeKonvaId = (): string[] => {
     let result: string[] = [];
@@ -143,6 +152,8 @@ export const CanvasPod = () => {
   {
     /* TODO: add other animation for isDraggerOver */
   }
+  const isViewMode = interactionMode === 'view';
+
   return (
     <div
       onDragOver={handleDragOver}
@@ -151,21 +162,37 @@ export const CanvasPod = () => {
       ref={dropRef}
       style={{ opacity: isDraggedOver ? 0.5 : 1 }}
     >
-      <ContextMenu dropRef={dropRef} />
       {/*         onMouseDown={handleClearSelection}*/}
+      <ContextMenu dropRef={dropRef} />
+      {loadSampleDocument && (
+        <div className={classes.load}>
+          <button
+            className={classes.loadButton}
+            onClick={() => {
+              loadDocument(sampleDocument);
+              setLoadSampleDocument(false);
+            }}
+          >
+            Load sample document
+          </button>
+        </div>
+      )}
       <Stage
         width={canvasSize.width}
         height={canvasSize.height}
+        pixelRatio={1}
         onTouchStart={handleClearSelection}
         ref={stageRef}
         scale={{ x: scale, y: scale }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
+        style={{ backgroundColor: 'var(--pure-white)' }}
         id="konva-stage" // data-id did not work for some reason
       >
-        <CanvasGridLayer canvasSize={canvasSize} />
-        <Layer ref={layerRef}>
+        {/* TODO: resize correctly the canvas grid */}
+        {!isViewMode && <CanvasGridLayer canvasSize={canvasSize} />}
+        <Layer ref={layerRef} listening={!isViewMode}>
           {
             /* TODO compentize and simplify this */
             shapes.map(shape => {
@@ -197,14 +224,16 @@ export const CanvasPod = () => {
               );
             })
           }
-          <Transformer
-            ref={transformerRef}
-            flipEnabled={false}
-            boundBoxFunc={handleTransformerBoundBoxFunc}
-            onDragStart={() => setIsTransfomerBeingDragged(true)}
-            onDragMove={handleTransformerDragMove}
-            onDragEnd={() => setIsTransfomerBeingDragged(false)}
-          />
+          {!isViewMode && (
+            <Transformer
+              ref={transformerRef}
+              flipEnabled={false}
+              boundBoxFunc={handleTransformerBoundBoxFunc}
+              onDragStart={() => setIsTransfomerBeingDragged(true)}
+              onDragMove={handleTransformerDragMove}
+              onDragEnd={() => setIsTransfomerBeingDragged(false)}
+            />
+          )}
           {isTransfomerBeingDragged && showSnapInHorizontalLine && (
             <Line
               points={[

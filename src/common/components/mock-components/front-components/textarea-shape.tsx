@@ -8,12 +8,12 @@ import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const textAreaShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 80,
-  minHeight: 70,
+  minWidth: 70,
+  minHeight: 44,
   maxWidth: -1,
-  maxHeight: 500,
-  defaultWidth: 190,
-  defaultHeight: 100,
+  maxHeight: -1,
+  defaultWidth: 200,
+  defaultHeight: 55,
 };
 
 export const getTextAreaSizeRestrictions = (): ShapeSizeRestrictions =>

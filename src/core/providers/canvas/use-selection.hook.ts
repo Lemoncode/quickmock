@@ -8,7 +8,11 @@ import { produce } from 'immer';
 
 export const useSelection = (
   document: DocumentModel,
-  setDocument: React.Dispatch<React.SetStateAction<DocumentModel>>
+  setDocument: React.Dispatch<React.SetStateAction<DocumentModel>>,
+  setDocumentAndMarkDirtyState: (
+    updater: DocumentModel | ((prev: DocumentModel) => DocumentModel),
+    isDirty?: boolean
+  ) => void
 ): SelectionInfo => {
   const transformerRef = useRef<Konva.Transformer>(null);
   const shapeRefs = useRef<ShapeRefs>({});
@@ -165,7 +169,7 @@ export const useSelection = (
     }
 
     const selectedShapeId = selectedShapesIds[0];
-    setDocument(prevDocument =>
+    setDocumentAndMarkDirtyState(prevDocument =>
       produce(prevDocument, draft => {
         draft.pages[prevDocument.activePageIndex].shapes = draft.pages[
           prevDocument.activePageIndex
@@ -181,7 +185,7 @@ export const useSelection = (
     key: K,
     value: OtherProps[K]
   ) => {
-    setDocument(prevDocument =>
+    setDocumentAndMarkDirtyState(prevDocument =>
       produce(prevDocument, draft => {
         draft.pages[prevDocument.activePageIndex].shapes = draft.pages[
           prevDocument.activePageIndex
@@ -198,7 +202,7 @@ export const useSelection = (
     key: K,
     value: OtherProps[K]
   ) => {
-    setDocument(prevDocument =>
+    setDocumentAndMarkDirtyState(prevDocument =>
       produce(prevDocument, draft => {
         draft.pages[prevDocument.activePageIndex].shapes = draft.pages[
           prevDocument.activePageIndex
@@ -225,7 +229,6 @@ export const useSelection = (
     if (selectedShapesIds.length === 1) {
       const selectedShapeId = selectedShapesIds[0];
       updateOtherPropsOnSelectedSingleShape(selectedShapeId, key, value);
-
       return;
     }
 

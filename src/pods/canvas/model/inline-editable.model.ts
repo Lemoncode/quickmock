@@ -35,6 +35,9 @@ const inlineEditableShapes = new Set<ShapeType>([
   'timepickerinput',
   'datepickerinput',
   'browser',
+  'modalDialog',
+  'gauge',
+  'loading-indicator',
 ]);
 
 // Check if a shape type allows inline editing
@@ -74,6 +77,9 @@ const shapeTypesWithDefaultText = new Set<ShapeType>([
   'timepickerinput',
   'datepickerinput',
   'browser',
+  'modalDialog',
+  'loading-indicator',
+  'gauge',
 ]);
 
 // Map of ShapeTypes to their default text values
@@ -104,12 +110,15 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   modal:
     'Alert\nWarning: The action you are about to perform may affect existing data. Are you sure you want to proceed? Once confirmed, this action cannot be undone.\nConfirm,Cancel',
   appBar: 'AppBar',
+  gauge: '10%',
   buttonBar: 'Button 1, Button 2, Button 3',
   tabsBar: 'Tab 1, Tab 2, Tab 3',
   link: 'Link',
   timepickerinput: 'hh:mm',
   datepickerinput: new Date().toLocaleDateString(),
   browser: 'https://example.com',
+  modalDialog: 'Title here...',
+  'loading-indicator': 'Loading...',
 };
 
 export const generateDefaultTextValue = (

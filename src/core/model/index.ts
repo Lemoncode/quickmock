@@ -15,6 +15,7 @@ export type ShapeType =
   | 'checkbox'
   | 'textarea'
   | 'toggleswitch'
+  | 'toggleLightDark'
   | 'progressbar'
   | 'listbox'
   | 'datepickerinput'
@@ -69,7 +70,12 @@ export type ShapeType =
   | 'tooltip'
   | 'slider'
   | 'link'
-  | 'richtext';
+  | 'cilinder'
+  | 'richtext'
+  | 'loading-indicator'
+  | 'videoconference'
+  | 'richtext'
+  | 'gauge';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -79,6 +85,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   checkbox: 'Checkbox',
   textarea: 'Textarea',
   toggleswitch: 'Toggle Switch',
+  toggleLightDark: 'Toggle Light/Dark',
   progressbar: 'Progress Bar',
   listbox: 'List Box',
   datepickerinput: 'Date Picker Input',
@@ -129,6 +136,10 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   tooltip: 'Tooltip',
   slider: 'Slider',
   richtext: 'Rich Text',
+  cilinder: 'Cilinder',
+  'loading-indicator': 'Loading',
+  videoconference: 'Videoconference',
+  gauge: 'Gauge',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
@@ -178,6 +189,8 @@ export interface OtherProps {
   selectedBackgroundColor?: string;
   textAlignment?: 'left' | 'center' | 'right';
   disabled?: boolean;
+  isPlaceholder?: boolean;
+  isPassword?: boolean;
 }
 
 export const BASE_ICONS_URL = '/icons/';
