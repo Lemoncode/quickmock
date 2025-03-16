@@ -2,6 +2,7 @@ import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { ZoomInIcon } from '@/common/components/icons/zoom-in.component';
 import { useCanvasContext, useInteractionModeContext } from '@/core/providers';
 import { ToolbarButton } from '../toolbar-button';
+import { SHORTCUTS } from '../../shortcut/shortcut.const';
 
 export const ZoomInButton = () => {
   const { scale, setScale } = useCanvasContext();
@@ -28,6 +29,7 @@ export const ZoomInButton = () => {
       disabled={isDisabled}
       icon={<ZoomInIcon />}
       label="Zoom In"
+      shortcutOptions={SHORTCUTS.zoomin}
     />
   );
 };

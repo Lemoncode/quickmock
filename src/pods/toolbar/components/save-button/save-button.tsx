@@ -2,6 +2,7 @@ import { SaveIcon } from '@/common/components/icons/save-icon.component';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { ToolbarButton } from '../toolbar-button';
 import { useLocalDisk } from '@/core/local-disk';
+import { SHORTCUTS } from '../../shortcut/shortcut.const';
 import { useCanvasContext } from '@/core/providers';
 
 export const SaveButton: React.FC = () => {
@@ -19,6 +20,7 @@ export const SaveButton: React.FC = () => {
       className={classes.button}
       icon={<SaveIcon />}
       label="Save"
+      shortcutOptions={SHORTCUTS.save}
     />
   );
 };

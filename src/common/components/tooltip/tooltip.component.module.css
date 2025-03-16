@@ -12,18 +12,16 @@
   border-radius: var(--border-radius-s);
   font-size: var(--fs-xxs);
   white-space: nowrap;
-  z-index: 100;
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity 0.5s ease,
-    visibility 0s linear 0.5s,
-    transform 0.5s ease;
 }
 
 .tooltip.visible {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(-2px);
+  transition:
+    opacity 0.5s ease-in,
+    transform 0.5s ease-in;
   transition-delay: 1s;
 }
