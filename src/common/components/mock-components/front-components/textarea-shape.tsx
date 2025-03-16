@@ -11,7 +11,7 @@ const textAreaShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 70,
   minHeight: 44,
   maxWidth: -1,
-  maxHeight: 120,
+  maxHeight: -1,
   defaultWidth: 200,
   defaultHeight: 55,
 };
