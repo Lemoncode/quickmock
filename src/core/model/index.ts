@@ -75,7 +75,8 @@ export type ShapeType =
   | 'loading-indicator'
   | 'videoconference'
   | 'richtext'
-  | 'gauge';
+  | 'gauge'
+  | 'imagePlaceholder';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -140,6 +141,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   'loading-indicator': 'Loading',
   videoconference: 'Videoconference',
   gauge: 'Gauge',
+  imagePlaceholder: 'Image Placeholder',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';

@@ -67,6 +67,7 @@ import {
   renderParagraph,
   renderRichTextParagraph,
 } from './simple-text-components';
+import { renderImagePlaceHolder } from './simple-low-wireframes-components';
 import { renderSmalltext } from './simple-text-components/smalltext.renderer';
 import { renderImage } from './simple-basic-shapes/image.renderer';
 import { renderCalendar } from './simple-rich-components/calendar.renderer';
@@ -200,7 +201,8 @@ export const renderShapeComponent = (
       return renderVideoconference(shape, shapeRenderedProps);
     case 'gauge':
       return renderGauge(shape, shapeRenderedProps);
-
+    case 'imagePlaceholder':
+      return renderImagePlaceHolder(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
