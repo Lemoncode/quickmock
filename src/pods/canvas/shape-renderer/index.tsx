@@ -44,6 +44,9 @@ import {
   renderToggleLightDark,
   renderVideoconference,
   renderGauge,
+  renderCalendar,
+  renderAppBar,
+  renderLoadingIndicator,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -57,6 +60,7 @@ import {
   renderPostit,
   renderLargeArrowShape,
   renderCilinder,
+  renderImage,
 } from './simple-basic-shapes';
 import {
   renderHeading1,
@@ -66,13 +70,9 @@ import {
   renderNormaltext,
   renderParagraph,
   renderRichTextParagraph,
+  renderSmalltext,
 } from './simple-text-components';
 import { renderImagePlaceHolder } from './simple-low-wireframes-components';
-import { renderSmalltext } from './simple-text-components/smalltext.renderer';
-import { renderImage } from './simple-basic-shapes/image.renderer';
-import { renderCalendar } from './simple-rich-components/calendar.renderer';
-import { renderAppBar } from './simple-rich-components/appBar.renderer';
-import { renderLoadingIndicator } from './simple-rich-components/loading-indicator.renderer';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
