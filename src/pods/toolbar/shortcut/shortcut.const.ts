@@ -36,6 +36,13 @@ export const SHORTCUTS: Shortcut = {
     targetKey: ['Ctrl+y', 'Meta+y'],
     targetKeyLabel: 'Ctrl + Y',
   },
+
+  selectAll: {
+    description: 'Select All',
+    id: 'select-all-button-shortcut',
+    targetKey: ['Ctrl+a', 'Meta+a'],
+    targetKeyLabel: 'Ctrl + A',
+  },
   new: {
     description: 'New',
     id: 'new-button-shortcut',
