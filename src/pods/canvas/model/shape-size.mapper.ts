@@ -77,6 +77,8 @@ import {
   // other imports
 } from '@/common/components/mock-components/front-text-components';
 
+import { getImagePlaceholderShapeSizeRestrictions } from '@/common/components/mock-components/front-low-wireframes-components';
+
 const getMultipleNodeSizeRestrictions = (): ShapeSizeRestrictions => ({
   minWidth: 0,
   minHeight: 0,
@@ -150,6 +152,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   'loading-indicator': getLoadIndicatorSizeRestrictions,
   videoconference: getVideoconferenceShapeSizeRestrictions,
   gauge: getGaugeShapeSizeRestrictions,
+  imagePlaceholder: getImagePlaceholderShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;

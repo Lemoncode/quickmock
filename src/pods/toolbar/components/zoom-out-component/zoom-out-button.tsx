@@ -2,6 +2,7 @@ import { ZoomOutIcon } from '@/common/components/icons/zoom-out.component';
 import classes from '@/pods/toolbar/toolbar.pod.module.css';
 import { useCanvasContext, useInteractionModeContext } from '@/core/providers';
 import { ToolbarButton } from '../toolbar-button';
+import { SHORTCUTS } from '../../shortcut/shortcut.const';
 
 export const ZoomOutButton = () => {
   const { scale, setScale } = useCanvasContext();
@@ -28,6 +29,7 @@ export const ZoomOutButton = () => {
       disabled={isDisabled}
       icon={<ZoomOutIcon />}
       label="Zoom Out"
+      shortcutOptions={SHORTCUTS.zoomout}
     />
   );
 };
