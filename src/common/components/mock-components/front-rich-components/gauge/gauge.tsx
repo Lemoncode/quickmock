@@ -98,7 +98,7 @@ export const Gauge = forwardRef<any, ShapeProps>((props, ref) => {
         y={center - fontSizeScaled / 2}
         width={center + 10}
         text={displayValue}
-        fontFamily="Arial, sans-serif"
+        fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={fontSizeScaled}
         align="center"
         fill={textColor}
