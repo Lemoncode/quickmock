@@ -11,12 +11,12 @@ import calendarIconSrc from '/icons/calendar.svg';
 import disabledCalendarIconSrc from '/icons/calendar-disabled.svg';
 
 const datepickerInputShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 30,
+  minWidth: 38,
+  minHeight: 38,
   maxWidth: -1,
-  maxHeight: 50,
-  defaultWidth: 180,
-  defaultHeight: 50,
+  maxHeight: 38,
+  defaultWidth: BASIC_SHAPE.DEFAULT_TEXT_WIDTH,
+  defaultHeight: BASIC_SHAPE.DEFAULT_TEXT_HEIGHT,
 };
 
 const shapeType: ShapeType = 'datepickerinput';
@@ -113,7 +113,9 @@ export const DatepickerInputShape = forwardRef<any, ShapeProps>(
           x={10}
           y={(restrictedHeight - fontSize) / 2 + 2}
           width={availableWidth}
+          fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE}
+          lineHeight={BASIC_SHAPE.DEFAULT_LINE_HEIGHT}
           align="left"
           ellipsis={true}
           wrap="none"
