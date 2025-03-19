@@ -68,6 +68,7 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'loading-indicator':
     case 'buttonBar':
     case 'slider':
+    case 'chip':
       return ['middle-left', 'middle-right'];
     case 'verticalLine':
     case 'verticalScrollBar':
