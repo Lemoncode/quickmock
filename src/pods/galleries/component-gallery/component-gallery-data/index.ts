@@ -15,6 +15,7 @@ export const mockWidgetCollection: ItemInfo[] = [
   { thumbnailSrc: '/widgets/listbox.svg', type: 'listbox' },
   { thumbnailSrc: '/widgets/progressbar.svg', type: 'progressbar' },
   { thumbnailSrc: '/widgets/radiobutton.svg', type: 'radiobutton' },
+  { thumbnailSrc: '/widgets/chip.svg', type: 'chip' },
   { thumbnailSrc: '/widgets/slider.svg', type: 'slider' },
   { thumbnailSrc: '/widgets/textarea.svg', type: 'textarea' },
   { thumbnailSrc: '/widgets/timepicker.svg', type: 'timepickerinput' },
