@@ -19,6 +19,7 @@ import {
   getToggleSwitchShapeSizeRestrictions,
   getTooltipShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
+  getChipShapeSizeRestrictions,
 } from '@/common/components/mock-components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -63,6 +64,7 @@ import {
   getVideoPlayerShapeSizeRestrictions,
   getVideoconferenceShapeSizeRestrictions,
   getGaugeShapeSizeRestrictions,
+
   // other imports
 } from '@/common/components/mock-components/front-rich-components';
 import {
@@ -153,6 +155,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   videoconference: getVideoconferenceShapeSizeRestrictions,
   gauge: getGaugeShapeSizeRestrictions,
   imagePlaceholder: getImagePlaceholderShapeSizeRestrictions,
+  chip: getChipShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;

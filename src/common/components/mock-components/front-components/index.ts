@@ -15,3 +15,4 @@ export * from './horizontalscrollbar-shape';
 export * from './label-shape';
 export * from './tooltip-shape';
 export * from './slider-shape';
+export * from './chip-shape';

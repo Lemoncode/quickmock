@@ -19,6 +19,7 @@ import {
   renderVerticalScrollBar,
   renderTooltip,
   renderSlider,
+  renderChip,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -203,6 +204,8 @@ export const renderShapeComponent = (
       return renderGauge(shape, shapeRenderedProps);
     case 'imagePlaceholder':
       return renderImagePlaceHolder(shape, shapeRenderedProps);
+    case 'chip':
+      return renderChip(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
