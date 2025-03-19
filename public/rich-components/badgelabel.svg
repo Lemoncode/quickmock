@@ -1,7 +1,0 @@
-<svg width="150" height="50" xmlns="http://www.w3.org/2000/svg">
-  <!-- Fondo del chip/badge -->
-  <rect x="10" y="10" width="130" height="30" rx="15" ry="15" style="fill:lightgray;stroke:gray;stroke-width:2"/>
-
-  <!-- Texto del chip/badge -->
-  <text x="30" y="30" font-family="Arial" font-size="16" fill="black">Badge Label</text>
-</svg>

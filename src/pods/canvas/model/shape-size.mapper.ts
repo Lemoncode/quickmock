@@ -19,6 +19,7 @@ import {
   getToggleSwitchShapeSizeRestrictions,
   getTooltipShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
+  getBadgeLabelShapeSizeRestrictions,
 } from '@/common/components/mock-components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -57,7 +58,7 @@ import {
   getTabsBarShapeSizeRestrictions,
   getVerticalMenuShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
-  getBadgeLabelShapeSizeRestrictions,
+
   // other imports
 } from '@/common/components/mock-components/front-rich-components';
 import {

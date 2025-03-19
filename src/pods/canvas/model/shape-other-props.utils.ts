@@ -212,7 +212,6 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#D3D3D3',
         textColor: '#000000',
         strokeStyle: [],
-        borderRadius: '12',
       };
     default:
       return undefined;

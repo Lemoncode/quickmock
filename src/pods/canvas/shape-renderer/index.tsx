@@ -19,6 +19,7 @@ import {
   renderVerticalScrollBar,
   renderTooltip,
   renderSlider,
+  renderBadgeLabel,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -40,7 +41,6 @@ import {
   renderAudioPlayer,
   renderModal,
   renderButtonBar,
-  renderBadgeLabel,
   renderTabsBar,
 } from './simple-rich-components';
 import {

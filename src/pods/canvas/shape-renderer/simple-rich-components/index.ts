@@ -12,6 +12,5 @@ export * from './table.renderer';
 export * from './modal.renderer';
 export * from './appBar.renderer';
 export * from './button-bar.renderer';
-export * from './badge-label.renderer';
 export * from './tabsbar.renderer';
 export * from './audio-player.renderer';
