@@ -206,7 +206,7 @@ export const generateDefaultOtherProps = (
       return {
         activeElement: 0,
       };
-    case 'badgelabel':
+    case 'chip':
       return {
         stroke: '#939393',
         backgroundColor: '#D3D3D3',

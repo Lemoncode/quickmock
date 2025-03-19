@@ -1,8 +1,8 @@
-import { BadgeLabelShape } from '@/common/components/mock-components/front-components';
+import { ChipShape } from '@/common/components/mock-components/front-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 
-export const renderBadgeLabel = (
+export const renderChip = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
@@ -10,7 +10,7 @@ export const renderBadgeLabel = (
     shapeRenderedProps;
 
   return (
-    <BadgeLabelShape
+    <ChipShape
       id={shape.id}
       key={shape.id}
       x={shape.x}

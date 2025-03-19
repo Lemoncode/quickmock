@@ -19,7 +19,7 @@ import {
   renderVerticalScrollBar,
   renderTooltip,
   renderSlider,
-  renderBadgeLabel,
+  renderChip,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -177,8 +177,8 @@ export const renderShapeComponent = (
       return renderTooltip(shape, shapeRenderedProps);
     case 'slider':
       return renderSlider(shape, shapeRenderedProps);
-    case 'badgelabel':
-      return renderBadgeLabel(shape, shapeRenderedProps);
+    case 'chip':
+      return renderChip(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

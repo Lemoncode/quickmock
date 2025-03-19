@@ -16,4 +16,4 @@ export * from './verticalscrollbar.renderer';
 export * from './horizontalscrollbar.renderer';
 export * from './tooltip.renderer';
 export * from './slider.renderer';
-export * from './badge-label.renderer';
+export * from './chip.renderer';

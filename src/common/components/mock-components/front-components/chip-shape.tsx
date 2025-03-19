@@ -3,25 +3,25 @@ import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import { BADGE_LABEL_SHAPE } from '../front-components/shape.const';
+import { CHIP_SHAPE } from '../front-components/shape.const';
 import { ShapeProps } from '../shape.model';
 import { useGroupShapeProps } from '../mock-components.utils';
 
-const BadgeLabelShapeSizeRestrictions: ShapeSizeRestrictions = {
+const ChipShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 40,
   minHeight: 28,
   maxWidth: -1,
   maxHeight: 28,
-  defaultWidth: 106,
+  defaultWidth: 56,
   defaultHeight: 28,
 };
 
-export const getBadgeLabelShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  BadgeLabelShapeSizeRestrictions;
+export const getChipShapeSizeRestrictions = (): ShapeSizeRestrictions =>
+  ChipShapeSizeRestrictions;
 
-const shapeType: ShapeType = 'badgelabel';
+const shapeType: ShapeType = 'chip';
 
-export const BadgeLabelShape = forwardRef<any, ShapeProps>((props, ref) => {
+export const ChipShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
     x,
     y,
@@ -34,7 +34,7 @@ export const BadgeLabelShape = forwardRef<any, ShapeProps>((props, ref) => {
     ...shapeProps
   } = props;
   const restrictedSize = fitSizeToShapeSizeRestrictions(
-    BadgeLabelShapeSizeRestrictions,
+    ChipShapeSizeRestrictions,
     width,
     height
   );
@@ -42,7 +42,7 @@ export const BadgeLabelShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeigth } = restrictedSize;
   const { stroke, strokeStyle, fill, textColor } = useShapeProps(
     otherProps,
-    BADGE_LABEL_SHAPE
+    CHIP_SHAPE
   );
 
   const commonGroupProps = useGroupShapeProps(
@@ -57,29 +57,26 @@ export const BadgeLabelShape = forwardRef<any, ShapeProps>((props, ref) => {
       <Rect
         x={0}
         y={0}
-        width={restrictedWidth + BADGE_LABEL_SHAPE.DEFAULT_STROKE_WIDTH * 2}
+        width={restrictedWidth + CHIP_SHAPE.DEFAULT_STROKE_WIDTH * 2}
         height={restrictedHeigth}
         fill={fill}
         stroke={stroke}
         dash={strokeStyle}
-        strokeWidth={BADGE_LABEL_SHAPE.DEFAULT_STROKE_WIDTH}
-        cornerRadius={BADGE_LABEL_SHAPE.DEFAULT_CORNER_RADIUS}
+        strokeWidth={CHIP_SHAPE.DEFAULT_STROKE_WIDTH}
+        cornerRadius={CHIP_SHAPE.DEFAULT_CORNER_RADIUS}
       />
 
       <Text
-        x={BADGE_LABEL_SHAPE.DEFAULT_PADDING}
-        y={
-          BADGE_LABEL_SHAPE.DEFAULT_PADDING -
-          BADGE_LABEL_SHAPE.DEFAULT_STROKE_WIDTH * 2
-        }
+        x={CHIP_SHAPE.DEFAULT_PADDING}
+        y={CHIP_SHAPE.DEFAULT_PADDING - CHIP_SHAPE.DEFAULT_STROKE_WIDTH * 2}
         width={
           restrictedWidth -
-          BADGE_LABEL_SHAPE.DEFAULT_PADDING * 2 -
-          BADGE_LABEL_SHAPE.DEFAULT_STROKE_WIDTH
+          CHIP_SHAPE.DEFAULT_PADDING * 2 -
+          CHIP_SHAPE.DEFAULT_STROKE_WIDTH
         }
         text={text}
-        fontFamily={BADGE_LABEL_SHAPE.DEFAULT_FONT_FAMILY}
-        fontSize={BADGE_LABEL_SHAPE.DEFAULT_FONT_SIZE}
+        fontFamily={CHIP_SHAPE.DEFAULT_FONT_FAMILY}
+        fontSize={CHIP_SHAPE.DEFAULT_FONT_SIZE}
         fill={textColor}
         verticalAlign="middle"
         align="center"

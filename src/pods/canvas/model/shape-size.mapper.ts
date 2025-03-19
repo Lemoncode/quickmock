@@ -19,7 +19,7 @@ import {
   getToggleSwitchShapeSizeRestrictions,
   getTooltipShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
-  getBadgeLabelShapeSizeRestrictions,
+  getChipShapeSizeRestrictions,
 } from '@/common/components/mock-components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -136,7 +136,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   tooltip: getTooltipShapeSizeRestrictions,
   slider: getSliderShapeSizeRestrictions,
   audioPlayer: getAudioPlayerShapeSizeRestrictions,
-  badgelabel: getBadgeLabelShapeSizeRestrictions,
+  chip: getChipShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;
