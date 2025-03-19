@@ -19,9 +19,11 @@ const inlineEditableShapes = new Set<ShapeType>([
   'heading1',
   'heading2',
   'heading3',
+  'link',
   'normaltext',
   'smalltext',
   'paragraph',
+  'richtext',
   'listbox',
   'image',
   'table',
@@ -34,6 +36,9 @@ const inlineEditableShapes = new Set<ShapeType>([
   'timepickerinput',
   'datepickerinput',
   'browser',
+  'modalDialog',
+  'gauge',
+  'loading-indicator',
 ]);
 
 // Check if a shape type allows inline editing
@@ -62,16 +67,21 @@ const shapeTypesWithDefaultText = new Set<ShapeType>([
   'tooltip',
   'normaltext',
   'smalltext',
+  'richtext',
   'paragraph',
   'table',
   'modal',
   'appBar',
   'buttonBar',
   'tabsBar',
+  'link',
   'chip',
   'timepickerinput',
   'datepickerinput',
   'browser',
+  'modalDialog',
+  'loading-indicator',
+  'gauge',
 ]);
 
 // Map of ShapeTypes to their default text values
@@ -88,7 +98,7 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   postit: '',
   listbox: '[*]Item\nItem1\nItem2\nItem3\nItem4\nItem5\nItem6',
   'horizontal-menu': 'Home, About, Services, Contact',
-  'vertical-menu': 'Option 1\nOption 2\n----\nOption 3\nOption 4',
+  'vertical-menu': 'Option 1, Option 2, ----, Option 3, Option 4',
   heading1: 'Heading 1',
   heading2: 'Heading 2',
   heading3: 'Heading 3',
@@ -96,17 +106,22 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   normaltext: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   smalltext: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   paragraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nSed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+  richtext: `This is a *bold text* example \\n an example of _italic text_ \\n and an example of ~underlined text~.`,
   table:
     'Name ^, Age ^v, Country v\nJohn Doe, 30, USA\nJane Smith, 25, UK\nLuis Gomez, 35, Argentina\n{*L,20R,30C}',
   modal:
     'Alert\nWarning: The action you are about to perform may affect existing data. Are you sure you want to proceed? Once confirmed, this action cannot be undone.\nConfirm,Cancel',
   appBar: 'AppBar',
+  gauge: '10%',
   buttonBar: 'Button 1, Button 2, Button 3',
   tabsBar: 'Tab 1, Tab 2, Tab 3',
+  link: 'Link',
   chip: 'Chip',
   timepickerinput: 'hh:mm',
   datepickerinput: new Date().toLocaleDateString(),
   browser: 'https://example.com',
+  modalDialog: 'Title here...',
+  'loading-indicator': 'Loading...',
 };
 
 export const generateDefaultTextValue = (
@@ -128,6 +143,7 @@ export const getShapeEditInlineType = (
     case 'accordion':
     case 'postit':
     case 'paragraph':
+    case 'richtext':
     case 'listbox':
     case 'vertical-menu':
     case 'table':

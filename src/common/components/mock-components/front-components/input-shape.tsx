@@ -3,12 +3,12 @@ import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Group, Rect, Text } from 'react-konva';
-import { INPUT_SHAPE } from './shape.const';
+import { DISABLED_COLOR_VALUES, INPUT_SHAPE } from './shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const inputShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 60,
+  minWidth: 38,
   minHeight: 38,
   maxWidth: -1,
   maxHeight: 38,
@@ -41,10 +41,16 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { stroke, fill, textColor, strokeStyle, borderRadius } = useShapeProps(
-    otherProps,
-    INPUT_SHAPE
-  );
+  const {
+    stroke,
+    fill,
+    textColor,
+    strokeStyle,
+    borderRadius,
+    disabled,
+    isPlaceholder,
+    isPassword,
+  } = useShapeProps(otherProps, INPUT_SHAPE);
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -52,6 +58,13 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
+
+  const maskPassword = (text: string) => {
+    const maskSymbol = '●';
+    return maskSymbol.repeat(text.length);
+  };
+
+  const finalText = isPassword && !isPlaceholder ? maskPassword(text) : text;
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
@@ -61,20 +74,26 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth}
         height={restrictedHeight}
         cornerRadius={borderRadius}
-        stroke={stroke}
+        stroke={disabled ? DISABLED_COLOR_VALUES.DEFAULT_STROKE_COLOR : stroke}
         dash={strokeStyle}
         strokeWidth={INPUT_SHAPE.DEFAULT_STROKE_WIDTH}
-        fill={fill}
+        fill={disabled ? DISABLED_COLOR_VALUES.DEFAULT_BACKGROUND_COLOR : fill}
       />
       <Text
         x={INPUT_SHAPE.DEFAULT_PADDING}
         y={INPUT_SHAPE.DEFAULT_PADDING + 1}
         width={width - INPUT_SHAPE.DEFAULT_PADDING * 2}
-        text={text}
+        text={finalText}
         fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
         lineHeight={INPUT_SHAPE.DEFAULT_LINE_HEIGHT}
-        fill={textColor}
+        fill={
+          disabled
+            ? DISABLED_COLOR_VALUES.DEFAULT_TEXT_COLOR
+            : isPlaceholder
+              ? '#8c8c8c'
+              : textColor
+        }
         align="left"
         ellipsis={true}
         wrap="none"
@@ -82,33 +101,3 @@ export const InputShape = forwardRef<any, ShapeProps>((props, ref) => {
     </Group>
   );
 });
-
-/*
-    <Group {...commonGroupProps} {...shapeProps}>
-      <Rect
-        x={0}
-        y={0}
-        width={restrictedWidth}
-        height={restrictedHeight}
-        cornerRadius={borderRadius}
-        stroke={stroke}
-        dash={strokeStyle}
-        strokeWidth={INPUT_SHAPE.DEFAULT_STROKE_WIDTH}
-        fill={fill}
-      />
-      <Text
-        x={INPUT_SHAPE.DEFAULT_PADDING}
-        y={INPUT_SHAPE.DEFAULT_PADDING + 1}
-        width={width - INPUT_SHAPE.DEFAULT_PADDING * 2}
-        text={text}
-        fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
-        fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
-        lineHeight={INPUT_SHAPE.DEFAULT_LINE_HEIGHT}
-        fill={textColor}
-        align="left"
-        ellipsis={true}
-        wrap="none"
-      />
-    </Group>
-
-*/

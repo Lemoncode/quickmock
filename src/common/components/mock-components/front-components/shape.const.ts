@@ -8,13 +8,15 @@ const DEFAULT_FONT_SIZE = 16;
 const DEFAULT_FILL_TEXT = '#000000';
 const DEFAULT_PADDING = 10;
 const DEFAULT_LINE_HEIGHT = 1.25;
-const DEFAULT_FILL_TEXT_INPUT = '#8c8c8c';
+const DEFAULT_FILL_TEXT_INPUT = '#000000';
 const DEFAULT_FONT_SIZE_INPUT = 15;
 const DEFAULT_TEXT_WIDTH = 165;
 const DEFAULT_TEXT_HEIGHT = 38;
 const DEFAULT_FONT_VARIANT = 'normal';
 const DEFAULT_FONT_STYLE = 'normal';
 const DEFAULT_TEXT_DECORATION = 'none';
+const DEFAULT_TEXT_ALIGNMENT = 'left';
+const DEFAULT_DISABLED = false;
 const DEFAULT_CORNER_RADIUS_CHIP = 1000;
 const DEFAULT_FONT_SIZE_CHIP = 14;
 
@@ -34,6 +36,8 @@ export interface DefaultStyleShape {
   DEFAULT_FONT_VARIANT: string;
   DEFAULT_FONT_STYLE: string;
   DEFAULT_TEXT_DECORATION: string;
+  DEFAULT_TEXT_ALIGNMENT: 'left' | 'center' | 'right';
+  DEFAULT_DISABLED: boolean;
 }
 
 export const BASIC_SHAPE: DefaultStyleShape = {
@@ -52,6 +56,8 @@ export const BASIC_SHAPE: DefaultStyleShape = {
   DEFAULT_FONT_VARIANT,
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_DECORATION,
+  DEFAULT_TEXT_ALIGNMENT,
+  DEFAULT_DISABLED,
 };
 
 export const INPUT_SHAPE: DefaultStyleShape = {
@@ -70,6 +76,8 @@ export const INPUT_SHAPE: DefaultStyleShape = {
   DEFAULT_FONT_VARIANT,
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_DECORATION,
+  DEFAULT_TEXT_ALIGNMENT,
+  DEFAULT_DISABLED,
 };
 
 //! maybe a function to calc max height base on the text
@@ -89,6 +97,45 @@ export const POSTIT_SHAPE: DefaultStyleShape = {
   DEFAULT_FONT_VARIANT,
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_DECORATION,
+  DEFAULT_TEXT_ALIGNMENT,
+  DEFAULT_DISABLED,
+};
+
+interface FontValues {
+  HEADING1: number;
+  HEADING2: number;
+  HEADING3: number;
+  NORMALTEXT: number;
+  SMALLTEXT: number;
+  PARAGRAPH: number;
+  LINK: number;
+}
+
+export const FONT_SIZE_VALUES: FontValues = {
+  HEADING1: 28,
+  HEADING2: 24,
+  HEADING3: 18,
+  NORMALTEXT: 18,
+  SMALLTEXT: 14,
+  PARAGRAPH: 14,
+  LINK: 20,
+};
+
+interface DisabledValues {
+  DEFAULT_STROKE_COLOR: string;
+  DEFAULT_BACKGROUND_COLOR: string;
+  DEFAULT_TEXT_COLOR: string;
+}
+
+export const DISABLED_COLOR_VALUES: DisabledValues = {
+  DEFAULT_STROKE_COLOR: '#D9D9D9',
+  DEFAULT_BACKGROUND_COLOR: '#F5F5F5',
+  DEFAULT_TEXT_COLOR: '#B0B0B0',
+};
+
+export const LINK_SHAPE: DefaultStyleShape = {
+  ...BASIC_SHAPE,
+  DEFAULT_FILL_TEXT: '#0000FF',
 };
 
 export const CHIP_SHAPE: DefaultStyleShape = {
@@ -107,4 +154,6 @@ export const CHIP_SHAPE: DefaultStyleShape = {
   DEFAULT_FONT_VARIANT,
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_DECORATION,
+  DEFAULT_TEXT_ALIGNMENT,
+  DEFAULT_DISABLED,
 };

@@ -1,17 +1,107 @@
-.container {
+.root {
   display: flex;
-  padding: var(--space-md);
-  gap: var(--space-md);
+  flex-direction: column;
+  padding: var(--space-s);
+  gap: var(--space-s);
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  overflow: auto;
+}
+.wrapper {
+  display: flex;
   flex-direction: column;
+  padding: var(--space-s);
+  gap: var(--space-s);
+  align-items: center;
+  justify-content: center;
 }
 
+.thumbContainer {
+  min-width: 200px;
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-s);
+  gap: var(--space-s);
+  align-items: center;
+  overflow: hidden;
+}
+
+@media screen and (max-device-width: 1090px) {
+  .root {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
+.thumb {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: cubic-bezier(1, 0, 0, 1) 0.3s 1 normal thumb;
+}
+@media screen and (max-device-width: 1090px) {
+  .thumb {
+    width: 200px;
+  }
+}
 .activeThumb {
-  background-color: rgb(41, 41, 235);
+  width: 100%;
+  height: 200px;
+  background-color: var(--primary-100);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: ease 0.3s 1 normal thumb;
+}
+@media screen and (max-device-width: 1090px) {
+  .activeThumb {
+    width: 200px;
+  }
+}
+/* .activeText {
+  color: white;
+} */
+
+.addButton {
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-md);
+  border: 1px solid var(--primary-700);
+  background-color: transparent;
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  font-size: var(--fs-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  cursor: pointer;
 }
 
-.activeText {
+.addButton:hover {
+  background-color: var(--primary-700);
   color: white;
+}
+
+@keyframes thumb {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    width: 100%;
+    height: 150px;
+  }
 }

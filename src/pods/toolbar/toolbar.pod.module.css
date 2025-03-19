@@ -1,10 +1,13 @@
 .container {
+  position: relative;
+  z-index: 3;
   grid-area: toolbar;
   display: flex;
   justify-content: space-between;
   padding: var(--space-s) var(--space-md);
   background-color: var(--primary-100);
   border-bottom: 1px solid var(--primary-900);
+
   ul {
     padding: 0;
     margin: 0;
@@ -16,6 +19,12 @@
   display: flex;
   justify-content: space-between;
   gap: var(--space-xl);
+}
+
+@media screen and (max-device-width: 1090px) {
+  .buttonGroup {
+    gap: 0;
+  }
 }
 
 .button {

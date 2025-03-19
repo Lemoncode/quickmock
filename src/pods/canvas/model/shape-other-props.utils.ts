@@ -1,6 +1,8 @@
 import {
   INPUT_SHAPE,
   BASIC_SHAPE,
+  FONT_SIZE_VALUES,
+  LINK_SHAPE,
 } from '@/common/components/mock-components/front-components/shape.const';
 import { ShapeType, OtherProps } from '@/core/model';
 
@@ -13,8 +15,11 @@ export const generateDefaultOtherProps = (
         stroke: INPUT_SHAPE.DEFAULT_STROKE_COLOR,
         backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
+        isPlaceholder: true,
+        isPassword: false,
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        disabled: INPUT_SHAPE.DEFAULT_DISABLED,
       };
     case 'tooltip':
       return {
@@ -31,6 +36,7 @@ export const generateDefaultOtherProps = (
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         borderRadius: `${BASIC_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
     case 'vertical-menu':
     case 'horizontal-menu':
@@ -50,6 +56,7 @@ export const generateDefaultOtherProps = (
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
     case 'combobox':
       return {
@@ -58,8 +65,15 @@ export const generateDefaultOtherProps = (
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
     case 'modal':
+    case 'gauge':
+      return {
+        backgroundColor: '#d3d3d3',
+        stroke: '#808080',
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+      };
     case 'buttonBar':
       return {
         stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
@@ -88,6 +102,7 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#ffffff',
         textColor: '#000000',
         selectedBackgroundColor: '#add8e6',
+        disabled: false,
       };
 
     case 'circle':
@@ -123,6 +138,8 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: FONT_SIZE_VALUES.HEADING1,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
 
     case 'heading2':
@@ -131,6 +148,8 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: FONT_SIZE_VALUES.HEADING2,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
     case 'heading3':
       return {
@@ -138,6 +157,15 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: FONT_SIZE_VALUES.HEADING3,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
+      };
+    case 'link':
+      return {
+        textColor: `${LINK_SHAPE.DEFAULT_FILL_TEXT}`,
+        textDecoration: 'underline',
+        fontSize: FONT_SIZE_VALUES.LINK,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
     case 'normaltext':
       return {
@@ -145,6 +173,8 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: FONT_SIZE_VALUES.NORMALTEXT,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
     case 'smalltext':
       return {
@@ -152,13 +182,27 @@ export const generateDefaultOtherProps = (
         fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
         fontStyle: `${INPUT_SHAPE.DEFAULT_FONT_STYLE}`,
         textDecoration: `${INPUT_SHAPE.DEFAULT_TEXT_DECORATION}`,
+        fontSize: FONT_SIZE_VALUES.SMALLTEXT,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
       };
     case 'paragraph':
+      return {
+        textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
+        fontSize: FONT_SIZE_VALUES.PARAGRAPH,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
+      };
+    case 'richtext':
+      return {
+        textColor: `${BASIC_SHAPE.DEFAULT_STROKE_COLOR}`,
+        fontSize: FONT_SIZE_VALUES.PARAGRAPH,
+        textAlignment: `${BASIC_SHAPE.DEFAULT_TEXT_ALIGNMENT}`,
+      };
     case 'label':
       return {
         textColor: '#000000',
       };
     case 'toggleswitch':
+    case 'toggleLightDark':
       return {
         checked: true,
       };
@@ -167,6 +211,7 @@ export const generateDefaultOtherProps = (
       return {
         checked: true,
         textColor: '#000000',
+        disabled: BASIC_SHAPE.DEFAULT_DISABLED,
       };
 
     case 'appBar':
@@ -194,6 +239,8 @@ export const generateDefaultOtherProps = (
       };
     case 'progressbar':
       return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: '#A9A9A9',
         progress: '50',
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };

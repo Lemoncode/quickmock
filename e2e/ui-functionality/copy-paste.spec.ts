@@ -123,7 +123,7 @@ test.describe('Copy/Paste functionality tests', () => {
     await addComponentsToCanvas(page, addInputIntoCanvas);
 
     //Select items by drag and drop
-    await dragAndDrop(page, { x: 260, y: 130 }, { x: 1000, y: 550 });
+    await dragAndDrop(page, { x: 260, y: 130 }, { x: 1000, y: 650 });
 
     //Copy and assert there are 3 components within the canvas
     await page.keyboard.press('ControlOrMeta+c');

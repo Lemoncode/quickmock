@@ -21,6 +21,8 @@
     "@fontsource-variable/montserrat": "^5.0.20",
     "@fontsource/balsamiq-sans": "^5.0.21",
     "@types/lodash.clonedeep": "^4.5.9",
+    "@uiw/react-color-chrome": "^2.3.2",
+    "html2canvas": "^1.4.1",
     "immer": "^10.1.1",
     "konva": "^9.3.12",
     "lodash.clonedeep": "^4.5.0",
@@ -29,6 +31,7 @@
     "react-konva": "^18.2.10",
     "react-konva-utils": "^1.0.6",
     "tiny-invariant": "^1.3.3",
+    "use-debounce": "^10.0.4",
     "use-image": "^1.1.1",
     "uuid": "^10.0.0"
   },

@@ -12,38 +12,51 @@ import {
   AboutButton,
 } from './components/index';
 import classes from './toolbar.pod.module.css';
+import { SettingsButton } from './components/settings-button';
+import { useInteractionModeContext } from '@/core/providers';
 
 export const ToolbarPod: React.FC = () => {
+  const { interactionMode } = useInteractionModeContext();
+  const isEditMode = interactionMode === 'edit';
   return (
     <header className={classes.container}>
       <ul className={classes.buttonGroup}>
-        <li>
-          <NewButton />
-        </li>
+        {isEditMode && (
+          <li>
+            <NewButton />
+          </li>
+        )}
         <li>
           <OpenButton />
         </li>
-        <li>
-          <SaveButton />
-        </li>
-        <li>
-          <ExportButton />
-        </li>
+        {isEditMode && (
+          <>
+            <li>
+              <SaveButton />
+            </li>
+
+            <li>
+              <ExportButton />
+            </li>
+          </>
+        )}
       </ul>
-      <ul className={classes.buttonGroup}>
-        <li>
-          <UndoButton />
-        </li>
-        <li>
-          <RedoButton />
-        </li>
-        <li>
-          <CopyButton />
-        </li>
-        <li>
-          <DeleteButton />
-        </li>
-      </ul>
+      {isEditMode && (
+        <ul className={classes.buttonGroup}>
+          <li>
+            <UndoButton />
+          </li>
+          <li>
+            <RedoButton />
+          </li>
+          <li>
+            <CopyButton />
+          </li>
+          <li>
+            <DeleteButton />
+          </li>
+        </ul>
+      )}
       <ul className={classes.buttonGroup}>
         <li>
           <ZoomOutButton />
@@ -53,6 +66,11 @@ export const ToolbarPod: React.FC = () => {
         </li>
       </ul>
       <ul className={classes.buttonGroup}>
+        {isEditMode && (
+          <li>
+            <SettingsButton />
+          </li>
+        )}
         <li>
           <AboutButton />
         </li>

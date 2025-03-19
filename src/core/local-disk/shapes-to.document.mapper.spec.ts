@@ -5,7 +5,11 @@ import {
 } from './shapes-to-document.mapper';
 import { ShapeModel } from '../model';
 import { QuickMockFileContract } from './local-disk.model';
-import { DocumentModel } from '../providers/canvas/canvas.model';
+import {
+  createDefaultCanvasSize,
+  DocumentModel,
+} from '../providers/canvas/canvas.model';
+import { APP_CONSTANTS } from '../providers/canvas/canvas.model';
 
 describe('shapes to document mapper', () => {
   describe('mapFromShapesArrayToQuickMockFileDocument', () => {
@@ -33,6 +37,8 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
 
       const expectedResult: QuickMockFileContract = {
@@ -44,6 +50,8 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
       // Act
       const result = mapFromShapesArrayToQuickMockFileDocument(document);
@@ -86,6 +94,8 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
 
       const expectedResult: QuickMockFileContract = {
@@ -97,6 +107,8 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
 
       // Act
@@ -119,6 +131,8 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
 
       const expectedResult: DocumentModel = {
@@ -130,6 +144,8 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
       //act
       const result =
@@ -149,6 +165,8 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
 
       const expectedResult: DocumentModel = {
@@ -160,6 +178,8 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
 
       //act
@@ -191,6 +211,8 @@ describe('shapes to document mapper', () => {
             ],
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
 
       const expectedResult: DocumentModel = {
@@ -213,6 +235,8 @@ describe('shapes to document mapper', () => {
             ],
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
 
       //act
@@ -264,6 +288,8 @@ describe('shapes to document mapper', () => {
             shapes: shapesPageB,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
 
       const expectedResult: DocumentModel = {
@@ -280,6 +306,8 @@ describe('shapes to document mapper', () => {
             shapes: shapesPageB,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
 
       //act
@@ -331,6 +359,8 @@ describe('shapes to document mapper', () => {
             shapes: shapesPageB,
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
 
       const expectedResult: DocumentModel = {
@@ -342,6 +372,8 @@ describe('shapes to document mapper', () => {
             shapes: shapespageA.concat(shapesPageB),
           },
         ],
+        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        size: createDefaultCanvasSize(),
       };
 
       //act

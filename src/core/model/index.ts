@@ -15,6 +15,7 @@ export type ShapeType =
   | 'checkbox'
   | 'textarea'
   | 'toggleswitch'
+  | 'toggleLightDark'
   | 'progressbar'
   | 'listbox'
   | 'datepickerinput'
@@ -61,13 +62,22 @@ export type ShapeType =
   | 'verticalScrollBar'
   | 'horizontalScrollBar'
   | 'modal'
+  | 'modalCover'
   | 'tabsBar'
   | 'appBar'
   | 'appBar'
   | 'buttonBar'
   | 'tooltip'
   | 'slider'
-  | 'chip';
+  | 'chip'
+  | 'link'
+  | 'cilinder'
+  | 'richtext'
+  | 'loading-indicator'
+  | 'videoconference'
+  | 'richtext'
+  | 'gauge'
+  | 'imagePlaceholder';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -77,6 +87,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   checkbox: 'Checkbox',
   textarea: 'Textarea',
   toggleswitch: 'Toggle Switch',
+  toggleLightDark: 'Toggle Light/Dark',
   progressbar: 'Progress Bar',
   listbox: 'List Box',
   datepickerinput: 'Date Picker Input',
@@ -107,6 +118,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   normaltext: 'Normal text',
   smalltext: 'Small text',
   paragraph: 'Paragraph',
+  link: 'Link',
   triangle: 'Triangle',
   'horizontal-menu': 'Horizontal Menu',
   largeArrow: 'Large Arrow',
@@ -119,12 +131,19 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   calendar: 'Calendar',
   verticalScrollBar: 'Vertical Scroll Bar',
   modal: 'Modal',
+  modalCover: 'Modal Cover',
   tabsBar: 'Tabs Bar',
   appBar: 'AppBar',
   buttonBar: 'Button Bar',
   tooltip: 'Tooltip',
   slider: 'Slider',
   chip: 'Chip',
+  richtext: 'Rich Text',
+  cilinder: 'Cilinder',
+  'loading-indicator': 'Loading',
+  videoconference: 'Videoconference',
+  gauge: 'Gauge',
+  imagePlaceholder: 'Image Placeholder',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
@@ -161,6 +180,7 @@ export interface OtherProps {
   textColor?: string;
   fontVariant?: string;
   fontStyle?: string;
+  fontSize?: number;
   textDecoration?: string;
   checked?: boolean;
   icon?: IconInfo;
@@ -171,6 +191,10 @@ export interface OtherProps {
   borderRadius?: string;
   activeElement?: number;
   selectedBackgroundColor?: string;
+  textAlignment?: 'left' | 'center' | 'right';
+  disabled?: boolean;
+  isPlaceholder?: boolean;
+  isPassword?: boolean;
 }
 
 export const BASE_ICONS_URL = '/icons/';

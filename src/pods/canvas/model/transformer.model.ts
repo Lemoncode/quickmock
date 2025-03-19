@@ -50,6 +50,7 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'listbox':
     case 'checkbox':
     case 'toggleswitch':
+    case 'toggleLightDark':
     case 'progressbar':
     case 'timepickerinput':
     case 'radiobutton':
@@ -60,8 +61,10 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'heading3':
     case 'normaltext':
     case 'smalltext':
+    case 'link':
     case 'horizontalScrollBar':
     case 'appBar':
+    case 'loading-indicator':
     case 'buttonBar':
     case 'slider':
     case 'chip':
@@ -73,6 +76,7 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'multiple':
       return [];
     case 'image':
+    case 'imagePlaceholder':
       return ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
     default:
       return [

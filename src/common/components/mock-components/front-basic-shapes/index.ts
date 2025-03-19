@@ -8,3 +8,5 @@ export * from './circle-basic-shape';
 export * from './star-shape';
 export * from './large-arrow-shape';
 export * from './image-shape';
+export * from './modal-cover-shape';
+export * from './cilinder-basic-shape';

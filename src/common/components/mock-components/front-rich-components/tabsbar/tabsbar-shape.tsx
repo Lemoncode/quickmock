@@ -3,11 +3,8 @@ import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeProps } from '../../shape.model';
-import {
-  extractCSVHeaders,
-  splitCSVContentIntoRows,
-} from '@/common/utils/active-element-selector.utils';
 import { useGroupShapeProps } from '../../mock-components.utils';
+import { useTabList } from './tab-list.hook';
 
 const tabsBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 450,
@@ -15,7 +12,7 @@ const tabsBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 450,
-  defaultHeight: 150,
+  defaultHeight: 180,
 };
 
 export const getTabsBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -42,16 +39,21 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const csvData = splitCSVContentIntoRows(text);
-  const headers = extractCSVHeaders(csvData[0]);
-  const tabLabels = headers.map(header => header.text);
-
-  // Calculate tab dimensions and margin
-  const tabWidth = 106; // Width of each tab
-  const tabHeight = 30; // Tab height
-  const tabMargin = 10; // Horizontal margin between tabs
+  // Tab dimensions and margin
+  const tabHeight = 30;
+  const tabsGap = 10;
+  const tabXPadding = 20;
+  const tabFont = { fontSize: 14, fontFamily: 'Arial, sans-serif' };
   const bodyHeight = restrictedHeight - tabHeight - 10; // Height of the tabs bar body
-  const totalTabsWidth = tabLabels.length * (tabWidth + tabMargin) + tabWidth; // Total width required plus one additional tab
+
+  const tabList = useTabList({
+    text,
+    containerWidth: restrictedWidth - tabsGap * 2, //left and right tabList margin
+    minTabWidth: 40, // Min-width of each tab, without xPadding
+    tabXPadding,
+    tabsGap,
+    font: tabFont,
+  });
 
   const activeTab = otherProps?.activeElement ?? 0;
 
@@ -68,36 +70,41 @@ export const TabsBarShape = forwardRef<any, ShapeProps>((props, ref) => {
       <Rect
         x={0}
         y={tabHeight + 10}
-        width={Math.max(restrictedWidth, totalTabsWidth)} // Adjusts the width of the background to include an additional tab
+        width={restrictedWidth}
         height={bodyHeight}
         stroke="black"
         strokeWidth={1}
         fill="white"
       />
       {/* Map through headerRow to create tabs */}
-      {tabLabels.map((header, index) => (
-        <Group key={index} x={10 + index * (tabWidth + tabMargin)} y={10}>
-          <Rect
-            width={tabWidth}
-            height={tabHeight}
-            fill={index === activeTab ? 'white' : '#E0E0E0'}
-            stroke="black"
-            strokeWidth={1}
-          />
-          <Text
-            x={20}
-            y={8}
-            width={tabWidth - 20}
-            height={tabHeight}
-            ellipsis={true}
-            wrap="none"
-            text={header} // Use the header text
-            fontFamily="Arial"
-            fontSize={14}
-            fill="black"
-          />
-        </Group>
-      ))}
+      {tabList.map(({ tab, width, xPos }, index) => {
+        return (
+          <Group key={index} x={10 + xPos || 0} y={10}>
+            {/* || 0 Workaround to avoid thumbpage NaN issue with konva */}
+            <Rect
+              width={width}
+              height={tabHeight}
+              fill={index === activeTab ? 'white' : '#E0E0E0'}
+              stroke="black"
+              strokeWidth={1}
+            />
+            <Text
+              x={tabXPadding}
+              y={8}
+              width={
+                width - tabXPadding * 2 || 0
+              } /* || 0 Workaround to avoid thumbpage NaN issue with konva */
+              height={tabHeight}
+              ellipsis={true}
+              wrap="none"
+              text={tab}
+              fontFamily={tabFont.fontFamily}
+              fontSize={tabFont.fontSize}
+              fill="black"
+            />
+          </Group>
+        );
+      })}
     </Group>
   );
 });

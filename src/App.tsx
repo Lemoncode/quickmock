@@ -4,8 +4,8 @@ import { MainScene } from './scenes/main.scene';
 function App() {
   return (
     <>
-      <MainScene />
       <ModalDialogComponent />
+      <MainScene />
     </>
   );
 }

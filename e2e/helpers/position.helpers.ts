@@ -1,7 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import { Group } from 'konva/lib/Group';
-
-interface Position {
+export interface Position {
   x: number;
   y: number;
 }
@@ -20,13 +19,17 @@ export const getLocatorPosition = async (
 };
 
 export const getCanvasBoundingBox = async (page: Page) => {
-  const canvasWindowPos = await page
-    .locator('#konva-stage canvas')
-    .boundingBox();
+  const locator = page.locator('#konva-stage canvas').nth(1);
+
+  // Ensure that the canvas is visible before continuie
+  await locator.waitFor({ state: 'visible' });
+
+  const canvasWindowPos = await locator.boundingBox();
+
   if (canvasWindowPos) {
     return canvasWindowPos;
   } else {
-    throw new Error('Canvas is not loaded on ui');
+    throw new Error('Canvas is not loaded on UI');
   }
 };
 
@@ -43,9 +46,10 @@ export const dragAndDrop = async (
 
 export const addComponentsToCanvas = async (
   page: Page,
-  components: string[]
+  components: string[],
+  displacementQty: number = 120
 ) => {
-  const stageCanvas = await page.locator('#konva-stage canvas').first();
+  const stageCanvas = await page.locator('#konva-stage canvas').nth(1);
   const canvasPosition = await stageCanvas.boundingBox();
   if (!canvasPosition) throw new Error('No canvas found');
 
@@ -65,7 +69,7 @@ export const addComponentsToCanvas = async (
       };
     };
 
-    await dragAndDrop(page, position, targetPosition(120, index));
+    await dragAndDrop(page, position, targetPosition(displacementQty, index));
   }
 };
 

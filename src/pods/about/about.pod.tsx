@@ -9,8 +9,7 @@ export const AboutPod = () => {
     <div className={classes.container}>
       <QuickmockLogoComponent styleClass={classes.projectLogo} />
       <h2 className={classes.projectName}>Quickmock</h2>
-      <p className={classes.projectVersion}>Version 0.0</p>
-      <p className={classes.projectCommunity}>Community preview</p>
+      <p className={classes.projectVersion}>Version 1.0</p>
       <DevelopmentTeamComponent />
     </div>
   );

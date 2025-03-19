@@ -1,6 +1,9 @@
+//Example:'"Adri, Doe", "24,4", Paraguay' => ['"Adri, Doe"','"24,4"',' Paraguay']
+const divideIntoColumns = (row: string): string[] =>
+  row.match(/\s*"([^"]*)"|\s*([^,]+)/g) || [];
 export const knowMaxColumns = (rows: string[]): number => {
   return rows.reduce((maxColumns, row) => {
-    const columns = row.split(',').length;
+    const columns = divideIntoColumns(row).length;
     return columns > maxColumns ? columns : maxColumns;
   }, 0);
 };
@@ -10,7 +13,7 @@ export const parseCSVRowsIntoArray = (csvContent: string): string[] => {
   const maxColumns = knowMaxColumns(arrayRows);
 
   arrayRows = arrayRows.map(row => {
-    const currentColumnCount = row.split(',').length;
+    const currentColumnCount = divideIntoColumns(row).length;
 
     // If a row is empty, return a string of commas
     if (currentColumnCount === 0) {
@@ -23,7 +26,7 @@ export const parseCSVRowsIntoArray = (csvContent: string): string[] => {
     }
 
     // If a row has less columns than maxColumns, add commas at the end
-    if (currentColumnCount < maxColumns) {
+    if (currentColumnCount <= maxColumns) {
       return row + ','.repeat(maxColumns - currentColumnCount); // Añadir comas al final
     }
 
@@ -71,10 +74,14 @@ export const extractDataRows = (
   return widthRow
     ? rows
         .slice(1, rows.length - 1)
-        .map(row => row.split(',').map(cell => cell.trim()))
+        .map(row =>
+          divideIntoColumns(row).map(value => value.replace(/"/g, '').trim())
+        )
     : rows
         .slice(1, rows.length)
-        .map(row => row.split(',').map(cell => cell.trim()));
+        .map(row =>
+          divideIntoColumns(row).map(value => value.replace(/"/g, '').trim())
+        );
 };
 
 export const extractWidthRow = (

@@ -39,6 +39,8 @@ import {
   getPostItShapeSizeRestrictions,
   getRectangleShapeSizeRestrictions,
   getStarShapeSizeRestrictions,
+  getModalCoverShapeSizeRestrictions,
+  getCilinderShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-basic-shapes';
 import {
@@ -51,13 +53,17 @@ import {
   getCalendarShapeSizeRestrictions,
   getHorizontalMenuShapeSizeRestrictions,
   getLineChartShapeSizeRestrictions,
+  getLoadIndicatorSizeRestrictions,
   getMapChartShapeSizeRestrictions,
   getModalShapeSizeRestrictions,
   getPieChartShapeSizeRestrictions,
   getTableSizeRestrictions,
   getTabsBarShapeSizeRestrictions,
+  getToggleLightDarkShapeSizeRestrictions,
   getVerticalMenuShapeSizeRestrictions,
   getVideoPlayerShapeSizeRestrictions,
+  getVideoconferenceShapeSizeRestrictions,
+  getGaugeShapeSizeRestrictions,
 
   // other imports
 } from '@/common/components/mock-components/front-rich-components';
@@ -65,11 +71,15 @@ import {
   getHeading1SizeRestrictions,
   getHeading2SizeRestrictions,
   getHeading3SizeRestrictions,
+  getLinkSizeRestrictions,
   getNormaltextSizeRestrictions,
   getParagraphSizeRestrictions,
   getSmalltextSizeRestrictions,
+  getRichTextSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-text-components';
+
+import { getImagePlaceholderShapeSizeRestrictions } from '@/common/components/mock-components/front-low-wireframes-components';
 
 const getMultipleNodeSizeRestrictions = (): ShapeSizeRestrictions => ({
   minWidth: 0,
@@ -87,6 +97,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   combobox: getComboBoxShapeSizeRestrictions,
   input: getInputShapeSizeRestrictions,
   toggleswitch: getToggleSwitchShapeSizeRestrictions,
+  toggleLightDark: getToggleLightDarkShapeSizeRestrictions,
   textarea: getTextAreaSizeRestrictions,
   datepickerinput: getDatepickerInputShapeSizeRestrictions,
   button: getButtonShapeSizeRestrictions,
@@ -119,6 +130,8 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   normaltext: getNormaltextSizeRestrictions,
   smalltext: getSmalltextSizeRestrictions,
   paragraph: getParagraphSizeRestrictions,
+  richtext: getRichTextSizeRestrictions,
+  link: getLinkSizeRestrictions,
   largeArrow: getLargeArrowShapeSizeRestrictions,
   radiobutton: getRadioButtonShapeSizeRestrictions,
   checkbox: getCheckboxShapeSizeRestrictions,
@@ -130,12 +143,18 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   calendar: getCalendarShapeSizeRestrictions,
   verticalScrollBar: getVerticalScrollBarShapeSizeRestrictions,
   modal: getModalShapeSizeRestrictions,
+  modalCover: getModalCoverShapeSizeRestrictions,
   tabsBar: getTabsBarShapeSizeRestrictions,
   appBar: getAppBarShapeSizeRestrictions,
   buttonBar: getButtonBarShapeSizeRestrictions,
   tooltip: getTooltipShapeSizeRestrictions,
   slider: getSliderShapeSizeRestrictions,
   audioPlayer: getAudioPlayerShapeSizeRestrictions,
+  cilinder: getCilinderShapeSizeRestrictions,
+  'loading-indicator': getLoadIndicatorSizeRestrictions,
+  videoconference: getVideoconferenceShapeSizeRestrictions,
+  gauge: getGaugeShapeSizeRestrictions,
+  imagePlaceholder: getImagePlaceholderShapeSizeRestrictions,
   chip: getChipShapeSizeRestrictions,
 };
 
