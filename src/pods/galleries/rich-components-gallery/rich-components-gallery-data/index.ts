@@ -30,6 +30,10 @@ export const mockRichComponentsCollection: ItemInfo[] = [
   { thumbnailSrc: '/rich-components/pie.svg', type: 'pie' },
   { thumbnailSrc: '/rich-components/table.svg', type: 'table' },
   { thumbnailSrc: '/rich-components/tabsbar.svg', type: 'tabsBar' },
+  {
+    thumbnailSrc: '/rich-components/input-with-stepper.svg',
+    type: 'inputWithStepper',
+  },
   { thumbnailSrc: '/widgets/togglelightdark.svg', type: 'toggleLightDark' },
   { thumbnailSrc: '/rich-components/videoPlayer.svg', type: 'videoPlayer' },
   {

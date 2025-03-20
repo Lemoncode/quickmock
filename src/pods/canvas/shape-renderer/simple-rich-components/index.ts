@@ -15,6 +15,7 @@ export * from './pie-chart.renderer';
 export * from './gauge.renderer';
 export * from './table.renderer';
 export * from './tabsbar.renderer';
+export * from './input-with-stepper.renderer';
 export * from './vertical-menu.renderer';
 export * from './video-player.renderer';
 export * from './audio-player.renderer';

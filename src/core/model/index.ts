@@ -68,6 +68,7 @@ export type ShapeType =
   | 'appBar'
   | 'buttonBar'
   | 'tooltip'
+  | 'inputWithStepper'
   | 'slider'
   | 'chip'
   | 'link'
@@ -137,6 +138,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   buttonBar: 'Button Bar',
   tooltip: 'Tooltip',
   slider: 'Slider',
+  inputWithStepper: 'Input With Stepper',
   chip: 'Chip',
   richtext: 'Rich Text',
   cilinder: 'Cilinder',

@@ -156,6 +156,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   gauge: getGaugeShapeSizeRestrictions,
   imagePlaceholder: getImagePlaceholderShapeSizeRestrictions,
   chip: getChipShapeSizeRestrictions,
+  inputWithStepper: getChipShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;

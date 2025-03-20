@@ -82,6 +82,7 @@ const shapeTypesWithDefaultText = new Set<ShapeType>([
   'modalDialog',
   'loading-indicator',
   'gauge',
+  'inputWithStepper',
 ]);
 
 // Map of ShapeTypes to their default text values
@@ -122,6 +123,7 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   browser: 'https://example.com',
   modalDialog: 'Title here...',
   'loading-indicator': 'Loading...',
+  inputWithStepper: '0',
 };
 
 export const generateDefaultTextValue = (

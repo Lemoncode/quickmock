@@ -48,6 +48,7 @@ import {
   renderCalendar,
   renderAppBar,
   renderLoadingIndicator,
+  renderInputWithStepper,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -206,6 +207,8 @@ export const renderShapeComponent = (
       return renderImagePlaceHolder(shape, shapeRenderedProps);
     case 'chip':
       return renderChip(shape, shapeRenderedProps);
+    case 'inputWithStepper':
+      return renderInputWithStepper(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

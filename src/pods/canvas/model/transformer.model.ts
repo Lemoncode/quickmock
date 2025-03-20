@@ -78,6 +78,8 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
       return [];
     case 'image':
       return ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
+    case 'inputWithStepper':
+      return ['middle-left', 'middle-right'];
     default:
       return [
         'top-left',
