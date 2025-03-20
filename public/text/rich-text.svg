@@ -1,0 +1,31 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1000"
+  height="600"
+  viewBox="0 0 1000 600"
+>
+  <!-- Fondo -->
+  <rect width="1000" height="600" fill="#f0f0f0" rx="10" />
+
+  <!-- Línea 1 -->
+  <text
+    x="50"
+    y="250"
+    font-family="Arial, sans-serif"
+    font-size="120"
+    fill="#333"
+  >
+    This is <tspan font-weight="bold">bold</tspan>
+  </text>
+
+  <!-- Línea 2 -->
+  <text
+    x="50"
+    y="450"
+    font-family="Arial, sans-serif"
+    font-size="120"
+    fill="#333"
+  >
+    and <tspan font-style="italic">italic</tspan> text.
+  </text>
+</svg>

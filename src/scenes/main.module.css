@@ -1,21 +1,31 @@
 .leftTools {
+  position: relative;
+  z-index: 2;
+  background-color: white;
   grid-area: leftTools;
   border-right: 1px solid black;
   display: inline-flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .rightTools {
+  position: relative;
+  z-index: 2;
+  background-color: white;
   grid-area: rightTools;
   border-left: 1px solid black;
 }
 
 .footer {
   grid-area: footer;
+  position: relative;
+  z-index: 2;
 }
 
 .container {
   overflow-y: auto;
+  position: relative;
 }
 .container[open] {
   flex: 1;
@@ -28,4 +38,14 @@
   background-color: var(--primary-200);
   padding: var(--space-xs) var(--space-md);
   border-bottom: 1px solid var(--primary-900);
+}
+
+.viewMode {
+  position: relative;
+  z-index: 2;
+  grid-area: view;
+  background-color: rgb(49, 49, 49);
+  font-size: var(--fs-xs);
+  color: var(--pure-white);
+  padding: var(--space-xs) var(--space-md);
 }

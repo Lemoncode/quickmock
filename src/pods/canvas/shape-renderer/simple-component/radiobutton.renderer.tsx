@@ -1,6 +1,6 @@
 import { ShapeModel } from '@/core/model';
 import { ShapeRendererProps } from '../model';
-import { RadioButtonShape } from '@/common/components/front-components/radiobutton-shape';
+import { RadioButtonShape } from '@/common/components/mock-components/front-components/radiobutton-shape';
 
 export const renderRadioButton = (
   shape: ShapeModel,

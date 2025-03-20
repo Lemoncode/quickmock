@@ -8,5 +8,16 @@
     'toolbar toolbar toolbar'
     'leftTools canvas rightTools'
     'footer footer footer';
-  height: 100vh;
+  height: 100svh;
+}
+
+.viewModeLayout {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    'view'
+    'toolbar '
+    'canvas'
+    'leftTools'
+    'footer';
 }

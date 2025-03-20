@@ -1,14 +1,34 @@
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: var(--primary-50);
   border-top: 1px solid var(--primary-100);
   padding: var(--space-xs) var(--space-md);
 }
 
-.title {
-  flex-grow: 1;
+@media screen and (max-device-width: 1090px) {
+  .container {
+    flex-direction: column;
+  }
+}
+.left,
+.center,
+.right {
+  flex: 1;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .zoomContainer {

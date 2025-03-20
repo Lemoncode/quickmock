@@ -1,4 +1,4 @@
-import { HorizontalMenu } from '@/common/components/front-rich-components';
+import { HorizontalMenu } from '@/common/components/mock-components/front-rich-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

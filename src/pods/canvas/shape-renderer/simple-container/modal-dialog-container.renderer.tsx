@@ -1,4 +1,4 @@
-import { ModalDialogContainer } from '@/common/components/front-containers';
+import { ModalDialogContainer } from '@/common/components/mock-components/front-containers';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 
@@ -24,6 +24,8 @@ export const renderModalDialogContainer = (
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      isEditable={shape.allowsInlineEdition}
+      text={shape.text}
     />
   );
 };

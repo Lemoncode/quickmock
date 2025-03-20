@@ -38,6 +38,7 @@
       :root {
         --fs-base: clamp(1rem, 0.58vi + 0.86rem, 1.38rem);
       }
+
       *,
       *::before {
         margin: 0;
@@ -91,6 +92,7 @@
         max-height: 1300px;
         margin: 0 auto;
       }
+
       .back::after {
         --border-width: calc(100vw / 700);
         content: '';
@@ -130,6 +132,7 @@
         margin: 0 auto;
         margin-bottom: 30px;
       }
+
       .github {
         position: absolute;
         top: 6.8vw;
@@ -140,11 +143,13 @@
         color: #000;
         text-decoration: none;
       }
+
       .github svg {
         width: 100%;
         height: 100%;
         object-fit: contain;
       }
+
       .video {
         display: flex;
         align-items: center;
@@ -158,6 +163,7 @@
         aspect-ratio: 16 / 9;
         border-radius: 9px;
       }
+
       .content {
         display: grid;
         grid-template-columns: 1fr;
@@ -175,19 +181,24 @@
         flex-direction: column;
         gap: 20px;
       }
+
       .community {
         font-weight: 600;
         color: rgb(223, 53, 53);
       }
+
       .right {
         padding: 10px;
       }
+
       .hide-mobile {
         display: block;
       }
+
       .mobile-only {
         display: none;
       }
+
       .mobile-text {
         padding: 16px 0;
         font-weight: 600;
@@ -206,20 +217,24 @@
         .video {
           width: 90%;
         }
+
         .title {
           top: 1vw;
         }
+
         .github {
           top: calc(5vw + 5px);
           position: absolute;
           width: 90px;
           padding: 24px;
         }
+
         .left,
         .right {
           padding-left: 100px;
           padding-right: 100px;
         }
+
         .back {
           padding: 20px;
         }
@@ -230,6 +245,7 @@
           max-height: 1100px;
           padding: 0;
         }
+
         .github {
           position: absolute;
           top: min(7vw, 150px);
@@ -237,18 +253,22 @@
           width: 90px;
           padding: 24px;
         }
+
         .video {
           width: 100%;
         }
+
         .right {
           align-self: end;
           padding: 10px;
         }
+
         .left {
           padding: 10px;
           padding-top: 3vw;
           align-self: start;
         }
+
         .title {
           top: 2vw;
           width: 60%;
@@ -267,16 +287,19 @@
           margin-top: -3vw;
         }
       }
+
       @media screen and (max-device-width: 1090px) {
         .hide-mobile {
           display: none;
         }
+
         .mobile-only {
           display: block;
         }
       }
     </style>
   </head>
+
   <body>
     <main class="main">
       <div class="back">
@@ -312,7 +335,6 @@
               Share your ideas as low-fidelity mocks in minutes, perfect for
               getting started.
             </p>
-            <p class="community">Community preview</p>
           </div>
           <div>
             <div class="video">

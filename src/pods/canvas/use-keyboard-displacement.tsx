@@ -2,8 +2,18 @@ import { useEffect } from 'react';
 import { useCanvasContext } from '@/core/providers';
 import { Coord } from '@/core/model';
 
+const arrowKeys = {
+  arrowUp: 'ArrowUp',
+  arrowDown: 'ArrowDown',
+  arrowLeft: 'ArrowLeft',
+  arrowRight: 'ArrowRight',
+};
+
+const isArrowKey = (key: string) => Object.values(arrowKeys).includes(key);
+
 export const useKeyboardDisplacement = () => {
-  const { selectionInfo, updateShapePosition } = useCanvasContext();
+  const { selectionInfo, updateShapePosition, isInlineEditing } =
+    useCanvasContext();
 
   // TODO: move this to business/utils
   const updateShapeCollectionPosition = (
@@ -25,28 +35,15 @@ export const useKeyboardDisplacement = () => {
     });
   };
 
-  const isKeyboardKey = (key: string) => {
-    return ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(key);
-  };
-
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      // Keydown keys can conflict when we are performing inlne edtiion
-      // input and textarea will use the cursosr and stage keyboard should not
-      // the bubble order is Stage >> Input, so we cannot stop propagation
-      // BUT
-      // We have added a data attribute to the input and textarea to check
-      // if the inline edition is on
-      // here we check if the event target has the data attribute
-      // then we return and let the input and textare control it
-      const isInlineEditing =
-        (event.target as any)?.attributes['data-is-inline-edition-on'] !==
-        undefined;
-      if (isInlineEditing || !isKeyboardKey(event.key)) {
+      if (isInlineEditing) {
         return;
       }
 
-      event.preventDefault();
+      if (isArrowKey(event.key)) {
+        event.preventDefault();
+      }
 
       if (selectionInfo.selectedShapesIds.length === 0) {
         return;
@@ -54,25 +51,25 @@ export const useKeyboardDisplacement = () => {
 
       const step = event.shiftKey ? 25 : 2; // If shift is pressed, move faster
       switch (event.key) {
-        case 'ArrowUp':
+        case arrowKeys.arrowUp:
           updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
             x: 0,
             y: -step,
           });
           break;
-        case 'ArrowDown':
+        case arrowKeys.arrowDown:
           updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
             x: 0,
             y: step,
           });
           break;
-        case 'ArrowLeft':
+        case arrowKeys.arrowLeft:
           updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
             x: -step,
             y: 0,
           });
           break;
-        case 'ArrowRight':
+        case arrowKeys.arrowRight:
           updateShapeCollectionPosition(selectionInfo.selectedShapesIds, {
             x: step,
             y: 0,

@@ -1,0 +1,27 @@
+.tooltipContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  transform: translateX(-50%);
+  background-color: var(--primary-700);
+  color: var(--primary-100);
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--border-radius-s);
+  font-size: var(--fs-xxs);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.tooltip.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-2px);
+  transition:
+    opacity 0.5s ease-in,
+    transform 0.5s ease-in;
+  transition-delay: 1s;
+}

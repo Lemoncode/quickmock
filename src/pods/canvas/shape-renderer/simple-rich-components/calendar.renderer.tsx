@@ -1,4 +1,4 @@
-import { CalendarShape } from '@/common/components/front-rich-components/calendar';
+import { CalendarShape } from '@/common/components/mock-components/front-rich-components/calendar';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

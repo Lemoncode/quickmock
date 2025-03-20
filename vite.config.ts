@@ -1,16 +1,7 @@
 import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 import react from '@vitejs/plugin-react';
-
-import type { UserConfig as VitestUserConfigInterface } from 'vitest/config';
-
-const vitestConfig: VitestUserConfigInterface = {
-  test: {
-    globals: true,
-    restoreMocks: true,
-    environment: 'jsdom',
-  },
-};
+import { configDefaults } from 'vitest/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -26,10 +17,17 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    restoreMocks: true,
+    include: ['./src/**/*.spec.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    exclude: [...configDefaults.exclude, 'e2e/*'],
   },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+  },
+  server: {
+    port: 5173, // Usa el mismo puerto que te muestra la terminal
+    open: true, // Esto abrirá el navegador automáticamente
   },
 });

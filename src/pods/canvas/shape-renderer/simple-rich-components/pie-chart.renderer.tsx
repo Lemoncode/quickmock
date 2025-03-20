@@ -1,4 +1,4 @@
-import { PieChartShape } from '@/common/components/front-rich-components';
+import { PieChartShape } from '@/common/components/mock-components/front-rich-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

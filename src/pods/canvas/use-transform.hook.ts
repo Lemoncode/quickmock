@@ -2,7 +2,7 @@ import { Box } from 'konva/lib/shapes/Transformer';
 import { Coord, Size } from '@/core/model';
 import { useEffect } from 'react';
 import { useCanvasContext } from '@/core/providers';
-import { getMinSizeFromShape } from './canvas.model';
+import { getMinSizeFromShape } from './model';
 import { KonvaEventObject, NodeConfig, Node } from 'konva/lib/Node';
 
 export const useTransform = (
@@ -18,6 +18,7 @@ export const useTransform = (
     selectedShapesRefs,
     transformerRef,
     selectedShapeType,
+    getSelectedShapeData,
   } = useCanvasContext().selectionInfo;
 
   const setTransfomerSingleSelection = () => {
@@ -33,6 +34,7 @@ export const useTransform = (
       transformerRef.current.enabledAnchors(
         selectedShape.attrs.typeOfTransformer
       );
+      transformerRef.current.rotateEnabled(false);
     }
   };
 
@@ -45,14 +47,61 @@ export const useTransform = (
     }
   }, [selectedShapesIds]);
 
+  // If the user isDragging from the top or left anchot we need to treat
+  // it as an special case, since the X,Y top position change and it may
+  // impact the size of the transformer (see where this is being used)
+  const isDraggingFromTopAnchor = () => {
+    const transformer = transformerRef.current;
+    if (!transformer) {
+      return false;
+    }
+
+    return (
+      transformer?.getActiveAnchor() === 'top-left' ||
+      transformer?.getActiveAnchor() === 'top-center' ||
+      transformer?.getActiveAnchor() === 'top-right'
+    );
+  };
+
+  const isDraggingFromLeftAnchor = () => {
+    const transformer = transformerRef.current;
+    if (!transformer) {
+      return false;
+    }
+
+    return (
+      transformer?.getActiveAnchor() === 'top-left' ||
+      transformer?.getActiveAnchor() === 'middle-left' ||
+      transformer?.getActiveAnchor() === 'bottom-left'
+    );
+  };
+
   const updateSingleItem = (node: Node<NodeConfig>, skipHistory: boolean) => {
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();
     const position = { x: node.x(), y: node.y() };
     const selectedShapeId = selectedShapesIds[0];
 
-    const newWidth = node.width() * scaleX;
-    const newHeight = node.height() * scaleY;
+    let newWidth = node.width() * scaleX;
+    let newHeight = node.height() * scaleY;
+
+    // Top and Left anchor, for this cases we need to do an extra calc
+    // to balance top of X,Y coordinates (origin) and transformer size
+    // if we don't to this adjustements in this case the shape may be
+    // up or down instead of resizing
+    if (isDraggingFromTopAnchor()) {
+      const oldShapedata = getSelectedShapeData();
+      const oldHeight = oldShapedata?.height ?? 0;
+
+      newHeight = oldHeight + (oldShapedata?.y ?? 0) - position.y;
+    }
+
+    if (isDraggingFromLeftAnchor()) {
+      const oldShapedata = getSelectedShapeData();
+      const oldWidth = oldShapedata?.width ?? 0;
+
+      newWidth = oldWidth + (oldShapedata?.x ?? 0) - position.x;
+    }
 
     updateShapeSizeAndPosition(
       selectedShapeId,

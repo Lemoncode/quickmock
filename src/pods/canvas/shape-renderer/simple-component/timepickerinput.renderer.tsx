@@ -1,4 +1,4 @@
-import { TimepickerInputShape } from '@/common/components/front-components';
+import { TimepickerInputShape } from '@/common/components/mock-components/front-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 
@@ -25,6 +25,8 @@ export const renderTimepickerinput = (
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      isEditable={shape.allowsInlineEdition}
+      text={shape.text}
       otherProps={shape.otherProps}
     />
   );

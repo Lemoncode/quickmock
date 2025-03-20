@@ -19,6 +19,7 @@ import {
   renderVerticalScrollBar,
   renderTooltip,
   renderSlider,
+  renderChip,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -37,32 +38,43 @@ import {
   renderLineChart,
   renderVerticalMenuShape,
   renderTable,
+  renderAudioPlayer,
   renderModal,
   renderButtonBar,
   renderTabsBar,
+  renderToggleLightDark,
+  renderVideoconference,
+  renderGauge,
+  renderCalendar,
+  renderAppBar,
+  renderLoadingIndicator,
   renderInputWithStepper,
 } from './simple-rich-components';
 import {
   renderDiamond,
   renderTriangle,
   renderRectangle,
-  renderLine,
+  renderHorizontalLine,
+  renderVerticalLine,
   renderCircle,
+  renderModalCover,
   renderStar,
   renderPostit,
   renderLargeArrowShape,
+  renderCilinder,
+  renderImage,
 } from './simple-basic-shapes';
 import {
   renderHeading1,
   renderHeading2,
   renderHeading3,
+  renderLink,
   renderNormaltext,
+  renderParagraph,
+  renderRichTextParagraph,
+  renderSmalltext,
 } from './simple-text-components';
-import { renderSmalltext } from './simple-text-components/smalltext.renderer';
-import { renderParagraph } from './simple-text-components/paragraph.renderer';
-import { renderImage } from './simple-basic-shapes/image.renderer';
-import { renderCalendar } from './simple-rich-components/calendar.renderer';
-import { renderAppBar } from './simple-rich-components/appBar.renderer';
+import { renderImagePlaceHolder } from './simple-low-wireframes-components';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -81,6 +93,8 @@ export const renderShapeComponent = (
       return renderTextArea(shape, shapeRenderedProps);
     case 'toggleswitch':
       return renderToggleSwitch(shape, shapeRenderedProps);
+    case 'toggleLightDark':
+      return renderToggleLightDark(shape, shapeRenderedProps);
     case 'progressbar':
       return renderProgressbar(shape, shapeRenderedProps);
     case 'listbox':
@@ -107,6 +121,8 @@ export const renderShapeComponent = (
       return renderPostit(shape, shapeRenderedProps);
     case 'videoPlayer':
       return renderVideoPlayer(shape, shapeRenderedProps);
+    case 'audioPlayer':
+      return renderAudioPlayer(shape, shapeRenderedProps);
     case 'pie':
       return renderPieChart(shape, shapeRenderedProps);
     case 'map':
@@ -117,8 +133,10 @@ export const renderShapeComponent = (
       return renderLineChart(shape, shapeRenderedProps);
     case 'diamond':
       return renderDiamond(shape, shapeRenderedProps);
-    case 'line':
-      return renderLine(shape, shapeRenderedProps);
+    case 'horizontalLine':
+      return renderHorizontalLine(shape, shapeRenderedProps);
+    case 'verticalLine':
+      return renderVerticalLine(shape, shapeRenderedProps);
     case 'accordion':
       return renderAccordion(shape, shapeRenderedProps);
     case 'triangle':
@@ -145,6 +163,10 @@ export const renderShapeComponent = (
       return renderSmalltext(shape, shapeRenderedProps);
     case 'paragraph':
       return renderParagraph(shape, shapeRenderedProps);
+    case 'richtext':
+      return renderRichTextParagraph(shape, shapeRenderedProps);
+    case 'link':
+      return renderLink(shape, shapeRenderedProps);
     case 'largeArrow':
       return renderLargeArrowShape(shape, shapeRenderedProps);
     case 'icon':
@@ -161,6 +183,8 @@ export const renderShapeComponent = (
       return renderVerticalScrollBar(shape, shapeRenderedProps);
     case 'modal':
       return renderModal(shape, shapeRenderedProps);
+    case 'modalCover':
+      return renderModalCover(shape, shapeRenderedProps);
     case 'tabsBar':
       return renderTabsBar(shape, shapeRenderedProps);
     case 'appBar':
@@ -171,6 +195,18 @@ export const renderShapeComponent = (
       return renderTooltip(shape, shapeRenderedProps);
     case 'slider':
       return renderSlider(shape, shapeRenderedProps);
+    case 'cilinder':
+      return renderCilinder(shape, shapeRenderedProps);
+    case 'loading-indicator':
+      return renderLoadingIndicator(shape, shapeRenderedProps);
+    case 'videoconference':
+      return renderVideoconference(shape, shapeRenderedProps);
+    case 'gauge':
+      return renderGauge(shape, shapeRenderedProps);
+    case 'imagePlaceholder':
+      return renderImagePlaceHolder(shape, shapeRenderedProps);
+    case 'chip':
+      return renderChip(shape, shapeRenderedProps);
     case 'inputWithStepper':
       return renderInputWithStepper(shape, shapeRenderedProps);
     default:

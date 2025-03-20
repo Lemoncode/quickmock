@@ -7,3 +7,4 @@ export { UndoButton } from './undo-button';
 export { RedoButton } from './redo-button';
 export { ExportButton } from './export-button';
 export { AboutButton } from './about-button';
+export { SettingsButton } from './settings-button';

@@ -1,4 +1,5 @@
 import { EditType } from '@/core/model';
+import { useCanvasContext } from '@/core/providers';
 import { useEffect, useRef, useState } from 'react';
 
 interface Configuration {
@@ -18,6 +19,7 @@ export const useSubmitCancelHook = (
   const divRef = useRef<HTMLDivElement>(null);
 
   const [isEditing, setIsEditing] = useState(false);
+  const { setIsInlineEditing } = useCanvasContext();
 
   const getActiveInputRef = ():
     | HTMLInputElement
@@ -45,6 +47,7 @@ export const useSubmitCancelHook = (
         !getActiveInputRef()?.contains(event.target as Node)
       ) {
         setIsEditing(false);
+        setIsInlineEditing(false);
         if (editType === 'input' || editType === 'textarea') {
           const inputRef = getActiveInputRef() as any;
           onTextSubmit(inputRef?.value || '');
@@ -55,11 +58,13 @@ export const useSubmitCancelHook = (
     const handleKeyDown = (event: KeyboardEvent) => {
       if (isEditing && event.key === 'Escape') {
         setIsEditing(false);
+        setIsInlineEditing(false);
         setEditText(text);
       }
 
       if (editType === 'input' && isEditable && event.key === 'Enter') {
         setIsEditing(false);
+        setIsInlineEditing(false);
         if (editType === 'input' || editType === 'textarea') {
           const inputRef = getActiveInputRef() as any;
           onTextSubmit(inputRef?.value || '');

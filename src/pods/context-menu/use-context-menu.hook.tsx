@@ -1,7 +1,6 @@
 import { useCanvasContext } from '@/core/providers';
 import { useEffect, useState } from 'react';
 import classes from './use-context-menu.hook.module.css';
-import { PropertiesPod } from '../properties';
 import { Commands } from './components/commands.component';
 
 interface ContextMenuProps {
@@ -27,7 +26,11 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ dropRef }) => {
 
     const handleRightClick = (event: MouseEvent) => {
       event.preventDefault();
-      if (selectionInfo.getSelectedShapeData()) {
+      if (
+        selectionInfo.getSelectedShapeData() &&
+        stageRef.current &&
+        stageRef.current.container().contains(event.target as Node)
+      ) {
         setShowContextMenu(true);
         setContextMenuPosition({ x: event.clientX, y: event.clientY });
       }
@@ -58,7 +61,6 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ dropRef }) => {
           }}
           className={classes.contextMenu}
         >
-          <PropertiesPod />
           <Commands setShowContextMenu={setShowContextMenu} />
         </div>
       )}

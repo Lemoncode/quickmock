@@ -1,4 +1,4 @@
-import { SvgIcon } from '@/common/components/front-components';
+import { SvgIcon } from '@/common/components/mock-components/front-components';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 
@@ -27,6 +27,7 @@ export const renderIcon = (
       onTransformEnd={handleTransform}
       iconInfo={shape.otherProps?.icon}
       iconSize={shape.otherProps?.iconSize}
+      stroke={shape.otherProps?.stroke}
     />
   );
 };

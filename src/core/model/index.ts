@@ -15,6 +15,7 @@ export type ShapeType =
   | 'checkbox'
   | 'textarea'
   | 'toggleswitch'
+  | 'toggleLightDark'
   | 'progressbar'
   | 'listbox'
   | 'datepickerinput'
@@ -29,9 +30,11 @@ export type ShapeType =
   | 'rectangle'
   | 'postit'
   | 'videoPlayer'
+  | 'audioPlayer'
   | 'diamond'
   | 'icon'
-  | 'line'
+  | 'horizontalLine'
+  | 'verticalLine'
   | 'accordion'
   | 'pie'
   | 'horizontal-menu'
@@ -59,13 +62,23 @@ export type ShapeType =
   | 'verticalScrollBar'
   | 'horizontalScrollBar'
   | 'modal'
+  | 'modalCover'
   | 'tabsBar'
   | 'appBar'
   | 'appBar'
   | 'buttonBar'
   | 'tooltip'
   | 'inputWithStepper'
-  | 'slider';
+  | 'slider'
+  | 'chip'
+  | 'link'
+  | 'cilinder'
+  | 'richtext'
+  | 'loading-indicator'
+  | 'videoconference'
+  | 'richtext'
+  | 'gauge'
+  | 'imagePlaceholder';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -75,6 +88,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   checkbox: 'Checkbox',
   textarea: 'Textarea',
   toggleswitch: 'Toggle Switch',
+  toggleLightDark: 'Toggle Light/Dark',
   progressbar: 'Progress Bar',
   listbox: 'List Box',
   datepickerinput: 'Date Picker Input',
@@ -87,8 +101,10 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   radiobutton: 'Radio Button',
   rectangle: 'Rectangle',
   videoPlayer: 'Video Player',
+  audioPlayer: 'Audio Player',
   diamond: 'Diamond',
-  line: 'Line',
+  horizontalLine: 'Horizontal Line',
+  verticalLine: 'Vertical Line',
   accordion: 'Accordion',
   pie: 'Pie',
   breadcrumb: 'Breadcrumb',
@@ -103,6 +119,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   normaltext: 'Normal text',
   smalltext: 'Small text',
   paragraph: 'Paragraph',
+  link: 'Link',
   triangle: 'Triangle',
   'horizontal-menu': 'Horizontal Menu',
   largeArrow: 'Large Arrow',
@@ -115,12 +132,20 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   calendar: 'Calendar',
   verticalScrollBar: 'Vertical Scroll Bar',
   modal: 'Modal',
+  modalCover: 'Modal Cover',
   tabsBar: 'Tabs Bar',
   appBar: 'AppBar',
   buttonBar: 'Button Bar',
   tooltip: 'Tooltip',
   slider: 'Slider',
   inputWithStepper: 'Input With Stepper',
+  chip: 'Chip',
+  richtext: 'Rich Text',
+  cilinder: 'Cilinder',
+  'loading-indicator': 'Loading',
+  videoconference: 'Videoconference',
+  gauge: 'Gauge',
+  imagePlaceholder: 'Image Placeholder',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
@@ -155,6 +180,10 @@ export interface OtherProps {
   strokeStyle?: number[];
   backgroundColor?: string;
   textColor?: string;
+  fontVariant?: string;
+  fontStyle?: string;
+  fontSize?: number;
+  textDecoration?: string;
   checked?: boolean;
   icon?: IconInfo;
   iconSize?: IconSize;
@@ -163,6 +192,11 @@ export interface OtherProps {
   progress?: string;
   borderRadius?: string;
   activeElement?: number;
+  selectedBackgroundColor?: string;
+  textAlignment?: 'left' | 'center' | 'right';
+  disabled?: boolean;
+  isPlaceholder?: boolean;
+  isPassword?: boolean;
 }
 
 export const BASE_ICONS_URL = '/icons/';

@@ -1,5 +1,21 @@
 import { Coord, ShapeModel, ShapeRefs } from '@/core/model';
-import { SelectionRect } from './canvas.model';
+import { SelectionRect } from './model';
+
+export const areCoordsInsideRect = (
+  pointX: number,
+  pointY: number,
+  rectX: number,
+  rectY: number,
+  rectWidth: number,
+  rectHeight: number
+): boolean => {
+  return (
+    pointX >= rectX &&
+    pointX <= rectX + rectWidth &&
+    pointY >= rectY &&
+    pointY <= rectY + rectHeight
+  );
+};
 
 const isShapeInsideSelectionRect = (
   shapeRect: SelectionRect,
