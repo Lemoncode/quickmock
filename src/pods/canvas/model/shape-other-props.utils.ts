@@ -122,6 +122,7 @@ export const generateDefaultOtherProps = (
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'horizontalLine':
+    case 'horizontalLineLow':
       return {
         stroke: '#000000',
         strokeStyle: [],

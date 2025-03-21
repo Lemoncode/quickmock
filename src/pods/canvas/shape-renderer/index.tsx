@@ -73,7 +73,10 @@ import {
   renderRichTextParagraph,
   renderSmalltext,
 } from './simple-text-components';
-import { renderImagePlaceHolder } from './simple-low-wireframes-components';
+import {
+  renderHorizontalLowLine,
+  renderImagePlaceHolder,
+} from './simple-low-wireframes-components';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -206,6 +209,8 @@ export const renderShapeComponent = (
       return renderImagePlaceHolder(shape, shapeRenderedProps);
     case 'chip':
       return renderChip(shape, shapeRenderedProps);
+    case 'horizontalLineLow':
+      return renderHorizontalLowLine(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
