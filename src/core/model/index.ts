@@ -77,7 +77,8 @@ export type ShapeType =
   | 'videoconference'
   | 'richtext'
   | 'gauge'
-  | 'imagePlaceholder';
+  | 'imagePlaceholder'
+  | 'verticalLineLow';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -144,6 +145,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   videoconference: 'Videoconference',
   gauge: 'Gauge',
   imagePlaceholder: 'Image Placeholder',
+  verticalLineLow: 'Vertical Line',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';

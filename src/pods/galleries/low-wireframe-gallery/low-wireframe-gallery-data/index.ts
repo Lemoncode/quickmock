@@ -5,4 +5,8 @@ export const mockLowWireframeCollection: ItemInfo[] = [
     thumbnailSrc: '/low-wireframes/imagePlaceholder.svg',
     type: 'imagePlaceholder',
   },
+  {
+    thumbnailSrc: '/low-wireframes/verticalLineLow.svg',
+    type: 'verticalLineLow',
+  },
 ];
