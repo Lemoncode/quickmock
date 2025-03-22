@@ -64,7 +64,6 @@ import {
   getVideoPlayerShapeSizeRestrictions,
   getVideoconferenceShapeSizeRestrictions,
   getGaugeShapeSizeRestrictions,
-
   // other imports
 } from '@/common/components/mock-components/front-rich-components';
 import {
@@ -80,6 +79,7 @@ import {
 } from '@/common/components/mock-components/front-text-components';
 
 import { getImagePlaceholderShapeSizeRestrictions } from '@/common/components/mock-components/front-low-wireframes-components';
+import { getVerticalLineLowShapeRestrictions } from '@/common/components/mock-components/front-low-wireframes-components/vertical-line-low-shape';
 
 const getMultipleNodeSizeRestrictions = (): ShapeSizeRestrictions => ({
   minWidth: 0,
@@ -156,6 +156,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   gauge: getGaugeShapeSizeRestrictions,
   imagePlaceholder: getImagePlaceholderShapeSizeRestrictions,
   chip: getChipShapeSizeRestrictions,
+  verticalLineLow: getVerticalLineLowShapeRestrictions,
 };
 
 export default shapeSizeMap;
