@@ -78,7 +78,10 @@ import {
   // other imports
 } from '@/common/components/mock-components/front-text-components';
 
-import { getImagePlaceholderShapeSizeRestrictions } from '@/common/components/mock-components/front-low-wireframes-components';
+import {
+  getHorizontalLineLowShapeRestrictions,
+  getImagePlaceholderShapeSizeRestrictions,
+} from '@/common/components/mock-components/front-low-wireframes-components';
 import { getVerticalLineLowShapeRestrictions } from '@/common/components/mock-components/front-low-wireframes-components/vertical-line-low-shape';
 
 const getMultipleNodeSizeRestrictions = (): ShapeSizeRestrictions => ({
@@ -156,6 +159,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   gauge: getGaugeShapeSizeRestrictions,
   imagePlaceholder: getImagePlaceholderShapeSizeRestrictions,
   chip: getChipShapeSizeRestrictions,
+  horizontalLineLow: getHorizontalLineLowShapeRestrictions,
   verticalLineLow: getVerticalLineLowShapeRestrictions,
 };
 

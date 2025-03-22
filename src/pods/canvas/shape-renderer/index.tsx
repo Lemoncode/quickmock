@@ -74,6 +74,7 @@ import {
   renderSmalltext,
 } from './simple-text-components';
 import {
+  renderHorizontalLowLine,
   renderImagePlaceHolder,
   renderVerticalLowLine,
 } from './simple-low-wireframes-components';
@@ -209,6 +210,8 @@ export const renderShapeComponent = (
       return renderImagePlaceHolder(shape, shapeRenderedProps);
     case 'chip':
       return renderChip(shape, shapeRenderedProps);
+    case 'horizontalLineLow':
+      return renderHorizontalLowLine(shape, shapeRenderedProps);
     case 'verticalLineLow':
       return renderVerticalLowLine(shape, shapeRenderedProps);
     default:
