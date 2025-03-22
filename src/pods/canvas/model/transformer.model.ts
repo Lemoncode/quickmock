@@ -73,6 +73,7 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
       return ['middle-left', 'middle-right'];
     case 'verticalLine':
     case 'verticalScrollBar':
+    case 'verticalLineLow':
       return ['top-center', 'bottom-center'];
     case 'icon':
     case 'multiple':

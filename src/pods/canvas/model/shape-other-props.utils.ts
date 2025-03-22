@@ -123,6 +123,7 @@ export const generateDefaultOtherProps = (
       };
     case 'horizontalLine':
     case 'horizontalLineLow':
+    case 'verticalLineLow':
       return {
         stroke: '#000000',
         strokeStyle: [],

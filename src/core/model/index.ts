@@ -78,7 +78,8 @@ export type ShapeType =
   | 'richtext'
   | 'gauge'
   | 'imagePlaceholder'
-  | 'horizontalLineLow';
+  | 'horizontalLineLow'
+  | 'verticalLineLow';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -146,6 +147,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   gauge: 'Gauge',
   imagePlaceholder: 'Image Placeholder',
   horizontalLineLow: 'Horizontal Divider',
+  verticalLineLow: 'Vertical Divider',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
