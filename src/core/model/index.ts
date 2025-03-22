@@ -145,7 +145,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   videoconference: 'Videoconference',
   gauge: 'Gauge',
   imagePlaceholder: 'Image Placeholder',
-  horizontalLineLow: 'Horizontal Line',
+  horizontalLineLow: 'Horizontal Divider',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
