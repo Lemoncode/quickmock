@@ -79,6 +79,7 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'multiple':
       return [];
     case 'image':
+    case 'ellipseLow':
       return ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
     default:
       return [

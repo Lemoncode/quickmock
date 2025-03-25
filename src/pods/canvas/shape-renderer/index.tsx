@@ -77,6 +77,7 @@ import {
   renderHorizontalLowLine,
   renderImagePlaceHolder,
   renderVerticalLowLine,
+  renderEllipseLow,
 } from './simple-low-wireframes-components';
 
 export const renderShapeComponent = (
@@ -214,6 +215,8 @@ export const renderShapeComponent = (
       return renderHorizontalLowLine(shape, shapeRenderedProps);
     case 'verticalLineLow':
       return renderVerticalLowLine(shape, shapeRenderedProps);
+    case 'ellipseLow':
+      return renderEllipseLow(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
