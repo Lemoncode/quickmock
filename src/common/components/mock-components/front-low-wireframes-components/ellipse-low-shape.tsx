@@ -6,12 +6,12 @@ import { ShapeProps } from '../shape.model';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const EllipseLowShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 50,
-  minHeight: 50,
+  minWidth: 10,
+  minHeight: 10,
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 100,
-  defaultHeight: 100,
+  defaultHeight: 50,
 };
 
 export const getEllipseLowShapeRestrictions = (): ShapeSizeRestrictions =>
@@ -37,7 +37,7 @@ export const EllipseLowShape = forwardRef<any, ShapeProps>((props, ref) => {
     height
   );
 
-  const { width: restrictedWidth } = restrictedSize;
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -49,10 +49,10 @@ export const EllipseLowShape = forwardRef<any, ShapeProps>((props, ref) => {
   return (
     <Group {...commonGroupProps} {...shapeProps}>
       <Ellipse
-        x={restrictedWidth}
-        y={restrictedWidth / 2}
+        x={0}
+        y={0}
         radiusX={restrictedWidth}
-        radiusY={restrictedWidth / 2}
+        radiusY={restrictedHeight}
         stroke="black"
         strokeWidth={4}
       />
