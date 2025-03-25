@@ -78,6 +78,7 @@ export type ShapeType =
   | 'richtext'
   | 'gauge'
   | 'imagePlaceholder'
+  | 'thickRectanglePlaceholder'
   | 'horizontalLineLow'
   | 'verticalLineLow';
 
@@ -146,6 +147,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   videoconference: 'Videoconference',
   gauge: 'Gauge',
   imagePlaceholder: 'Image Placeholder',
+  thickRectanglePlaceholder: 'Thick Rectangle Placeholder',
   horizontalLineLow: 'Horizontal Divider',
   verticalLineLow: 'Vertical Divider',
 };

@@ -81,6 +81,7 @@ import {
 import {
   getHorizontalLineLowShapeRestrictions,
   getImagePlaceholderShapeSizeRestrictions,
+  getThickRectanglePlaceholderShapeSizeRestrictions,
 } from '@/common/components/mock-components/front-low-wireframes-components';
 import { getVerticalLineLowShapeRestrictions } from '@/common/components/mock-components/front-low-wireframes-components/vertical-line-low-shape';
 
@@ -158,6 +159,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   videoconference: getVideoconferenceShapeSizeRestrictions,
   gauge: getGaugeShapeSizeRestrictions,
   imagePlaceholder: getImagePlaceholderShapeSizeRestrictions,
+  thickRectanglePlaceholder: getThickRectanglePlaceholderShapeSizeRestrictions,
   chip: getChipShapeSizeRestrictions,
   horizontalLineLow: getHorizontalLineLowShapeRestrictions,
   verticalLineLow: getVerticalLineLowShapeRestrictions,

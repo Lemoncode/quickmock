@@ -76,6 +76,7 @@ import {
 import {
   renderHorizontalLowLine,
   renderImagePlaceHolder,
+  renderThickRectanglePlaceholder,
   renderVerticalLowLine,
 } from './simple-low-wireframes-components';
 
@@ -208,6 +209,8 @@ export const renderShapeComponent = (
       return renderGauge(shape, shapeRenderedProps);
     case 'imagePlaceholder':
       return renderImagePlaceHolder(shape, shapeRenderedProps);
+    case 'thickRectanglePlaceholder':
+      return renderThickRectanglePlaceholder(shape, shapeRenderedProps);
     case 'chip':
       return renderChip(shape, shapeRenderedProps);
     case 'horizontalLineLow':
