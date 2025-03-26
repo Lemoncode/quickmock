@@ -74,6 +74,7 @@ import {
   renderSmalltext,
 } from './simple-text-components';
 import {
+  renderCirclePlaceholder,
   renderHorizontalLowLine,
   renderImagePlaceHolder,
   renderVerticalLowLine,
@@ -214,6 +215,8 @@ export const renderShapeComponent = (
       return renderHorizontalLowLine(shape, shapeRenderedProps);
     case 'verticalLineLow':
       return renderVerticalLowLine(shape, shapeRenderedProps);
+    case 'circlePlaceholder':
+      return renderCirclePlaceholder(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

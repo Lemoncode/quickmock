@@ -79,6 +79,7 @@ import {
 } from '@/common/components/mock-components/front-text-components';
 
 import {
+  getCirclePlaceholderShapeSizeRestrictions,
   getHorizontalLineLowShapeRestrictions,
   getImagePlaceholderShapeSizeRestrictions,
 } from '@/common/components/mock-components/front-low-wireframes-components';
@@ -161,6 +162,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   chip: getChipShapeSizeRestrictions,
   horizontalLineLow: getHorizontalLineLowShapeRestrictions,
   verticalLineLow: getVerticalLineLowShapeRestrictions,
+  circlePlaceholder: getCirclePlaceholderShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;
