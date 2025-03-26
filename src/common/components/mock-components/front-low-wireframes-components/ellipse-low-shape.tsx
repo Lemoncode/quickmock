@@ -4,6 +4,8 @@ import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeProps } from '../shape.model';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { BASIC_SHAPE } from '../front-components/shape.const';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
 
 const EllipseLowShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
@@ -39,6 +41,8 @@ export const EllipseLowShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
+  const { stroke, strokeStyle } = useShapeProps(otherProps, BASIC_SHAPE);
+
   const commonGroupProps = useGroupShapeProps(
     props,
     restrictedSize,
@@ -53,8 +57,9 @@ export const EllipseLowShape = forwardRef<any, ShapeProps>((props, ref) => {
         y={0}
         radiusX={restrictedWidth}
         radiusY={restrictedHeight}
-        stroke="black"
+        stroke={stroke}
         strokeWidth={4}
+        dash={strokeStyle}
       />
     </Group>
   );
