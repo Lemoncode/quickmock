@@ -16,7 +16,7 @@ const circleLowShapeRestrictions: ShapeSizeRestrictions = {
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 160,
-  defaultHeight: 160,
+  defaultHeight: 100,
 };
 
 export const getCircleLowShapeSizeRestrictions = (): ShapeSizeRestrictions =>
