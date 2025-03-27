@@ -12,13 +12,13 @@ test('has rectangle component', async ({ page }) => {
   await page.goto('');
   await page.getByText('Basic Shapes').click();
 
-  await expect(page.getByAltText('Rectangle')).toBeVisible();
+  await expect(page.getByAltText(/^Rectangle$/)).toBeVisible();
 });
 
 test('can add rectangle component to canvas', async ({ page }) => {
   await page.goto('');
   await page.getByText('Basic Shapes').click();
-  const component = page.getByAltText('Rectangle');
+  const component = page.getByAltText(/^Rectangle$/);
 
   const position = await getLocatorPosition(component);
   await dragAndDrop(page, position, {
