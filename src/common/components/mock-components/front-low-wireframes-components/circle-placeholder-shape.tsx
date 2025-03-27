@@ -4,7 +4,10 @@ import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Circle, Group } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import { BASIC_SHAPE } from '../front-components/shape.const';
+import {
+  BASIC_SHAPE,
+  LOW_WIREFRAME_SHAPE,
+} from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const circlePlaceholderShapeRestrictions: ShapeSizeRestrictions = {
@@ -55,7 +58,7 @@ export const CirclePlaceholderShape = forwardRef<any, ShapeProps>(
           y={restrictedHeight / 2}
           radius={radius}
           stroke={stroke}
-          strokeWidth={10}
+          strokeWidth={LOW_WIREFRAME_SHAPE.DEFAULT_STROKE_WIDTH}
           fill={fill}
           dash={strokeStyle}
         />
