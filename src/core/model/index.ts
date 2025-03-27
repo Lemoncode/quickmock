@@ -151,7 +151,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   horizontalLineLow: 'Horizontal Divider',
   verticalLineLow: 'Vertical Divider',
   ellipseLow: 'Ellipse',
-  rectangleLow: 'Low square',
+  rectangleLow: 'Square Placeholder',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
