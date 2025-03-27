@@ -75,7 +75,7 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'verticalScrollBar':
     case 'verticalLineLow':
       return ['top-center', 'bottom-center'];
-    case 'circlePlaceholder':
+    case 'circleLow':
       return [
         'top-left',
         'top-right',

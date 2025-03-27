@@ -123,7 +123,7 @@ export const generateDefaultOtherProps = (
       };
     case 'horizontalLine':
     case 'horizontalLineLow':
-    case 'circlePlaceholder':
+    case 'circleLow':
     case 'verticalLineLow':
     case 'ellipseLow':
       return {

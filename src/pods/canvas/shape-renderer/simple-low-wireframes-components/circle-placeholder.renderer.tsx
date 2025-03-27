@@ -1,8 +1,8 @@
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
-import { CirclePlaceholderShape } from '@/common/components/mock-components/front-low-wireframes-components';
+import { CircleLowShape } from '@/common/components/mock-components/front-low-wireframes-components';
 
-export const renderCirclePlaceholder = (
+export const renderCircleLow = (
   shape: ShapeModel,
   shapeRenderedProps: ShapeRendererProps
 ) => {
@@ -10,7 +10,7 @@ export const renderCirclePlaceholder = (
     shapeRenderedProps;
 
   return (
-    <CirclePlaceholderShape
+    <CircleLowShape
       id={shape.id}
       key={shape.id}
       ref={shapeRefs.current[shape.id]}
