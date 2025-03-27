@@ -80,6 +80,7 @@ export type ShapeType =
   | 'imagePlaceholder'
   | 'horizontalLineLow'
   | 'verticalLineLow'
+  | 'ellipseLow'
   | 'circlePlaceholder';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
@@ -149,6 +150,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   imagePlaceholder: 'Image Placeholder',
   horizontalLineLow: 'Horizontal Divider',
   verticalLineLow: 'Vertical Divider',
+  ellipseLow: 'Ellipse',
   circlePlaceholder: 'Circle Placeholder',
 };
 

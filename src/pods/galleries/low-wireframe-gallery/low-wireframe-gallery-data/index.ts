@@ -14,6 +14,10 @@ export const mockLowWireframeCollection: ItemInfo[] = [
     type: 'verticalLineLow',
   },
   {
+    thumbnailSrc: '/low-wireframes/ellipseLow.svg',
+    type: 'ellipseLow',
+  },
+  {
     thumbnailSrc: '/low-wireframes/circlePlaceholder.svg',
     type: 'circlePlaceholder',
   },

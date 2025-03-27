@@ -125,6 +125,7 @@ export const generateDefaultOtherProps = (
     case 'horizontalLineLow':
     case 'circlePlaceholder':
     case 'verticalLineLow':
+    case 'ellipseLow':
       return {
         stroke: '#000000',
         strokeStyle: [],
