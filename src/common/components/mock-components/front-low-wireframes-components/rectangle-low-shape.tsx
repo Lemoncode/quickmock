@@ -4,6 +4,8 @@ import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
 import { Group, Rect } from 'react-konva';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from '../front-components/shape.const';
 
 const rectangleLowShapeRestriction: ShapeSizeRestrictions = {
   minWidth: 10,
@@ -40,6 +42,8 @@ export const RectangleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
+  const { stroke, strokeStyle } = useShapeProps(otherProps, BASIC_SHAPE);
+
   const commonGroupProps = useGroupShapeProps(
     props,
     restrictedSize,
@@ -52,7 +56,8 @@ export const RectangleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
       <Rect
         width={restrictedWidth}
         height={restrictedHeight}
-        stroke="black"
+        stroke={stroke}
+        dash={strokeStyle}
         strokeWidth={6}
         fill="white"
       />
