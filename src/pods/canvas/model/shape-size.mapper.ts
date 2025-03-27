@@ -83,6 +83,7 @@ import {
   getHorizontalLineLowShapeRestrictions,
   getImagePlaceholderShapeSizeRestrictions,
   getVerticalLineLowShapeRestrictions,
+  getRectangleLowShapeRestrictions,
 } from '@/common/components/mock-components/front-low-wireframes-components';
 
 const getMultipleNodeSizeRestrictions = (): ShapeSizeRestrictions => ({
@@ -163,6 +164,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   horizontalLineLow: getHorizontalLineLowShapeRestrictions,
   verticalLineLow: getVerticalLineLowShapeRestrictions,
   ellipseLow: getEllipseLowShapeRestrictions,
+  rectangleLow: getRectangleLowShapeRestrictions,
 };
 
 export default shapeSizeMap;
