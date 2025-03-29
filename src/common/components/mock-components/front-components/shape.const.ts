@@ -60,6 +60,10 @@ export const BASIC_SHAPE: DefaultStyleShape = {
   DEFAULT_DISABLED,
 };
 
+export const LOW_WIREFRAME_SHAPE = {
+  DEFAULT_STROKE_WIDTH: 6,
+};
+
 export const INPUT_SHAPE: DefaultStyleShape = {
   DEFAULT_CORNER_RADIUS,
   DEFAULT_STROKE_COLOR,
