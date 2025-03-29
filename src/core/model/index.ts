@@ -81,7 +81,8 @@ export type ShapeType =
   | 'horizontalLineLow'
   | 'verticalLineLow'
   | 'ellipseLow'
-  | 'rectangleLow';
+  | 'rectangleLow'
+  | 'circleLow';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -152,6 +153,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   verticalLineLow: 'Vertical Divider',
   ellipseLow: 'Ellipse',
   rectangleLow: 'Rectangle Placeholder',
+  circleLow: 'Circle',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
