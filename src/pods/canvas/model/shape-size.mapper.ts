@@ -85,6 +85,7 @@ import {
   getRectangleLowShapeRestrictions,
   getEllipseLowShapeRestrictions,
   getCircleLowShapeSizeRestrictions,
+  getTextScribbledShapeRestrictions,
 } from '@/common/components/mock-components/front-low-wireframes-components';
 
 const getMultipleNodeSizeRestrictions = (): ShapeSizeRestrictions => ({
@@ -167,6 +168,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   ellipseLow: getEllipseLowShapeRestrictions,
   rectangleLow: getRectangleLowShapeRestrictions,
   circleLow: getCircleLowShapeSizeRestrictions,
+  textScribbled: getTextScribbledShapeRestrictions,
 };
 
 export default shapeSizeMap;
