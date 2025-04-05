@@ -38,15 +38,44 @@ export const addBlankSpaceToPath = (currentX: number, height: number) => {
   };
 };
 
-export const calculatePath = (width: number, height: number, id: string) => {
+const drawCharScribble = (
+  char: string,
+  i: number,
+  currentX: number,
+  height: number
+) => {
   const amplitude = height / 3;
+  const charWidth = AVG_CHAR_WIDTH;
+  const seed = char.charCodeAt(0) + i * 31;
 
+  const controlX1 = currentX + charWidth / 2;
+  const controlY1 = rounded(
+    height / 2 + (seededRandom(seed) * amplitude - amplitude / 2)
+  );
+
+  const controlX2 = currentX + charWidth;
+  const controlY2 = rounded(
+    height / 2 + (seededRandom(seed + 1) * amplitude - amplitude / 2)
+  );
+
+  const endX = currentX + charWidth;
+  const endY = height / 2;
+
+  return {
+    pathSegment: `C ${controlX1},${controlY1} ${controlX2},${controlY2} ${endX},${endY}`,
+    endX,
+  };
+};
+
+export const calculatePath = (width: number, height: number, id: string) => {
   // This AVG_CHAR_WIDTH is a rough approximation of the average character width
   // It could lead us to issues
-  const maxChars = Math.floor(width / AVG_CHAR_WIDTH);
-
   const offset = getOffsetFromId(id ?? '', MAX_START_OFFSET);
-  const visibleText = SEED_PHRASE.slice(offset, offset + maxChars);
+
+  // In the past it was: /*offset + maxChars*/
+  // but just updated to SEED_PHRASE.length to ensure we have enough cahrs despite
+  // the average offset (the loop will break if we run out of space)
+  const visibleText = SEED_PHRASE.slice(offset, SEED_PHRASE.length);
 
   const path: string[] = [];
   let currentX = 0;
@@ -54,26 +83,9 @@ export const calculatePath = (width: number, height: number, id: string) => {
 
   for (let i = 0; i < visibleText.length; i++) {
     const char = visibleText[i];
-    const charWidth = AVG_CHAR_WIDTH;
-    const seed = char.charCodeAt(0) + i * 31;
 
-    const controlX1 = currentX + charWidth / 2;
-    const controlY1 = rounded(
-      height / 2 + (seededRandom(seed) * amplitude - amplitude / 2)
-    );
-
-    const controlX2 = currentX + charWidth;
-    const controlY2 = rounded(
-      height / 2 + (seededRandom(seed + 1) * amplitude - amplitude / 2)
-    );
-
-    const endX = currentX + charWidth;
-    const endY = height / 2;
-
-    path.push(
-      `C ${controlX1},${controlY1} ${controlX2},${controlY2} ${endX},${endY}`
-    );
-
+    const { pathSegment, endX } = drawCharScribble(char, i, currentX, height);
+    path.push(pathSegment);
     currentX = endX;
 
     // If it's a space, we need to add a blank space to the path

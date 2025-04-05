@@ -42,18 +42,14 @@ export const TextScribbled = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const pathData = useMemo(() => {
+    console.log('Calculating path data', restrictedWidth);
     return calculatePath(restrictedWidth, restrictedHeight, id);
-  }, [width]);
+  }, [restrictedWidth]);
+
+  //const pathData = calculatePath(restrictedWidth, restrictedHeight, id);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
-      {/* Had to add a rectangle to allow drag / drop movement*/}
-      <Rect
-        width={restrictedSize.width}
-        height={restrictedSize.height}
-        stroke={stroke}
-        strokeWidth={0}
-      />
       <Path
         data={pathData}
         stroke={stroke}
@@ -61,18 +57,13 @@ export const TextScribbled = forwardRef<any, ShapeProps>((props, ref) => {
         lineCap="round"
         lineJoin="round"
       />
+      {/* Had to add a rectangle to allow drag / drop movement*/}
+      <Rect
+        width={restrictedSize.width}
+        height={restrictedSize.height}
+        stroke={stroke}
+        strokeWidth={0}
+      />
     </Group>
   );
 });
-
-/*
-      <RectangleShape
-        x={0}
-        y={0}
-        width={width}
-        height={height}
-        stroke={stroke}
-        strokeWidth={6}
-        fill="white"
-      ></RectangleShape>
-*/
