@@ -30,10 +30,18 @@ export const getOffsetFromId = (id: string, max: number) => {
 
 export const rounded = (value: number) => Math.round(value * 2) / 2;
 
-export const addBlankSpaceToPath = (currentX: number, height: number) => {
+export const addBlankSpaceToPath = (
+  currentX: number,
+  maxWidth: number,
+  height: number
+) => {
   currentX += SPACE_WIDTH;
+
+  // We don't want to go out of the area, if not transformer won't work well
+  const adjustedEndX = Math.min(currentX, maxWidth);
+
   return {
-    pathSlice: `M ${currentX},${height / 2}`,
+    pathSlice: `M ${adjustedEndX},${height / 2}`,
     newCurrentX: currentX,
   };
 };
@@ -42,6 +50,7 @@ const drawCharScribble = (
   char: string,
   i: number,
   currentX: number,
+  maxWidth: number,
   height: number
 ) => {
   const amplitude = height / 3;
@@ -61,8 +70,11 @@ const drawCharScribble = (
   const endX = currentX + charWidth;
   const endY = height / 2;
 
+  // We don't want to go out of the area, if not transformer won't work well
+  const adjustedEndX = Math.min(endX, maxWidth);
+
   return {
-    pathSegment: `C ${controlX1},${controlY1} ${controlX2},${controlY2} ${endX},${endY}`,
+    pathSegment: `C ${controlX1},${controlY1} ${controlX2},${controlY2} ${adjustedEndX},${endY}`,
     endX,
   };
 };
@@ -86,12 +98,22 @@ export const calculatePath = (width: number, height: number, id: string) => {
 
     if (char !== ' ') {
       // Draw the character scribble
-      const { pathSegment, endX } = drawCharScribble(char, i, currentX, height);
+      const { pathSegment, endX } = drawCharScribble(
+        char,
+        i,
+        currentX,
+        width,
+        height
+      );
       path.push(pathSegment);
       currentX = endX;
     } else {
       // If it's a space, we need to add a blank space to the path
-      const { pathSlice, newCurrentX } = addBlankSpaceToPath(currentX, height);
+      const { pathSlice, newCurrentX } = addBlankSpaceToPath(
+        currentX,
+        width,
+        height
+      );
       path.push(pathSlice);
       currentX = newCurrentX;
     }
