@@ -45,8 +45,6 @@ export const TextScribbled = forwardRef<any, ShapeProps>((props, ref) => {
     return calculatePath(restrictedWidth, restrictedHeight, id);
   }, [restrictedWidth]);
 
-  //const pathData = calculatePath(restrictedWidth, restrictedHeight, id);
-
   return (
     <Group {...commonGroupProps} {...shapeProps}>
       <Path
