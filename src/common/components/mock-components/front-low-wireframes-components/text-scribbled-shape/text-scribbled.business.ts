@@ -38,7 +38,7 @@ export const addBlankSpaceToPath = (
   currentX += SPACE_WIDTH;
 
   // We don't want to go out of the area, if not transformer won't work well
-  const adjustedEndX = Math.min(currentX, maxWidth);
+  const adjustedEndX = Math.min(currentX, maxWidth - 1);
 
   return {
     pathSlice: `M ${adjustedEndX},${height / 2}`,
@@ -71,7 +71,7 @@ const drawCharScribble = (
   const endY = height / 2;
 
   // We don't want to go out of the area, if not transformer won't work well
-  const adjustedEndX = Math.min(endX, maxWidth);
+  const adjustedEndX = Math.min(endX, maxWidth - 1);
 
   return {
     pathSegment: `C ${controlX1},${controlY1} ${controlX2},${controlY2} ${adjustedEndX},${endY}`,
@@ -80,6 +80,7 @@ const drawCharScribble = (
 };
 
 export const calculatePath = (width: number, height: number, id: string) => {
+  console.log('** calculatePath', width, height, id);
   // This AVG_CHAR_WIDTH is a rough approximation of the average character width
   // It could lead us to issues
   const offset = getOffsetFromId(id ?? '', MAX_START_OFFSET);
@@ -119,7 +120,10 @@ export const calculatePath = (width: number, height: number, id: string) => {
     }
 
     // If we run out of space, we break the loop
-    if (currentX > width) break;
+    // We need to add the AVG_CHAR_WIDTH to the equation to avoid
+    // rending a scribble that could be outside of the area
+    // and make the transformer not work well
+    if (currentX + AVG_CHAR_WIDTH >= width) break;
   }
 
   return path.join(' ');
