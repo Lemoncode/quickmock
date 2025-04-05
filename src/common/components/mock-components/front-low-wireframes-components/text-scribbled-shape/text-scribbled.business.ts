@@ -1,3 +1,5 @@
+import { AVG_CHAR_WIDTH, SPACE_WIDTH } from './text-scribbled.model';
+
 export const phrase =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
   'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ' +
@@ -38,4 +40,51 @@ export const checkIfSpaceAndAddToPath = (
     currentX += spaceWidth;
     path.push(`M ${currentX},${height / 2}`);
   }
+};
+
+export const calculatePath = (width: number, height: number, id: string) => {
+  const amplitude = height / 3;
+
+  const maxChars = Math.min(100, Math.floor(width / AVG_CHAR_WIDTH));
+
+  const offset = getOffsetFromId(id ?? '', phrase.length);
+  const visibleText = phrase.slice(offset, offset + maxChars);
+
+  const path: string[] = [];
+  let currentX = 0;
+  path.push(`M ${currentX},${height / 2}`);
+
+  for (let i = 0; i < visibleText.length; i++) {
+    const char = visibleText[i];
+    const charWidth = AVG_CHAR_WIDTH;
+    const seed = char.charCodeAt(0) + i * 31;
+
+    const controlX1 = currentX + charWidth / 2;
+    const controlY1 = rounded(
+      height / 2 + (seededRandom(seed) * amplitude - amplitude / 2)
+    );
+
+    const controlX2 = currentX + charWidth;
+    const controlY2 = rounded(
+      height / 2 + (seededRandom(seed + 1) * amplitude - amplitude / 2)
+    );
+
+    const endX = currentX + charWidth;
+    const endY = height / 2;
+
+    path.push(
+      `C ${controlX1},${controlY1} ${controlX2},${controlY2} ${endX},${endY}`
+    );
+
+    currentX = endX;
+
+    if (char === ' ') {
+      currentX += SPACE_WIDTH;
+      path.push(`M ${currentX},${height / 2}`);
+    }
+
+    if (currentX > width) break;
+  }
+
+  return path.join(' ');
 };
