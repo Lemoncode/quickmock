@@ -1,10 +1,10 @@
 import { forwardRef, useMemo } from 'react';
 import { Group, Path, Rect } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { ShapeProps } from '../shape.model';
-import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import { BASIC_SHAPE } from '../front-components/shape.const';
-import { useGroupShapeProps } from '../mock-components.utils';
+import { ShapeProps } from '../../shape.model';
+import { useShapeProps } from '../../../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from '../../front-components/shape.const';
+import { useGroupShapeProps } from '../../mock-components.utils';
 import {
   getOffsetFromId,
   phrase,
