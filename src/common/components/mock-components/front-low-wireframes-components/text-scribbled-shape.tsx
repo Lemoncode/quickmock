@@ -1,19 +1,25 @@
-import { forwardRef } from 'react';
-import { Group, Path } from 'react-konva';
+import { forwardRef, useMemo } from 'react';
+import { Group, Path, Rect } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeProps } from '../shape.model';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
+import {
+  getOffsetFromId,
+  phrase,
+  rounded,
+  seededRandom,
+} from './text-scribbled.business';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
 
 const textScribbledShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
-  minHeight: 20,
-  maxWidth: -1,
+  minHeight: 80,
+  maxWidth: 1000,
   maxHeight: -1,
   defaultWidth: 300,
-  defaultHeight: 100,
+  defaultHeight: 80,
 };
 
 export const getTextScribbledShapeRestrictions = (): ShapeSizeRestrictions =>
@@ -22,8 +28,15 @@ export const getTextScribbledShapeRestrictions = (): ShapeSizeRestrictions =>
 const shapeType: ShapeType = 'textScribbled';
 
 export const TextScribbled = forwardRef<any, ShapeProps>((props, ref) => {
-  const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
-    props;
+  const { width, height, id, otherProps, ...shapeProps } = props;
+
+  const { stroke } = useShapeProps(otherProps, BASIC_SHAPE);
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    { width, height },
+    shapeType,
+    ref
+  );
 
   const restrictedSize = fitSizeToShapeSizeRestrictions(
     textScribbledShapeRestrictions,
@@ -33,76 +46,86 @@ export const TextScribbled = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { stroke } = useShapeProps(otherProps, BASIC_SHAPE);
+  const pathData = useMemo(() => {
+    const width = restrictedWidth;
+    const height = restrictedHeight;
+    console.log('** Width', restrictedWidth);
 
-  const commonGroupProps = useGroupShapeProps(
-    props,
-    restrictedSize,
-    shapeType,
-    ref
-  );
+    const amplitude = height / 3;
+    const avgCharWidth = 10;
+    const spaceWidth = avgCharWidth * 1.5;
+    const maxChars = Math.min(100, Math.floor(width / avgCharWidth));
 
-  const phrase =
-    'One ring to rule them all, one ring to find them, One ring to bring them all, and in the darkness bind them; In the Land of Mordor where the shadows lie';
+    const offset = getOffsetFromId(id ?? '', phrase.length);
+    const visibleText = phrase.slice(offset, offset + maxChars);
 
-  // Generate a scribbled path for the phrase
-  const generateScribbledPath = () => {
-    const path = [];
-    const amplitude = restrictedHeight / 3; // Amplitude for ups and downs
-    const frequency = 10; // Number of ups and downs per word
-    const words = phrase.split(' '); // Split the phrase into words
-    const wordSpacing = restrictedWidth / words.length; // Approximate spacing per word
+    const path: string[] = [];
     let currentX = 0;
+    path.push(`M ${currentX},${height / 2}`);
 
-    path.push(`M ${currentX},${restrictedHeight / 2}`); // Move to starting point
+    for (let i = 0; i < visibleText.length; i++) {
+      const char = visibleText[i];
+      const charWidth = avgCharWidth;
+      const seed = char.charCodeAt(0) + i * 31;
 
-    for (let i = 0; i < words.length; i++) {
-      const word = words[i];
-      const wordWidth = wordSpacing * word.length; // Approximate width of the word
+      const controlX1 = currentX + charWidth / 2;
+      const controlY1 = rounded(
+        height / 2 + (seededRandom(seed) * amplitude - amplitude / 2)
+      );
 
-      for (let j = 0; j < word.length; j++) {
-        const controlX1 = currentX + wordWidth / (frequency * 2);
-        const controlY1 =
-          restrictedHeight / 2 + Math.random() * amplitude - amplitude / 2;
+      const controlX2 = currentX + charWidth;
+      const controlY2 = rounded(
+        height / 2 + (seededRandom(seed + 1) * amplitude - amplitude / 2)
+      );
 
-        const controlX2 = currentX + wordWidth / frequency;
-        const controlY2 =
-          restrictedHeight / 2 + Math.random() * amplitude - amplitude / 2;
+      const endX = currentX + charWidth;
+      const endY = height / 2;
 
-        const endX = currentX + wordWidth / frequency;
-        const endY = restrictedHeight / 2;
+      path.push(
+        `C ${controlX1},${controlY1} ${controlX2},${controlY2} ${endX},${endY}`
+      );
 
-        path.push(
-          `C ${controlX1},${controlY1} ${controlX2},${controlY2} ${endX},${endY}`
-        );
-        currentX = endX;
+      currentX = endX;
+
+      if (char === ' ') {
+        currentX += spaceWidth;
+        path.push(`M ${currentX},${height / 2}`);
       }
 
-      // Add space between words
-      currentX += wordSpacing; // Add spacing for the word gap
-
-      // Stop if the scribble exceeds the component's width
-      if (currentX > restrictedWidth) {
-        break;
-      }
-
-      // Add a small gap to simulate spaces
-      path.push(`M ${currentX},${restrictedHeight / 2}`);
+      if (currentX > width) break;
     }
 
     return path.join(' ');
-  };
+  }, [width]);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
-      {/* Scribbled effect */}
-      <Path
-        data={generateScribbledPath()}
+      {/* Had to add a rectangle to allow drag / drop movement*/}
+      <Rect
+        width={restrictedSize.width}
+        height={restrictedSize.height}
         stroke={stroke}
-        strokeWidth={3} // Thicker stroke for better visibility
+        strokeWidth={0}
+      />
+      <Path
+        data={pathData}
+        stroke={stroke}
+        strokeWidth={3}
         lineCap="round"
         lineJoin="round"
       />
     </Group>
   );
 });
+
+/*
+      <RectangleShape
+        x={0}
+        y={0}
+        width={width}
+        height={height}
+        stroke={stroke}
+        strokeWidth={6}
+        fill="white"
+      ></RectangleShape>
+*/
