@@ -45,7 +45,7 @@ export const checkIfSpaceAndAddToPath = (
 export const calculatePath = (width: number, height: number, id: string) => {
   const amplitude = height / 3;
 
-  const maxChars = Math.min(100, Math.floor(width / AVG_CHAR_WIDTH));
+  const maxChars = Math.floor(width / AVG_CHAR_WIDTH);
 
   const offset = getOffsetFromId(id ?? '', phrase.length);
   const visibleText = phrase.slice(offset, offset + maxChars);
