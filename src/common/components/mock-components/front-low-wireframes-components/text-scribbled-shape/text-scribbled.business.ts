@@ -17,6 +17,15 @@ export const seededRandom = (seed: number) => {
   return x - Math.floor(x);
 };
 
+// 30 characters is enough to get a good random offset phrase[X]
+// in the past it was phrase.length, but that can lead to issues
+// if the offset start at the end of the phrase then we can get a frozen text when we make it bigger.
+const MAX_START_OFFSET = 30;
+
+// We need to add some random offset to start the text at a different position
+// BUT we cannot use here just a random number because it will change every time
+// the component is re-rendered, so we need to use a deterministic way to get the offset
+// based on the Id of the shape
 // 👇 Based on the Id deterministic offset
 // a bit weird, maybe just a random useEffect []
 export const getOffsetFromId = (id: string, max: number) => {
@@ -29,6 +38,7 @@ export const getOffsetFromId = (id: string, max: number) => {
 
 export const rounded = (value: number) => Math.round(value * 2) / 2;
 
+/*
 export const checkIfSpaceAndAddToPath = (
   path: string[],
   char: string,
@@ -40,14 +50,24 @@ export const checkIfSpaceAndAddToPath = (
     currentX += spaceWidth;
     path.push(`M ${currentX},${height / 2}`);
   }
+};*/
+
+export const addBlankSpaceToPath = (currentX: number, height: number) => {
+  currentX += SPACE_WIDTH;
+  return {
+    pathSlice: `M ${currentX},${height / 2}`,
+    newCurrentX: currentX,
+  };
 };
 
 export const calculatePath = (width: number, height: number, id: string) => {
   const amplitude = height / 3;
 
+  // This AVG_CHAR_WIDTH is a rough approximation of the average character width
+  // It could lead us to issues
   const maxChars = Math.floor(width / AVG_CHAR_WIDTH);
 
-  const offset = getOffsetFromId(id ?? '', phrase.length);
+  const offset = getOffsetFromId(id ?? '', MAX_START_OFFSET);
   const visibleText = phrase.slice(offset, offset + maxChars);
 
   const path: string[] = [];
@@ -78,11 +98,14 @@ export const calculatePath = (width: number, height: number, id: string) => {
 
     currentX = endX;
 
+    // If it's a space, we need to add a blank space to the path
     if (char === ' ') {
-      currentX += SPACE_WIDTH;
-      path.push(`M ${currentX},${height / 2}`);
+      const { pathSlice, newCurrentX } = addBlankSpaceToPath(currentX, height);
+      path.push(pathSlice);
+      currentX = newCurrentX;
     }
 
+    // If we run out of space, we break the loop
     if (currentX > width) break;
   }
 
