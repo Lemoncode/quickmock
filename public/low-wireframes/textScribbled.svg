@@ -1,5 +1,5 @@
 <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-  <!-- Palabra 1 -->
+  <!-- Word 1 -->
   <path d="
     M 0,100
     C 6,85 12,115 18,100
@@ -8,7 +8,7 @@
   "
   fill="none" stroke="black" stroke-width="2"/>
 
-  <!-- Palabra 2 -->
+  <!-- Word 2 -->
   <path d="
     M 70,100
     C 76,88 82,112 88,100
@@ -18,7 +18,7 @@
   "
   fill="none" stroke="black" stroke-width="2"/>
 
-  <!-- Palabra 3 -->
+  <!-- Word 3 -->
   <path d="
     M 160,100
     C 166,83 172,117 178,100
