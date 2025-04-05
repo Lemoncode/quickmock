@@ -42,7 +42,6 @@ export const TextScribbled = forwardRef<any, ShapeProps>((props, ref) => {
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
   const pathData = useMemo(() => {
-    console.log('Calculating path data', restrictedWidth);
     return calculatePath(restrictedWidth, restrictedHeight, id);
   }, [restrictedWidth]);
 
