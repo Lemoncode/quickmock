@@ -84,12 +84,13 @@ export const calculatePath = (width: number, height: number, id: string) => {
   for (let i = 0; i < visibleText.length; i++) {
     const char = visibleText[i];
 
-    const { pathSegment, endX } = drawCharScribble(char, i, currentX, height);
-    path.push(pathSegment);
-    currentX = endX;
-
-    // If it's a space, we need to add a blank space to the path
-    if (char === ' ') {
+    if (char !== ' ') {
+      // Draw the character scribble
+      const { pathSegment, endX } = drawCharScribble(char, i, currentX, height);
+      path.push(pathSegment);
+      currentX = endX;
+    } else {
+      // If it's a space, we need to add a blank space to the path
       const { pathSlice, newCurrentX } = addBlankSpaceToPath(currentX, height);
       path.push(pathSlice);
       currentX = newCurrentX;
