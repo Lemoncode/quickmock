@@ -5,15 +5,8 @@ import { ShapeProps } from '../../shape.model';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useGroupShapeProps } from '../../mock-components.utils';
-import {
-  calculatePath,
-  getOffsetFromId,
-  phrase,
-  rounded,
-  seededRandom,
-} from './text-scribbled.business';
+import { calculatePath } from './text-scribbled.business';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
-import { AVG_CHAR_WIDTH, SPACE_WIDTH } from './text-scribbled.model';
 
 const textScribbledShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
