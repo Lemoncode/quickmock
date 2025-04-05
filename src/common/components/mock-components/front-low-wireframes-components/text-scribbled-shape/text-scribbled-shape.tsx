@@ -10,11 +10,11 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
 
 const textScribbledShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
-  minHeight: 80,
-  maxWidth: 1000,
+  minHeight: 50,
+  maxWidth: 2000,
   maxHeight: -1,
   defaultWidth: 300,
-  defaultHeight: 80,
+  defaultHeight: 50,
 };
 
 export const getTextScribbledShapeRestrictions = (): ShapeSizeRestrictions =>
