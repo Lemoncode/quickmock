@@ -80,6 +80,7 @@ import {
   renderVerticalLowLine,
   renderEllipseLow,
   renderRectangleLow,
+  renderTextScribbled,
 } from './simple-low-wireframes-components';
 
 export const renderShapeComponent = (
@@ -223,6 +224,8 @@ export const renderShapeComponent = (
       return renderRectangleLow(shape, shapeRenderedProps);
     case 'circleLow':
       return renderCircleLow(shape, shapeRenderedProps);
+    case 'textScribbled':
+      return renderTextScribbled(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
