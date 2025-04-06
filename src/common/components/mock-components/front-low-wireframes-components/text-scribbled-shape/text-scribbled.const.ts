@@ -4,6 +4,11 @@ export const AVG_CHAR_WIDTH = 10;
 // Blank space width is 1.5 times the average character width
 export const SPACE_WIDTH = AVG_CHAR_WIDTH * 1.5;
 
+// 30 characters is enough to get a good random offset phrase[X]
+// in the past it was phrase.length, but that can lead to issues
+// if the offset start at the end of the phrase then we can get a frozen text when we make it bigger.
+export const MAX_START_OFFSET = 30;
+
 // We use this as a seed to generate the random values for the path
 // We use this as a seed to generate the random values for the path
 export const SEED_PHRASE =
