@@ -5,7 +5,12 @@ import {
 } from './text-scribbled.const';
 
 export const seededRandom = (seed: number) => {
+  // Let's get a random value in between -1 and 1
+  // And let's multiply it by 10000 to get a bigger number (more precision)
   const x = Math.sin(seed) * 10000;
+
+  // Le's extract the decimal part of the number
+  // a number in between 0 and 1
   return x - Math.floor(x);
 };
 
@@ -41,7 +46,7 @@ export const addBlankSpaceToPath = (
   const adjustedEndX = Math.min(currentX, maxWidth - 1);
 
   return {
-    pathSlice: `M ${adjustedEndX},${height / 2}`,
+    pathSlice: `M ${adjustedEndX},${Math.trunc(height / 2)}`,
     newCurrentX: currentX,
   };
 };
@@ -53,22 +58,28 @@ const drawCharScribble = (
   maxWidth: number,
   height: number
 ) => {
+  // Max Y variation on the scribble
   const amplitude = height / 3;
   const charWidth = AVG_CHAR_WIDTH;
+  // Let's generate a psuedo-random number based on the char and the index
   const seed = char.charCodeAt(0) + i * 31;
 
   const controlX1 = currentX + charWidth / 2;
-  const controlY1 = rounded(
-    height / 2 + (seededRandom(seed) * amplitude - amplitude / 2)
+  const controlY1 = Math.trunc(
+    rounded(
+      // Generate a pseudo random number between -amplitude and amplitude
+      height / 2 + (seededRandom(seed) * amplitude - amplitude / 2)
+    )
   );
 
   const controlX2 = currentX + charWidth;
-  const controlY2 = rounded(
-    height / 2 + (seededRandom(seed + 1) * amplitude - amplitude / 2)
+  const controlY2 = Math.trunc(
+    rounded(height / 2 + (seededRandom(seed + 1) * amplitude - amplitude / 2))
   );
 
-  const endX = currentX + charWidth;
-  const endY = height / 2;
+  // Let's truc it to avoid edge cases with the max
+  const endX = Math.trunc(currentX + charWidth);
+  const endY = Math.trunc(height / 2);
 
   // We don't want to go out of the area, if not transformer won't work well
   const adjustedEndX = Math.min(endX, maxWidth - 1);
@@ -80,7 +91,7 @@ const drawCharScribble = (
 };
 
 export const calculatePath = (width: number, height: number, id: string) => {
-  console.log('** calculatePath', width, height, id);
+  //console.log('** calculatePath', width, height, id);
   // This AVG_CHAR_WIDTH is a rough approximation of the average character width
   // It could lead us to issues
   const offset = getOffsetFromId(id ?? '', MAX_START_OFFSET);
@@ -92,7 +103,7 @@ export const calculatePath = (width: number, height: number, id: string) => {
 
   const path: string[] = [];
   let currentX = 0;
-  path.push(`M ${currentX},${height / 2}`);
+  path.push(`M ${currentX},${Math.trunc(height / 2)}`);
 
   for (let i = 0; i < visibleText.length; i++) {
     const char = visibleText[i];
@@ -125,6 +136,9 @@ export const calculatePath = (width: number, height: number, id: string) => {
     // and make the transformer not work well
     if (currentX + AVG_CHAR_WIDTH >= width) break;
   }
+
+  const result = path.join(' ');
+  console.log('** calculatePath result', result);
 
   return path.join(' ');
 };
