@@ -24,4 +24,8 @@ export const mockRichComponentsCollection: ItemInfo[] = [
     thumbnailSrc: '/rich-components/videoconference.svg',
     type: 'videoconference',
   },
+  {
+    thumbnailSrc: '/rich-components/tree.svg',
+    type: 'tree',
+  },
 ];

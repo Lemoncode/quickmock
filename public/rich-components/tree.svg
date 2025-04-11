@@ -1,0 +1,23 @@
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .texto { font: 14px sans-serif; fill: black; }
+    .icono { fill: none; stroke: black; stroke-width: 2; }
+  </style>
+
+  <!-- Carpeta principal -->
+  <rect x="20" y="20" width="20" height="15" class="icono"/>
+  <text x="50" y="33" class="texto">Nombre de la carpeta</text>
+
+  <!-- Subcarpeta -->
+  <path d="M20 60 h8 l3 -4 h15 v14 h-26 z" class="icono"/>
+  <text x="50" y="70" class="texto">Subcarpeta</text>
+
+  <!-- Archivo -->
+  <path d="M20 95 h15 v20 h-15 z" class="icono"/>
+  <path d="M20 95 l10 0 l0 10 l10 0" class="icono"/>
+  <text x="50" y="110" class="texto">Nombre del archivo</text>
+
+  <!-- Otra carpeta -->
+  <rect x="20" y="130" width="20" height="15" class="icono"/>
+  <text x="50" y="143" class="texto">Otro nombre de carpeta</text>
+</svg>
