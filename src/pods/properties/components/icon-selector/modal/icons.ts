@@ -1410,7 +1410,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Windows',
     filename: 'windows.svg',
-    searchTerms: ['windows', 'system', 'software', 'desktop'],
+    searchTerms: ['windows', 'system', 'software', 'desktop', 'microsoft'],
     categories: ['IT'],
   },
   {
@@ -2398,17 +2398,28 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['filter', 'query', 'search', 'find', 'lookup', 'funnel'],
     categories: ['IT'],
   },
-
   {
-    name: 'Microsoft Excel',
-    filename: 'microsoftexcel.svg',
-    searchTerms: ['microsoft', 'excel', 'office', 'spreadsheet'],
+    name: 'Excel',
+    filename: 'excel.svg',
+    searchTerms: ['excel', 'office', 'microsoft'],
     categories: ['IT'],
   },
   {
-    name: 'Microsoft Word',
-    filename: 'microsoftword.svg',
-    searchTerms: ['microsoft', 'word', 'office', 'document'],
+    name: 'Word',
+    filename: 'word.svg',
+    searchTerms: ['word', 'office', 'microsoft'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Powerpoint',
+    filename: 'powerpoint.svg',
+    searchTerms: ['powerpoint', 'office', 'microsoft'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Teams',
+    filename: 'teams.svg',
+    searchTerms: ['teams', 'office', 'microsoft'],
     categories: ['IT'],
   },
   {
