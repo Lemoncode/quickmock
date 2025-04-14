@@ -2398,4 +2398,28 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['filter', 'query', 'search', 'find', 'lookup', 'funnel'],
     categories: ['IT'],
   },
+  {
+    name: 'Excel',
+    filename: 'excel.svg',
+    searchTerms: ['excel', 'office', 'microsoft'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Word',
+    filename: 'word.svg',
+    searchTerms: ['word', 'office', 'microsoft'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Powerpoint',
+    filename: 'powerpoint.svg',
+    searchTerms: ['powerpoint', 'office', 'microsoft'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Teams',
+    filename: 'teams.svg',
+    searchTerms: ['teams', 'office', 'microsoft'],
+    categories: ['IT'],
+  },
 ];
