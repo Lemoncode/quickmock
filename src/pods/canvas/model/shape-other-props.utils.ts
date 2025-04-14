@@ -122,6 +122,11 @@ export const generateDefaultOtherProps = (
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'horizontalLine':
+    case 'horizontalLineLow':
+    case 'rectangleLow':
+    case 'circleLow':
+    case 'verticalLineLow':
+    case 'ellipseLow':
       return {
         stroke: '#000000',
         strokeStyle: [],
@@ -252,6 +257,13 @@ export const generateDefaultOtherProps = (
     case 'tabsBar':
       return {
         activeElement: 0,
+      };
+    case 'chip':
+      return {
+        stroke: '#939393',
+        backgroundColor: '#D3D3D3',
+        textColor: '#000000',
+        strokeStyle: [],
       };
     default:
       return undefined;

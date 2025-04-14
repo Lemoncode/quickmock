@@ -5,3 +5,4 @@ export * from './normaltext.renderer';
 export * from './link.renderer';
 export * from './paragraph.renderer';
 export * from './richtext.renderer';
+export * from './smalltext.renderer';

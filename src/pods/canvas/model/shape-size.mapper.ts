@@ -19,6 +19,7 @@ import {
   getToggleSwitchShapeSizeRestrictions,
   getTooltipShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
+  getChipShapeSizeRestrictions,
 } from '@/common/components/mock-components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -76,6 +77,16 @@ import {
   getRichTextSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-text-components';
+
+import {
+  getHorizontalLineLowShapeRestrictions,
+  getImagePlaceholderShapeSizeRestrictions,
+  getVerticalLineLowShapeRestrictions,
+  getRectangleLowShapeRestrictions,
+  getEllipseLowShapeRestrictions,
+  getCircleLowShapeSizeRestrictions,
+  getTextScribbledShapeRestrictions,
+} from '@/common/components/mock-components/front-low-wireframes-components';
 
 const getMultipleNodeSizeRestrictions = (): ShapeSizeRestrictions => ({
   minWidth: 0,
@@ -150,6 +161,14 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   'loading-indicator': getLoadIndicatorSizeRestrictions,
   videoconference: getVideoconferenceShapeSizeRestrictions,
   gauge: getGaugeShapeSizeRestrictions,
+  imagePlaceholder: getImagePlaceholderShapeSizeRestrictions,
+  chip: getChipShapeSizeRestrictions,
+  horizontalLineLow: getHorizontalLineLowShapeRestrictions,
+  verticalLineLow: getVerticalLineLowShapeRestrictions,
+  ellipseLow: getEllipseLowShapeRestrictions,
+  rectangleLow: getRectangleLowShapeRestrictions,
+  circleLow: getCircleLowShapeSizeRestrictions,
+  textScribbled: getTextScribbledShapeRestrictions,
 };
 
 export default shapeSizeMap;

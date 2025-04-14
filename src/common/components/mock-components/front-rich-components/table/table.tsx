@@ -68,13 +68,13 @@ export const Table = forwardRef<any, ShapeProps>((props, ref) => {
       {headerRow.map((header, colIdx) => {
         const accumulatedWidth = cellWidths
           .slice(0, colIdx)
-          .reduce((a, b) => a + b, 0);
+          .reduce((a, b) => a + b, 5);
         const triangleSize = 7; // Adjust the size of the triangle
 
         return (
           <Group key={`header-${colIdx}`}>
             <Rect
-              x={accumulatedWidth}
+              x={accumulatedWidth - 5}
               y={0}
               width={cellWidths[colIdx]}
               height={cellHeight}
@@ -98,7 +98,7 @@ export const Table = forwardRef<any, ShapeProps>((props, ref) => {
             {/* Draw filter triangles if defined */}
             {filterHeaderRow[colIdx] && (
               <Group
-                x={accumulatedWidth + cellWidths[colIdx] - triangleSize - 7}
+                x={accumulatedWidth + cellWidths[colIdx] - triangleSize - 12}
                 y={10}
               >
                 {filterHeaderRow[colIdx].includes('^') && (
