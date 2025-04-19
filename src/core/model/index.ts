@@ -188,6 +188,7 @@ export type IconSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
 export interface OtherProps {
   stroke?: string;
   strokeStyle?: number[];
+  strokeWidth?: number;
   backgroundColor?: string;
   textColor?: string;
   fontVariant?: string;

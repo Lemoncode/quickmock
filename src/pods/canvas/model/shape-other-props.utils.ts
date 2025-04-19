@@ -3,6 +3,7 @@ import {
   BASIC_SHAPE,
   FONT_SIZE_VALUES,
   LINK_SHAPE,
+  LOW_WIREFRAME_SHAPE,
 } from '@/common/components/mock-components/front-components/shape.const';
 import { ShapeType, OtherProps } from '@/core/model';
 
@@ -130,6 +131,7 @@ export const generateDefaultOtherProps = (
       return {
         stroke: '#000000',
         strokeStyle: [],
+        strokeWidth: LOW_WIREFRAME_SHAPE.DEFAULT_STROKE_WIDTH,
       };
     case 'verticalLine':
       return {
