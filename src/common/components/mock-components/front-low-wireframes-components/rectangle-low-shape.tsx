@@ -42,7 +42,10 @@ export const RectangleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { stroke, strokeStyle } = useShapeProps(otherProps, BASIC_SHAPE);
+  const { stroke, strokeStyle, strokeWidth } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -58,7 +61,7 @@ export const RectangleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
         height={restrictedHeight}
         stroke={stroke}
         dash={strokeStyle}
-        strokeWidth={6}
+        strokeWidth={strokeWidth}
         fill="white"
       />
     </Group>
