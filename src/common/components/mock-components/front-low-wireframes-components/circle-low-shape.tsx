@@ -4,10 +4,7 @@ import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { Circle, Group } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import {
-  BASIC_SHAPE,
-  LOW_WIREFRAME_SHAPE,
-} from '../front-components/shape.const';
+import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const circleLowShapeRestrictions: ShapeSizeRestrictions = {
@@ -38,7 +35,10 @@ export const CircleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const radius = Math.min(restrictedWidth, restrictedHeight) / 2;
 
-  const { stroke, fill, strokeStyle } = useShapeProps(otherProps, BASIC_SHAPE);
+  const { stroke, fill, strokeStyle, strokeWidth } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -54,7 +54,7 @@ export const CircleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
         y={restrictedHeight / 2}
         radius={radius}
         stroke={stroke}
-        strokeWidth={LOW_WIREFRAME_SHAPE.DEFAULT_STROKE_WIDTH}
+        strokeWidth={strokeWidth}
         fill={fill}
         dash={strokeStyle}
       />

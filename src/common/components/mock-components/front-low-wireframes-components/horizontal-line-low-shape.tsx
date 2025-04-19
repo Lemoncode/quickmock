@@ -42,7 +42,10 @@ export const HorizontalLineLowShape = forwardRef<any, ShapeProps>(
 
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-    const { stroke, strokeStyle } = useShapeProps(otherProps, BASIC_SHAPE);
+    const { stroke, strokeStyle, strokeWidth } = useShapeProps(
+      otherProps,
+      BASIC_SHAPE
+    );
 
     const commonGroupProps = useGroupShapeProps(
       props,
@@ -65,7 +68,7 @@ export const HorizontalLineLowShape = forwardRef<any, ShapeProps>(
           y={restrictedHeight / 2}
           points={[0, 0, restrictedWidth, 0]}
           stroke={stroke}
-          strokeWidth={4}
+          strokeWidth={strokeWidth}
           dash={strokeStyle}
         />
       </Group>
