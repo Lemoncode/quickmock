@@ -20,6 +20,7 @@ import { ShowProp } from './components/show-prop';
 import { iconCollection } from './components/icon-selector/modal/icons';
 import { Placeholder } from './components/placeholder';
 import { Password } from './components/password';
+import { StrokeWidth } from './components/stroke-width/stroke.width.component';
 
 export const PropertiesPod = () => {
   const { selectionInfo, fullDocument } = useCanvasContext();
@@ -104,6 +105,26 @@ export const PropertiesPod = () => {
               )
             }
           />
+        </ShowProp>
+
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="strokeWidth"
+          propValue={selectedShapeData?.otherProps?.strokeWidth}
+        >
+          <StrokeWidth
+            label="Stroke width"
+            strokeWidth={selectedShapeData?.otherProps?.strokeWidth ?? 0}
+            value={selectedShapeData?.otherProps?.strokeWidth ?? 0}
+            onChange={strokeWidth =>
+              updateOtherPropsOnSelected(
+                'strokeWidth',
+                strokeWidth,
+                isMultipleSelection
+              )
+            }
+          ></StrokeWidth>
         </ShowProp>
 
         <ShowProp
