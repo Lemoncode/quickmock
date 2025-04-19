@@ -20,7 +20,7 @@ import { ShowProp } from './components/show-prop';
 import { iconCollection } from './components/icon-selector/modal/icons';
 import { Placeholder } from './components/placeholder';
 import { Password } from './components/password';
-import { StrokeWidth } from './components/stroke-width/stroke.width.component';
+import { StrokeWidth } from './components/stroke-width';
 
 export const PropertiesPod = () => {
   const { selectionInfo, fullDocument } = useCanvasContext();
