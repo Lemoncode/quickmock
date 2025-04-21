@@ -6,6 +6,7 @@ import { ShapeProps } from '../shape.model';
 import { useGroupShapeProps } from '../mock-components.utils';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { calculateShapeAdjustedDimensions } from '@/common/utils/shapes';
 
 const EllipseLowShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
@@ -46,6 +47,13 @@ export const EllipseLowShape = forwardRef<any, ShapeProps>((props, ref) => {
     BASIC_SHAPE
   );
 
+  const adjustedDimensions = calculateShapeAdjustedDimensions(
+    strokeWidth,
+    restrictedWidth,
+    restrictedHeight,
+    shapeType
+  );
+
   const commonGroupProps = useGroupShapeProps(
     props,
     restrictedSize,
@@ -55,15 +63,17 @@ export const EllipseLowShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
-      <Ellipse
-        x={0}
-        y={0}
-        radiusX={restrictedWidth}
-        radiusY={restrictedHeight}
-        stroke={stroke}
-        strokeWidth={strokeWidth}
-        dash={strokeStyle}
-      />
+      {adjustedDimensions.type === 'ellipseLow' && (
+        <Ellipse
+          x={adjustedDimensions.centerX}
+          y={adjustedDimensions.centerY}
+          radiusX={adjustedDimensions.adjustedRadiusX}
+          radiusY={adjustedDimensions.adjustedRadiusY}
+          stroke={stroke}
+          strokeWidth={strokeWidth}
+          dash={strokeStyle}
+        />
+      )}
     </Group>
   );
 });

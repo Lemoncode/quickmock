@@ -6,6 +6,7 @@ import { Circle, Group } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { calculateShapeAdjustedDimensions } from '@/common/utils/shapes/shape-adjusted-dimensions';
 
 const circleLowShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
@@ -33,11 +34,16 @@ export const CircleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const radius = Math.min(restrictedWidth, restrictedHeight) / 2;
-
   const { stroke, fill, strokeStyle, strokeWidth } = useShapeProps(
     otherProps,
     BASIC_SHAPE
+  );
+
+  const adjustedDimensions = calculateShapeAdjustedDimensions(
+    strokeWidth,
+    restrictedWidth,
+    restrictedHeight,
+    shapeType
   );
 
   const commonGroupProps = useGroupShapeProps(
@@ -49,15 +55,17 @@ export const CircleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
-      <Circle
-        x={restrictedWidth / 2}
-        y={restrictedHeight / 2}
-        radius={radius}
-        stroke={stroke}
-        strokeWidth={strokeWidth}
-        fill={fill}
-        dash={strokeStyle}
-      />
+      {adjustedDimensions.type === 'circleLow' && (
+        <Circle
+          x={adjustedDimensions.centerX}
+          y={adjustedDimensions.centerY}
+          radius={adjustedDimensions.adjustedRadius}
+          stroke={stroke}
+          strokeWidth={strokeWidth}
+          fill={fill}
+          dash={strokeStyle}
+        />
+      )}
     </Group>
   );
 });

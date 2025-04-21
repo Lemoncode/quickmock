@@ -50,12 +50,12 @@ export const RectangleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
     BASIC_SHAPE
   );
 
-  const { adjustedX, adjustedY, adjustedWidth, adjustedHeight } =
-    calculateShapeAdjustedDimensions(
-      strokeWidth,
-      restrictedWidth,
-      restrictedHeight
-    );
+  const adjustedDimensions = calculateShapeAdjustedDimensions(
+    strokeWidth,
+    restrictedWidth,
+    restrictedHeight,
+    shapeType
+  );
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -66,16 +66,18 @@ export const RectangleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
-      <Rect
-        x={adjustedX}
-        y={adjustedY}
-        width={adjustedWidth}
-        height={adjustedHeight}
-        stroke={stroke}
-        dash={strokeStyle}
-        strokeWidth={strokeWidth}
-        fill="white"
-      />
+      {adjustedDimensions.type === 'rectangleLow' && (
+        <Rect
+          x={adjustedDimensions.adjustedX}
+          y={adjustedDimensions.adjustedY}
+          width={adjustedDimensions.adjustedWidth}
+          height={adjustedDimensions.adjustedHeight}
+          stroke={stroke}
+          dash={strokeStyle}
+          strokeWidth={strokeWidth}
+          fill="white"
+        />
+      )}
     </Group>
   );
 });
