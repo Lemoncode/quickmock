@@ -1,6 +1,7 @@
 import { ShapeType } from '@/core/model';
 import { AdjustedShapeDimensions } from './shape-dimension-types';
-export const calculateShapeAdjustedDimensions = (
+
+export const calculateShapeAdjustedDimensionsBasedOnStrokeHeight = (
   strokeWidth: number,
   restrictedWidth: number,
   restrictedHeight: number,

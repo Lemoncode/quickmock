@@ -2,7 +2,7 @@ import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import {
-  calculateShapeAdjustedDimensions,
+  calculateShapeAdjustedDimensionsBasedOnStrokeHeight,
   fitSizeToShapeSizeRestrictions,
 } from '@/common/utils/shapes';
 import { Group, Rect } from 'react-konva';
@@ -50,12 +50,13 @@ export const RectangleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
     BASIC_SHAPE
   );
 
-  const adjustedDimensions = calculateShapeAdjustedDimensions(
-    strokeWidth,
-    restrictedWidth,
-    restrictedHeight,
-    shapeType
-  );
+  const adjustedDimensions =
+    calculateShapeAdjustedDimensionsBasedOnStrokeHeight(
+      strokeWidth,
+      restrictedWidth,
+      restrictedHeight,
+      shapeType
+    );
 
   const commonGroupProps = useGroupShapeProps(
     props,

@@ -1,12 +1,14 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
-import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import {
+  fitSizeToShapeSizeRestrictions,
+  calculateShapeAdjustedDimensionsBasedOnStrokeHeight,
+} from '@/common/utils/shapes';
 import { Circle, Group } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-import { calculateShapeAdjustedDimensions } from '@/common/utils/shapes/shape-adjusted-dimensions';
 
 const circleLowShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
@@ -39,12 +41,13 @@ export const CircleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
     BASIC_SHAPE
   );
 
-  const adjustedDimensions = calculateShapeAdjustedDimensions(
-    strokeWidth,
-    restrictedWidth,
-    restrictedHeight,
-    shapeType
-  );
+  const adjustedDimensions =
+    calculateShapeAdjustedDimensionsBasedOnStrokeHeight(
+      strokeWidth,
+      restrictedWidth,
+      restrictedHeight,
+      shapeType
+    );
 
   const commonGroupProps = useGroupShapeProps(
     props,
