@@ -41,11 +41,8 @@ export const calculateShapeAdjustedDimensionsBasedOnStrokeHeight = (
     }
 
     case 'ellipseLow': {
-      const originalRadiusX = restrictedWidth / 2;
-      const originalRadiusY = restrictedHeight / 2;
-
-      const adjustedRadiusX = Math.max(originalRadiusX - halfStroke, 0);
-      const adjustedRadiusY = Math.max(originalRadiusY - halfStroke, 0);
+      const adjustedRadiusX = Math.max(centerX - halfStroke, 0);
+      const adjustedRadiusY = Math.max(centerY - halfStroke, 0);
 
       return {
         type: 'ellipseLow',
