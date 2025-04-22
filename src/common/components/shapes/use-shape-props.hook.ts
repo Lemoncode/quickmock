@@ -63,6 +63,11 @@ export const useShapeProps = (
     [otherProps?.strokeStyle]
   );
 
+  const strokeWidth = useMemo(
+    () => otherProps?.strokeWidth ?? defaultStyleShape.DEFAULT_STROKE_WIDTH,
+    [otherProps?.strokeWidth]
+  );
+
   const borderRadius = useMemo(() => {
     const radius = Number(otherProps?.borderRadius);
     return isNaN(radius) ? defaultStyleShape.DEFAULT_CORNER_RADIUS : radius;
@@ -93,6 +98,7 @@ export const useShapeProps = (
     fill,
     textColor,
     strokeStyle,
+    strokeWidth,
     borderRadius,
     isOn,
     progress,

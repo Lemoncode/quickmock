@@ -4,11 +4,9 @@ import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeProps } from '../shape.model';
 import { useGroupShapeProps } from '../mock-components.utils';
-import {
-  BASIC_SHAPE,
-  LOW_WIREFRAME_SHAPE,
-} from '../front-components/shape.const';
+import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { calculateShapeAdjustedDimensionsBasedOnStrokeHeight } from '@/common/utils/shapes';
 
 const EllipseLowShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 10,
@@ -44,7 +42,18 @@ export const EllipseLowShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { stroke, strokeStyle } = useShapeProps(otherProps, BASIC_SHAPE);
+  const { stroke, strokeStyle, strokeWidth } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
+
+  const adjustedDimensions =
+    calculateShapeAdjustedDimensionsBasedOnStrokeHeight(
+      strokeWidth,
+      restrictedWidth,
+      restrictedHeight,
+      shapeType
+    );
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -55,15 +64,17 @@ export const EllipseLowShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
-      <Ellipse
-        x={0}
-        y={0}
-        radiusX={restrictedWidth}
-        radiusY={restrictedHeight}
-        stroke={stroke}
-        strokeWidth={LOW_WIREFRAME_SHAPE.DEFAULT_STROKE_WIDTH}
-        dash={strokeStyle}
-      />
+      {adjustedDimensions.type === 'ellipseLow' && (
+        <Ellipse
+          x={adjustedDimensions.centerX}
+          y={adjustedDimensions.centerY}
+          radiusX={adjustedDimensions.adjustedRadiusX}
+          radiusY={adjustedDimensions.adjustedRadiusY}
+          stroke={stroke}
+          strokeWidth={strokeWidth}
+          dash={strokeStyle}
+        />
+      )}
     </Group>
   );
 });

@@ -61,7 +61,7 @@ export const BASIC_SHAPE: DefaultStyleShape = {
 };
 
 export const LOW_WIREFRAME_SHAPE = {
-  DEFAULT_STROKE_WIDTH: 6,
+  DEFAULT_STROKE_WIDTH: 4,
 };
 
 export const INPUT_SHAPE: DefaultStyleShape = {

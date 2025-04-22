@@ -1,7 +1,10 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
-import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
+import {
+  calculateShapeAdjustedDimensionsBasedOnStrokeHeight,
+  fitSizeToShapeSizeRestrictions,
+} from '@/common/utils/shapes';
 import { Group, Rect } from 'react-konva';
 import { useGroupShapeProps } from '../mock-components.utils';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
@@ -42,7 +45,18 @@ export const RectangleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const { stroke, strokeStyle } = useShapeProps(otherProps, BASIC_SHAPE);
+  const { stroke, strokeStyle, strokeWidth } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
+
+  const adjustedDimensions =
+    calculateShapeAdjustedDimensionsBasedOnStrokeHeight(
+      strokeWidth,
+      restrictedWidth,
+      restrictedHeight,
+      shapeType
+    );
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -53,14 +67,18 @@ export const RectangleLowShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
-      <Rect
-        width={restrictedWidth}
-        height={restrictedHeight}
-        stroke={stroke}
-        dash={strokeStyle}
-        strokeWidth={6}
-        fill="white"
-      />
+      {adjustedDimensions.type === 'rectangleLow' && (
+        <Rect
+          x={adjustedDimensions.adjustedX}
+          y={adjustedDimensions.adjustedY}
+          width={adjustedDimensions.adjustedWidth}
+          height={adjustedDimensions.adjustedHeight}
+          stroke={stroke}
+          dash={strokeStyle}
+          strokeWidth={strokeWidth}
+          fill="white"
+        />
+      )}
     </Group>
   );
 });
