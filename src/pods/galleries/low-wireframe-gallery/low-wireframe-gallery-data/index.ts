@@ -29,4 +29,8 @@ export const mockLowWireframeCollection: ItemInfo[] = [
     thumbnailSrc: '/low-wireframes/textScribbled.svg',
     type: 'textScribbled',
   },
+  {
+    thumbnailSrc: '/low-wireframes/paragraphScribbled.svg',
+    type: 'paragraphScribbled',
+  },
 ];
