@@ -8,6 +8,7 @@ import {
 } from './export-button.utils';
 import { ToolbarButton } from '../toolbar-button';
 import Konva from 'konva';
+import { SHORTCUTS } from '../../shortcut/shortcut.const';
 
 export const ExportButton = () => {
   const { stageRef, shapes, fileName, getActivePageName } = useCanvasContext();
@@ -65,6 +66,7 @@ export const ExportButton = () => {
       disabled={shapes.length === 0}
       icon={<ExportIcon />}
       label="Export"
+      shortcutOptions={SHORTCUTS.export}
     />
   );
 };

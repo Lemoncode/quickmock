@@ -46,7 +46,10 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'label':
     case 'input':
     case 'combobox':
+    case 'datepickerinput':
     case 'horizontalLine':
+    case 'horizontalLineLow':
+    case 'textScribbled':
     case 'listbox':
     case 'checkbox':
     case 'toggleswitch':
@@ -67,10 +70,21 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
     case 'loading-indicator':
     case 'buttonBar':
     case 'slider':
+    case 'chip':
       return ['middle-left', 'middle-right'];
     case 'verticalLine':
     case 'verticalScrollBar':
+    case 'verticalLineLow':
       return ['top-center', 'bottom-center'];
+    case 'circleLow':
+      return [
+        'top-left',
+        'top-right',
+        'bottom-left',
+        'bottom-right',
+        'top-center',
+        'bottom-center',
+      ];
     case 'icon':
     case 'multiple':
       return [];

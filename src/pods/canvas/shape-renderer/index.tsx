@@ -19,6 +19,7 @@ import {
   renderVerticalScrollBar,
   renderTooltip,
   renderSlider,
+  renderChip,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -44,6 +45,9 @@ import {
   renderToggleLightDark,
   renderVideoconference,
   renderGauge,
+  renderCalendar,
+  renderAppBar,
+  renderLoadingIndicator,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -57,6 +61,7 @@ import {
   renderPostit,
   renderLargeArrowShape,
   renderCilinder,
+  renderImage,
 } from './simple-basic-shapes';
 import {
   renderHeading1,
@@ -66,12 +71,18 @@ import {
   renderNormaltext,
   renderParagraph,
   renderRichTextParagraph,
+  renderSmalltext,
 } from './simple-text-components';
-import { renderSmalltext } from './simple-text-components/smalltext.renderer';
-import { renderImage } from './simple-basic-shapes/image.renderer';
-import { renderCalendar } from './simple-rich-components/calendar.renderer';
-import { renderAppBar } from './simple-rich-components/appBar.renderer';
-import { renderLoadingIndicator } from './simple-rich-components/loading-indicator.renderer';
+import {
+  renderCircleLow,
+  renderHorizontalLowLine,
+  renderImagePlaceHolder,
+  renderVerticalLowLine,
+  renderEllipseLow,
+  renderRectangleLow,
+  renderTextScribbled,
+  renderParagraphScribbled,
+} from './simple-low-wireframes-components';
 
 export const renderShapeComponent = (
   shape: ShapeModel,
@@ -200,7 +211,24 @@ export const renderShapeComponent = (
       return renderVideoconference(shape, shapeRenderedProps);
     case 'gauge':
       return renderGauge(shape, shapeRenderedProps);
-
+    case 'imagePlaceholder':
+      return renderImagePlaceHolder(shape, shapeRenderedProps);
+    case 'chip':
+      return renderChip(shape, shapeRenderedProps);
+    case 'horizontalLineLow':
+      return renderHorizontalLowLine(shape, shapeRenderedProps);
+    case 'verticalLineLow':
+      return renderVerticalLowLine(shape, shapeRenderedProps);
+    case 'ellipseLow':
+      return renderEllipseLow(shape, shapeRenderedProps);
+    case 'rectangleLow':
+      return renderRectangleLow(shape, shapeRenderedProps);
+    case 'circleLow':
+      return renderCircleLow(shape, shapeRenderedProps);
+    case 'textScribbled':
+      return renderTextScribbled(shape, shapeRenderedProps);
+    case 'paragraphScribbled':
+      return renderParagraphScribbled(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

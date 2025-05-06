@@ -8,7 +8,7 @@ import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 
 const paragraphSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 200,
+  minWidth: 20,
   minHeight: 20,
   maxWidth: -1,
   maxHeight: -1,

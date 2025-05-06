@@ -69,13 +69,22 @@ export type ShapeType =
   | 'buttonBar'
   | 'tooltip'
   | 'slider'
+  | 'chip'
   | 'link'
   | 'cilinder'
   | 'richtext'
   | 'loading-indicator'
   | 'videoconference'
   | 'richtext'
-  | 'gauge';
+  | 'gauge'
+  | 'imagePlaceholder'
+  | 'horizontalLineLow'
+  | 'verticalLineLow'
+  | 'ellipseLow'
+  | 'rectangleLow'
+  | 'circleLow'
+  | 'textScribbled'
+  | 'paragraphScribbled';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -135,11 +144,20 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   buttonBar: 'Button Bar',
   tooltip: 'Tooltip',
   slider: 'Slider',
+  chip: 'Chip',
   richtext: 'Rich Text',
   cilinder: 'Cilinder',
   'loading-indicator': 'Loading',
   videoconference: 'Videoconference',
   gauge: 'Gauge',
+  imagePlaceholder: 'Image Placeholder',
+  horizontalLineLow: 'Horizontal Divider',
+  verticalLineLow: 'Vertical Divider',
+  ellipseLow: 'Ellipse',
+  rectangleLow: 'Rectangle Placeholder',
+  circleLow: 'Circle',
+  textScribbled: 'Text Scribbled',
+  paragraphScribbled: 'Paragraph Scribbled',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
@@ -172,6 +190,7 @@ export type IconSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
 export interface OtherProps {
   stroke?: string;
   strokeStyle?: number[];
+  strokeWidth?: number;
   backgroundColor?: string;
   textColor?: string;
   fontVariant?: string;

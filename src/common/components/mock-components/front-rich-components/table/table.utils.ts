@@ -1,6 +1,6 @@
 //Example:'"Adri, Doe", "24,4", Paraguay' => ['"Adri, Doe"','"24,4"',' Paraguay']
 const divideIntoColumns = (row: string): string[] =>
-  row.match(/\s*"([^"]*)"|\s*([^,]+)/g) || [];
+  row.replace(/,(?=\S)/g, ', ').match(/\s*"([^"]*)"|\s*([^,]+)/g) || [];
 export const knowMaxColumns = (rows: string[]): number => {
   return rows.reduce((maxColumns, row) => {
     const columns = divideIntoColumns(row).length;
@@ -13,21 +13,17 @@ export const parseCSVRowsIntoArray = (csvContent: string): string[] => {
   const maxColumns = knowMaxColumns(arrayRows);
 
   arrayRows = arrayRows.map(row => {
-    const currentColumnCount = divideIntoColumns(row).length;
+    const columns = divideIntoColumns(row);
+    const currentColumnCount = columns.length;
 
-    // If a row is empty, return a string of commas
+    // Si la fila está vacía, continuamos sin procesarla
     if (currentColumnCount === 0) {
       return ','.repeat(maxColumns - 1);
     }
 
-    // If a width row is added {}, ignore it
-    if (row.startsWith('{') && row.endsWith('}')) {
-      return row;
-    }
-
-    // If a row has less columns than maxColumns, add commas at the end
-    if (currentColumnCount <= maxColumns) {
-      return row + ','.repeat(maxColumns - currentColumnCount); // Añadir comas al final
+    // Si una fila tiene menos columnas que el máximo, añade comas al final
+    if (currentColumnCount < maxColumns) {
+      return row + ','.repeat(maxColumns - currentColumnCount);
     }
 
     return row;

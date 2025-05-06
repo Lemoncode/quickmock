@@ -3,6 +3,7 @@ import {
   BASIC_SHAPE,
   FONT_SIZE_VALUES,
   LINK_SHAPE,
+  LOW_WIREFRAME_SHAPE,
 } from '@/common/components/mock-components/front-components/shape.const';
 import { ShapeType, OtherProps } from '@/core/model';
 
@@ -122,9 +123,15 @@ export const generateDefaultOtherProps = (
         borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
       };
     case 'horizontalLine':
+    case 'horizontalLineLow':
+    case 'rectangleLow':
+    case 'circleLow':
+    case 'verticalLineLow':
+    case 'ellipseLow':
       return {
         stroke: '#000000',
         strokeStyle: [],
+        strokeWidth: LOW_WIREFRAME_SHAPE.DEFAULT_STROKE_WIDTH,
       };
     case 'verticalLine':
       return {
@@ -252,6 +259,13 @@ export const generateDefaultOtherProps = (
     case 'tabsBar':
       return {
         activeElement: 0,
+      };
+    case 'chip':
+      return {
+        stroke: '#939393',
+        backgroundColor: '#D3D3D3',
+        textColor: '#000000',
+        strokeStyle: [],
       };
     default:
       return undefined;
