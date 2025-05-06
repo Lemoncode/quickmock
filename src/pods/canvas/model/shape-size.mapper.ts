@@ -87,6 +87,7 @@ import {
   getCircleLowShapeSizeRestrictions,
   getTextScribbledShapeRestrictions,
 } from '@/common/components/mock-components/front-low-wireframes-components';
+import { getParagraphScribbledShapeRestrictions } from '@/common/components/mock-components/front-low-wireframes-components/paragraph-scribbled-shape';
 
 const getMultipleNodeSizeRestrictions = (): ShapeSizeRestrictions => ({
   minWidth: 0,
@@ -169,6 +170,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   rectangleLow: getRectangleLowShapeRestrictions,
   circleLow: getCircleLowShapeSizeRestrictions,
   textScribbled: getTextScribbledShapeRestrictions,
+  paragraphScribbled: getParagraphScribbledShapeRestrictions,
 };
 
 export default shapeSizeMap;
