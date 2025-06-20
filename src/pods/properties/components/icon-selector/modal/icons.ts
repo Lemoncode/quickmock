@@ -2554,4 +2554,10 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['nine', 'number', 'count', 'ninth'],
     categories: ['IT'],
   },
+  {
+    name: 'Calculator',
+    filename: 'phCalculatorLight.svg',
+    searchTerms: ['calculator', 'math', 'arithmetic', 'compute', 'calculate'],
+    categories: ['IT'],
+  },
 ];
