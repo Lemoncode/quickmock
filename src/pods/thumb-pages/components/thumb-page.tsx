@@ -12,6 +12,8 @@ import classes from './thumb-page.module.css';
 
 import React from 'react';
 import { useDragDropThumb } from './drag-drop-thumb.hook';
+import Konva from 'konva';
+import { ENV } from '@/core/constants';
 
 interface Props {
   pageIndex: number;
@@ -35,6 +37,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
   });
 
   const divRef = useRef<HTMLDivElement>(null);
+  const layerRef = useRef<Konva.Layer>(null);
   const [key, setKey] = React.useState(0);
 
   const { dragging, isDraggedOver } = useDragDropThumb(divRef, pageIndex);
@@ -51,6 +54,15 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
       setKey(key => key + 1);
     }, 100);
   };
+
+  // Exposing thumb layer for testing
+
+  if (typeof window !== 'undefined' && ENV.IS_TEST_ENV && layerRef.current) {
+    if (!window.__TESTING_KONVA_THUMB_LAYERS__) {
+      window.__TESTING_KONVA_THUMB_LAYERS__ = [];
+    }
+    window.__TESTING_KONVA_THUMB_LAYERS__[pageIndex] = layerRef.current;
+  }
 
   React.useLayoutEffect(() => {
     handleResizeAndForceRedraw();
@@ -105,7 +117,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
             scaleX={finalScale}
             scaleY={finalScale}
           >
-            <Layer>
+            <Layer ref={layerRef}>
               {shapes.map(shape => {
                 if (!fakeShapeRefs.current[shape.id]) {
                   fakeShapeRefs.current[shape.id] = createRef();
