@@ -5,6 +5,7 @@ import {
   getShapeBackgroundColor,
   addComponentsWithDifferentCategoriesToCanvas,
   selectAllComponentsInCanvas,
+  checkPropertiesExist,
 } from '../helpers';
 
 test('when selecting a button and a rectangle, select both, change background color to red, both should update their bg to red', async ({
@@ -44,4 +45,35 @@ test('when selecting a button and a rectangle, select both, change background co
 
   expect(buttonBgColor).toBe('#DD0000');
   expect(rectangleBgColor).toBe('#DD0000');
+});
+
+test('verify that in the props we can find the common props of both items', async ({
+  page,
+}) => {
+  await page.goto('');
+
+  // Add components to canvas
+  const components: ComponentWithCategory[] = [
+    { name: 'Button' },
+    { name: 'Rectangle', category: 'Basic Shapes' },
+  ];
+  await addComponentsWithDifferentCategoriesToCanvas(page, components);
+
+  // Select all components in canvas
+  await selectAllComponentsInCanvas(page);
+
+  // Confirm both items are selected
+  const selectedItems = await getTransformer(page);
+  expect(selectedItems._nodes.length).toEqual(2);
+
+  const commonProps: string[] = [
+    'Layering',
+    'Stroke',
+    'Stroke style',
+    'Background',
+    'Border-radius',
+  ];
+
+  // Verify common properties are visible in the properties panel
+  await checkPropertiesExist(page, commonProps);
 });
