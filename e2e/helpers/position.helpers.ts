@@ -49,6 +49,18 @@ export const dragAndDrop = async (
   await page.mouse.up();
 };
 
+const getTargetPosition = (
+  canvasPosition: { x: number; y: number },
+  displacementQty: number,
+  multiplyFactor: number
+): Position => {
+  const positionDisplacement = displacementQty * (multiplyFactor + 1);
+  return {
+    x: canvasPosition.x + displacementQty + positionDisplacement,
+    y: canvasPosition.y + positionDisplacement,
+  };
+};
+
 export const addComponentsToCanvas = async (
   page: Page,
   components: string[],
@@ -63,18 +75,12 @@ export const addComponentsToCanvas = async (
     await component.scrollIntoViewIfNeeded();
     const position = await getLocatorPosition(component);
 
-    const targetPosition = (
-      displacementQty: number,
-      multiplyFactor: number
-    ) => {
-      const positionDisplacement = displacementQty * (multiplyFactor + 1);
-      return {
-        x: canvasPosition.x + displacementQty + positionDisplacement,
-        y: canvasPosition.y + positionDisplacement,
-      };
-    };
-
-    await dragAndDrop(page, position, targetPosition(displacementQty, index));
+    const targetPosition = getTargetPosition(
+      canvasPosition,
+      displacementQty,
+      index
+    );
+    await dragAndDrop(page, position, targetPosition);
   }
 };
 
@@ -133,18 +139,12 @@ export const addComponentsWithDifferentCategoriesToCanvas = async (
       await component.scrollIntoViewIfNeeded();
       const position = await getLocatorPosition(component);
 
-      const targetPosition = (
-        displacementQty: number,
-        multiplyFactor: number
-      ) => {
-        const positionDisplacement = displacementQty * (multiplyFactor + 1);
-        return {
-          x: canvasPosition.x + displacementQty + positionDisplacement,
-          y: canvasPosition.y + positionDisplacement,
-        };
-      };
-
-      await dragAndDrop(page, position, targetPosition(displacementQty, index));
+      const targetPosition = getTargetPosition(
+        canvasPosition,
+        displacementQty,
+        index
+      );
+      await dragAndDrop(page, position, targetPosition);
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
