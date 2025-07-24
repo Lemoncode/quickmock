@@ -1,31 +1,26 @@
 import { test, expect } from '@playwright/test';
-import { dragAndDrop, getLocatorPosition, getTransformer } from '../helpers';
-import { getShapeBackgroundColor } from '../helpers';
+import {
+  getTransformer,
+  ComponentWithCategory,
+  getShapeBackgroundColor,
+  addComponentsWithDifferentCategoriesToCanvas,
+  selectAllComponentsInCanvas,
+} from '../helpers';
 
 test('when selecting a button and a rectangle, select both, change background color to red, both should update their bg to red', async ({
   page,
 }) => {
   await page.goto('');
 
-  // Drag & drop button in canvas
-  const button = page.getByAltText('Button', { exact: true });
+  // Add components to canvas
+  const components: ComponentWithCategory[] = [
+    { name: 'Button' }, // Button is in default 'Components' category
+    { name: 'Rectangle', category: 'Basic Shapes' },
+  ];
+  await addComponentsWithDifferentCategoriesToCanvas(page, components);
 
-  const position = await getLocatorPosition(button);
-  const targetPosition = { x: position.x + 500, y: position.y };
-  await dragAndDrop(page, position, targetPosition);
-
-  // Drag & drop rectangle in canvas
-  await page.getByText('Basic Shapes').click();
-  const rectangle = page.getByText('Rectangle', { exact: true }).locator('..');
-
-  const position2 = await getLocatorPosition(rectangle);
-  const targetPosition2 = { x: position2.x + 500, y: position2.y - 100 };
-  await dragAndDrop(page, position2, targetPosition2);
-
-  await page.mouse.click(800, 130);
-
-  // Perform items selection
-  await dragAndDrop(page, { x: 260, y: 130 }, { x: 1000, y: 550 });
+  // Select all components in canvas
+  await selectAllComponentsInCanvas(page);
 
   // Confirm both items are selected
   const selectedItems = await getTransformer(page);
