@@ -19,3 +19,13 @@ export const checkPropertiesExist = async (
     await expect(propLocator).toBeVisible();
   }
 };
+
+export const checkPropertiesDoNotExist = async (
+  page: Page,
+  properties: string[]
+) => {
+  for (const property of properties) {
+    const propLocator = page.getByText(property, { exact: true });
+    await expect(propLocator).not.toBeVisible();
+  }
+};
