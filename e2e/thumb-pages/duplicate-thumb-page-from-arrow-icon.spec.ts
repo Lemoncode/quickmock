@@ -40,6 +40,11 @@ test('should duplicate thumbpage when triggered via the arrow icon', async ({
     .locator('..');
   await expect(pageTwo).toBeVisible();
 
+  // Additional click to force the duplicate thumbnail to finish rendering.
+  await pageTwo.click();
+  // Without this click, the React/Konva pipeline does not always update on time and the
+  // assertions fail intermittently.
+
   // Verify components exist in copy thumb
   const buttonInCopyThumb = await getByShapeTypeInThumb(page, 1, 'button');
   const comboboxInCopyThumb = await getByShapeTypeInThumb(page, 1, 'combobox');
