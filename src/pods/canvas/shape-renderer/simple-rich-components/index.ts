@@ -20,3 +20,4 @@ export * from './video-player.renderer';
 export * from './audio-player.renderer';
 export * from './loading-indicator.renderer';
 export * from './videoconference.renderer';
+export * from './fab-button.renderer';

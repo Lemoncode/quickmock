@@ -5,6 +5,8 @@ import { Group } from 'konva/lib/Group';
 import { E2E_CanvasItemKeyAttrs } from './types/e2e-types';
 import { getCanvasBoundingBox } from './position.helpers';
 
+// MAIN CANVAS HELPERS
+
 const getLayer = async (page: Page): Promise<Layer> =>
   await page.evaluate(() => {
     return window.__TESTING_KONVA_LAYER__;
@@ -48,6 +50,50 @@ export const getByShapeType = async (
   } else {
     return undefined;
   }
+};
+
+// THUMB HELPERS
+
+const getThumbLayer = async (page: Page, pageIndex: number): Promise<Layer> =>
+  await page.evaluate(index => {
+    return window.__TESTING_KONVA_THUMB_LAYERS__?.[index];
+  }, pageIndex);
+
+const getThumbChildren = async (page: Page, pageIndex: number) => {
+  const layer = await getThumbLayer(page, pageIndex);
+  return layer?.children || [];
+};
+
+// Waits for a thumb to finish rendering (until it has at least one child)
+
+export const waitForThumbToRender = async (
+  page: Page,
+  pageIndex: number,
+  timeout = 5000
+) => {
+  await page.waitForFunction(
+    async index => {
+      const layer = window.__TESTING_KONVA_THUMB_LAYERS__?.[index];
+      if (!layer) return false;
+
+      const children = layer.children || [];
+      return children && children.length > 0;
+    },
+    pageIndex,
+    { timeout }
+  );
+};
+
+export const getByShapeTypeInThumb = async (
+  page: Page,
+  pageIndex: number,
+  shape: string
+): Promise<Group | Shape | undefined> => {
+  await waitForThumbToRender(page, pageIndex);
+
+  // Search for the shape
+  const children = await getThumbChildren(page, pageIndex);
+  return children?.find(child => child.attrs.shapeType === shape);
 };
 
 export const getTransformer = async (page: Page): Promise<any> => {
