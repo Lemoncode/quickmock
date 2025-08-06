@@ -6,10 +6,10 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
 import { useShapeProps } from '@/common/components/shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../../mock-components.utils';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
-import { loadSvgWithFill } from '../../front-components/icon/icon-shape.business';
 import { IconModal } from '@/pods/properties/components/icon-selector/modal';
 import { useModalDialogContext } from '@/core/providers/model-dialog-providers/model-dialog.provider';
 import { useCanvasContext } from '@/core/providers';
+import { loadSvgWithFill } from '@/common/utils/svg.utils';
 
 const fabButtonShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 25,
