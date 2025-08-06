@@ -84,7 +84,8 @@ export type ShapeType =
   | 'rectangleLow'
   | 'circleLow'
   | 'textScribbled'
-  | 'paragraphScribbled';
+  | 'paragraphScribbled'
+  | 'fabButton';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -158,6 +159,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   circleLow: 'Circle',
   textScribbled: 'Text Scribbled',
   paragraphScribbled: 'Paragraph Scribbled',
+  fabButton: 'Fab Button',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';

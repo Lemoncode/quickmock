@@ -75,6 +75,17 @@ export const generateDefaultOtherProps = (
         stroke: '#808080',
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
       };
+    case 'fabButton':
+      return {
+        icon: {
+          name: 'chat',
+          filename: 'chat.svg',
+          searchTerms: ['chat', 'message', 'conversation', 'chatting'],
+          categories: ['IT'],
+        },
+        stroke: '#ffffff',
+        backgroundColor: '#A9A9A9',
+      };
     case 'buttonBar':
       return {
         stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,

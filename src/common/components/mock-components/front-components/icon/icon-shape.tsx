@@ -7,7 +7,8 @@ import { useModalDialogContext } from '@/core/providers/model-dialog-providers/m
 import { IconModal } from '@/pods/properties/components/icon-selector/modal';
 import { useCanvasContext } from '@/core/providers';
 import { useGroupShapeProps } from '../../mock-components.utils';
-import { loadSvgWithFill, returnIconSize } from './icon-shape.business';
+import { returnIconSize } from './icon-shape.business';
+import { loadSvgWithFill } from '@/common/utils/svg.utils';
 
 const iconShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 25,
