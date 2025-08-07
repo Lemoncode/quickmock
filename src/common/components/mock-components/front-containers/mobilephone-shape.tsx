@@ -8,7 +8,7 @@ import { loadSvgWithFill } from '@/common/utils/svg.utils';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 
 const mobilePhoneShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 150,
+  minWidth: 200,
   minHeight: 150,
   maxWidth: 1000,
   maxHeight: 1000,
