@@ -1,9 +1,10 @@
-import { forwardRef } from 'react';
-import { Group, Rect, Circle } from 'react-konva';
+import { forwardRef, useEffect, useState } from 'react';
+import { Group, Rect, Circle, Image } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { loadSvgWithFill } from '@/common/utils/svg.utils';
 
 const mobilePhoneShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 150,
@@ -37,12 +38,44 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
   const speakerRadius = 2;
   const buttonRadius = 9;
 
+  const [wifiIcon, setWifiIcon] = useState<HTMLImageElement | null>(null);
+  const [batteryIcon, setBatteryIcon] = useState<HTMLImageElement | null>(null);
+  const [signalIcon, setSignalIcon] = useState<HTMLImageElement | null>(null);
+
+  const adornerIconSize = 20;
+  const adornerPadding = 5;
+  const adornerTotalWidth = adornerIconSize * 3 + 17 * 2;
+
+  // Calculate inner screen coordinates (excluding frame margins)
+  const screenX = margin + screenMargin; // Left edge of inner screen
+  const screenY = screenMargin * 3; // Top edge of inner screen
+  const screenWidth = restrictedWidth - 2 * margin - 2 * screenMargin; // Available width inside screen
+
+  // Position adorner in top-right corner of inner screen
+  const adornerStartX = screenX + screenWidth - adornerTotalWidth; // Right-aligned positioning
+  const adornerY = screenY + adornerPadding; // Top-aligned with padding
+
+  // Individual icon positions within the adorner
+  const wifiX = adornerStartX;
+  const signalX = adornerStartX + 17;
+  const batteryX = adornerStartX + 20 * 2;
+
   const commonGroupProps = useGroupShapeProps(
     props,
     restrictedSize,
     shapeType,
     ref
   );
+
+  useEffect(() => {
+    loadSvgWithFill('/icons/wifi.svg', 'black').then(img => setWifiIcon(img));
+    loadSvgWithFill('/icons/cellsignal.svg', 'black').then(img =>
+      setSignalIcon(img)
+    );
+    loadSvgWithFill('/icons/batteryfull.svg', 'black').then(img =>
+      setBatteryIcon(img)
+    );
+  }, []);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
@@ -81,6 +114,41 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
         strokeWidth={1}
         fill="white"
       />
+
+      {/* Adorner */}
+
+      {/* Wifi */}
+      {wifiIcon && (
+        <Image
+          image={wifiIcon}
+          x={wifiX}
+          y={adornerY - 2}
+          width={adornerIconSize}
+          height={adornerIconSize}
+        />
+      )}
+
+      {/* Cell signal */}
+      {signalIcon && (
+        <Image
+          image={signalIcon}
+          x={signalX}
+          y={adornerY}
+          width={adornerIconSize}
+          height={adornerIconSize}
+        />
+      )}
+
+      {/* Battery */}
+      {batteryIcon && (
+        <Image
+          image={batteryIcon}
+          x={batteryX}
+          y={adornerY}
+          width={adornerIconSize}
+          height={adornerIconSize}
+        />
+      )}
 
       {/* Init button */}
       <Circle
