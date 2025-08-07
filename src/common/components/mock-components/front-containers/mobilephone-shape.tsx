@@ -1,10 +1,11 @@
 import { forwardRef, useEffect, useState } from 'react';
-import { Group, Rect, Circle, Image } from 'react-konva';
+import { Group, Rect, Circle, Image, Text } from 'react-konva';
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
 import { loadSvgWithFill } from '@/common/utils/svg.utils';
+import { BASIC_SHAPE } from '../front-components/shape.const';
 
 const mobilePhoneShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 150,
@@ -41,10 +42,11 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
   const [wifiIcon, setWifiIcon] = useState<HTMLImageElement | null>(null);
   const [batteryIcon, setBatteryIcon] = useState<HTMLImageElement | null>(null);
   const [signalIcon, setSignalIcon] = useState<HTMLImageElement | null>(null);
+  const [currentTime, setCurrentTime] = useState('');
 
   const adornerIconSize = 20;
   const adornerPadding = 5;
-  const adornerTotalWidth = adornerIconSize * 3 + 17 * 2;
+  const adornerTotalWidth = adornerIconSize * 3 + 17 * 2 + 30;
 
   // Calculate inner screen coordinates (excluding frame margins)
   const screenX = margin + screenMargin; // Left edge of inner screen
@@ -59,6 +61,10 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
   const wifiX = adornerStartX;
   const signalX = adornerStartX + 17;
   const batteryX = adornerStartX + 20 * 2;
+
+  const timeX = adornerStartX + 23 * 3;
+  const timeY = adornerY + 4;
+  const timeWidth = 40;
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -75,6 +81,24 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
     loadSvgWithFill('/icons/batteryfull.svg', 'black').then(img =>
       setBatteryIcon(img)
     );
+  }, []);
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setCurrentTime(
+        now.toLocaleTimeString('es-ES', {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+        })
+      );
+    };
+
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+
+    return () => clearInterval(timer);
   }, []);
 
   return (
@@ -149,6 +173,18 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
           height={adornerIconSize}
         />
       )}
+
+      {/* Current time */}
+      <Text
+        x={timeX}
+        y={timeY}
+        width={timeWidth}
+        height={adornerIconSize}
+        text={currentTime}
+        fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
+        fontSize={14}
+        wrap="none"
+      />
 
       {/* Init button */}
       <Circle
