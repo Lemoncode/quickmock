@@ -19,6 +19,7 @@ const DEFAULT_TEXT_ALIGNMENT = 'left';
 const DEFAULT_DISABLED = false;
 const DEFAULT_CORNER_RADIUS_CHIP = 1000;
 const DEFAULT_FONT_SIZE_CHIP = 14;
+const DEFAULT_MIN_WIDTH = 10;
 
 export interface DefaultStyleShape {
   DEFAULT_CORNER_RADIUS: number;
@@ -38,6 +39,7 @@ export interface DefaultStyleShape {
   DEFAULT_TEXT_DECORATION: string;
   DEFAULT_TEXT_ALIGNMENT: 'left' | 'center' | 'right';
   DEFAULT_DISABLED: boolean;
+  DEFAULT_MIN_WIDTH: number;
 }
 
 export const BASIC_SHAPE: DefaultStyleShape = {
@@ -58,6 +60,7 @@ export const BASIC_SHAPE: DefaultStyleShape = {
   DEFAULT_TEXT_DECORATION,
   DEFAULT_TEXT_ALIGNMENT,
   DEFAULT_DISABLED,
+  DEFAULT_MIN_WIDTH,
 };
 
 export const LOW_WIREFRAME_SHAPE = {
@@ -82,6 +85,7 @@ export const INPUT_SHAPE: DefaultStyleShape = {
   DEFAULT_TEXT_DECORATION,
   DEFAULT_TEXT_ALIGNMENT,
   DEFAULT_DISABLED,
+  DEFAULT_MIN_WIDTH,
 };
 
 //! maybe a function to calc max height base on the text
@@ -103,6 +107,7 @@ export const POSTIT_SHAPE: DefaultStyleShape = {
   DEFAULT_TEXT_DECORATION,
   DEFAULT_TEXT_ALIGNMENT,
   DEFAULT_DISABLED,
+  DEFAULT_MIN_WIDTH,
 };
 
 interface FontValues {
@@ -160,4 +165,5 @@ export const CHIP_SHAPE: DefaultStyleShape = {
   DEFAULT_TEXT_DECORATION,
   DEFAULT_TEXT_ALIGNMENT,
   DEFAULT_DISABLED,
+  DEFAULT_MIN_WIDTH,
 };
