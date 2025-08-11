@@ -9,7 +9,7 @@ import { calculatePath } from './text-scribbled.business';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
 
 const textScribbledShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
+  minWidth: BASIC_SHAPE.DEFAULT_MIN_WIDTH,
   minHeight: 45,
   maxWidth: -1,
   maxHeight: -1,
