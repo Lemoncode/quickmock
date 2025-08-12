@@ -9,7 +9,7 @@ import { useGroupShapeProps } from '../mock-components.utils';
 import { useResizeOnFontSizeChange } from './front-text-hooks/resize-fontsize-change.hook';
 
 const smalltextSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 40,
+  minWidth: BASIC_SHAPE.DEFAULT_MIN_WIDTH,
   minHeight: 20,
   maxWidth: -1,
   maxHeight: -1,

@@ -10,7 +10,7 @@ import { MIN_LINE_HEIGHT } from './paragraph-scribbled.const';
 import { calculateParagraphPaths } from './paragraph-scribbled.business';
 
 const paragraphScribbledShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
+  minWidth: BASIC_SHAPE.DEFAULT_MIN_WIDTH,
   minHeight: MIN_LINE_HEIGHT,
   maxWidth: -1,
   maxHeight: -1,
