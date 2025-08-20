@@ -14,22 +14,22 @@
   <!-- Adorner superior derecho (wifi, cobertura, batería y hora) -->
   <g id="adorner">
     <!-- Wifi -->
-    <g id="wifi" transform="translate(105,52) scale(0.043)" fill="black">
+    <g id="wifi" transform="translate(125,52) scale(0.043)" fill="black">
       <path d="M138 204a10 10 0 1 1-10-10a10 10 0 0 1 10 10m97.81-115.45a170 170 0 0 0-215.62 0a6 6 0 1 0 7.62 9.27a158 158 0 0 1 200.38 0a6 6 0 1 0 7.62-9.27m-32.08 35.79a122 122 0 0 0-151.46 0a6 6 0 0 0 7.46 9.41a110 110 0 0 1 136.54 0A6 6 0 0 0 200 135a6 6 0 0 0 3.73-10.7Zm-32.2 35.81a74 74 0 0 0-87.06 0a6 6 0 0 0 7.06 9.7a62 62 0 0 1 72.94 0a6 6 0 0 0 8.38-1.32a6 6 0 0 0-1.32-8.38"/>
     </g>
 
     <!-- Cobertura (barras) -->
-    <g id="signal" transform="translate(115,53) scale(0.043)" fill="black">
+    <g id="signal" transform="translate(135,53) scale(0.043)" fill="black">
       <path d="M166 72v128a6 6 0 0 1-12 0V72a6 6 0 0 1 12 0m34-46a6 6 0 0 0-6 6v168a6 6 0 0 0 12 0V32a6 6 0 0 0-6-6m-80 80a6 6 0 0 0-6 6v88a6 6 0 0 0 12 0v-88a6 6 0 0 0-6-6m-40 40a6 6 0 0 0-6 6v48a6 6 0 0 0 12 0v-48a6 6 0 0 0-6-6m-40 40a6 6 0 0 0-6 6v8a6 6 0 0 0 12 0v-8a6 6 0 0 0-6-6"/>
     </g>
 
     <!-- Batería -->
-    <g id="battery" transform="translate(128,53) scale(0.043)" fill="black">
+    <g id="battery" transform="translate(148,53) scale(0.043)" fill="black">
       <path d="M200 58H32a22 22 0 0 0-22 22v96a22 22 0 0 0 22 22h168a22 22 0 0 0 22-22V80a22 22 0 0 0-22-22m10 118a10 10 0 0 1-10 10H32a10 10 0 0 1-10-10V80a10 10 0 0 1 10-10h168a10 10 0 0 1 10 10Zm-28-80v64a6 6 0 0 1-12 0V96a6 6 0 0 1 12 0m-40 0v64a6 6 0 0 1-12 0V96a6 6 0 0 1 12 0m-40 0v64a6 6 0 0 1-12 0V96a6 6 0 0 1 12 0m-40 0v64a6 6 0 0 1-12 0V96a6 6 0 0 1 12 0m192 0v64a6 6 0 0 1-12 0V96a6 6 0 0 1 12 0"/>
     </g>
 
     <!-- Hora -->
-    <text x="144" y="61" font-family="Comic Sans MS, Balsamiq Sans, cursive" font-size="7.5" fill="black">17:00</text>
+    <text x="38" y="61" font-family="Comic Sans MS, Balsamiq Sans, cursive" font-size="7.5" fill="black">17:00</text>
   </g>
   
   <!-- Botón de inicio -->

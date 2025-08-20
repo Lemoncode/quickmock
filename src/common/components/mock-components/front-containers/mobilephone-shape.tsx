@@ -46,7 +46,7 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const adornerIconSize = 20;
   const adornerPadding = 5;
-  const adornerTotalWidth = adornerIconSize * 3 + 17 * 2 + 30;
+  const adornerTotalWidth = adornerIconSize * 3 + screenMargin;
 
   // Calculate inner screen coordinates (excluding frame margins)
   const screenX = margin + screenMargin; // Left edge of inner screen
@@ -62,7 +62,7 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
   const signalX = adornerStartX + 17;
   const batteryX = adornerStartX + 20 * 2;
 
-  const timeX = adornerStartX + 23 * 3;
+  const timeX = screenX + screenMargin;
   const timeY = adornerY + 4;
   const timeWidth = 40;
 
@@ -88,7 +88,7 @@ export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
       const now = new Date();
       setCurrentTime(
         now.toLocaleTimeString('es-ES', {
-          hour: '2-digit',
+          hour: 'numeric',
           minute: '2-digit',
           hour12: false,
         })
