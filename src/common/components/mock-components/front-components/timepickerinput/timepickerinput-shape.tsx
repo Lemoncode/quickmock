@@ -13,11 +13,11 @@ import disabledClockIconSrc from '/icons/clock-disabled.svg';
 
 const timepickerInputShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 100,
-  minHeight: 50,
+  minHeight: 38,
   maxWidth: -1,
-  maxHeight: 50,
+  maxHeight: 38,
   defaultWidth: 220,
-  defaultHeight: 50,
+  defaultHeight: 38,
 };
 
 const shapeType: ShapeType = 'timepickerinput';
@@ -114,7 +114,7 @@ export const TimepickerInputShape = forwardRef<any, ShapeProps>(
         <Text
           text={text}
           x={10}
-          y={(restrictedHeight - fontSize) / 2 + 2}
+          y={(restrictedHeight - fontSize) / 2}
           width={availableWidth}
           fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
           fontSize={BASIC_SHAPE.DEFAULT_FONT_SIZE}
