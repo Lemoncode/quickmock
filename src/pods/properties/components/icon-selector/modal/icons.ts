@@ -2560,4 +2560,28 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['calculator', 'math', 'arithmetic', 'compute', 'calculate'],
     categories: ['IT'],
   },
+  {
+    name: 'Tree view doutone',
+    filename: 'phTreeViewDuotone.svg',
+    searchTerms: ['tree', 'view', 'doutone'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Square Split horizontal',
+    filename: 'phSquareSplitHorizontal.svg',
+    searchTerms: ['square', 'split', 'horizontal'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Square Split vertical light',
+    filename: 'phSquareSplitVerticalLight.svg',
+    searchTerms: ['square', 'split', 'vertical'],
+    categories: ['IT'],
+  },
+  {
+    name: 'Copy',
+    filename: 'phCopy.svg',
+    searchTerms: ['copy', 'duplicate', 'clone'],
+    categories: ['IT'],
+  },
 ];
