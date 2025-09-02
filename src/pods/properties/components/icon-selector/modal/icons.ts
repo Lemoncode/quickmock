@@ -2578,4 +2578,10 @@ export const iconCollection: IconInfo[] = [
     searchTerms: ['square', 'split', 'vertical'],
     categories: ['IT'],
   },
+  {
+    name: 'Copy',
+    filename: 'phCopy.svg',
+    searchTerms: ['copy', 'duplicate', 'clone'],
+    categories: ['IT'],
+  },
 ];
