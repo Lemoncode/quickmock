@@ -66,16 +66,16 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
 
     const iconWidth = 50;
     const elementHeight = 60;
-    const paddingLeft = 40;
+    const paddingX = 40;
     const paddingTop = 30;
-    const fileX = 50 + paddingLeft;
+    const fileX = 50 + paddingX;
     const iconTextSpacing = 10;
 
-    const folderTextX = iconWidth + iconTextSpacing + paddingLeft;
+    const folderTextX = iconWidth + iconTextSpacing + paddingX;
     const fileTextX = fileX + iconWidth + iconTextSpacing;
 
-    const folderAvailableWidth = restrictedWidth - folderTextX;
-    const fileAvailableWidth = restrictedWidth - fileTextX;
+    const folderAvailableWidth = restrictedWidth - folderTextX - paddingX;
+    const fileAvailableWidth = restrictedWidth - fileTextX - paddingX;
 
     const { stroke, strokeStyle, fill, textColor, borderRadius } =
       useShapeProps(otherProps, BASIC_SHAPE);
@@ -122,7 +122,7 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
             {icons[index]?.value && (
               <Image
                 image={icons[index].value}
-                x={icons[index].type === 'file' ? fileX : paddingLeft}
+                x={icons[index].type === 'file' ? fileX : paddingX}
                 y={paddingTop + elementHeight * index}
                 width={iconWidth}
                 height={iconWidth}
