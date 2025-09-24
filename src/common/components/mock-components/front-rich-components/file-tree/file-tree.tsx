@@ -2,12 +2,14 @@ import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { forwardRef, useEffect, useState } from 'react';
 import { Group, Image, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../../shape.model';
-import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
 import { useGroupShapeProps } from '../../mock-components.utils';
 import { loadSvgWithFill } from '@/common/utils/svg.utils';
 import { useShapeProps } from '@/common/components/shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
-import { parseFileTreeText } from './file-tree.business';
+import {
+  calculateFileTreeDynamicSize,
+  parseFileTreeText,
+} from './file-tree.business';
 
 const fileTreeShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 220,
@@ -51,19 +53,22 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       }
     );
 
-    const restrictedSize = fitSizeToShapeSizeRestrictions(
-      fileTreeShapeRestrictions,
-      width,
-      height
-    );
-    const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
-
     const iconWidth = 50;
     const elementHeight = 60;
     const paddingX = 40;
-    const paddingTop = 30;
+    const paddingY = 30;
     const fileX = 50 + paddingX;
     const iconTextSpacing = 10;
+
+    const restrictedSize = calculateFileTreeDynamicSize(treeItems, {
+      width,
+      height,
+      elementHeight,
+      paddingY,
+      baseRestrictions: fileTreeShapeRestrictions,
+    });
+
+    const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
     const folderTextX = iconWidth + iconTextSpacing + paddingX;
     const fileTextX = fileX + iconWidth + iconTextSpacing;
@@ -102,7 +107,7 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
           x={0}
           y={0}
           width={restrictedWidth}
-          height={restrictedHeight + 20}
+          height={restrictedHeight}
           stroke={stroke}
           strokeWidth={2}
           fill={fill}
@@ -116,14 +121,14 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
               <Image
                 image={icons[item.type]!}
                 x={item.type === 'file' ? fileX : paddingX}
-                y={paddingTop + elementHeight * index}
+                y={paddingY + elementHeight * index}
                 width={iconWidth}
                 height={iconWidth}
               />
             )}
             <Text
               x={item.type === 'file' ? fileTextX : folderTextX}
-              y={paddingTop + elementHeight * index + 20}
+              y={paddingY + elementHeight * index + 20}
               text={item.text}
               width={
                 item.type === 'file' ? fileAvailableWidth : folderAvailableWidth
