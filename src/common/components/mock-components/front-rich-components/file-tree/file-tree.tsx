@@ -10,12 +10,12 @@ import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { joinTextContent } from './file-tree.business';
 
 const fileTreeShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 280,
+  minWidth: 220,
   minHeight: 280,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 180,
-  defaultHeight: 180,
+  defaultWidth: 280,
+  defaultHeight: 280,
 };
 
 interface FileTreeShapeProps extends ShapeProps {
@@ -36,7 +36,17 @@ export const getFileTreeShapeSizeRestrictions = (): ShapeSizeRestrictions =>
 
 export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
   (props, ref) => {
-    const { x, y, width, height, id, text, otherProps, ...shapeProps } = props;
+    const {
+      x,
+      y,
+      width,
+      height,
+      id,
+      onSelected,
+      text,
+      otherProps,
+      ...shapeProps
+    } = props;
 
     const treeTitles = joinTextContent(text);
 
@@ -56,7 +66,16 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
 
     const iconWidth = 50;
     const elementHeight = 60;
-    const fileX = 50;
+    const paddingLeft = 40;
+    const paddingTop = 30;
+    const fileX = 50 + paddingLeft;
+    const iconTextSpacing = 10;
+
+    const folderTextX = iconWidth + iconTextSpacing + paddingLeft;
+    const fileTextX = fileX + iconWidth + iconTextSpacing;
+
+    const folderAvailableWidth = restrictedWidth - folderTextX;
+    const fileAvailableWidth = restrictedWidth - fileTextX;
 
     const { stroke, strokeStyle, fill, textColor, borderRadius } =
       useShapeProps(otherProps, BASIC_SHAPE);
@@ -87,9 +106,9 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       <Group {...commonGroupProps} {...shapeProps}>
         {/* Container */}
         <Rect
-          x={-10}
-          y={-10}
-          width={restrictedWidth + 20}
+          x={0}
+          y={0}
+          width={restrictedWidth}
           height={restrictedHeight + 20}
           stroke={stroke}
           strokeWidth={2}
@@ -103,17 +122,21 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
             {icons[index]?.value && (
               <Image
                 image={icons[index].value}
-                x={title === 'File' ? fileX : 0}
-                y={elementHeight * index}
+                x={icons[index].type === 'file' ? fileX : paddingLeft}
+                y={paddingTop + elementHeight * index}
                 width={iconWidth}
                 height={iconWidth}
               />
             )}
             <Text
-              x={title === 'File' ? fileX + iconWidth + 10 : iconWidth + 10}
-              y={elementHeight * index + 20}
+              x={icons[index].type === 'file' ? fileTextX : folderTextX}
+              y={paddingTop + elementHeight * index + 20}
               text={title}
-              width={restrictedWidth}
+              width={
+                icons[index].type === 'file'
+                  ? fileAvailableWidth
+                  : folderAvailableWidth
+              }
               height={elementHeight}
               fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
               fontSize={15}
