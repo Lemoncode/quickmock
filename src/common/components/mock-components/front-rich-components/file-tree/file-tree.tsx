@@ -7,7 +7,7 @@ import { useGroupShapeProps } from '../../mock-components.utils';
 import { loadSvgWithFill } from '@/common/utils/svg.utils';
 import { useShapeProps } from '@/common/components/shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
-import { joinTextContent } from './file-tree.business';
+import { parseFileTreeText } from './file-tree.business';
 
 const fileTreeShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 220,
@@ -20,13 +20,6 @@ const fileTreeShapeRestrictions: ShapeSizeRestrictions = {
 
 interface FileTreeShapeProps extends ShapeProps {
   text: string;
-}
-
-type IconType = 'folder' | 'subfolder' | 'file';
-
-interface IconState {
-  type: IconType;
-  value: HTMLImageElement | null;
 }
 
 const shapeType: ShapeType = 'fileTree';
@@ -48,14 +41,15 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       ...shapeProps
     } = props;
 
-    const treeTitles = joinTextContent(text);
+    const treeItems = parseFileTreeText(text);
 
-    const [icons, setIcons] = useState<IconState[]>([
-      { type: 'folder', value: null },
-      { type: 'subfolder', value: null },
-      { type: 'file', value: null },
-      { type: 'folder', value: null },
-    ]);
+    const [icons, setIcons] = useState<Record<string, HTMLImageElement | null>>(
+      {
+        folder: null,
+        subfolder: null,
+        file: null,
+      }
+    );
 
     const restrictedSize = fitSizeToShapeSizeRestrictions(
       fileTreeShapeRestrictions,
@@ -93,12 +87,11 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
         loadSvgWithFill('/icons/open.svg', stroke),
         loadSvgWithFill('/icons/new.svg', stroke),
       ]).then(([folder, subfolder, file]) => {
-        setIcons([
-          { type: 'folder', value: folder },
-          { type: 'subfolder', value: subfolder },
-          { type: 'file', value: file },
-          { type: 'folder', value: folder },
-        ]);
+        setIcons({
+          folder,
+          subfolder,
+          file,
+        });
       });
     }, [stroke]);
 
@@ -117,25 +110,23 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
           cornerRadius={borderRadius}
         />
 
-        {treeTitles.map((title, index) => (
+        {treeItems.map((item, index) => (
           <Group key={index}>
-            {icons[index]?.value && (
+            {icons[item.type] && (
               <Image
-                image={icons[index].value}
-                x={icons[index].type === 'file' ? fileX : paddingX}
+                image={icons[item.type]!}
+                x={item.type === 'file' ? fileX : paddingX}
                 y={paddingTop + elementHeight * index}
                 width={iconWidth}
                 height={iconWidth}
               />
             )}
             <Text
-              x={icons[index].type === 'file' ? fileTextX : folderTextX}
+              x={item.type === 'file' ? fileTextX : folderTextX}
               y={paddingTop + elementHeight * index + 20}
-              text={title}
+              text={item.text}
               width={
-                icons[index].type === 'file'
-                  ? fileAvailableWidth
-                  : folderAvailableWidth
+                item.type === 'file' ? fileAvailableWidth : folderAvailableWidth
               }
               height={elementHeight}
               fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
