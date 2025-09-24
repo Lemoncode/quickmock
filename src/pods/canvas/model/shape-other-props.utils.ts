@@ -75,6 +75,14 @@ export const generateDefaultOtherProps = (
         stroke: '#808080',
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
       };
+    case 'fileTree':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+        borderRadius: `${BASIC_SHAPE.DEFAULT_CORNER_RADIUS}`,
+      };
     case 'fabButton':
       return {
         icon: {
