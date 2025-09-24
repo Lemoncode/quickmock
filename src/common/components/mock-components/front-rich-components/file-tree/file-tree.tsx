@@ -89,9 +89,9 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
 
     useEffect(() => {
       Promise.all([
-        loadSvgWithFill('/icons/folder.svg', 'black'),
-        loadSvgWithFill('/icons/open.svg', 'black'),
-        loadSvgWithFill('/icons/new.svg', 'black'),
+        loadSvgWithFill('/icons/folder.svg', stroke),
+        loadSvgWithFill('/icons/open.svg', stroke),
+        loadSvgWithFill('/icons/new.svg', stroke),
       ]).then(([folder, subfolder, file]) => {
         setIcons([
           { type: 'folder', value: folder },
@@ -100,7 +100,7 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
           { type: 'folder', value: folder },
         ]);
       });
-    }, []);
+    }, [stroke]);
 
     return (
       <Group {...commonGroupProps} {...shapeProps}>
