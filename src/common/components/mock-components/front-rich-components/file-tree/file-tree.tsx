@@ -8,12 +8,13 @@ import { useShapeProps } from '@/common/components/shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import {
   calculateFileTreeDynamicSize,
+  FileTreeItem,
   parseFileTreeText,
 } from './file-tree.business';
 
 const fileTreeShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 220,
-  minHeight: 280,
+  minHeight: 180,
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 280,
@@ -57,8 +58,8 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
     const elementHeight = 60;
     const paddingX = 40;
     const paddingY = 30;
-    const fileX = 50 + paddingX;
     const iconTextSpacing = 10;
+    const indentationStep = 10;
 
     const restrictedSize = calculateFileTreeDynamicSize(treeItems, {
       width,
@@ -70,12 +71,6 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
 
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-    const folderTextX = iconWidth + iconTextSpacing + paddingX;
-    const fileTextX = fileX + iconWidth + iconTextSpacing;
-
-    const folderAvailableWidth = restrictedWidth - folderTextX - paddingX;
-    const fileAvailableWidth = restrictedWidth - fileTextX - paddingX;
-
     const { stroke, strokeStyle, fill, textColor, borderRadius } =
       useShapeProps(otherProps, BASIC_SHAPE);
 
@@ -85,6 +80,23 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       shapeType,
       ref
     );
+
+    // Helper functions for position calculations
+    const calculateIconX = (item: FileTreeItem) => {
+      return (
+        paddingX +
+        item.level * indentationStep +
+        (item.type === 'file' ? 40 : 0)
+      );
+    };
+
+    const calculateTextX = (item: FileTreeItem) => {
+      return calculateIconX(item) + iconWidth + iconTextSpacing;
+    };
+
+    const calculateAvailableWidth = (item: FileTreeItem) => {
+      return restrictedWidth - calculateTextX(item) - paddingX;
+    };
 
     useEffect(() => {
       Promise.all([
@@ -120,19 +132,17 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
             {icons[item.type] && (
               <Image
                 image={icons[item.type]!}
-                x={item.type === 'file' ? fileX : paddingX}
+                x={calculateIconX(item)}
                 y={paddingY + elementHeight * index}
                 width={iconWidth}
                 height={iconWidth}
               />
             )}
             <Text
-              x={item.type === 'file' ? fileTextX : folderTextX}
+              x={calculateTextX(item)}
               y={paddingY + elementHeight * index + 20}
               text={item.text}
-              width={
-                item.type === 'file' ? fileAvailableWidth : folderAvailableWidth
-              }
+              width={calculateAvailableWidth(item)}
               height={elementHeight}
               fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
               fontSize={15}

@@ -6,9 +6,11 @@ export const joinTextContent = (text: string): string[] => {
 };
 
 // Symbol -> + Folder - Subfolder * File
+// Level -> Level 0: no indentation in Folder / Level 1: 1 indentation (2 spaces) in Subfolder / Level 2: 2 (4 spaces) indentations in File
 export interface FileTreeItem {
   type: 'folder' | 'subfolder' | 'file';
   text: string;
+  level: number;
 }
 
 interface FileTreeDynamicSizeParams {
@@ -21,8 +23,11 @@ interface FileTreeDynamicSizeParams {
 
 export const parseFileTreeText = (text: string): FileTreeItem[] => {
   return text
-    .split(',')
+    .split('\n')
     .map(line => {
+      // First detect indentation
+      const indentMatch = line.match(/^(\s*)/);
+      const level = indentMatch ? Math.floor(indentMatch[1].length / 2) : 0;
       const trimmed = line.trim();
 
       if (trimmed === '') return null;
@@ -32,6 +37,7 @@ export const parseFileTreeText = (text: string): FileTreeItem[] => {
         return {
           type: 'folder',
           text: trimmed.substring(2).trim(),
+          level: level,
         };
       }
 
@@ -39,6 +45,7 @@ export const parseFileTreeText = (text: string): FileTreeItem[] => {
         return {
           type: 'subfolder',
           text: trimmed.substring(2).trim(),
+          level: level,
         };
       }
 
@@ -46,6 +53,7 @@ export const parseFileTreeText = (text: string): FileTreeItem[] => {
         return {
           type: 'file',
           text: trimmed.substring(2).trim(),
+          level: level,
         };
       }
 
@@ -53,6 +61,7 @@ export const parseFileTreeText = (text: string): FileTreeItem[] => {
       return {
         type: 'folder',
         text: trimmed,
+        level: level,
       };
     })
     .filter((item): item is FileTreeItem => item !== null);
