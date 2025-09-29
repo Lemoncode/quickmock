@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  padding: var(--space-xs) var(--space-md);
+  border-bottom: 1px solid var(--primary-300);
+}
+
+.container :first-child {
+  flex: 1;
+}
+
+.range {
+  cursor: pointer;
+  width: 60px;
+  height: var(--space-lg);
+}
+
+.size {
+  width: 10px;
+  padding: 0 var(--space-md) 0 var(--space-s);
+}

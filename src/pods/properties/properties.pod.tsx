@@ -3,7 +3,13 @@ import classes from './properties.pod.module.css';
 import { ZIndexOptions } from './components/zindex/zindex-option.component';
 import { ColorPicker } from './components/color-picker/color-picker.component';
 import { Checked } from './components/checked/checked.component';
-import { SelectSize, SelectIcon, BorderRadius, Disabled } from './components';
+import {
+  SelectSize,
+  SelectIcon,
+  BorderRadius,
+  Disabled,
+  SelectSizeV2,
+} from './components';
 import { StrokeStyle } from './components/stroke-style/stroke.style.component';
 import { ImageSrc } from './components/image-src/image-selector.component';
 import { ImageBlackAndWhite } from './components/image-black-and-white/image-black-and-white-selector.component';
@@ -145,6 +151,23 @@ export const PropertiesPod = () => {
             }
           />
         </ShowProp>
+
+        <ShowProp
+          singleSelection={isSingleSelection}
+          multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
+          propKey="size"
+          propValue={selectedShapeData?.otherProps?.size}
+        >
+          <SelectSizeV2
+            label="Size"
+            shapeType={selectedShapeData?.type}
+            value={selectedShapeData?.otherProps?.size ?? ''}
+            onChange={size =>
+              updateOtherPropsOnSelected('size', size, isMultipleSelection)
+            }
+          />
+        </ShowProp>
+
         <ShowProp
           singleSelection={isSingleSelection}
           multipleSelectionPropsInCommon={multipleSelectionPropsInCommon}
