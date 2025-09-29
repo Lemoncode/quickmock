@@ -191,6 +191,12 @@ export interface IconInfo {
 
 export type IconSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
 
+export type ElementSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
+
+export interface SizeConfig {
+  availableSizes: ElementSize[];
+}
+
 export interface OtherProps {
   stroke?: string;
   strokeStyle?: number[];
@@ -204,6 +210,7 @@ export interface OtherProps {
   checked?: boolean;
   icon?: IconInfo;
   iconSize?: IconSize;
+  size?: ElementSize;
   imageSrc?: string;
   imageBlackAndWhite?: boolean;
   progress?: string;
