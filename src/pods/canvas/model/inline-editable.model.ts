@@ -117,7 +117,7 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   gauge: '10%',
   buttonBar: 'Button 1, Button 2, Button 3',
   tabsBar: 'Tab 1, Tab 2, Tab 3',
-  fileTree: '+ Folder 1\n  - Subfolder\n    * File\n+ Folder 2\n',
+  fileTree: '+ Folder 1\n   - Subfolder\n      * File\n+ Folder 2\n',
   link: 'Link',
   chip: 'Chip',
   timepickerinput: 'hh:mm',
