@@ -6,7 +6,7 @@ export const joinTextContent = (text: string): string[] => {
 };
 
 // Symbol -> + Folder - Subfolder * File
-// Level -> Level 0: no indentation in Folder / Level 1: 1 indentation (2 spaces) in Subfolder / Level 2: 2 (4 spaces) indentations in File
+// Level -> Level 0: no indentation in Folder / Level 1: 1 indentation (3 spaces) in Subfolder / Level 2: 2 indentations (6 spaces) in File
 export interface FileTreeItem {
   type: 'folder' | 'subfolder' | 'file';
   text: string;
@@ -15,7 +15,6 @@ export interface FileTreeItem {
 
 interface FileTreeDynamicSizeParams {
   width: number;
-  height: number;
   elementHeight: number;
   paddingY: number;
   baseRestrictions: ShapeSizeRestrictions;
@@ -27,7 +26,7 @@ export const parseFileTreeText = (text: string): FileTreeItem[] => {
     .map(line => {
       // First detect indentation
       const indentMatch = line.match(/^(\s*)/);
-      const level = indentMatch ? Math.floor(indentMatch[1].length / 2) : 0;
+      const level = indentMatch ? Math.floor(indentMatch[1].length / 3) : 0;
       const trimmed = line.trim();
 
       if (trimmed === '') return null;
@@ -71,7 +70,7 @@ export const calculateFileTreeDynamicSize = (
   treeItems: FileTreeItem[],
   params: FileTreeDynamicSizeParams
 ): Size => {
-  const { width, height, elementHeight, paddingY, baseRestrictions } = params;
+  const { width, elementHeight, paddingY, baseRestrictions } = params;
 
   // Calculate minimum height required based on content
   const minContentHeight = treeItems.length * elementHeight + paddingY * 2;
@@ -81,13 +80,12 @@ export const calculateFileTreeDynamicSize = (
     ...baseRestrictions,
     minHeight: minContentHeight,
     defaultHeight: Math.max(
-      baseRestrictions.defaultHeight || 280,
+      baseRestrictions.defaultHeight || 200,
       minContentHeight
     ),
   };
 
-  // Use the user's current height, but ensure that it is not less than minContentHeight.
-  const finalHeight = Math.max(height, minContentHeight);
+  const finalHeight = minContentHeight;
 
   return fitSizeToShapeSizeRestrictions(
     dynamicRestrictions,
