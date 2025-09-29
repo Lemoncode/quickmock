@@ -1,5 +1,32 @@
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
-import { ShapeSizeRestrictions, Size } from '@/core/model';
+import { ElementSize, ShapeSizeRestrictions, Size } from '@/core/model';
+import { FONT_SIZE_VALUES } from '../../front-components/shape.const';
+
+export const getFileTreeSizeValues = (size?: ElementSize) => {
+  switch (size) {
+    case 'XS':
+      return {
+        fontSize: FONT_SIZE_VALUES.SMALLTEXT,
+        iconWidth: 40,
+        elementHeight: 55,
+        size: 'XS',
+      };
+    case 'S':
+      return {
+        fontSize: FONT_SIZE_VALUES.NORMALTEXT,
+        iconWidth: 50,
+        elementHeight: 60,
+        size: 'S',
+      };
+    default:
+      return {
+        fontSize: FONT_SIZE_VALUES.NORMALTEXT,
+        iconWidth: 50,
+        elementHeight: 60,
+        size: 'S',
+      };
+  }
+};
 
 export const joinTextContent = (text: string): string[] => {
   return text.split(', ');

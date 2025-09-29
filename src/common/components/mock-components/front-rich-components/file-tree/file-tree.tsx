@@ -9,16 +9,17 @@ import { BASIC_SHAPE } from '../../front-components/shape.const';
 import {
   calculateFileTreeDynamicSize,
   FileTreeItem,
+  getFileTreeSizeValues,
   parseFileTreeText,
 } from './file-tree.business';
 
 const fileTreeShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 220,
-  minHeight: 180,
+  minWidth: 200,
+  minHeight: 120,
   maxWidth: -1,
   maxHeight: -1,
-  defaultWidth: 280,
-  defaultHeight: 280,
+  defaultWidth: 230,
+  defaultHeight: 180,
 };
 
 interface FileTreeShapeProps extends ShapeProps {
@@ -54,16 +55,17 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       }
     );
 
-    const iconWidth = 50;
-    const elementHeight = 60;
-    const paddingX = 40;
-    const paddingY = 30;
+    const { fontSize, iconWidth, elementHeight, size } = getFileTreeSizeValues(
+      otherProps?.size
+    );
+
+    const paddingX = 30;
+    const paddingY = 25;
     const iconTextSpacing = 10;
-    const indentationStep = 10;
+    const indentationStep = 25;
 
     const restrictedSize = calculateFileTreeDynamicSize(treeItems, {
       width,
-      height,
       elementHeight,
       paddingY,
       baseRestrictions: fileTreeShapeRestrictions,
@@ -83,11 +85,7 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
 
     // Helper functions for position calculations
     const calculateIconX = (item: FileTreeItem) => {
-      return (
-        paddingX +
-        item.level * indentationStep +
-        (item.type === 'file' ? 40 : 0)
-      );
+      return paddingX + item.level * indentationStep;
     };
 
     const calculateTextX = (item: FileTreeItem) => {
@@ -133,7 +131,7 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
               <Image
                 image={icons[item.type]!}
                 x={calculateIconX(item)}
-                y={paddingY + elementHeight * index}
+                y={paddingY + elementHeight * index + (size === 'XS' ? 5 : 0)}
                 width={iconWidth}
                 height={iconWidth}
               />
@@ -145,7 +143,7 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
               width={calculateAvailableWidth(item)}
               height={elementHeight}
               fontFamily={BASIC_SHAPE.DEFAULT_FONT_FAMILY}
-              fontSize={15}
+              fontSize={fontSize}
               fill={textColor}
               wrap="none"
               ellipsis={true}
