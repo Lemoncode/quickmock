@@ -1,6 +1,8 @@
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
 import { ElementSize, ShapeSizeRestrictions, Size } from '@/core/model';
 import { FONT_SIZE_VALUES } from '../../front-components/shape.const';
+import { useCanvasContext } from '@/core/providers';
+import { useEffect, useRef } from 'react';
 
 interface FileTreeSizeValues {
   fontSize: number;
@@ -144,4 +146,40 @@ export const calculateFileTreeDynamicSize = (
     width,
     finalHeight
   );
+};
+
+// Hook to resize edition text area based on content
+export const useFileTreeResizeOnContentChange = (
+  id: string,
+  coords: { x: number; y: number },
+  text: string,
+  currentSize: Size,
+  calculatedSize: Size,
+  minHeight: number
+) => {
+  const previousText = useRef(text);
+  const { updateShapeSizeAndPosition } = useCanvasContext();
+
+  useEffect(() => {
+    // Only update if the text has changed AND the height is different
+    const textChanged = previousText.current !== text;
+
+    const finalHeight = Math.max(calculatedSize.height, minHeight);
+    const finalSize = { ...calculatedSize, height: finalHeight };
+
+    const heightChanged = finalHeight !== currentSize.height;
+
+    if (textChanged && heightChanged) {
+      previousText.current = text;
+      updateShapeSizeAndPosition(id, coords, finalSize, false);
+    }
+  }, [
+    text,
+    calculatedSize.height,
+    currentSize.height,
+    id,
+    coords.x,
+    coords.y,
+    updateShapeSizeAndPosition,
+  ]);
 };
