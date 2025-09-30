@@ -14,7 +14,7 @@ import {
 } from './file-tree.business';
 
 const fileTreeShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 200,
+  minWidth: 150,
   minHeight: 120,
   maxWidth: -1,
   maxHeight: -1,
@@ -55,14 +55,16 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       }
     );
 
-    const { fontSize, iconWidth, elementHeight, size } = getFileTreeSizeValues(
-      otherProps?.size
-    );
-
-    const paddingX = 30;
-    const paddingY = 25;
-    const iconTextSpacing = 10;
-    const indentationStep = 25;
+    const {
+      fontSize,
+      iconDimension,
+      elementHeight,
+      extraTextTopPadding,
+      paddingX,
+      paddingY,
+      iconTextSpacing,
+      indentationStep,
+    } = getFileTreeSizeValues(otherProps?.size);
 
     const restrictedSize = calculateFileTreeDynamicSize(treeItems, {
       width,
@@ -89,7 +91,7 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
     };
 
     const calculateTextX = (item: FileTreeItem) => {
-      return calculateIconX(item) + iconWidth + iconTextSpacing;
+      return calculateIconX(item) + iconDimension + iconTextSpacing;
     };
 
     const calculateAvailableWidth = (item: FileTreeItem) => {
@@ -131,14 +133,14 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
               <Image
                 image={icons[item.type]!}
                 x={calculateIconX(item)}
-                y={paddingY + elementHeight * index + (size === 'XS' ? 5 : 0)}
-                width={iconWidth}
-                height={iconWidth}
+                y={paddingY + elementHeight * index}
+                width={iconDimension}
+                height={iconDimension}
               />
             )}
             <Text
               x={calculateTextX(item)}
-              y={paddingY + elementHeight * index + 20}
+              y={paddingY + elementHeight * index + extraTextTopPadding}
               text={item.text}
               width={calculateAvailableWidth(item)}
               height={elementHeight}

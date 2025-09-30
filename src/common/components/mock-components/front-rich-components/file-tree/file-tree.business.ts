@@ -2,28 +2,53 @@ import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
 import { ElementSize, ShapeSizeRestrictions, Size } from '@/core/model';
 import { FONT_SIZE_VALUES } from '../../front-components/shape.const';
 
-export const getFileTreeSizeValues = (size?: ElementSize) => {
+interface FileTreeSizeValues {
+  fontSize: number;
+  iconDimension: number;
+  elementHeight: number;
+  paddingX: number;
+  paddingY: number;
+  extraTextTopPadding: number;
+  iconTextSpacing: number;
+  indentationStep: number;
+}
+
+export const getFileTreeSizeValues = (
+  size?: ElementSize
+): FileTreeSizeValues => {
   switch (size) {
     case 'XS':
       return {
-        fontSize: FONT_SIZE_VALUES.SMALLTEXT,
-        iconWidth: 40,
-        elementHeight: 55,
-        size: 'XS',
+        fontSize: 12,
+        iconDimension: 25,
+        elementHeight: 30,
+        paddingX: 25,
+        paddingY: 15,
+        extraTextTopPadding: 9,
+        iconTextSpacing: 8,
+        indentationStep: 15,
       };
     case 'S':
       return {
         fontSize: FONT_SIZE_VALUES.NORMALTEXT,
-        iconWidth: 50,
+        iconDimension: 50,
         elementHeight: 60,
-        size: 'S',
+        paddingX: 30,
+        paddingY: 20,
+        extraTextTopPadding: 20,
+        iconTextSpacing: 10,
+        indentationStep: 27,
       };
     default:
       return {
         fontSize: FONT_SIZE_VALUES.NORMALTEXT,
-        iconWidth: 50,
+        iconDimension: 50,
         elementHeight: 60,
-        size: 'S',
+        paddingX: 30,
+        paddingY: 20,
+        extraTextTopPadding: 20,
+        iconTextSpacing: 10,
+        indentationStep: 25,
       };
   }
 };
