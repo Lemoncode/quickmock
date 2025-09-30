@@ -183,3 +183,31 @@ export const useFileTreeResizeOnContentChange = (
     updateShapeSizeAndPosition,
   ]);
 };
+
+export const useFileTreeResizeOnSizeChange = (
+  id: string,
+  coords: { x: number; y: number },
+  currentWidth: number,
+  size?: ElementSize
+) => {
+  const previousSize = useRef(size);
+  const { updateShapeSizeAndPosition } = useCanvasContext();
+
+  useEffect(() => {
+    // Only update if the size has changed
+    if (previousSize.current !== size) {
+      previousSize.current = size;
+
+      const newWidth = size === 'XS' ? 150 : 230;
+
+      if (currentWidth !== newWidth) {
+        updateShapeSizeAndPosition(
+          id,
+          coords,
+          { width: newWidth, height: currentWidth },
+          false
+        );
+      }
+    }
+  }, [size, currentWidth, id, coords.x, coords.y, updateShapeSizeAndPosition]);
+};

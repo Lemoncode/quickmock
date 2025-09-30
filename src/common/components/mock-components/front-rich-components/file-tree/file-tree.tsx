@@ -12,6 +12,7 @@ import {
   getFileTreeSizeValues,
   parseFileTreeText,
   useFileTreeResizeOnContentChange,
+  useFileTreeResizeOnSizeChange,
 } from './file-tree.business';
 
 const fileTreeShapeRestrictions: ShapeSizeRestrictions = {
@@ -82,6 +83,8 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       restrictedSize,
       fileTreeShapeRestrictions.minHeight
     );
+
+    useFileTreeResizeOnSizeChange(id, { x, y }, width, otherProps?.size);
 
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
