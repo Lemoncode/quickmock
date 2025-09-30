@@ -1,28 +1,28 @@
-<svg width="220" height="220" xmlns="http://www.w3.org/2000/svg">
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
   <!-- Main rectangle -->
-  <rect x="5" y="5" width="210" height="210" style="fill:none;stroke:black;stroke-width:2"/>
+  <rect x="30" y="15" width="140" height="170" style="fill:none;stroke:black;stroke-width:2"/>
 
   <!-- Folder 1 -->
-  <g transform="translate(40, 32) scale(0.13)">
+  <g transform="translate(50, 32) scale(0.12)">
     <path fill="black" d="M216 74h-85.51l-27.9-27.9a13.94 13.94 0 0 0-9.9-4.1H40a14 14 0 0 0-14 14v144.62A13.39 13.39 0 0 0 39.38 214h177.51A13.12 13.12 0 0 0 230 200.89V88a14 14 0 0 0-14-14M40 54h52.69a2 2 0 0 1 1.41.59L113.51 74H38V56a2 2 0 0 1 2-2m178 146.89a1.11 1.11 0 0 1-1.11 1.11H39.38a1.4 1.4 0 0 1-1.38-1.38V86h178a2 2 0 0 1 2 2Z"/>
   </g>
-  <text x="80" y="55" font-family="Arial" font-size="13" fill="black">Folder 1</text>
+  <text x="86" y="53" font-family="Arial" font-size="12" fill="black">Folder 1</text>
 
   <!-- Subfolder -->
-  <g transform="translate(46, 72) scale(0.13)">
+  <g transform="translate(65, 68) scale(0.12)">
     <path fill="black" d="M243.36 111.81A14 14 0 0 0 232 106h-18V88a14 14 0 0 0-14-14h-69.33a2 2 0 0 1-1.2-.4l-27.73-20.8a14.06 14.06 0 0 0-8.4-2.8H40a14 14 0 0 0-14 14v144a6 6 0 0 0 6 6h179.1a6 6 0 0 0 5.69-4.1l28.49-85.47a14 14 0 0 0-1.92-12.62M40 62h53.34a2 2 0 0 1 1.2.4l27.73 20.8a14.06 14.06 0 0 0 8.4 2.8H200a2 2 0 0 1 2 2v18h-55.57a13.94 13.94 0 0 0-7.77 2.35l-20 13.31a2 2 0 0 1-1.11.34H69.42a13.93 13.93 0 0 0-13 8.8L38 176.84V64a2 2 0 0 1 2-2m193.9 58.63L206.78 202H40.86l26.7-66.74a2 2 0 0 1 1.86-1.26h48.16a13.94 13.94 0 0 0 7.77-2.35l20-13.31a2 2 0 0 1 1.11-.34H232a2 2 0 0 1 1.9 2.63"/>
   </g>
-  <text x="86" y="95" font-family="Arial" font-size="13" fill="black">Subfolder</text>
+  <text x="101" y="89" font-family="Arial" font-size="12" fill="black">Subfolder</text>
 
   <!-- File -->
-  <g transform="translate(81, 112) scale(0.13)">
+  <g transform="translate(80, 104) scale(0.12)">
     <path fill="black" d="m212.24 83.76l-56-56A6 6 0 0 0 152 26H56a14 14 0 0 0-14 14v176a14 14 0 0 0 14 14h144a14 14 0 0 0 14-14V88a6 6 0 0 0-1.76-4.24M158 46.48L193.52 82H158ZM200 218H56a2 2 0 0 1-2-2V40a2 2 0 0 1 2-2h90v50a6 6 0 0 0 6 6h50v122a2 2 0 0 1-2 2"/>
   </g>
-  <text x="120" y="135" font-family="Arial" font-size="13" fill="black">File</text>
+  <text x="116" y="124" font-family="Arial" font-size="12" fill="black">File</text>
 
   <!-- Folder 2 -->
-  <g transform="translate(40, 152) scale(0.13)">
+  <g transform="translate(50, 140) scale(0.12)">
     <path fill="black" d="M216 74h-85.51l-27.9-27.9a13.94 13.94 0 0 0-9.9-4.1H40a14 14 0 0 0-14 14v144.62A13.39 13.39 0 0 0 39.38 214h177.51A13.12 13.12 0 0 0 230 200.89V88a14 14 0 0 0-14-14M40 54h52.69a2 2 0 0 1 1.41.59L113.51 74H38V56a2 2 0 0 1 2-2m178 146.89a1.11 1.11 0 0 1-1.11 1.11H39.38a1.4 1.4 0 0 1-1.38-1.38V86h178a2 2 0 0 1 2 2Z"/>
   </g>
-  <text x="80" y="175" font-family="Arial" font-size="13" fill="black">Folder 2</text>
+  <text x="86" y="161" font-family="Arial" font-size="12" fill="black">Folder 2</text>
 </svg>
