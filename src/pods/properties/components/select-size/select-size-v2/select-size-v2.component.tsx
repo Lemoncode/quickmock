@@ -3,6 +3,10 @@ import classes from './select-size-v2.component.module.css';
 import { sizeToStep, stepToSize } from './select-size.utils';
 import { getSizeConfigForShape } from '@/pods/canvas/model/shape-other-props.utils';
 
+// ⚠️ This is a temporary v2 component introduced to support shape-specific size customization.
+// It will replace current SelectSize once migration is complete.
+// For details, see issue: https://github.com/Lemoncode/quickmock/issues/791
+
 interface Props {
   label: string;
   shapeType?: ShapeType;
