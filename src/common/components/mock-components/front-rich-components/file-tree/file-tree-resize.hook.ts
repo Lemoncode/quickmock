@@ -15,22 +15,28 @@ const useFileTreeResizeOnContentChange = (
   const { updateShapeSizeAndPosition } = useCanvasContext();
 
   useEffect(() => {
-    // Only update if the text has changed AND the height is different
     const textChanged = previousText.current !== text;
 
     const finalHeight = Math.max(calculatedSize.height, minHeight);
     const finalSize = { ...calculatedSize, height: finalHeight };
 
-    const heightChanged = finalHeight !== currentSize.height;
+    const sizeChanged =
+      finalHeight !== currentSize.height ||
+      calculatedSize.width !== currentSize.width;
 
-    if (textChanged && heightChanged) {
+    if (textChanged && sizeChanged) {
       previousText.current = text;
+      updateShapeSizeAndPosition(id, coords, finalSize, false);
+    } else if (sizeChanged) {
+      // If only the size has changed, also resize
       updateShapeSizeAndPosition(id, coords, finalSize, false);
     }
   }, [
     text,
     calculatedSize.height,
+    calculatedSize.width,
     currentSize.height,
+    currentSize.width,
     id,
     coords.x,
     coords.y,
@@ -38,10 +44,16 @@ const useFileTreeResizeOnContentChange = (
   ]);
 };
 
+// Hook to force width change when ElementSize changes (XS ↔ S)
+// This ensures that when dropping a component and changing from S to XS (or vice versa),
+// the component doesn't maintain the previous width but forces the correct one:
+// - XS: 150px width
+// - S: 230px width
+
 const useFileTreeResizeOnSizeChange = (
   id: string,
   coords: { x: number; y: number },
-  currentWidth: number,
+  currentSize: Size,
   size?: ElementSize
 ) => {
   const previousSize = useRef(size);
@@ -54,16 +66,23 @@ const useFileTreeResizeOnSizeChange = (
 
       const newWidth = size === 'XS' ? 150 : 230;
 
-      if (currentWidth !== newWidth) {
+      if (currentSize.width !== newWidth) {
         updateShapeSizeAndPosition(
           id,
           coords,
-          { width: newWidth, height: currentWidth },
+          { width: newWidth, height: currentSize.height },
           false
         );
       }
     }
-  }, [size, currentWidth, id, coords.x, coords.y, updateShapeSizeAndPosition]);
+  }, [
+    size,
+    currentSize.width,
+    id,
+    coords.x,
+    coords.y,
+    updateShapeSizeAndPosition,
+  ]);
 };
 
 export const useFileTreeResize = (
@@ -84,5 +103,5 @@ export const useFileTreeResize = (
     minHeight
   );
 
-  useFileTreeResizeOnSizeChange(id, coords, currentSize.width, size);
+  useFileTreeResizeOnSizeChange(id, coords, currentSize, size);
 };
