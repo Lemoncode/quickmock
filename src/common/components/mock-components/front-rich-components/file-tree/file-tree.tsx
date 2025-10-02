@@ -16,7 +16,7 @@ import { useFileTreeResize } from './file-tree-resize.hook';
 
 const fileTreeShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 150,
-  minHeight: 120,
+  minHeight: 50,
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 230,

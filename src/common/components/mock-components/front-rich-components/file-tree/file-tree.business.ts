@@ -143,15 +143,11 @@ export const calculateFileTreeDynamicSize = (
   // Calculate minimum height required based on content
   const minContentHeight = treeItems.length * elementHeight + paddingY * 2;
 
-  // Create dynamic constraints with adaptive minimum height
+  // Create dynamic constraints for content-based sizing
   const dynamicRestrictions: ShapeSizeRestrictions = {
     ...baseRestrictions,
     minWidth: Math.max(baseRestrictions.minWidth, requiredWidth),
-    minHeight: minContentHeight,
-    defaultHeight: Math.max(
-      baseRestrictions.defaultHeight || 200,
-      minContentHeight
-    ),
+    defaultHeight: minContentHeight,
   };
 
   const finalHeight = minContentHeight;
