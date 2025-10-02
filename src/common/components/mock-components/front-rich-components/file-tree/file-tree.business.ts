@@ -69,6 +69,9 @@ interface FileTreeDynamicSizeParams {
   width: number;
   elementHeight: number;
   paddingY: number;
+  paddingX: number;
+  iconDimension: number;
+  indentationStep: number;
   baseRestrictions: ShapeSizeRestrictions;
 }
 
@@ -122,7 +125,20 @@ export const calculateFileTreeDynamicSize = (
   treeItems: FileTreeItem[],
   params: FileTreeDynamicSizeParams
 ): Size => {
-  const { width, elementHeight, paddingY, baseRestrictions } = params;
+  const {
+    width,
+    elementHeight,
+    paddingY,
+    paddingX,
+    iconDimension,
+    indentationStep,
+    baseRestrictions,
+  } = params;
+
+  const maxIconX = Math.max(
+    ...treeItems.map(item => paddingX + item.level * indentationStep)
+  );
+  const requiredWidth = maxIconX + iconDimension + paddingX;
 
   // Calculate minimum height required based on content
   const minContentHeight = treeItems.length * elementHeight + paddingY * 2;
@@ -130,6 +146,7 @@ export const calculateFileTreeDynamicSize = (
   // Create dynamic constraints with adaptive minimum height
   const dynamicRestrictions: ShapeSizeRestrictions = {
     ...baseRestrictions,
+    minWidth: Math.max(baseRestrictions.minWidth, requiredWidth),
     minHeight: minContentHeight,
     defaultHeight: Math.max(
       baseRestrictions.defaultHeight || 200,

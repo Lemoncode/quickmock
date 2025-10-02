@@ -71,6 +71,9 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       width,
       elementHeight,
       paddingY,
+      paddingX,
+      iconDimension,
+      indentationStep,
       baseRestrictions: fileTreeShapeRestrictions,
     });
 
