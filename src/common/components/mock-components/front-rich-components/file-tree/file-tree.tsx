@@ -11,9 +11,8 @@ import {
   FileTreeItem,
   getFileTreeSizeValues,
   parseFileTreeText,
-  useFileTreeResizeOnContentChange,
-  useFileTreeResizeOnSizeChange,
 } from './file-tree.business';
+import { useFileTreeResize } from './file-tree-resize.hook';
 
 const fileTreeShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 150,
@@ -75,16 +74,15 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       baseRestrictions: fileTreeShapeRestrictions,
     });
 
-    useFileTreeResizeOnContentChange(
+    useFileTreeResize(
       id,
       { x, y },
       text,
       { width, height },
       restrictedSize,
-      fileTreeShapeRestrictions.minHeight
+      fileTreeShapeRestrictions.minHeight,
+      otherProps?.size
     );
-
-    useFileTreeResizeOnSizeChange(id, { x, y }, width, otherProps?.size);
 
     const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
