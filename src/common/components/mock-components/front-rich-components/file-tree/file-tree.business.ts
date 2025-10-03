@@ -82,36 +82,37 @@ export const parseFileTreeText = (text: string): FileTreeItem[] => {
       // First detect indentation
       const indentMatch = line.match(/^(\s*)/);
       const level = indentMatch ? Math.floor(indentMatch[1].length / 3) : 0;
-      const trimmed = line.trim();
+      const trimmedStart = line.trimStart();
 
-      if (trimmed === '') return null;
+      if (trimmedStart === '') return null;
 
       // Detect symbol
-      if (trimmed.startsWith('+ ')) {
+      if (trimmedStart.startsWith('+ ')) {
         return {
           type: 'folder',
-          text: trimmed.substring(2).trim(),
+          text: trimmedStart.substring(2).trim(),
           level: level,
         };
       }
 
-      if (trimmed.startsWith('- ')) {
+      if (trimmedStart.startsWith('- ')) {
         return {
           type: 'subfolder',
-          text: trimmed.substring(2).trim(),
+          text: trimmedStart.substring(2).trim(),
           level: level,
         };
       }
 
-      if (trimmed.startsWith('* ')) {
+      if (trimmedStart.startsWith('* ')) {
         return {
           type: 'file',
-          text: trimmed.substring(2).trim(),
+          text: trimmedStart.substring(2).trim(),
           level: level,
         };
       }
 
       // No symbol: will be treated as a folder
+      const trimmed = line.trim();
       return {
         type: 'folder',
         text: trimmed,
