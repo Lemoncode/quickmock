@@ -1,5 +1,5 @@
 import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { Group, Image, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../../shape.model';
 import { useGroupShapeProps } from '../../mock-components.utils';
@@ -46,7 +46,9 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       ...shapeProps
     } = props;
 
-    const treeItems = parseFileTreeText(text);
+    const treeItems = useMemo(() => {
+      return parseFileTreeText(text);
+    }, [text]);
 
     const [icons, setIcons] = useState<Record<string, HTMLImageElement | null>>(
       {
@@ -65,7 +67,10 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       paddingY,
       iconTextSpacing,
       indentationStep,
-    } = getFileTreeSizeValues(otherProps?.size);
+    } = useMemo(
+      () => getFileTreeSizeValues(otherProps?.size),
+      [otherProps?.size]
+    );
 
     const restrictedSize = calculateFileTreeDynamicSize(treeItems, {
       width,
