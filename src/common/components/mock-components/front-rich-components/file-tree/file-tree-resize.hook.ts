@@ -1,6 +1,7 @@
 import { ElementSize, Size } from '@/core/model';
 import { useCanvasContext } from '@/core/providers';
 import { useEffect, useRef } from 'react';
+import { FileTreeItem, FileTreeSizeValues } from './file-tree.model';
 
 // Hook to resize edition text area based on content
 const useFileTreeResizeOnContentChange = (
@@ -54,6 +55,8 @@ const useFileTreeResizeOnSizeChange = (
   id: string,
   coords: { x: number; y: number },
   currentSize: Size,
+  treeItems: FileTreeItem[],
+  sizeValues: FileTreeSizeValues,
   size?: ElementSize
 ) => {
   const previousSize = useRef(size);
@@ -66,11 +69,20 @@ const useFileTreeResizeOnSizeChange = (
 
       const newWidth = size === 'XS' ? 150 : 230;
 
-      if (currentSize.width !== newWidth) {
+      const minContentHeight =
+        treeItems && sizeValues
+          ? treeItems.length * sizeValues.elementHeight +
+            sizeValues.paddingY * 2
+          : currentSize.height;
+
+      if (
+        currentSize.width !== newWidth ||
+        currentSize.height !== minContentHeight
+      ) {
         updateShapeSizeAndPosition(
           id,
           coords,
-          { width: newWidth, height: currentSize.height },
+          { width: newWidth, height: minContentHeight },
           false
         );
       }
@@ -78,10 +90,13 @@ const useFileTreeResizeOnSizeChange = (
   }, [
     size,
     currentSize.width,
+    currentSize.height,
     id,
     coords.x,
     coords.y,
     updateShapeSizeAndPosition,
+    treeItems,
+    sizeValues,
   ]);
 };
 
@@ -92,6 +107,8 @@ export const useFileTreeResize = (
   currentSize: Size,
   calculatedSize: Size,
   minHeight: number,
+  treeItems: FileTreeItem[],
+  sizeValues: FileTreeSizeValues,
   size?: ElementSize
 ) => {
   useFileTreeResizeOnContentChange(
@@ -103,5 +120,13 @@ export const useFileTreeResize = (
     minHeight
   );
 
-  useFileTreeResizeOnSizeChange(id, coords, currentSize, size);
+  useFileTreeResizeOnSizeChange(
+    id,
+    coords,
+    currentSize,
+
+    treeItems,
+    sizeValues,
+    size
+  );
 };

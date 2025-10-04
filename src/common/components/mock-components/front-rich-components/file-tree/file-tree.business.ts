@@ -1,17 +1,11 @@
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes';
 import { ElementSize, ShapeSizeRestrictions, Size } from '@/core/model';
 import { FONT_SIZE_VALUES } from '../../front-components/shape.const';
-
-interface FileTreeSizeValues {
-  fontSize: number;
-  iconDimension: number;
-  elementHeight: number;
-  paddingX: number;
-  paddingY: number;
-  extraTextTopPadding: number;
-  iconTextSpacing: number;
-  indentationStep: number;
-}
+import {
+  FileTreeDynamicSizeParams,
+  FileTreeItem,
+  FileTreeSizeValues,
+} from './file-tree.model';
 
 export const getFileTreeSizeValues = (
   size?: ElementSize
@@ -52,28 +46,6 @@ export const getFileTreeSizeValues = (
       };
   }
 };
-
-export const joinTextContent = (text: string): string[] => {
-  return text.split(', ');
-};
-
-// Symbol -> + Folder - Subfolder * File
-// Level -> Level 0: no indentation in Folder / Level 1: 1 indentation (3 spaces) in Subfolder / Level 2: 2 indentations (6 spaces) in File
-export interface FileTreeItem {
-  type: 'folder' | 'subfolder' | 'file';
-  text: string;
-  level: number;
-}
-
-interface FileTreeDynamicSizeParams {
-  width: number;
-  elementHeight: number;
-  paddingY: number;
-  paddingX: number;
-  iconDimension: number;
-  indentationStep: number;
-  baseRestrictions: ShapeSizeRestrictions;
-}
 
 export const parseFileTreeText = (text: string): FileTreeItem[] => {
   return text
@@ -128,6 +100,7 @@ export const calculateFileTreeDynamicSize = (
 ): Size => {
   const {
     width,
+    height,
     elementHeight,
     paddingY,
     paddingX,
@@ -151,7 +124,7 @@ export const calculateFileTreeDynamicSize = (
     defaultHeight: minContentHeight,
   };
 
-  const finalHeight = minContentHeight;
+  const finalHeight = Math.max(height, minContentHeight);
 
   return fitSizeToShapeSizeRestrictions(
     dynamicRestrictions,

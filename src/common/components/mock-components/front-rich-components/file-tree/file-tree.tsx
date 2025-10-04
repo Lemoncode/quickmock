@@ -8,11 +8,11 @@ import { useShapeProps } from '@/common/components/shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import {
   calculateFileTreeDynamicSize,
-  FileTreeItem,
   getFileTreeSizeValues,
   parseFileTreeText,
 } from './file-tree.business';
 import { useFileTreeResize } from './file-tree-resize.hook';
+import { FileTreeItem } from './file-tree.model';
 
 const fileTreeShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 150,
@@ -74,6 +74,7 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
 
     const restrictedSize = calculateFileTreeDynamicSize(treeItems, {
       width,
+      height,
       elementHeight,
       paddingY,
       paddingX,
@@ -89,6 +90,17 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       { width, height },
       restrictedSize,
       fileTreeShapeRestrictions.minHeight,
+      treeItems,
+      {
+        fontSize,
+        iconDimension,
+        elementHeight,
+        extraTextTopPadding,
+        paddingX,
+        paddingY,
+        iconTextSpacing,
+        indentationStep,
+      },
       otherProps?.size
     );
 
