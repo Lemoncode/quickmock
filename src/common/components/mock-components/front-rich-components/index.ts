@@ -19,3 +19,4 @@ export * from './videoconference';
 export * from './togglelightdark-shape';
 export * from './gauge/gauge';
 export * from './fab-button/fab-button';
+export * from './file-tree/file-tree';

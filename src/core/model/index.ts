@@ -85,7 +85,8 @@ export type ShapeType =
   | 'circleLow'
   | 'textScribbled'
   | 'paragraphScribbled'
-  | 'fabButton';
+  | 'fabButton'
+  | 'fileTree';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -160,6 +161,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   textScribbled: 'Text Scribbled',
   paragraphScribbled: 'Paragraph Scribbled',
   fabButton: 'Fab Button',
+  fileTree: 'File Tree',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';
@@ -189,6 +191,12 @@ export interface IconInfo {
 
 export type IconSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
 
+export type ElementSize = 'XS' | 'S' | 'M' | 'L' | 'XL';
+
+export interface SizeConfig {
+  availableSizes: ElementSize[];
+}
+
 export interface OtherProps {
   stroke?: string;
   strokeStyle?: number[];
@@ -202,6 +210,7 @@ export interface OtherProps {
   checked?: boolean;
   icon?: IconInfo;
   iconSize?: IconSize;
+  size?: ElementSize;
   imageSrc?: string;
   imageBlackAndWhite?: boolean;
   progress?: string;
