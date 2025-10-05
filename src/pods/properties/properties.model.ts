@@ -13,6 +13,7 @@ export const multiSelectEnabledProperties: (keyof OtherProps)[] = [
   'checked',
   'icon',
   'iconSize',
+  'size',
   'imageBlackAndWhite',
   'progress',
   'borderRadius',

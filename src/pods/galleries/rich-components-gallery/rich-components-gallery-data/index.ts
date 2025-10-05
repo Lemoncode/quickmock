@@ -40,4 +40,8 @@ export const mockRichComponentsCollection: ItemInfo[] = [
     thumbnailSrc: '/rich-components/fab-button.svg',
     type: 'fabButton',
   },
+  {
+    thumbnailSrc: '/rich-components/file-tree.svg',
+    type: 'fileTree',
+  },
 ];

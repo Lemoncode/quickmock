@@ -49,6 +49,7 @@ import {
   renderAppBar,
   renderLoadingIndicator,
   renderFabButton,
+  renderFileTree,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -212,6 +213,8 @@ export const renderShapeComponent = (
       return renderVideoconference(shape, shapeRenderedProps);
     case 'fabButton':
       return renderFabButton(shape, shapeRenderedProps);
+    case 'fileTree':
+      return renderFileTree(shape, shapeRenderedProps);
     case 'gauge':
       return renderGauge(shape, shapeRenderedProps);
     case 'imagePlaceholder':

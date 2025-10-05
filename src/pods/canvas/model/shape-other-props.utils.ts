@@ -5,7 +5,7 @@ import {
   LINK_SHAPE,
   LOW_WIREFRAME_SHAPE,
 } from '@/common/components/mock-components/front-components/shape.const';
-import { ShapeType, OtherProps } from '@/core/model';
+import { ShapeType, OtherProps, SizeConfig } from '@/core/model';
 
 export const generateDefaultOtherProps = (
   shapeType: ShapeType
@@ -74,6 +74,15 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#d3d3d3',
         stroke: '#808080',
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+      };
+    case 'fileTree':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: BASIC_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
+        borderRadius: `${BASIC_SHAPE.DEFAULT_CORNER_RADIUS}`,
+        size: 'S',
       };
     case 'fabButton':
       return {
@@ -277,6 +286,23 @@ export const generateDefaultOtherProps = (
         backgroundColor: '#D3D3D3',
         textColor: '#000000',
         strokeStyle: [],
+      };
+    default:
+      return undefined;
+  }
+};
+
+export const getSizeConfigForShape = (
+  shapeType: ShapeType
+): SizeConfig | undefined => {
+  switch (shapeType) {
+    case 'icon':
+      return {
+        availableSizes: ['XS', 'S', 'M', 'L', 'XL'],
+      };
+    case 'fileTree':
+      return {
+        availableSizes: ['XS', 'S'],
       };
     default:
       return undefined;
