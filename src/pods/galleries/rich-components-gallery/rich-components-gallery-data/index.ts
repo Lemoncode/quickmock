@@ -44,4 +44,8 @@ export const mockRichComponentsCollection: ItemInfo[] = [
     thumbnailSrc: '/rich-components/file-tree.svg',
     type: 'fileTree',
   },
+  {
+    thumbnailSrc: '/rich-components/input-stepper.svg',
+    type: 'inputStepper',
+  },
 ];

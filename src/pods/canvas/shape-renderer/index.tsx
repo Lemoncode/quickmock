@@ -50,6 +50,7 @@ import {
   renderLoadingIndicator,
   renderFabButton,
   renderFileTree,
+  renderInputStepper,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -235,6 +236,8 @@ export const renderShapeComponent = (
       return renderTextScribbled(shape, shapeRenderedProps);
     case 'paragraphScribbled':
       return renderParagraphScribbled(shape, shapeRenderedProps);
+    case 'inputStepper':
+      return renderInputStepper(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }

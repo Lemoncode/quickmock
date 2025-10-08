@@ -66,6 +66,7 @@ import {
   getGaugeShapeSizeRestrictions,
   getFabButtonShapeSizeRestrictions,
   getFileTreeShapeSizeRestrictions,
+  getInputStepperShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-rich-components';
 import {
@@ -175,6 +176,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   paragraphScribbled: getParagraphScribbledShapeRestrictions,
   fabButton: getFabButtonShapeSizeRestrictions,
   fileTree: getFileTreeShapeSizeRestrictions,
+  inputStepper: getInputStepperShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;
