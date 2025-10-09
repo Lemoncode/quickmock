@@ -22,8 +22,17 @@ export const getInputStepperShapeSizeRestrictions = (): ShapeSizeRestrictions =>
 const shapeType: ShapeType = 'inputStepper';
 
 export const InputStepperShape = forwardRef<any, ShapeProps>((props, ref) => {
-  const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
-    props;
+  const {
+    x,
+    y,
+    width,
+    height,
+    id,
+    text,
+    onSelected,
+    otherProps,
+    ...shapeProps
+  } = props;
 
   const restrictedSize = fitSizeToShapeSizeRestrictions(
     InputStepperShapeSizeRestrictions,
@@ -33,7 +42,7 @@ export const InputStepperShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
 
-  const handleButtonWidth = (restrictedWidth: number): number => {
+  const getButtonWidth = (restrictedWidth: number): number => {
     const buttonWidth = restrictedWidth * 0.3;
     const minButtonWidth = 30;
     const maxButtonWidth = 70;
@@ -43,7 +52,7 @@ export const InputStepperShape = forwardRef<any, ShapeProps>((props, ref) => {
     return buttonWidth;
   };
 
-  const buttonWidth = handleButtonWidth(restrictedWidth);
+  const buttonWidth = getButtonWidth(restrictedWidth);
   const buttonHeight = restrictedHeight / 2;
 
   const commonGroupProps = useGroupShapeProps(
@@ -60,7 +69,6 @@ export const InputStepperShape = forwardRef<any, ShapeProps>((props, ref) => {
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
-      {/* Caja del input */}
       <Rect
         x={0}
         y={0}
@@ -77,7 +85,7 @@ export const InputStepperShape = forwardRef<any, ShapeProps>((props, ref) => {
         width={restrictedWidth - buttonWidth - 8}
         x={0} // Alinear a la derecha dependiendo de la cantidad de dígitos
         y={restrictedHeight / 2 - 6} // Centrar verticalmente
-        text={'0'}
+        text={text}
         fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE + 2}
         fill={textColor}

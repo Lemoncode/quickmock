@@ -292,8 +292,6 @@ export const generateDefaultOtherProps = (
         stroke: INPUT_SHAPE.DEFAULT_STROKE_COLOR,
         backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
         textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
-        borderRadius: `${INPUT_SHAPE.DEFAULT_CORNER_RADIUS}`,
-        disabled: INPUT_SHAPE.DEFAULT_DISABLED,
         strokeStyle: [],
       };
     default:

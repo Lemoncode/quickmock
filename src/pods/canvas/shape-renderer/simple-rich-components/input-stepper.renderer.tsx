@@ -13,18 +13,22 @@ export const renderInputStepper = (
     <InputStepperShape
       id={shape.id}
       key={shape.id}
-      ref={shapeRefs.current[shape.id]}
       x={shape.x}
       y={shape.y}
-      name="shape"
       width={shape.width}
       height={shape.height}
+      name="shape"
       draggable
       typeOfTransformer={shape.typeOfTransformer}
       onSelected={handleSelected}
+      ref={shapeRefs.current[shape.id]}
       onDragEnd={handleDragEnd(shape.id)}
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
+      editType={shape.editType}
+      isEditable={true}
+      text={shape.text}
+      otherProps={shape.otherProps}
     />
   );
 };
