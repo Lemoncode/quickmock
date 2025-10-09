@@ -89,6 +89,7 @@ export const InputStepperShape = forwardRef<any, ShapeProps>((props, ref) => {
         fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
         fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE + 2}
         fill={textColor}
+        ellipsis={true}
         align="right"
       />
 

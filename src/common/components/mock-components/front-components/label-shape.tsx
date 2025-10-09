@@ -62,7 +62,6 @@ export const LabelShape = forwardRef<any, ShapeProps>((props, ref) => {
         fill={textColor}
         align="center"
         verticalAlign="middle"
-        ellipsis={true}
         wrap="none"
       />
     </Group>
