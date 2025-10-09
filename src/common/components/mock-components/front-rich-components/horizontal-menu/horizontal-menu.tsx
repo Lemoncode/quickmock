@@ -54,10 +54,8 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
   const totalMargins = restrictedWidth - itemSpacing * (numberOfItems + 1);
   const itemWidth = totalMargins / numberOfItems;
 
-  const { stroke, strokeStyle, fill, textColor, borderRadius } = useShapeProps(
-    otherProps,
-    BASIC_SHAPE
-  );
+  const { stroke, strokeStyle, fill, textColor, borderRadius, fontSize } =
+    useShapeProps(otherProps, BASIC_SHAPE);
 
   const itemVerticalPadding = 4;
 
@@ -98,7 +96,7 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
             y={restrictedHeight / 2 - 8}
             text={header}
             fontFamily="Arial"
-            fontSize={16}
+            fontSize={fontSize}
             fill={textColor}
             width={itemWidth}
             align="center"
