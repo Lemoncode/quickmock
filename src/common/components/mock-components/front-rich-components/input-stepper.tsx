@@ -4,14 +4,16 @@ import { ShapeSizeRestrictions, ShapeType } from '@/core/model';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeProps } from '../shape.model';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { useShapeProps } from '@/common/components/shapes/use-shape-props.hook';
+import { INPUT_SHAPE } from '../front-components/shape.const';
 
 const InputStepperShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 100,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 250,
-  defaultHeight: 150,
+  minWidth: 60,
+  minHeight: 35,
+  maxWidth: 500,
+  maxHeight: 35,
+  defaultWidth: 100,
+  defaultHeight: 35,
 };
 
 export const getInputStepperShapeSizeRestrictions = (): ShapeSizeRestrictions =>
@@ -20,15 +22,29 @@ export const getInputStepperShapeSizeRestrictions = (): ShapeSizeRestrictions =>
 const shapeType: ShapeType = 'inputStepper';
 
 export const InputStepperShape = forwardRef<any, ShapeProps>((props, ref) => {
-  const { x, y, width, height, id, onSelected, ...shapeProps } = props;
+  const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
+    props;
+
   const restrictedSize = fitSizeToShapeSizeRestrictions(
     InputStepperShapeSizeRestrictions,
     width,
     height
   );
 
-  const inputWidth = width - 30; // Reservar espacio para el stepper
-  const buttonHeight = height / 2;
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
+
+  const handleButtonWidth = (restrictedWidth: number): number => {
+    const buttonWidth = restrictedWidth * 0.3;
+    const minButtonWidth = 30;
+    const maxButtonWidth = 70;
+
+    if (buttonWidth < minButtonWidth) return minButtonWidth;
+    if (buttonWidth > maxButtonWidth) return maxButtonWidth;
+    return buttonWidth;
+  };
+
+  const buttonWidth = handleButtonWidth(restrictedWidth);
+  const buttonHeight = restrictedHeight / 2;
 
   const commonGroupProps = useGroupShapeProps(
     props,
@@ -37,70 +53,80 @@ export const InputStepperShape = forwardRef<any, ShapeProps>((props, ref) => {
     ref
   );
 
+  const { stroke, strokeStyle, fill, textColor } = useShapeProps(
+    otherProps,
+    INPUT_SHAPE
+  );
+
   return (
     <Group {...commonGroupProps} {...shapeProps}>
       {/* Caja del input */}
       <Rect
         x={0}
         y={0}
-        width={inputWidth / 2} // Reducir ancho a la mitad
-        height={height}
-        fill="white"
-        stroke="black"
+        width={restrictedWidth - buttonWidth}
+        height={restrictedHeight}
+        fill={fill}
+        stroke={stroke}
         strokeWidth={2}
-        cornerRadius={0} // Sin bordes redondeados
+        dash={strokeStyle}
       />
 
       {/* Texto del input */}
       <Text
-        x={inputWidth / 2 - 10} // Alinear a la derecha
-        y={height / 2 - 8} // Centrar verticalmente
+        width={restrictedWidth - buttonWidth - 8}
+        x={0} // Alinear a la derecha dependiendo de la cantidad de dígitos
+        y={restrictedHeight / 2 - 6} // Centrar verticalmente
         text={'0'}
-        fontFamily="Arial"
-        fontSize={16}
-        fill="black"
+        fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
+        fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE + 2}
+        fill={textColor}
         align="right"
       />
 
       {/* Botón de incremento (flecha arriba) */}
-      <Group>
+      <Group x={restrictedWidth - buttonWidth} y={buttonHeight}>
         <Rect
           x={0}
-          y={0}
-          width={30}
+          y={-17}
+          width={buttonWidth}
           height={buttonHeight}
-          fill="lightgray"
-          stroke="black"
+          fill={fill}
+          stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
         />
         <Text
-          x={10}
-          y={buttonHeight / 2 - 8}
+          x={buttonWidth / 2 - 7}
+          y={buttonHeight / 2 - 25}
           text="▲"
-          fontFamily="Arial"
-          fontSize={14}
-          fill="black"
+          fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
+          fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
+          fill={textColor}
+          align="center"
         />
       </Group>
 
       {/* Botón de decremento (flecha abajo) */}
-      <Group>
+      <Group x={restrictedWidth - buttonWidth} y={buttonHeight}>
         <Rect
           x={0}
           y={0}
-          width={30}
+          width={buttonWidth}
           height={buttonHeight}
-          fill="lightgray"
-          stroke="black"
+          fill={fill}
+          stroke={stroke}
           strokeWidth={2}
+          dash={strokeStyle}
         />
         <Text
-          x={10}
-          y={buttonHeight / 2 - 8}
+          x={buttonWidth / 2 - 6}
+          y={buttonHeight / 2 - 6}
           text="▼"
-          fontFamily="Arial"
-          fontSize={14}
-          fill="black"
+          fontFamily={INPUT_SHAPE.DEFAULT_FONT_FAMILY}
+          fontSize={INPUT_SHAPE.DEFAULT_FONT_SIZE}
+          fill={textColor}
+          align="center"
         />
       </Group>
     </Group>
