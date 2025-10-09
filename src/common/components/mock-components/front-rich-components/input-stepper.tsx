@@ -100,7 +100,7 @@ export const InputStepperShape = forwardRef<any, ShapeProps>((props, ref) => {
           y={-17}
           width={buttonWidth}
           height={buttonHeight}
-          fill={fill}
+          fill="lightgrey"
           stroke={stroke}
           strokeWidth={2}
           dash={strokeStyle}
@@ -123,7 +123,7 @@ export const InputStepperShape = forwardRef<any, ShapeProps>((props, ref) => {
           y={0}
           width={buttonWidth}
           height={buttonHeight}
-          fill={fill}
+          fill="lightgrey"
           stroke={stroke}
           strokeWidth={2}
           dash={strokeStyle}

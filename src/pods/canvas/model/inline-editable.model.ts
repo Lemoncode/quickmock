@@ -40,6 +40,7 @@ const inlineEditableShapes = new Set<ShapeType>([
   'gauge',
   'loading-indicator',
   'fileTree',
+  'inputStepper',
 ]);
 
 // Check if a shape type allows inline editing
