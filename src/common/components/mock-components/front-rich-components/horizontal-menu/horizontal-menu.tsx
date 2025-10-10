@@ -42,7 +42,7 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
   const csvData = splitCSVContentIntoRows(text);
   const headers = extractCSVHeaders(csvData[0]);
   const itemLabels = headers.map(header => header.text);
-
+  const verticalPadding = 8;
   const numberOfItems = itemLabels.length;
   const itemSpacing = 10;
 
@@ -96,12 +96,12 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
             x={itemSpacing * (index + 1) + itemWidth * index}
             y={itemVerticalPadding}
             width={itemWidth}
-            height={restrictedHeight - 2 * itemVerticalPadding}
+            height={restrictedHeight - verticalPadding}
             fill={index === activeSelected ? 'lightblue' : fill}
           />
           <Text
             x={itemSpacing * (index + 1) + itemWidth * index}
-            y={restrictedHeight / 2 - 8}
+            y={restrictedHeight / 2 - fontSize / 2}
             text={header}
             fontFamily="Arial"
             fontSize={fontSize}
