@@ -10,6 +10,7 @@ import {
   splitCSVContentIntoRows,
 } from '@/common/utils/active-element-selector.utils';
 import { useGroupShapeProps } from '../../mock-components.utils';
+import { useResizeOnFontSizeChange } from '../../front-text-components/front-text-hooks/resize-fontsize-change.hook';
 
 const horizontalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
@@ -54,8 +55,15 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
   const totalMargins = restrictedWidth - itemSpacing * (numberOfItems + 1);
   const itemWidth = totalMargins / numberOfItems;
 
-  const { stroke, strokeStyle, fill, textColor, borderRadius, fontSize } =
-    useShapeProps(otherProps, BASIC_SHAPE);
+  const {
+    stroke,
+    strokeStyle,
+    fill,
+    textColor,
+    borderRadius,
+    fontSize,
+    fontVariant,
+  } = useShapeProps(otherProps, BASIC_SHAPE);
 
   const itemVerticalPadding = 4;
 
@@ -67,7 +75,7 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
-
+  useResizeOnFontSizeChange(id, { x, y }, text, fontSize, fontVariant);
   return (
     <Group {...commonGroupProps} {...shapeProps}>
       <Rect
@@ -102,6 +110,7 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
             align="center"
             wrap="none"
             ellipsis={true}
+            fontVariant={fontVariant}
           />
         </Group>
       ))}
