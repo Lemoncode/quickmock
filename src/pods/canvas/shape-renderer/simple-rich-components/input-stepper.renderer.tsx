@@ -24,6 +24,7 @@ export const renderInputStepper = (
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
       initialValue={0}
+      typeOfTransformer={shape.typeOfTransformer}
     />
   );
 };

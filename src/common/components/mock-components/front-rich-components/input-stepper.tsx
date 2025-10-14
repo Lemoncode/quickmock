@@ -1,16 +1,10 @@
-import { useState, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
-import { ShapeConfig } from 'konva/lib/Shape';
 import { ShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-
-interface InputWithStepperProps extends ShapeConfig {
-  id: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  initialValue?: number;
-}
+import { useGroupShapeProps } from '../mock-components.utils';
+import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
+import { ShapeType } from '@/core/model';
+import { ShapeProps } from '../shape.model';
 
 // Size restrictions (igual patrón que file-tree)
 export const inputStepperShapeRestrictions: ShapeSizeRestrictions = {
@@ -25,90 +19,96 @@ export const inputStepperShapeRestrictions: ShapeSizeRestrictions = {
 export const getInputStepperShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   inputStepperShapeRestrictions;
 
-export const InputWithStepper = forwardRef<any, InputWithStepperProps>(
-  ({ x, y, width, height, initialValue = 0, id, ...shapeProps }, ref) => {
-    const [value, setValue] = useState(initialValue);
+export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
+  const { x, y, width, height, text, onSelect, otherProps, id, ...shapeProps } =
+    props;
 
-    const handleIncrement = () => {
-      setValue(value + 1);
-    };
+  const inputWidth = width - 30; // Reservar espacio para el stepper
+  const buttonHeight = height / 2;
 
-    const handleDecrement = () => {
-      setValue(value - 1);
-    };
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    inputStepperShapeRestrictions,
+    width,
+    height
+  );
 
-    const inputWidth = width - 30; // Reservar espacio para el stepper
-    const buttonHeight = height / 2;
+  const shapeType: ShapeType = 'input-stepper';
 
-    return (
-      <Group x={x} y={y} ref={ref} {...shapeProps}>
-        {/* Caja del input */}
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
+  return (
+    <Group {...commonGroupProps} {...shapeProps}>
+      {/* Caja del input */}
+      <Rect
+        x={0}
+        y={0}
+        width={inputWidth / 2} // Reducir ancho a la mitad
+        height={height}
+        fill="white"
+        stroke="black"
+        strokeWidth={2}
+        cornerRadius={0} // Sin bordes redondeados
+      />
+
+      {/* Texto del input */}
+      <Text
+        x={inputWidth / 2 - 10} // Alinear a la derecha
+        y={height / 2 - 8} // Centrar verticalmente
+        text={'0'}
+        fontFamily="Arial"
+        fontSize={16}
+        fill="black"
+        align="right"
+      />
+
+      {/* Botón de incremento (flecha arriba) */}
+      <Group x={inputWidth / 2} y={0}>
         <Rect
           x={0}
           y={0}
-          width={inputWidth / 2} // Reducir ancho a la mitad
-          height={height}
-          fill="white"
+          width={30}
+          height={buttonHeight}
+          fill="lightgray"
           stroke="black"
           strokeWidth={2}
-          cornerRadius={0} // Sin bordes redondeados
         />
-
-        {/* Texto del input */}
         <Text
-          x={inputWidth / 2 - 10} // Alinear a la derecha
-          y={height / 2 - 8} // Centrar verticalmente
-          text={value.toString()}
+          x={10}
+          y={buttonHeight / 2 - 8}
+          text="▲"
           fontFamily="Arial"
-          fontSize={16}
+          fontSize={14}
           fill="black"
-          align="right"
         />
-
-        {/* Botón de incremento (flecha arriba) */}
-        <Group x={inputWidth / 2} y={0} onClick={handleIncrement}>
-          <Rect
-            x={0}
-            y={0}
-            width={30}
-            height={buttonHeight}
-            fill="lightgray"
-            stroke="black"
-            strokeWidth={2}
-          />
-          <Text
-            x={10}
-            y={buttonHeight / 2 - 8}
-            text="▲"
-            fontFamily="Arial"
-            fontSize={14}
-            fill="black"
-          />
-        </Group>
-
-        {/* Botón de decremento (flecha abajo) */}
-        <Group x={inputWidth / 2} y={buttonHeight} onClick={handleDecrement}>
-          <Rect
-            x={0}
-            y={0}
-            width={30}
-            height={buttonHeight}
-            fill="lightgray"
-            stroke="black"
-            strokeWidth={2}
-          />
-          <Text
-            x={10}
-            y={buttonHeight / 2 - 8}
-            text="▼"
-            fontFamily="Arial"
-            fontSize={14}
-            fill="black"
-          />
-        </Group>
       </Group>
-    );
-  }
-);
+
+      {/* Botón de decremento (flecha abajo) */}
+      <Group x={inputWidth / 2} y={buttonHeight}>
+        <Rect
+          x={0}
+          y={0}
+          width={30}
+          height={buttonHeight}
+          fill="lightgray"
+          stroke="black"
+          strokeWidth={2}
+        />
+        <Text
+          x={10}
+          y={buttonHeight / 2 - 8}
+          text="▼"
+          fontFamily="Arial"
+          fontSize={14}
+          fill="black"
+        />
+      </Group>
+    </Group>
+  );
+});
 
 export default InputWithStepper;
