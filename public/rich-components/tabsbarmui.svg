@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="64" viewBox="0 0 480 64" role="img" aria-label="Material UI style tabs">
+  <!-- background -->
+  <rect x="0" y="0" width="480" height="64" fill="transparent"/>
+
+  <!-- bottom divider line (gris) empieza después del indicador azul -->
+  <line x1="78" y1="39" x2="480" y2="39" stroke="#E0E0E0" stroke-width="1"/>
+
+  <!-- Tabs -->
+  <!-- Tab 1 (active) -->
+  <g transform="translate(24,12)" cursor="pointer" aria-hidden="true">
+    <text x="0" y="18" font-family="Roboto, Arial, sans-serif" font-size="14" font-weight="500"
+          fill="#1976D2">Item One</text>
+    <!-- active indicator azul -->
+    <rect x="0" y="26" width="78" height="3" rx="2" ry="2" fill="#1976D2"/>
+  </g>
+
+  <!-- Tab 2 -->
+  <g transform="translate(130,12)" cursor="pointer" aria-hidden="true">
+    <text x="0" y="18" font-family="Roboto, Arial, sans-serif" font-size="14" font-weight="500"
+          fill="rgba(0,0,0,0.6)">Item Two</text>
+  </g>
+
+  <!-- Tab 3 -->
+  <g transform="translate(260,12)" cursor="pointer" aria-hidden="true">
+    <text x="0" y="18" font-family="Roboto, Arial, sans-serif" font-size="14" font-weight="500"
+          fill="rgba(0,0,0,0.6)">Item Three</text>
+  </g>
+</svg>

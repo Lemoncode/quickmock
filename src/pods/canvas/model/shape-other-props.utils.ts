@@ -280,6 +280,10 @@ export const generateDefaultOtherProps = (
       return {
         activeElement: 0,
       };
+    case 'tabsBarMUI':
+      return {
+        activeElement: 0,
+      };
     case 'chip':
       return {
         stroke: '#939393',

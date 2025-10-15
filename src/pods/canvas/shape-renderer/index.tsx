@@ -50,6 +50,7 @@ import {
   renderLoadingIndicator,
   renderFabButton,
   renderFileTree,
+  renderTabsBarMUI,
 } from './simple-rich-components';
 import {
   renderDiamond,
@@ -197,6 +198,8 @@ export const renderShapeComponent = (
       return renderModalCover(shape, shapeRenderedProps);
     case 'tabsBar':
       return renderTabsBar(shape, shapeRenderedProps);
+    case 'tabsBarMUI':
+      return renderTabsBarMUI(shape, shapeRenderedProps);
     case 'appBar':
       return renderAppBar(shape, shapeRenderedProps);
     case 'buttonBar':

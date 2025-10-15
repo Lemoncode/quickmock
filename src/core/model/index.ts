@@ -86,7 +86,8 @@ export type ShapeType =
   | 'textScribbled'
   | 'paragraphScribbled'
   | 'fabButton'
-  | 'fileTree';
+  | 'fileTree'
+  | 'tabsBarMUI';
 
 export const ShapeDisplayName: Record<ShapeType, string> = {
   multiple: 'multiple',
@@ -162,6 +163,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   paragraphScribbled: 'Paragraph Scribbled',
   fabButton: 'Fab Button',
   fileTree: 'File Tree',
+  tabsBarMUI: 'Tabs Bar MUI',
 };
 
 export type EditType = 'input' | 'textarea' | 'imageupload';

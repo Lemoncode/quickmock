@@ -22,3 +22,4 @@ export * from './loading-indicator.renderer';
 export * from './videoconference.renderer';
 export * from './fab-button.renderer';
 export * from './file-tree.renderer';
+export * from './tabsbarmui.renderer';
