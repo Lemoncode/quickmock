@@ -5,6 +5,8 @@ import { useGroupShapeProps } from '../mock-components.utils';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeType } from '@/core/model';
 import { ShapeProps } from '../shape.model';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { INPUT_SHAPE } from '../front-components/shape.const';
 
 // Size restrictions (igual patrón que file-tree)
 export const inputStepperShapeRestrictions: ShapeSizeRestrictions = {
@@ -40,7 +42,10 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
-
+  const { stroke, textColor, strokeStyle } = useShapeProps(
+    otherProps,
+    INPUT_SHAPE
+  );
   return (
     <Group {...commonGroupProps} {...shapeProps}>
       {/* Caja del input */}
@@ -49,8 +54,9 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
         y={0}
         width={inputWidth / 2} // Reducir ancho a la mitad
         height={height}
+        strokeStyle={strokeStyle}
         fill="white"
-        stroke="black"
+        stroke={stroke}
         strokeWidth={2}
         cornerRadius={0} // Sin bordes redondeados
       />
@@ -62,6 +68,7 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
         text={'0'}
         fontFamily="Arial"
         fontSize={16}
+        textColor={textColor}
         fill="black"
         align="right"
       />
@@ -95,7 +102,7 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
           width={30}
           height={buttonHeight}
           fill="lightgray"
-          stroke="black"
+          stroke={stroke}
           strokeWidth={2}
         />
         <Text
