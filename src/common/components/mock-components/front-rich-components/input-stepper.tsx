@@ -42,10 +42,11 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
-  const { stroke, textColor, strokeStyle } = useShapeProps(
+  const { stroke, textColor, strokeStyle, fill, strokeWidth } = useShapeProps(
     otherProps,
     INPUT_SHAPE
   );
+
   return (
     <Group {...commonGroupProps} {...shapeProps}>
       {/* Caja del input */}
@@ -54,10 +55,10 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
         y={0}
         width={inputWidth / 2} // Reducir ancho a la mitad
         height={height}
-        strokeStyle={strokeStyle}
-        fill="white"
+        fill={fill}
         stroke={stroke}
-        strokeWidth={2}
+        strokeWidth={strokeWidth}
+        dash={strokeStyle}
         cornerRadius={0} // Sin bordes redondeados
       />
 
@@ -68,8 +69,7 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
         text={'0'}
         fontFamily="Arial"
         fontSize={16}
-        textColor={textColor}
-        fill="black"
+        fill={textColor}
         align="right"
       />
 
@@ -80,9 +80,10 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
           y={0}
           width={30}
           height={buttonHeight}
-          fill="lightgray"
-          stroke="black"
-          strokeWidth={2}
+          fill={fill}
+          stroke={stroke}
+          strokeWidth={strokeWidth}
+          dash={strokeStyle}
         />
         <Text
           x={10}
@@ -90,7 +91,7 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
           text="▲"
           fontFamily="Arial"
           fontSize={14}
-          fill="black"
+          fill={textColor}
         />
       </Group>
 
@@ -101,9 +102,10 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
           y={0}
           width={30}
           height={buttonHeight}
-          fill="lightgray"
+          fill={fill}
           stroke={stroke}
-          strokeWidth={2}
+          strokeWidth={strokeWidth}
+          dash={strokeStyle}
         />
         <Text
           x={10}
@@ -111,7 +113,7 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
           text="▼"
           fontFamily="Arial"
           fontSize={14}
-          fill="black"
+          fill={textColor}
         />
       </Group>
     </Group>
