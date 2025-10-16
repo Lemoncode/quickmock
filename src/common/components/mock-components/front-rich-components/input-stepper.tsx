@@ -7,7 +7,6 @@ import { ShapeType } from '@/core/model';
 import { ShapeProps } from '../shape.model';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { INPUT_SHAPE } from '../front-components/shape.const';
-import { i } from 'vitest/dist/reporters-yx5ZTtEV.js';
 
 // Size restrictions (igual patrón que file-tree)
 export const inputStepperShapeRestrictions: ShapeSizeRestrictions = {
@@ -48,13 +47,15 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
     INPUT_SHAPE
   );
 
+  const { width: restrictedWidth } = restrictedSize;
+
   return (
     <Group {...commonGroupProps} {...shapeProps}>
       {/* Caja del input */}
       <Rect
         x={0}
         y={0}
-        width={inputWidth / 2} // Reducir ancho a la mitad
+        width={restrictedWidth}
         height={height}
         fill={fill}
         stroke={stroke}
@@ -75,13 +76,13 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
       />
 
       {/* Botón de incremento (flecha arriba) */}
-      <Group x={inputWidth / 2} y={0}>
+      <Group x={inputWidth} y={0}>
         <Rect
           x={0}
           y={0}
           width={30}
           height={buttonHeight}
-          fill={fill}
+          fill="lightgrey"
           stroke={stroke}
           strokeWidth={strokeWidth}
           dash={strokeStyle}
@@ -97,13 +98,13 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
       </Group>
 
       {/* Botón de decremento (flecha abajo) */}
-      <Group x={inputWidth / 2} y={buttonHeight}>
+      <Group x={inputWidth} y={buttonHeight}>
         <Rect
           x={0}
           y={0}
           width={30}
           height={buttonHeight}
-          fill={fill}
+          fill="lightgrey"
           stroke={stroke}
           strokeWidth={strokeWidth}
           dash={strokeStyle}
