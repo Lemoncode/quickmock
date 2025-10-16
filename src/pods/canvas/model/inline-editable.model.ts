@@ -31,6 +31,7 @@ const inlineEditableShapes = new Set<ShapeType>([
   'appBar',
   'buttonBar',
   'tabsBar',
+  'tabsBarMUI',
   'tooltip',
   'chip',
   'timepickerinput',
@@ -75,6 +76,7 @@ const shapeTypesWithDefaultText = new Set<ShapeType>([
   'appBar',
   'buttonBar',
   'tabsBar',
+  'tabsBarMUI',
   'link',
   'chip',
   'timepickerinput',
@@ -117,6 +119,7 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   gauge: '10%',
   buttonBar: 'Button 1, Button 2, Button 3',
   tabsBar: 'Tab 1, Tab 2, Tab 3',
+  tabsBarMUI: 'Tab 1, Tab 2, Tab 3',
   fileTree: '+ Folder 1\n   - Subfolder\n      * File\n+ Folder 2\n',
   link: 'Link',
   chip: 'Chip',
@@ -153,6 +156,7 @@ export const getShapeEditInlineType = (
     case 'modal':
     case 'appBar':
     case 'tabsBar':
+    case 'tabsBarMUI':
     case 'tooltip':
     case 'fileTree':
       return 'textarea';
