@@ -7,6 +7,7 @@ import { ShapeType } from '@/core/model';
 import { ShapeProps } from '../shape.model';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { INPUT_SHAPE } from '../front-components/shape.const';
+import { i } from 'vitest/dist/reporters-yx5ZTtEV.js';
 
 // Size restrictions (igual patrón que file-tree)
 export const inputStepperShapeRestrictions: ShapeSizeRestrictions = {
@@ -64,13 +65,13 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
 
       {/* Texto del input */}
       <Text
-        x={inputWidth / 2 - 10} // Alinear a la derecha
+        x={0} // Alinear a la derecha
         y={height / 2 - 8} // Centrar verticalmente
-        text={'0'}
+        text={text}
         fontFamily="Arial"
         fontSize={16}
         fill={textColor}
-        align="right"
+        align="left"
       />
 
       {/* Botón de incremento (flecha arriba) */}
