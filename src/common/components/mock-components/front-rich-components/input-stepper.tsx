@@ -68,11 +68,13 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
       <Text
         x={0} // Alinear a la derecha
         y={height / 2 - 8} // Centrar verticalmente
+        width={restrictedWidth}
         text={text}
         fontFamily="Arial"
         fontSize={16}
         fill={textColor}
         align="left"
+        wrap="none"
       />
 
       {/* Botón de incremento (flecha arriba) */}
