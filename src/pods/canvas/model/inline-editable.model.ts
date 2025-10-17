@@ -40,6 +40,7 @@ const inlineEditableShapes = new Set<ShapeType>([
   'gauge',
   'loading-indicator',
   'fileTree',
+  'input-stepper',
 ]);
 
 // Check if a shape type allows inline editing
@@ -62,6 +63,7 @@ const shapeTypesWithDefaultText = new Set<ShapeType>([
   'listbox',
   'horizontal-menu',
   'vertical-menu',
+  'input-stepper',
   'heading1',
   'heading2',
   'heading3',
@@ -125,6 +127,7 @@ const defaultTextValueMap: Partial<Record<ShapeType, string>> = {
   browser: 'https://example.com',
   modalDialog: 'Title here...',
   'loading-indicator': 'Loading...',
+  'input-stepper': '0',
 };
 
 export const generateDefaultTextValue = (

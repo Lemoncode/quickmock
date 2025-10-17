@@ -38,6 +38,7 @@ export type ShapeType =
   | 'accordion'
   | 'pie'
   | 'horizontal-menu'
+  | 'input-stepper'
   | 'breadcrumb'
   | 'map'
   | 'circle'
@@ -130,6 +131,7 @@ export const ShapeDisplayName: Record<ShapeType, string> = {
   link: 'Link',
   triangle: 'Triangle',
   'horizontal-menu': 'Horizontal Menu',
+  'input-stepper': 'Input Stepper',
   largeArrow: 'Large Arrow',
   icon: 'Icon',
   bar: 'Bar Chart',
@@ -237,4 +239,9 @@ export interface ShapeModel {
   editType?: EditType;
   text?: string;
   otherProps?: OtherProps;
+}
+
+export interface inputStepper {
+  id: string;
+  min: number;
 }
