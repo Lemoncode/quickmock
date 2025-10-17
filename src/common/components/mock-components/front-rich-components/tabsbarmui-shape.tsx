@@ -58,20 +58,11 @@ export const TabsBarMUIShape = forwardRef<any, ShapeProps>((props, ref) => {
   const indicatorY = 26;
   const dividerY = 39.5; // ⬅️ subimos ligeramente la línea gris
 
-  const activeTabData = tabList[activeTab];
-  const activeTabX = (activeTabData?.xPos || 0) + 10;
-  const activeTabWidth = activeTabData?.width || 0;
-
   return (
     <Group {...commonGroupProps} {...shapeProps}>
       {/* Línea gris inferior (empieza después del tab activo) */}
       <Line
-        points={[
-          activeTabX + activeTabWidth,
-          dividerY,
-          restrictedWidth,
-          dividerY,
-        ]}
+        points={[10, dividerY, restrictedWidth, dividerY]}
         stroke={dividerColor}
         strokeWidth={1}
       />

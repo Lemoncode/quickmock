@@ -46,6 +46,6 @@ export const mockRichComponentsCollection: ItemInfo[] = [
   },
   {
     thumbnailSrc: '/rich-components/tabsbarmui.svg',
-    type: 'tabsBarMui',
+    type: 'tabsBarMUI',
   },
 ];
