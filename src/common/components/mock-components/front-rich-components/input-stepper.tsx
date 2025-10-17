@@ -73,7 +73,7 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
         fontFamily="Arial"
         fontSize={16}
         fill={textColor}
-        align="left"
+        align="center"
         wrap="none"
       />
 
