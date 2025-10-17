@@ -48,6 +48,8 @@ export const generateDefaultOtherProps = (
         strokeStyle: [],
         borderRadius: `${BASIC_SHAPE.DEFAULT_CORNER_RADIUS}`,
         activeElement: 0,
+        fontSize: FONT_SIZE_VALUES.NORMALTEXT,
+        fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
       };
     case 'datepickerinput':
     case 'timepickerinput':
