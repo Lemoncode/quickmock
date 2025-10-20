@@ -6,6 +6,7 @@ export * from './breadcrumb.renderer';
 export * from './button-bar.renderer';
 export * from './calendar.renderer';
 export * from './horizontal-menu.renderer';
+export * from './input-stepper.renderer';
 export * from './line-chart.renderer';
 export * from './map-chart.renderer';
 export * from './table.renderer';
