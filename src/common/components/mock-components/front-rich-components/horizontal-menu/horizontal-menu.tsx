@@ -10,7 +10,10 @@ import {
   splitCSVContentIntoRows,
 } from '@/common/utils/active-element-selector.utils';
 import { useGroupShapeProps } from '../../mock-components.utils';
-import { useResizeOnFontSizeChange } from '../../front-text-components/front-text-hooks/resize-fontsize-change.hook';
+import {
+  MultipleItemsInfo,
+  useResizeOnFontSizeChange,
+} from '../../front-text-components/front-text-hooks/resize-fontsize-change.hook';
 
 const horizontalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
@@ -42,7 +45,7 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
   const csvData = splitCSVContentIntoRows(text);
   const headers = extractCSVHeaders(csvData[0]);
   const itemLabels = headers.map(header => header.text);
-  const verticalPadding = 8;
+  const totalVerticalPadding = 8;
   const numberOfItems = itemLabels.length;
   const itemSpacing = 10;
 
@@ -52,8 +55,9 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
     height
   );
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
-  const totalMargins = restrictedWidth - itemSpacing * (numberOfItems + 1);
-  const itemWidth = totalMargins / numberOfItems;
+  const totalHorizontalMargins =
+    restrictedWidth - itemSpacing * (numberOfItems + 1);
+  const itemWidth = totalHorizontalMargins / numberOfItems;
 
   const {
     stroke,
@@ -65,7 +69,7 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
     fontVariant,
   } = useShapeProps(otherProps, BASIC_SHAPE);
 
-  const itemVerticalPadding = 4;
+  const singleVerticalPadding = totalVerticalPadding / 2;
 
   const activeSelected = otherProps?.activeElement ?? 0;
 
@@ -75,9 +79,25 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
-  useResizeOnFontSizeChange(id, { x, y }, text, fontSize, fontVariant);
+
+  const multiplesItemsInfo: MultipleItemsInfo = {
+    numberOfItems: numberOfItems,
+    horizontalSpacing: itemSpacing,
+  };
+
+  useResizeOnFontSizeChange(
+    id,
+    { x, y },
+    text,
+    fontSize,
+    fontVariant,
+    false,
+    multiplesItemsInfo
+  );
+
   return (
     <Group {...commonGroupProps} {...shapeProps}>
+      {/* Main Rectangle*/}
       <Rect
         x={0}
         y={0}
@@ -92,11 +112,12 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
 
       {itemLabels.map((header, index) => (
         <Group key={index}>
+          {/* Blue selected rectangle */}
           <Rect
             x={itemSpacing * (index + 1) + itemWidth * index}
-            y={itemVerticalPadding}
+            y={singleVerticalPadding}
             width={itemWidth}
-            height={restrictedHeight - verticalPadding}
+            height={restrictedHeight - totalVerticalPadding}
             fill={index === activeSelected ? 'lightblue' : fill}
           />
           <Text
