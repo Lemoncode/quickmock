@@ -14,7 +14,7 @@ import { useResizeOnFontSizeChange } from '../../front-text-components/front-tex
 
 const horizontalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
-  minHeight: 25,
+  minHeight: 50,
   maxWidth: -1,
   maxHeight: 100,
   defaultWidth: 500,
