@@ -48,8 +48,13 @@ export const generateDefaultOtherProps = (
         strokeStyle: [],
         borderRadius: `${BASIC_SHAPE.DEFAULT_CORNER_RADIUS}`,
         activeElement: 0,
-        fontSize: FONT_SIZE_VALUES.NORMALTEXT,
-        fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
+      };
+    case 'input-stepper':
+      return {
+        stroke: INPUT_SHAPE.DEFAULT_STROKE_COLOR,
+        backgroundColor: INPUT_SHAPE.DEFAULT_FILL_BACKGROUND,
+        textColor: INPUT_SHAPE.DEFAULT_FILL_TEXT,
+        strokeStyle: [],
       };
     case 'datepickerinput':
     case 'timepickerinput':
