@@ -29,6 +29,7 @@ import {
 } from './simple-container';
 import {
   renderVideoPlayer,
+  renderInputStepper,
   renderAccordion,
   renderHorizontalMenu,
   renderPieChart,
@@ -153,6 +154,8 @@ export const renderShapeComponent = (
       return renderTriangle(shape, shapeRenderedProps);
     case 'horizontal-menu':
       return renderHorizontalMenu(shape, shapeRenderedProps);
+    case 'input-stepper':
+      return renderInputStepper(shape, shapeRenderedProps);
     case 'vertical-menu':
       return renderVerticalMenuShape(shape, shapeRenderedProps);
     case 'breadcrumb':

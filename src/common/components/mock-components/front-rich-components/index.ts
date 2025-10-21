@@ -2,6 +2,7 @@ export * from './accordion';
 export * from './breadcrumb/breadcrumb';
 export * from './pie-chart';
 export * from './horizontal-menu/horizontal-menu';
+export * from './input-stepper';
 export * from './map-chart';
 export * from './video-player';
 export * from './bar-chart';
