@@ -11,7 +11,7 @@ import { INPUT_SHAPE } from '../front-components/shape.const';
 // Size restrictions (igual patrón que file-tree)
 export const inputStepperShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 80,
-  minHeight: 24,
+  minHeight: 32,
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 120,
@@ -49,6 +49,18 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth } = restrictedSize;
 
+  const getInputWidth = (restrictedWidth: number): number => {
+    const inputWidth = restrictedWidth * 0.3;
+    const minInputWidth = 30;
+    const maxInputWidth = 70;
+
+    if (inputWidth < minInputWidth) return minInputWidth;
+    if (inputWidth > maxInputWidth) return maxInputWidth;
+    return inputWidth;
+  };
+
+  const a = getInputWidth(restrictedWidth);
+
   return (
     <Group {...commonGroupProps} {...shapeProps}>
       {/* Caja del input */}
@@ -68,12 +80,12 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
       <Text
         x={0} // Alinear a la derecha
         y={height / 2 - 8} // Centrar verticalmente
-        width={restrictedWidth}
+        width={restrictedWidth - a - 8}
         text={text}
         fontFamily="Arial"
         fontSize={16}
         fill={textColor}
-        align="center"
+        align="right"
         wrap="none"
       />
 
