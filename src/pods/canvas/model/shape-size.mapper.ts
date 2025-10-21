@@ -1,6 +1,6 @@
 // src/common/shape-utils/shapeSizeMap.ts
 import { ShapeType, ShapeSizeRestrictions } from '@/core/model';
-import { getInputStepperShapeSizeRestrictions } from '@/common/components/mock-components/front-rich-components/input-stepper';
+import { getInputStepperShapeSizeRestrictions } from '@/common/components/mock-components/front-rich-components/input-stepper/input-stepper';
 import {
   getButtonShapeSizeRestrictions,
   getCheckboxShapeSizeRestrictions,

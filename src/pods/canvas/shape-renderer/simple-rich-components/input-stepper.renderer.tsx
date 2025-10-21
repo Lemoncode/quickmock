@@ -1,4 +1,4 @@
-import { InputWithStepper } from '@/common/components/mock-components/front-rich-components/input-stepper';
+import { InputWithStepper } from '@/common/components/mock-components/front-rich-components/input-stepper/input-stepper';
 import { ShapeRendererProps } from '../model';
 import { ShapeModel } from '@/core/model';
 

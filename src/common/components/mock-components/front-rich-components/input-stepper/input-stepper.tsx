@@ -1,12 +1,13 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { useGroupShapeProps } from '../mock-components.utils';
+import { useGroupShapeProps } from '../../mock-components.utils';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
 import { ShapeType } from '@/core/model';
-import { ShapeProps } from '../shape.model';
-import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import { INPUT_SHAPE } from '../front-components/shape.const';
+import { ShapeProps } from '../../shape.model';
+import { useShapeProps } from '../../../shapes/use-shape-props.hook';
+import { INPUT_SHAPE } from '../../front-components/shape.const';
+import { getTextFieldWidth } from './input-stepper.business';
 
 // Size restrictions (igual patrón que file-tree)
 export const inputStepperShapeRestrictions: ShapeSizeRestrictions = {
@@ -49,17 +50,7 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
 
   const { width: restrictedWidth } = restrictedSize;
 
-  const getInputWidth = (restrictedWidth: number): number => {
-    const inputWidth = restrictedWidth * 0.3;
-    const minInputWidth = 30;
-    const maxInputWidth = 70;
-
-    if (inputWidth < minInputWidth) return minInputWidth;
-    if (inputWidth > maxInputWidth) return maxInputWidth;
-    return inputWidth;
-  };
-
-  const a = getInputWidth(restrictedWidth);
+  const textFieldWidth = getTextFieldWidth(restrictedWidth);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
@@ -78,9 +69,9 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
 
       {/* Texto del input */}
       <Text
-        x={0} // Alinear a la derecha
+        x={0}
         y={height / 2 - 8} // Centrar verticalmente
-        width={restrictedWidth - a - 8}
+        width={restrictedWidth - textFieldWidth - 8}
         text={text}
         fontFamily="Arial"
         fontSize={16}
