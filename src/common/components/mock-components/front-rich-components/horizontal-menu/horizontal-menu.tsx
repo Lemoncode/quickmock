@@ -46,7 +46,6 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
   const headers = extractCSVHeaders(csvData[0]);
   const itemLabels = headers.map(header => header.text);
   const totalVerticalPadding = 8;
-
   const numberOfItems = itemLabels.length;
   const itemSpacing = 10;
 
@@ -123,15 +122,16 @@ export const HorizontalMenu = forwardRef<any, ShapeProps>((props, ref) => {
           />
           <Text
             x={itemSpacing * (index + 1) + itemWidth * index}
-            y={restrictedHeight / 2 - 8}
+            y={restrictedHeight / 2 - fontSize / 2}
             text={header}
             fontFamily="Arial"
-            fontSize={16}
+            fontSize={fontSize}
             fill={textColor}
             width={itemWidth}
             align="center"
             wrap="none"
             ellipsis={true}
+            fontVariant={fontVariant}
           />
         </Group>
       ))}
