@@ -1,5 +1,6 @@
 // src/common/shape-utils/shapeSizeMap.ts
 import { ShapeType, ShapeSizeRestrictions } from '@/core/model';
+import { getInputStepperShapeSizeRestrictions } from '@/common/components/mock-components/front-rich-components/input-stepper';
 import {
   getButtonShapeSizeRestrictions,
   getCheckboxShapeSizeRestrictions,
@@ -128,6 +129,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   postit: getPostItShapeSizeRestrictions,
   pie: getPieChartShapeSizeRestrictions,
   'horizontal-menu': getHorizontalMenuShapeSizeRestrictions,
+  'input-stepper': getInputStepperShapeSizeRestrictions,
   'vertical-menu': getVerticalMenuShapeSizeRestrictions,
   breadcrumb: getBreadcrumbShapeSizeRestrictions,
   map: getMapChartShapeSizeRestrictions,
@@ -172,9 +174,9 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   rectangleLow: getRectangleLowShapeRestrictions,
   circleLow: getCircleLowShapeSizeRestrictions,
   textScribbled: getTextScribbledShapeRestrictions,
-  paragraphScribbled: getParagraphScribbledShapeRestrictions,
   fabButton: getFabButtonShapeSizeRestrictions,
   fileTree: getFileTreeShapeSizeRestrictions,
+  paragraphScribbled: getParagraphScribbledShapeRestrictions,
 };
 
 export default shapeSizeMap;
