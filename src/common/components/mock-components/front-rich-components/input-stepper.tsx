@@ -11,7 +11,7 @@ import { INPUT_SHAPE } from '../front-components/shape.const';
 // Size restrictions (igual patrón que file-tree)
 export const inputStepperShapeRestrictions: ShapeSizeRestrictions = {
   minWidth: 80,
-  minHeight: 32,
+  minHeight: 24,
   maxWidth: -1,
   maxHeight: -1,
   defaultWidth: 120,
