@@ -41,7 +41,6 @@ const inlineEditableShapes = new Set<ShapeType>([
   'loading-indicator',
   'fileTree',
   'input-stepper',
-  'mousecursor',
 ]);
 
 // Check if a shape type allows inline editing
