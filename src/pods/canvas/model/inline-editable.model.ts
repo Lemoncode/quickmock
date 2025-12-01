@@ -41,6 +41,7 @@ const inlineEditableShapes = new Set<ShapeType>([
   'loading-indicator',
   'fileTree',
   'input-stepper',
+  'mousecursor',
 ]);
 
 // Check if a shape type allows inline editing
@@ -86,6 +87,7 @@ const shapeTypesWithDefaultText = new Set<ShapeType>([
   'loading-indicator',
   'gauge',
   'fileTree',
+  'mousecursor',
 ]);
 
 // Map of ShapeTypes to their default text values

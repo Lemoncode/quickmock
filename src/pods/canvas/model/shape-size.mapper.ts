@@ -21,6 +21,7 @@ import {
   getTooltipShapeSizeRestrictions,
   getVerticalScrollBarShapeSizeRestrictions,
   getChipShapeSizeRestrictions,
+  getMouseCursorShapeSizeRestrictions,
 } from '@/common/components/mock-components/front-components';
 import {
   getBrowserWindowShapeSizeRestrictions,
@@ -177,6 +178,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   fabButton: getFabButtonShapeSizeRestrictions,
   fileTree: getFileTreeShapeSizeRestrictions,
   paragraphScribbled: getParagraphScribbledShapeRestrictions,
+  mousecursor: getMouseCursorShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;

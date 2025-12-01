@@ -16,3 +16,4 @@ export * from './label-shape';
 export * from './tooltip-shape';
 export * from './slider-shape';
 export * from './chip-shape';
+export * from './mouse-cursor-shape';

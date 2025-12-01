@@ -240,6 +240,11 @@ export const generateDefaultOtherProps = (
       return {
         checked: true,
       };
+    case 'mousecursor':
+      return {
+        iconSize: 'M',
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+      };
     case 'checkbox':
     case 'radiobutton':
       return {

@@ -17,3 +17,4 @@ export * from './horizontalscrollbar.renderer';
 export * from './tooltip.renderer';
 export * from './slider.renderer';
 export * from './chip.renderer';
+export * from './mouse-cursor.renderer';

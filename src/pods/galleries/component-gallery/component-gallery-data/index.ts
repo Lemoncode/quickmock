@@ -22,4 +22,5 @@ export const mockWidgetCollection: ItemInfo[] = [
   { thumbnailSrc: '/widgets/toggleswitch.svg', type: 'toggleswitch' },
   { thumbnailSrc: '/widgets/tooltip.svg', type: 'tooltip' },
   { thumbnailSrc: '/widgets/verticalscrollbar.svg', type: 'verticalScrollBar' },
+  { thumbnailSrc: '/icons/cursor.svg', type: 'mousecursor' },
 ];

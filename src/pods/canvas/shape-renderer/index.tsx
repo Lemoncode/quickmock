@@ -20,6 +20,7 @@ import {
   renderTooltip,
   renderSlider,
   renderChip,
+  renderMouseCursor,
 } from './simple-component';
 import {
   renderBrowserWindow,
@@ -224,6 +225,8 @@ export const renderShapeComponent = (
       return renderImagePlaceHolder(shape, shapeRenderedProps);
     case 'chip':
       return renderChip(shape, shapeRenderedProps);
+    case 'mousecursor':
+      return renderMouseCursor(shape, shapeRenderedProps);
     case 'horizontalLineLow':
       return renderHorizontalLowLine(shape, shapeRenderedProps);
     case 'verticalLineLow':
