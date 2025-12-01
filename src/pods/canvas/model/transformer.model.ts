@@ -87,6 +87,7 @@ export const generateTypeOfTransformer = (shapeType: ShapeType): string[] => {
         'bottom-center',
       ];
     case 'icon':
+    case 'mousecursor':
     case 'multiple':
       return [];
     case 'image':

@@ -9,8 +9,6 @@ export const renderMouseCursor = (
   const { handleSelected, shapeRefs, handleDragEnd, handleTransform } =
     shapeRenderedProps;
 
-  console.log(shape);
-
   return (
     <MouseCursorShape
       id={shape.id}
@@ -28,6 +26,7 @@ export const renderMouseCursor = (
       onTransform={handleTransform}
       onTransformEnd={handleTransform}
       otherProps={shape.otherProps}
+      iconSize={shape.otherProps?.iconSize}
     />
   );
 };
