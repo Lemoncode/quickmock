@@ -65,7 +65,7 @@ export const MouseCursorShape = forwardRef<any, ShapeProps>((props, ref) => {
     loadSvgWithFill(`${BASE_ICONS_URL}${fileName}`, `${stroke}`).then(img => {
       setImage(img);
     });
-  }, []);
+  }, [stroke]);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
