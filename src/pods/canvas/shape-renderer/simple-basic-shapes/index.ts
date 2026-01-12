@@ -10,3 +10,4 @@ export * from './large-arrow.renderer';
 export * from './modal-cover.rerender';
 export * from './cilinder.renderer';
 export * from './image.renderer';
+export * from './mouse-cursor.renderer';

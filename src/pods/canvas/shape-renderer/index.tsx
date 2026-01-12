@@ -65,6 +65,7 @@ import {
   renderLargeArrowShape,
   renderCilinder,
   renderImage,
+  renderMouseCursor,
 } from './simple-basic-shapes';
 import {
   renderHeading1,
@@ -238,6 +239,8 @@ export const renderShapeComponent = (
       return renderTextScribbled(shape, shapeRenderedProps);
     case 'paragraphScribbled':
       return renderParagraphScribbled(shape, shapeRenderedProps);
+    case 'mouseCursor':
+      return renderMouseCursor(shape, shapeRenderedProps);
     default:
       return renderNotFound(shape, shapeRenderedProps);
   }
