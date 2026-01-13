@@ -1,11 +1,13 @@
 import { ShapeSizeRestrictions, ShapeType, BASE_ICONS_URL } from '@/core/model';
 import { forwardRef, useEffect, useState } from 'react';
-import { ShapeProps } from '../shape.model';
+import { ShapeProps } from '../../shape.model';
 import { loadSvgWithFill } from '@/common/utils/svg.utils';
 import { Group, Image } from 'react-konva';
 import { fitSizeToShapeSizeRestrictions } from '@/common/utils/shapes/shape-restrictions';
-import { returnIconSize } from '../front-components/icon/icon-shape.business';
-import { useGroupShapeProps } from '../mock-components.utils';
+import { returnIconSize } from './icon-shape.business';
+import { useGroupShapeProps } from '../../mock-components.utils';
+import { useShapeProps } from '../../../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from '../../front-components/shape.const';
 
 const MouseCursorSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 25,
@@ -43,6 +45,7 @@ export const MouseCursorShape = forwardRef<any, ShapeProps>((props, ref) => {
   );
 
   const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
+  const { stroke } = useShapeProps(otherProps, BASIC_SHAPE);
   const commonGroupProps = useGroupShapeProps(
     props,
     restrictedSize,
@@ -54,10 +57,10 @@ export const MouseCursorShape = forwardRef<any, ShapeProps>((props, ref) => {
   //const imgRef = useRef(null);
   const fileName = 'cursor.svg';
   useEffect(() => {
-    loadSvgWithFill(`${BASE_ICONS_URL}${fileName}`, '').then(img => {
+    loadSvgWithFill(`${BASE_ICONS_URL}${fileName}`, `${stroke}`).then(img => {
       setImage(img);
     });
-  }, []);
+  }, [stroke]);
   return (
     <Group {...commonGroupProps} {...shapeProps}>
       {image && (
