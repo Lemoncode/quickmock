@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   plugins: [react()],
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       input: {
         main: './index.html',
         editor: './editor.html',

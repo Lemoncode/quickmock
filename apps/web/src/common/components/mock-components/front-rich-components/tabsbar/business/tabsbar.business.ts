@@ -1,6 +1,6 @@
+import { calcTextDimensions } from '#common/utils/calc-text-dimensions';
 import { Layer } from 'konva/lib/Layer';
 import { balanceSpacePerItem } from './balance-space';
-import { calcTextDimensions } from '#common/utils/calc-text-dimensions';
 
 export const adjustTabWidths = (args: {
   tabs: string[];

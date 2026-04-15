@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "exports": {
-    "./base": "./base.ts"
+    "./base": "./base.ts",
+    "./browser": "./browser.ts"
   },
   "devDependencies": {
-    "vitest": "^4.1.4",
-    "@vitest/coverage-v8": "^4.1.4"
+    "@testing-library/jest-dom": "^6.9.1",
+    "@vitest/coverage-v8": "^4.1.4",
+    "vitest": "^4.1.4"
   }
 }
