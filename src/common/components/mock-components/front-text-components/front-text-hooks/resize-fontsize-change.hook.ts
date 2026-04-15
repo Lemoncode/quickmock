@@ -2,13 +2,19 @@ import { calcTextDimensions } from '@/common/utils/calc-text-dimensions';
 import { useCanvasContext } from '@/core/providers';
 import { useEffect, useRef } from 'react';
 
+export interface MultipleItemsInfo {
+  numberOfItems: number;
+  horizontalSpacing: number;
+}
+
 export const useResizeOnFontSizeChange = (
   id: string,
   coords: { x: number; y: number },
   text: string,
   fontSize: number,
   fontVariant: string,
-  multiline: boolean = false
+  multiline: boolean = false,
+  multipleItemsInfo?: MultipleItemsInfo // Just in case we have a list of items (horizontally), e.g horizontal menu
 ) => {
   const previousFontSize = useRef(fontSize);
   const { updateShapeSizeAndPosition, stageRef } = useCanvasContext();
@@ -21,12 +27,22 @@ export const useResizeOnFontSizeChange = (
       const paragraphLines = _extractParagraphLines(text);
       const longestLine = _findLongestString(paragraphLines);
 
-      const { width, height } = calcTextDimensions(
-        multiline ? longestLine : text,
-        fontSize,
-        fontVariant,
-        konvaLayer
-      );
+      const { width: longestLineWidth, height: longestLineHeight } =
+        calcTextDimensions(
+          multiline ? longestLine : text,
+          fontSize,
+          fontVariant,
+          konvaLayer
+        );
+
+      // We add to the longest line width the spacing between items if multiple items
+      const width =
+        longestLineWidth +
+        (multipleItemsInfo
+          ? multipleItemsInfo.horizontalSpacing *
+            multipleItemsInfo.numberOfItems
+          : 0);
+      const height = longestLineHeight;
 
       updateShapeSizeAndPosition(
         id,
