@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest';
 import { removeShapesFromList } from './canvas.business';
 import { ShapeModel } from '#core/model';
 

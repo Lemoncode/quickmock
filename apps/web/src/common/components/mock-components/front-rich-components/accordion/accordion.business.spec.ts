@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest';
 import { mapTextToSections } from './accordion.business';
 
 describe('mapTextToSections', () => {

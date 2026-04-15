@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest';
 import { adjustTabWidths } from './tabsbar.business';
 
 const _sum = (resultado: number[]) =>

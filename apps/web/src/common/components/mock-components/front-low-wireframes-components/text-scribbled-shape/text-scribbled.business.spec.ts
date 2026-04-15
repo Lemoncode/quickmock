@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest';
 import { calculatePath } from './text-scribbled.business';
 import { AVG_CHAR_WIDTH } from './text-scribbled.const';
 
