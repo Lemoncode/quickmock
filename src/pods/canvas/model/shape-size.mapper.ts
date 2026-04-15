@@ -42,6 +42,7 @@ import {
   getStarShapeSizeRestrictions,
   getModalCoverShapeSizeRestrictions,
   getCilinderShapeSizeRestrictions,
+  getMouseCursorShapeSizeRestrictions,
   // other imports
 } from '@/common/components/mock-components/front-basic-shapes';
 import {
@@ -177,6 +178,7 @@ const shapeSizeMap: Record<ShapeType, () => ShapeSizeRestrictions> = {
   fabButton: getFabButtonShapeSizeRestrictions,
   fileTree: getFileTreeShapeSizeRestrictions,
   paragraphScribbled: getParagraphScribbledShapeRestrictions,
+  mouseCursor: getMouseCursorShapeSizeRestrictions,
 };
 
 export default shapeSizeMap;

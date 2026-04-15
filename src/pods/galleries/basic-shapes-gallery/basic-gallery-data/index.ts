@@ -13,4 +13,5 @@ export const mockBasicShapesCollection: ItemInfo[] = [
   { thumbnailSrc: '/shapes/triangle.svg', type: 'triangle' },
   { thumbnailSrc: '/shapes/verticalLine.svg', type: 'verticalLine' },
   { thumbnailSrc: '/shapes/cilinder.svg', type: 'cilinder' },
+  { thumbnailSrc: '/icons/cursor.svg', type: 'mouseCursor' },
 ];

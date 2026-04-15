@@ -209,6 +209,7 @@ export const iconCollection: IconInfo[] = [
     name: 'Shopping cart',
     filename: 'shoppingcart.svg',
     searchTerms: [
+      'shopping cart',
       'shopping',
       'cart',
       'purchase',
@@ -337,6 +338,7 @@ export const iconCollection: IconInfo[] = [
       'arrive',
       'land',
       'stopping',
+      'aeroplane',
     ],
     categories: ['IT'],
   },
@@ -351,6 +353,7 @@ export const iconCollection: IconInfo[] = [
       'start',
       'take off',
       'launch',
+      'aeroplane',
     ],
     categories: ['IT'],
   },
@@ -367,7 +370,6 @@ export const iconCollection: IconInfo[] = [
       'surf',
       'browse',
       'world wide web',
-      'www',
       'connected',
     ],
     categories: ['IT'],
@@ -406,6 +408,7 @@ export const iconCollection: IconInfo[] = [
       'notification',
       'feed',
       'photo',
+      'x',
     ],
     categories: ['IT'],
   },
@@ -419,8 +422,8 @@ export const iconCollection: IconInfo[] = [
       'artificial intelligence',
       'virtual reality',
       'metaverse',
-      'meta ai',
       'smart glasses',
+      'ia',
     ],
     categories: ['IT'],
   },
@@ -690,13 +693,13 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Bell Off',
     filename: 'bellmuted.svg',
-    searchTerms: ['bell', 'mute', 'silent', 'sound', 'off'],
+    searchTerms: ['bell off', 'mute', 'silent', 'sound', 'off'],
     categories: ['IT'],
   },
   {
     name: 'Bell snooze',
     filename: 'bellsnooze.svg',
-    searchTerms: ['bell', 'snooze', 'sleep', 'pause'],
+    searchTerms: ['bell snooze', 'snooze', 'sleep', 'pause'],
     categories: ['IT'],
   },
   {
@@ -768,7 +771,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Cloud sun',
     filename: 'cloudsun.svg',
-    searchTerms: ['cloud', 'day', 'partly', 'cloudy', 'weather'],
+    searchTerms: ['cloud sun', 'day', 'partly', 'cloudy', 'weather'],
     categories: ['IT'],
   },
   {
@@ -792,7 +795,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Sunglasses',
     filename: 'sunglass.svg',
-    searchTerms: ['sunglass', 'glasses', 'sun', 'protection'],
+    searchTerms: ['sunglasses', 'sunglass', 'glasses', 'sun', 'protection'],
     categories: ['IT'],
   },
   {
@@ -846,7 +849,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Google Chrome',
     filename: 'chrome.svg',
-    searchTerms: ['chrome', 'browser', 'internet', 'web'],
+    searchTerms: ['google chrome', 'chrome', 'browser', 'internet', 'web'],
     categories: ['IT'],
   },
   {
@@ -888,6 +891,7 @@ export const iconCollection: IconInfo[] = [
       'repository',
       'version control',
       'pull request',
+      'fork',
     ],
     categories: ['IT'],
   },
@@ -972,13 +976,13 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Eye',
     filename: 'eye.svg',
-    searchTerms: ['eye', 'visible', 'watch', 'view'],
+    searchTerms: ['eye', 'visible', 'watch', 'view', 'vision'],
     categories: ['IT'],
   },
   {
     name: 'Eye slash',
     filename: 'eyeslash.svg',
-    searchTerms: ['eye', 'slash', 'invisible', 'hide'],
+    searchTerms: ['eye', 'slash', 'invisible', 'hide', 'vision'],
     categories: ['IT'],
   },
   {
@@ -990,13 +994,13 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Smiley',
     filename: 'smiley.svg',
-    searchTerms: ['smiley', 'happy', 'face', 'emoji'],
+    searchTerms: ['smiley', 'smile', 'happy', 'face', 'emoji'],
     categories: ['IT'],
   },
   {
     name: 'Smiley wink',
     filename: 'smileywink.svg',
-    searchTerms: ['wink', 'playful', 'face', 'emoji'],
+    searchTerms: ['smiley', 'wink', 'playful', 'face', 'emoji'],
     categories: ['IT'],
   },
   {
@@ -1038,7 +1042,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Fast forward',
     filename: 'fastforward.svg',
-    searchTerms: ['skip', 'forward', 'next', 'advance', 'controls'],
+    searchTerms: ['fast', 'skip', 'forward', 'next', 'advance', 'controls'],
     categories: ['IT'],
   },
   {
@@ -1056,13 +1060,13 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Envelope',
     filename: 'envelope.svg',
-    searchTerms: ['envelope', 'mail', 'postbag', 'letter'],
+    searchTerms: ['envelope', 'mail', 'postbag', 'letter', 'postcard'],
     categories: ['IT'],
   },
   {
     name: 'Envelope open',
     filename: 'envelopeopen.svg',
-    searchTerms: ['envelope', 'open', 'mail', 'postbag', 'letter'],
+    searchTerms: ['envelope', 'open', 'mail', 'postbag', 'letter', 'postcard'],
     categories: ['IT'],
   },
   {
@@ -1092,13 +1096,13 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Map pin area',
     filename: 'pinarea.svg',
-    searchTerms: ['map', 'area', 'location', 'place', 'plat'],
+    searchTerms: ['map', 'pin', 'area', 'location', 'place', 'plat'],
     categories: ['IT'],
   },
   {
     name: 'Map pin',
     filename: 'pin.svg',
-    searchTerms: ['map', 'location', 'place', 'plat'],
+    searchTerms: ['map', 'pin', 'location', 'place', 'plat'],
     categories: ['IT'],
   },
   {
@@ -1170,7 +1174,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Chat dots',
     filename: 'chatdots.svg',
-    searchTerms: ['chat', 'message', 'conversation', 'chatting'],
+    searchTerms: ['chat', 'dots', 'message', 'conversation', 'chatting'],
     categories: ['IT'],
   },
   {
@@ -1182,7 +1186,14 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Chat slash',
     filename: 'chatslash.svg',
-    searchTerms: ['chat', 'message', 'conversation', 'chatting', 'mute'],
+    searchTerms: [
+      'chat',
+      'slash',
+      'message',
+      'conversation',
+      'chatting',
+      'mute',
+    ],
     categories: ['IT'],
   },
   {
@@ -1266,7 +1277,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Hands clapping',
     filename: 'handsclapping.svg',
-    searchTerms: ['hand', 'clapping', 'applause', 'celebration'],
+    searchTerms: ['hands', 'clapping', 'applause', 'celebration'],
     categories: ['IT'],
   },
   {
@@ -1296,7 +1307,14 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Cog wheel',
     filename: 'cogwheel.svg',
-    searchTerms: ['settings', 'configuration', 'options', 'preferences'],
+    searchTerms: [
+      'cog',
+      'wheel',
+      'settings',
+      'configuration',
+      'options',
+      'preferences',
+    ],
     categories: ['IT'],
   },
   {
@@ -1338,7 +1356,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Microphone off',
     filename: 'microphoneslash.svg',
-    searchTerms: ['microphone', 'mute', 'silence', 'mic'],
+    searchTerms: ['microphone', 'off', 'mute', 'silence', 'mic'],
     categories: ['IT'],
   },
   {
@@ -1350,7 +1368,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Webcam off',
     filename: 'webcamslash.svg',
-    searchTerms: ['webcam', 'camera', 'slash', 'camcorder', 'off'],
+    searchTerms: ['webcam', 'off', 'camera', 'slash', 'camcorder', 'off'],
     categories: ['IT'],
   },
   {
@@ -1386,7 +1404,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Dots Square',
     filename: 'dotssquare.svg',
-    searchTerms: ['dots', 'square', 'menu', 'more'],
+    searchTerms: ['dots', 'square', 'menu', 'more', 'drag'],
     categories: ['IT'],
   },
   {
@@ -1404,19 +1422,26 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Linux',
     filename: 'linux.svg',
-    searchTerms: ['linux', 'system', 'software', 'desktop'],
+    searchTerms: ['linux', 'system', 'software', 'desktop', 'os'],
     categories: ['IT'],
   },
   {
     name: 'Windows',
     filename: 'windows.svg',
-    searchTerms: ['windows', 'system', 'software', 'desktop', 'microsoft'],
+    searchTerms: [
+      'windows',
+      'system',
+      'software',
+      'desktop',
+      'microsoft',
+      'os',
+    ],
     categories: ['IT'],
   },
   {
     name: 'Moon',
     filename: 'moon.svg',
-    searchTerms: ['moon', 'night', 'dark', 'sky'],
+    searchTerms: ['moon', 'night', 'dark', 'sky', 'satellite'],
     categories: ['IT'],
   },
   {
@@ -1428,31 +1453,38 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Gitlab',
     filename: 'gitlab.svg',
-    searchTerms: ['gitlab', 'code', 'repository', 'version control'],
+    searchTerms: [
+      'gitlab',
+      'code',
+      'repository',
+      'version control',
+      'pull request',
+      'fork',
+    ],
     categories: ['IT'],
   },
   {
     name: 'List dots',
     filename: 'listdots.svg',
-    searchTerms: ['list', 'categorize', 'unordered', 'classify'],
+    searchTerms: ['list', 'dots', 'categorize', 'unordered', 'classify'],
     categories: ['IT'],
   },
   {
     name: 'List checks',
     filename: 'listchecks.svg',
-    searchTerms: ['list', 'categorize', 'unordered', 'classify'],
+    searchTerms: ['list', 'checks', 'categorize', 'unordered', 'classify'],
     categories: ['IT'],
   },
   {
     name: 'List dashes',
     filename: 'listdashes.svg',
-    searchTerms: ['list', 'categorize', 'unordered', 'classify'],
+    searchTerms: ['list', 'dashes', 'categorize', 'unordered', 'classify'],
     categories: ['IT'],
   },
   {
     name: 'List heart',
     filename: 'listheart.svg',
-    searchTerms: ['list', 'categorize', 'unordered', 'classify'],
+    searchTerms: ['list', 'heart', 'categorize', 'unordered', 'classify'],
     categories: ['IT'],
   },
   {
@@ -1476,7 +1508,14 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'list star',
     filename: 'liststar.svg',
-    searchTerms: ['list', 'categorize', 'unordered', 'classify', 'favorite'],
+    searchTerms: [
+      'list',
+      'star',
+      'categorize',
+      'unordered',
+      'classify',
+      'favorite',
+    ],
     categories: ['IT'],
   },
   {
@@ -1548,7 +1587,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Shield checkered',
     filename: 'shieldcheckered.svg',
-    searchTerms: ['shield', 'protection', 'security', 'defense'],
+    searchTerms: ['shield', 'checked', 'protection', 'security', 'defense'],
     categories: ['IT'],
   },
   {
@@ -1657,7 +1696,15 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'File jpg',
     filename: 'filejpg.svg',
-    searchTerms: ['file', 'jpg', 'document', 'digital', 'sheet'],
+    searchTerms: [
+      'file',
+      'jpg',
+      'document',
+      'digital',
+      'sheet',
+      'img',
+      'image',
+    ],
     categories: ['IT'],
   },
   {
@@ -1753,7 +1800,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Plug',
     filename: 'plug.svg',
-    searchTerms: ['plug', 'device', 'connect', 'power'],
+    searchTerms: ['plug', 'device', 'connect', 'power', 'plug in'],
     categories: ['IT'],
   },
   {
@@ -1807,7 +1854,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'First aid',
     filename: 'firstaid.svg',
-    searchTerms: ['hospital', 'medical', 'emergency', 'health'],
+    searchTerms: ['first', 'aid', 'hospital', 'medical', 'emergency', 'health'],
     categories: ['IT'],
   },
   {
@@ -2023,7 +2070,15 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Chart line up',
     filename: 'chartlineup.svg',
-    searchTerms: ['trade', 'chart', 'graph', 'business', 'benefits'],
+    searchTerms: [
+      'trade',
+      'chart',
+      'line',
+      'up',
+      'graph',
+      'business',
+      'benefits',
+    ],
     categories: ['IT'],
   },
   {
@@ -2083,13 +2138,20 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Eyedropper alternative',
     filename: 'eyedroppersample.svg',
-    searchTerms: ['eyedropper', 'color', 'picker', 'tool', 'paint'],
+    searchTerms: [
+      'eyedropper',
+      'alternative',
+      'color',
+      'picker',
+      'tool',
+      'paint',
+    ],
     categories: ['IT'],
   },
   {
     name: 'Folder plus',
     filename: 'folderplus.svg',
-    searchTerms: ['folder', 'add', 'create', 'new'],
+    searchTerms: ['folder', 'plus', 'add', 'create', 'new'],
     categories: ['IT'],
   },
   {
@@ -2239,13 +2301,20 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Four users',
     filename: 'usersfour.svg',
-    searchTerms: ['users', 'people', 'group', 'team'],
+    searchTerms: ['four', 'users', 'people', 'group', 'team'],
     categories: ['IT'],
   },
   {
     name: 'Virtual reality',
     filename: 'virtualreality.svg',
-    searchTerms: ['virtual', 'artificial', 'glasses', 'technology', 'vr'],
+    searchTerms: [
+      'virtual',
+      'reality',
+      'artificial',
+      'glasses',
+      'technology',
+      'vr',
+    ],
     categories: ['IT'],
   },
   {
@@ -2365,7 +2434,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Close circle',
     filename: 'xcircle.svg',
-    searchTerms: ['close', 'cross', 'dialog', 'delete'],
+    searchTerms: ['close', 'circle', 'cross', 'dialog', 'delete'],
     categories: ['IT'],
   },
   {
@@ -2377,7 +2446,7 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Close square',
     filename: 'xclosesquare.svg',
-    searchTerms: ['close', 'cross', 'dialog', 'delete'],
+    searchTerms: ['close', 'cross', 'dialog', 'delete', 'square'],
     categories: ['IT'],
   },
   {
@@ -2437,121 +2506,121 @@ export const iconCollection: IconInfo[] = [
   {
     name: 'Rectangle Zero',
     filename: 'rectanglezero.svg',
-    searchTerms: ['zero', 'number', 'count', 'null'],
+    searchTerms: ['rectangle', 'zero', 'number', 'count', 'null'],
     categories: ['IT'],
   },
   {
     name: 'Rectangle One',
     filename: 'rectangleone.svg',
-    searchTerms: ['one', 'number', 'count', 'first'],
+    searchTerms: ['rectangle', 'one', 'number', 'count', 'first'],
     categories: ['IT'],
   },
   {
     name: 'Rectangle Two',
     filename: 'rectangletwo.svg',
-    searchTerms: ['two', 'number', 'count', 'second'],
+    searchTerms: ['rectangle', 'two', 'number', 'count', 'second'],
     categories: ['IT'],
   },
   {
     name: 'Rectangle Three',
     filename: 'rectanglethree.svg',
-    searchTerms: ['three', 'number', 'count', 'third'],
+    searchTerms: ['rectangle', 'three', 'number', 'count', 'third'],
     categories: ['IT'],
   },
   {
     name: 'Rectangle Four',
     filename: 'rectanglefour.svg',
-    searchTerms: ['four', 'number', 'count', 'fourth'],
+    searchTerms: ['rectangle', 'four', 'number', 'count', 'fourth'],
     categories: ['IT'],
   },
   {
     name: 'Rectangle Five',
     filename: 'rectanglefive.svg',
-    searchTerms: ['five', 'number', 'count', 'fifth'],
+    searchTerms: ['rectangle', 'five', 'number', 'count', 'fifth'],
     categories: ['IT'],
   },
   {
     name: 'Rectangle Six',
     filename: 'rectanglesix.svg',
-    searchTerms: ['six', 'number', 'count', 'sixth'],
+    searchTerms: ['rectangle', 'six', 'number', 'count', 'sixth'],
     categories: ['IT'],
   },
   {
     name: 'Rectangle Seven',
     filename: 'rectangleseven.svg',
-    searchTerms: ['seven', 'number', 'count', 'seventh'],
+    searchTerms: ['rectangle', 'seven', 'number', 'count', 'seventh'],
     categories: ['IT'],
   },
   {
     name: 'Rectangle Eight',
     filename: 'rectangleeight.svg',
-    searchTerms: ['eight', 'number', 'count', 'eighth'],
+    searchTerms: ['rectangle', 'eight', 'number', 'count', 'eighth'],
     categories: ['IT'],
   },
   {
     name: 'Rectangle Nine',
     filename: 'rectanglenine.svg',
-    searchTerms: ['nine', 'number', 'count', 'ninth'],
+    searchTerms: ['rectangle', 'nine', 'number', 'count', 'ninth'],
     categories: ['IT'],
   },
   {
     name: 'Circle Zero',
     filename: 'circlezero.svg',
-    searchTerms: ['zero', 'number', 'count', 'null'],
+    searchTerms: ['circle', 'zero', 'number', 'count', 'null'],
     categories: ['IT'],
   },
   {
     name: 'Circle One',
     filename: 'circleone.svg',
-    searchTerms: ['one', 'number', 'count', 'first'],
+    searchTerms: ['circle', 'one', 'number', 'count', 'first'],
     categories: ['IT'],
   },
   {
     name: 'Circle Two',
     filename: 'circletwo.svg',
-    searchTerms: ['two', 'number', 'count', 'second'],
+    searchTerms: ['circle', 'two', 'number', 'count', 'second'],
     categories: ['IT'],
   },
   {
     name: 'Circle Three',
     filename: 'circlethree.svg',
-    searchTerms: ['three', 'number', 'count', 'third'],
+    searchTerms: ['circle', 'three', 'number', 'count', 'third'],
     categories: ['IT'],
   },
   {
     name: 'Circle Four',
     filename: 'circlefour.svg',
-    searchTerms: ['four', 'number', 'count', 'fourth'],
+    searchTerms: ['circle', 'four', 'number', 'count', 'fourth'],
     categories: ['IT'],
   },
   {
     name: 'Circle Five',
     filename: 'circlefive.svg',
-    searchTerms: ['five', 'number', 'count', 'fifth'],
+    searchTerms: ['circle', 'five', 'number', 'count', 'fifth'],
     categories: ['IT'],
   },
   {
     name: 'Circle Six',
     filename: 'circlesix.svg',
-    searchTerms: ['six', 'number', 'count', 'sixth'],
+    searchTerms: ['circle', 'six', 'number', 'count', 'sixth'],
     categories: ['IT'],
   },
   {
     name: 'Circle Seven',
     filename: 'circleseven.svg',
-    searchTerms: ['seven', 'number', 'count', 'seventh'],
+    searchTerms: ['circle', 'seven', 'number', 'count', 'seventh'],
     categories: ['IT'],
   },
   {
     name: 'Circle Eight',
     filename: 'circleeight.svg',
-    searchTerms: ['eight', 'number', 'count', 'eighth'],
+    searchTerms: ['circle', 'eight', 'number', 'count', 'eighth'],
     categories: ['IT'],
   },
   {
     name: 'Circle Nine',
     filename: 'circlenine.svg',
-    searchTerms: ['nine', 'number', 'count', 'ninth'],
+    searchTerms: ['circle', 'nine', 'number', 'count', 'ninth'],
     categories: ['IT'],
   },
   {
