@@ -22,7 +22,8 @@ const shapeType: ShapeType = 'modalDialog';
 
 export const ModalDialogContainer = forwardRef<any, ShapeProps>(
   (props, ref) => {
-    const { _x, _y, width, height, _id, _onSelected, text, ...shapeProps } = props;
+    const { _x, _y, width, height, _id, _onSelected, text, ...shapeProps } =
+      props;
     const restrictedSize = fitSizeToShapeSizeRestrictions(
       modalDialogShapeSizeRestrictions,
       width,

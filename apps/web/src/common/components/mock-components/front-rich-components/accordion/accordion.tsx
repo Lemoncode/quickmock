@@ -28,7 +28,8 @@ const singleHeaderHeight = 50;
 const minimumAccordionBodyHeight = 60;
 
 export const AccordionShape = forwardRef<any, ShapeProps>((props, ref) => {
-  const { _x, _y, width, height, _id, _onSelected, text, ...shapeProps } = props;
+  const { _x, _y, width, height, _id, _onSelected, text, ...shapeProps } =
+    props;
   const [sections, setSections] = useState<string[]>([
     '[*] Sectión A',
     'Sectión B',

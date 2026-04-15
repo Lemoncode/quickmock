@@ -29,7 +29,8 @@ export const getTableSizeRestrictions = (): ShapeSizeRestrictions =>
 const shapeType: ShapeType = 'table';
 
 export const Table = forwardRef<any, ShapeProps>((props, ref) => {
-  const { _x, _y, width, height, _id, _onSelected, text, ...shapeProps } = props;
+  const { _x, _y, width, height, _id, _onSelected, text, ...shapeProps } =
+    props;
 
   const restrictedSize = fitSizeToShapeSizeRestrictions(
     tableSizeRestrictions,

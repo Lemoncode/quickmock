@@ -1,21 +1,22 @@
-import React from 'react';
-import { Coord, OtherProps, ShapeModel, ShapeType, Size } from '#core/model';
-import { CanvasContext } from './canvas.context';
-import { useSelection } from './use-selection.hook';
-import { createShape } from '#pods/canvas/model';
 import { useHistoryManager } from '#common/undo-redo';
+import { Coord, OtherProps, ShapeModel, ShapeType, Size } from '#core/model';
+import { createShape } from '#pods/canvas/model';
+import { produce } from 'immer';
+import Konva from 'konva';
+import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { isPageIndexValid, removeShapesFromList } from './canvas.business';
+import { CanvasContext } from './canvas.context';
 import { useStateWithInterceptor } from './canvas.hook';
 import {
+  APP_CONSTANTS,
   createDefaultCanvasSize,
   createDefaultDocumentModel,
   DocumentModel,
 } from './canvas.model';
-import { v4 as uuidv4 } from 'uuid';
-import Konva from 'konva';
-import { isPageIndexValid, removeShapesFromList } from './canvas.business';
 import { useClipboard } from './use-clipboard.hook';
-import { produce } from 'immer';
-import { APP_CONSTANTS } from './canvas.model';
+import { useSelection } from './use-selection.hook';
+
 interface Props {
   children: React.ReactNode;
 }
@@ -339,7 +340,7 @@ export const CanvasProvider: React.FC<Props> = props => {
   };
 
   const [customColors, setCustomColors] = React.useState<(string | null)[]>(
-    new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null)
+    Array.from({ length: APP_CONSTANTS.COLOR_SLOTS }, () => null)
   );
 
   const updateColorSlot = (color: string, index: number) => {

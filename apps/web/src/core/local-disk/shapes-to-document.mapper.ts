@@ -1,11 +1,11 @@
 import { FONT_SIZE_VALUES } from '#common/components/mock-components/front-components/shape.const';
 import { ShapeModel } from '../model';
 import {
+  APP_CONSTANTS,
   createDefaultCanvasSize,
   DocumentModel,
 } from '../providers/canvas/canvas.model';
 import { Page, QuickMockFileContract } from './local-disk.model';
-import { APP_CONSTANTS } from '../providers/canvas/canvas.model';
 
 export const mapFromShapesArrayToQuickMockFileDocument = (
   fullDocument: DocumentModel
@@ -27,7 +27,7 @@ export const mapFromQuickMockFileDocumentToApplicationDocument = (
     pages: AdaptMinor_0_2_Updates(fileDocument.pages),
     customColors:
       fileDocument.customColors ||
-      new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+      Array.from({ length: APP_CONSTANTS.COLOR_SLOTS }, () => null),
     size: fileDocument.size ?? createDefaultCanvasSize(),
   };
 };
@@ -179,7 +179,7 @@ export const mapFromQuickMockFileDocumentToApplicationDocumentV0_1 = (
     ],
     customColors:
       fileDocument.customColors ||
-      new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+      Array.from({ length: APP_CONSTANTS.COLOR_SLOTS }, () => null),
     size: fileDocument.size,
   };
 };

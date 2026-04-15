@@ -1,15 +1,15 @@
-import {
-  mapFromShapesArrayToQuickMockFileDocument,
-  mapFromQuickMockFileDocumentToApplicationDocument,
-  mapFromQuickMockFileDocumentToApplicationDocumentV0_1,
-} from './shapes-to-document.mapper';
 import { ShapeModel } from '../model';
-import { QuickMockFileContract } from './local-disk.model';
 import {
+  APP_CONSTANTS,
   createDefaultCanvasSize,
   DocumentModel,
 } from '../providers/canvas/canvas.model';
-import { APP_CONSTANTS } from '../providers/canvas/canvas.model';
+import { QuickMockFileContract } from './local-disk.model';
+import {
+  mapFromQuickMockFileDocumentToApplicationDocument,
+  mapFromQuickMockFileDocumentToApplicationDocumentV0_1,
+  mapFromShapesArrayToQuickMockFileDocument,
+} from './shapes-to-document.mapper';
 
 describe('shapes to document mapper', () => {
   describe('mapFromShapesArrayToQuickMockFileDocument', () => {
@@ -37,7 +37,10 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
 
@@ -50,7 +53,10 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
       // Act
@@ -94,7 +100,10 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
 
@@ -107,7 +116,10 @@ describe('shapes to document mapper', () => {
             shapes: shapes,
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
 
@@ -131,7 +143,10 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
 
@@ -144,7 +159,10 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
       //act
@@ -165,7 +183,10 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
 
@@ -178,7 +199,10 @@ describe('shapes to document mapper', () => {
             shapes: [],
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
 
@@ -211,7 +235,10 @@ describe('shapes to document mapper', () => {
             ],
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
 
@@ -235,7 +262,10 @@ describe('shapes to document mapper', () => {
             ],
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
 
@@ -288,7 +318,10 @@ describe('shapes to document mapper', () => {
             shapes: shapesPageB,
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
 
@@ -306,7 +339,10 @@ describe('shapes to document mapper', () => {
             shapes: shapesPageB,
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
 
@@ -359,7 +395,10 @@ describe('shapes to document mapper', () => {
             shapes: shapesPageB,
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
 
@@ -372,7 +411,10 @@ describe('shapes to document mapper', () => {
             shapes: shapespageA.concat(shapesPageB),
           },
         ],
-        customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+        customColors: Array.from(
+          { length: APP_CONSTANTS.COLOR_SLOTS },
+          () => null
+        ),
         size: createDefaultCanvasSize(),
       };
 

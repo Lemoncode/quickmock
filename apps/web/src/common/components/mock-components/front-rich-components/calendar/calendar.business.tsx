@@ -14,7 +14,7 @@ export const getCurrentMonthDays = (date: Date) => {
   const startDay = new Date(year, date.getMonth(), 1).getDay();
 
   const days = [];
-  let week = new Array(startDay).fill(null); // Fill the first week with nulls up to the start day
+  let week: (number | null)[] = Array.from({ length: startDay }, () => null); // Fill the first week with nulls up to the start day
 
   for (let day = 1; day <= daysInMonth; day++) {
     week.push(day);

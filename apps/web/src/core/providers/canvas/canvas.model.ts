@@ -46,7 +46,7 @@ export const createDefaultDocumentModel = (): DocumentModel => ({
       shapes: [],
     },
   ],
-  customColors: new Array(APP_CONSTANTS.COLOR_SLOTS).fill(null),
+  customColors: Array.from({ length: APP_CONSTANTS.COLOR_SLOTS }, () => null),
   size: createDefaultCanvasSize(),
 });
 
