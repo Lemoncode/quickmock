@@ -1,7 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
 
-process.loadEnvFile('.env.test');
-
 const BASE_URL = 'http://localhost:5173/editor.html';
 
 export default defineConfig({
@@ -26,7 +24,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run dev',
+    command: 'npx vite --mode test',
     url: BASE_URL,
     reuseExistingServer: !process.env.CI,
   },
