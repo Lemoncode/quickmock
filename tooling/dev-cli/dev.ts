@@ -13,24 +13,30 @@ const main = async () => {
     process.exit(0);
   }
 
-  const selected = await p.multiselect({
-    message: 'Which packages to run in dev mode?',
-    options: devPackages.map(pkg => ({
-      value: pkg.name,
-      label: pkg.name,
-      hint: pkg.dir,
-    })),
-    required: true,
-  });
+  // Single package: skip prompt and auto-select
+  const selected: string[] =
+    devPackages.length === 1
+      ? [devPackages[0].name]
+      : await (async () => {
+          const result = await p.multiselect({
+            message: 'Which packages to run in dev mode?',
+            options: devPackages.map(pkg => ({
+              value: pkg.name,
+              label: pkg.name,
+              hint: pkg.dir,
+            })),
+            required: true,
+          });
 
-  if (p.isCancel(selected)) {
-    p.cancel('Cancelled.');
-    process.exit(0);
-  }
+          if (p.isCancel(result)) {
+            p.cancel('Cancelled.');
+            process.exit(0);
+          }
 
-  const filters = (selected as string[])
-    .map(name => `--filter=${name}...`)
-    .join(' ');
+          return result as string[];
+        })();
+
+  const filters = selected.map(name => `--filter=${name}...`).join(' ');
 
   p.outro(`Running: turbo dev check-types:watch ${filters}`);
 
