@@ -249,7 +249,9 @@ export const CanvasProvider: React.FC<Props> = props => {
     y: number,
     otherProps?: OtherProps
   ) => {
-    loadSampleDocument && setLoadSampleDocument(false);
+    if (loadSampleDocument) {
+      setLoadSampleDocument(false);
+    }
     if (!isPageIndexValid(document)) {
       return '';
     }
@@ -334,7 +336,7 @@ export const CanvasProvider: React.FC<Props> = props => {
 
   const loadDocument = (document: DocumentModel) => {
     setDocumentAndMarkDirtyState(document, false);
-    loadSampleDocument && setLoadSampleDocument(false);
+    if (loadSampleDocument) setLoadSampleDocument(false);
     setDocument(document);
     setHowManyLoadedDocuments(numberOfDocuments => numberOfDocuments + 1);
     setCustomColors(document.customColors);
