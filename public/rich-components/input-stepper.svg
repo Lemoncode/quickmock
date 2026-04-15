@@ -3,7 +3,7 @@
   <rect x="10" y="10" width="60" height="30" style="fill:white;stroke:black;stroke-width:2"/>
 
   <!-- Texto del input -->
-  <text x="60" y="30" font-family="Arial" font-size="16" fill="black" text-anchor="end">0</text>
+  <text x="15" y="30" font-family="Arial" font-size="16" fill="black" text-anchor="start">0</text>
 
   <!-- Botón de incremento (flecha arriba) -->
   <rect x="70" y="10" width="20" height="15" style="fill:lightgray;stroke:black;stroke-width:2"/>

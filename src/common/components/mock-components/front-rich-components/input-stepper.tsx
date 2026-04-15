@@ -66,14 +66,14 @@ export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
 
       {/* Texto del input */}
       <Text
-        x={0} // Alinear a la derecha
+        x={INPUT_SHAPE.DEFAULT_PADDING}
         y={height / 2 - 8} // Centrar verticalmente
-        width={restrictedWidth}
+        width={restrictedWidth - INPUT_SHAPE.DEFAULT_PADDING * 2}
         text={text}
         fontFamily="Arial"
         fontSize={16}
         fill={textColor}
-        align="center"
+        align="left"
         wrap="none"
       />
 
