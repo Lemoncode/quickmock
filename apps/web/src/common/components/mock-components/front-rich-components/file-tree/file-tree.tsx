@@ -1,36 +1,25 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { useShapeProps } from '#common/components/shapes/use-shape-props.hook';
+import { loadSvgWithFill } from '#common/utils/svg.utils';
+import { ShapeType } from '#core/model';
 import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { Group, Image, Rect, Text } from 'react-konva';
-import { ShapeProps } from '../../shape.model';
-import { useGroupShapeProps } from '../../mock-components.utils';
-import { loadSvgWithFill } from '#common/utils/svg.utils';
-import { useShapeProps } from '#common/components/shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
+import { useGroupShapeProps } from '../../mock-components.utils';
+import { ShapeProps } from '../../shape.model';
+import { useFileTreeResize } from './file-tree-resize.hook';
 import {
   calculateFileTreeDynamicSize,
   getFileTreeSizeValues,
   parseFileTreeText,
 } from './file-tree.business';
-import { useFileTreeResize } from './file-tree-resize.hook';
 import { FileTreeItem } from './file-tree.model';
-
-const fileTreeShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 150,
-  minHeight: 50,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 230,
-  defaultHeight: 180,
-};
+import { fileTreeShapeRestrictions } from './file-tree.restrictions';
 
 interface FileTreeShapeProps extends ShapeProps {
   text: string;
 }
 
 const shapeType: ShapeType = 'fileTree';
-
-export const getFileTreeShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  fileTreeShapeRestrictions;
 
 export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
   (props, ref) => {

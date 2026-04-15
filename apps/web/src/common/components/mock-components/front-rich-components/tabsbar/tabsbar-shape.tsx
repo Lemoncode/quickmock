@@ -1,22 +1,11 @@
+import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
-import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
-import { ShapeProps } from '../../shape.model';
 import { useGroupShapeProps } from '../../mock-components.utils';
+import { ShapeProps } from '../../shape.model';
 import { useTabList } from './tab-list.hook';
-
-const tabsBarShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 450,
-  minHeight: 150,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 450,
-  defaultHeight: 180,
-};
-
-export const getTabsBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  tabsBarShapeSizeRestrictions;
+import { tabsBarShapeSizeRestrictions } from './tabsbar-shape.restrictions';
 
 const shapeType: ShapeType = 'tabsBar';
 

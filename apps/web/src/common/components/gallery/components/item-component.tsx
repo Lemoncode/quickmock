@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { createRoot } from 'react-dom/client';
+import { ShapeDisplayName, ShapeType } from '#core/model';
 import { draggable } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import { setCustomNativeDragPreview } from '@atlaskit/pragmatic-drag-and-drop/element/set-custom-native-drag-preview';
+import { useEffect, useRef, useState } from 'react';
+import { createRoot } from 'react-dom/client';
 import invariant from 'tiny-invariant';
-import { ShapeDisplayName, ShapeType } from '#core/model';
-import { ItemInfo } from './model';
 import classes from './item-component.module.css';
+import { ItemInfo } from './model';
 
 interface Props {
   item: ItemInfo;
@@ -83,6 +83,7 @@ const Preview: React.FC<Props> = props => {
 
   return (
     <img
+      alt={ShapeDisplayName[item.type as ShapeType]}
       src={item.thumbnailSrc}
       style={{
         width: 'var(--gallery-item-size)',

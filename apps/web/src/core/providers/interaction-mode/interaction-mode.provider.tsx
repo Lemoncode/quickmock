@@ -1,7 +1,7 @@
 import React from 'react';
-import { InteractionMode } from './interaction-mode.model';
+import { useCanvasContext } from '../canvas/canvas.provider';
 import { InteractionModeContext } from './interaction-mode.context';
-import { useCanvasContext } from '../canvas';
+import { InteractionMode } from './interaction-mode.model';
 
 interface Props {
   children: React.ReactNode;

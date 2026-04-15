@@ -1,6 +1,6 @@
 import { SettingsIcon } from '#common/components/icons/';
 import { useModalDialogContext } from '#core/providers/model-dialog-providers/model-dialog.provider';
-import { SettingsPod } from '#pods';
+import { SettingsPod } from '#pods/settings/settings.pod';
 import { ToolbarButton } from '#pods/toolbar/components/toolbar-button/toolbar-button';
 import classes from '#pods/toolbar/toolbar.pod.module.css';
 import { SHORTCUTS } from '../../shortcut/shortcut.const';

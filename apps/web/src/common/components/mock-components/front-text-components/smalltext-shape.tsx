@@ -1,24 +1,13 @@
+import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { Group, Text } from 'react-konva';
-import { ShapeProps } from '../shape.model';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
-import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { ShapeProps } from '../shape.model';
 import { useResizeOnFontSizeChange } from './front-text-hooks/resize-fontsize-change.hook';
-
-const smalltextSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: BASIC_SHAPE.DEFAULT_MIN_WIDTH,
-  minHeight: 20,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 375,
-  defaultHeight: 25,
-};
-
-export const getSmalltextSizeRestrictions = (): ShapeSizeRestrictions =>
-  smalltextSizeRestrictions;
+import { smalltextSizeRestrictions } from './smalltext-shape.restrictions';
 
 const shapeType: ShapeType = 'smalltext';
 

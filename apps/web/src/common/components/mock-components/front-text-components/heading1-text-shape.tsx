@@ -1,24 +1,13 @@
+import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { Group, Text } from 'react-konva';
-import { ShapeProps } from '../shape.model';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
-import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { ShapeProps } from '../shape.model';
 import { useResizeOnFontSizeChange } from './front-text-hooks/resize-fontsize-change.hook';
-
-const heading1SizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 40,
-  minHeight: 20,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 150,
-  defaultHeight: 25,
-};
-
-export const getHeading1SizeRestrictions = (): ShapeSizeRestrictions =>
-  heading1SizeRestrictions;
+import { heading1SizeRestrictions } from './heading1-text-shape.restrictions';
 
 const shapeType: ShapeType = 'heading1';
 

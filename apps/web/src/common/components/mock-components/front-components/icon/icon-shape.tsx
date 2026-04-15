@@ -1,26 +1,15 @@
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
-import { BASE_ICONS_URL, ShapeSizeRestrictions, ShapeType } from '#core/model';
-import { forwardRef, useRef, useState, useEffect } from 'react';
-import { Group, Image } from 'react-konva';
-import { ShapeProps } from '../../shape.model';
+import { loadSvgWithFill } from '#common/utils/svg.utils';
+import { BASE_ICONS_URL, ShapeType } from '#core/model';
+import { useCanvasContext } from '#core/providers';
 import { useModalDialogContext } from '#core/providers/model-dialog-providers/model-dialog.provider';
 import { IconModal } from '#pods/properties/components/icon-selector/modal';
-import { useCanvasContext } from '#core/providers';
+import { forwardRef, useEffect, useRef, useState } from 'react';
+import { Group, Image } from 'react-konva';
 import { useGroupShapeProps } from '../../mock-components.utils';
+import { ShapeProps } from '../../shape.model';
 import { returnIconSize } from './icon-shape.business';
-import { loadSvgWithFill } from '#common/utils/svg.utils';
-
-const iconShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 25,
-  minHeight: 25,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 150,
-  defaultHeight: 150,
-};
-
-export const getIconShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  iconShapeRestrictions;
+import { iconShapeRestrictions } from './icon-shape.restrictions';
 
 const shapeType: ShapeType = 'icon';
 

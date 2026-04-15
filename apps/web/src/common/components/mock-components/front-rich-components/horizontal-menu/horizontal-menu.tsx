@@ -1,31 +1,20 @@
-import { Group, Rect, Text } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
-import { forwardRef } from 'react';
-import { ShapeProps } from '../../shape.model';
-import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
-import { BASIC_SHAPE } from '../../front-components/shape.const';
-import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import {
   extractCSVHeaders,
   splitCSVContentIntoRows,
 } from '#common/utils/active-element-selector.utils';
-import { useGroupShapeProps } from '../../mock-components.utils';
+import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
+import { ShapeType } from '#core/model';
+import { forwardRef } from 'react';
+import { Group, Rect, Text } from 'react-konva';
+import { useShapeProps } from '../../../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from '../../front-components/shape.const';
 import {
   MultipleItemsInfo,
   useResizeOnFontSizeChange,
 } from '../../front-text-components/front-text-hooks/resize-fontsize-change.hook';
-
-const horizontalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 200,
-  minHeight: 50,
-  maxWidth: -1,
-  maxHeight: 100,
-  defaultWidth: 500,
-  defaultHeight: 50,
-};
-
-export const getHorizontalMenuShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => horizontalMenuShapeSizeRestrictions;
+import { useGroupShapeProps } from '../../mock-components.utils';
+import { ShapeProps } from '../../shape.model';
+import { horizontalMenuShapeSizeRestrictions } from './horizontal-menu.restrictions';
 
 const shapeType: ShapeType = 'horizontal-menu';
 
