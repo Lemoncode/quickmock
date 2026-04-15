@@ -1,9 +1,9 @@
-import React from 'react';
-import classes from './thumb-pages.module.css';
-import { useCanvasContext, useInteractionModeContext } from '#core/providers';
-import { PageTitleInlineEdit, ThumbPage } from './components';
 import { PlusIcon } from '#common/components/icons';
+import { useCanvasContext, useInteractionModeContext } from '#core/providers';
+import React from 'react';
+import { PageTitleInlineEdit, ThumbPage } from './components';
 import { useMonitorDropThumb } from './monitor-drop-thumb.hook';
+import classes from './thumb-pages.module.css';
 
 interface Props {
   isVisible: boolean;
@@ -54,7 +54,9 @@ export const ThumbPagesPod: React.FC<Props> = props => {
             ) : (
               <div
                 onDoubleClick={() => {
-                  interactionMode === 'edit' && setPageTitleBeingEdited(index);
+                  if (interactionMode === 'edit') {
+                    setPageTitleBeingEdited(index);
+                  }
                 }}
                 className={
                   page.id === getActivePage().id ? classes.activeText : ''

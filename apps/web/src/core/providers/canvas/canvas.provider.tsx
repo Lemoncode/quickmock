@@ -174,7 +174,9 @@ export const CanvasProvider: React.FC<Props> = props => {
   };
 
   const pasteShapes = (shapes: ShapeModel[]) => {
-    loadSampleDocument && setLoadSampleDocument(false);
+    if (loadSampleDocument) {
+      setLoadSampleDocument(false);
+    }
     const newShapes: ShapeModel[] = shapes.map(shape => {
       shape.id = uuidv4();
       return shape;
