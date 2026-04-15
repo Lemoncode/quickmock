@@ -266,6 +266,11 @@ export const generateDefaultOtherProps = (
         iconSize: 'M',
         stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
       };
+    case 'mouseCursor':
+      return {
+        stroke: BASIC_SHAPE.DEFAULT_STROKE_COLOR,
+        iconSize: 'M',
+      };
     case 'image':
       return {
         imageSrc: '',
