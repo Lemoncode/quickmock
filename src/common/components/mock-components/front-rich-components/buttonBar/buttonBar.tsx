@@ -10,6 +10,7 @@ import {
   splitCSVContentIntoRows,
 } from '@/common/utils/active-element-selector.utils';
 import { useGroupShapeProps } from '../../mock-components.utils';
+import { useResizeOnFontSizeChange } from '../../front-text-components/front-text-hooks/resize-fontsize-change.hook';
 
 const buttonBarShapeSizeRestrictions: ShapeSizeRestrictions = {
   minWidth: 200,
@@ -49,13 +50,11 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const csvData = splitCSVContentIntoRows(text);
   const headers = extractCSVHeaders(csvData[0]);
   const tabLabels = headers.map(header => header.text);
-
+  const verticalPadding = 8;
   const dynamicTabWidth = restrictedWidth / tabLabels.length;
 
-  const { stroke, strokeStyle, fill, textColor } = useShapeProps(
-    otherProps,
-    BASIC_SHAPE
-  );
+  const { stroke, strokeStyle, fill, textColor, fontSize, fontVariant } =
+    useShapeProps(otherProps, BASIC_SHAPE);
 
   const activeTab = otherProps?.activeElement ?? 0;
 
@@ -65,6 +64,7 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>((props, ref) => {
     shapeType,
     ref
   );
+  useResizeOnFontSizeChange(id, { x, y }, text, fontSize, fontVariant);
 
   return (
     <Group {...commonGroupProps} {...shapeProps}>
@@ -72,7 +72,7 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>((props, ref) => {
         <Group key={index} x={index * dynamicTabWidth}>
           <Rect
             width={dynamicTabWidth}
-            height={restrictedHeight}
+            height={restrictedHeight - verticalPadding}
             fill={index === activeTab ? 'lightblue' : fill}
             stroke={stroke}
             strokeWidth={1}
@@ -80,14 +80,14 @@ export const ButtonBarShape = forwardRef<any, ShapeProps>((props, ref) => {
           />
           <Text
             x={0}
-            y={18}
+            y={restrictedHeight / 2 - fontSize / 2}
             width={dynamicTabWidth - 20}
             height={restrictedHeight - 20}
             ellipsis={true}
             wrap="none"
             text={header} // Use the header text
             fontFamily="Arial"
-            fontSize={16}
+            fontSize={fontSize}
             fill={textColor}
             align="center"
           />

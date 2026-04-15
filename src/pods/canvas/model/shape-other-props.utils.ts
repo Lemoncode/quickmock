@@ -111,6 +111,8 @@ export const generateDefaultOtherProps = (
         textColor: BASIC_SHAPE.DEFAULT_FILL_TEXT,
         strokeStyle: [],
         activeElement: 0,
+        fontSize: FONT_SIZE_VALUES.NORMALTEXT,
+        fontVariant: `${INPUT_SHAPE.DEFAULT_FONT_VARIANT}`,
       };
     case 'largeArrow':
       return {
