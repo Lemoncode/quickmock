@@ -16,22 +16,28 @@ const main = async () => {
     process.exit(0);
   }
 
-  const selected = await p.multiselect({
-    message: 'Which packages to test in watch mode?',
-    options: testPackages.map(pkg => ({
-      value: pkg.name,
-      label: pkg.name,
-      hint: pkg.dir,
-    })),
-    required: true,
-  });
+  // Single package: skip prompt and auto-select
+  const names: string[] =
+    testPackages.length === 1
+      ? [testPackages[0].name]
+      : await (async () => {
+          const result = await p.multiselect({
+            message: 'Which packages to test in watch mode?',
+            options: testPackages.map(pkg => ({
+              value: pkg.name,
+              label: pkg.name,
+              hint: pkg.dir,
+            })),
+            required: true,
+          });
 
-  if (p.isCancel(selected)) {
-    p.cancel('Cancelled.');
-    process.exit(0);
-  }
+          if (p.isCancel(result)) {
+            p.cancel('Cancelled.');
+            process.exit(0);
+          }
 
-  const names = selected as string[];
+          return result as string[];
+        })();
 
   // Single package: spawn vitest directly for interactive stdin (keyboard shortcuts)
   if (names.length === 1) {
