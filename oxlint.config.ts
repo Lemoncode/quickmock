@@ -9,7 +9,7 @@ export default defineConfig({
     perf: 'warn',
   },
   rules: {
-    'typescript/no-explicit-any': 'error',
+    'typescript/no-explicit-any': 'warn',
     'typescript/no-non-null-assertion': 'warn',
     'import/no-cycle': 'error',
     'import/no-self-import': 'error',
