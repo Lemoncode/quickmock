@@ -1,0 +1,13 @@
+{
+  "name": "@lemoncode/vitest-config",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    "./base": "./base.ts"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.4",
+    "@vitest/coverage-v8": "^4.1.4"
+  }
+}

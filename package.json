@@ -1,63 +1,32 @@
 {
-  "name": "quickmock",
+  "name": "@lemoncode/monorepo",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "packageManager": "npm@11.9.0",
+  "engines": {
+    "node": ">=24",
+    "npm": ">=11"
+  },
+  "workspaces": [
+    "apps/*",
+    "tooling/*"
+  ],
   "scripts": {
-    "postinstall": "npm run install:e2e-browsers",
+    "start": "node --run dev",
+    "dev": "tsx tooling/dev-cli/dev.ts",
+    "build": "turbo build",
+    "test": "turbo test",
+    "test:watch": "tsx tooling/dev-cli/test-watch.ts",
+    "test:coverage": "turbo test:coverage",
+    "check-types": "turbo check-types",
+    "e2e": "turbo e2e",
+    "ci:e2e": "turbo ci:e2e",
     "install:e2e-browsers": "npx playwright install",
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "test": "vitest",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "prepare": "husky || \"No need to install husky\"",
-    "tsc-check": "tsc --noEmit",
-    "e2e": "playwright test --ui",
-    "ci:e2e": "playwright test"
-  },
-  "dependencies": {
-    "@atlaskit/pragmatic-drag-and-drop": "^1.2.1",
-    "@fontsource-variable/montserrat": "^5.0.20",
-    "@fontsource/balsamiq-sans": "^5.0.21",
-    "@types/lodash.clonedeep": "^4.5.9",
-    "@uiw/react-color-chrome": "^2.3.2",
-    "html2canvas": "^1.4.1",
-    "immer": "^10.1.1",
-    "konva": "^9.3.12",
-    "lodash.clonedeep": "^4.5.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-konva": "^18.2.10",
-    "react-konva-utils": "^1.0.6",
-    "tiny-invariant": "^1.3.3",
-    "use-debounce": "^10.0.4",
-    "use-image": "^1.1.1",
-    "uuid": "^10.0.0"
-  },
-  "devDependencies": {
-    "@dotenvx/dotenvx": "^1.14.2",
-    "@playwright/test": "^1.47.2",
-    "@types/jest": "^29.5.12",
-    "@types/node": "^22.5.5",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@types/uuid": "^10.0.0",
-    "@types/wicg-file-system-access": "^2023.10.5",
-    "@typescript-eslint/eslint-plugin": "^7.13.1",
-    "@typescript-eslint/parser": "^7.13.1",
-    "@vitejs/plugin-react": "^4.3.1",
-    "eslint": "^8.57.0",
-    "eslint-plugin-prettier": "^5.1.3",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
-    "husky": "^9.0.11",
-    "jsdom": "^24.1.0",
-    "lint-staged": "^15.2.7",
-    "prettier": "^3.3.2",
-    "typescript": "^5.2.2",
-    "vite": "^5.3.1",
-    "vitest": "^1.6.0"
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky || \"No need to install husky\""
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -66,5 +35,14 @@
     "*.css": [
       "prettier --write"
     ]
+  },
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "oxlint": "^1.60.0",
+    "prettier": "^3.8.3",
+    "tsx": "^4.21.0",
+    "turbo": "^2.9.6",
+    "typescript": "^6.0.2"
   }
 }
