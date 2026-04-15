@@ -149,7 +149,7 @@ export const addComponentsWithDifferentCategoriesToCanvas = async (
       const errorMessage =
         error instanceof Error ? error.message : String(error);
       throw new Error(
-        `Failed to add component "${componentConfig.name}" from category "${componentConfig.category || 'default'}": ${errorMessage}`
+        `Failed to add component "${componentConfig.name}" from category "${componentConfig.category || 'default'}": ${errorMessage}`, { cause: error }
       );
     }
   }

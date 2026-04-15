@@ -23,15 +23,15 @@ export const getAppBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
 
 export const AppBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
-    x,
-    y,
+    _x,
+    _y,
     width,
     height,
-    title,
-    id,
+    _title,
+    _id,
     text,
     otherProps,
-    onSelected,
+    _onSelected,
     ...shapeProps
   } = props;
   const restrictedSize = fitSizeToShapeSizeRestrictions(

@@ -87,7 +87,7 @@ export const ThumbPage: React.FunctionComponent<Props> = props => {
     return () => {
       window.removeEventListener('resize', handleResizeAndForceRedraw);
     };
-  }, [divRef.current]);
+  }, []);
 
   const {
     showContextMenu,

@@ -21,7 +21,7 @@ export const getBrowserWindowShapeSizeRestrictions =
 const shapeType: ShapeType = 'browser';
 
 export const BrowserWindowShape = forwardRef<any, ShapeProps>((props, ref) => {
-  const { x, y, width, height, id, onSelected, text, ...shapeProps } = props;
+  const { _x, _y, width, height, _id, _onSelected, text, ...shapeProps } = props;
   const restrictedSize = fitSizeToShapeSizeRestrictions(
     browserWindowShapeSizeRestrictions,
     width,

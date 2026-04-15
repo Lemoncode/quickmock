@@ -15,7 +15,7 @@ const getLayer = async (page: Page): Promise<Layer> =>
 const getChildren = async (page: Page): Promise<(Group | Shape)[]> => {
   const layer = await getLayer(page);
   return layer?.children.flatMap(child =>
-    Boolean((child as any)?.children) ? (child as any).children : child
+    (child as any)?.children ? (child as any).children : child
   );
 };
 

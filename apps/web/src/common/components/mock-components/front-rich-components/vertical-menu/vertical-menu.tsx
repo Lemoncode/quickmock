@@ -33,14 +33,14 @@ const shapeType: ShapeType = 'vertical-menu';
 export const VerticalMenuShape = forwardRef<any, VerticalMenuShapeProps>(
   (props, ref) => {
     const {
-      x,
-      y,
+      _x,
+      _y,
       width,
       height,
-      id,
-      onSelected,
+      _id,
+      _onSelected,
       text,
-      separator = 'black',
+      _separator = 'black',
       otherProps,
       ...shapeProps
     } = props;

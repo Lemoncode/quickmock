@@ -25,13 +25,13 @@ const shapeType: ShapeType = 'mouseCursor';
 
 export const MouseCursorShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
-    x,
-    y,
-    width,
-    height,
-    id,
-    onSelected,
-    text,
+    _x,
+    _y,
+    _width,
+    _height,
+    _id,
+    _onSelected,
+    _text,
     iconSize,
     otherProps,
     ...shapeProps

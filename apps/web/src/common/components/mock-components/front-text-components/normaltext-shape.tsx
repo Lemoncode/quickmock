@@ -29,7 +29,7 @@ export const NormaltextShape = forwardRef<any, ShapeProps>((props, ref) => {
     width,
     height,
     id,
-    onSelected,
+    _onSelected,
     text,
     otherProps,
     ...shapeProps

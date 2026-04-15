@@ -26,12 +26,12 @@ const shapeType: ShapeType = 'icon';
 
 export const SvgIcon = forwardRef<any, ShapeProps>((props, ref) => {
   const {
-    x,
-    y,
-    width,
-    height,
-    id,
-    onSelected,
+    _x,
+    _y,
+    _width,
+    _height,
+    _id,
+    _onSelected,
     iconInfo,
     iconSize,
     stroke,

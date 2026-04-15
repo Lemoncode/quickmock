@@ -22,7 +22,7 @@ export const getMobilePhoneShapeSizeRestrictions = (): ShapeSizeRestrictions =>
 const shapeType: ShapeType = 'mobilePhone';
 
 export const MobilePhoneShape = forwardRef<any, ShapeProps>((props, ref) => {
-  const { x, y, width, height, id, onSelected, ...shapeProps } = props;
+  const { _x, _y, width, height, _id, _onSelected, ...shapeProps } = props;
   const restrictedSize = fitSizeToShapeSizeRestrictions(
     mobilePhoneShapeSizeRestrictions,
     width,

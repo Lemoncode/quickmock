@@ -14,13 +14,14 @@ export default defineConfig({
     'import/no-cycle': 'error',
     'import/no-self-import': 'error',
     'unicorn/no-null': 'off',
-    'unicorn/prevent-abbreviations': 'off',
+    'unicorn/no-useless-spread': 'off',
   },
   overrides: [
     {
       files: ['apps/web/**/*.{ts,tsx}'],
       plugins: ['react', 'jsx-a11y'],
       rules: {
+        'react/react-in-jsx-scope': 'off',
         'react/no-direct-mutation-state': 'error',
         'react/jsx-no-target-blank': 'error',
         'jsx-a11y/alt-text': 'error',

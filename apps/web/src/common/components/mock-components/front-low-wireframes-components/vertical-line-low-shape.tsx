@@ -24,13 +24,13 @@ const shapeType: ShapeType = 'verticalLineLow';
 export const VerticalLineLowShape = forwardRef<any, ShapeProps>(
   (props, ref) => {
     const {
-      x,
-      y,
+      _x,
+      _y,
       width,
       height,
-      id,
-      onSelected,
-      text,
+      _id,
+      _onSelected,
+      _text,
       otherProps,
       ...shapeProps
     } = props;

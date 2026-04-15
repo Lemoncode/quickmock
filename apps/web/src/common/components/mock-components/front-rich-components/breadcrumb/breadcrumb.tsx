@@ -25,12 +25,12 @@ export const getBreadcrumbShapeSizeRestrictions = (): ShapeSizeRestrictions =>
 
 export const BreadcrumbShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
-    x,
-    y,
-    id,
-    width,
-    height,
-    onSelected,
+    _x,
+    _y,
+    _id,
+    _width,
+    _height,
+    _onSelected,
     text,
     otherProps,
     ...shapeProps

@@ -23,12 +23,12 @@ const shapeType: ShapeType = 'label';
 
 export const LabelShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
-    x,
-    y,
+    _x,
+    _y,
     width,
     height,
-    id,
-    onSelected,
+    _id,
+    _onSelected,
     text,
     otherProps,
     ...shapeProps

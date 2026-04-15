@@ -23,7 +23,7 @@ export const getLineChartShapeSizeRestrictions = (): ShapeSizeRestrictions =>
 const shapeType: ShapeType = 'linechart';
 
 export const LineChartShape = forwardRef<any, ShapeProps>((props, ref) => {
-  const { x, y, width, height, id, onSelected, ...shapeProps } = props;
+  const { _x, _y, width, height, _id, _onSelected, ...shapeProps } = props;
   const restrictedSize = fitSizeToShapeSizeRestrictions(
     LineChartShapeSizeRestrictions,
     width,

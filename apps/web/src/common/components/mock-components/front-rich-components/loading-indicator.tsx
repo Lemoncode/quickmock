@@ -22,7 +22,7 @@ export const getLoadIndicatorSizeRestrictions = (): ShapeSizeRestrictions =>
   LoadIndicatorSizeRestrictions;
 
 export const LoadIndicator = forwardRef<any, ShapeProps>((props, ref) => {
-  const { x, y, width, height, otherProps, ...shapeProps } = props;
+  const { _x, _y, width, height, otherProps, ...shapeProps } = props;
 
   const restrictedSize = {
     width: width || LoadIndicatorSizeRestrictions.defaultWidth,

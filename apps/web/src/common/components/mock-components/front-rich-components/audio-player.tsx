@@ -21,7 +21,7 @@ export const getAudioPlayerShapeSizeRestrictions = (): ShapeSizeRestrictions =>
 const shapeType: ShapeType = 'audioPlayer';
 
 export const AudioPlayerShape = forwardRef<any, ShapeProps>((props, ref) => {
-  const { x, y, width, height, id, onSelected, ...shapeProps } = props;
+  const { _x, _y, width, height, _id, _onSelected, ...shapeProps } = props;
 
   const restrictedSize = fitSizeToShapeSizeRestrictions(
     AudioPlayerShapeSizeRestrictions,

@@ -30,12 +30,12 @@ const marginText = 3;
 
 export const CheckBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
-    x,
-    y,
+    _x,
+    _y,
     width,
     height,
-    id,
-    onSelected,
+    _id,
+    _onSelected,
     text,
     otherProps,
     ...shapeProps

@@ -40,7 +40,7 @@ export const FileTreeShape = forwardRef<any, FileTreeShapeProps>(
       width,
       height,
       id,
-      onSelected,
+      _onSelected,
       text,
       otherProps,
       ...shapeProps

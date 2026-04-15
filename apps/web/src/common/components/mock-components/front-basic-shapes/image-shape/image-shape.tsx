@@ -23,7 +23,7 @@ export const getImageShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   imageShapeRestrictions;
 
 export const ImageShape = forwardRef<any, ShapeProps>((props, ref) => {
-  const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
+  const { _x, _y, width, height, _id, _onSelected, otherProps, ...shapeProps } =
     props;
   const restrictedSize = fitSizeToShapeSizeRestrictions(
     imageShapeRestrictions,

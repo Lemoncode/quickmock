@@ -10,7 +10,7 @@ export const parseTextWithFormatting = (text: string): string => {
   parsedText = parsedText.replace(/_(.*?)_/g, '<em>$1</em>');
 
   // Replace ~text~ <u>text</u>
-  parsedText = parsedText.replace(/\~(.*?)\~/g, '<u>$1</u>');
+  parsedText = parsedText.replace(/~(.*?)~/g, '<u>$1</u>');
 
   return parsedText;
 };

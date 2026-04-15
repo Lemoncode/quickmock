@@ -23,13 +23,13 @@ const shapeType: ShapeType = 'chip';
 
 export const ChipShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
-    x,
-    y,
+    _x,
+    _y,
     width,
     height,
-    id,
+    _id,
     text,
-    onSelected,
+    _onSelected,
     otherProps,
     ...shapeProps
   } = props;

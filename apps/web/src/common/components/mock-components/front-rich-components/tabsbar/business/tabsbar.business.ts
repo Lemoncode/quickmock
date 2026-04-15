@@ -56,7 +56,7 @@ export const adjustTabWidths = (args: {
   );
 
   // This order is necessary to build layer by layer the new sizes
-  const ascendentTabList = arrangeTabsInfo.sort(
+  const ascendentTabList = arrangeTabsInfo.toSorted(
     (a, b) => a.desiredWidth - b.desiredWidth
   );
 

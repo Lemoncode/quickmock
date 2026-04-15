@@ -26,7 +26,7 @@ export const getFabButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   fabButtonShapeRestrictions;
 
 export const FabButtonShape = forwardRef<any, ShapeProps>((props, ref) => {
-  const { x, y, width, height, id, onSelected, otherProps, ...shapeProps } =
+  const { _x, _y, width, height, _id, _onSelected, otherProps, ...shapeProps } =
     props;
 
   const [iconImage, setIconImage] = useState<HTMLImageElement | null>(null);

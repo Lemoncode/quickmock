@@ -22,7 +22,7 @@ export const getInputStepperShapeSizeRestrictions = (): ShapeSizeRestrictions =>
   inputStepperShapeRestrictions;
 
 export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
-  const { x, y, width, height, text, onSelect, otherProps, id, ...shapeProps } =
+  const { _x, _y, width, height, text, _onSelect, otherProps, _id, ...shapeProps } =
     props;
 
   const inputWidth = width - 30; // Reservar espacio para el stepper

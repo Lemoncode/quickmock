@@ -21,14 +21,14 @@ const shapeType = 'modalCover';
 
 export const ModalCoverShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {
-    x,
-    y,
+    _x,
+    _y,
     width,
     height,
-    id,
-    onSelected,
-    text,
-    otherProps,
+    _id,
+    _onSelected,
+    _text,
+    _otherProps,
     ...shapeProps
   } = props;
 
