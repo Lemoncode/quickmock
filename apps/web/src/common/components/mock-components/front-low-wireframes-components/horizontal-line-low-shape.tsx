@@ -1,23 +1,12 @@
 import { forwardRef } from 'react';
 import { Group, Line, Rect } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { ShapeProps } from '../shape.model';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const horizontalLineLowShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 30,
-  minHeight: 10,
-  maxWidth: -1,
-  maxHeight: 10,
-  defaultWidth: 200,
-  defaultHeight: 10,
-};
-
-export const getHorizontalLineLowShapeRestrictions =
-  (): ShapeSizeRestrictions => horizontalLineLowShapeRestrictions;
+import { horizontalLineLowShapeRestrictions } from './horizontal-line-low-shape.restrictions';
 
 const shapeType: ShapeType = 'horizontalLine';
 

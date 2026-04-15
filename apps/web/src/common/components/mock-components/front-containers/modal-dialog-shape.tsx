@@ -1,22 +1,11 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
 import { BASIC_SHAPE } from '../front-components/shape.const';
-
-const modalDialogShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 250,
-  minHeight: 150,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 500,
-  defaultHeight: 300,
-};
-
-export const getModalDialogShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  modalDialogShapeSizeRestrictions;
+import { modalDialogShapeSizeRestrictions } from './modal-dialog-shape.restrictions';
 
 const shapeType: ShapeType = 'modalDialog';
 

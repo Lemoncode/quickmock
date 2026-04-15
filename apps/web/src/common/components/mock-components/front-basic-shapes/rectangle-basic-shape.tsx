@@ -1,4 +1,3 @@
-import { ShapeSizeRestrictions } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -6,18 +5,7 @@ import { Group, Rect } from 'react-konva';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const rectangleShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 10,
-  minHeight: 10,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 160,
-  defaultHeight: 160,
-};
-
-export const getRectangleShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  rectangleShapeRestrictions;
+import { rectangleShapeRestrictions } from './rectangle-basic-shape.restrictions';
 
 const shapeType = 'rectangle';
 

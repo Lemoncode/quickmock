@@ -1,24 +1,13 @@
 import { forwardRef, useMemo } from 'react';
 import { Group, Line, Circle, Rect } from 'react-konva';
 import { ShapeProps } from '../shape.model';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const LineChartShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 100,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 250,
-  defaultHeight: 200,
-};
+import { LineChartShapeSizeRestrictions } from './line-chart.restrictions';
 
 const LINE_CHART_WIDTH = 350;
 const LINE_CHART_HEIGHT = 250;
-
-export const getLineChartShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  LineChartShapeSizeRestrictions;
 
 const shapeType: ShapeType = 'linechart';
 

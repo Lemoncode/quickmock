@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -6,20 +6,9 @@ import { Circle, Group, Rect } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from './shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const toggleSwitchShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 50,
-  minHeight: 25,
-  maxWidth: 100,
-  maxHeight: 35,
-  defaultWidth: 60,
-  defaultHeight: 25,
-};
+import { toggleSwitchShapeRestrictions } from './toggleswitch-shape.restrictions';
 
 const shapeType: ShapeType = 'toggleswitch';
-
-export const getToggleSwitchShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  toggleSwitchShapeRestrictions;
 
 export const ToggleSwitch = forwardRef<any, ShapeProps>((props, ref) => {
   const { _x, _y, width, height, _id, _onSelected, otherProps, ...shapeProps } =

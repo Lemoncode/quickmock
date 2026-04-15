@@ -1,25 +1,14 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../shape.model';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const AppBarShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 155,
-  minHeight: 38,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 250,
-  defaultHeight: BASIC_SHAPE.DEFAULT_TEXT_HEIGHT,
-};
+import { AppBarShapeSizeRestrictions } from './appBar.restrictions';
 
 const shapeType: ShapeType = 'appBar';
-
-export const getAppBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  AppBarShapeSizeRestrictions;
 
 export const AppBarShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {

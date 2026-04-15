@@ -1,27 +1,17 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
-import { forwardRef } from 'react';
-import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
-import { Group, Rect, Line, Text } from 'react-konva';
+import { ShapeType } from '#core/model';
+import { forwardRef } from 'react';
+import { Group, Line, Rect, Text } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from './shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const CHECKBOX_DEFAULT_HEIGHT = 20;
-
-const checkBoxShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: CHECKBOX_DEFAULT_HEIGHT,
-  maxWidth: -1,
-  maxHeight: CHECKBOX_DEFAULT_HEIGHT,
-  defaultWidth: BASIC_SHAPE.DEFAULT_TEXT_WIDTH,
-  defaultHeight: CHECKBOX_DEFAULT_HEIGHT,
-};
+import { ShapeProps } from '../shape.model';
+import {
+  CHECKBOX_DEFAULT_HEIGHT,
+  checkBoxShapeRestrictions,
+} from './checkbox-shape.restrictions';
+import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from './shape.const';
 
 const shapeType: ShapeType = 'checkbox';
-
-export const getCheckboxShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  checkBoxShapeRestrictions;
 
 const marginTick = 5;
 const boxTickWidth = CHECKBOX_DEFAULT_HEIGHT;

@@ -1,21 +1,10 @@
 import { Group, Line, Rect } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const BarChartShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 100,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 250,
-  defaultHeight: 150,
-};
-
-export const getBarChartShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  BarChartShapeSizeRestrictions;
+import { BarChartShapeSizeRestrictions } from './bar-chart.restrictions';
 
 const shapeType: ShapeType = 'bar';
 

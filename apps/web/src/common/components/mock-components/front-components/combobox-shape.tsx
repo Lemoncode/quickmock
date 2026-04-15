@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -6,20 +6,9 @@ import { Group, Text, Rect, Line } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from './shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const comboBoxShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 85,
-  minHeight: BASIC_SHAPE.DEFAULT_TEXT_HEIGHT,
-  maxWidth: -1,
-  maxHeight: BASIC_SHAPE.DEFAULT_TEXT_HEIGHT,
-  defaultWidth: BASIC_SHAPE.DEFAULT_TEXT_WIDTH,
-  defaultHeight: BASIC_SHAPE.DEFAULT_TEXT_HEIGHT,
-};
+import { comboBoxShapeRestrictions } from './combobox-shape.restrictions';
 
 const shapeType: ShapeType = 'combobox';
-
-export const getComboBoxShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  comboBoxShapeRestrictions;
 
 export const ComboBoxShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {

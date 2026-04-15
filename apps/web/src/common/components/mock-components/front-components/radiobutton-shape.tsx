@@ -1,25 +1,12 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
-import { forwardRef } from 'react';
-import { Group, Circle, Text } from 'react-konva';
-import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
+import { ShapeType } from '#core/model';
+import { forwardRef } from 'react';
+import { Circle, Group, Text } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
-import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from './shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const RADIO_BUTTON_DEFAULT_HEIGHT = 18;
-
-const radioButtonShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 50,
-  minHeight: RADIO_BUTTON_DEFAULT_HEIGHT,
-  maxWidth: -1,
-  maxHeight: RADIO_BUTTON_DEFAULT_HEIGHT,
-  defaultWidth: BASIC_SHAPE.DEFAULT_TEXT_WIDTH,
-  defaultHeight: RADIO_BUTTON_DEFAULT_HEIGHT,
-};
-
-export const getRadioButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  radioButtonShapeRestrictions;
+import { ShapeProps } from '../shape.model';
+import { radioButtonShapeRestrictions } from './radiobutton-shape.restrictions';
+import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from './shape.const';
 
 const shapeType: ShapeType = 'radiobutton';
 

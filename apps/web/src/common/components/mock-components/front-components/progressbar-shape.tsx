@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -6,18 +6,7 @@ import { Group, Rect } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from './shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const progressBarShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 20,
-  maxWidth: -1,
-  maxHeight: 30,
-  defaultWidth: 300,
-  defaultHeight: 20,
-};
-
-export const getProgressBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  progressBarShapeRestrictions;
+import { progressBarShapeRestrictions } from './progressbar-shape.restrictions';
 
 const shapeType: ShapeType = 'progressbar';
 

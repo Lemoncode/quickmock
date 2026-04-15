@@ -1,22 +1,11 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { Group, Rect, Circle, Text } from 'react-konva';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const browserWindowShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 200,
-  minHeight: 150,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 800,
-  defaultHeight: 600,
-};
-
-export const getBrowserWindowShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => browserWindowShapeSizeRestrictions;
+import { browserWindowShapeSizeRestrictions } from './browserwindow-shape.restrictions';
 
 const shapeType: ShapeType = 'browser';
 

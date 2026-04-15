@@ -1,26 +1,14 @@
-import { forwardRef } from 'react';
-import { Group, Rect, Text } from 'react-konva';
-import { ShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
-import { useGroupShapeProps } from '../mock-components.utils';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { ShapeType } from '#core/model';
-import { ShapeProps } from '../shape.model';
+import { forwardRef } from 'react';
+import { Group, Rect, Text } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { INPUT_SHAPE } from '../front-components/shape.const';
+import { useGroupShapeProps } from '../mock-components.utils';
+import { ShapeProps } from '../shape.model';
+import { inputStepperShapeRestrictions } from './input-stepper.restrictions';
 
 // Size restrictions (igual patrón que file-tree)
-export const inputStepperShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 80,
-  minHeight: 24,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 120,
-  defaultHeight: 32,
-};
-
-export const getInputStepperShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  inputStepperShapeRestrictions;
-
 export const InputWithStepper = forwardRef<any, ShapeProps>((props, ref) => {
   const {
     _x,

@@ -1,24 +1,13 @@
 import { Group, Circle, Path, Rect } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const MapChartShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 50,
-  minHeight: 50,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 200,
-  defaultHeight: 200,
-};
+import { MapChartShapeSizeRestrictions } from './map-chart.restrictions';
 
 const MAP_FIX_WIDTH = 200;
 const MAP_FIX_HEIGHT = 200;
-
-export const getMapChartShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  MapChartShapeSizeRestrictions;
 
 const shapeType: ShapeType = 'map';
 

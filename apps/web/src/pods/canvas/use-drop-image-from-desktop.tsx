@@ -1,13 +1,13 @@
+import { getImageShapeSizeRestrictions } from '#common/components/mock-components/front-basic-shapes/image-shape/image-shape.restrictions';
+import { adjustSizeKeepingAspectRatio } from '#common/utils/image.utils';
 import { useCanvasContext } from '#core/providers';
 import invariant from 'tiny-invariant';
 import {
   calculateScaledCoordsFromCanvasDivCoordinates,
   getScrollFromDiv,
+  isDropImageFile,
 } from './canvas.util';
 import { calculateShapeOffsetToXDropCoordinate } from './use-monitor.business';
-import { getImageShapeSizeRestrictions } from '#common/components/mock-components/front-basic-shapes';
-import { adjustSizeKeepingAspectRatio } from '#common/utils/image.utils';
-import { isDropImageFile } from './canvas.util';
 
 export const useDropImageFromDesktop = (
   dropRef: React.MutableRefObject<HTMLDivElement>

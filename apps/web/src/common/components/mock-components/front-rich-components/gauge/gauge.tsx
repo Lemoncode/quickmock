@@ -1,9 +1,10 @@
-import { Circle, Group, Path, Text } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
-import { forwardRef } from 'react';
-import { ShapeProps } from '../../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
+import { ShapeType } from '#core/model';
+import { forwardRef } from 'react';
+import { Circle, Group, Path, Text } from 'react-konva';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
+import { ShapeProps } from '../../shape.model';
+import { gaugeShapeSizeRestrictions } from './gauge.restrictions';
 
 import { BASIC_SHAPE } from '#common/components/mock-components/front-components/shape.const';
 import { useGroupShapeProps } from '../../mock-components.utils';
@@ -11,18 +12,6 @@ import {
   endsWhithPercentageSymbol,
   extractNumbersAsTwoDigitString,
 } from './gauge.utils';
-
-const gaugeShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 70,
-  minHeight: 70,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 150,
-  defaultHeight: 150,
-};
-
-export const getGaugeShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  gaugeShapeSizeRestrictions;
 
 const shapeType: ShapeType = 'gauge';
 

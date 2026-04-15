@@ -1,21 +1,10 @@
 import { Group, Line, Rect } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const HorizontalScrollBarShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 10,
-  maxWidth: -1,
-  maxHeight: 20,
-  defaultWidth: 250,
-  defaultHeight: 20,
-};
-
-export const getHorizontalScrollBarShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => HorizontalScrollBarShapeSizeRestrictions;
+import { HorizontalScrollBarShapeSizeRestrictions } from './horizontalscrollbar-shape.restrictions';
 
 const shapeType: ShapeType = 'horizontalScrollBar';
 

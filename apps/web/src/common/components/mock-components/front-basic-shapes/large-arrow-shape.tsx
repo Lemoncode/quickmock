@@ -1,20 +1,12 @@
 import { Group, Path } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const LargeArrowShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 30,
-  minHeight: 50,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 100,
-  defaultHeight: 100,
-};
+import { LargeArrowShapeSizeRestrictions } from './large-arrow-shape.restrictions';
 
 const LARGE_ARROW_FIX_WIDTH = 100;
 const LARGE_ARROW_FIX_HEIGHT = 100;
@@ -23,8 +15,6 @@ const pathData = `M10,35 L200,35 L200,15 L300,50 L200,85 L200,65 L10,65 Z`;
 
 const shapeType: ShapeType = 'largeArrow';
 
-export const getLargeArrowShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  LargeArrowShapeSizeRestrictions;
 export const LargeArrowShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { _x, _y, width, height, _id, _onSelected, otherProps, ...shapeProps } =
     props;

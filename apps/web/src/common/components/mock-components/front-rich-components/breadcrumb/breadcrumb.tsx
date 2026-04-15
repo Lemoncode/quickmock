@@ -1,27 +1,15 @@
+import { ShapeType } from '#core/model';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Text } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
-import { ShapeProps } from '../../shape.model';
-import { calculatePositions, mapTextToSections } from './breadcrumb.business';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useGroupShapeProps } from '../../mock-components.utils';
-
-export const breadcrumbShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 600,
-  minHeight: 60,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 200,
-  defaultHeight: 60,
-};
+import { ShapeProps } from '../../shape.model';
+import { calculatePositions, mapTextToSections } from './breadcrumb.business';
 
 export const GROUP_HEIGHT = 60;
 
 const shapeType: ShapeType = 'breadcrumb';
-
-export const getBreadcrumbShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  breadcrumbShapeSizeRestrictions;
 
 export const BreadcrumbShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {

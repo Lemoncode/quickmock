@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../../shape.model';
@@ -9,18 +9,7 @@ import {
 import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from '../shape.const';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../../mock-components.utils';
-
-const listboxShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 75,
-  minHeight: 200,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 120,
-  defaultHeight: 220,
-};
-
-export const getListboxShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  listboxShapeSizeRestrictions;
+import { listboxShapeSizeRestrictions } from './listbox-shape.restrictions';
 
 interface ListBoxShapeProps extends ShapeProps {
   text: string;

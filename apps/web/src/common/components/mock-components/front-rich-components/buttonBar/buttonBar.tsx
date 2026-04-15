@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { Group, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -10,18 +10,7 @@ import {
   splitCSVContentIntoRows,
 } from '#common/utils/active-element-selector.utils';
 import { useGroupShapeProps } from '../../mock-components.utils';
-
-const buttonBarShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 200,
-  minHeight: 25,
-  maxWidth: -1,
-  maxHeight: 100,
-  defaultWidth: 500,
-  defaultHeight: 50,
-};
-
-export const getButtonBarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  buttonBarShapeSizeRestrictions;
+import { buttonBarShapeSizeRestrictions } from './buttonBar.restrictions';
 
 const shapeType: ShapeType = 'buttonBar';
 

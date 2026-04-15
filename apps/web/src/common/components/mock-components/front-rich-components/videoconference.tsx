@@ -1,21 +1,10 @@
 import { Group, Rect, Circle, Line, Arc, Path } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const videoconferenceShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 200,
-  minHeight: 200,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 600,
-  defaultHeight: 400,
-};
-
-export const getVideoconferenceShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => videoconferenceShapeSizeRestrictions;
+import { videoconferenceShapeSizeRestrictions } from './videoconference.restrictions';
 
 const shapeType: ShapeType = 'videoPlayer';
 

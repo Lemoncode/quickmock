@@ -1,23 +1,12 @@
 import { Group, Line, Rect } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const VerticalScrollBarShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 10,
-  minHeight: 100,
-  maxWidth: 20,
-  maxHeight: -1,
-  defaultWidth: 20,
-  defaultHeight: 250,
-};
+import { VerticalScrollBarShapeSizeRestrictions } from './verticalscrollbar-shape.restrictions';
 
 const shapeType: ShapeType = 'verticalScrollBar';
-
-export const getVerticalScrollBarShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => VerticalScrollBarShapeSizeRestrictions;
 
 export const VerticalScrollBarShape = forwardRef<any, ShapeProps>(
   (props, ref) => {

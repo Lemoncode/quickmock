@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import {
@@ -9,18 +9,7 @@ import { Circle, Group } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const circleLowShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 10,
-  minHeight: 10,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 160,
-  defaultHeight: 100,
-};
-
-export const getCircleLowShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  circleLowShapeRestrictions;
+import { circleLowShapeRestrictions } from './circle-low-shape.restrictions';
 
 const shapeType: ShapeType = 'circleLow';
 

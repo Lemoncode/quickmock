@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef, useEffect, useRef } from 'react';
 import { ShapeProps } from '../../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -7,20 +7,9 @@ import { NoImageSelected } from './components/no-image.component';
 import useImage from 'use-image';
 import Konva from 'konva';
 import { useGroupShapeProps } from '../../mock-components.utils';
-
-const imageShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 10,
-  minHeight: 10,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 300,
-  defaultHeight: 300,
-};
+import { imageShapeRestrictions } from './image-shape.restrictions';
 
 const shapeType: ShapeType = 'image';
-
-export const getImageShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  imageShapeRestrictions;
 
 export const ImageShape = forwardRef<any, ShapeProps>((props, ref) => {
   const { _x, _y, width, height, _id, _onSelected, otherProps, ...shapeProps } =

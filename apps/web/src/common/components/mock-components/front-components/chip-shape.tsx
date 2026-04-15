@@ -1,23 +1,12 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Text } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { CHIP_SHAPE } from '../front-components/shape.const';
 import { ShapeProps } from '../shape.model';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const ChipShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 40,
-  minHeight: 28,
-  maxWidth: -1,
-  maxHeight: 28,
-  defaultWidth: 56,
-  defaultHeight: 28,
-};
-
-export const getChipShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  ChipShapeSizeRestrictions;
+import { ChipShapeSizeRestrictions } from './chip-shape.restrictions';
 
 const shapeType: ShapeType = 'chip';
 

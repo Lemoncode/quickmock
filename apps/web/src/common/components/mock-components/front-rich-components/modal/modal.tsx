@@ -1,5 +1,5 @@
 import { Group, Rect, Text } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -7,18 +7,7 @@ import { darkenColor, getModalPartsText } from './modal.utils';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useGroupShapeProps } from '../../mock-components.utils';
-
-const modalShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 235,
-  minHeight: 200,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 375,
-  defaultHeight: 225,
-};
-
-export const getModalShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  modalShapeSizeRestrictions;
+import { modalShapeSizeRestrictions } from './modal.restrictions';
 
 const shapeType: ShapeType = 'modal';
 

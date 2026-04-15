@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Text, Line } from 'react-konva';
 import { ShapeProps } from '../../shape.model';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import {
   extractAlignments,
@@ -13,18 +13,7 @@ import {
 import { calculateCellWidths } from './table-col-width.utils';
 import { Triangle } from './components/filter-triangle';
 import { useGroupShapeProps } from '../../mock-components.utils';
-
-const tableSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 1,
-  minHeight: 75,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 300,
-  defaultHeight: 150,
-};
-
-export const getTableSizeRestrictions = (): ShapeSizeRestrictions =>
-  tableSizeRestrictions;
+import { tableSizeRestrictions } from './table.restrictions';
 
 const shapeType: ShapeType = 'table';
 

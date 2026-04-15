@@ -1,21 +1,9 @@
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes';
-import { ShapeSizeRestrictions } from '#core/model';
 import { Group, Rect } from 'react-konva';
 import { useGroupShapeProps } from '../mock-components.utils';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
-
-const modalCoverShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 50,
-  minHeight: 50,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 200,
-  defaultHeight: 200,
-};
-
-export const getModalCoverShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  modalCoverShapeSizeRestrictions;
+import { modalCoverShapeSizeRestrictions } from './modal-cover-shape.restrictions';
 
 const shapeType = 'modalCover';
 

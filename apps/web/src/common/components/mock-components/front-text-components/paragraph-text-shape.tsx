@@ -1,23 +1,12 @@
 import { forwardRef } from 'react';
 import { Group, Text } from 'react-konva';
 import { ShapeProps } from '../shape.model';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const paragraphSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: BASIC_SHAPE.DEFAULT_MIN_WIDTH,
-  minHeight: 20,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 420,
-  defaultHeight: 130,
-};
-
-export const getParagraphSizeRestrictions = (): ShapeSizeRestrictions =>
-  paragraphSizeRestrictions;
+import { paragraphSizeRestrictions } from './paragraph-text-shape.restrictions';
 
 const shapeType: ShapeType = 'paragraph';
 

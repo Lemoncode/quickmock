@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -10,20 +10,9 @@ import { splitCSVContent, setTime } from './timepickerinput-shape.business';
 
 import clockIconSrc from '/icons/clock.svg';
 import disabledClockIconSrc from '/icons/clock-disabled.svg';
-
-const timepickerInputShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 38,
-  maxWidth: -1,
-  maxHeight: 38,
-  defaultWidth: 220,
-  defaultHeight: 38,
-};
+import { timepickerInputShapeRestrictions } from './timepickerinput-shape.restrictions';
 
 const shapeType: ShapeType = 'timepickerinput';
-
-export const getTimepickerInputShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => timepickerInputShapeRestrictions;
 
 export const TimepickerInputShape = forwardRef<any, ShapeProps>(
   (props, ref) => {

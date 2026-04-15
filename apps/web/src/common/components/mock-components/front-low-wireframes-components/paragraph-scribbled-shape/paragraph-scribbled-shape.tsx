@@ -1,25 +1,13 @@
+import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes';
+import { ShapeType } from '#core/model';
 import { forwardRef, useMemo } from 'react';
 import { Group, Path, Rect } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
-import { ShapeProps } from '../../shape.model';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useGroupShapeProps } from '../../mock-components.utils';
-import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes';
-import { MIN_LINE_HEIGHT } from './paragraph-scribbled.const';
+import { ShapeProps } from '../../shape.model';
+import { paragraphScribbledShapeRestrictions } from './paragraph-scribbled-shape.restrictions';
 import { calculateParagraphPaths } from './paragraph-scribbled.business';
-
-const paragraphScribbledShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: BASIC_SHAPE.DEFAULT_MIN_WIDTH,
-  minHeight: MIN_LINE_HEIGHT,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 300,
-  defaultHeight: 150,
-};
-
-export const getParagraphScribbledShapeRestrictions =
-  (): ShapeSizeRestrictions => paragraphScribbledShapeRestrictions;
 
 const shapeType: ShapeType = 'paragraphScribbled';
 

@@ -1,6 +1,6 @@
 import { useState, forwardRef } from 'react';
 import { Group, Rect, Text, Line } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { ShapeProps } from '../../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import {
@@ -10,18 +10,7 @@ import {
 } from './calendar.business';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useGroupShapeProps } from '../../mock-components.utils';
-
-const calendarShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 350,
-  minHeight: 350,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 500,
-  defaultHeight: 500,
-};
-
-export const getCalendarShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  calendarShapeSizeRestrictions;
+import { calendarShapeSizeRestrictions } from './calendar.restrictions';
 
 const shapeType: ShapeType = 'calendar';
 

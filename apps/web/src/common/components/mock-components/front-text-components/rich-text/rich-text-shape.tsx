@@ -1,24 +1,13 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Group, Image as KonvaImage } from 'react-konva';
 import { ShapeProps } from '../../shape.model';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../../mock-components.utils';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { getImage } from './image-cache';
-
-const richTextSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 10,
-  minHeight: 10,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 200,
-  defaultHeight: 100,
-};
-
-export const getRichTextSizeRestrictions = (): ShapeSizeRestrictions =>
-  richTextSizeRestrictions;
+import { richTextSizeRestrictions } from './rich-text-shape.restrictions';
 
 const shapeType: ShapeType = 'richtext';
 

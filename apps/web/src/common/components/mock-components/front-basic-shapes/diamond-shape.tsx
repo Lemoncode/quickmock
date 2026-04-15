@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -6,18 +6,7 @@ import { Group, Line } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const diamondShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 10,
-  minHeight: 10,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 160,
-  defaultHeight: 160,
-};
-
-export const getDiamondShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  diamondShapeRestrictions;
+import { diamondShapeRestrictions } from './diamond-shape.restrictions';
 
 const shapeType: ShapeType = 'diamond';
 

@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { Group, Line, Rect, Text } from 'react-konva';
 import { ShapeProps } from '../../shape.model';
@@ -7,18 +7,7 @@ import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restr
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../../mock-components.utils';
-
-const verticalMenuShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 220,
-  minHeight: 180,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 120,
-  defaultHeight: 180,
-};
-
-export const getVerticalMenuShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  verticalMenuShapeSizeRestrictions;
+import { verticalMenuShapeSizeRestrictions } from './vertical-menu.restrictions';
 
 interface VerticalMenuShapeProps extends ShapeProps {
   text: string;

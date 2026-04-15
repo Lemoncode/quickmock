@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -9,20 +9,9 @@ import { useGroupShapeProps } from '../mock-components.utils';
 
 import calendarIconSrc from '/icons/calendar.svg';
 import disabledCalendarIconSrc from '/icons/calendar-disabled.svg';
-
-const datepickerInputShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 38,
-  minHeight: 38,
-  maxWidth: -1,
-  maxHeight: 38,
-  defaultWidth: BASIC_SHAPE.DEFAULT_TEXT_WIDTH,
-  defaultHeight: BASIC_SHAPE.DEFAULT_TEXT_HEIGHT,
-};
+import { datepickerInputShapeRestrictions } from './datepickerinput-shape.restrictions';
 
 const shapeType: ShapeType = 'datepickerinput';
-
-export const getDatepickerInputShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => datepickerInputShapeRestrictions;
 
 export const DatepickerInputShape = forwardRef<any, ShapeProps>(
   (props, ref) => {

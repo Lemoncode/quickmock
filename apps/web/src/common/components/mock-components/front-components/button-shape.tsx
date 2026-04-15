@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -7,18 +7,7 @@ import { BASIC_SHAPE } from './shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
 import { DISABLED_COLOR_VALUES } from '#common/components/mock-components/front-components/shape.const';
-
-const buttonShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 50,
-  minHeight: 35,
-  maxWidth: -1,
-  maxHeight: 100,
-  defaultWidth: 100,
-  defaultHeight: 35,
-};
-
-export const getButtonShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  buttonShapeRestrictions;
+import { buttonShapeRestrictions } from './button-shape.restrictions';
 
 const shapeType: ShapeType = 'button';
 

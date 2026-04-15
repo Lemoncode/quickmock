@@ -1,26 +1,15 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
-import { forwardRef } from 'react';
-import { ShapeProps } from '../shape.model';
 import {
   calculateShapeAdjustedDimensionsBasedOnStrokeHeight,
   fitSizeToShapeSizeRestrictions,
 } from '#common/utils/shapes';
+import { ShapeType } from '#core/model';
+import { forwardRef } from 'react';
 import { Group, Rect } from 'react-konva';
-import { useGroupShapeProps } from '../mock-components.utils';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
-
-const rectangleLowShapeRestriction: ShapeSizeRestrictions = {
-  minWidth: 10,
-  minHeight: 10,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 160,
-  defaultHeight: 160,
-};
-
-export const getRectangleLowShapeRestrictions = (): ShapeSizeRestrictions =>
-  rectangleLowShapeRestriction;
+import { useGroupShapeProps } from '../mock-components.utils';
+import { ShapeProps } from '../shape.model';
+import { rectangleLowShapeRestriction } from './rectangle-low-shape.restrictions';
 
 const shapeType: ShapeType = 'rectangleLow';
 

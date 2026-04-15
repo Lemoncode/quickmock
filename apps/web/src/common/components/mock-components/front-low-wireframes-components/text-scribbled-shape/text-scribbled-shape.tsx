@@ -1,24 +1,13 @@
 import { forwardRef, useMemo } from 'react';
 import { Group, Path, Rect } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { ShapeProps } from '../../shape.model';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
 import { useGroupShapeProps } from '../../mock-components.utils';
 import { calculatePath } from './text-scribbled.business';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes';
-
-const textScribbledShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: BASIC_SHAPE.DEFAULT_MIN_WIDTH,
-  minHeight: 45,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 300,
-  defaultHeight: 50,
-};
-
-export const getTextScribbledShapeRestrictions = (): ShapeSizeRestrictions =>
-  textScribbledShapeRestrictions;
+import { textScribbledShapeRestrictions } from './text-scribbled-shape.restrictions';
 
 const shapeType: ShapeType = 'textScribbled';
 

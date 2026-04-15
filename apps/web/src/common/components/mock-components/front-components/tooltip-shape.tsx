@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -6,20 +6,9 @@ import { Text, Group, Rect, Line } from 'react-konva';
 import { BASIC_SHAPE } from './shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const tooltipShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 80,
-  minHeight: 70,
-  maxWidth: -1,
-  maxHeight: 500,
-  defaultWidth: BASIC_SHAPE.DEFAULT_TEXT_WIDTH,
-  defaultHeight: 100,
-};
+import { tooltipShapeRestrictions } from './tooltip-shape.restrictions';
 
 const shapeType: ShapeType = 'tooltip';
-
-export const getTooltipShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  tooltipShapeRestrictions;
 
 export const TooltipShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {

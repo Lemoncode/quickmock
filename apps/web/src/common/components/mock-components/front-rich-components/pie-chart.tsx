@@ -1,24 +1,13 @@
 import { Group, Circle, Path } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef, useMemo } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const PieChartShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 100,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 500,
-  defaultHeight: 500,
-};
+import { PieChartShapeSizeRestrictions } from './pie-chart.restrictions';
 
 const PIE_FIX_WIDTH = 200;
 const PIE_FIX_HEIGHT = 200;
-
-export const getPieChartShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  PieChartShapeSizeRestrictions;
 
 const shapeType: ShapeType = 'pie';
 

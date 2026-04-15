@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -6,18 +6,7 @@ import { Group, Rect, Text } from 'react-konva';
 import { BASIC_SHAPE, DISABLED_COLOR_VALUES } from './shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const textAreaShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: BASIC_SHAPE.DEFAULT_MIN_WIDTH,
-  minHeight: 44,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 200,
-  defaultHeight: 55,
-};
-
-export const getTextAreaSizeRestrictions = (): ShapeSizeRestrictions =>
-  textAreaShapeRestrictions;
+import { textAreaShapeRestrictions } from './textarea-shape.restrictions';
 
 const shapeType: ShapeType = 'textarea';
 

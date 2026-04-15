@@ -1,24 +1,13 @@
 import { forwardRef } from 'react';
 import { Ellipse, Group } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { ShapeProps } from '../shape.model';
 import { useGroupShapeProps } from '../mock-components.utils';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { calculateShapeAdjustedDimensionsBasedOnStrokeHeight } from '#common/utils/shapes';
-
-const EllipseLowShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 10,
-  minHeight: 10,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 100,
-  defaultHeight: 50,
-};
-
-export const getEllipseLowShapeRestrictions = (): ShapeSizeRestrictions =>
-  EllipseLowShapeRestrictions;
+import { EllipseLowShapeRestrictions } from './ellipse-low-shape.restrictions';
 
 const shapeType: ShapeType = 'ellipseLow';
 

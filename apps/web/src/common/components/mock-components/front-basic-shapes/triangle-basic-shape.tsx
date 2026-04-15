@@ -1,28 +1,14 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
-import { forwardRef } from 'react';
-import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
+import { ShapeType } from '#core/model';
+import { forwardRef } from 'react';
 import { Group, Line } from 'react-konva';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const WIDTH = 160;
-const HEIGHT = (WIDTH * 1.732) / 2;
-
-const triangleShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 10,
-  minHeight: 10,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: WIDTH,
-  defaultHeight: HEIGHT,
-};
+import { ShapeProps } from '../shape.model';
+import { triangleShapeRestrictions } from './triangle-basic-shape.restrictions';
 
 const shapeType: ShapeType = 'triangle';
-
-export const getTriangleShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  triangleShapeRestrictions;
 
 export const TriangleShape = forwardRef<any, ShapeProps>((props, ref) => {
   const {

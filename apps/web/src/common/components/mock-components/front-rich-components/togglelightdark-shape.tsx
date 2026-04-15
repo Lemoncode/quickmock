@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -8,22 +8,11 @@ import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
 import sunIconUrl from '/icons/sun.svg';
 import moonIconUrl from '/icons/moonalt.svg';
+import { toggleLightDarkShapeRestrictions } from './togglelightdark-shape.restrictions';
 
 const iconSize = 20;
 
-const toggleLightDarkShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 50,
-  minHeight: 25,
-  maxWidth: 50,
-  maxHeight: 25,
-  defaultWidth: 50,
-  defaultHeight: 25,
-};
-
 const shapeType: ShapeType = 'toggleLightDark';
-
-export const getToggleLightDarkShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => toggleLightDarkShapeRestrictions;
 
 export const ToggleLightDark = forwardRef<any, ShapeProps>((props, ref) => {
   const { _x, _y, width, height, _id, _onSelected, otherProps, ...shapeProps } =

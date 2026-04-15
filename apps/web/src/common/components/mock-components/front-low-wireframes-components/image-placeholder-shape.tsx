@@ -1,21 +1,10 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { Group, Line, Rect } from 'react-konva';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const imagePlaceholderShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 10,
-  minHeight: 10,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 160,
-  defaultHeight: 160,
-};
-
-export const getImagePlaceholderShapeSizeRestrictions =
-  (): ShapeSizeRestrictions => imagePlaceholderShapeRestrictions;
+import { imagePlaceholderShapeRestrictions } from './image-placeholder-shape.restrictions';
 
 const shapeType: ShapeType = 'imagePlaceholder';
 

@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType, BASE_ICONS_URL } from '#core/model';
+import { ShapeType, BASE_ICONS_URL } from '#core/model';
 import { forwardRef, useEffect, useState } from 'react';
 import { ShapeProps } from '../../shape.model';
 import { loadSvgWithFill } from '#common/utils/svg.utils';
@@ -8,18 +8,7 @@ import { returnIconSize } from './icon-shape.business';
 import { useGroupShapeProps } from '../../mock-components.utils';
 import { useShapeProps } from '../../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from '../../front-components/shape.const';
-
-const MouseCursorSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 25,
-  minHeight: 25,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 150,
-  defaultHeight: 150,
-};
-
-export const getMouseCursorShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  MouseCursorSizeRestrictions;
+import { MouseCursorSizeRestrictions } from './mouse-cursor-basic-shape.restrictions';
 
 const shapeType: ShapeType = 'mouseCursor';
 

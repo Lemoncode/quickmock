@@ -1,4 +1,4 @@
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
@@ -6,18 +6,7 @@ import { Group, Rect, Text } from 'react-konva';
 import { DISABLED_COLOR_VALUES, INPUT_SHAPE } from './shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const inputShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: INPUT_SHAPE.DEFAULT_MIN_WIDTH,
-  minHeight: 38,
-  maxWidth: -1,
-  maxHeight: 38,
-  defaultWidth: INPUT_SHAPE.DEFAULT_TEXT_WIDTH,
-  defaultHeight: INPUT_SHAPE.DEFAULT_TEXT_HEIGHT,
-};
-
-export const getInputShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  inputShapeRestrictions;
+import { inputShapeRestrictions } from './input-shape.restrictions';
 
 const shapeType: ShapeType = 'input';
 

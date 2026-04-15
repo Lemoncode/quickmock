@@ -1,23 +1,12 @@
 import { forwardRef, useEffect, useState } from 'react';
 import { Group, Rect, Circle, Image, Text } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
 import { loadSvgWithFill } from '#common/utils/svg.utils';
 import { BASIC_SHAPE } from '../front-components/shape.const';
-
-const mobilePhoneShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 200,
-  minHeight: 150,
-  maxWidth: 1000,
-  maxHeight: 1000,
-  defaultWidth: 300,
-  defaultHeight: 560,
-};
-
-export const getMobilePhoneShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  mobilePhoneShapeSizeRestrictions;
+import { mobilePhoneShapeSizeRestrictions } from './mobilephone-shape.restrictions';
 
 const shapeType: ShapeType = 'mobilePhone';
 

@@ -1,23 +1,12 @@
 import { forwardRef, useMemo } from 'react';
 import { Group, Line, Circle } from 'react-konva';
 import { ShapeProps } from '../shape.model';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from './shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const sliderShapeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 100,
-  minHeight: 20,
-  maxWidth: -1,
-  maxHeight: 30,
-  defaultWidth: 300,
-  defaultHeight: 20,
-};
-
-export const getSliderShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  sliderShapeRestrictions;
+import { sliderShapeRestrictions } from './slider-shape.restrictions';
 
 const shapeType: ShapeType = 'slider';
 

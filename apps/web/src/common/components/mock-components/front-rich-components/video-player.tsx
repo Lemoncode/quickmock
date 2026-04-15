@@ -1,21 +1,10 @@
 import { Group, Rect, Circle, Line } from 'react-konva';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { forwardRef } from 'react';
 import { ShapeProps } from '../shape.model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const videoPlayerShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 200,
-  minHeight: 150,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 600,
-  defaultHeight: 400,
-};
-
-export const getVideoPlayerShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  videoPlayerShapeSizeRestrictions;
+import { videoPlayerShapeSizeRestrictions } from './video-player.restrictions';
 
 const shapeType: ShapeType = 'videoPlayer';
 

@@ -1,22 +1,12 @@
 import { forwardRef } from 'react';
 import { Line, Rect, Path, Group } from 'react-konva';
 import { ShapeProps } from '../shape.model';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
+import { AudioPlayerShapeSizeRestrictions } from './audio-player.restrictions';
 
-const AudioPlayerShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 280,
-  minHeight: 50,
-  maxWidth: -1,
-  maxHeight: 50,
-  defaultWidth: 280,
-  defaultHeight: 50,
-};
 const PROGRESSBAR_PROGRESS = 0.5;
-
-export const getAudioPlayerShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  AudioPlayerShapeSizeRestrictions;
 
 const shapeType: ShapeType = 'audioPlayer';
 

@@ -2,24 +2,13 @@ import { useRef, forwardRef } from 'react';
 import { Group, Rect, Text, Circle } from 'react-konva';
 import Konva from 'konva';
 import { ShapeProps } from '../shape.model';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { BASIC_SHAPE } from '../front-components/shape.const';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const LoadIndicatorSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 200,
-  minHeight: 100,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 200,
-  defaultHeight: 100,
-};
+import { LoadIndicatorSizeRestrictions } from './loading-indicator.restrictions';
 
 const shapeType: ShapeType = 'loading-indicator';
-
-export const getLoadIndicatorSizeRestrictions = (): ShapeSizeRestrictions =>
-  LoadIndicatorSizeRestrictions;
 
 export const LoadIndicator = forwardRef<any, ShapeProps>((props, ref) => {
   const { _x, _y, width, height, otherProps, ...shapeProps } = props;

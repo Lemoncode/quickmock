@@ -1,21 +1,10 @@
 import { forwardRef } from 'react';
 import { Group, Rect, Circle } from 'react-konva';
 import { ShapeProps } from '../shape.model';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const tabletShapeSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 200,
-  minHeight: 150,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 650,
-  defaultHeight: 500,
-};
-
-export const getTabletShapeSizeRestrictions = (): ShapeSizeRestrictions =>
-  tabletShapeSizeRestrictions;
+import { tabletShapeSizeRestrictions } from './tablet-shape.restrictions';
 
 const shapeType: ShapeType = 'tablet';
 

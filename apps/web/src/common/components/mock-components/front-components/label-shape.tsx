@@ -1,23 +1,12 @@
 import { forwardRef } from 'react';
 import { Group, Text } from 'react-konva';
 import { ShapeProps } from '../shape.model';
-import { ShapeSizeRestrictions, ShapeType } from '#core/model';
+import { ShapeType } from '#core/model';
 import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
 import { useShapeProps } from '../../shapes/use-shape-props.hook';
 import { BASIC_SHAPE } from './shape.const';
 import { useGroupShapeProps } from '../mock-components.utils';
-
-const labelSizeRestrictions: ShapeSizeRestrictions = {
-  minWidth: 40,
-  minHeight: 20,
-  maxWidth: -1,
-  maxHeight: -1,
-  defaultWidth: 60,
-  defaultHeight: 25,
-};
-
-export const getLabelSizeRestrictions = (): ShapeSizeRestrictions =>
-  labelSizeRestrictions;
+import { labelSizeRestrictions } from './label-shape.restrictions';
 
 const shapeType: ShapeType = 'label';
 
