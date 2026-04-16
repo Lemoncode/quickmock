@@ -2,12 +2,7 @@
   "name": "@lemoncode/quickmock-vscode-extension",
   "version": "0.0.0",
   "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
-  },
+  "main": "./dist/index.mjs",
   "imports": {
     "#*": "./src/*"
   },
@@ -18,6 +13,7 @@
     "provenance": true
   },
   "scripts": {
+    "dev": "node --run build -- --watch --sourcemap",
     "build": "tsdown",
     "check-types": "tsc --noEmit",
     "test": "vitest run",
@@ -30,5 +26,43 @@
     "@lemoncode/vitest-config": "*",
     "@types/vscode": "1.116.0",
     "@vscode/vsce": "3.9.0"
+  },
+  "publisher": "Lemoncoders",
+  "displayName": "Quickmock",
+  "description": "Quickmock VSCode extension for your free, open source wireframing tool. Share your ideas as low-fidelity mocks in minutes, perfect for getting started.",
+  "keywords": [
+    "wireframe",
+    "mockup",
+    "prototype",
+    "low-fidelity",
+    "design",
+    "ui",
+    "ux",
+    "sketch",
+    "quickmock"
+  ],
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "author": "Lemoncode",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.105.0"
+  },
+  "icon": "./assets/app-icon.webp",
+  "galleryBanner": {
+    "color": "#17191E",
+    "theme": "dark"
+  },
+  "qna": false,
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      {
+        "command": "quickmock.helloWorld",
+        "title": "Quickmock: Hello World"
+      }
+    ]
   }
 }
