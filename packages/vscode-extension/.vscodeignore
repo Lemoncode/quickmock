@@ -1,0 +1,8 @@
+src/**
+node_modules/**
+*.ts
+tsconfig.json
+tsdown.config.ts
+vitest.config.ts
+.turbo/**
+coverage/**

@@ -41,3 +41,6 @@ lerna-debug.log*
 
 # Vite
 .vite
+
+# Temporary LICENSE copies (created by publish scripts)
+packages/*/LICENSE

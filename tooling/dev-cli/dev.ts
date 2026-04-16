@@ -1,6 +1,6 @@
 import * as p from '@clack/prompts';
 import { spawn } from 'node:child_process';
-import { filterByScript, getWorkspacePackages } from './lib/workspace.ts';
+import { filterByScript, getWorkspacePackages } from './lib/workspace';
 
 const main = async () => {
   p.intro('Dev CLI');
