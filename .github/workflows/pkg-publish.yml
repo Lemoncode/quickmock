@@ -29,13 +29,17 @@ jobs:
 
       - run: node --run build
 
-      - name: Publish to npm
+      - name: Publish npm packages
         uses: changesets/action@v1
         with:
-          publish: node --run publish-packages
+          publish: node --run publish:npm
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: 'true'
+
+      - name: Publish VS Code extensions
+        run: node --run publish:vscode
+        env:
           VSCE_PAT: ${{ secrets.VSCE_TOKEN }}
