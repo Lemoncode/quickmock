@@ -4,9 +4,7 @@ export const activate = (context: vscode.ExtensionContext) => {
   const disposable = vscode.commands.registerCommand(
     'quickmock.helloWorld',
     () => {
-      vscode.window.showInformationMessage(
-        'Quickmock extension is running!'
-      );
+      vscode.window.showInformationMessage('Quickmock extension is running!');
     }
   );
 

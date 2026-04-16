@@ -5,7 +5,9 @@
       "name": "Run Quickmock Extension",
       "type": "extensionHost",
       "request": "launch",
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-extension"],
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-extension"
+      ],
       "outFiles": ["${workspaceFolder}/packages/vscode-extension/dist/**/*.mjs"]
     }
   ]
