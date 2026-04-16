@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { defineConfig, devices } from '@playwright/test';
 
 const BASE_URL = 'http://localhost:5173/editor.html';
@@ -24,7 +25,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npx vite --mode test',
+    command: 'npx vite --port 5173 --strictPort --mode test',
     url: BASE_URL,
     reuseExistingServer: !process.env.CI,
   },
