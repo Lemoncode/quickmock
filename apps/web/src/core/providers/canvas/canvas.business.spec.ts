@@ -1,5 +1,5 @@
-import { removeShapesFromList } from './canvas.business';
 import { ShapeModel } from '#core/model';
+import { removeShapesFromList } from './canvas.business';
 
 describe('canvas.business', () => {
   describe('removeShapeFromList', () => {

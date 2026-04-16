@@ -9,7 +9,9 @@
   },
   "workspaces": [
     "apps/*",
-    "tooling/*"
+    "packages/*",
+    "tooling/*",
+    "local-npm-registry"
   ],
   "scripts": {
     "start": "node --run dev",
@@ -26,6 +28,10 @@
     "lint:fix": "oxlint --fix .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "changeset": "changeset",
+    "publish-packages": "changeset publish",
+    "start:local-npm-registry": "node local-npm-registry/publish.js start",
+    "local:publish": "node --run build && node local-npm-registry/publish.js publish",
     "prepare": "husky || \"No need to install husky\""
   },
   "lint-staged": {
@@ -43,6 +49,7 @@
     "prettier": "^3.8.3",
     "tsx": "^4.21.0",
     "turbo": "^2.9.6",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "@changesets/cli": "^2.30.0"
   }
 }

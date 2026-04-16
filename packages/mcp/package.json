@@ -1,0 +1,34 @@
+{
+  "name": "@lemoncode/quickmock-mcp",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "imports": {
+    "#*": "./src/*"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsdown",
+    "check-types": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@lemoncode/typescript-config": "*",
+    "@lemoncode/tsdown-config": "*",
+    "@lemoncode/vitest-config": "*",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.4"
+  }
+}
