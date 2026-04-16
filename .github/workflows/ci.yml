@@ -18,6 +18,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install test browsers
+        run: node --run install:test-browsers
+
       - name: Lint
         run: npm run lint
 
@@ -43,9 +46,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: |
-          npm ci
-          node --run install:e2e-browsers
+        run: npm ci
+
+      - name: Install test browsers
+        run: node --run install:test-browsers
 
       - name: Build
         run: npm run build

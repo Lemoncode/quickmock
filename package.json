@@ -22,7 +22,7 @@
     "check-types": "turbo check-types",
     "e2e": "turbo e2e",
     "ci:e2e": "turbo ci:e2e",
-    "install:e2e-browsers": "npx playwright install",
+    "install:test-browsers": "npx playwright install --with-deps",
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
     "format": "prettier --write .",
