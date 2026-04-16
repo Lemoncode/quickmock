@@ -1,6 +1,7 @@
 name: Package Versioning
 
 on:
+  workflow_dispatch:
   push:
     branches: [dev]
     paths:
