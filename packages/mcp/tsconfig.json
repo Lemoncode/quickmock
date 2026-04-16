@@ -1,0 +1,10 @@
+{
+  "extends": "@lemoncode/typescript-config/node",
+  "include": ["src"],
+  "compilerOptions": {
+    "rootDir": "src",
+    "paths": {
+      "#*": ["./src/*"]
+    }
+  }
+}

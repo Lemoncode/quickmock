@@ -1,0 +1,83 @@
+import { forwardRef } from 'react';
+import { ShapeProps } from '../shape.model';
+import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
+import { Group, Rect, Ellipse, Line } from 'react-konva';
+import { BASIC_SHAPE } from '../front-components/shape.const';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { useGroupShapeProps } from '../mock-components.utils';
+import { cilinderShapeRestrictions } from './cilinder-basic-shape.restrictions';
+
+const shapeType = 'cilinder';
+
+export const CilinderShape = forwardRef<any, ShapeProps>((props, ref) => {
+  const {
+    _x,
+    _y,
+    width,
+    height,
+    _id,
+    _onSelected,
+    _text,
+    otherProps,
+    ...shapeProps
+  } = props;
+
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    cilinderShapeRestrictions,
+    width,
+    height
+  );
+
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
+
+  const { strokeStyle } = useShapeProps(otherProps, BASIC_SHAPE);
+
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
+  return (
+    <Group {...commonGroupProps} {...shapeProps}>
+      <Ellipse
+        x={restrictedWidth / 2}
+        y={restrictedHeight}
+        radiusX={restrictedWidth / 2}
+        radiusY={restrictedWidth / 8}
+        fill="#B0B0B0"
+        stroke={BASIC_SHAPE.DEFAULT_STROKE_COLOR}
+        strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
+      />
+      <Rect
+        x={0}
+        y={0}
+        width={restrictedWidth}
+        height={restrictedHeight}
+        strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
+        fill="#B0B0B0"
+        dash={strokeStyle}
+      />
+      <Line
+        points={[0, 0, 0, restrictedHeight]}
+        stroke={BASIC_SHAPE.DEFAULT_STROKE_COLOR}
+        strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
+      />
+      <Line
+        points={[restrictedWidth, 0, restrictedWidth, restrictedHeight]}
+        stroke={BASIC_SHAPE.DEFAULT_STROKE_COLOR}
+        strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
+      />
+      <Ellipse
+        x={restrictedWidth / 2}
+        y={0}
+        radiusX={restrictedWidth / 2}
+        radiusY={restrictedWidth / 8}
+        fill="#CFCFCF"
+        stroke={BASIC_SHAPE.DEFAULT_STROKE_COLOR}
+        strokeWidth={BASIC_SHAPE.DEFAULT_STROKE_WIDTH}
+      />
+    </Group>
+  );
+});

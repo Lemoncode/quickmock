@@ -1,0 +1,14 @@
+{
+  "extends": "@lemoncode/typescript-config/browser",
+  "include": ["src", "e2e", "./global.d.ts"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "allowImportingTsExtensions": true,
+    "moduleDetection": "force",
+    "verbatimModuleSyntax": false,
+    "noUncheckedIndexedAccess": false,
+    "paths": {
+      "#*": ["./src/*"]
+    }
+  }
+}

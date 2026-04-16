@@ -1,0 +1,53 @@
+import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes';
+import { Group, Rect } from 'react-konva';
+import { useGroupShapeProps } from '../mock-components.utils';
+import { forwardRef } from 'react';
+import { ShapeProps } from '../shape.model';
+import { modalCoverShapeSizeRestrictions } from './modal-cover-shape.restrictions';
+
+const shapeType = 'modalCover';
+
+export const ModalCoverShape = forwardRef<any, ShapeProps>((props, ref) => {
+  const {
+    _x,
+    _y,
+    width,
+    height,
+    _id,
+    _onSelected,
+    _text,
+    _otherProps,
+    ...shapeProps
+  } = props;
+
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    modalCoverShapeSizeRestrictions,
+    width,
+    height
+  );
+
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
+
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
+  return (
+    <Group {...commonGroupProps} {...shapeProps}>
+      <Rect
+        x={0}
+        y={0}
+        width={restrictedWidth}
+        height={restrictedHeight}
+        fill={'gray'}
+        strokeWidth={2}
+        dash={[1]}
+        opacity={0.7}
+        listening={true}
+      />
+    </Group>
+  );
+});
