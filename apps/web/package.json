@@ -39,7 +39,7 @@
   "devDependencies": {
     "@lemoncode/typescript-config": "*",
     "@lemoncode/vitest-config": "*",
-    "@playwright/test": "1.47.2",
+    "@playwright/test": "1.59.1",
     "@types/lodash.clonedeep": "4.5.9",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
@@ -48,6 +48,6 @@
     "@vitejs/plugin-react": "6.0.1",
     "@vitest/browser": "4.1.4",
     "@vitest/browser-playwright": "4.1.4",
-    "vite": "8.0.0"
+    "vite": "8.0.8"
   }
 }
