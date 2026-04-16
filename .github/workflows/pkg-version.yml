@@ -28,7 +28,6 @@ jobs:
       - name: Create Version PR
         uses: changesets/action@v1
         with:
-          version: node --run changeset version
           title: 'chore: version packages'
           commit: 'chore: version packages'
         env:
