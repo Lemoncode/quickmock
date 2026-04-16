@@ -25,5 +25,10 @@
     "@lemoncode/typescript-config": "*",
     "@lemoncode/tsdown-config": "*",
     "@lemoncode/vitest-config": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lemoncode/quickmock",
+    "directory": "packages/mcp"
   }
 }
