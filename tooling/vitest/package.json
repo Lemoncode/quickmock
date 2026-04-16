@@ -8,8 +8,8 @@
     "./browser": "./browser.ts"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.9.1",
-    "@vitest/coverage-v8": "^4.1.4",
-    "vitest": "^4.1.4"
+    "@testing-library/jest-dom": "6.9.1",
+    "@vitest/coverage-v8": "4.1.4",
+    "vitest": "4.1.4"
   }
 }

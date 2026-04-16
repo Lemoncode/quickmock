@@ -27,8 +27,6 @@
   "devDependencies": {
     "@lemoncode/typescript-config": "*",
     "@lemoncode/tsdown-config": "*",
-    "@lemoncode/vitest-config": "*",
-    "typescript": "^6.0.2",
-    "vitest": "^4.1.4"
+    "@lemoncode/vitest-config": "*"
   }
 }
