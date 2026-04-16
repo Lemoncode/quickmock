@@ -10,10 +10,10 @@ updates:
         update-types:
           - 'version-update:semver-major'
     groups:
-      production-dependencies:
-        dependency-type: 'production'
-      development-dependencies:
-        dependency-type: 'development'
+      minor-and-patch:
+        update-types:
+          - 'minor'
+          - 'patch'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
