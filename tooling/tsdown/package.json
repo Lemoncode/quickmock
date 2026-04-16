@@ -7,6 +7,6 @@
     "./base": "./base.ts"
   },
   "devDependencies": {
-    "tsdown": "0.21.8"
+    "tsdown": "0.21.9"
   }
 }
