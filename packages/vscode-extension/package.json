@@ -9,9 +9,6 @@
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "provenance": true
-  },
   "scripts": {
     "dev": "node --run build -- --watch --sourcemap",
     "build": "tsdown",

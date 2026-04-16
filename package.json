@@ -10,8 +10,7 @@
   "workspaces": [
     "apps/*",
     "packages/*",
-    "tooling/*",
-    "local-npm-registry"
+    "tooling/*"
   ],
   "scripts": {
     "start": "node --run dev",
@@ -30,8 +29,9 @@
     "format:check": "prettier --check .",
     "changeset": "changeset",
     "publish-packages": "changeset publish",
-    "start:local-npm-registry": "node local-npm-registry/publish.js start",
-    "local:publish": "node --run build && node local-npm-registry/publish.js publish",
+    "start:local-npm-registry": "npm run build && cd ./local-npm-registry && npm start",
+    "stop:local-npm-registry": "cd ./local-npm-registry && npm stop",
+    "local:publish": "node --run start:local-npm-registry && changeset version && node local-npm-registry/publish.js changeset publish",
     "prepare": "husky || \"No need to install husky\""
   },
   "lint-staged": {

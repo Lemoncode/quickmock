@@ -14,9 +14,6 @@
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "provenance": true
-  },
   "scripts": {
     "build": "tsdown",
     "check-types": "tsc --noEmit",

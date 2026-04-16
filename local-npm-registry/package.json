@@ -3,9 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "verdaccio --config ./config.yaml --listen 4873"
-  },
-  "devDependencies": {
-    "verdaccio": "6.5.0"
+    "prestart": "npm stop",
+    "start": "docker compose up -d",
+    "stop": "docker compose down --remove-orphans"
   }
 }
