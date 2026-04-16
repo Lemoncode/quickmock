@@ -24,7 +24,7 @@
     "@fontsource/balsamiq-sans": "5.0.21",
     "@uiw/react-color-chrome": "2.10.1",
     "html2canvas": "1.4.1",
-    "immer": "10.1.1",
+    "immer": "11.1.4",
     "konva": "9.3.22",
     "lodash.clonedeep": "4.5.0",
     "react": "18.3.1",
