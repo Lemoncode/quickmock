@@ -1,0 +1,69 @@
+import { ShapeType } from '#core/model';
+import { forwardRef, useMemo } from 'react';
+import { ShapeProps } from '../shape.model';
+import { fitSizeToShapeSizeRestrictions } from '#common/utils/shapes/shape-restrictions';
+import { Group, Rect } from 'react-konva';
+import { useShapeProps } from '../../shapes/use-shape-props.hook';
+import { BASIC_SHAPE } from './shape.const';
+import { useGroupShapeProps } from '../mock-components.utils';
+import { progressBarShapeRestrictions } from './progressbar-shape.restrictions';
+
+const shapeType: ShapeType = 'progressbar';
+
+export const ProgressBarShape = forwardRef<any, ShapeProps>((props, ref) => {
+  const { _x, _y, width, height, _id, _onSelected, otherProps, ...shapeProps } =
+    props;
+  const restrictedSize = fitSizeToShapeSizeRestrictions(
+    progressBarShapeRestrictions,
+    width,
+    height
+  );
+  const { width: restrictedWidth, height: restrictedHeight } = restrictedSize;
+
+  const { progress, borderRadius, fill, stroke } = useShapeProps(
+    otherProps,
+    BASIC_SHAPE
+  );
+
+  const progressWidth = useMemo(
+    () => (progress / 100) * restrictedWidth,
+    [progress, restrictedWidth]
+  );
+
+  const commonGroupProps = useGroupShapeProps(
+    props,
+    restrictedSize,
+    shapeType,
+    ref
+  );
+
+  return (
+    <Group {...commonGroupProps} {...shapeProps}>
+      {/* Progressbar background */}
+      <Rect
+        x={0}
+        y={0}
+        width={restrictedWidth}
+        height={restrictedHeight}
+        cornerRadius={borderRadius}
+        stroke={stroke}
+        strokeWidth={2}
+        fill="white"
+      />
+
+      {/* Progressbar progress */}
+      <Rect
+        x={0}
+        y={0}
+        width={progressWidth}
+        height={restrictedHeight}
+        cornerRadius={borderRadius}
+        stroke={stroke}
+        strokeWidth={2}
+        fill={fill}
+      />
+    </Group>
+  );
+});
+
+export default ProgressBarShape;
