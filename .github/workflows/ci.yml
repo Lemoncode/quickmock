@@ -58,6 +58,7 @@ jobs:
         run: node --run ci:e2e
 
   changeset-check:
+    if: github.event.pull_request.base.ref != 'main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
