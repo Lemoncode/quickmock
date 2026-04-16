@@ -3,6 +3,9 @@ name: Package Publish
 on:
   push:
     branches: [main]
+    paths:
+      - 'packages/**'
+      - '.changeset/**'
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 

@@ -3,6 +3,9 @@ name: Package Versioning
 on:
   push:
     branches: [dev]
+    paths:
+      - 'packages/**'
+      - '.changeset/**'
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 

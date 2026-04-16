@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: Use Node.js 24
-        uses: actions/setup-node@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v6
         with:
-          node-version: '24'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Install dependencies
@@ -34,12 +34,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: Use Node.js 24
-        uses: actions/setup-node@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v6
         with:
-          node-version: '24'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Install dependencies
@@ -52,3 +52,29 @@ jobs:
 
       - name: Run E2E tests
         run: npm run ci:e2e
+
+  changeset-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Check for changeset
+        run: |
+          BASE=${{ github.event.pull_request.base.sha }}
+          HEAD=${{ github.event.pull_request.head.sha }}
+
+          PACKAGES_CHANGED=$(git diff --name-only "$BASE" "$HEAD" -- packages/ | head -1)
+
+          if [ -n "$PACKAGES_CHANGED" ]; then
+            CHANGESET_ADDED=$(git diff --name-only "$BASE" "$HEAD" -- '.changeset/*.md' | head -1)
+            if [ -z "$CHANGESET_ADDED" ]; then
+              echo "::error::This PR modifies packages/ but has no changeset. Run 'node --run changeset' to add one."
+              exit 1
+            fi
+            echo "Changeset found for package changes."
+          else
+            echo "No package changes detected, skipping changeset check."
+          fi
