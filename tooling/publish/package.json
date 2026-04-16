@@ -1,0 +1,5 @@
+{
+  "name": "publish",
+  "type": "module",
+  "private": true
+}

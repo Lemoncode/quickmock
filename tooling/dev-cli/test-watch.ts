@@ -1,7 +1,7 @@
 import * as p from '@clack/prompts';
 import { spawn } from 'node:child_process';
 import { resolve } from 'node:path';
-import { filterByScript, getWorkspacePackages } from './lib/workspace.ts';
+import { filterByScript, getWorkspacePackages } from './lib/workspace';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 

@@ -1,14 +1,11 @@
 {
-  "name": "@lemoncode/quickmock-vscode-extension",
+  "name": "quickmock",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.mjs",
   "imports": {
     "#*": "./src/*"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "node --run build -- --watch --sourcemap",
     "build": "tsdown",
@@ -50,7 +47,7 @@
     "directory": "packages/vscode-extension"
   },
   "engines": {
-    "vscode": "^1.105.0"
+    "vscode": "^1.116.0"
   },
   "icon": "./assets/app-icon.webp",
   "galleryBanner": {
