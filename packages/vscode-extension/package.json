@@ -47,7 +47,7 @@
     "directory": "packages/vscode-extension"
   },
   "engines": {
-    "vscode": "^1.116.0"
+    "vscode": "^1.115.0"
   },
   "icon": "./assets/app-icon.webp",
   "galleryBanner": {
@@ -55,12 +55,41 @@
     "theme": "dark"
   },
   "qna": false,
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "contributes": {
+    "customEditors": [
+      {
+        "viewType": "quickmock.editor",
+        "displayName": "QuickMock Wireframe Editor",
+        "selector": [
+          {
+            "filenamePattern": "*.qm"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
     "commands": [
       {
-        "command": "quickmock.helloWorld",
-        "title": "Quickmock: Hello World"
+        "command": "quickmock-vscode-ai.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "quickmock.newWireframe",
+        "title": "QuickMock: New Wireframe"
+      },
+      {
+        "command": "quickmock.connectMcp",
+        "title": "QuickMock: Connect MCP Server",
+        "category": "QuickMock"
+      }
+    ],
+    "mcpServerDefinitionProviders": [
+      {
+        "id": "quickmock",
+        "label": "QuickMock Wireframe Tools"
       }
     ]
   }
