@@ -6,7 +6,7 @@ import {
   type AppMessage,
   HOST_MESSAGE_TYPE,
   type HostMessage,
-} from '#core/protocol';
+} from '@lemoncode/quickmock-bridge-protocol';
 import {
   openDocument,
   type QuickMockDocument,

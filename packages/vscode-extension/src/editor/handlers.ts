@@ -4,7 +4,7 @@ import {
   type AppMessage,
   HOST_MESSAGE_TYPE,
   type HostMessage,
-} from '#core/protocol';
+} from '@lemoncode/quickmock-bridge-protocol';
 import { type QuickMockDocument, writeFile } from './document';
 
 type PostMessageFn = (msg: HostMessage) => void;

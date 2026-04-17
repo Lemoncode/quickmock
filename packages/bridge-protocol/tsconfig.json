@@ -1,0 +1,10 @@
+{
+  "extends": "@lemoncode/typescript-config/base",
+  "include": ["src"],
+  "compilerOptions": {
+    "target": "ES2024",
+    "lib": ["ES2024"],
+    "noEmit": true,
+    "rootDir": "src"
+  }
+}

@@ -1,3 +1,15 @@
+export interface ContentBbox {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+export interface LoadFilePayload {
+  data: unknown;
+  fileName: string;
+}
+
 export const HOST_MESSAGE_TYPE = {
   LOAD: 'qm:load',
   SAVED: 'qm:saved',
@@ -11,11 +23,6 @@ export const APP_MESSAGE_TYPE = {
   WEBVIEW_READY: 'WEBVIEW_READY',
 } as const;
 
-export interface LoadFilePayload {
-  data: unknown;
-  fileName: string;
-}
-
 export type HostMessage =
   | {
       type: typeof HOST_MESSAGE_TYPE.LOAD;
@@ -26,12 +33,14 @@ export type HostMessage =
 
 export type AppMessage =
   | { type: typeof APP_MESSAGE_TYPE.READY }
+  | { type: typeof APP_MESSAGE_TYPE.WEBVIEW_READY }
   | { type: typeof APP_MESSAGE_TYPE.SAVE; payload: { content: string } }
-  | { type: typeof APP_MESSAGE_TYPE.RENDER_COMPLETE }
-  | { type: typeof APP_MESSAGE_TYPE.WEBVIEW_READY };
+  | {
+      type: typeof APP_MESSAGE_TYPE.RENDER_COMPLETE;
+      payload?: ContentBbox;
+    };
 
-export interface BridgeMessage<T = unknown> {
-  type: string;
-  payload?: T;
-  requestId?: string;
-}
+export type PayloadOf<
+  U extends { type: string },
+  T extends U['type'],
+> = Extract<U, { type: T }> extends { payload: infer P } ? P : undefined;

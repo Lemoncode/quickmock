@@ -1,5 +1,6 @@
 import { createServer, type Server } from 'node:http'
 import type { AddressInfo } from 'node:net'
+import { APP_MESSAGE_TYPE } from '@lemoncode/quickmock-bridge-protocol'
 import { QUICKMOCK_URL } from './renderer.consts'
 
 export interface BridgeServer {
@@ -25,6 +26,9 @@ export function startBridgeServer(): Promise<BridgeServer> {
 }
 
 function buildBridgeHtml(): string {
+  const READY = JSON.stringify(APP_MESSAGE_TYPE.READY)
+  const RENDER_COMPLETE = JSON.stringify(APP_MESSAGE_TYPE.RENDER_COMPLETE)
+
   return /* html */ `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,8 +55,8 @@ function buildBridgeHtml(): string {
 
       // Messages coming UP from the QuickMock iframe
       if (event.source === iframe.contentWindow) {
-        if (type === 'qm:ready')           window.__qmReady = true
-        if (type === 'qm:render-complete') {
+        if (type === ${READY}) window.__qmReady = true
+        if (type === ${RENDER_COMPLETE}) {
           window.__renderComplete = true
           window.__renderBbox = event.data.payload ?? null
         }

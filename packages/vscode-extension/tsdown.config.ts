@@ -16,6 +16,7 @@ export default defineConfig([
     sourcemap: true,
     clean: false,
     dts: false,
+    deps: { alwaysBundle: /.*/ },
     outputOptions: {
       entryFileNames: '[name].js',
     },

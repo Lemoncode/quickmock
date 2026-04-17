@@ -2,7 +2,7 @@ import {
   type AppMessage,
   HOST_MESSAGE_TYPE,
   type HostMessage,
-} from '#core/protocol';
+} from '@lemoncode/quickmock-bridge-protocol';
 
 declare function acquireVsCodeApi(): { postMessage(msg: AppMessage): void };
 

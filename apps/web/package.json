@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "1.7.10",
+    "@lemoncode/quickmock-bridge-protocol": "*",
     "@fontsource-variable/montserrat": "5.0.20",
     "@fontsource/balsamiq-sans": "5.0.21",
     "@uiw/react-color-chrome": "2.10.1",
