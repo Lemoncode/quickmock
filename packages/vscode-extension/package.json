@@ -8,18 +8,22 @@
   },
   "scripts": {
     "dev": "node --run build -- --watch --sourcemap",
-    "build": "tsdown",
+    "build": "tsdown && cpy ../mcp/dist/index.mjs dist --rename=mcp-server.mjs",
     "check-types": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@lemoncode/quickmock-mcp": "*"
   },
   "devDependencies": {
     "@lemoncode/tsdown-config": "*",
     "@lemoncode/typescript-config": "*",
     "@lemoncode/vitest-config": "*",
     "@types/vscode": "1.116.0",
-    "@vscode/vsce": "3.9.0"
+    "@vscode/vsce": "3.9.0",
+    "cpy-cli": "^7.0.0"
   },
   "publisher": "Lemoncoders",
   "displayName": "Quickmock",
@@ -72,10 +76,6 @@
       }
     ],
     "commands": [
-      {
-        "command": "quickmock-vscode-ai.helloWorld",
-        "title": "Hello World"
-      },
       {
         "command": "quickmock.newWireframe",
         "title": "QuickMock: New Wireframe"
