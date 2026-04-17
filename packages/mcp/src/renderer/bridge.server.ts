@@ -1,5 +1,5 @@
 import { createServer, type Server } from 'node:http'
-import { AddressInfo } from 'node:net'
+import type { AddressInfo } from 'node:net'
 import { QUICKMOCK_URL } from './renderer.consts'
 
 export interface BridgeServer {

@@ -11,7 +11,7 @@ interface ParsedDataUrl {
 
 function parseDataUrl(src: string): ParsedDataUrl | null {
   const match = src.match(/^data:([^;]+);base64,(.+)$/)
-  if (!match) {
+  if (!match?.[1] || !match[2]) {
     return null
   }
   return { mimeType: match[1], base64: match[2] }
