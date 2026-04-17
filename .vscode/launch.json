@@ -8,6 +8,9 @@
       "args": [
         "--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-extension"
       ],
+      "env": {
+        "QM_APP_URL": "http://localhost:5173/editor.html?env=vscode"
+      },
       "outFiles": ["${workspaceFolder}/packages/vscode-extension/dist/**/*.mjs"]
     }
   ]
