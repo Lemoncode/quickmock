@@ -15,14 +15,14 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@lemoncode/quickmock-bridge-protocol": "*",
     "@lemoncode/quickmock-mcp": "*"
   },
   "devDependencies": {
+    "@lemoncode/quickmock-bridge-protocol": "*",
     "@lemoncode/tsdown-config": "*",
     "@lemoncode/typescript-config": "*",
     "@lemoncode/vitest-config": "*",
-    "@types/vscode": "1.116.0",
+    "@types/vscode": "1.115.0",
     "@vscode/vsce": "3.9.0"
   },
   "publisher": "Lemoncoders",
