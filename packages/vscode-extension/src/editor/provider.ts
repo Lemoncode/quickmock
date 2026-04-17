@@ -1,5 +1,6 @@
 import { basename } from 'node:path';
 import * as vscode from 'vscode';
+import { QUICKMOCK_APP_URL } from '#core/constants';
 import { documentRegistry } from '#core/document-registry';
 import {
   type AppMessage,
@@ -109,7 +110,11 @@ export class QuickMockEditorProvider
       enableScripts: true,
       localResourceRoots: [this.extensionUri],
     };
-    panel.webview.html = getHtml(panel.webview, this.extensionUri);
+    panel.webview.html = getHtml(
+      panel.webview,
+      this.extensionUri,
+      QUICKMOCK_APP_URL
+    );
 
     panel.webview.onDidReceiveMessage(async (msg: AppMessage) => {
       await handleWebviewMessage(msg, doc, (reply) =>
