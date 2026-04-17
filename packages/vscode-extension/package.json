@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "node --run build -- --watch --sourcemap",
-    "build": "tsdown && cpy ../mcp/dist/index.mjs dist --rename=mcp-server.mjs",
+    "build": "tsdown && node scripts/copy-mcp.mjs",
     "check-types": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -22,8 +22,7 @@
     "@lemoncode/typescript-config": "*",
     "@lemoncode/vitest-config": "*",
     "@types/vscode": "1.116.0",
-    "@vscode/vsce": "3.9.0",
-    "cpy-cli": "^7.0.0"
+    "@vscode/vsce": "3.9.0"
   },
   "publisher": "Lemoncoders",
   "displayName": "Quickmock",
