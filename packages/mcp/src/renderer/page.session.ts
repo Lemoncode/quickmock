@@ -77,14 +77,14 @@ export async function sendFileToApp(
   fileName: string
 ): Promise<void> {
   await page.evaluate(
-    ({ content, fileName }) => {
+    ({ content, fileName, origin }) => {
       const iframe = document.querySelector('iframe') as HTMLIFrameElement;
       iframe.contentWindow?.postMessage(
         { type: 'LOAD_FILE', payload: { data: JSON.parse(content), fileName } },
-        '*'
+        origin
       );
     },
-    { content, fileName }
+    { content, fileName, origin: QM_APP_ORIGIN }
   );
 }
 
