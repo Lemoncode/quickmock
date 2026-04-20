@@ -41,7 +41,7 @@ function buildBridgeHtml(): string {
   </style>
 </head>
 <body>
-  <iframe id="qm" src="${QUICKMOCK_URL}" allow="clipboard-read; clipboard-write"></iframe>
+  <iframe id="qm" src="${QUICKMOCK_URL}" sandbox="allow-scripts allow-same-origin" allow="clipboard-read; clipboard-write"></iframe>
   <script>
     window.__qmReady = false
     window.__renderComplete = false
