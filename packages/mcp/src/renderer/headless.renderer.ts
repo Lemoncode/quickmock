@@ -10,13 +10,6 @@ import {
   watchNetworkFailures,
 } from './page.session';
 
-const BROWSER_LAUNCH_ARGS = [
-  '--no-sandbox',
-  '--disable-setuid-sandbox',
-  '--disable-web-security',
-  '--disable-features=IsolateOrigins,site-per-process',
-];
-
 /** Renders a .qm file in a headless Chromium instance and returns a PNG buffer. */
 export async function renderWireframe(
   content: string,
@@ -51,7 +44,6 @@ async function withBrowser<T>(
   const browser = await puppeteer.launch({
     headless: true,
     executablePath,
-    args: BROWSER_LAUNCH_ARGS,
   });
   try {
     return await fn(browser);
