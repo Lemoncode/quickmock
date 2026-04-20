@@ -40,7 +40,5 @@ export type AppMessage =
       payload?: ContentBbox;
     };
 
-export type PayloadOf<
-  U extends { type: string },
-  T extends U['type'],
-> = Extract<U, { type: T }> extends { payload: infer P } ? P : undefined;
+export type PayloadOf<U extends { type: string }, T extends U['type']> =
+  Extract<U, { type: T }> extends { payload: infer P } ? P : undefined;

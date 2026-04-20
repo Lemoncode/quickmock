@@ -1,33 +1,33 @@
-import { APP_MESSAGE_TYPE } from '@lemoncode/quickmock-bridge-protocol'
-import { createServer, type Server } from 'node:http'
-import type { AddressInfo } from 'node:net'
-import { QUICKMOCK_URL } from './app-url.consts'
+import { APP_MESSAGE_TYPE } from '@lemoncode/quickmock-bridge-protocol';
+import { createServer, type Server } from 'node:http';
+import type { AddressInfo } from 'node:net';
+import { QUICKMOCK_URL } from './app-url.consts';
 
 export interface BridgeServer {
-  server: Server
-  port: number
+  server: Server;
+  port: number;
 }
 
 /** HTTP server that serves the Puppeteer ↔ QuickMock iframe bridge page. */
 export function startBridgeServer(): Promise<BridgeServer> {
   return new Promise((resolve, reject) => {
     const server = createServer((_req, res) => {
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(buildBridgeHtml())
-    })
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(buildBridgeHtml());
+    });
 
-    server.on('error', reject)
+    server.on('error', reject);
 
     server.listen(0, '127.0.0.1', () => {
-      const { port } = server.address() as AddressInfo
-      resolve({ server, port })
-    })
-  })
+      const { port } = server.address() as AddressInfo;
+      resolve({ server, port });
+    });
+  });
 }
 
 function buildBridgeHtml(): string {
-  const READY = JSON.stringify(APP_MESSAGE_TYPE.READY)
-  const RENDER_COMPLETE = JSON.stringify(APP_MESSAGE_TYPE.RENDER_COMPLETE)
+  const READY = JSON.stringify(APP_MESSAGE_TYPE.READY);
+  const RENDER_COMPLETE = JSON.stringify(APP_MESSAGE_TYPE.RENDER_COMPLETE);
 
   return /* html */ `<!DOCTYPE html>
 <html lang="en">
@@ -70,5 +70,5 @@ function buildBridgeHtml(): string {
     })
   </script>
 </body>
-</html>`
+</html>`;
 }

@@ -40,13 +40,13 @@ export const registerConnectMcpCommand = (
 
     const items: vscode.QuickPickItem[] = [
       { label: 'Providers', kind: vscode.QuickPickItemKind.Separator },
-      ...results.map((r) => ({
+      ...results.map(r => ({
         label: `${STATUS_ICON[r.status]} ${r.label}`,
         description: r.status === 'registered' ? 'registered' : r.status,
         detail: r.detail,
       })),
       { label: 'Available tools', kind: vscode.QuickPickItemKind.Separator },
-      ...TOOLS.map((t) => ({
+      ...TOOLS.map(t => ({
         label: `$(tools) ${t.name}`,
         description: t.description,
       })),
@@ -66,8 +66,6 @@ export const registerConnectMcpCommand = (
 
     if (selected?.description === serverPath) {
       await vscode.env.clipboard.writeText(serverPath);
-      vscode.window.showInformationMessage(
-        'Server path copied to clipboard.'
-      );
+      vscode.window.showInformationMessage('Server path copied to clipboard.');
     }
   });

@@ -41,6 +41,6 @@ export const syncAppUrlFile = (): void => {
 };
 
 export const onAppUrlChange = (listener: () => void): vscode.Disposable =>
-  vscode.workspace.onDidChangeConfiguration((e) => {
+  vscode.workspace.onDidChangeConfiguration(e => {
     if (e.affectsConfiguration(FULL_KEY)) listener();
   });

@@ -1,1 +1,1 @@
-export * from './get-wireframe-assets.tool'
+export * from './get-wireframe-assets.tool';

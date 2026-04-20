@@ -41,7 +41,7 @@ export const registerQuickMockMcpServerProvider = (
       MCP_SERVER_ID,
       {
         onDidChangeMcpServerDefinitions: didChangeDefinitions.event,
-        provideMcpServerDefinitions: async (_token) => {
+        provideMcpServerDefinitions: async _token => {
           logInfo('Providing MCP server definitions');
           const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
           if (!workspaceFolder) {

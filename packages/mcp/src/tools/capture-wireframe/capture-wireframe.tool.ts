@@ -1,5 +1,5 @@
-import { captureWireframeHandler } from './capture-wireframe.handler'
-import { captureWireframeSchema } from './capture-wireframe.schema'
+import { captureWireframeHandler } from './capture-wireframe.handler';
+import { captureWireframeSchema } from './capture-wireframe.schema';
 
 export const captureWireframe = {
   name: 'capture_wireframe' as const,
@@ -8,4 +8,4 @@ export const captureWireframe = {
     'Use get_wireframe_pages first to discover available pages and their indices. ',
   schema: captureWireframeSchema,
   execute: captureWireframeHandler,
-}
+};

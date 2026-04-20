@@ -1,5 +1,8 @@
 import { isHeadlessEnv, isVSCodeEnv } from '#common/utils/env.utils.ts';
-import { onMessage, sendToExtension } from '#common/utils/vscode-bridge.utils.ts';
+import {
+  onMessage,
+  sendToExtension,
+} from '#common/utils/vscode-bridge.utils.ts';
 import { QuickMockFileContract } from '#core/local-disk/local-disk.model';
 import { useCanvasContext } from '#core/providers';
 import {

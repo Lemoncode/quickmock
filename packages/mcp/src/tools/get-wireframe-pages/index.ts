@@ -1,1 +1,1 @@
-export * from './get-wireframe-pages.tool'
+export * from './get-wireframe-pages.tool';

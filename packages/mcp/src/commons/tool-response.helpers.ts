@@ -1,19 +1,19 @@
-type TextContent = { type: 'text'; text: string }
-type ImageContent = { type: 'image'; data: string; mimeType: string }
-type ToolContent = TextContent | ImageContent
+type TextContent = { type: 'text'; text: string };
+type ImageContent = { type: 'image'; data: string; mimeType: string };
+type ToolContent = TextContent | ImageContent;
 
 export function toolText(text: string) {
-  return { content: [{ type: 'text' as const, text }] }
+  return { content: [{ type: 'text' as const, text }] };
 }
 
 export function toolImage(data: string, mimeType: string) {
-  return { content: [{ type: 'image' as const, data, mimeType }] }
+  return { content: [{ type: 'image' as const, data, mimeType }] };
 }
 
 export function toolMultiContent(items: ToolContent[]) {
-  return { content: items }
+  return { content: items };
 }
 
 export function toolError(text: string) {
-  return { content: [{ type: 'text' as const, text }], isError: true as const }
+  return { content: [{ type: 'text' as const, text }], isError: true as const };
 }

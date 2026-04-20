@@ -1,5 +1,5 @@
-import { getWireframeAssetsHandler } from './get-wireframe-assets.handler'
-import { getWireframeAssetsSchema } from './get-wireframe-assets.schema'
+import { getWireframeAssetsHandler } from './get-wireframe-assets.handler';
+import { getWireframeAssetsSchema } from './get-wireframe-assets.schema';
 
 export const getWireframeAssets = {
   name: 'get_wireframe_assets' as const,
@@ -10,4 +10,4 @@ export const getWireframeAssets = {
     'and returns the images as inline content so they can be viewed directly.',
   schema: getWireframeAssetsSchema,
   execute: getWireframeAssetsHandler,
-}
+};

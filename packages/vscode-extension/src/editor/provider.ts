@@ -16,9 +16,7 @@ import {
 import { handleWebviewMessage } from './handlers';
 import { getHtml } from './panel';
 
-export class QuickMockEditorProvider
-  implements vscode.CustomEditorProvider<QuickMockDocument>
-{
+export class QuickMockEditorProvider implements vscode.CustomEditorProvider<QuickMockDocument> {
   static register(context: vscode.ExtensionContext): vscode.Disposable {
     const provider = new QuickMockEditorProvider(context.extensionUri);
     const editorRegistration = vscode.window.registerCustomEditorProvider(
@@ -86,10 +84,9 @@ export class QuickMockEditorProvider
     return {
       id: context.destination.toString(),
       delete: () => {
-        vscode.workspace.fs.delete(context.destination).then(
-          undefined,
-          () => {}
-        );
+        vscode.workspace.fs
+          .delete(context.destination)
+          .then(undefined, () => {});
       },
     };
   }
@@ -102,7 +99,7 @@ export class QuickMockEditorProvider
     const key = doc.uri.toString();
     this.panels.set(key, [...(this.panels.get(key) ?? []), panel]);
     panel.onDidDispose(() => {
-      const remaining = (this.panels.get(key) ?? []).filter((p) => p !== panel);
+      const remaining = (this.panels.get(key) ?? []).filter(p => p !== panel);
       this.panels.set(key, remaining);
       if (remaining.length === 0) {
         documentRegistry.delete(doc.uri.fsPath);
@@ -120,7 +117,7 @@ export class QuickMockEditorProvider
     );
 
     panel.webview.onDidReceiveMessage(async (msg: AppMessage) => {
-      await handleWebviewMessage(msg, doc, (reply) =>
+      await handleWebviewMessage(msg, doc, reply =>
         panel.webview.postMessage(reply satisfies HostMessage)
       );
       documentRegistry.set(doc.uri.fsPath, doc.content);

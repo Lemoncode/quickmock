@@ -1,1 +1,1 @@
-export * from './capture-wireframe.tool'
+export * from './capture-wireframe.tool';

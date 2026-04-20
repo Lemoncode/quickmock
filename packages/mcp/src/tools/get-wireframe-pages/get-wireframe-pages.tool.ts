@@ -1,5 +1,5 @@
-import { getWireframePagesHandler } from './get-wireframe-pages.handler'
-import { getWireframePagesSchema } from './get-wireframe-pages.schema'
+import { getWireframePagesHandler } from './get-wireframe-pages.handler';
+import { getWireframePagesSchema } from './get-wireframe-pages.schema';
 
 export const getWireframePages = {
   name: 'get_wireframe_pages' as const,
@@ -8,4 +8,4 @@ export const getWireframePages = {
     'Use the index values with capture_wireframe to screenshot a specific page.',
   schema: getWireframePagesSchema,
   execute: getWireframePagesHandler,
-}
+};

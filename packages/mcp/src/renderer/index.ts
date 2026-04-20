@@ -1,1 +1,1 @@
-export * from './headless.renderer'
+export * from './headless.renderer';

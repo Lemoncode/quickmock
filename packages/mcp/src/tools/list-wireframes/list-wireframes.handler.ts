@@ -1,44 +1,52 @@
-import { toolError, toolText } from '#/commons/tool-response.helpers'
-import { readdir } from 'node:fs/promises'
-import { join, relative } from 'node:path'
+import { toolError, toolText } from '#/commons/tool-response.helpers';
+import { readdir } from 'node:fs/promises';
+import { join, relative } from 'node:path';
 
-const IGNORED_DIRS = new Set(['node_modules', '.git', 'dist', 'out', '.vscode'])
+const IGNORED_DIRS = new Set([
+  'node_modules',
+  '.git',
+  'dist',
+  'out',
+  '.vscode',
+]);
 
 export async function listWireframesHandler() {
-  const root = process.env.QM_WORKSPACE_ROOT ?? process.cwd()
+  const root = process.env.QM_WORKSPACE_ROOT ?? process.cwd();
 
   try {
-    const files = await collectQmFiles(root, root)
-    return toolText(JSON.stringify(files, null, 2))
+    const files = await collectQmFiles(root, root);
+    return toolText(JSON.stringify(files, null, 2));
   } catch (err) {
-    return toolError(`Error scanning workspace: ${String(err)}`)
+    return toolError(`Error scanning workspace: ${String(err)}`);
   }
 }
 
 async function collectQmFiles(dir: string, root: string): Promise<string[]> {
-  let entries: import('node:fs').Dirent[]
+  let entries: import('node:fs').Dirent[];
   try {
-    entries = (await readdir(dir, { withFileTypes: true })) as unknown as import('node:fs').Dirent[]
+    entries = (await readdir(dir, {
+      withFileTypes: true,
+    })) as unknown as import('node:fs').Dirent[];
   } catch {
-    return []
+    return [];
   }
 
-  const results: string[] = []
+  const results: string[] = [];
 
   for (const entry of entries) {
     if (IGNORED_DIRS.has(entry.name)) {
-      continue
+      continue;
     }
 
-    const fullPath = join(dir, entry.name)
+    const fullPath = join(dir, entry.name);
 
     if (entry.isDirectory()) {
-      const nested = await collectQmFiles(fullPath, root)
-      results.push(...nested)
+      const nested = await collectQmFiles(fullPath, root);
+      results.push(...nested);
     } else if (entry.isFile() && entry.name.endsWith('.qm')) {
-      results.push(relative(root, fullPath))
+      results.push(relative(root, fullPath));
     }
   }
 
-  return results
+  return results;
 }

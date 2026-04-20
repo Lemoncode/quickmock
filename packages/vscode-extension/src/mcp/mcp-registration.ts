@@ -38,8 +38,7 @@ const registerInVSCode = async (
 ): Promise<RegistrationResult> => {
   try {
     const config = vscode.workspace.getConfiguration(MCP_CONFIG_SECTION);
-    const servers =
-      config.get<Record<string, unknown>>(MCP_SERVERS_KEY) ?? {};
+    const servers = config.get<Record<string, unknown>>(MCP_SERVERS_KEY) ?? {};
     servers[MCP_SERVER_ID] = entry;
     await config.update(
       MCP_SERVERS_KEY,
@@ -111,7 +110,7 @@ export const registerMcpServer = async (
 
   const results: RegistrationResult[] = [
     await registerInVSCode(entry),
-    ...getMcpClientTargets().map((t) => registerInClientTarget(t, entry)),
+    ...getMcpClientTargets().map(t => registerInClientTarget(t, entry)),
   ];
 
   for (const r of results) {

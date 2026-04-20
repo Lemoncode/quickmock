@@ -1,14 +1,16 @@
-import { toolError, toolText } from '#/commons/tool-response.helpers'
-import type { WireframeFileService } from '#/commons/wireframe-file.service'
+import { toolError, toolText } from '#/commons/tool-response.helpers';
+import type { WireframeFileService } from '#/commons/wireframe-file.service';
 
 export async function getWireframeJsonHandler(
   args: { path: string },
-  service: WireframeFileService,
+  service: WireframeFileService
 ) {
   try {
-    const { content } = await service.readFile(args.path)
-    return toolText(content)
+    const { content } = await service.readFile(args.path);
+    return toolText(content);
   } catch (err) {
-    return toolError(`Error reading wireframe at "${args.path}": ${String(err)}`)
+    return toolError(
+      `Error reading wireframe at "${args.path}": ${String(err)}`
+    );
   }
 }

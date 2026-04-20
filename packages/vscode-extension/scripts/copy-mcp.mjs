@@ -6,7 +6,9 @@ import { fileURLToPath } from 'node:url';
 const require = createRequire(import.meta.url);
 const here = dirname(fileURLToPath(import.meta.url));
 
-const mcpDir = dirname(require.resolve('@lemoncode/quickmock-mcp/package.json'));
+const mcpDir = dirname(
+  require.resolve('@lemoncode/quickmock-mcp/package.json')
+);
 const source = join(mcpDir, 'dist');
 
 const distDir = join(here, '..', 'dist');

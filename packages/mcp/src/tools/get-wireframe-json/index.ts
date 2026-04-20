@@ -1,1 +1,1 @@
-export * from './get-wireframe-json.tool'
+export * from './get-wireframe-json.tool';

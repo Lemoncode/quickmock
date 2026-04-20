@@ -6,20 +6,20 @@ import { basename } from 'node:path';
 
 export async function captureWireframeHandler(
   args: { path: string; pageIndex?: number },
-  service: WireframeFileService,
+  service: WireframeFileService
 ) {
-  const { path, pageIndex = 0 } = args
+  const { path, pageIndex = 0 } = args;
 
   try {
-    const { absPath, content, parsed } = await service.readFile(path)
-    const fileName = basename(absPath)
-    const pageCount = parsed.pages.length
+    const { absPath, content, parsed } = await service.readFile(path);
+    const fileName = basename(absPath);
+    const pageCount = parsed.pages.length;
 
     if (pageIndex < 0 || pageIndex >= pageCount) {
       return toolError(
         `Page index ${pageIndex} is out of range. ` +
-          `"${fileName}" has ${pageCount} page${pageCount === 1 ? '' : 's'} (indices 0–${pageCount - 1}).`,
-      )
+          `"${fileName}" has ${pageCount} page${pageCount === 1 ? '' : 's'} (indices 0–${pageCount - 1}).`
+      );
     }
 
     const targetContent =
@@ -27,12 +27,17 @@ export async function captureWireframeHandler(
         ? content
         : JSON.stringify({
             ...parsed,
-            pages: [parsed.pages[pageIndex], ...parsed.pages.filter((_, i) => i !== pageIndex)],
-          })
+            pages: [
+              parsed.pages[pageIndex],
+              ...parsed.pages.filter((_, i) => i !== pageIndex),
+            ],
+          });
 
-    const png = await renderWireframe(targetContent, fileName)
-    return toolImage(png.toString('base64'), 'image/png')
+    const png = await renderWireframe(targetContent, fileName);
+    return toolImage(png.toString('base64'), 'image/png');
   } catch (err) {
-    return toolError(`Error capturing wireframe at "${path} with ${QUICKMOCK_URL}": ${String(err)}`)
+    return toolError(
+      `Error capturing wireframe at "${path} with ${QUICKMOCK_URL}": ${String(err)}`
+    );
   }
 }
