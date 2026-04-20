@@ -1,7 +1,7 @@
 import { APP_MESSAGE_TYPE } from '@lemoncode/quickmock-bridge-protocol';
 import { createServer, type Server } from 'node:http';
 import type { AddressInfo } from 'node:net';
-import { QUICKMOCK_URL } from './app-url.consts';
+import { QM_APP_ORIGIN, QUICKMOCK_URL } from './app-url.consts';
 
 export interface BridgeServer {
   server: Server;
@@ -28,6 +28,7 @@ export function startBridgeServer(): Promise<BridgeServer> {
 function buildBridgeHtml(): string {
   const READY = JSON.stringify(APP_MESSAGE_TYPE.READY);
   const RENDER_COMPLETE = JSON.stringify(APP_MESSAGE_TYPE.RENDER_COMPLETE);
+  const QM_ORIGIN = JSON.stringify(QM_APP_ORIGIN);
 
   return /* html */ `<!DOCTYPE html>
 <html lang="en">
@@ -65,7 +66,7 @@ function buildBridgeHtml(): string {
 
       // Messages coming DOWN from Puppeteer (page.evaluate) → forward to iframe
       if (iframe.contentWindow) {
-        iframe.contentWindow.postMessage(event.data, '*')
+        iframe.contentWindow.postMessage(event.data, ${QM_ORIGIN})
       }
     })
   </script>
