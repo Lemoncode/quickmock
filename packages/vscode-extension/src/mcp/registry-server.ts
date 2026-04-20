@@ -1,17 +1,26 @@
-import { createHash } from 'node:crypto';
+import { randomBytes } from 'node:crypto';
 import { unlinkSync, writeFileSync } from 'node:fs';
 import {
   createServer,
   type IncomingMessage,
   type ServerResponse,
 } from 'node:http';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import {
+  buildPortFilePath,
+  DOCUMENT_ROUTE,
+  encodePortFile,
+  LOOPBACK_HOST,
+  TOKEN_HEADER,
+} from '@lemoncode/quickmock-registry-protocol';
 import * as vscode from 'vscode';
 import { documentRegistry } from '#core/document-registry';
 
+const TOKEN_BYTE_LENGTH = 32;
+const PORT_FILE_MODE = 0o600;
+
 export class RegistryServer {
   private portFile: string | null = null;
+  private token = '';
 
   async start(context: vscode.ExtensionContext): Promise<void> {
     const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
@@ -19,17 +28,19 @@ export class RegistryServer {
       return;
     }
 
-    const hash = workspaceHash(workspaceRoot);
-    this.portFile = join(tmpdir(), `quickmock-${hash}.port`);
+    this.portFile = buildPortFilePath(workspaceRoot);
+    this.token = randomBytes(TOKEN_BYTE_LENGTH).toString('hex');
 
     const server = createServer((req, res) => this.handleRequest(req, res));
 
     await new Promise<void>((resolve, reject) => {
       server.on('error', reject);
-      server.listen(0, '127.0.0.1', () => {
-        const addr = server.address() as { port: number };
+      server.listen(0, LOOPBACK_HOST, () => {
+        const { port } = server.address() as { port: number };
         try {
-          writeFileSync(this.portFile!, String(addr.port), 'utf-8');
+          writeFileSync(this.portFile!, encodePortFile(port, this.token), {
+            mode: PORT_FILE_MODE,
+          });
         } catch (err) {
           reject(err);
           return;
@@ -51,9 +62,15 @@ export class RegistryServer {
   }
 
   private handleRequest(req: IncomingMessage, res: ServerResponse): void {
+    if (req.headers[TOKEN_HEADER] !== this.token) {
+      res.writeHead(401);
+      res.end();
+      return;
+    }
+
     const url = new URL(req.url ?? '/', 'http://localhost');
 
-    if (url.pathname !== '/document') {
+    if (url.pathname !== DOCUMENT_ROUTE) {
       res.writeHead(404);
       res.end();
       return;
@@ -77,6 +94,3 @@ export class RegistryServer {
     res.end(content);
   }
 }
-
-const workspaceHash = (root: string): string =>
-  createHash('md5').update(root).digest('hex').slice(0, 8);

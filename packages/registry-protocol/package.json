@@ -1,0 +1,16 @@
+{
+  "name": "@lemoncode/quickmock-registry-protocol",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@lemoncode/typescript-config": "*",
+    "@types/node": "^22.19.17"
+  }
+}

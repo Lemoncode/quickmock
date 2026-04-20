@@ -1,33 +1,40 @@
 import { readFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import {
+  buildPortFilePath,
+  DOCUMENT_ROUTE,
+  LOOPBACK_HOST,
+  parsePortFile,
+  TOKEN_HEADER,
+} from '@lemoncode/quickmock-registry-protocol';
 import { nullClient, type RegistryClient } from './registry.models';
-import { workspaceHash } from './registry.utils';
+
+const REQUEST_TIMEOUT_MS = 2_000;
+
+function readPortFile(workspaceRoot: string) {
+  try {
+    const raw = readFileSync(buildPortFilePath(workspaceRoot), 'utf-8');
+    return parsePortFile(raw);
+  } catch {
+    return null;
+  }
+}
 
 /** HTTP client for the VSCode extension's registry server. Falls back to nullClient when the extension is not running. */
 export function createRegistryClient(): RegistryClient {
   const workspaceRoot = process.env.QM_WORKSPACE_ROOT ?? process.cwd();
-
-  let port: number;
-  try {
-    const hash = workspaceHash(workspaceRoot);
-    const portFile = join(tmpdir(), `quickmock-${hash}.port`);
-    port = parseInt(readFileSync(portFile, 'utf-8').trim(), 10);
-    if (Number.isNaN(port)) {
-      return nullClient;
-    }
-  } catch {
-    return nullClient;
-  }
+  const portFile = readPortFile(workspaceRoot);
+  if (!portFile) return nullClient;
+  const { port, token } = portFile;
 
   return {
     async getDocument(fsPath: string): Promise<string | null> {
       try {
-        const url = `http://127.0.0.1:${port}/document?path=${encodeURIComponent(fsPath)}`;
-        const res = await fetch(url, { signal: AbortSignal.timeout(2_000) });
-        if (!res.ok) {
-          return null;
-        }
+        const url = `http://${LOOPBACK_HOST}:${port}${DOCUMENT_ROUTE}?path=${encodeURIComponent(fsPath)}`;
+        const res = await fetch(url, {
+          headers: { [TOKEN_HEADER]: token },
+          signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+        });
+        if (!res.ok) return null;
         return await res.text();
       } catch {
         return null;

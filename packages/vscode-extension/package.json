@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@lemoncode/quickmock-bridge-protocol": "*",
+    "@lemoncode/quickmock-registry-protocol": "*",
     "@lemoncode/tsdown-config": "*",
     "@lemoncode/typescript-config": "*",
     "@lemoncode/vitest-config": "*",
