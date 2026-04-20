@@ -1,5 +1,5 @@
-import { toolError, toolText } from '../../commons/tool-response.helpers'
-import type { WireframeFileService } from '../../commons/wireframe-file.service'
+import { toolError, toolText } from '#/commons/tool-response.helpers'
+import type { WireframeFileService } from '#/commons/wireframe-file.service'
 import type { WireframePage } from './get-wireframe-pages.models'
 
 export async function getWireframePagesHandler(

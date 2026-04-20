@@ -1,7 +1,7 @@
+import { APP_MESSAGE_TYPE } from '@lemoncode/quickmock-bridge-protocol'
 import { createServer, type Server } from 'node:http'
 import type { AddressInfo } from 'node:net'
-import { APP_MESSAGE_TYPE } from '@lemoncode/quickmock-bridge-protocol'
-import { QUICKMOCK_URL } from './renderer.consts'
+import { QUICKMOCK_URL } from './app-url.consts'
 
 export interface BridgeServer {
   server: Server

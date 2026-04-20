@@ -1,8 +1,7 @@
-import type { Page } from 'puppeteer'
+import type { Page } from 'puppeteer-core'
+import { QM_APP_ORIGIN, QUICKMOCK_URL } from './app-url.consts'
 import {
   LOCAL_INSTANCE_HINT,
-  QM_APP_ORIGIN,
-  QUICKMOCK_URL,
   READY_TIMEOUT_MS,
   RENDER_TIMEOUT_MS,
 } from './renderer.consts'

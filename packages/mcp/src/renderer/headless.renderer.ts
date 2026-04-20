@@ -1,6 +1,7 @@
-import type { Browser } from 'puppeteer'
-import puppeteer from 'puppeteer'
+import type { Browser } from 'puppeteer-core'
+import puppeteer from 'puppeteer-core'
 import { startBridgeServer } from './bridge.server'
+import { resolveChromiumExecutable } from './chromium.resolver'
 import {
   screenshotIframe,
   sendFileToApp,
@@ -39,7 +40,12 @@ export async function renderWireframe(content: string, fileName: string): Promis
 }
 
 async function withBrowser<T>(fn: (browser: Browser) => Promise<T>): Promise<T> {
-  const browser = await puppeteer.launch({ headless: true, args: BROWSER_LAUNCH_ARGS })
+  const executablePath = await resolveChromiumExecutable()
+  const browser = await puppeteer.launch({
+    headless: true,
+    executablePath,
+    args: BROWSER_LAUNCH_ARGS,
+  })
   try {
     return await fn(browser)
   } finally {

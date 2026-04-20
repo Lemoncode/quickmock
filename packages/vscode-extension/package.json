@@ -2,7 +2,7 @@
   "name": "quickmock",
   "version": "0.0.1",
   "type": "module",
-  "main": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
   "imports": {
     "#*": "./src/*"
   },
@@ -91,6 +91,17 @@
         "id": "quickmock",
         "label": "QuickMock Wireframe Tools"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "QuickMock",
+      "properties": {
+        "quickmock.appUrl": {
+          "type": "string",
+          "default": "https://quickmock.net/editor.html",
+          "format": "uri",
+          "markdownDescription": "Base URL of the QuickMock web app used by the custom editor and the MCP renderer. The extension automatically appends `?env=vscode` for the webview and `&headless=1` for the headless screenshot MCP. Changing this refreshes open editors and respawns the MCP server."
+        }
+      }
+    }
   }
 }

@@ -1,6 +1,6 @@
+import { toolError, toolText } from '#/commons/tool-response.helpers'
 import { readdir } from 'node:fs/promises'
 import { join, relative } from 'node:path'
-import { toolError, toolText } from '../../commons/tool-response.helpers'
 
 const IGNORED_DIRS = new Set(['node_modules', '.git', 'dist', 'out', '.vscode'])
 

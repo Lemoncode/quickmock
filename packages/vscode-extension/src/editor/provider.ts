@@ -1,6 +1,6 @@
 import { basename } from 'node:path';
 import * as vscode from 'vscode';
-import { QUICKMOCK_APP_URL } from '#core/constants';
+import { getEditorAppUrl, onAppUrlChange } from '#core/config';
 import { documentRegistry } from '#core/document-registry';
 import {
   type AppMessage,
@@ -20,14 +20,17 @@ export class QuickMockEditorProvider
   implements vscode.CustomEditorProvider<QuickMockDocument>
 {
   static register(context: vscode.ExtensionContext): vscode.Disposable {
-    return vscode.window.registerCustomEditorProvider(
+    const provider = new QuickMockEditorProvider(context.extensionUri);
+    const editorRegistration = vscode.window.registerCustomEditorProvider(
       'quickmock.editor',
-      new QuickMockEditorProvider(context.extensionUri),
+      provider,
       {
         supportsMultipleEditorsPerDocument: false,
         webviewOptions: { retainContextWhenHidden: true },
       }
     );
+    const configListener = onAppUrlChange(() => provider.refreshAllPanels());
+    return vscode.Disposable.from(editorRegistration, configListener);
   }
 
   constructor(private readonly extensionUri: vscode.Uri) {}
@@ -113,7 +116,7 @@ export class QuickMockEditorProvider
     panel.webview.html = getHtml(
       panel.webview,
       this.extensionUri,
-      QUICKMOCK_APP_URL
+      getEditorAppUrl()
     );
 
     panel.webview.onDidReceiveMessage(async (msg: AppMessage) => {
@@ -127,6 +130,15 @@ export class QuickMockEditorProvider
   private broadcast(doc: QuickMockDocument, msg: HostMessage): void {
     for (const panel of this.panels.get(doc.uri.toString()) ?? []) {
       panel.webview.postMessage(msg);
+    }
+  }
+
+  refreshAllPanels(): void {
+    const url = getEditorAppUrl();
+    for (const panels of this.panels.values()) {
+      for (const panel of panels) {
+        panel.webview.html = getHtml(panel.webview, this.extensionUri, url);
+      }
     }
   }
 }

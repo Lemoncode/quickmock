@@ -1,7 +1,8 @@
-import { basename } from 'node:path'
-import { renderWireframe } from '../../renderer/headless.renderer'
-import { toolError, toolImage } from '../../commons/tool-response.helpers'
-import type { WireframeFileService } from '../../commons/wireframe-file.service'
+import { toolError, toolImage } from '#/commons/tool-response.helpers';
+import type { WireframeFileService } from '#/commons/wireframe-file.service';
+import { renderWireframe } from '#/renderer/headless.renderer';
+import { QUICKMOCK_URL } from '#renderer/app-url.consts.js';
+import { basename } from 'node:path';
 
 export async function captureWireframeHandler(
   args: { path: string; pageIndex?: number },
@@ -32,6 +33,6 @@ export async function captureWireframeHandler(
     const png = await renderWireframe(targetContent, fileName)
     return toolImage(png.toString('base64'), 'image/png')
   } catch (err) {
-    return toolError(`Error capturing wireframe at "${path}": ${String(err)}`)
+    return toolError(`Error capturing wireframe at "${path} with ${QUICKMOCK_URL}": ${String(err)}`)
   }
 }

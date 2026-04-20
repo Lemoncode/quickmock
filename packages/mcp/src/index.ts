@@ -2,6 +2,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp'
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio'
 import { createWireframeFileService } from './commons/wireframe-file.service'
 import { createRegistryClient } from './core'
+import { logError } from './core/mcp.logger'
 import { captureWireframe } from './tools/capture-wireframe'
 import { getWireframeAssets } from './tools/get-wireframe-assets'
 import { getWireframeJson } from './tools/get-wireframe-json'
@@ -47,6 +48,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('[quickmock-mcp] fatal error:', err)
+  logError('fatal error:', err)
   process.exit(1)
 })

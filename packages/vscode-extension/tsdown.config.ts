@@ -5,6 +5,8 @@ export default defineConfig([
   {
     ...baseTsdownConfig,
     entry: ['src/index.ts'],
+    format: 'cjs',
+    dts: false,
     deps: { neverBundle: ['vscode'] },
   },
   {

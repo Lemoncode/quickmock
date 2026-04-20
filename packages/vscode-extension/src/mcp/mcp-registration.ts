@@ -1,9 +1,17 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { homedir, platform } from 'node:os';
-import { dirname, join } from 'node:path';
+import { existsSync } from 'node:fs';
+import { dirname } from 'node:path';
 import * as vscode from 'vscode';
+import { logError, logInfo } from '#core/logger';
+import { getMcpEntrypointPath, MCP_SERVER_ID } from '#core/paths';
+import {
+  getMcpClientTargets,
+  type McpClientTarget,
+} from './mcp-client-targets';
+import { readMcpFileConfig, writeMcpFileConfig } from './mcp-config-file';
 
-const MCP_SERVER_KEY = 'quickmock';
+const VSCODE_CLIENT_LABEL = 'VS Code / GitHub Copilot';
+const MCP_CONFIG_SECTION = 'mcp';
+const MCP_SERVERS_KEY = 'servers';
 
 export type RegistrationStatus = 'registered' | 'skipped' | 'error';
 
@@ -13,135 +21,104 @@ export interface RegistrationResult {
   detail?: string;
 }
 
-interface McpFileConfig {
-  mcpServers?: Record<string, unknown>;
-  [key: string]: unknown;
+interface McpServerEntry {
+  type: 'stdio';
+  command: string;
+  args: string[];
 }
 
-interface FileTarget {
-  label: string;
-  path: string;
-}
-
-const getFileTargets = (): FileTarget[] => {
-  const home = homedir();
-  const os = platform();
-
-  const targets: FileTarget[] = [
-    { label: 'Claude Code', path: join(home, '.claude.json') },
-    { label: 'Cursor', path: join(home, '.cursor', 'mcp.json') },
-    {
-      label: 'Windsurf',
-      path: join(home, '.codeium', 'windsurf', 'mcp_config.json'),
-    },
-  ];
-
-  if (os === 'darwin') {
-    targets.push({
-      label: 'Claude Desktop',
-      path: join(
-        home,
-        'Library',
-        'Application Support',
-        'Claude',
-        'claude_desktop_config.json'
-      ),
-    });
-  } else if (os === 'win32') {
-    const appData = process.env.APPDATA ?? join(home, 'AppData', 'Roaming');
-    targets.push({
-      label: 'Claude Desktop',
-      path: join(appData, 'Claude', 'claude_desktop_config.json'),
-    });
-  } else {
-    targets.push({
-      label: 'Claude Desktop',
-      path: join(home, '.config', 'Claude', 'claude_desktop_config.json'),
-    });
-  }
-
-  return targets;
-};
-
-const readFileConfig = (filePath: string): McpFileConfig => {
-  try {
-    return JSON.parse(readFileSync(filePath, 'utf-8')) as McpFileConfig;
-  } catch {
-    return {};
-  }
-};
-
-const writeFileConfig = (filePath: string, data: McpFileConfig): void => {
-  const dir = dirname(filePath);
-  if (!existsSync(dir)) {
-    mkdirSync(dir, { recursive: true });
-  }
-  writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
-};
+const buildMcpServerEntry = (serverPath: string): McpServerEntry => ({
+  type: 'stdio',
+  command: 'node',
+  args: [serverPath],
+});
 
 const registerInVSCode = async (
-  entry: unknown
+  entry: McpServerEntry
 ): Promise<RegistrationResult> => {
   try {
-    const config = vscode.workspace.getConfiguration('mcp');
-    const servers = config.get<Record<string, unknown>>('servers') ?? {};
-    servers[MCP_SERVER_KEY] = entry;
-    await config.update('servers', servers, vscode.ConfigurationTarget.Global);
-    return { label: 'VS Code / GitHub Copilot', status: 'registered' };
+    const config = vscode.workspace.getConfiguration(MCP_CONFIG_SECTION);
+    const servers =
+      config.get<Record<string, unknown>>(MCP_SERVERS_KEY) ?? {};
+    servers[MCP_SERVER_ID] = entry;
+    await config.update(
+      MCP_SERVERS_KEY,
+      servers,
+      vscode.ConfigurationTarget.Global
+    );
+    return { label: VSCODE_CLIENT_LABEL, status: 'registered' };
   } catch (err) {
     return {
-      label: 'VS Code / GitHub Copilot',
+      label: VSCODE_CLIENT_LABEL,
       status: 'error',
       detail: String(err),
     };
   }
 };
 
-const registerInFileTarget = (
-  target: FileTarget,
-  entry: unknown
+const registerInClientTarget = (
+  target: McpClientTarget,
+  entry: McpServerEntry
 ): RegistrationResult => {
-  const dir = dirname(target.path);
-  if (!existsSync(dir) && !existsSync(target.path)) {
+  if (!existsSync(target.path) && !existsSync(dirname(target.path))) {
     return { label: target.label, status: 'skipped', detail: 'Not installed' };
   }
 
   try {
-    const config = readFileConfig(target.path);
-    if (!config.mcpServers) {
-      config.mcpServers = {};
-    }
-    config.mcpServers[MCP_SERVER_KEY] = entry;
-    writeFileConfig(target.path, config);
+    const config = readMcpFileConfig(target.path);
+    if (!config.mcpServers) config.mcpServers = {};
+    config.mcpServers[MCP_SERVER_ID] = entry;
+    writeMcpFileConfig(target.path, config);
     return { label: target.label, status: 'registered' };
   } catch (err) {
     return { label: target.label, status: 'error', detail: String(err) };
   }
 };
 
+export const cleanupStaleMcpRegistration = async (): Promise<void> => {
+  try {
+    const config = vscode.workspace.getConfiguration(MCP_CONFIG_SECTION);
+    const servers = {
+      ...(config.get<Record<string, unknown>>(MCP_SERVERS_KEY) ?? {}),
+    };
+    const entry = servers[MCP_SERVER_ID] as { args?: unknown } | undefined;
+    if (!entry) return;
+
+    const args = Array.isArray(entry.args)
+      ? entry.args.filter((a): a is string => typeof a === 'string')
+      : [];
+    const entrypoint = args[0];
+    if (entrypoint && existsSync(entrypoint)) return;
+
+    delete servers[MCP_SERVER_ID];
+    await config.update(
+      MCP_SERVERS_KEY,
+      servers,
+      vscode.ConfigurationTarget.Global
+    );
+    logInfo(
+      `Removed stale MCP registration (entrypoint "${entrypoint ?? '<none>'}" missing)`
+    );
+  } catch (err) {
+    logError('Failed to clean up stale MCP registration:', err);
+  }
+};
+
 export const registerMcpServer = async (
   context: vscode.ExtensionContext
 ): Promise<RegistrationResult[]> => {
-  const serverPath = vscode.Uri.joinPath(
-    context.extensionUri,
-    'dist',
-    'mcp-server.mjs'
-  ).fsPath;
-
-  const entry = { type: 'stdio', command: 'node', args: [serverPath], env: {} };
+  const entry = buildMcpServerEntry(getMcpEntrypointPath(context));
 
   const results: RegistrationResult[] = [
     await registerInVSCode(entry),
-    ...getFileTargets().map((t) => registerInFileTarget(t, entry)),
+    ...getMcpClientTargets().map((t) => registerInClientTarget(t, entry)),
   ];
 
   for (const r of results) {
     if (r.status === 'registered') {
-      console.info(`[QuickMock] MCP registered — ${r.label}`);
+      logInfo(`MCP registered — ${r.label}`);
     } else if (r.status === 'error') {
-      console.error(
-        `[QuickMock] MCP registration failed — ${r.label}: ${r.detail}`
-      );
+      logError(`MCP registration failed — ${r.label}: ${r.detail}`);
     }
   }
 

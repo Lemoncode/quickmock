@@ -1,8 +1,8 @@
+import { toolError, toolText } from '#/commons/tool-response.helpers'
+import type { WireframeFileService } from '#/commons/wireframe-file.service'
 import { createHash } from 'node:crypto'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { basename, extname, join, resolve } from 'node:path'
-import { toolError, toolText } from '../../commons/tool-response.helpers'
-import type { WireframeFileService } from '../../commons/wireframe-file.service'
 
 interface ParsedDataUrl {
   mimeType: string

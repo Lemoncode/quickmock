@@ -1,5 +1,5 @@
-import { toolError, toolText } from '../../commons/tool-response.helpers'
-import type { WireframeFileService } from '../../commons/wireframe-file.service'
+import { toolError, toolText } from '#/commons/tool-response.helpers'
+import type { WireframeFileService } from '#/commons/wireframe-file.service'
 
 export async function getWireframeJsonHandler(
   args: { path: string },

@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { getMcpEntrypointPath } from '#core/paths';
 import { registerMcpServer } from './mcp-registration';
 
 const TOOLS = [
@@ -26,11 +27,7 @@ export const registerConnectMcpCommand = (
   context: vscode.ExtensionContext
 ): vscode.Disposable =>
   vscode.commands.registerCommand('quickmock.connectMcp', async () => {
-    const serverPath = vscode.Uri.joinPath(
-      context.extensionUri,
-      'dist',
-      'mcp-server.mjs'
-    ).fsPath;
+    const serverPath = getMcpEntrypointPath(context);
 
     const results = await vscode.window.withProgress(
       {
