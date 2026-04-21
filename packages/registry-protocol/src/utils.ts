@@ -1,9 +1,7 @@
 import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { PORT_TOKEN_SEPARATOR } from './consts';
-
-const WORKSPACE_HASH_LENGTH = 8;
+import { PORT_TOKEN_SEPARATOR, WORKSPACE_HASH_LENGTH } from './constant';
 
 export function buildPortFilePath(workspaceRoot: string): string {
   const hash = createHash('md5')
@@ -21,7 +19,7 @@ export function parsePortFile(
   raw: string
 ): { port: number; token: string } | null {
   const [portStr, token] = raw.trim().split(PORT_TOKEN_SEPARATOR);
-  const port = parseInt(portStr ?? '', 10);
+  const port = Number.parseInt(portStr ?? '', 10);
   if (Number.isNaN(port) || !token) return null;
   return { port, token };
 }

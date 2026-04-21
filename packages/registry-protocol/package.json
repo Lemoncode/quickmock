@@ -10,7 +10,6 @@
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@lemoncode/typescript-config": "*",
-    "@types/node": "^22.19.17"
+    "@lemoncode/typescript-config": "*"
   }
 }
