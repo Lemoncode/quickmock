@@ -1,4 +1,3 @@
-import * as vscode from 'vscode';
 import { onAppUrlChange, syncAppUrlFile } from '#core/config';
 import { logError } from '#core/logger';
 import { QuickMockEditorProvider } from '#editor/provider';
@@ -9,6 +8,7 @@ import {
 } from '#mcp/mcp-registration';
 import { RegistryServer } from '#mcp/registry-server';
 import { registerQuickMockMcpServerProvider } from '#mcp/server-definition-provider';
+import * as vscode from 'vscode';
 
 export const activate = (context: vscode.ExtensionContext) => {
   syncAppUrlFile();

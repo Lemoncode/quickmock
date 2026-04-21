@@ -7,7 +7,10 @@ export default defineConfig([
     entry: ['src/index.ts'],
     format: ['esm', 'cjs'],
     dts: false,
-    deps: { neverBundle: ['vscode'] },
+    deps: {
+      neverBundle: ['vscode'],
+      // alwaysBundle: ['@lemoncode/quickmock-mcp'],
+    },
   },
   {
     ...baseTsdownConfig,

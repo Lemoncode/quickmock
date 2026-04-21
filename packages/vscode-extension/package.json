@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "node --run build -- --watch --sourcemap",
-    "build": "tsdown && node scripts/copy-mcp.mjs",
+    "build": "tsdown",
     "check-types": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
