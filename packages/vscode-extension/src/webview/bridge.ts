@@ -4,6 +4,7 @@ import {
   type HostMessage,
 } from '@lemoncode/quickmock-bridge-protocol';
 
+// Reference: https://code.visualstudio.com/api/extension-guides/webview#loading-local-content
 declare function acquireVsCodeApi(): { postMessage(msg: AppMessage): void };
 
 const vscode = acquireVsCodeApi();

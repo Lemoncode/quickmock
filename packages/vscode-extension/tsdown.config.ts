@@ -5,20 +5,15 @@ export default defineConfig([
   {
     ...baseTsdownConfig,
     entry: ['src/index.ts'],
-    format: 'cjs',
+    format: ['esm', 'cjs'],
     dts: false,
     deps: { neverBundle: ['vscode'] },
   },
   {
+    ...baseTsdownConfig,
     entry: { webview: 'src/webview/main.ts' },
     format: 'iife',
     platform: 'browser',
-    outDir: 'dist',
-    target: 'es2022',
-    sourcemap: true,
-    clean: false,
-    dts: false,
-    deps: { alwaysBundle: /.*/ },
     outputOptions: {
       entryFileNames: '[name].js',
     },
