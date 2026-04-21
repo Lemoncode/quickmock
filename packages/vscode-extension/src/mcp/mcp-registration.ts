@@ -78,7 +78,7 @@ export const cleanupStaleMcpRegistration = async (): Promise<void> => {
   try {
     const config = vscode.workspace.getConfiguration(MCP_CONFIG_SECTION);
     const servers = {
-      ...(config.get<Record<string, unknown>>(MCP_SERVERS_KEY) ?? {}),
+      ...config.get<Record<string, unknown>>(MCP_SERVERS_KEY),
     };
     const entry = servers[MCP_SERVER_ID] as { args?: unknown } | undefined;
     if (!entry) return;
