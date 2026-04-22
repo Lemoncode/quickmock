@@ -1,5 +1,8 @@
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio';
+// The SDK's `exports` wildcard maps `./*` → `./dist/esm/*` without `.js`,
+// so Node ESM cannot resolve subpath imports at runtime.
+// See https://github.com/modelcontextprotocol/typescript-sdk/issues/440
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { createWireframeFileService } from './commons/wireframe-file.service';
 import { createRegistryClient } from './core';
 import { logError } from './core/mcp.logger';

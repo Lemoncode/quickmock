@@ -1,11 +1,7 @@
 import { onAppUrlChange, syncAppUrlFile } from '#core/config';
 import { logError } from '#core/logger';
 import { QuickMockEditorProvider } from '#editor/provider';
-import { registerConnectMcpCommand } from '#mcp/mcp-command';
-import {
-  cleanupStaleMcpRegistration,
-  registerMcpServer,
-} from '#mcp/mcp-registration';
+import { registerMcpServer } from '#mcp/mcp-registration';
 import { RegistryServer } from '#mcp/registry-server';
 import { registerQuickMockMcpServerProvider } from '#mcp/server-definition-provider';
 import * as vscode from 'vscode';
@@ -22,11 +18,10 @@ export const activate = (context: vscode.ExtensionContext) => {
     .catch(err => logError('Failed to start MCP registry server:', err));
 
   context.subscriptions.push(registerQuickMockMcpServerProvider(context));
-  context.subscriptions.push(registerConnectMcpCommand(context));
 
-  cleanupStaleMcpRegistration()
-    .then(() => registerMcpServer(context))
-    .catch(err => logError('Failed to register MCP server:', err));
+  registerMcpServer(context).catch(err =>
+    logError('Failed to register MCP server:', err)
+  );
 
   context.subscriptions.push(
     vscode.commands.registerCommand('quickmock.newWireframe', () => {

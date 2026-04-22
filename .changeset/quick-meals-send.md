@@ -11,11 +11,9 @@ First public release of the QuickMock VS Code extension and its MCP server.
 
 - `quickmock.appUrl` setting (default `https://quickmock.net/editor.html`) to point the editor and the MCP renderer at any QuickMock instance. Changes refresh open editors and respawn the MCP server.
 
-- Automatic MCP server registration for VS Code / GitHub Copilot, Claude Code, Cursor, Windsurf and Claude Desktop, plus a dynamic `McpServerDefinitionProvider`.
+- Automatic MCP server registration for VS Code / GitHub Copilot, Claude Code, Cursor, Windsurf and Claude Desktop, plus a dynamic `McpServerDefinitionProvider`. Existing entries are refreshed on activation so users always end up pointing at the right MCP invocation.
 
-- `QuickMock: Connect MCP Server` command to re-run registration on demand and inspect the available tools.
-
-- Stale registrations pointing at a missing entrypoint are pruned automatically on activation.
+- The MCP server is no longer bundled inside the `.vsix`. In production the extension spawns it on demand via `npx -y @lemoncode/quickmock-mcp`, so users always run the latest published MCP without waiting for an extension release. In development it resolves the local workspace build.
 
 **`@lemoncode/quickmock-mcp` (MCP server)**
 

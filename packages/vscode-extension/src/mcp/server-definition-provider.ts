@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import * as vscode from 'vscode';
 import { getHeadlessAppUrl, onAppUrlChange } from '#core/config';
 import { logInfo } from '#core/logger';
-import { getMcpEntrypointPath, MCP_SERVER_ID } from '#core/paths';
+import { getMcpInvocation, MCP_SERVER_ID } from '#mcp/mcp-invocation';
 import { version as EXTENSION_VERSION } from '../../package.json';
 
 const SERVER_LABEL = 'QuickMock Wireframe Tools';
@@ -18,10 +18,12 @@ const buildDefinition = (
     .digest('hex')
     .slice(0, VERSION_HASH_LENGTH);
 
+  const { command, args } = getMcpInvocation(context);
+
   return new vscode.McpStdioServerDefinition(
     SERVER_LABEL,
-    'node',
-    [getMcpEntrypointPath(context)],
+    command,
+    args,
     { QM_WORKSPACE_ROOT: workspaceFolder.uri.fsPath },
     `${EXTENSION_VERSION}+${versionSuffix}`
   );

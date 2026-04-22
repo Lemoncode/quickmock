@@ -15,6 +15,9 @@
   "files": [
     "dist"
   ],
+  "bin": {
+    "quickmock-mcp": "./dist/index.mjs"
+  },
   "scripts": {
     "build": "tsdown",
     "check-types": "tsc --noEmit",

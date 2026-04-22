@@ -81,11 +81,6 @@
       {
         "command": "quickmock.newWireframe",
         "title": "QuickMock: New Wireframe"
-      },
-      {
-        "command": "quickmock.connectMcp",
-        "title": "QuickMock: Connect MCP Server",
-        "category": "QuickMock"
       }
     ],
     "mcpServerDefinitionProviders": [

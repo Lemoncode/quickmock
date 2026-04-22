@@ -2,7 +2,8 @@ import { existsSync } from 'node:fs';
 import { dirname } from 'node:path';
 import * as vscode from 'vscode';
 import { logError, logInfo } from '#core/logger';
-import { getMcpEntrypointPath, MCP_SERVER_ID } from '#core/paths';
+import { getMcpInvocation, MCP_SERVER_ID } from '#mcp/mcp-invocation';
+import type { McpInvocation } from '#mcp/mcp-invocation';
 import {
   getMcpClientTargets,
   type McpClientTarget,
@@ -27,10 +28,13 @@ interface McpServerEntry {
   args: string[];
 }
 
-const buildMcpServerEntry = (serverPath: string): McpServerEntry => ({
+const buildMcpServerEntry = ({
+  command,
+  args,
+}: McpInvocation): McpServerEntry => ({
   type: 'stdio',
-  command: 'node',
-  args: [serverPath],
+  command,
+  args,
 });
 
 const registerInVSCode = async (
@@ -74,39 +78,10 @@ const registerInClientTarget = (
   }
 };
 
-export const cleanupStaleMcpRegistration = async (): Promise<void> => {
-  try {
-    const config = vscode.workspace.getConfiguration(MCP_CONFIG_SECTION);
-    const servers = {
-      ...config.get<Record<string, unknown>>(MCP_SERVERS_KEY),
-    };
-    const entry = servers[MCP_SERVER_ID] as { args?: unknown } | undefined;
-    if (!entry) return;
-
-    const args = Array.isArray(entry.args)
-      ? entry.args.filter((a): a is string => typeof a === 'string')
-      : [];
-    const entrypoint = args[0];
-    if (entrypoint && existsSync(entrypoint)) return;
-
-    delete servers[MCP_SERVER_ID];
-    await config.update(
-      MCP_SERVERS_KEY,
-      servers,
-      vscode.ConfigurationTarget.Global
-    );
-    logInfo(
-      `Removed stale MCP registration (entrypoint "${entrypoint ?? '<none>'}" missing)`
-    );
-  } catch (err) {
-    logError('Failed to clean up stale MCP registration:', err);
-  }
-};
-
 export const registerMcpServer = async (
   context: vscode.ExtensionContext
 ): Promise<RegistrationResult[]> => {
-  const entry = buildMcpServerEntry(getMcpEntrypointPath(context));
+  const entry = buildMcpServerEntry(getMcpInvocation(context));
 
   const results: RegistrationResult[] = [
     await registerInVSCode(entry),
