@@ -19,7 +19,7 @@
     "@lemoncode/typescript-config": "*",
     "@lemoncode/vitest-config": "*",
     "@types/vscode": "1.116.0",
-    "@vscode/vsce": "3.9.0"
+    "@vscode/vsce": "3.9.1"
   },
   "publisher": "Lemoncoders",
   "displayName": "Quickmock",
