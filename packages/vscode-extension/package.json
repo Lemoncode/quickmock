@@ -16,7 +16,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@lemoncode/quickmock-mcp": "*"
+    "@lemoncode/quickmock-mcp": "0.0.1"
   },
   "devDependencies": {
     "@lemoncode/quickmock-bridge-protocol": "*",
