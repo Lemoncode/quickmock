@@ -9,7 +9,6 @@ export default defineConfig([
     dts: false,
     deps: {
       neverBundle: ['vscode'],
-      // alwaysBundle: ['@lemoncode/quickmock-mcp'],
     },
   },
   {
