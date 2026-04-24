@@ -1,7 +1,7 @@
 import { MainLayout } from '#layout/main.layout';
 import classes from './main.module.css';
 
-import { isHeadlessEnv } from '#common/utils/env.utils.ts';
+import { isHeadlessEnv, isVSCodeEnv } from '#common/utils/env.utils.ts';
 import { useInteractionModeContext } from '#core/providers';
 import {
   BasicShapesGalleryPod,
@@ -81,9 +81,11 @@ export const MainScene = () => {
           <PropertiesPod />
         </div>
       )}
-      <div className={classes.footer}>
-        <FooterPod />
-      </div>
+      {!isVSCodeEnv() && (
+        <div className={classes.footer}>
+          <FooterPod />
+        </div>
+      )}
     </MainLayout>
   );
 };
