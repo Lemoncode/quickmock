@@ -1,14 +1,14 @@
+import { logError, logInfo } from '#core/logger';
 import { existsSync } from 'node:fs';
 import { dirname } from 'node:path';
 import * as vscode from 'vscode';
-import { logError, logInfo } from '#core/logger';
-import { getMcpInvocation, MCP_SERVER_ID } from '#mcp/mcp-invocation';
-import type { McpInvocation } from '#mcp/mcp-invocation';
 import {
   getMcpClientTargets,
   type McpClientTarget,
 } from './mcp-client-targets';
 import { readMcpFileConfig, writeMcpFileConfig } from './mcp-config-file';
+import type { McpInvocation } from './mcp-invocation';
+import { getMcpInvocation, MCP_SERVER_ID } from './mcp-invocation';
 
 const VSCODE_CLIENT_LABEL = 'VS Code / GitHub Copilot';
 const MCP_CONFIG_SECTION = 'mcp';

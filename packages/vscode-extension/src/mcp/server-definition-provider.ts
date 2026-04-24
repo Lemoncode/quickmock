@@ -1,8 +1,7 @@
+import { getHeadlessAppUrl, logInfo, onAppUrlChange } from '#core';
+import { getMcpInvocation, MCP_SERVER_ID } from '#mcp/mcp-invocation';
 import { createHash } from 'node:crypto';
 import * as vscode from 'vscode';
-import { getHeadlessAppUrl, onAppUrlChange } from '#core/config';
-import { logInfo } from '#core/logger';
-import { getMcpInvocation, MCP_SERVER_ID } from '#mcp/mcp-invocation';
 import { version as EXTENSION_VERSION } from '../../package.json';
 
 const SERVER_LABEL = 'QuickMock Wireframe Tools';

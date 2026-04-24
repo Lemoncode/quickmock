@@ -1,9 +1,10 @@
-import { onAppUrlChange, syncAppUrlFile } from '#core/config';
-import { logError } from '#core/logger';
-import { QuickMockEditorProvider } from '#editor/provider';
-import { registerMcpServer } from '#mcp/mcp-registration';
-import { RegistryServer } from '#mcp/registry-server';
-import { registerQuickMockMcpServerProvider } from '#mcp/server-definition-provider';
+import { logError, onAppUrlChange, syncAppUrlFile } from '#core';
+import { QuickMockEditorProvider } from '#editor';
+import {
+  registerMcpServer,
+  registerQuickMockMcpServerProvider,
+  RegistryServer,
+} from '#mcp';
 import * as vscode from 'vscode';
 
 export const activate = (context: vscode.ExtensionContext) => {

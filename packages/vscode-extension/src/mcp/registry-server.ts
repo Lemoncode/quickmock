@@ -1,10 +1,4 @@
-import { randomBytes } from 'node:crypto';
-import { unlinkSync, writeFileSync } from 'node:fs';
-import {
-  createServer,
-  type IncomingMessage,
-  type ServerResponse,
-} from 'node:http';
+import { documentRegistry } from '#core';
 import {
   buildPortFilePath,
   DOCUMENT_ROUTE,
@@ -12,8 +6,14 @@ import {
   LOOPBACK_HOST,
   TOKEN_HEADER,
 } from '@lemoncode/quickmock-registry-protocol';
+import { randomBytes } from 'node:crypto';
+import { unlinkSync, writeFileSync } from 'node:fs';
+import {
+  createServer,
+  type IncomingMessage,
+  type ServerResponse,
+} from 'node:http';
 import * as vscode from 'vscode';
-import { documentRegistry } from '#core/document-registry';
 
 const TOKEN_BYTE_LENGTH = 32;
 const PORT_FILE_MODE = 0o600;

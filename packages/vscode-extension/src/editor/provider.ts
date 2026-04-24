@@ -1,12 +1,11 @@
-import { basename } from 'node:path';
-import * as vscode from 'vscode';
-import { getEditorAppUrl, onAppUrlChange } from '#core/config';
-import { documentRegistry } from '#core/document-registry';
+import { documentRegistry, getEditorAppUrl, onAppUrlChange } from '#core';
 import {
   type AppMessage,
   HOST_MESSAGE_TYPE,
   type HostMessage,
 } from '@lemoncode/quickmock-bridge-protocol';
+import { basename } from 'node:path';
+import * as vscode from 'vscode';
 import {
   openDocument,
   type QuickMockDocument,
