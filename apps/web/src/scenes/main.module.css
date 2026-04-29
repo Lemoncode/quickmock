@@ -1,7 +1,7 @@
 .leftTools {
   position: relative;
   z-index: 2;
-  background-color: white;
+  background-color: var(--pure-white);
   grid-area: leftTools;
   border-right: 1px solid black;
   display: inline-flex;
@@ -12,7 +12,7 @@
 .rightTools {
   position: relative;
   z-index: 2;
-  background-color: white;
+  background-color: var(--pure-white);
   grid-area: rightTools;
   border-left: 1px solid black;
 }
