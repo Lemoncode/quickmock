@@ -1,18 +1,15 @@
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import * as vscode from 'vscode';
+import { MCP_PKG } from './constants';
+import type { McpInvocation } from './model';
 
-export const MCP_SERVER_ID = 'quickmock';
-
-const MCP_PKG = '@lemoncode/quickmock-mcp';
-
-export interface McpInvocation {
-  command: string;
-  args: string[];
-}
-
-// Production: spawn the MCP from the published npm package via npx.
-// Development: spawn the local workspace build so changes are picked up on rebuild.
+/**
+ * Resolves how the MCP child process should be spawned for the current extension mode.
+ * In production it points to the published npm package via `npx`; in development it points to the local workspace build so changes are picked up on rebuild.
+ * @param context The VS Code extension context.
+ * @returns The command and arguments to spawn the MCP process.
+ */
 export const getMcpInvocation = (
   context: vscode.ExtensionContext
 ): McpInvocation =>
