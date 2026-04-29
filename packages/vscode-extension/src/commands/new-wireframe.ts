@@ -5,7 +5,7 @@ export const registerNewWireframeCommand = (
 ): void => {
   context.subscriptions.push(
     vscode.commands.registerCommand('quickmock.newWireframe', () => {
-      vscode.window.showInformationMessage('New wireframe coming soon');
+      vscode.window.showInformationMessage('New wireframe coming soon'); // TODO: Implement the actual functionality for creating a new wireframe
     })
   );
 };
