@@ -65,6 +65,18 @@
     "onStartupFinished"
   ],
   "contributes": {
+    "languages": [
+      {
+        "id": "quickmock",
+        "extensions": [
+          ".qm"
+        ],
+        "icon": {
+          "light": "./assets/file-logo.png",
+          "dark": "./assets/file-logo.png"
+        }
+      }
+    ],
     "customEditors": [
       {
         "viewType": "quickmock.editor",
