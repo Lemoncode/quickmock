@@ -1,4 +1,9 @@
-storage: ./storage
+storage: /verdaccio/storage
+
+auth:
+  htpasswd:
+    file: /verdaccio/storage/htpasswd
+    max_users: 1000
 
 uplinks:
   npmjs:
@@ -6,9 +11,9 @@ uplinks:
 
 packages:
   '@lemoncode/*':
-    access: $anonymous
-    publish: $anonymous
+    access: $all
+    publish: $authenticated
   '**':
-    access: $anonymous
-    publish: $anonymous
+    access: $all
+    publish: $authenticated
     proxy: npmjs

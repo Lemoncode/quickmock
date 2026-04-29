@@ -30,6 +30,7 @@
     "changeset": "changeset",
     "publish:npm": "tsx tooling/publish/publish-npm.ts",
     "publish:vscode": "tsx tooling/publish/publish-vscode.ts",
+    "package:vscode": "node --run build && cd packages/vscode-extension && npx vsce package --no-dependencies --out ./dist",
     "start:local-npm-registry": "npm run build && cd ./local-npm-registry && npm start",
     "stop:local-npm-registry": "cd ./local-npm-registry && npm stop",
     "local:publish": "node --run start:local-npm-registry && changeset version && node local-npm-registry/publish.js changeset publish",

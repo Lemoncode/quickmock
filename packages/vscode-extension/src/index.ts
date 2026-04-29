@@ -1,14 +1,34 @@
+import { logError, onAppUrlChange, syncAppUrlFile } from '#core';
+import { QuickMockEditorProvider } from '#editor';
+import {
+  registerMcpServer,
+  registerQuickMockMcpServerProvider,
+  RegistryServer,
+} from '#mcp';
 import * as vscode from 'vscode';
 
 export const activate = (context: vscode.ExtensionContext) => {
-  const disposable = vscode.commands.registerCommand(
-    'quickmock.helloWorld',
-    () => {
-      vscode.window.showInformationMessage('Quickmock extension is running!');
-    }
+  syncAppUrlFile();
+  context.subscriptions.push(onAppUrlChange(syncAppUrlFile));
+
+  context.subscriptions.push(QuickMockEditorProvider.register(context));
+
+  const registryServer = new RegistryServer();
+  registryServer
+    .start(context)
+    .catch(err => logError('Failed to start MCP registry server:', err));
+
+  context.subscriptions.push(registerQuickMockMcpServerProvider(context));
+
+  registerMcpServer(context).catch(err =>
+    logError('Failed to register MCP server:', err)
   );
 
-  context.subscriptions.push(disposable);
+  context.subscriptions.push(
+    vscode.commands.registerCommand('quickmock.newWireframe', () => {
+      vscode.window.showInformationMessage('New wireframe coming soon');
+    })
+  );
 };
 
 export const deactivate = () => {};

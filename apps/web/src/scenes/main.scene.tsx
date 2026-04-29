@@ -1,26 +1,35 @@
 import { MainLayout } from '#layout/main.layout';
 import classes from './main.module.css';
 
+import { isHeadlessEnv } from '#common/utils/env.utils.ts';
+import { useInteractionModeContext } from '#core/providers';
 import {
-  CanvasPod,
-  ToolbarPod,
-  ContainerGalleryPod,
-  ComponentGalleryPod,
   BasicShapesGalleryPod,
+  CanvasPod,
+  ComponentGalleryPod,
+  ContainerGalleryPod,
+  LowWireframeGalleryPod,
   RichComponentsGalleryPod,
   TextComponetGalleryPod,
-  LowWireframeGalleryPod,
+  ToolbarPod,
 } from '#pods';
-import { PropertiesPod } from '#pods/properties';
 import { FooterPod } from '#pods/footer/footer.pod';
+import { PropertiesPod } from '#pods/properties';
 import { ThumbPagesPod } from '#pods/thumb-pages';
 import { useAccordionSectionVisibility } from './accordion-section-visibility.hook';
-import { useInteractionModeContext } from '#core/providers';
 
 export const MainScene = () => {
   const { isThumbPagesPodOpen, thumbPagesPodRef } =
     useAccordionSectionVisibility();
   const { interactionMode } = useInteractionModeContext();
+
+  if (isHeadlessEnv()) {
+    return (
+      <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
+        <CanvasPod />
+      </div>
+    );
+  }
 
   return (
     <MainLayout>
