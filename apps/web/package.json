@@ -19,9 +19,9 @@
     "ci:e2e": "playwright test"
   },
   "dependencies": {
-    "@atlaskit/pragmatic-drag-and-drop": "1.7.10",
-    "@fontsource-variable/montserrat": "5.0.20",
-    "@fontsource/balsamiq-sans": "5.0.21",
+    "@atlaskit/pragmatic-drag-and-drop": "1.8.1",
+    "@fontsource-variable/montserrat": "5.2.8",
+    "@fontsource/balsamiq-sans": "5.2.8",
     "@uiw/react-color-chrome": "2.10.1",
     "html2canvas": "1.4.1",
     "immer": "10.1.1",
@@ -32,8 +32,8 @@
     "react-konva": "18.2.14",
     "react-konva-utils": "1.1.3",
     "tiny-invariant": "1.3.3",
-    "use-debounce": "10.0.4",
-    "use-image": "1.1.1",
+    "use-debounce": "10.1.1",
+    "use-image": "1.1.4",
     "uuid": "10.0.0"
   },
   "devDependencies": {
@@ -46,6 +46,6 @@
     "@types/uuid": "10.0.0",
     "@types/wicg-file-system-access": "2023.10.7",
     "@vitejs/plugin-react": "6.0.1",
-    "vite": "8.0.8"
+    "vite": "8.0.11"
   }
 }
