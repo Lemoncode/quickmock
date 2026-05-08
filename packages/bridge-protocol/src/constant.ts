@@ -2,6 +2,7 @@ export const HOST_MESSAGE_TYPE = {
   LOAD: 'qm:load',
   SAVED: 'qm:saved',
   LOAD_FILE: 'LOAD_FILE',
+  THEME: 'qm:theme',
 } as const;
 
 export const APP_MESSAGE_TYPE = {
