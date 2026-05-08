@@ -1,5 +1,5 @@
-import { isVSCodeEnv } from '#common/utils/env.utils.ts';
-import { onMessage } from '#common/utils/vscode-bridge.utils.ts';
+import { isVSCodeEnv } from '#common/utils/env.utils';
+import { onMessage } from '#common/utils/vscode-bridge.utils';
 import {
   HOST_MESSAGE_TYPE,
   type ThemePayload,

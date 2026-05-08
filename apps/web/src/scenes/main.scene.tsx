@@ -1,7 +1,7 @@
 import { MainLayout } from '#layout/main.layout';
 import classes from './main.module.css';
 
-import { isHeadlessEnv, isVSCodeEnv } from '#common/utils/env.utils.ts';
+import { isHeadlessEnv, isVSCodeEnv } from '#common/utils/env.utils';
 import { useInteractionModeContext } from '#core/providers';
 import {
   BasicShapesGalleryPod,
