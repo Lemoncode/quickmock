@@ -39,7 +39,13 @@ export const setupThemeSync = (
   };
   window.addEventListener('message', onIframeReady);
 
-  const observer = new MutationObserver(sendTheme);
+  let rafId = 0;
+  const sendThemeDebounced = (): void => {
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(sendTheme);
+  };
+
+  const observer = new MutationObserver(sendThemeDebounced);
   observer.observe(document.body, {
     attributes: true,
     attributeFilter: ['class', 'style'],
@@ -48,5 +54,6 @@ export const setupThemeSync = (
   return () => {
     window.removeEventListener('message', onIframeReady);
     observer.disconnect();
+    cancelAnimationFrame(rafId);
   };
 };
