@@ -21,8 +21,10 @@ const applyTheme = (theme: ThemePayload): void => {
       root.style.setProperty(cssVar, value);
     }
   }
-  if (theme.background) document.body.style.backgroundColor = theme.background;
-  if (theme.foreground) document.body.style.color = theme.foreground;
+  if (theme.background)
+    document.body.style.setProperty('background-color', theme.background);
+  if (theme.foreground)
+    document.body.style.setProperty('color', theme.foreground);
 };
 
 export const useVSCodeTheme = (): void => {
