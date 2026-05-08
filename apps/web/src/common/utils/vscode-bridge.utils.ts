@@ -13,9 +13,20 @@ type AnyHandler = (payload: unknown) => void;
 
 const handlers = new Map<string, Set<AnyHandler>>();
 
+const resolveParentOrigin = (): string => {
+  if (!document.referrer) return '*';
+  try {
+    return new URL(document.referrer).origin;
+  } catch {
+    return '*';
+  }
+};
+
+const parentOrigin = resolveParentOrigin();
+
 export const sendToExtension = (msg: AppMessage): void => {
   if (!isVSCodeEnv()) return;
-  window.parent.postMessage(msg, '*');
+  window.parent.postMessage(msg, parentOrigin);
 };
 
 export const onMessage = <T extends HostMessage['type']>(
