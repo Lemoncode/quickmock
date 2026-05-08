@@ -7,7 +7,7 @@ import {
 import { useEffect } from 'react';
 
 const CSS_VAR_MAP: Record<keyof ThemePayload, readonly string[]> = {
-  background: ['--primary-100', '--primary-500', '--primary-200'],
+  background: ['--primary-100', '--primary-200'],
   backgroundSecondary: ['--pure-white'],
   foreground: ['--primary-700'],
 };
