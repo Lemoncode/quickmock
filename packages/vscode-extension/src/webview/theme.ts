@@ -24,7 +24,7 @@ const IFRAME_READY_TYPES: ReadonlySet<string> = new Set([
 export const setupThemeSync = (
   iframe: HTMLIFrameElement,
   appOrigin: string
-): (() => void) => {
+): void => {
   const sendTheme = (): void => {
     iframe.contentWindow?.postMessage(
       { type: HOST_MESSAGE_TYPE.THEME, payload: extractTheme() },
@@ -50,10 +50,4 @@ export const setupThemeSync = (
     attributes: true,
     attributeFilter: ['class', 'style'],
   });
-
-  return () => {
-    window.removeEventListener('message', onIframeReady);
-    observer.disconnect();
-    cancelAnimationFrame(rafId);
-  };
 };
