@@ -1,14 +1,15 @@
+import { registerCommands } from '#commands';
+import { onAppUrlChange, syncAppUrlFile } from '#core';
+import { QuickMockEditorProvider } from '#editor';
+import { setupMcp } from '#mcp';
 import * as vscode from 'vscode';
 
 export const activate = (context: vscode.ExtensionContext) => {
-  const disposable = vscode.commands.registerCommand(
-    'quickmock.helloWorld',
-    () => {
-      vscode.window.showInformationMessage('Quickmock extension is running!');
-    }
-  );
-
-  context.subscriptions.push(disposable);
+  syncAppUrlFile();
+  context.subscriptions.push(onAppUrlChange(syncAppUrlFile));
+  context.subscriptions.push(QuickMockEditorProvider.register(context));
+  setupMcp(context);
+  registerCommands(context);
 };
 
 export const deactivate = () => {};

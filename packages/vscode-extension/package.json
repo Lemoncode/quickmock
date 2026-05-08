@@ -2,7 +2,8 @@
   "name": "quickmock",
   "version": "0.0.1",
   "type": "module",
-  "main": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
   "imports": {
     "#*": "./src/*"
   },
@@ -14,11 +15,16 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
   },
+  "dependencies": {
+    "@lemoncode/quickmock-mcp": "0.0.1"
+  },
   "devDependencies": {
+    "@lemoncode/quickmock-bridge-protocol": "*",
+    "@lemoncode/quickmock-registry-protocol": "*",
     "@lemoncode/tsdown-config": "*",
     "@lemoncode/typescript-config": "*",
     "@lemoncode/vitest-config": "*",
-    "@types/vscode": "1.116.0",
+    "@types/vscode": "1.115.0",
     "@vscode/vsce": "3.9.0"
   },
   "publisher": "Lemoncoders",
@@ -47,7 +53,7 @@
     "directory": "packages/vscode-extension"
   },
   "engines": {
-    "vscode": "^1.116.0"
+    "vscode": "^1.115.0"
   },
   "icon": "./assets/app-icon.webp",
   "galleryBanner": {
@@ -55,13 +61,56 @@
     "theme": "dark"
   },
   "qna": false,
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "contributes": {
+    "languages": [
+      {
+        "id": "quickmock",
+        "extensions": [
+          ".qm"
+        ],
+        "icon": {
+          "light": "./assets/file-logo.png",
+          "dark": "./assets/file-logo.png"
+        }
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "quickmock.editor",
+        "displayName": "QuickMock Wireframe Editor",
+        "selector": [
+          {
+            "filenamePattern": "*.qm"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
     "commands": [
       {
-        "command": "quickmock.helloWorld",
-        "title": "Quickmock: Hello World"
+        "command": "quickmock.newWireframe",
+        "title": "QuickMock: New Wireframe"
       }
-    ]
+    ],
+    "mcpServerDefinitionProviders": [
+      {
+        "id": "quickmock",
+        "label": "QuickMock Wireframe Tools"
+      }
+    ],
+    "configuration": {
+      "title": "QuickMock",
+      "properties": {
+        "quickmock.appUrl": {
+          "type": "string",
+          "default": "https://quickmock.net/editor.html",
+          "format": "uri",
+          "markdownDescription": "Base URL of the QuickMock web app used by the custom editor and the MCP renderer. The extension automatically appends `?env=vscode` for the webview and `&headless=1` for the headless screenshot MCP. Changing this refreshes open editors and respawns the MCP server."
+        }
+      }
+    }
   }
 }
