@@ -84,6 +84,7 @@ export const startDocumentBridge = async (
 
   context.subscriptions.push({
     dispose: () => {
+      server.closeAllConnections();
       server.close();
       try {
         unlinkSync(portFile);
