@@ -21,7 +21,24 @@ export const ItemComponent: React.FC<Props> = props => {
 
     invariant(el);
 
-    return draggable({
+    // Workaround para bug de macOS en webview de VS Code (issue #193558 / #256444).
+    // VS Code intercepta drags HTML5 que no tengan un MIME "conocido" en su
+    // dataTransfer y evita que los eventos `dragover`/`drop` se entreguen al
+    // iframe interior. Añadiendo `text/plain` en fase captura, antes de que
+    // PDND ejecute su propio handler de dragstart, marcamos el drag como
+    // "estándar" y el routing nativo pasa al iframe correctamente.
+    const macOsWebviewMimeWorkaround = (ev: DragEvent) => {
+      if (!ev.dataTransfer) return;
+      try {
+        ev.dataTransfer.setData('text/plain', `quickmock-shape:${item.type}`);
+        ev.dataTransfer.effectAllowed = 'move';
+      } catch {
+        // setData solo es válido durante dragstart; ignoramos si ya se cerró.
+      }
+    };
+    el.addEventListener('dragstart', macOsWebviewMimeWorkaround, true);
+
+    const cleanupPdnd = draggable({
       element: el,
       getInitialData: () => ({ type: item.type }),
       onDragStart: () => {
@@ -63,6 +80,11 @@ export const ItemComponent: React.FC<Props> = props => {
         });
       },
     });
+
+    return () => {
+      el.removeEventListener('dragstart', macOsWebviewMimeWorkaround, true);
+      cleanupPdnd();
+    };
   }, []);
 
   return (
