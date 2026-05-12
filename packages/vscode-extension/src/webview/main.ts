@@ -10,10 +10,12 @@ const appOrigin = new URL(appUrl).origin;
 
 const iframe = document.createElement('iframe');
 iframe.src = appUrl;
-iframe.setAttribute(
-  'sandbox',
-  'allow-scripts allow-same-origin allow-downloads'
-);
+// TEMP: sandbox eliminado para confirmar bug de drag-and-drop en macOS-webview.
+// Restaurar tras la prueba si el drag funciona sin él.
+// iframe.setAttribute(
+//   'sandbox',
+//   'allow-scripts allow-same-origin allow-downloads'
+// );
 iframe.allow = 'clipboard-read; clipboard-write';
 iframe.title = 'QuickMock Application';
 document.body.appendChild(iframe);
