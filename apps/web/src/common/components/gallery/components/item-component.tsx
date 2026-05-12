@@ -1,4 +1,8 @@
 import { ShapeDisplayName, ShapeType } from '#core/model';
+import {
+  notifyDragEndToWebviewShell,
+  notifyDragStartToWebviewShell,
+} from '#core/vscode/mac-webview-drag-bridge.utils';
 import { draggable } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import { setCustomNativeDragPreview } from '@atlaskit/pragmatic-drag-and-drop/element/set-custom-native-drag-preview';
 import { useEffect, useRef, useState } from 'react';
@@ -24,8 +28,14 @@ export const ItemComponent: React.FC<Props> = props => {
     return draggable({
       element: el,
       getInitialData: () => ({ type: item.type }),
-      onDragStart: () => setIsDragging(true),
-      onDrop: () => setIsDragging(false),
+      onDragStart: () => {
+        setIsDragging(true);
+        notifyDragStartToWebviewShell(item.type as ShapeType);
+      },
+      onDrop: () => {
+        setIsDragging(false);
+        notifyDragEndToWebviewShell();
+      },
       onGenerateDragPreview: ({ nativeSetDragImage }) => {
         setCustomNativeDragPreview({
           //Important: this numbers are the half of the width and height of var(--gallery-item-size)

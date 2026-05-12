@@ -1,4 +1,5 @@
 import { setupBridge } from './bridge';
+import { setupDragBridge } from './drag-bridge';
 import { setupThemeSync } from './theme';
 
 const appUrl = document.body.dataset.appUrl;
@@ -20,3 +21,4 @@ document.body.appendChild(iframe);
 
 setupBridge(iframe, appOrigin);
 setupThemeSync(iframe, appOrigin);
+setupDragBridge(iframe, appOrigin);

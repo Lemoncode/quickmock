@@ -12,3 +12,9 @@ export const APP_MESSAGE_TYPE = {
   WEBVIEW_READY: 'WEBVIEW_READY',
   NEW_FILE: 'qm:new-file',
 } as const;
+
+export const DRAG_BRIDGE_MESSAGE_TYPE = {
+  DRAG_START: 'qm:drag-start',
+  DRAG_END: 'qm:drag-end',
+  GALLERY_DROP: 'qm:gallery-drop',
+} as const;
