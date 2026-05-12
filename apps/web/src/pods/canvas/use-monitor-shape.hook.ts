@@ -19,7 +19,14 @@ export const useMonitorShape = (
 
   useEffect(() => {
     return monitorForElements({
+      onDragStart: args =>
+        console.log('[MON-START]', { sourceData: args.source.data }),
       onDrop({ source, location }) {
+        console.log('[MON-DROP]', {
+          sourceType: source.data.type,
+          targetsCount: location.current.dropTargets.length,
+          firstTargetData: location.current.dropTargets[0]?.data,
+        });
         const destination = location.current.dropTargets[0];
         if (!destination) return;
         invariant(destination);
@@ -56,6 +63,7 @@ export const useMonitorShape = (
               calculateShapeOffsetToXDropCoordinate(konvaCoord.x, type);
             positionY = konvaCoord.y;
           }
+          console.log('[CALL-ADD-SHAPE]', { type, positionX, positionY });
           addNewShape(type, positionX, positionY);
         }
       },

@@ -9,6 +9,10 @@ export const useMonitorDropThumb = () => {
   useEffect(() => {
     return monitorForElements({
       onDrop({ source, location }) {
+        console.log('[MON-THUMB-DROP]', {
+          sourceData: source.data,
+          targetsCount: location.current.dropTargets.length,
+        });
         const destination = location.current.dropTargets[0];
         if (!destination || source.data.pageId === destination.data.pageId) {
           return;

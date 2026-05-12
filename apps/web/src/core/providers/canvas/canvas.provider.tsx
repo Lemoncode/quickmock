@@ -249,6 +249,7 @@ export const CanvasProvider: React.FC<Props> = props => {
     y: number,
     otherProps?: OtherProps
   ) => {
+    console.log('drop', type, x, y);
     if (loadSampleDocument) {
       setLoadSampleDocument(false);
     }

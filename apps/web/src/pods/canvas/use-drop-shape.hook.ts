@@ -14,9 +14,18 @@ export const useDropShape = () => {
     return dropTargetForElements({
       element: el,
       getData: () => ({ destination: 'canvas' }),
-      onDragEnter: () => setIsDraggedOver(true),
-      onDragLeave: () => setIsDraggedOver(false),
-      onDrop: () => setIsDraggedOver(false),
+      onDragEnter: () => {
+        console.log('[DT-ENTER] canvas drop target');
+        setIsDraggedOver(true);
+      },
+      onDragLeave: () => {
+        console.log('[DT-LEAVE] canvas drop target');
+        setIsDraggedOver(false);
+      },
+      onDrop: () => {
+        console.log('[DT-DROP] canvas drop target');
+        setIsDraggedOver(false);
+      },
     });
   });
 

@@ -24,9 +24,16 @@ export const ItemComponent: React.FC<Props> = props => {
     return draggable({
       element: el,
       getInitialData: () => ({ type: item.type }),
-      onDragStart: () => setIsDragging(true),
-      onDrop: () => setIsDragging(false),
+      onDragStart: () => {
+        console.log('[DRAG-START]', item.type);
+        setIsDragging(true);
+      },
+      onDrop: () => {
+        console.log('[DRAG-END]', item.type);
+        setIsDragging(false);
+      },
       onGenerateDragPreview: ({ nativeSetDragImage }) => {
+        console.log('[GEN-PREVIEW]', item.type);
         setCustomNativeDragPreview({
           //Important: this numbers are the half of the width and height of var(--gallery-item-size)
           // TODO, we may extract the size variable value from the HTML variable it self
