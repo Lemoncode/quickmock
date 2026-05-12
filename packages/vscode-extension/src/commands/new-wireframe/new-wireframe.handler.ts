@@ -1,11 +1,11 @@
 import { getPrimaryWorkspaceFolder } from '#core';
 import { writeFile } from '#editor/document';
+import * as vscode from 'vscode';
 import {
   createEmptyQuickMockContent,
   DEFAULT_QUICKMOCK_FILE_NAME,
   QUICKMOCK_FILE_EXTENSION,
-} from '#editor/template';
-import * as vscode from 'vscode';
+} from './new-wireframe.template';
 
 const CUSTOM_EDITOR_VIEW_TYPE = 'quickmock.editor';
 
