@@ -37,6 +37,27 @@ export const useDropShape = () => {
     document.addEventListener('dragenter', docSniff, true);
     document.addEventListener('dragover', docSniff, true);
     document.addEventListener('drop', docSniff, true);
+    document.addEventListener('dragend', docSniff, true);
+
+    const winSniff = (ev: DragEvent) => {
+      console.log(`[WIN-${ev.type}]`, {
+        target: (ev.target as HTMLElement)?.tagName,
+        clientX: ev.clientX,
+        clientY: ev.clientY,
+      });
+    };
+    window.addEventListener('dragenter', winSniff, true);
+    window.addEventListener('dragover', winSniff, true);
+    window.addEventListener('drop', winSniff, true);
+    window.addEventListener('dragend', winSniff, true);
+
+    const bodySniff = (ev: DragEvent) => {
+      console.log(`[BODY-${ev.type}]`);
+    };
+    document.body.addEventListener('dragenter', bodySniff, true);
+    document.body.addEventListener('dragover', bodySniff, true);
+    document.body.addEventListener('drop', bodySniff, true);
+    document.body.addEventListener('dragend', bodySniff, true);
 
     const cleanupSniff = () => {
       el.removeEventListener('dragenter', sniff);
@@ -46,6 +67,15 @@ export const useDropShape = () => {
       document.removeEventListener('dragenter', docSniff, true);
       document.removeEventListener('dragover', docSniff, true);
       document.removeEventListener('drop', docSniff, true);
+      document.removeEventListener('dragend', docSniff, true);
+      window.removeEventListener('dragenter', winSniff, true);
+      window.removeEventListener('dragover', winSniff, true);
+      window.removeEventListener('drop', winSniff, true);
+      window.removeEventListener('dragend', winSniff, true);
+      document.body.removeEventListener('dragenter', bodySniff, true);
+      document.body.removeEventListener('dragover', bodySniff, true);
+      document.body.removeEventListener('drop', bodySniff, true);
+      document.body.removeEventListener('dragend', bodySniff, true);
     };
 
     const cleanupPdnd = dropTargetForElements({
