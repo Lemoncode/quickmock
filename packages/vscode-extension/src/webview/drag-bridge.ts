@@ -23,8 +23,14 @@ type DragEndMessage = Extract<
   { type: typeof DRAG_BRIDGE_MESSAGE_TYPE.DRAG_END }
 >;
 
+interface NavigatorWithUserAgentData extends Navigator {
+  userAgentData: { platform: string };
+}
+
 const isRunningOnMacOS = (): boolean => {
-  return navigator.userAgent.toLowerCase().includes('mac');
+  return (
+    (navigator as NavigatorWithUserAgentData).userAgentData.platform === 'macOS'
+  );
 };
 
 const isDragStartMessage = (data: unknown): data is DragStartMessage => {
