@@ -109,11 +109,6 @@ export class QuickMockEditorProvider implements vscode.CustomEditorProvider<Quic
       enableScripts: true,
       localResourceRoots: [this.extensionUri],
     };
-    panel.webview.html = getHtml(
-      panel.webview,
-      this.extensionUri,
-      getEditorAppUrl()
-    );
 
     panel.webview.onDidReceiveMessage(async (msg: AppMessage) => {
       await handleWebviewMessage(msg, doc, reply =>
@@ -121,6 +116,12 @@ export class QuickMockEditorProvider implements vscode.CustomEditorProvider<Quic
       );
       documentRegistry.set(doc.uri.fsPath, doc.content);
     });
+
+    panel.webview.html = getHtml(
+      panel.webview,
+      this.extensionUri,
+      getEditorAppUrl()
+    );
   }
 
   private broadcast(doc: QuickMockDocument, msg: HostMessage): void {
