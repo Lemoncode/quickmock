@@ -44,10 +44,18 @@ export const ItemComponent: React.FC<Props> = props => {
       onDragStart: () => {
         console.log('[DRAG-START]', item.type);
         setIsDragging(true);
+        // Signal to the webview shell (parent) which shape type is being
+        // dragged, so it can forward the drop coordinates back. Required
+        // workaround for macOS VS Code webview drag bug.
+        window.parent.postMessage(
+          { type: 'qm:drag-start', shapeType: item.type },
+          '*'
+        );
       },
       onDrop: () => {
         console.log('[DRAG-END]', item.type);
         setIsDragging(false);
+        window.parent.postMessage({ type: 'qm:drag-end' }, '*');
       },
       onGenerateDragPreview: ({ nativeSetDragImage }) => {
         console.log('[GEN-PREVIEW]', item.type);

@@ -3,6 +3,7 @@ import {
   HOST_MESSAGE_TYPE,
   type HostMessage,
 } from '@lemoncode/quickmock-bridge-protocol';
+import { isDragBridgeMessage } from './drag-bridge';
 
 // Reference: https://code.visualstudio.com/api/extension-guides/webview#loading-local-content
 declare function acquireVsCodeApi(): { postMessage(msg: AppMessage): void };
@@ -21,6 +22,7 @@ export const setupBridge = (
 ): void => {
   window.addEventListener('message', (event: MessageEvent) => {
     if (event.origin === appOrigin) {
+      if (isDragBridgeMessage(event.data)) return;
       vscode.postMessage(event.data as AppMessage);
     } else {
       const msg = event.data as HostMessage;

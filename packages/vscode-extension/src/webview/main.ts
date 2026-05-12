@@ -1,4 +1,5 @@
 import { setupBridge } from './bridge';
+import { setupDragBridge } from './drag-bridge';
 import { setupThemeSync } from './theme';
 
 const appUrl = document.body.dataset.appUrl;
@@ -20,20 +21,4 @@ document.body.appendChild(iframe);
 
 setupBridge(iframe, appOrigin);
 setupThemeSync(iframe, appOrigin);
-
-// DIAG: sniffer en el shell del webview para detectar si los drag events
-// HTML5 nativos están aterrizando aquí (en lugar de en el iframe interior).
-const shellDragSniff = (ev: DragEvent) => {
-  console.log(`[SHELL-${ev.type}]`, {
-    target: (ev.target as HTMLElement)?.tagName,
-    clientX: ev.clientX,
-    clientY: ev.clientY,
-    defaultPrevented: ev.defaultPrevented,
-  });
-};
-['dragstart', 'dragenter', 'dragover', 'dragleave', 'drop', 'dragend'].forEach(
-  type => {
-    window.addEventListener(type, shellDragSniff as EventListener, true);
-    document.addEventListener(type, shellDragSniff as EventListener, true);
-  }
-);
+setupDragBridge(iframe, appOrigin);
