@@ -34,7 +34,8 @@ export type AppMessage =
   | {
       type: typeof APP_MESSAGE_TYPE.RENDER_COMPLETE;
       payload?: ContentBbox;
-    };
+    }
+  | { type: typeof APP_MESSAGE_TYPE.NEW_FILE };
 
 export type PayloadOf<U extends { type: string }, T extends U['type']> =
   Extract<U, { type: T }> extends { payload: infer P } ? P : undefined;

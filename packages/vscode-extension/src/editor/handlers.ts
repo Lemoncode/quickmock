@@ -5,6 +5,8 @@ import {
   HOST_MESSAGE_TYPE,
   type HostMessage,
 } from '@lemoncode/quickmock-bridge-protocol';
+import * as vscode from 'vscode';
+import { QUICKMOCK_NEW_WIREFRAME_COMMAND_ID } from '#commands';
 import { type QuickMockDocument, writeFile } from './document';
 
 type PostMessageFn = (msg: HostMessage) => void;
@@ -40,6 +42,10 @@ export const handleWebviewMessage = async (
       doc.content = msg.payload.content;
       await writeFile(doc.uri, doc.content);
       postMessage({ type: HOST_MESSAGE_TYPE.SAVED });
+      break;
+
+    case APP_MESSAGE_TYPE.NEW_FILE:
+      await vscode.commands.executeCommand(QUICKMOCK_NEW_WIREFRAME_COMMAND_ID);
       break;
   }
 };

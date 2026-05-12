@@ -10,4 +10,5 @@ export const APP_MESSAGE_TYPE = {
   SAVE: 'qm:save',
   RENDER_COMPLETE: 'qm:render-complete',
   WEBVIEW_READY: 'WEBVIEW_READY',
+  NEW_FILE: 'qm:new-file',
 } as const;
