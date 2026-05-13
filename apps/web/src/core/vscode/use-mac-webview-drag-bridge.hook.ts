@@ -1,8 +1,3 @@
-import { useEffect } from 'react';
-import {
-  type DragBridgeHostMessage,
-  DRAG_BRIDGE_MESSAGE_TYPE,
-} from '@lemoncode/quickmock-bridge-protocol';
 import { ShapeType } from '#core/model';
 import { useCanvasContext } from '#core/providers';
 import {
@@ -11,7 +6,15 @@ import {
   portScreenPositionToDivCoordinates,
 } from '#pods/canvas/canvas.util';
 import { calculateShapeOffsetToXDropCoordinate } from '#pods/canvas/use-monitor.business';
-import { shouldUseMacWebviewDragBridge } from './mac-webview-drag-bridge.utils';
+import {
+  type DragBridgeHostMessage,
+  DRAG_BRIDGE_MESSAGE_TYPE,
+} from '@lemoncode/quickmock-bridge-protocol';
+import { useEffect } from 'react';
+import {
+  notifyDragMoveToWebviewShell,
+  shouldUseMacWebviewDragBridge,
+} from './mac-webview-drag-bridge.utils';
 
 // macOS-only workaround for microsoft/vscode#193558: HTML5 drag events
 // targeting the inner iframe are dispatched to the iframe element in the
@@ -99,6 +102,19 @@ export const useMacWebviewDragBridge = (
     window.addEventListener('message', handleGalleryDrop);
     return () => {
       window.removeEventListener('message', handleGalleryDrop);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!shouldUseMacWebviewDragBridge()) {
+      return;
+    }
+    const handleDragOver = (event: DragEvent): void => {
+      notifyDragMoveToWebviewShell(event.clientX, event.clientY);
+    };
+    document.addEventListener('dragover', handleDragOver, true);
+    return () => {
+      document.removeEventListener('dragover', handleDragOver, true);
     };
   }, []);
 };

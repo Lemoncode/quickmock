@@ -15,6 +15,7 @@ export const APP_MESSAGE_TYPE = {
 
 export const DRAG_BRIDGE_MESSAGE_TYPE = {
   DRAG_START: 'qm:drag-start',
+  DRAG_MOVE: 'qm:drag-move',
   DRAG_END: 'qm:drag-end',
   GALLERY_DROP: 'qm:gallery-drop',
 } as const;
