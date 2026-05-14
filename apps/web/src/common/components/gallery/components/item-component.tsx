@@ -54,11 +54,9 @@ export const ItemComponent: React.FC<Props> = props => {
         notifyDragEndToWebviewShell();
       },
       onGenerateDragPreview: ({ nativeSetDragImage }) => {
-        // On macOS inside the VS Code webview the native drag image snapshot
-        // taken from this nested iframe is unreliable: it renders inconsistently
-        // or not at all because the OS captures the drag image at the shell
-        // level. We suppress the broken native preview with a 1x1 transparent
-        // element and the shell paints its own preview (see drag-bridge.ts).
+        // Native drag image from the nested iframe is unreliable on macOS; the
+        // shell paints its own preview (see drag-bridge.ts), so suppress the
+        // native one with a 1×1 transparent element.
         if (shouldUseMacWebviewDragBridge()) {
           setCustomNativeDragPreview({
             getOffset: () => ({ x: 0, y: 0 }),

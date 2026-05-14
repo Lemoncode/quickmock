@@ -16,13 +16,10 @@ import {
   shouldUseMacWebviewDragBridge,
 } from './mac-webview-drag-bridge.utils';
 
-// macOS-only workaround for microsoft/vscode#193558: HTML5 drag events
-// targeting the inner iframe are dispatched to the iframe element in the
-// shell, so pragmatic-drag-and-drop's drop target inside the iframe never
-// fires. The shell-side bridge in vscode-extension/src/webview/drag-bridge.ts
-// captures the drop and forwards the coordinates back to us via the
-// DRAG_BRIDGE_MESSAGE_TYPE.GALLERY_DROP message, and we reproduce the same
-// insertion that useMonitorShape would do natively on other platforms.
+// macOS workaround for microsoft/vscode#193558: drag events on the inner
+// iframe route to the shell, so the shell-side bridge captures the drop and
+// forwards coordinates here; this reproduces the insertion useMonitorShape
+// performs natively on other platforms.
 
 type GalleryDropMessage = Extract<
   DragBridgeHostMessage,

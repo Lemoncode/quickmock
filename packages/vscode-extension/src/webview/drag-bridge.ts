@@ -3,23 +3,12 @@ import {
   DRAG_BRIDGE_MESSAGE_TYPE,
 } from '@lemoncode/quickmock-bridge-protocol';
 
-// Workaround for a VS Code webview limitation around drag-and-drop across the
-// shell ↔ inner iframe boundary:
-//
-// 1) On macOS, HTML5 drag events targeting the inner iframe are dispatched to
-//    the iframe element in the shell instead of to the iframe's contents, so
-//    the drag-and-drop library inside the iframe never sees `dragover`/`drop`
-//    (microsoft/vscode#193558). This bridge captures those events in the shell
-//    and forwards the drop coordinates back to the iframe.
-//
-// 2) The native drag image snapshot taken from inside a nested iframe is
-//    unreliable on macOS (the OS captures it at the shell level). To get a
-//    consistent preview on every platform, the iframe sends the gallery
-//    thumbnail as a data URL on drag-start and the shell paints a floating
-//    preview that tracks the cursor. The shell positions the preview from its
-//    own `dragover` (active path on macOS) or from `drag-move` messages
-//    forwarded by the iframe (active path on Linux/Windows where drag events
-//    stay inside the iframe).
+// macOS workaround for microsoft/vscode#193558:
+// 1) Drag events on the inner iframe route to the webview shell, so this bridge
+//    captures dragover/drop here and forwards drop coordinates to the iframe.
+// 2) The native drag image from the nested iframe is unreliable, so the iframe
+//    sends a thumbnail data URL on drag-start and the shell paints a floating
+//    preview that tracks the cursor.
 
 const PREVIEW_SIZE_PX = 110;
 const PREVIEW_HALF_SIZE_PX = PREVIEW_SIZE_PX / 2;
@@ -153,7 +142,6 @@ export const setupDragBridge = (
       return;
     }
     if (isDragMoveMessage(event.data)) {
-      // Iframe-relative coords; translate to shell viewport coords.
       const iframeRect = iframe.getBoundingClientRect();
       positionPreviewAtShellCoords(
         event.data.payload.clientX + iframeRect.left,
@@ -171,9 +159,7 @@ export const setupDragBridge = (
     if (activeShapeType === null) {
       return;
     }
-    // The browser only fires `drop` on a target whose `dragover` called
-    // preventDefault, so this is required to receive the drop event below
-    // (the macOS-only routing puts the event on the shell document).
+    // `dragover` must preventDefault for the target to receive `drop`.
     event.preventDefault();
     positionPreviewAtShellCoords(event.clientX, event.clientY);
   };
@@ -208,16 +194,13 @@ export const setupDragBridge = (
   };
 
   window.addEventListener('message', handleIncomingMessage);
-  // The native dragover/drop bridge is only needed on macOS, where the OS-bug
-  // routes drag events from the inner iframe to the shell document. On
-  // Linux/Windows the iframe handles its own drop natively and the shell only
-  // renders the preview from the iframe-forwarded `DRAG_MOVE` messages.
+  // Only macOS routes iframe drag events to the shell; intercepting on other
+  // platforms would block the iframe's own drop handling.
   if (isRunningOnMacOS()) {
     document.addEventListener('dragover', handleDragOver, true);
     document.addEventListener('drop', handleDrop, true);
   }
-  // Safety net: clean up the preview if the drag is cancelled outside the
-  // shell (e.g. Esc key, window blur) and we never receive a drop or drag-end.
+  // Cleanup if the drag is cancelled outside the shell (Esc, window blur).
   document.addEventListener('dragend', handleDragEndOrCancel, true);
   window.addEventListener('blur', handleDragEndOrCancel);
 };
