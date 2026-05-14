@@ -1,23 +1,25 @@
-import { DeleteButton } from './components/delete-button';
+import { isVSCodeEnv } from '#common/utils/env.utils.ts';
+import { useInteractionModeContext } from '#core/providers';
 import { CopyButton } from './components/copy-paste-button';
+import { DeleteButton } from './components/delete-button';
 import {
-  ZoomInButton,
-  ZoomOutButton,
+  AboutButton,
   ExportButton,
   NewButton,
   OpenButton,
+  RedoButton,
   SaveButton,
   UndoButton,
-  RedoButton,
-  AboutButton,
+  ZoomInButton,
+  ZoomOutButton,
 } from './components/index';
-import classes from './toolbar.pod.module.css';
 import { SettingsButton } from './components/settings-button';
-import { useInteractionModeContext } from '#core/providers';
+import classes from './toolbar.pod.module.css';
 
 export const ToolbarPod: React.FC = () => {
   const { interactionMode } = useInteractionModeContext();
   const isEditMode = interactionMode === 'edit';
+  const isVSCode = isVSCodeEnv();
   return (
     <header className={classes.container}>
       <ul className={classes.buttonGroup}>
@@ -26,19 +28,23 @@ export const ToolbarPod: React.FC = () => {
             <NewButton />
           </li>
         )}
-        <li>
-          <OpenButton />
-        </li>
-        {isEditMode && (
-          <>
-            <li>
-              <SaveButton />
-            </li>
 
-            <li>
-              <ExportButton />
-            </li>
-          </>
+        {!isVSCode && (
+          <li>
+            <OpenButton />
+          </li>
+        )}
+
+        {isEditMode && !isVSCode && (
+          <li>
+            <SaveButton />
+          </li>
+        )}
+
+        {isEditMode && (
+          <li>
+            <ExportButton />
+          </li>
         )}
       </ul>
       {isEditMode && (
