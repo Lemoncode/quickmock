@@ -22,31 +22,33 @@ export const ToolbarPod: React.FC = () => {
   const isVSCode = isVSCodeEnv();
   return (
     <header className={classes.container}>
-      <ul className={classes.buttonGroup}>
-        {isEditMode && (
-          <li>
-            <NewButton />
-          </li>
-        )}
+      {(isEditMode || !isVSCode) && (
+        <ul className={classes.buttonGroup}>
+          {isEditMode && (
+            <li>
+              <NewButton />
+            </li>
+          )}
 
-        {!isVSCode && (
-          <li>
-            <OpenButton />
-          </li>
-        )}
+          {!isVSCode && (
+            <li>
+              <OpenButton />
+            </li>
+          )}
 
-        {isEditMode && !isVSCode && (
-          <li>
-            <SaveButton />
-          </li>
-        )}
+          {isEditMode && !isVSCode && (
+            <li>
+              <SaveButton />
+            </li>
+          )}
 
-        {isEditMode && (
-          <li>
-            <ExportButton />
-          </li>
-        )}
-      </ul>
+          {isEditMode && (
+            <li>
+              <ExportButton />
+            </li>
+          )}
+        </ul>
+      )}
       {isEditMode && (
         <ul className={classes.buttonGroup}>
           <li>
