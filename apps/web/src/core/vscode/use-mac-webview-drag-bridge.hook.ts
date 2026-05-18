@@ -3,6 +3,7 @@ import { useCanvasContext } from '#core/providers';
 import {
   convertFromDivElementCoordsToKonvaCoords,
   getScrollFromDiv,
+  isScreenPositionInsideDivElement,
   portScreenPositionToDivCoordinates,
 } from '#pods/canvas/canvas.util';
 import { calculateShapeOffsetToXDropCoordinate } from '#pods/canvas/use-monitor.business';
@@ -70,6 +71,10 @@ export const useMacWebviewDragBridge = (
       }
 
       const screenPosition = { x: clientX, y: clientY };
+      if (!isScreenPositionInsideDivElement(dropDivElement, screenPosition)) {
+        return;
+      }
+
       const relativeDivPosition = portScreenPositionToDivCoordinates(
         dropDivElement,
         screenPosition
