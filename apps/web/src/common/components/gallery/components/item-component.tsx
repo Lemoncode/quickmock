@@ -46,8 +46,10 @@ export const ItemComponent: React.FC<Props> = props => {
       getInitialData: () => ({ type: item.type }),
       onDragStart: () => {
         setIsDragging(true);
-        const dataUrl = thumbnailDataUrlRef.current ?? item.thumbnailSrc;
-        notifyDragStartToWebviewShell(item.type as ShapeType, dataUrl);
+        const dataUrl = thumbnailDataUrlRef.current;
+        if (dataUrl) {
+          notifyDragStartToWebviewShell(item.type as ShapeType, dataUrl);
+        }
       },
       onDrop: () => {
         setIsDragging(false);
@@ -57,7 +59,7 @@ export const ItemComponent: React.FC<Props> = props => {
         // Native drag image from the nested iframe is unreliable on macOS; the
         // shell paints its own preview (see drag-bridge.ts), so suppress the
         // native one with a 1×1 transparent element.
-        if (shouldUseMacWebviewDragBridge()) {
+        if (shouldUseMacWebviewDragBridge() && thumbnailDataUrlRef.current) {
           setCustomNativeDragPreview({
             getOffset: () => ({ x: 0, y: 0 }),
             render({ container }) {
