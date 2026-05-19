@@ -18,7 +18,7 @@ export const getHtml = (
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; frame-src ${appOrigin}; connect-src ${appOrigin} ${wsOrigin}; script-src ${webview.cspSource}; style-src 'unsafe-inline';" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; frame-src ${appOrigin}; connect-src ${appOrigin} ${wsOrigin}; script-src ${webview.cspSource}; style-src 'unsafe-inline'; img-src data:;" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
