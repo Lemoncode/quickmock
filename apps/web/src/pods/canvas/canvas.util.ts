@@ -24,6 +24,20 @@ export const portScreenPositionToDivCoordinates = (
   return { x, y };
 };
 
+export const isScreenPositionInsideDivElement = (
+  divElement: HTMLDivElement,
+  screenPosition: Coord
+) => {
+  const { left, right, top, bottom } = divElement.getBoundingClientRect();
+
+  return (
+    screenPosition.x >= left &&
+    screenPosition.x <= right &&
+    screenPosition.y >= top &&
+    screenPosition.y <= bottom
+  );
+};
+
 interface PositionInfo {
   screenPosition: Coord;
   relativeDivPosition: Coord;
