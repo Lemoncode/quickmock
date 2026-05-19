@@ -28,6 +28,7 @@
   cursor: pointer;
   background: white;
   border-radius: 2px;
+  color: black;
 }
 
 .arrowIcon {
@@ -60,10 +61,12 @@
   gap: var(--space-s);
   font-size: var(--fs-xs);
   cursor: pointer;
+  color: black;
 }
 
 .dropdownItem:hover {
   background-color: var(--primary-100);
+  color: var(--text-color);
 }
 
 .linePreview {
