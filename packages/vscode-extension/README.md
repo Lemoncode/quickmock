@@ -8,7 +8,7 @@
 
 ## 🌟 Project
 
-`quickmock` is the VS Code extension package for editing QuickMock `.qm` files directly inside VS Code.
+This is the VS Code extension package for editing QuickMock `.qm` files directly inside VS Code.
 
 It includes:
 
