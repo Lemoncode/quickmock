@@ -1,7 +1,7 @@
 import { QUICKMOCK_NEW_WIREFRAME_COMMAND_ID } from '#commands';
 import * as vscode from 'vscode';
 import {
-  ITEM_COLOR,
+  ITEM_COLOR_THEME_TOKEN,
   ITEM_TEXT,
   ITEM_TOOLTIP,
   STATUS_BAR_PRIORITY,
@@ -16,7 +16,7 @@ export const registerNewWireframeStatusBarItem = (
   );
   item.text = ITEM_TEXT;
   item.tooltip = ITEM_TOOLTIP;
-  item.color = ITEM_COLOR;
+  item.color = new vscode.ThemeColor(ITEM_COLOR_THEME_TOKEN);
   item.command = QUICKMOCK_NEW_WIREFRAME_COMMAND_ID;
   item.show();
 
