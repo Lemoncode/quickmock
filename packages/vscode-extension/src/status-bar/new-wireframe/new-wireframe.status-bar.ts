@@ -1,7 +1,11 @@
 import { QUICKMOCK_NEW_WIREFRAME_COMMAND_ID } from '#commands';
 import * as vscode from 'vscode';
-
-const STATUS_BAR_PRIORITY = 100;
+import {
+  ITEM_COLOR,
+  ITEM_TEXT,
+  ITEM_TOOLTIP,
+  STATUS_BAR_PRIORITY,
+} from './new-wireframe.consts';
 
 export const registerNewWireframeStatusBarItem = (
   context: vscode.ExtensionContext
@@ -10,9 +14,9 @@ export const registerNewWireframeStatusBarItem = (
     vscode.StatusBarAlignment.Left,
     STATUS_BAR_PRIORITY
   );
-  item.text = '$(lightbulb) Quickmock';
-  item.tooltip = 'Create new Quickmock wireframe';
-  item.color = '#309a8a';
+  item.text = ITEM_TEXT;
+  item.tooltip = ITEM_TOOLTIP;
+  item.color = ITEM_COLOR;
   item.command = QUICKMOCK_NEW_WIREFRAME_COMMAND_ID;
   item.show();
 
