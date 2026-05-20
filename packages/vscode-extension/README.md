@@ -1,4 +1,4 @@
-# Quick mock
+# QuickMock VS Code Extension
 
 ![Contributors](https://img.shields.io/github/contributors/Lemoncode/quickmock)
 ![Forks](https://img.shields.io/github/forks/Lemoncode/quickmock)
@@ -8,86 +8,78 @@
 
 ## 🌟 Project
 
-Quick Mock is a free, open source online tool for quickly creating low fidelity UI mockups.
+This is the VS Code extension package for editing QuickMock `.qm` files directly inside VS Code.
 
-You can take a look at the desktop community preview at [Quick Mock](https://www.quickmock.net/)
+It includes:
 
-[![Quick mock video tutorial](https://img.youtube.com/vi/NqswxUvXm4c/0.jpg)](https://www.youtube.com/watch?v=NqswxUvXm4c)
+- Open and edit `.qm` wireframes directly in VS Code.
+- Create new wireframe files and start sketching quickly.
+- Work with QuickMock + AI workflows through MCP integration.
+- Keep wireframing inside your regular development workflow.
 
 ## 🚀 Installation
 
-To install the project, clone the repository and run the following commands:
+### Install from Visual Studio Marketplace
+
+1. Open VS Code.
+2. Go to **Extensions** (`Ctrl+Shift+X` / `Cmd+Shift+X`).
+3. Search for **Quickmock** by **Lemoncoders**.
+4. Click **Install**.
+
+### Install for development
 
 ```sh
 git clone https://github.com/Lemoncode/quickmock.git
-```
-
-Install the dependencies
-
-```bash
+cd quickmock
 npm install
+npm run start
 ```
 
-Run the project
+Then run the extension in VS Code:
+
+1. Open the repository in VS Code.
+2. Start **Run and Debug**.
+3. Launch the extension host with **F5** (or run it from the **Run and Debug** panel).
+
+Create the `.vsix` artifact:
 
 ```bash
-npm run dev
+npm run package:vscode
 ```
 
-Open your browser and go to http://localhost:5173 (if this port is busy it will be changed to the next available port)
+The packaged extension is generated under `packages/vscode-extension/dist`.
 
-## VS Code extension
+## 🤖 MCP setup
 
-If you prefer to work inside VS Code, install the [QuickMock VS Code extension](./packages/vscode-extension/README.md). It adds a custom editor for `.qm` files and also configures the MCP server for AI tools.
+Installing the VS Code extension is enough to get the MCP server configured.
+
+1. Install **Quickmock** from the Marketplace.
+2. Open a workspace that contains `.qm` files.
+3. The extension registers the **QuickMock Wireframe Tools** MCP server automatically for VS Code / GitHub Copilot and updates supported external MCP clients, like Claude Code.
+
+If you want to run the MCP server directly, you can use the following command:
+
+```bash
+npx -y @lemoncode/quickmock-mcp
+```
+
+In development, it resolves the local workspace build instead.
 
 ## 🤝 Contributing
 
-Your feedback and contributions are welcome! If you have ideas for new features or have found a bug, we would love to hear about it. Here's how you can contribute:
-
-**Report a Bug 🐛**
-
-If you encounter a bug in the project, please first check if it has already been reported in our GitHub Issues. If you don't find it there, feel free to open a new issue. Provide as many details as possible, including steps to reproduce the bug, the environment in which it occurs (operating system, project version, etc.), and any other relevant details.
-
-**Propose a New Feature ✨**
-
-Do you have an idea to improve the project? Great! Share your thoughts with us by opening a new GitHub Issue under the feature request label. Describe the feature you would like to see, how and why you think it would be a valuable addition to the project.
+Your feedback and contributions are welcome. If you find issues with `.qm` editor behavior, VS Code integration, command handling, or MCP registration, please open an issue with clear reproduction steps.
 
 ## 🛠️ Technologies
 
-The application is being developed using the following technologies:
+The extension is developed using:
 
-- [React](https://react.dev/)
-- [React Konva](https://konvajs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) / [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) / [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG)
-- [Vite](https://vitejs.dev/)
-- [Vitest](https://vitest.dev/)
-
-## 💖 Sponsor Quick Mock
-
-Are you or your company interested in supporting Quick Mock? Sponsorship is a powerful way to contribute to the development and maintenance of our project, and we're always looking for partners who share our vision.
-
-Why Sponsor Quick Mock?
-
-- **Support Open Source:** Your sponsorship directly contributes to the open-source community, enabling us to maintain and improve our project.
-
-- **Visibility for Your Brand:** Sponsoring Quick Mock can provide visibility for your brand in the tech community. It's an excellent way to demonstrate your commitment to supporting innovative software development.
-
-- **Direct Impact:** Your support makes a tangible difference, allowing us to focus more on development, add new features, and improve the user experience.
-
-If you're interested in sponsoring this project, please feel free to reach out to us at: info@lemoncode.net
-
-Thank you for supporting open-source development!
-
-## 📐 Custom Component Libraries for Enterprise
-
-If your organization has its own design system and component library, we can create a custom set of low-fidelity mock components tailored to your palette and guidelines. This allows your team to create wireframes that align perfectly with your branding and design standards.
-
-For more information and to request a quote, feel free to contact us at: info@lemoncode.net.
+- [VS Code Extension API](https://code.visualstudio.com/api)
+- [Model Context Protocol](https://modelcontextprotocol.io/)
 
 ## 👥 Team
 
-Team members participating in this project
+Team members participating in this project:
 
 <p align="left">
   <a href="https://github.com/LourdesRsdp">
@@ -129,7 +121,6 @@ Team members participating in this project
   <a href="https://github.com/Pableras90">
     <kbd><img src="https://github.com/Pableras90.png" alt="Pablo Reinaldo" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
-
   <a href="https://github.com/Alber-Writer">
     <kbd><img src="https://github.com/Alber-Writer.png" alt="Alberto Escribano" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
