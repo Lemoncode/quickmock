@@ -21,7 +21,9 @@ export const ToolbarPod: React.FC = () => {
   const isEditMode = interactionMode === 'edit';
   const isVSCode = isVSCodeEnv();
   return (
-    <header className={classes.container}>
+    <header
+      className={`${classes.container} ${isVSCode ? classes.vscode : ''}`}
+    >
       {(isEditMode || !isVSCode) && (
         <ul className={classes.buttonGroup}>
           {isEditMode && (

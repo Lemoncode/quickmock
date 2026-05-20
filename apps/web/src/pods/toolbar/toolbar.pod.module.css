@@ -56,6 +56,11 @@
   color: var(--pure-white);
 }
 
+.vscode .button:hover {
+  background-color: var(--primary-700);
+  color: var(--primary-200);
+}
+
 .button:disabled {
   color: var(--primary-300);
   cursor: not-allowed;
@@ -63,4 +68,8 @@
 
 .button:disabled:hover {
   background-color: inherit;
+}
+
+.vscode .button:disabled:hover {
+  color: var(--text-color);
 }
