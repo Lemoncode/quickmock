@@ -60,19 +60,6 @@ The extension is developed using:
 - [TypeScript](https://www.typescriptlang.org/)
 - [VS Code Extension API](https://code.visualstudio.com/api)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
-- [Vitest](https://vitest.dev/)
-
-## 💖 Sponsor Quick Mock
-
-Are you or your company interested in supporting Quick Mock? Sponsorship helps us maintain and improve the project.
-
-If you're interested in sponsoring this project, please reach out at: info@lemoncode.net
-
-## 📐 Custom Component Libraries for Enterprise
-
-If your organization uses its own design system and component library, we can build a custom low-fidelity component set aligned with your branding guidelines.
-
-For more information and quotes, contact us at: info@lemoncode.net.
 
 ## 👥 Team
 
@@ -118,7 +105,6 @@ Team members participating in this project:
   <a href="https://github.com/Pableras90">
     <kbd><img src="https://github.com/Pableras90.png" alt="Pablo Reinaldo" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
-
   <a href="https://github.com/Alber-Writer">
     <kbd><img src="https://github.com/Alber-Writer.png" alt="Alberto Escribano" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
