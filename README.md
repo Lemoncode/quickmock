@@ -36,6 +36,10 @@ npm run dev
 
 Open your browser and go to http://localhost:5173 (if this port is busy it will be changed to the next available port)
 
+## VS Code extension
+
+If you prefer to work inside VS Code, install the [QuickMock VS Code extension](./packages/vscode-extension/README.md). It adds a custom editor for `.qm` files and also configures the MCP server for AI tools.
+
 ## 🤝 Contributing
 
 Your feedback and contributions are welcome! If you have ideas for new features or have found a bug, we would love to hear about it. Here's how you can contribute:
