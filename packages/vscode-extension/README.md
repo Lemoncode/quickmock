@@ -49,6 +49,22 @@ npm run package:vscode
 
 The packaged extension is generated under `packages/vscode-extension/dist`.
 
+## 🤖 MCP setup
+
+Installing the VS Code extension is enough to get the MCP server configured.
+
+1. Install **Quickmock** from the Marketplace.
+2. Open a workspace that contains `.qm` files.
+3. The extension registers the **QuickMock Wireframe Tools** MCP server automatically for VS Code / GitHub Copilot and updates supported external MCP clients, like Claude Code.
+
+If you want to run the MCP server directly, you can use the following command:
+
+```bash
+npx -y @lemoncode/quickmock-mcp
+```
+
+In development, it resolves the local workspace build instead.
+
 ## 🤝 Contributing
 
 Your feedback and contributions are welcome. If you find issues with `.qm` editor behavior, VS Code integration, command handling, or MCP registration, please open an issue with clear reproduction steps.
