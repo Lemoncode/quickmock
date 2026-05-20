@@ -22,7 +22,7 @@ const resolveParentOrigin = (): string => {
   }
 };
 
-const parentOrigin = resolveParentOrigin();
+export const parentOrigin = resolveParentOrigin();
 
 export const sendToExtension = (msg: AppMessage): void => {
   if (!isVSCodeEnv()) return;

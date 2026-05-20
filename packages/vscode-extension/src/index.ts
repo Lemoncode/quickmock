@@ -2,6 +2,7 @@ import { registerCommands } from '#commands';
 import { onAppUrlChange, syncAppUrlFile } from '#core';
 import { QuickMockEditorProvider } from '#editor';
 import { setupMcp } from '#mcp';
+import { registerStatusBarItems } from '#status-bar';
 import * as vscode from 'vscode';
 
 export const activate = (context: vscode.ExtensionContext) => {
@@ -10,6 +11,7 @@ export const activate = (context: vscode.ExtensionContext) => {
   context.subscriptions.push(QuickMockEditorProvider.register(context));
   setupMcp(context);
   registerCommands(context);
+  registerStatusBarItems(context);
 };
 
 export const deactivate = () => {};
