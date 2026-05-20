@@ -1,5 +1,11 @@
 # @lemoncode/quickmock-mcp
 
+## 0.1.1
+
+### Patch Changes
+
+- 79b48b7: Added basic README.md.
+
 ## 0.1.0
 
 ### Minor Changes
