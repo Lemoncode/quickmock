@@ -6,6 +6,7 @@ import { useTransform } from './use-transform.hook';
 import { renderShapeComponent } from './shape-renderer';
 import { useDropShape } from './use-drop-shape.hook';
 import { useMonitorShape } from './use-monitor-shape.hook';
+import { useMacWebviewDragBridge } from '#core/vscode/use-mac-webview-drag-bridge.hook';
 import classes from './canvas.pod.module.css';
 import { EditableComponent } from '#common/components/inline-edit';
 import { useSnapIn } from './use-snapin.hook';
@@ -58,6 +59,7 @@ export const CanvasPod = () => {
 
   const { isDraggedOver, dropRef } = useDropShape();
   useMonitorShape(dropRef, addNewShapeAndSetSelected);
+  useMacWebviewDragBridge(dropRef, addNewShapeAndSetSelected);
   useEffect(() => {
     if (dropRef.current) setDropRef(dropRef);
   }, [dropRef, setDropRef]);

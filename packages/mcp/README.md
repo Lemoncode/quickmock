@@ -1,4 +1,4 @@
-# Quick mock
+# QuickMock MCP Server
 
 ![Contributors](https://img.shields.io/github/contributors/Lemoncode/quickmock)
 ![Forks](https://img.shields.io/github/forks/Lemoncode/quickmock)
@@ -8,86 +8,63 @@
 
 ## 🌟 Project
 
-Quick Mock is a free, open source online tool for quickly creating low fidelity UI mockups.
+`@lemoncode/quickmock-mcp` is the MCP server for QuickMock.
 
-You can take a look at the desktop community preview at [Quick Mock](https://www.quickmock.net/)
+It provides tools to inspect `.qm` wireframe files, read their content and pages, extract image assets, and generate rendered screenshots through a headless browser flow.
 
-[![Quick mock video tutorial](https://img.youtube.com/vi/NqswxUvXm4c/0.jpg)](https://www.youtube.com/watch?v=NqswxUvXm4c)
+### Available tools
+
+- `list_wireframes`: finds `.qm` files in the current workspace.
+- `get_wireframe_json`: returns JSON content from a wireframe file.
+- `get_wireframe_pages`: returns wireframe pages metadata.
+- `get_wireframe_assets`: extracts embedded image assets to disk.
+- `capture_wireframe`: renders and returns a PNG screenshot.
 
 ## 🚀 Installation
 
-To install the project, clone the repository and run the following commands:
+To work on this package locally from the monorepo:
 
 ```sh
 git clone https://github.com/Lemoncode/quickmock.git
-```
-
-Install the dependencies
-
-```bash
+cd quickmock
 npm install
 ```
 
-Run the project
+Build the MCP package:
 
 ```bash
-npm run dev
+npm run build --workspace packages/mcp
 ```
 
-Open your browser and go to http://localhost:5173 (if this port is busy it will be changed to the next available port)
+Run it via stdio:
 
-## VS Code extension
+```bash
+npx -y @lemoncode/quickmock-mcp
+```
 
-If you prefer to work inside VS Code, install the [QuickMock VS Code extension](./packages/vscode-extension/README.md). It adds a custom editor for `.qm` files and also configures the MCP server for AI tools.
+Inspect it with MCP Inspector:
+
+```bash
+npm run inspect --workspace packages/mcp
+```
 
 ## 🤝 Contributing
 
-Your feedback and contributions are welcome! If you have ideas for new features or have found a bug, we would love to hear about it. Here's how you can contribute:
-
-**Report a Bug 🐛**
-
-If you encounter a bug in the project, please first check if it has already been reported in our GitHub Issues. If you don't find it there, feel free to open a new issue. Provide as many details as possible, including steps to reproduce the bug, the environment in which it occurs (operating system, project version, etc.), and any other relevant details.
-
-**Propose a New Feature ✨**
-
-Do you have an idea to improve the project? Great! Share your thoughts with us by opening a new GitHub Issue under the feature request label. Describe the feature you would like to see, how and why you think it would be a valuable addition to the project.
+Your feedback and contributions are welcome. If you find issues related to MCP tool behavior, wireframe parsing, or rendering output, please open an issue with reproduction steps and environment details.
 
 ## 🛠️ Technologies
 
-The application is being developed using the following technologies:
+The package is developed with:
 
-- [React](https://react.dev/)
-- [React Konva](https://konvajs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) / [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) / [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG)
-- [Vite](https://vitejs.dev/)
+- [Model Context Protocol SDK](https://github.com/modelcontextprotocol/typescript-sdk)
+- [Puppeteer Core](https://pptr.dev/)
+- [Zod](https://zod.dev/)
 - [Vitest](https://vitest.dev/)
-
-## 💖 Sponsor Quick Mock
-
-Are you or your company interested in supporting Quick Mock? Sponsorship is a powerful way to contribute to the development and maintenance of our project, and we're always looking for partners who share our vision.
-
-Why Sponsor Quick Mock?
-
-- **Support Open Source:** Your sponsorship directly contributes to the open-source community, enabling us to maintain and improve our project.
-
-- **Visibility for Your Brand:** Sponsoring Quick Mock can provide visibility for your brand in the tech community. It's an excellent way to demonstrate your commitment to supporting innovative software development.
-
-- **Direct Impact:** Your support makes a tangible difference, allowing us to focus more on development, add new features, and improve the user experience.
-
-If you're interested in sponsoring this project, please feel free to reach out to us at: info@lemoncode.net
-
-Thank you for supporting open-source development!
-
-## 📐 Custom Component Libraries for Enterprise
-
-If your organization has its own design system and component library, we can create a custom set of low-fidelity mock components tailored to your palette and guidelines. This allows your team to create wireframes that align perfectly with your branding and design standards.
-
-For more information and to request a quote, feel free to contact us at: info@lemoncode.net.
 
 ## 👥 Team
 
-Team members participating in this project
+Team members participating in this project:
 
 <p align="left">
   <a href="https://github.com/LourdesRsdp">
@@ -111,8 +88,7 @@ Team members participating in this project
     <a href="https://github.com/monikMononoke">
     <kbd><img src="https://github.com/monikMononoke.png" alt="Mónika" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
-  </a>
-    <a href="https://github.com/Ivanruii">
+  <a href="https://github.com/Ivanruii">
     <kbd><img src="https://github.com/Ivanruii.png" alt="Ivan Ruíz" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
   </a>
@@ -129,7 +105,6 @@ Team members participating in this project
   <a href="https://github.com/Pableras90">
     <kbd><img src="https://github.com/Pableras90.png" alt="Pablo Reinaldo" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>
-
   <a href="https://github.com/Alber-Writer">
     <kbd><img src="https://github.com/Alber-Writer.png" alt="Alberto Escribano" width="50" height="50" style="border-radius: 50%;"></kbd>
   </a>

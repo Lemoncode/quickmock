@@ -1,6 +1,6 @@
 {
   "name": "quickmock",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -16,7 +16,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@lemoncode/quickmock-mcp": "0.1.0"
+    "@lemoncode/quickmock-mcp": "0.1.1"
   },
   "devDependencies": {
     "@lemoncode/quickmock-bridge-protocol": "*",

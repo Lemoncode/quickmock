@@ -1,5 +1,21 @@
 # @lemoncode/quickmock-vscode-extension
 
+## 0.3.0
+
+### Minor Changes
+
+- a385bac: Added create new wireframe button on VSCode status bar.
+
+### Patch Changes
+
+- 79b48b7: Added basic README.md.
+- c955c05: Fix component-gallery drag-and-drop in the VS Code extension on macOS,
+  where HTML5 drag events targeting the inner iframe were dispatched to
+  the webview shell instead of into the iframe (microsoft/vscode#193558).
+  Linux and Windows are unaffected.
+- Updated dependencies [79b48b7]
+  - @lemoncode/quickmock-mcp@0.1.1
+
 ## 0.2.0
 
 ### Minor Changes
