@@ -164,9 +164,15 @@ export const memberList: Member[] = [
     urlLinkedin: 'https://www.linkedin.com/in/gabriel-ionut-birsan-b14816307/',
     image: './assets/gabriel-ionut.jpeg',
   },
-
   {
     id: '22',
+    name: 'Jonathan',
+    surname: 'King',
+    urlLinkedin: 'https://www.linkedin.com/in/jonathan-king-6a23861a3/',
+    image: './assets/jonathan-king.jpeg',
+  },
+  {
+    id: '23',
     name: 'Antonio',
     surname: 'Contreras',
     urlLinkedin:
@@ -175,7 +181,7 @@ export const memberList: Member[] = [
   },
 
   {
-    id: '23',
+    id: '24',
     name: 'Braulio',
     surname: 'Diez',
     urlLinkedin: 'https://www.linkedin.com/in/brauliodiez/',
