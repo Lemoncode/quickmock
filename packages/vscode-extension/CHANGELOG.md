@@ -1,5 +1,11 @@
 # @lemoncode/quickmock-vscode-extension
 
+## 0.3.1
+
+### Patch Changes
+
+- 1fbf21e: Fix toolbar button hover styles in the VS Code extension so disabled and primary buttons use the correct hover background and text colors.
+
 ## 0.3.0
 
 ### Minor Changes
