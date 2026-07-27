@@ -1,23 +1,23 @@
-import React, { createRef, useEffect, useMemo, useRef, useState } from 'react';
-import Konva from 'konva';
-import { useCanvasContext, useInteractionModeContext } from '#core/providers';
-import { Layer, Line, Rect, Stage, Transformer } from 'react-konva';
-import { useTransform } from './use-transform.hook';
-import { renderShapeComponent } from './shape-renderer';
-import { useDropShape } from './use-drop-shape.hook';
-import { useMonitorShape } from './use-monitor-shape.hook';
-import { useMacWebviewDragBridge } from '#core/vscode/use-mac-webview-drag-bridge.hook';
-import classes from './canvas.pod.module.css';
 import { EditableComponent } from '#common/components/inline-edit';
-import { useSnapIn } from './use-snapin.hook';
-import { ShapeType } from '#core/model';
 import { ENV } from '#core/constants';
-import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
-import { useKeyboardDisplacement } from './use-keyboard-displacement';
-import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
+import { ShapeType } from '#core/model';
+import { useCanvasContext, useInteractionModeContext } from '#core/providers';
+import { useMacWebviewDragBridge } from '#core/vscode/use-mac-webview-drag-bridge.hook';
+import Konva from 'konva';
+import React, { createRef, useEffect, useMemo, useRef, useState } from 'react';
+import { Layer, Line, Rect, Stage, Transformer } from 'react-konva';
 import { ContextMenu } from '../context-menu/use-context-menu.hook';
 import { CanvasGridLayer } from './canvas.grid';
+import classes from './canvas.pod.module.css';
 import { sampleDocument } from './sample-document';
+import { renderShapeComponent } from './shape-renderer';
+import { useDropImageFromDesktop } from './use-drop-image-from-desktop';
+import { useDropShape } from './use-drop-shape.hook';
+import { useKeyboardDisplacement } from './use-keyboard-displacement';
+import { useMonitorShape } from './use-monitor-shape.hook';
+import { useMultipleSelectionShapeHook } from './use-multiple-selection-shape.hook';
+import { useSnapIn } from './use-snapin.hook';
+import { useTransform } from './use-transform.hook';
 
 export const CanvasPod = () => {
   const [isTransfomerBeingDragged, setIsTransfomerBeingDragged] =
@@ -236,6 +236,8 @@ export const CanvasPod = () => {
               onDragEnd={() => setIsTransfomerBeingDragged(false)}
             />
           )}
+        </Layer>
+        <Layer listening={false}>
           {isTransfomerBeingDragged && showSnapInHorizontalLine && (
             <Line
               points={[
