@@ -38,7 +38,7 @@ export const HtmlEditWidget = forwardRef<any, Props>(
           <input
             ref={ref}
             style={{ width: '100%', height: '100%' }}
-            value={value}
+            defaultValue={value}
             onChange={handleTextChange}
             data-is-inline-edition-on="true"
           />
@@ -47,7 +47,7 @@ export const HtmlEditWidget = forwardRef<any, Props>(
           <textarea
             ref={ref}
             style={{ width: '100%', height: '100%' }}
-            value={value}
+            defaultValue={value}
             onChange={handleTextChange}
             data-is-inline-edition-on="true"
             data-testid="textareaedit"
